@@ -1,0 +1,46 @@
+<?php
+/**
+ * @copyright 2002-2014 www.huibo.com
+ * @name 企业招聘中心接口 
+ * @author ZhangYu
+ * @version 2014-02-12
+*/
+
+class controller_interface extends components_cbasepage  {
+	function __construct() {
+		parent::__construct(false);
+	}
+	
+	/**
+	 * 
+	 * 设置求职申请的已读状态
+	 * @param unknown_type $inPath
+	 */
+	public function pageSetApplyRead($inPath) {
+		$param = base_lib_BaseUtils::sstripslashes($this->getUrlParams($inPath));
+		$encrypt_applyid =base_lib_BaseUtils::getStr($param['key']);
+		if(!base_lib_BaseUtils::nullOrEmpty($encrypt_applyid)) {
+			$xml = SXML::load('../config/company/company.xml');
+			$service_SNumCrypt = new SNumCrypt();
+			$apply_id = $service_SNumCrypt->decrypt($encrypt_applyid, $xml->ApplyIDKey);
+			$service_apply = new base_service_company_resume_apply();	
+			$result = $service_apply->setRead(array($apply_id));
+		}
+		
+	}
+    
+    /**
+	 *  微信支付回调 PC
+	 */
+	function pageWXChargeRespond() {
+		require_once(PLUGINS_DIR . '/pay/WxPay/HbWxPay.Config.php');
+		require_once(PLUGINS_DIR . '/pay/WxPay/WxPay.Notify.php');
+		$service_company_charge_companycashcharge = new base_service_company_charge_companycashcharge();
+
+		$Wx_config = new HbWxPayConfig();
+		$Wx_PayNotify = new WxPayNotify();
+		$Wx_PayNotify->Handle($Wx_config, array ($service_company_charge_companycashcharge, 'WXReChargeRespond'));
+	}
+    
+}
+?>

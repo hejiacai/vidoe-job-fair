@@ -1,0 +1,1557 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>{/$title/}</title>
+        <link rel="stylesheet" type="text/css" href="{/version file='m_font_style.css'/}">
+        <link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}">
+         <link rel="stylesheet" type="text/css" href="{/version file='oastyle.css'/}"/>
+         
+         <script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.min.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='common.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='dialog.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='ui_inputFocus.js'/}"></script>
+
+<script type="text/javascript" language="javascript" src="{/version file='ui_uploadify.js'/}"></script>
+         
+        <script type="text/javascript" language="javascript" src="{/version file='mobile.thirdselect.js'/}"></script>
+        <script type="text/javascript" language="javascript" src="{/version file='WdatePicker.js'/}"></script>
+        <script type="text/javascript" language="javascript" src="{/version file='ui_validate.js'/}"></script><!--验证-->
+        <script type="text/javascript" language="javascript" src="{/version file='jquery.form.js'/}"></script>
+
+        <script type="text/javascript" src="{/version file='ui_calling.js'/}"></script>
+        
+        <script type="text/javascript">
+            window.CONFIG = {
+                HOST: '{/$siteurl.style/}',
+                COMBOPATH: '/js/v2/'
+            }
+        </script>
+        <script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+        <script type="text/javascript" src="{/version file='version.js'/}"></script>
+        <script type="text/javascript" src="{/version file='global.js'/}"></script>
+		<style>
+			*{
+				margin:0;
+				padding:0;
+				font-family: "微软雅黑";
+			}
+			body{text-align: left;min-width: 1200px;background:#fff;}
+			li{list-style: none;}
+			.header{
+				position: relative;
+				min-width:1200px;
+				height:437px;
+				background: url({/$siteurl.style/}/img/mobile/activity/pcheader.jpg) no-repeat center center;
+				text-align: center;
+				overflow: hidden;
+			}
+			.header .headerTitle{
+				font-size: 54px;
+				color:#f11024;
+				margin-top: 65px;
+			}
+			.header .headerInfo{
+				font-size: 20px;
+				color:#51262a;
+				margin-top: 170px;
+			}
+			
+			
+			.headNav{
+				width:100%;
+				min-width: 1200px;
+				height:50px;
+				background: #305abc;
+			}
+			.headNav .fixed{
+				position: fixed;
+				top:0;
+				width:100%;
+				background: #305abc;
+				z-index: 2;
+			}
+			.headNav ul{
+				position: relative;
+				width:1000px;
+				margin:auto;
+				height:50px;
+			}
+			.headNav li{
+				float: left;
+				position: relative;
+				width:120px;
+				height:50px;
+				font-size: 16px;
+				font-weight: bold;
+				color:#fff;
+				line-height: 50px;
+				text-align: center;
+				-webkit-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				cursor: pointer;
+			}
+			.headNav li:hover{
+				background: #4776e4;
+			}
+			.headNav li.cut:after{
+				content: '';
+				position: absolute;
+				width:40px;
+				height:5px;
+				left:40px;
+				bottom:0;
+				background: #f1071d;
+			}
+			.headNav li.entryBtn{
+				position: absolute;
+				background: #f1071d;
+				right:0;
+				font-family: "微软雅黑";
+			}
+			.body{
+				min-width:1200px;
+				margin:auto;
+				overflow: hidden;
+			}
+			.body h3 div{
+				position: relative;
+				top:-70px;
+				width:4em;
+				font-size: 36px;
+				font-weight: bold;
+				margin:auto;
+				color:#333;
+			}
+			.body h3 div:before{
+				content:'';
+				position: absolute;
+				top:20px;
+				left:-40px;
+				width:12px;
+				height:13px;
+				background: url({/$siteurl.style/}/img/mobile/activity/h3Left.png) no-repeat 0 0 / 100% 100%;
+			}
+			.body h3 div:after{
+				content:'';
+				position: absolute;
+				top:20px;
+				right:-40px;
+				width:18px;
+				height:12px;
+				background: url({/$siteurl.style/}/img/mobile/activity/h3Right.png) no-repeat 0 0 / 100% 100%;
+			}
+			.body h3{
+				position: relative;
+				font-size: 24px;
+				color:#e8e8e9;
+				margin-top: 100px;
+				font-weight: normal;
+				text-align: center;
+				font-family: 'Iskoola Pota'
+			}
+			.body h3:after{
+				position: relative;
+				display: block;
+				top: -75px;
+				content:'';
+				width:1em;
+				height:8px;
+				background: #305abc;
+				margin:auto;
+				border-radius: 4px;
+			}
+			.body p{
+				font-size: 16px;
+				color:#333;
+				text-indent: 2em;
+				line-height: 2em;
+			}
+			.infobox{
+				width:100%;
+				height:90px;
+				border-radius: 5px;
+				border:1px dashed #ff999a;
+				background: #ffe6e6;
+				margin: 30px 0;
+				
+			}
+			.infobox div{
+				
+				float: left;
+				line-height: 90px;
+				text-align: center;
+				color:#f3292e;
+				font-weight: bold;
+				
+			}
+			.infobox .info-time{
+				width:40%;
+			}
+			.infobox .info-tele{
+				width:60%;
+			}
+			.infobox img{
+				vertical-align: middle;
+				margin-right: 10px;
+			}
+			.infolist{
+				font-size: 16px;
+				line-height: 2em;
+				color:#444;
+			}
+			.infolist span{
+				
+				font-weight: bold;
+			}
+			
+			.companytable{
+				width:100%;
+				line-height: 3em;
+				border-spacing: 0;
+				border-collapse: collapse;
+				margin-bottom: 50px;
+			}
+			.companytable td,.companytable th{
+				color:#444;
+				text-align: center;
+				border:1px solid #ff999a
+			}
+			.companytable .bgpink{
+				background: #ffe6e6;
+			}
+			
+			
+			.footerBm{
+				font-size: 14px;
+				width:100%;
+				padding:50px 0;
+				background: #333333;
+				color:#999999;
+				text-decoration: none;
+				line-height: 2em;
+				
+			}
+			.footerNav a{
+				padding: 0 0.5em;
+			}
+			.footerBm a{
+				color:#999999;
+				text-decoration: none;
+			}
+			
+			#intro{
+				min-width: 1200px;
+				overflow: hidden;
+			}
+			#intro .content{
+				position: relative;
+				margin:auto;
+				font-size: 18px;
+				width:1000px;
+				height:225px;
+				border:8px solid #e8e9f5;
+			}
+			#intro .content p{
+				margin:60px;
+				margin-left: 80px;
+			}
+			#intro .content p:before{
+				content: '';
+				position: absolute;
+				top:30px;
+				left:30px;
+				width:24px;
+				height:19px;
+				background: url({/$siteurl.style/}/img/mobile/activity/quotL.png) no-repeat 0 0 /100% 100%;
+			}
+			#intro .content p:after{
+				content: '';
+				position: absolute;
+				right:30px;
+				bottom:30px;
+				width:24px;
+				height:19px;
+				background: url({/$siteurl.style/}/img/mobile/activity/quotR.png) no-repeat 0 0 /100% 100%;
+			}
+			
+			#flow{
+				height:719px;
+				overflow: hidden;
+				background: url({/$siteurl.style/}/img/mobile/activity/flowBg.jpg) no-repeat center ;
+			}
+			#flow h3{
+				margin-top:180px;
+			}
+			
+			
+			#award{
+				height:862px;
+				overflow: hidden;
+				background: url({/$siteurl.style/}/img/mobile/activity/awardBg.jpg) no-repeat center ;
+			}
+			#award h3 div{color:#fff;}
+			#award h3{color:#5f87e4}
+			#award h3:after{background: #fff;}
+			#award .content{
+				font-size: 0;
+				width:1200px;
+				margin:auto;
+				text-align: center;
+			}
+			.award-item{
+				display: inline-block;
+				width:260px;
+				height:220px;
+				margin-right: 15px;
+				margin-top: 20px;
+				background: #fff;
+				text-align: center;
+				overflow: hidden;
+				border-radius: 5px;
+				
+			}
+			.award-item img{
+				margin-top: 20px;
+			}
+			.award-item span{
+				font-size: 20px;;
+				color:#f1071d;
+			}
+			.award-item h5{
+				margin-top: 10px;
+				font-size: 16px;
+				color:#333;
+			}
+			.award-item h5:after{
+				content:'';
+				display: block;
+				margin:auto;
+				width:15px;
+				height:5px;
+				border-radius: 2.5px;
+				background: #999;
+				position: relative;
+				bottom:-10px;
+			}
+			.award-item div{
+				margin:20px;
+				font-size: 14px;
+				color:#666
+			}
+			.award-item div em{
+				color:#305abc;
+				font-style: normal;
+			}
+			#price{
+				height:779px;
+				overflow: hidden;
+				background: url({/$siteurl.style/}/img/mobile/activity/priceBg.png) no-repeat center ;
+			}
+			#price .content{
+				font-size: 0;
+				width:1200px;
+				margin:auto;
+				text-align: center;
+				
+			}
+			.price-item{
+				display: inline-block;
+				width:599px;
+				height:120px;
+				line-height: 120px;
+			}
+			.price-item.borderRight{
+				border-right: 1px dashed #e8e8e9;
+			}
+			.price-item.borderBottom{
+				border-bottom: 1px dashed #e8e8e9;
+			}
+			.price-item img{
+				margin-left: 20px;
+				vertical-align: middle;
+			}
+			.price-item div{
+				display: inline-block;
+				font-size: 16px;
+				margin-left: 30px;
+				color:#666;
+				width:350px;
+				line-height: normal;
+				vertical-align: middle;
+				text-align: left;
+			}
+			
+			.price-item div em{
+				color:#305abc;
+				font-style: normal;
+				font-weight: bold;
+			}
+			
+			
+			
+			#rules{
+				position: relative;
+				top:-200px;
+			}
+			#rules table{
+				width:1100px;
+				margin:auto;
+			}
+			#rules tr{
+				display: block;
+				margin-top: 30px;
+			}
+			#rules tr.row4{
+				margin-top: 10px;
+			}
+			#rules th{
+				width:5.5em;
+				font-size: 24px;
+				vertical-align: top;
+				font-weight: bold;
+			}
+			#rules td{
+				font-size: 0;
+			}
+			
+			.row1-item{
+				display: inline-block;
+				width:400px;
+				font-size: 16px;
+				color:#333;
+			}
+			.row1-item em{
+				font-style: normal;
+				display: inline-block;
+				width:1.5em;
+				height:1.5em;
+				line-height: 1.5em;
+				border-radius: 0.75em;
+				background: #f1071d;
+				text-align: center;
+				color:#fff;
+				margin: 5px;
+				font-weight: bold;
+			}
+			.row1-item .nobg{
+				background: none;
+			}
+			.row2-text{
+				font-size: 16px;
+				color:#333;
+				margin-top: 5px;
+				word-wrap:break-word;
+				word-break: break-all;
+				overflow:hidden;
+				margin-bottom: 50px;
+			}
+			.row2-text em{
+				font-style: normal;
+				color:#f1071d;
+				
+			}
+			.row2-item{
+				height:100px;
+				line-height: 100px;
+				background: #f7f7f7;
+				margin-bottom: 20px;
+				border-radius: 5px;
+				overflow: hidden;
+			}
+			.row2-left{
+				display: inline-block;
+				vertical-align: middle;
+				font-size: 16px;
+				width:125px;
+				height:100px;
+				color:#fff;
+				background: #f1071d;
+				text-align: center;
+				font-weight: bold;
+			}
+			.row2-left div{
+				display: inline-block;
+				line-height: normal;
+				vertical-align: middle;
+			}
+			.row2-right{
+				display: inline-block;
+				line-height: normal;
+				vertical-align: middle;
+				font-size: 16px;
+				width:750px;
+				padding-left: 50px;
+				color:#666;
+			}
+			.row3-item{
+				display: inline-block;
+				width:320px;
+				height:180px;
+				font-size: 16px;
+			}
+			.row3-item img,.row3-item div{
+				float: left;
+			}
+			.row3-item div{
+				width:250px;
+				margin-left: 10px;
+			}
+			.row3-item h6{
+				font-size: 16px;
+				font-weight: bold;
+			}
+			.row3-item li{
+				list-style: disc;
+				position: relative;
+				left:20px;
+				color:#666;
+			}
+			.row3-item em{
+				font-style: normal;
+				color:#3062d6
+			}
+			#rules .row4 td{
+				width:893px;
+				background: #f1071d;
+				font-size: 16px;
+				line-height: 2em;
+				font-weight: bold;
+				color:#fff;
+				border-radius: 5px;
+				padding:15px 35px;
+			}
+			#entry{
+				position: relative;
+    			top: -150px;
+    			margin-bottom: -50px;
+    		}
+			#entry .entryBox{
+				width:1100px;
+				border:1px solid #f1f1f1;
+				background: #fff;
+				color:#444;
+				margin:auto
+			}
+			.entryHead{
+				text-align: right;
+				padding:20px 50px;
+				border-bottom: 1px solid #f1f1f1;
+				font-size: 16px;
+			}
+			.entryForm{
+				padding:30px;
+			}
+			.entryAward{
+				background: #f8f8f8;
+				line-height: 25px;
+				padding:20px;
+			}
+			.entryAward span{
+				display: inline-block;
+				vertical-align: top;
+			}
+			.entryAwardLeft{
+				font-size: 16px;
+				font-weight: bold;
+				margin-right: 20px;
+			}
+			.entryAwardRight{
+				width:800px;
+				font-size: 0;
+			}
+			.entryAwardRight label{
+				display: inline-block;
+				width:200px;
+				font-size: 14px;
+			}
+			.entryAwardRight div{
+				color:#f1071d;
+				font-size: 14px;
+			}
+			.entryForm table{
+				border-spacing: 0 20px;
+				border-collapse:separate;
+			}
+			.entryForm th{
+				font-weight: normal;
+				text-align: right;
+				padding-right: 10px;
+			}
+			.entryForm table textarea{
+				width:780px;
+				height:180px;
+				line-height: 33px;
+				font-size: 16px;
+				border:1px solid #f1f1f1;
+				outline: none;
+				/*text-indent: 0.5em;*/
+				padding-left:0.5em;
+				resize: none;
+			}
+			.entryForm table input,.entryForm table select,.entryForm table .drop{
+				height:33px;
+				line-height: 33px;
+				border:1px solid #f1f1f1;
+				outline: none;
+				text-indent: 0.5em;
+			}
+			.entryForm table .w320{
+				width:320px;
+				margin-right: 60px;
+			}
+			.entryForm table .w150{
+				width:150px
+			}
+			.entryForm table .w160{
+				width:160px
+			}
+			.entryForm .fakeTh{
+				padding-left: 40px;
+				padding-right: 10px;
+			}
+			.entryBtn{
+				display: block;
+				width:180px;
+				height:50px;
+				text-align: center;
+				color:#fff;
+				background: #f1071d;
+				border:none;
+				outline: none;
+				margin:auto;
+				font-size: 18px;
+			}
+			
+			.ui_hb_areaDrop_drop{
+				border:none;
+				position: relative;
+    			top: -3px;
+    		}
+    		
+    		
+    		
+    		.checkMod .dropLstCon .lst ul li input.chb{margin:0 2px;width:auto;}
+    		
+    		
+    		.btn1 {
+    			display: block;
+    			width: 60px;
+			    background: #e60012;
+			    border: 1px solid #e60012;
+			    box-shadow: none;
+			    margin:auto;
+			    height:25px;
+			    line-height: 25px;
+			    text-align: center;
+    		}
+    		.ui_login_dialog .ui_dialog_container{
+    			height:auto !important;
+    			
+    		}
+    		.ui_activity_code_dialog .ui_dialog_container{
+    			text-align: center;
+    			color:#444;
+    		}
+    		.ui_activity_code_dialog .ui_dialog_container div{
+    			margin-bottom:15px
+    		}
+    		.ui_activity_code_dialog img{
+    			display: block;
+    			margin:auto;
+    			width:250px;
+    			height:250px;
+    		}
+    		
+    		.entrySucc,.entryOut{
+    			width:1100px;
+				border:1px solid #f1f1f1;
+				background: #fff;
+				color:#444;
+				margin:auto;
+				padding:80px 0;
+				text-align: center;
+    		}
+    		.entrySucc h2{
+    			margin-top: 20px;
+    			font-size: 18px;
+    			color:#444;
+    			font-weight: bold;
+    		}
+    		.entrySucc .entryQr{
+    			display: block;
+    			margin:20px auto 0;
+    			padding:30px;
+    			width:250px;
+    			height: 250px;
+    			border:1px solid #f1f1f1;
+    		}
+    		.entrySucc .entryTip{
+    			display: inline-block;
+    			font-size: 16px;
+    			color:#666;
+    			background: #f8f9ff;
+    			padding:10px;
+    			margin: 20px auto 0;
+    		}
+    		.entrySucc .entryTip em{
+    			color:#4275eb;
+    		}
+    		
+    		.dialogBtn a.btn1{
+    			margin:5px auto 10px;
+    			color:#fff;
+    		}
+    		#famouseCode{margin:0 15px;}
+    		#qrWindow{
+    			position: absolute;
+    			width:150px;
+    			height:180px;
+    			border:1px solid #eee;
+			    margin-left: 50%;
+			    left: 565px;
+			    top:650px;
+			    background: #fff;
+			    text-align: center;
+    		}
+    		#qrWindow div{
+    			font-size: 16px;
+    			color:#305abc;
+    			height:20px;
+    			margin: 5px 0;
+    		}
+    		#qrWindow img{
+    			width:150px;
+    			height:150px;
+    		}
+    		#qrWindow.fixed{
+			    position: fixed;
+			    top:150px;
+			    z-index: 1;
+    		}
+    		.dialogSel a.btn1{
+    			display: inline-block;
+    			margin: 5px 15px 10px 0;
+    		}
+    		.dialogSel a.btn3{
+    			display: inline-block;
+			    width: 60px;
+			    background: #FFFFFB;
+			    border: 1px solid #DBDBDB;
+			    box-shadow: none;
+			    height: 25px;
+			    line-height: 25px;
+			    text-align: center;
+    		}
+		</style>
+	</head>
+	<body>
+		<div class="header">
+			<!--<h1 class="headerTitle">重庆市2019年</h1>
+			<div class="headerInfo">
+				指导单位：重庆市人力资源和社会保障局 <br />
+				主办单位：重庆市人才研究和人力资源服务协会<br />
+				承办单位：汇博网
+			</div>-->
+		</div>
+		<div class="headNav">
+			<div>
+				<ul>
+					<li class="cut">活动简介</li>
+					<li>活动流程</li>
+					<li>奖项设置</li>
+					<li>奖品设置</li>
+					<li>选项规则</li>
+					<li>企业报名</li>
+					<li class="entryBtn" id="activityCodeBtn" {/if $activity_end_msg/}style="display:none;"{//if/}>网络投票入口</li>
+				</ul>
+			</div>
+		</div>
+		<div id="qrWindow"><div>微信扫码投票</div><img src="{/$activity_code/}"></div>
+		<div id="intro">
+			<div class="body">
+				<h3>BRIEF INTRODUCTION<div>活动简介</div></h3>
+				<div class="content">
+					<p>
+						重庆明星雇主评选活动，由汇博网发起，旨在充分挖掘重庆企业自身的雇主形象，提升重庆企业人力资源发展的空间和路径，在评选中吸收优秀的人力资源借鉴经验和做法，帮助企业进一步优化自身管理和发展，打造强势的重庆雇主品牌建设氛围，营造重庆宜居宜业的人才就业环境。
+					</p>
+				</div>
+			</div>
+		</div>
+		<div id="flow">
+			<div class="body">
+				<h3>ACTIVITY FLOW<div>活动流程</div></h3>
+				
+			</div>
+		</div>
+		<div id="award">
+			<div class="body">
+				<h3>AWARD<div>奖项设置</div></h3>
+				<div class="content">
+					<div class="award-item">
+						<img src="{/$siteurl.style/}/img/mobile/activity/crown.png" alt="" /><br />
+						<span>10家</span>
+						<h5>2019年重庆明星雇主</h5>
+						<div>前<em>100</em>名可获汇博网“2019年重庆明星雇主”打标</div>
+					</div>
+					<div class="award-item">
+						<img src="{/$siteurl.style/}/img/mobile/activity/madel.png" alt="" /><br />
+						<span>1家</span>
+						<h5>2019年重庆最佳薪酬福利雇主</h5>
+						<div>前<em>10</em>名可获汇博网“2019年重庆最佳薪酬福利雇主”打标</div>
+					</div>
+					<div class="award-item">
+						<img src="{/$siteurl.style/}/img/mobile/activity/madel.png" alt="" /><br />
+						<span>1家</span>
+						<h5>2019年重庆最具发展潜力雇主</h5>
+						<div>前<em>10</em>名可获汇博网“2019年重庆最具发展潜力雇主”打标</div>
+					</div>
+					<div class="award-item">
+						<img src="{/$siteurl.style/}/img/mobile/activity/madel.png" alt="" /><br />
+						<span>1家</span>
+						<h5>2019年重庆中小企业最佳雇主</h5>
+						<div>前<em>10</em>名可获汇博网“2019年重庆中小企业最佳雇主”打标</div>
+					</div>
+					<div class="award-item">
+						<img src="{/$siteurl.style/}/img/mobile/activity/madel.png" alt="" /><br />
+						<span>1家</span>
+						<h5>2019年重庆最佳工作环境雇主</h5>
+						<div>前<em>10</em>名可获汇博网“2019年重庆最佳工作环境雇主”打标</div>
+					</div>
+					<div class="award-item">
+						<img src="{/$siteurl.style/}/img/mobile/activity/madel.png" alt="" /><br />
+						<span>1家</span>
+						<h5>2019年重庆最受大学生欢迎雇主</h5>
+						<div>前<em>10</em>名可获汇博网“2019年重庆最受大学生欢迎雇主”打标</div>
+					</div>
+					<div class="award-item">
+						<img src="{/$siteurl.style/}/img/mobile/activity/madel.png" alt="" /><br />
+						<span>3家</span>
+						<h5>2019年重庆优秀服务商</h5>
+						<div>前<em>10</em>名可获汇博网“2019年重庆优秀服务商”打标</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="price">
+			<div class="body">
+				<h3>PRIZE SETTING<div>奖项对比</div></h3>
+				<div class="content">
+					<div class="price-item borderRight borderBottom">
+						<img src="{/$siteurl.style/}/img/mobile/activity/price1.jpg" alt="" />
+						<div>汇博网2020全年度网站“<em>最佳雇主品牌</em>”打标，树立在重庆招聘求职中的明星雇主企业标杆，提升其招聘效果。</div>
+					</div>
+					<div class="price-item borderBottom">
+						<img src="{/$siteurl.style/}/img/mobile/activity/price2.jpg" alt="" />
+						<div>汇博网<em>PC首页广告位一号位赠送30天推广</em>，展示企业风采，帮助企业更加深入地推进雇主品牌建设。</div>
+					</div>
+					<div class="price-item borderRight borderBottom">
+						<img src="{/$siteurl.style/}/img/mobile/activity/price3.jpg" alt="" />
+						<div>汇博网<em>公众号专题报告</em>宣传一次，更深层地发掘企业文化，彰显企业底蕴，形成业界好评。</div>
+					</div>
+					<div class="price-item borderBottom">
+						<img src="{/$siteurl.style/}/img/mobile/activity/price4.jpg" alt="" />
+						<div>各大<em>主流媒体进行集中性报道</em>，打造强势的重庆雇主品牌建设氛围，营造重庆良好的雇主环境，形成社会美誉度。</div>
+					</div>
+					<div class="price-item borderRight">
+						<img src="{/$siteurl.style/}/img/mobile/activity/price5.jpg" alt="" />
+						<div>与汇博网达成2020年全年度所有线上、线下品牌<em>活动宣传战略</em>合作伙伴，汇博网所有广告宣传，在明星雇主同意的前提下，均给予其广告推广。</div>
+					</div>
+					<div class="price-item">
+						<img src="{/$siteurl.style/}/img/mobile/activity/price6.jpg" alt="" />
+						<div>年度峰会<em>现场提名并颁奖</em>，奖牌颁发机构：重庆市人才研究和人力资源服务协会，充分发挥行业优秀雇主的示范、引领和带动作用。</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div id="rules">
+			<div class="body">
+				<h3>SELECTION RULES<div>评选规则</div></h3>
+				<div class="content">
+					<table>
+						<tr class="row1">
+							<th>评选条件：</th>
+							<td>
+								<div class='row1-item'>
+									<em>1</em>依法成立，诚信规范经营
+								</div>
+								<div class='row1-item'>
+									<em>2</em>企业持续稳定经营2年以上
+								</div>
+								<div class='row1-item'>
+									<em>3</em>企业在2018年-2019年度无重大劳动安全事故
+								</div>
+								<div class='row1-item'>
+									<em>4</em>企业在2018年-2019年度无重大劳动纠纷
+								</div>
+								<div class='row1-item'>
+									<em class="nobg"></em>以上资料将由<strong>91背调</strong>提供核实服务
+								</div>
+							</td>
+						</tr>
+						<tr class="row2">
+							<th>评选方式：</th>
+							<td>
+								<div class="row2-text">评选活动坚持公开、公平、公正的原则，采取企业自主报名，<em>网络大众投票，政府部门、行业HR和社会求职“三方参与”</em>的方式，设置初审、网络投票、专家评议、HR评议、企业内部员工调研五个评分环节，各环节分数分别为：10分、50分、20分、10分、10分，按照<em>10%</em><em>、50%、20%、10%、10%</em>的权重计入总分，按总分由高到低的顺序产生评选结果。</div>
+								<div class='row2-item'>
+									<div class="row2-left"><div>初审<br />（10%）</div></div>
+									<div class="row2-right">指导单位和主办单位对报名企业进行初审，并会同市人力社保局劳动关系处、人力资源流动管理处、市就业服务管理局和区县（自治县）人力社保局等对参评机构进行初审；</div>
+								</div>
+								<div class='row2-item'>
+									<div class="row2-left"><div>网络投票<br />（50%）</div></div>
+									<div class="row2-right">参与网络投票前50强企业总分，网络投票第一名获得50分，第二名49分……以此类推，第50名为1分。</div>
+								</div>
+								<div class='row2-item'>
+									<div class="row2-left"><div>专家评议<br />（20%）</div></div>
+									<div class="row2-right">由指导单位主管部门及汇博网各业务部门负责人，人力资源专家等组成专家评审委员会，根据活动评审的六大维度进行打分，去掉一个最高分，去掉一个最低分，平均分为企业专家评议的最终得分。</div>
+								</div>
+								<div class='row2-item'>
+									<div class="row2-left"><div>HR评议<br />（10%）</div></div>
+									<div class="row2-right">筛选前期自愿报名参与HR评议的30名HR，统一对入围的50强企业进行打分，HR不能参与自己所在企业的打分，去掉一个最高分，去掉一个最低分，平均分为企业HR评议阶段的最终得分。</div>
+								</div>
+								<div class='row2-item'>
+									<div class="row2-left"><div>企业内部<br />员工调研<br />（10%）</div></div>
+									<div class="row2-right">通过网站大数据，找到相应单位的人员邀请其为现在公司或者曾在公司打分，去掉一个最高分，去掉最低分，平均分为企业内部员工调研最终得分。</div>
+								</div>
+							</td>
+						</tr>
+						<tr class="row3">
+							<th>评选维度：</th>
+							<td>
+								<div class="row3-item">
+									<img src="{/$siteurl.style/}/img/mobile/activity/dimen1.png" alt="" />
+									<div>
+										<h6>雇主品牌建设</h6>
+										<ul>
+											<li>雇主品牌意识<em>(1分)</em></li>
+											<li>打造雇主品牌的方法<em>(1分)</em></li>
+											<li>积极推动雇主品牌的传播<em>(1分)</em></li>
+										</ul>
+									</div>
+								</div>
+								<div class="row3-item">
+									<img src="{/$siteurl.style/}/img/mobile/activity/dimen2.png" alt="" />
+									<div>
+										<h6>雇主形象</h6>
+										<ul>
+											<li>企业社会责任<em>(1分)</em></li>
+											<li>成功的市场地位<em>(1分)</em></li>
+											<li>企业具有良好的发展前景<em>(1分)</em></li>
+											<li>产品和服务不断创新<em>(1分)</em></li>
+										</ul>
+									</div>
+								</div>
+								<div class="row3-item">
+									<img src="{/$siteurl.style/}/img/mobile/activity/dimen3.png" alt="" />
+									<div>
+										<h6>组织管理</h6>
+										<ul>
+											<li>健全的公司内部沟通机制<em>(1分)</em></li>
+											<li>对员工尊重<em>(1分)</em></li>
+											<li>用人公平<em>(1分)</em></li>
+											<li>践行对员工的承诺<em>(1分)</em></li>
+										</ul>
+									</div>
+								</div>
+								<div class="row3-item">
+									<img src="{/$siteurl.style/}/img/mobile/activity/dimen4.png" alt="" />
+									<div>
+										<h6>薪酬福利</h6>
+										<ul>
+											<li>有竞争力的薪酬<em>(1分)</em></li>
+											<li>完善的福利待遇<em>(1分)</em></li>
+											<li>良好的收入前景<em>(1分)</em></li>
+										</ul>
+									</div>
+								</div>
+								<div class="row3-item">
+									<img src="{/$siteurl.style/}/img/mobile/activity/dimen5.png" alt="" />
+									<div>
+										<h6>培训发展</h6>
+										<ul>
+											<li>员工职位晋升空间<em>(1分)</em></li>
+											<li>提升个人核心能力的机会<em>(1分)</em></li>
+											<li>系统的培训体系<em>(1分)</em></li>
+											<li>完善的职业规划<em>(1分)</em></li>
+										</ul>
+									</div>
+								</div>
+								<div class="row3-item">
+									<img src="{/$siteurl.style/}/img/mobile/activity/dimen6.png" alt="" />
+									<div>
+										<h6>工作环境</h6>
+										<ul>
+											<li>良好的部门内部和跨部门合作<em>(1分)</em></li>
+											<li>舒适的工作环境<em>(1分)</em></li>
+										</ul>
+									</div>
+								</div>
+							</td>
+						</tr>
+						<tr class="row4">
+							<th>评选机构：</th>
+							<td>
+								指导单位： 重庆市人才研究和人力资源服务协会<br /> 
+								主办单位：汇博网（huibo.com)<br />
+								支持单位：重庆校企融合协会&nbsp;&nbsp;&nbsp;&nbsp;太和顾问&nbsp;&nbsp;&nbsp;&nbsp;91背调
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+		
+		<div id="entry">
+			<div class="body">
+				<h3>ACTIVITY FLOW<div>企业报名</div></h3>
+				<div class="entryBox" style="display:{/if !$found_date && !$year_profit && !$activity_end_msg/}block;{/else/}none;{//if/}">
+					<div class="entryHead"><a href="javascript:;" id='loginBtn' {/if $company_id/}style="display:none;"{//if/}>已报名登录</a></div>
+					<form action="{/get_url rule='/votesgin/post'/}" method='post' class="entryForm">
+						<div class="entryAward">
+							<span class="entryAwardLeft">报名奖项</span>
+							<span class="entryAwardRight">
+                                {/foreach $awards as $v/}
+								<label for="entryCkb{/$v['id']/}"><input id="entryCkb{/$v['id']/}" class="entryCkb" type="checkbox" value="{/$v['id']/}" name="famouseAwardPut"/>{/$v['awards_name']/}</label>
+                                {//foreach/}
+								<div>每家企业最多可报2项</div>
+							</span>
+						</div>
+						<table>
+							<tr>
+								<th>公司名称</th><td><input class="w320" type="text" name="famouseCompanyName" value="{/$company['company_name']/}" id='famouseCompanyName'/></td>
+								<th>公司行业</th><td class="checkMod">
+                                    <!--<input id="newCalling" readonly="readonly" class="w320" type="text" name="famouseTradePut"/>-->
+                                    <span class="drop formText JobIndDrop zIndex" style="width:300px;" id="company_calling"></span>
+                                </td>
+							</tr>
+							<tr>
+								<th>公司规模</th>
+								<td><!--<span class="drop zIndex" id="company_size"></span>-->
+									<select class="w160" name="size_id" id="" placeholder="请选择">
+										<option value="" style='display: none;'>请选择</option>
+                                        {/foreach $company_sizes as $k=>$v/}
+										<option value="{/$k/}" {/if $company['size_id'] == $k/}selected{//if/}>{/$v/}</option>
+                                        {//foreach/}
+									</select>
+								</td>
+								<th>成立时间</th><td><input onclick="WdatePicker()" class="w320" type="text" name="famouseFormed" value="{/$found_date/}"/></td>
+							</tr>
+							<tr>
+								<th>年产值</th><td colspan="3"><input class="w160" type="text" name="famouseProd" value="{/$year_profit/}"/>万</td>
+							</tr>
+							<tr>
+								<th>公司地址</th><td><span id="curarea"></span></td>
+								<th>详细地址</th><td><input class="w320" type="text" name="famouseinDetail" value="{/$company['address']/}"/></td>
+							</tr>
+							<tr>
+								<th>企业简介<br />（选填）</th>
+								<td colspan="3"><textarea name="famouseIntro" rows="" cols="" value="{/$company['info']/}">{/$company['info']/}</textarea></td>
+							</tr>
+							<tr>
+								<th>联系人</th>
+								<td colspan="3" class="xf-input">
+									<input class="w150" type="text" name="famouseContacts" value="{/$company['linkman']/}"/>
+									<span class="fakeTh">手机号</span>
+									<input class="w150" type="text" id="famousePhone" name="famousePhone" value="{/$company['link_mobile']/}"/><input class="w150" type="text" placeholder="请输入短信验证码" name="famouseCode" id="famouseCode"/><a id="btnSendValidate" href="javascript:;">获取短信验证码</a><span class="cutDown" style="display: none;"><em>60</em>秒后可重新发送</span>
+								</td>
+							</tr>
+							<tr {/if $licence_file_name || !$need_upload_licence/}style="display: none;"{//if/}>
+								<th>营业执照</th>
+                                <td colspan="3">
+                                     <a href="javascript:;" id="uploadFile1" class="uploadFile1">
+                                        <img id="licenceImage" src="{/$licence_file_url/}" width="103px" height="103px" />
+                                        <span>上传营业执照</span>
+                                     </a>
+                                </td>
+							</tr>
+							<tr {/if $company['company_logo_path']/}style="display: none;"{//if/}>
+								<th>公司logo</th>
+                                <td colspan="3">
+                                    <a href="javascript:;" id="upLOGO" class="upLOGO">
+                                        <img src="{/$company_logo_path/}" width="103px" height="103px" />
+                                        <span>上传LOGO</span>
+                                     </a>
+                                </td>
+							</tr>
+						</table>
+                        <input id="hidLogo" name="hidden_logo" type="hidden" value="{/$company['company_logo_path']/}"/>
+                        <input type="hidden" id="hddLicenceurl" name="hddLicenceurl" value="{/$licence_file_name/}">
+						<input class="entryBtn" type="button" value="提交" id="submitForm" data-lock='0'/>
+					</form>
+				</div>
+				<div class="entrySucc" style="display:{/if ($found_date || $year_profit) && !$activity_end_msg/}block;{/else/}none;{//if/}">
+					<h2>报名成功</h2>
+					<h2>微信扫码分享投票链接</h2>
+					<img class="entryQr" src="{/$company_code/}" alt="" />
+					<div class="entryTip">手机打开网址，在企业报名中可修改资料&nbsp;&nbsp;&nbsp;&nbsp;客服电话：<em>13154815154</em></div>
+				</div>
+                
+                <div class="entryOut" style="display:{/if $activity_end_msg/}block;{/else/}none;{//if/}">
+                    <h2>{/$activity_end_msg/}</h2>
+                </div>
+			
+			</div>
+		</div>
+		
+        <!-------弹窗上传营业资质------{/$mobile_url/}/licencevalidate/saveTempLicence/-->
+        <div class="iphoneImg" style="display:none;">
+             <form id="form1" action="{/get_url rule='/votesgin/saveTempLicence'/}" method="post" enctype="multipart/form-data">
+                 <input style="display:none" type="file" name="Filedata">
+                 <a href="javascript:;" id="selectImage">从手机相册选择</a>
+             </form>
+            <a href="javascript:;" id="cons" class="gray">取消</a>
+        </div>
+        
+		<div class="footerBm" style="text-align: center;">
+			<div class="footerNav"><a target="_blank" href="http://www.huibo.com/about/">关于汇博</a>|<a target="_blank" href="http://www.huibo.com/about/contact/">联系我们</a>|<a target="_blank" href="http://www.huibo.com/qiye/ent49no58.html">诚聘英才</a>|<a target="_blank" href="http://www.huibo.com/about/brand/">品牌合作</a>|<a target="_blank" href="http://www.huibo.com/about/media">媒体合作</a>|<a target="_blank" href="http://www.huibo.com/about/links/">友情链接</a><!--|<a target="_blank" href="http://www.huibo.com/about/sitemap/">网站地图</a>-->|<a target="_blank" href="http://www.huibo.com/about/law/">法律声明</a>|<a target="_blank" href="http://www.huibo.com/about/privacy/">隐私政策</a></div>
+		    <div class="copyright">
+		    	<p>&copy;2019&nbsp;汇博网&nbsp;版权所有&nbsp;&nbsp;|&nbsp;&nbsp;增值电信业务经营许可证：渝B2-20060063&nbsp;&nbsp;|&nbsp;&nbsp;人才中介服务许可证：渝新委发[2012] 124号&nbsp;&nbsp;|&nbsp;&nbsp;<a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=50010502001182" rel="nofollow">渝公网安备 50010502001182号</a></p>
+		        <p>招聘单位无权收取任何费用,请求职人员加强自我保护意识,按劳动法规保护自身权益,警惕虚假招聘,避免上当受骗!</p>
+		    </div>
+		</div>
+<script  type="text/javascript">
+    var action_url = '{/$siteurl.style/}';
+    if(typeof action_dom == 'object'){
+        action_dom.push( ['#submitForm', 9]);
+        action_dom.push( ['#loginBtn', 29]);
+        action_dom.push( ['#activityCodeBtn', 30]);
+    }else{
+        action_dom = [
+            ['#submitForm', 9],
+            ['#loginBtn', 29],
+            ['#activityCodeBtn', 30]
+        ];
+    }
+</script>
+<script type="text/javascript" language="javascript" src="{/version file='action.js'/}"></script>
+<script type="text/javascript">
+
+    $(window).ready(function(){
+        var arr=['intro','flow','award','price','rules','entry'];
+        $('#company_calling').calling({hddName:"famouseTradePut", type:'single', isLimit:true, max:1, unLimitedLevel:3});
+        $("#company_calling").setCallingValue("{/$company['calling_id']/}");
+        
+        $('.headNav li').on('click',function(){
+            $('.headNav li').removeClass('cut')
+            $(this).addClass('cut')	
+            location.href="#"+arr[$(this).index()];
+        })
+        $(document).on('scroll',function(){
+            if($(document).scrollTop() > 440){
+                $('.headNav div').addClass('fixed')
+            }else{
+                $('.headNav div').removeClass('fixed')
+            }
+            $.each(arr,function(i,e){
+                var min=$('#'+ e).offset().top-100;
+                if($(document).scrollTop()>min){
+                    $('.headNav li').removeClass('cut').eq(i).addClass('cut')
+                }else{
+                    return false;
+                }
+            })
+            if($(document).scrollTop() > 500){
+            	$('#qrWindow').addClass('fixed')
+            }else{
+            	$('#qrWindow').removeClass('fixed')
+            }
+        })
+        //最多选两项
+        $('.entryCkb').on('propertyChange change',function(){
+        	if($('.entryCkb:checked').length>2){
+        		$(this).prop('checked',false)
+        		$.anchorMsg('每家企业最多可报2项',{icon: "fail"});
+        	}
+        })
+        
+        
+        //获取验证码
+        var chatinterval;
+		$('.xf-input').on('click','#btnSendValidate', function(){
+			var chatPhonex = $('#famousePhone').val();
+			var pattern = /^[1]\d{10}$/;
+			if(chatPhonex == ''){
+				$.message("请输入手机号");
+			}else if(!pattern.test(chatPhonex)){
+				$.message("手机号码格式不正确");
+			}else{
+                $.getJSON("{/get_url rule='/votesgin/SendAuthCode'/}",{mobile_phone:chatPhonex},function(result){
+                    //closeLoading();
+                    $.message(result.msg);
+                    chatinterval = setInterval(countdown,1000);
+                });
+			}
+		});
+		
+		var countdown = function(){
+		
+	        var seconds = $('.cutDown em').html();
+	        seconds = parseInt(seconds);
+	        if(seconds>0){
+	            seconds--;
+	            $('.cutDown em').html(seconds);
+	            $('#btnSendValidate').hide();
+	            $('.cutDown').show();
+	        }else{
+	            clearInterval(chatinterval);
+	            $('#btnSendValidate').show().text('重新发送');
+	            $('.cutDown').hide();
+	           $('.cutDown em').text("60");
+	        }
+	    }
+
+    })
+    hbjs.use('@imageEditor, @confirmBox, @checkBoxer, @jobDialog, @hbCommon, @actions, @areaDrop, @form, @jobDropList', function(m){
+        var imageEditor = m['widge.imageEditor'],
+            ConfirmBox = m['widge.overlay.confirmBox'],
+            checkBoxer = m['widge.checkBoxer'],
+            Dialog = m['widge.overlay.hbDialog'],
+            util = m['base.util'],
+            $ = m['product.hbCommon'].extend(m['cqjob.actions'], m['cqjob.jobDialog']),
+            uploadDialog = new Dialog({
+                close: 'x',
+                idName: 'ui_company_dialog',
+                title: '请上传有识别性的logo图片',
+                width: 700,
+                content: '{/$siteurl.company|replace:"http:":""/}/votesgin/uploadCompanyLogo/',
+                isAjax: true
+            }),
+            fontSize = 18,
+            pWidth = 70,
+            imgEditor,
+            loginDialog = new Dialog({
+                close: 'x',
+                idName: 'ui_login_dialog',
+                title: '登录',
+                width: 'auto',
+                height: 'auto',
+                content: '{/$siteurl.company|replace:"http:":""/}/votesgin/ajaxlogin/',
+                isAjax: true
+            }),
+            activityCodeDialog = new Dialog({
+                close: 'x',
+                idName: 'ui_activity_code_dialog',
+                title: '扫一扫',
+                width: 300,
+                height: 'auto',
+                content: '<div><img src="{/$activity_code/}">网络投票仅限微信中可参与</div>',
+                isAjax: true
+            });
+
+        $("#submitForm").on('click', function(){
+            if($(this).attr('data-lock') == 1){
+                $.message('请勿重复提交');
+                return;
+            }
+            var famouseAwardPut = new Array();
+            $('input[name=famouseAwardPut]').each(function(i,n){
+                if($(n).is(":checked")){
+                    famouseAwardPut.push($(n).val());
+                }
+            });
+            if(famouseAwardPut.length > 0){
+                famouseAwardPut = famouseAwardPut.join(',');
+            }else{
+                famouseAwardPut = '';
+            }
+
+            var famouseCompanyName = $('input[name=famouseCompanyName]').val();
+            var famouseTradePut = $('input[name=famouseTradePut]').val();
+            var size_id = $('select[name=size_id]').val();
+            var famouseFormed = $('input[name=famouseFormed]').val();
+            var famouseProd = $('input[name=famouseProd]').val();
+            var famouseArea = $('input[name=hidArea]').val();
+            var famouseinDetail = $('input[name=famouseinDetail]').val();
+            var famouseContacts = $('input[name=famouseContacts]').val();
+            var famousePhone = $('input[name=famousePhone]').val();
+            var famouseCode = $('input[name=famouseCode]').val();
+            var famouseIntro = $('textarea[name=famouseIntro]').val();
+//            var pattern = /^[1]\d{10}$/;
+//
+//
+//            if(!famouseAwardPut){alert('请选择报名奖项');return false;}
+//            if(!famouseCompanyName){alert('请填写公司名称');return false;}
+//            if(!famouseTradePut){alert('请选择公司行业');return false;}
+//            if(!size_id){alert('请选择公司规模');return false;}
+//            if(!famouseFormed){alert('请选择成立时间');return false;}
+//            if(!famouseProd){alert('请填写公司年产值');return false;}
+//            if(!(/(^[1-9]\d*$)/.test(famouseProd))){alert('年产值请输入正整数');return false;}
+//            if(!famouseArea){alert('请选择公司地址');return false;}
+//            if(!famouseinDetail){alert('请填写公司详细地址');return false;}
+//            if(!famouseIntro){alert('请填写公司简介');return false;}
+//            if(!famouseContacts){alert('请填写联系人');return false;}
+//            if(!famousePhone){alert('请填写手机号');return false;}
+//            if(!pattern.test(famousePhone)){alert('手机号码格式不正确');return false;}
+//            if(famousePhone != "{/$company['link_mobile']/}" && !famouseCode){alert('请填写验证码');return false;}
+
+            var data = {
+                famouseAwardPut : famouseAwardPut,
+                famouseCompanyName : famouseCompanyName,
+                famouseTradePut : famouseTradePut,
+                size_id : size_id,
+                famouseFormed : famouseFormed,
+                famouseProd : famouseProd,
+                famouseIntro : famouseIntro,
+                famouseArea : famouseArea,
+                famouseinDetail : famouseinDetail,
+                famouseContacts : famouseContacts,
+                famousePhone : famousePhone,
+                famouseCode : famouseCode,
+                licence_file_url : $('#hddLicenceurl').val(),
+                company_logo_path : $('#hidLogo').val(),
+                activity_id : {/$activity_id/}
+            }
+
+//            $('.loading').show();
+            $(this).attr('data-lock', '1');
+            $.post('{/get_url rule="/votesgin/post"/}',data,function(reData){
+                $("#submitForm").attr('data-lock', '0');
+//                $('.loading').hide();
+                if (reData.error) {
+                	console.log(reData.error)
+                    $.message(reData.error.replace(/\n/g,'，'));
+                } else {
+                    $.message(reData.success);
+                }
+                if (!reData.error || reData.error == '' || reData.error == undefined){
+                    setTimeout("window.location.reload()" ,2500);
+                }
+            },'json');
+        });
+        
+        $("#famouseCompanyName").on('blur', function(){
+            var company_name = $("input[name=famouseCompanyName]").val();
+             $.ajax({
+                url:'{/get_url rule="/votesgin/CheckSameCompanyName"/}',
+                type:"get",
+                dataType: "json",
+                data: {company_name:company_name},
+                success:function(json){
+                    if(json.status){
+                        $.confirm('该企业已在汇博注册，是否前去登录？','提示',function(){
+                            loginDialog.show();
+                        });
+                    }
+                }
+            });
+        });
+        
+        $('#activityCodeBtn').on('click', function(){
+            activityCodeDialog.show();
+        });
+        $("#loginBtn").on('click', function(){
+            loginDialog.show();
+        });
+        $('#upLOGO').on('click', function(e){
+            uploadDialog.show();
+        });
+        uploadDialog.after('hide', function(){
+            this.query('#newPopQuit').off('click');
+            imgEditor.destory();
+        });
+        uploadDialog.on('loadComplete', function(){
+            var uploadPanel = this.query('#uplogo1'),
+                editPanel = this.query('#dropImageContainer'),
+                dropImage = this.query('#dropImage'),
+                uploadingDialog;
+
+            imgEditor = new imageEditor({
+                imageCroperConfig: {
+                    element: dropImage,//目标
+                    handle: '#dragDiv',
+                    color: '#f1f1f1',
+                    width: dropImage.width(),
+                    height: dropImage.height()
+                },
+                fileUploaderConfig: {
+                    imageURL: '{/$logo_virt_path/}',
+                    uploadURL:'/votesgin/uploadImage'
+                },
+                trigger: this.query('#newPopSave')
+            });
+            imgEditor.on('startUpload', function(e){
+                var msg = "正在上传...";
+                uploadingDialog = ConfirmBox.timeBomb(msg, {
+                    name : "warning",
+                    timeout : 100000,
+                    width: fontSize * msg.length + pWidth
+                });
+            }).on('progresed', function(e){
+                this._imgFileName = e.data.name;
+                this._imgType = e.data.thumb_type;
+                this._imgRatio = e.data.thumb_ratio;
+                this.loadImage(e.url);
+
+                uploadingDialog.hide();
+                uploadPanel.hide();
+                editPanel.show();
+
+                var preview1 = editPanel.find('#preview120'),
+                    preview2 = editPanel.find('#preview160');
+
+                this.addPreview(preview1, 120, 120);
+                this.addPreview(preview2, 160, 160);
+            }).on('progressError', function(e){
+                if(e.errorMsg != undefined){
+                    ConfirmBox.timeBomb(e.errorMsg, {
+                        name : "fail",
+                        timeout : 3000,
+                        width: fontSize * e.errorMsg.length + pWidth
+                    });
+                    return;
+                }
+
+                if(e.data.status == 0){
+                    ConfirmBox.timeBomb(e.data.errorMsg, {
+                        name : "fail",
+                        timeout : 3000,
+                        width: fontSize * e.data.errorMsg.length + pWidth
+                    });
+                }
+            }).on('save', function(e){
+                var self = this;
+                $.ajax({
+                    url: '{/$siteurl.company|replace:"http:":""/}/votesgin/saveLogo',
+                    data: {
+                        cropX: e.cropX,
+                        cropY: e.cropY,
+                        cropH: e.cropH,
+                        cropW: e.cropW,
+                        cropPH: e.cropPH,
+                        cropPW: e.cropPW,
+                        url: e.url,
+                        name: this._imgFileName,
+                        thumb_type: this._imgType,
+                        thumb_ratio: this._imgRatio
+                    },
+                    success: function(e){
+                        e = util.json(e);
+                        if(e.state){
+                            $('#hidLogo').val(e.image_path);
+                            $('#upLOGO > img').attr('src', e.image_url);
+                            uploadDialog.hide();
+                            delete self._imgFileName;
+                            delete self._imgType;
+                            delete self._imgRatio;
+                        }
+                    }
+                });
+            });
+
+            imgEditor.imageCroper.on('loadSuccess', function(){
+                uploadPanel.hide();
+                editPanel.show();
+            }).on('loadError', function(){
+                delete this._imgFileName;
+                delete this._imgType;
+                delete this._imgRatio;
+                uploadPanel.show();
+                editPanel.hide();
+                var msg = '加载图片失败';
+                ConfirmBox.timeBomb(msg, {
+                    name : "fail",
+                    timeout : 1000,
+                    width: fontSize * msg.length + pWidth
+                });
+            });
+
+            this.query('#newPopQuit').on('click', function(){
+                uploadDialog.hide();
+            });
+        });
+
+        //企业资质上传
+        $("#uploadFile1").click(function(){
+            $("input[name='Filedata']").click();
+        });
+
+        $("input[name='Filedata']").change(function(){
+            $('#form1').ajaxSubmit({beforeSubmit: function(){},data:{},success: success,dataType:'json'});
+        });
+
+        function success(json){
+            if(json && json.error){
+                $.message(json.error);
+
+                return false;
+            }
+            $.message("上传成功");
+            $("#licenceImage").attr('src',json.path);
+            $("input[name='hddLicenceurl']").val(json.newname_path);
+        }
+
+        var AreaDrop = m['product.areaDrop'];
+        var areaDrop = new AreaDrop({
+            hidName: 'hidArea',
+            container: $('#curarea'),
+            selectedValue: '{/$company["area_id"]/}'
+        });
+        
+//        $('#newCalling').on('click',function(){
+//            callingdialog = new Dialog({
+//                idName: 'apply_job',
+//                title: '选择主行业',
+//                content: '{/get_url rule="/votesgin/selectCalling"/}?type=1',
+//                isOverflow: true,
+//                close:'╳',
+//                isAjax : true,
+//                width:'710px'
+//            });
+//            callingdialog.show();
+//        });
+//        //修改行业
+//function updateCalling(calling_id,calling_name,type, $){
+//    if(type ==1) {
+//        $("#addMainCalling").empty();
+//        $("#main_calling").val(calling_id);
+//        var area_id = $('#curarea').find('input[name=hidArea]').val();
+//        var promotionAreaList = [{/$promotion['area_ids']/}];
+//        var promotionCalling = [{/$promotion['calling_ids']/}];
+//        var stop = false;
+//        var thisArea_id = area_id.substr(0,2);
+//        if(thisArea_id=='03'){
+//            for(var i = 0 ; i < promotionAreaList.length ; i++ ) {
+//                var thisProArea = promotionAreaList[i].toString();
+//                var area_id = area_id.toString();
+//                if (stop) {
+//                    break;
+//                }
+//                for (var j = 0; j < promotionCalling.length; j++) {
+//                    if (promotionCalling[j] == calling_id || thisProArea == area_id) {
+//                        $('#PromotionArea').show();stop=true;
+//                        break;
+//                    } else {
+//                        $('#promotion_code').val('');
+//                        $('#PromotionArea').hide();
+//                    }
+//                }
+//            }
+//        }
+//
+//        var h = "<span class='selednew'>" + calling_name + "</span>"
+//        $("#addMainCalling").html(h);
+//        callingdialog.hide();
+//    }
+//}
+        $("#company_size").droplist({
+            isCanWrite:false,
+            inputWidth:125,
+            style:'width:133px',
+            hddName:'hddComsize',
+            items:[
+                    {id:'01',name:'50人以下'},
+                    {id:'02',name:'51-100人'},
+                    {id:'03',name:'101-500人'},
+                    {id:'04',name:'501-1000人'},
+                    {id:'05',name:'1000人以上'}
+                    ],
+            onSelect:function(i,name){
+                baseInforForm.element($('#hddComsize'));
+            }
+        });
+    })
+</script>
+	</body>
+</html>

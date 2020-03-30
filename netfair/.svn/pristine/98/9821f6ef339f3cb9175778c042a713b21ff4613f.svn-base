@@ -1,0 +1,52 @@
+{/if $list/}
+{/if $page==1/}
+	<div class="businessHallList">
+{//if/}
+        {/foreach $list as $key=>$val/}
+			<div class="jobSeekersHall">
+				<div class="jobSeekersHallLeft">
+					<img src="{/if $val.photo/}{/$val.photo_name/}{/else/}
+				{/if $val.sex==1/}{/$siteurl.style/}/img/company/video/defaultMan.png{/elseif $val.sex==2/}{/$siteurl.style/}/img/company/video/defaultWoman.png{//if/}{//if/}"
+						 onerror="javascript:this.src='{/if $val.sex==1/}{/$siteurl.style/}/img/company/video/defaultMan.png{/elseif $val.sex==2/}{/$siteurl.style/}/img/company/video/defaultWoman.png{//if/}'">
+					<span>{/$val.user_name_desc/}</span>
+					<i class="{/if $val.sex==1/}boy{/elseif $val.sex==2/}girl{//if/}"></i>
+				</div>
+				<div class="jobSeekersHallRight">
+					<span class="hallName01" title="{/$val.station/}">{/$val.station/}</span>
+					<span class="hallName02">{/$val.age/}岁 {/if $val.work_year/} · {/$val.work_year/}{//if/} {/if $val.salary_desc/}· {/intval($val.salary_desc)/1000/}k及以上{//if/}</span>
+					<span class="hallName03">{/if $val.school/}{/$val.school/}{//if/}{/if $val.degree_desc/}({/$val.degree_desc/}){/else/} {//if/}</span>
+					<span class="hallName04">{/$val.major_desc/}</span>
+				</div>
+				<div class="clear"></div>
+				<div class="jobSeekersHall-botom-btn-box">
+					<a href="javascritp:void(0);" class="hallName05 person-hallName05"><i></i>立即视频面试</a>
+				</div>
+			</div>
+        {//foreach/}
+{/if $page==1/}
+	</div>
+{//if/}
+    {/$pager/}
+{/else/}
+    {/if $page==1/}
+		<div class="noApplyVideo">
+			<img src="{/$siteurl.style/}/img/company/video/eng_icon10.png">
+			暂无数据
+		</div>
+		<script>
+            var init_loadingPage = 1;
+		</script>
+    {/else/}
+		<div class="noApplyVideo">
+			暂无更多数据
+		</div>
+        <script>
+            var init_loadingPage_nodata = 1;
+        </script>
+    {//if/}
+	<script>
+        setTimeout(function () {
+            loadingPage = 2;
+        }, 200);
+	</script>
+{//if/}

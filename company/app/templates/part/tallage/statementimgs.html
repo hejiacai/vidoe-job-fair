@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>银行流水</title>
+        <meta charset="UTF-8">
+		<link rel="stylesheet" type="text/css" href="{/version file='main.css'/}"/>
+		<link rel="stylesheet" type="text/css" href="{/version file='mainPhoto.css'/}"/>
+		<script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.js'/}"></script>
+		<script type="text/javascript" language="javascript" src="{/version file='jquery.cookie.js'/}"></script>
+		<script type="text/javascript" language="javascript" src="{/version file='jquery.prettyPhoto.js'/}"></script>
+		<script type="text/javascript" language="javascript" src="{/version file='lrtkmain.js'/}"></script>
+    </head>
+    <body>
+        <div class="gallery">
+        {/foreach $defaults_files as $v/}
+		<a target="_blank" href="{/$v/}" rel="prettyPhoto[]" style="display: inline-block; width: 320px;height: 130px;">
+			<img src='{/$v/}' style="width: 320px;height: 130px;">
+		</a>
+        {//foreach/}
+        </div>
+    </body>
+</html>

@@ -1,0 +1,637 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+<title>汇博网_招聘中心_我的账户</title>
+<!–[if lt IE9]> 
+<script src="{/version file="html5.js"/}"></script>
+<![endif]–>
+
+<link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='comback.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='icons.css'/}" />
+
+<script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.min.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='common.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='dialog.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='jquery.form.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='ui_inputFocus.js'/}"></script><!--输入框获取焦点-->
+
+<script type="text/javascript" language="javascript" src="{/version file='ui_validate.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='ui_uploadify.js'/}"></script>
+
+
+<style type="text/css">
+.part{border:1px solid #dadada; border-radius:5px;padding:15px;margin:0 0 20px;zoom:1;}
+.part dl{overflow:hidden;}
+.part dl dt{float:left;display:inline;width:175px; text-align:center;}
+.part dl dd{float:left;display:inline;width:745px;margin:5px 0 0;}
+.part dl dt .ico{height:80px;width:100px;margin:0 auto;background:url({$siteurl.style}/img/c/c.gif) no-repeat;}
+.part dl dt p{height:22px;line-height:22px;margin:5px 0 0;font-size:16px;}
+.part dl dd p{line-height:30px;}
+.part dl dd p a.btn3{margin:0 10px 0 0;}
+
+.part1 dl dt .ico{background-position:0 0;}
+.part2 dl dt .ico{background-position:-100px 0;}
+.part3 dl dt .ico{background-position:-200px 0;}
+.part4 dl dt .ico{background-position:-300px 0;}
+
+.part1 p a.lnk{margin:0 10px;}
+
+.part2 p.tit{height:45px;}
+.part2 p.tit i.hbFntWes{float:left;display:inline;margin:0 5px 0 0;font-size:45px;}
+.part2 p.tit span{float:left;font-size:12px;margin:8px 0 0 0;}
+.part2 p.tit span em{font-weight:bold;font-size:16px;line-height:28px;margin:0 0 0 5px;}
+.part2 p span.line{color:#cecece;margin:0 10px;}
+.part2 p a.lnk{margin:0 10px;}
+.part2 div.tip{line-height:30px;}
+.part2 div.tip span.lst{float:left;display:inline;padding:0 10px 0 0;border-right:1px solid #ccc;margin-right:10px;height:24px;line-height:24px;}
+.part2 div.tip span.last{border:0;}
+.part2 div.tip .tipLay{top:-36px;left:-196px;}
+.part2 div.tip .tipLayTxt{width:350px;font-size:12px;background:#fffce3;border:1px solid #fad5a8;}
+.part2 div.tip .tipLay .tipArr{background:url({/$siteurl.style/}/img/common/contrl.gif) no-repeat -8px 0;width:8px;height:5px;top:auto;bottom:-4px;left:115px; z-index:4}
+
+.part3 p.tit{font-weight:bold;}
+.part3 p b{float:left;display:inline;height:30px;line-height:30px;font-weight:normal;}
+.part3 p .bar{margin:7px 0 0;display:inline-block;}
+.part3 p a{margin:0 10px 0;}
+
+.part4 p.tit{height:45px;}
+.part4 p.tit i.hbFntWes{float:left;display:inline;margin:0 5px 0 0;font-size:45px;}
+.part4 p.tit span{float:left;display:inline;font-weight:bold;font-size:16px;line-height:28px;margin:8px 0 0 0;}
+.part4 p.tit span em{}
+.part4 dl dd.part4AttIng{margin:40px 0 0;}
+.part4 dl dd.part4AttS{margin:33px 0 0;}
+.part4 dl dd.part4AttS span a.btn3{margin:0 0 0 10px;font-weight:normal;}
+.part4 dl dd.part4AttErr{margin:17px 0 0;}
+.part4 dl dd.part4AttErr a.btn3{margin:0 0 0 10px;font-weight:normal;}
+.part4 dl dd.part4AttNo{margin:17px 0 0;}
+.part4 dl dd.part4AttNo a.btn3{margin:0 0 0 10px;font-weight:normal;}
+
+.part2 p.notmember {margin-top: 20px;}
+
+.firmMemberPge a{ float:right; display:block;width:160px; height:40px; line-height:40px; color:#fff; font-size:16px; background:#21a3df url({/$siteurl.style/}/img/c/new_index/firmicon16.png) 34px center no-repeat; border-radius:4px; text-indent:4.1em;#text-indent:4.8em;}
+.firmMemberPge img{ float:right; display:block; margin:7px 20px 0 0;}
+.firmMemberPge a:hover{ background:#107cae url({/$siteurl.style/}/img/c/new_index/firmicon16.png) 34px center no-repeat;}
+
+.playm{display: inline-block;width:72px;height: 30px;background: url({/$siteurl.style/}/img/c/icon.jpg) no-repeat;text-indent: -999px;overflow: hidden;vertical-align: middle;margin-left: 15px}
+</style>
+
+<style type="text/css">
+.banner{width:100%; height:79px; overflow:hidden; position:relative; z-index:1;}
+header,.hdCon{ background:#f0f0f0;}
+.hdCon{ height:30px;}
+.hdL .logo{ height:30px; line-height:30px; color:#8e8e8e; font-family:"宋体"; font-size:12px;}
+.hdR ul li,.hdR ul li a.lnk,.hdR ul .navLst a{ height:30px; line-height:30px;}
+.hdR ul .navLst i{ margin:10px 5px 0 0;}
+.hdR ul li.wemChatlist{width:100px;}
+.hdR ul li.wemChatlist a,.hdR ul li.wemChatlist a:hover{ height:30px; line-height:32px; color:#888;background:url({/$siteurl.style/}/img/newindex/weChat06.png) 0 center no-repeat}
+.hdR ul li.navLst a:hover,.hdR ul li.wemChatlist a:hover,.hdR ul li.tcomInfo a:hover,.hdR ul li.thelpInfo a:hover{ color: #666;}
+.compNavbg{width:100%; overflow:hidden; background:#fff; margin-bottom:20px;}
+.compNav{width:1000px; height:50px; overflow:hidden; margin:0 auto; text-align:left;}
+.compLogo{ display:block; float:left;width:144px; height:30px; background:url({/$siteurl.style/}/img/newindex/compLogo.png) no-repeat; margin:10px 0;}
+.compList{ float:left; padding-left:60px;}
+.compList li{ float:left;}
+.compList li a{ display:block; width:120px; text-align:center;height:50px; line-height:50px; font-size:16px; font-family:"微软雅黑"; color:#2a2623;}
+.compList li a:hover{text-decoration: none;color:#4c4b49;}
+.compList li.cut a{ font-weight:bold; color:#004d92; background:url({/$siteurl.style/}/img/newindex/hbcompany02.png) center bottom no-repeat;}
+.compList li.cut2 a{ font-weight:bold; color:#004d92; background:url({/$siteurl.style/}/img/newindex/weChat07.png) center bottom no-repeat;}
+.comPost{ display:block; float:right;width:110px; height:30px; line-height:30px; font-family:"微软雅黑"; background:url({/$siteurl.style/}/img/newindex/hbcompany03.png) 15px center no-repeat #66bce4; text-indent:40px; margin-top:10px; color:#fff; border-radius:4px;font-size:14px;}
+.comPost:hover{background:url({/$siteurl.style/}/img/newindex/hbcompany03.png) 15px center no-repeat #5ca8cc; color:#fff;text-decoration: none;}
+.comPost:focus,.comPost:active{background-color: #4aa2f2 }
+.subcompNavbg{width:100%; overflow:hidden; background:#2b6fad; height:36px; text-align:left;}
+.subcompMage{width:1000px; margin:0 auto;}
+.subcompNav{ float:left; overflow:hidden;}
+.subcompNav li{ float:left; display:none;}
+.subcompNav li a{ display:block; float:left; color:#fff; color:#d2e5f6; font-family:"微软雅黑"; height:16px; line-height:16px; padding:0 20px; border-right:1px solid #23598c;border-left:1px solid #368ad9; margin-top:11px; font-size: 14px;}
+.subcompNav li a.first{ border-left:none;}
+.subcompNav li a.last{ border-right:none;}
+.subcompNav li a.cut{ font-weight:bold; color:#fff;}
+.subcompNav li a:hover{color:#fff;text-decoration: none;}
+.subcompNav li.tabList3{ margin-left:97px;_margin-left:48px;}
+.subcompNav li.tabList4{ margin-left:217px; _margin-left:108px;}
+.subcompRt{ float:right;}
+.subcompRt a{ display:block; height:36px; padding-left:20px; line-height:36px; color:#d2e5f6; float:left; font-family:"微软雅黑"; font-size: 14px; }
+.subcompRt a.compHome{ background:url({/$siteurl.style/}/img/newindex/hbcompany04.png) left center no-repeat; margin-right:20px;}
+.subcompRt a.compHome:hover{background:url({/$siteurl.style/}/img/newindex/hbcompany04cut.png) left center no-repeat;color:#fff;}
+.subcompRt a.compSch{ background:url({/$siteurl.style/}/img/newindex/hbcompany05.png) left center no-repeat;}
+.subcompRt a.compSch:hover{background:url({/$siteurl.style/}/img/newindex/hbcompany05cut.png) left center no-repeat;color:#fff;}
+.hdR ul li a em.num{left:25px; top:2px;}
+.comPostBg,.comPostBgcut{ width:110px; height:50px; overflow:hidden; float:right;background:url({/$siteurl.style/}/img/newindex/weChat07.png) center bottom no-repeat;}
+
+.compList li a{ position: relative;}
+.notice_icon {background:url({/$siteurl.style/}/img/newindex/bubble.png);width:23px; height:21px; font-size: 12px; font-family: "宋体"; line-height: 18px; color:#fff; position: absolute;top:5px; right:4px; text-align: center;}
+
+</style>
+
+<style>
+    .dz_upimg .step_box{margin: 40px 120px}
+    .dz_upimg .step_box li{height:29px;overflow: hidden;float:left;background: #f3f3f3 url({/$siteurl.style/}/img/c/hrmember/dz_step_ctr.jpg) right top no-repeat;color:#444;font-size:12px;line-height: 29px; text-align: center;width:360px}
+    .dz_upimg .step_box li.cur{background-image:url({/$siteurl.style/}/img/c/hrmember/dz_step_ctrg.jpg)}
+    .dz_upimg .step_box li.last{background:#f3f3f3 url({/$siteurl.style/}/img/c/hrmember/dz_step_arrg.jpg) right top no-repeat}
+    .dz_upimg .step_box li.lastcur{background:#55728d url({/$siteurl.style/}/img/c/hrmember/dz_step_arr.jpg) right top no-repeat;color:#fff}
+    .dz_upimg .step_box li.cur{background-color: #55728d;color:#fff}
+    .dz_upimg .orange{color:#ed6802;font-size:14px;margin-left: 120px}
+    .dz_upimg dl{color:#a6a6a6; font-size:14px;margin:20px 0 0 120px}
+    .dz_upimg dl dt{float:left}
+    .dz_upimg dl dd{margin-left: 150px;font-size:12px}
+    .dz_upimg dl .uploadify{margin-top: -4px}
+    .dz_upimg .img{margin:20px 0 0 220px}
+    .dz_upimg .success_box,.dz_upimg .warning_box{margin-left: 300px;margin-top: 40px;margin-bottom: 100px}
+    .dz_upimg .success_box dd,.dz_upimg .warning_box dd,.dz_upimg .error_box dd{margin-left: 60px;padding-top: 3px}
+    .dz_upimg .success_box p{color:#00c60e;font-size:14px;margin-bottom: 5px}
+    .dz_upimg .warning_box p{color:#444;font-size:14px;padding-top: 8px}
+    .dz_upimg .error_box{margin-left: 300px;margin-top: 40px;margin-bottom: 40px}
+    .dz_upimg .error_box p{color:#fa3f38;font-size:14px;margin-bottom: 5px}
+</style>
+
+<style type="text/css">
+.noopen_box{margin: 70px 0 70px 250px;color:#6c6c6c;font-size:14px}
+.noopen_box dt{float:left;padding-top: 5px}
+.noopen_box dd{margin-left: 60px;font-family:"宋体"}
+.noopen_box dd label{display: block;margin:10px 0;color:#484848}
+.noopen_box dd span{display: block;margin-bottom: 10px}
+.noopen_box dd .link{color:#fff;font-size:12px;background-color: #00bab1;border-radius: 3px;padding:7px 15px;margin-left: 20px}
+#upload_photo-button{margin-top:-27px;}
+
+.imgLst{clear:both;width:730px;float:left;margin:15px 0 0;display:inline;}
+.imgLst ul li{float:left;display:inline; position:relative; z-index:1;width:122px;height:125px;margin:0 24px 5px 0;}
+.imgLst ul li .pic{height:82px;}
+.imgLst ul li .pic img{width:120px;height:80px;border:1px solid #dadada;}
+.imgLst ul li a.del{position:absolute;right:-10px;top:-10px;font-size:22px;color:#D84D14;background:#fff; border-radius:15px;}
+.imgLst ul li a.del:hover{color:#cb4647;}
+.imgLst ul li .imgInp{margin:5px 0 0;}
+.imgLst ul li .imgInp input.imgTxt{height:22px;line-height:22px;border:1px solid #fff;font-size:12px;width:120px; text-align:center; cursor:pointer;}
+.imgLst ul li .imgInp input.imgTxtHov{border:1px solid #dadada;}
+.imgLst ul li .load{display:none;width:120px;height:80px;border:1px solid #eaeaea;background:url({/$siteurl.style/}/img/common/loadBox.gif) no-repeat center center;}
+.imgLst ul li .loadTxt{ text-align:center;font-size:12px;display:none;height:24px;line-height:24px;margin-top:5px;}
+
+.imgLst ul li.hov .imgInp input.imgTxt{border:1px solid #aaa;}
+.imgLst ul li.hov .pic img{border:1px solid #cbcbcb}
+.imgLst ul li.imgLoading .load{display:block;}
+.imgLst ul li.imgLoading .loadTxt{display:block;}
+.imgLst ul li.imgLoading .pic,.imgLst ul li.imgLoading .imgInp,.imgLst ul li.imgLoading a.del{display:none;}
+</style>
+</head>
+
+<body id="body">
+{/include file="new_header.html" par="企业管理" cur="企业资质"/}
+<div class="content" id="content">
+
+{/if $account_type != 'hr_main'/}
+
+	<section class="section" style="overflow:hidden;">
+    	<dl class="noopen_box">
+    		<dt><img src="{/$siteurl.style/}/img/c/hrmember/icon_warning.jpg" /></dt>
+    		<dd>
+    			<p>您尚未开通人力资源公司适用的HR会员，请咨询招聘顾问！
+					<a href="{/geturl rule='/hrdesc'/}" class="link">了解HR会员</a></p>
+    			{/if $hrManager['user_name']/}<label>招聘顾问：{/$hrManager['user_name']/}</label>{//if/}
+    			<span>{/$tel_head/}转{/$hrManager['tel']/}    {/if $hrManager['qq']/}QQ: {/$hrManager['qq']/}{//if/}</span>
+    			{/if !empty($hrManager['qq'])/}
+		            <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin={/trim($hrManager["qq"])/}&site=qq&menu=yes">
+		            	<img border="0"  width="79" height="25" src="http://wpa.qq.com/pa?p=2:{/trim($hrManager["qq"])/}:51" alt="点击这里给我发消息" title="点击这里给我发消息"/>
+		            </a>
+	            {/else/}
+                	<script charset="utf-8" type="text/javascript" src="http://wpa.b.qq.com/cgi/wpa.php?key=XzkzODA0MDQyNl8xMjgzMTBfNDAwODg3Mjg4N18"></script>                        
+	            {//if/}
+    		</dd>
+    	</dl>
+    </section>
+
+{/else/}
+
+    <section class="section dz_upimg" style="overflow:hidden;">
+    	{/if $check_status == $allstatus['pass']/}
+    	<!--成功-->
+    	<dl class="success_box">
+    		<dt><img src="{/$siteurl.style/}/img/c/hrmember/icon_suc.jpg" /></dt>
+    		<dd>
+    			<p>您的人力资源许证可已通过验证</p>
+    			<span>认证通过时间：{/date('Y年m月d日',strtotime($update_time))/}</span>
+    		</dd>
+    	</dl>
+
+	
+    	{/elseif $check_status == $allstatus['checking']/}
+    	<!--审核中-->
+    	<ul class="clearfix step_box">
+    		<li>第一步：提交人力资源许可证</li>
+    		<li class="lastcur">第二步：等待审核</li>
+    	</ul>
+    	<dl class="warning_box">
+    		<dt><img src="{/$siteurl.style/}/img/c/hrmember/icon_warning.jpg" /></dt>
+    		<dd>
+    			<p>汇博工作人员正在玩命的加速审核，请等待！</p>
+    		</dd>
+    	</dl>
+
+
+
+    	{/elseif $check_status == $allstatus['nopass']/}
+    	<!--审核未通过-->
+    	<dl class="error_box">
+    		<dt><img src="{/$siteurl.style/}/img/c/hrmember/icon_error.jpg" /></dt>
+    		<dd style="width:400px;">
+    			<p>您的人力资源许可证验证未通过，请重新上传验证</p>
+    			{/if !empty($reason)/}<span>原因：{/$reason/}</span>{//if/}
+    		</dd>
+    	</dl>
+    	<ul class="clearfix step_box">
+    		<li class="cur">第一步：提交人力资源许可证</li>
+    		<li class="last">第二步：等待审核</li>
+    	</ul>
+    	<p class="orange">验证人力资源许可证，能极大提升求职者的信任度！</p>
+    	<dl class="clearfix">
+    		<dt>上传人力资源许可证</dt>
+    		<dd>
+    			<p class="clearfix">
+    				<span style="float:left" class="tipTxt formFile">
+                        <input type="file" id="upload_photo" name="upload_photo">
+                    </span>
+                    <a href="javascript:void(0)" id="btnSubmitPhoto" onclick="$('#upload_photo').uploadify('upload','*');" style="display:none"></a>
+            		<span class="tipTxt gray" style="float:left">需清晰有效，支持jpg/gif/png图片格式，大小不超过2M</span> 
+            	</p>
+                <form id="mien" action="/hrlicence/savehrlicence" method="post">
+                <span class="imgLst">
+                    <ul id="imgLst"></ul>
+                    <div class="clear"></div>
+                </span>
+                </form>
+        		<p style="margin-top: 20px"><img src="{/$siteurl.style/}/img/c/hrmember/img9.jpg" /></p>
+        		<p style="margin: 20px 0 80px 0"><a id="mien_btn" class="btnsF16 btn1" href="javascript:void(0);">提交</a></p>				
+    		</dd>
+    	</dl>
+
+		{/else/}
+    	<!--未上传许可证-->
+    	<ul class="clearfix step_box">
+    		<li class="cur">第一步：提交人力资源许可证</li>
+    		<li class="last">第二步：等待审核</li>
+    	</ul>
+    	<p class="orange">验证人力资源许可证，能极大提升求职者的信任度！</p>
+    	<dl class="clearfix">
+    		<dt>上传人力资源许可证</dt>
+    		<dd>
+    			<p class="clearfix">
+    				<span style="margin:0 10px 0 0;float:left" class="tipTxt formFile"><input type="file" id="upload_photo" name="upload_photo" onchange="uploadlicence()"></span>
+                    <a href="javascript:void(0)" id="btnSubmitPhoto" style="display:none"></a>
+            		<span class="tipTxt gray" style="float:left">需清晰有效，支持jpg/gif/png图片格式，大小不超过2M</span> 
+            	</p>
+                <form id="mien" action="/hrlicence/savehrlicence" method="post">
+                <span class="imgLst">
+                    <ul id="imgLst"></ul>
+                    <div class="clear"></div>
+                </span>
+                </form>
+        		<p style="margin-top: 20px"><img src="{/$siteurl.style/}/img/c/hrmember/img9.jpg" /></p>
+        		<p style="margin: 20px 0 80px 0"><a id="mien_btn" class="btnsF16 btn1" href="javascript:void(0);">提交</a></p>				
+    		</dd>
+    	</dl>
+    	
+    	{//if/}
+    </section>
+
+{//if/}
+
+</div>
+{/include file="footer.html"/}
+<section class="floatRT">
+    <a href="{/get_url rule='/about/message' domain='main'/}" target="_blank" class="serviceLink">我有问题要反馈</a>
+    <b></b>
+</section>
+<script type="text/javascript">
+try {
+	hbjs.use(factory);
+} catch(e) {
+	factory($);
+}
+function factory($){
+	$(window).scroll(function(){
+        if ($(document).scrollTop() > 120){
+            $('#sus').find('a.backTop').css({'display':'inline-block'});
+        }else{
+            $('#sus').find('a.backTop').css({'display':'none'});
+        }
+    });
+    $('#sus').find('a.backTop').click(function(){
+        $('html,body').animate({ scrollTop: 0 });
+    });    
+}
+</script>
+<script type="text/javascript">
+//2014-11-13 huangwt 去掉企业相册                              
+var noLoginError = false;
+var fileNullError = false;
+var extensionError = false;
+var maxCountError = false;
+var photoUploadFail = false;
+var mien_infor;
+
+var maxCount = 1;
+var queueLength = 0;
+var errorCount = 0;
+var queueSizeCount = 1;
+var queueSize = 0;
+var remCount = 0;
+$(document).ready(function(){
+        //上传图片
+        $('#upload_photo').uploadify({
+            auto:true,
+            swf:'/swf/uploadify.swf',
+            uploader : '/hrlicence/SaveTempLicence/',
+            formData: {
+                'upload_cookie_userid': '{/$upload_cookie_userid/}',
+                'upload_cookie_nickname':'{/$upload_cookie_nickname/}',
+                'upload_cookie_usertype':'{/$upload_cookie_usertype/}',
+                'upload_cookie_userkey':'{/$upload_cookie_userkey/}',
+                'upload_cookie_tick':'{/$upload_cookie_tick/}',
+                'upload_cookie_accountid':'{/$upload_cookie_accountid/}'
+            },
+            queueID:'imgLst',
+            fileSizeLimit: '2048kb',
+            fileTypeExts:'*.jpg;*.bmp;*.gif;*.jpeg;*.png',
+            removeCompleted:false,
+            buttonImage:'{/$siteurl.style/}/uploadify/submit.png',
+            fileTypeDesc:'All Files',
+            method:'post',
+            cancelImage: '{/$siteurl.style/}/uploadify/cancel.png',
+            width:85,
+            height:27,
+            multi:true,
+            itemTemplate:'<li class="imgLoading" id="${fileID}">'
+                +'<a class="del hbFntWes" href="javascript:$(\'#${instanceID}\').uploadify(\'cancel\', \'${fileID}\')">&#xf057;</a>'
+                +'<div class="pic"><img src=""></div>'
+                +'<div class="load"></div>'
+                +'<div class="loadTxt">上传中...</div>'
+                +'<div class="imgInp" style="display:none">'
+                +'<input type="text" class="newImg imgTxt" value="" />'
+                +'<span style="display:none" v="" /></span>'
+                +'<input type="hidden" class="pics" name="hddLicenceurl" value="" />'
+                +'</div>'
+                +'</li>',
+            onSelect:function(file){
+                queueLength++;
+                queueSize++;
+                if(remCount==0){
+                    $.anchorMsg('您最多上传1张',{icon:'warning'});
+                    $('#upload_photo').uploadify('cancel',file.id);
+                    return false;
+                }
+                else if( remCount<queueSizeCount && queueSize>remCount){
+                    $.anchorMsg('您本次最多上传'+remCount+'张',{icon:'warning'});
+                    $('#upload_photo').uploadify('cancel',file.id);
+                    return false;
+                }
+                else if(queueSize>queueSizeCount){
+                    $.anchorMsg('每次只能上传1张照片',{icon:'warning'});
+                    $('#upload_photo').uploadify('cancel',file.id);
+                    return false;
+                }
+                if(queueLength<=maxCount){
+                    return true;
+                }
+                else{
+                    $('#upload_photo').uploadify('cancel',file.id);
+                    return false;
+                }
+            },
+            onDialogOpen:function(){
+                queueSize =0;
+                remCount = maxCount-queueLength;
+            },
+            onUploadSuccess:function(file,data,response){
+                if(data!=null&&data!=undefined&&data!=''){
+                    var json = eval("("+data+")");
+                     if(json.error==100){
+                         noLoginError=true;
+                         $.anchorMsg("请选择您要上传的文件", { icon: "warning" });
+                     }else if(json.error==101){
+                         fileNullError=true;
+                         $.anchorMsg("文件超过最大限制", { icon: "warning" });
+                     }else if(json.error==102){
+                         extensionError=true;
+                         $.anchorMsg("您上传的文件格式有误", { icon: "warning" });
+                     }else if (json.error==103) {
+                         maxCountError = true;
+                         $.anchorMsg("抱歉！最多允许上传1张照片", { icon: "warning" });
+                     } else if (json.error==104) {
+                         photoUploadFail = true;
+                         $.anchorMsg("文件上传失败", { icon: "warning" });
+                     } else {
+                        var path = json.path;
+                        $('#'+file.id).removeClass('imgLoading');
+                        $('#'+file.id).find('img').attr('src',path+'?'+Math.random().toString().replace('.','0'));
+                        $('#'+file.id).find('.loadTxt').hide();
+                        $('#'+file.id).find('.imgInp').show().find('input').val(json.name).next().attr('v',json.name);
+                        $('#'+file.id).find('input[name^=hddNewPhotoName]').val(json.newname+'|'+json.name);
+                    }
+                }
+            },
+            onSelectError:function(file,errorCode,errorMsg){
+
+                var settings = this.settings;
+                switch(errorCode) {
+                    case SWFUpload.QUEUE_ERROR.QUEUE_LIMIT_EXCEEDED:
+                        $.anchorMsg("一次最多上传" + settings.queueSizeLimit + "张照片！", { icon: "warning" });
+                        break;
+                    case SWFUpload.QUEUE_ERROR.FILE_EXCEEDS_SIZE_LIMIT:
+                        $.anchorMsg('抱歉 "' + file.name + '" 文件查过了大小限制 (' + settings.fileSizeLimit + ').',{icon:'warning'});
+                        break;
+                    case SWFUpload.QUEUE_ERROR.ZERO_BYTE_FILE:
+                        $.anchorMsg('文件 "' + file.name + '" 为空.',{icon:'warning'});
+                        break;
+                    case SWFUpload.QUEUE_ERROR.INVALID_FILETYPE:
+                        $.anchorMsg('文件 "' + file.name + '" 类型不支持 (' + settings.fileTypeDesc + ').',{icon:'warning'});
+                        break;
+                }
+            },
+            onQueueComplete:function(data){
+                if (!noLoginError&&!fileNullError&&!extensionError&&!maxCountError && !photoUploadFail) {
+                    var filesUploadCount= data.uploadsSuccessful - data.uploadsErrored> 0 ?(data.uploadsSuccessful - data.uploadsErrored):0;
+                    if(data.uploadsErrored!=0){
+                        $.anchorMsg("上传失败，请重新上传",{ icon: "warning" });
+                        return;
+                    }
+                }
+            },
+            onCancel:function(file_id){
+                queueLength--;
+            }
+    });
+
+    //保存
+    $("#mien_btn").click(function(){
+        if(!validate()) return false;
+        mien_infor = get_mien_infor();
+        $("#mien").ajaxSubmit({
+            success:function(json){
+                if((json.success||false)){
+                    $.message(json.error,{title:'操作失败！'});
+                    return false;
+                }
+                $.anchorMsg("保存成功！");
+                 setTimeout(function() {
+                    window.location.href = window.location.href;
+                },1000);
+                return false;
+            }
+        });
+        return false;
+    });
+    var validate = function(){
+        var list = $("#mien").find('.pics');
+        var list1 = $("#mien").find('.modpics');
+        var list2 = $("#mien").find('.delpics');
+        if(list.length ==0 && list1.length ==0 && list2.length==0){
+            $.anchorMsg('请选择上传的图片文件', { icon: 'warning' });
+            return false;
+        }
+        return true;
+    };
+
+    function get_mien_infor(){
+        var infor = {};
+
+        return $("#mien").serialize();
+    }
+
+    //已经上传名称的事件
+    $('#imgLst .oldImg').live('mouseover', function(event) {
+        event.preventDefault();
+        $(this).closest('li').addClass('hov');
+    }).live('mouseout', function(event) {
+        event.preventDefault();
+        $(this).closest('li').removeClass('hov');
+    }).live('focus', function(event) {
+        event.preventDefault();
+        $(this).addClass('imgTxtHov');
+    }).live('blur', function(event) {
+        event.preventDefault();
+        var _slef = $(this);
+        _slef.removeClass('imgTxtHov');
+        var oldName = _slef.next().attr('v');
+        var photo_id = _slef.closest('li').find('input[name=photo_id]').val();
+        if (_slef.val().trim().length == 0) {
+            $.anchorMsg('请填写你要修改图片的名称', { icon: 'warning' });
+            _slef.val(oldName);
+            return;
+        }
+        if (_slef.val().trim().length >= 64) {
+            $.anchorMsg('图片名称过长', { icon: 'warning' });
+            _slef.val(oldName);
+            return;
+        }
+        if (_slef.val() != oldName) {
+            $('#spnModPhoto').append('<input type="hidden" class="modpics" name="hddModPhotoID[]" value="'+photo_id+'|'+_slef.val()+'">');
+        }
+    });
+    //还未保存的
+     $('#imgLst .newImg').live('mouseover', function(event) {
+        event.preventDefault();
+        $(this).closest('li').addClass('hov');
+    }).live('mouseout', function(event) {
+        event.preventDefault();
+        $(this).closest('li').removeClass('hov');
+    }).live('focus', function(event) {
+        event.preventDefault();
+        $(this).addClass('imgTxtHov');
+    }).live('blur', function(event) {
+        event.preventDefault();
+        var _slef = $(this);
+        _slef.removeClass('imgTxtHov');
+        var oldName = _slef.next().attr('v');
+        if (_slef.val().trim().length == 0) {
+            $.anchorMsg('请填写你要修改图片的名称', { icon: 'warning' });
+            _slef.val(oldName);
+            return;
+        }
+        if (_slef.val().trim().length >= 64) {
+            $.anchorMsg('图片名称过长', { icon: 'warning' });
+            return;
+        }
+        if (_slef.val() != oldName) {
+            var temp_data = _slef.closest('li').find('input[name^=hddNewPhotoName]');
+            var img_path = temp_data.val().split('|')[0];
+            temp_data.val(img_path+'|'+_slef.val());
+        }
+    });
+});
+
+//保存数据成功
+function sucPhotoCallBack(json){
+    if(json&&json.error){
+        $.message(json.error,{icon:'warning'});
+        return;
+    }
+    var temp = '<li id="li{0}">'
+                +'<input type="hidden" id="photo_id" name="photo_id" value="{0}">'
+                +'<input type="hidden" id="photo_path" name="photo_path" value="{1}">'
+                +'<a class="del hbFntWes" onclick="delPhoto(this);return false;" href="javascript:void(0);">&#xf057;</a>'
+                +'<div class="pic"><img src="{/$photo_virt_path/}{2}"></div>'
+                +'<div class="load"></div>'
+                +'<div class="imgInp">'
+                +'<input type="text" class="oldImg imgTxt" value="{3}" />'
+                +'<span style="display:none" v="{3}" /></span>'
+                +'</div>'
+                +'</li>';
+    //清空数据
+    $('#imgLst').empty();
+    for(var i=0;i< json.company_photo.length;i++){
+        var photo = json.company_photo[i];
+        $('#imgLst').append($.format(temp,photo.photo_id,photo.photo_path,photo.photo_thumb_path,photo.photo_name));
+    }
+    $('#alr_photo_count').html(json.alr_photo_count);
+    $('#spnDelPhoto').empty();
+    $('#spnModPhoto').empty();
+    $.anchorMsg("保存数据成功！");
+    return;
+}
+
+//删除图片
+function delPhoto(obj){
+    var self = $(obj);
+    var li = self.closest('li');
+    var photo_id = li.find('input[name=photo_id]').val();
+    li.remove();
+    maxCount++;
+    $('#spnDelPhoto').append('<input type="hidden" class="delpics" name="hddDelPhotoID[]" value="'+photo_id+'">');
+}
+
+
+
+$(function(){
+    var flag = '{/$flag/}';
+    var fixHeight = $("#fstNav").height();
+    scroller(flag, 700, fixHeight);
+});
+</script>
+<script type="text/javascript">
+	var account={
+		init:function(){
+			$('#btnModUsername').click(function(){
+				$.showModal('/account/ModifyName/success-usernameSuccess',{title:'用户名修改'});
+			});
+			$('#btnModPassword').click(function(){
+				$.showModal('/account/ModifyPassword/success-passwordSuccess',{title:'密码修改'});
+			});
+		},
+		usernameSuccess:function(json){
+			$('#pUserName').text(json.user_id);
+		},
+		applyVip:function(isOpen){
+			var title = '开通会员';
+			if(isOpen){
+				title = '续费会员';
+			}
+			$.showModal('/account/showApplyVipTips/',{title:title});
+		}
+	}
+	account.init();	
+</script>
+
+</body>
+</html>

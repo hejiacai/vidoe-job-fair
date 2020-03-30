@@ -1,0 +1,793 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+.dat{background:#fff;}
+.lngChange{padding:0 10px;zoom:1; text-align:right; background:#f7f7f7; line-height:30px; height:30px;}
+.lngChange .l{float:left; display:inline;}
+.lngChange .l em{margin-right:10px; font-size:12px; color:#999;}
+.lngChange .r{ float:right; display:inline;font-size:12px;}
+.lngChange .r i.hbFntWes{font-size:14px; color:#6C6C6C; margin:0 5px;}
+.lngChange .r a.cu{color:#6c6c6c;}
+.rTeam{padding:0 10px 20px 10px;zoom:1;}
+.rTeam .gray{color:#666;}
+.rTeamBas{padding:20px 10px 30px 10px; zoom:1; position:relative; z-index:1;}
+.rTeamBas .photo{width:120px; height:150px;position:absolute; left:10px; top:26px; background:url({/$siteurl.style/}/img/common/user120_150.jpg) no-repeat;}
+.rTeamBas .photo img{width:120px; height:150px; border:0;}
+.rTeamBas .info{margin-left:135px;}
+.info .infoT{display:inline-block;}
+.info .infoT p{padding-bottom:8px; zoom:1;}
+.info .infoT b.rName{font-size:24px; margin-right:10px; font-family:"微软雅黑";}
+.info .infoT i{margin-right:10px;border-right:1px solid #dadada; padding-right:10px;zoom:1; height:14px; line-height:14px; display:inline; margin-bottom:10px;}
+.info .infoT i.end{border:0;}
+.info .infoC{color:#666; line-height:24px; font-size:12px;}
+.info .infoC b{font-weight:normal;}
+
+.rTeamCon{padding:0 35px 30px 35px; zoom:1;}
+.rTeamCon .conBox{background:#f5f5f5; line-height:38px; padding:0 20px;zoom:1; font-size:12px;}
+.rTeamCon .conBox p{font-size:12px;}
+.rTeamCon .conBox p a.ach{display:block; text-align:center;}
+.rTeamCon .conBox p.ser{text-align:center; display:block;}
+.rTeamCon .conBox .phone{border-bottom:1px dashed #dadada;}
+.rTeamCon .conBox .phone .tipTxt b.num{font-size:16px; float:left; display:inline; color:#000;}
+.rTeamCon .conBox .phone .tipTxt .phoneVal{display:inline; float:left; position:relative; z-index:1; width:185px;}
+.rTeamCon .conBox .phone .tipTxt .phoneVal i{background:url({/$siteurl.style/}/img/p/person.gif) no-repeat 0 0; width:48px; height:15px; right:15px; position:absolute; top:12px;}
+.rTeamCon .conBox .phone .tipTxt .val i{background-position:0 -15px;}
+
+.rTeamCon .conBox .info{display:block; overflow:hidden;}
+.rTeamCon .conBox .tipTxt{margin:0 30px 0 0; display:inline; float:left;}
+.rTeamCon .conBox .tipTxt em{color:#999; float:left; display:inline;}
+.rTeamCon .conBox .tipTxt em.hbFntWes{font-size:20px; float:left; display:inline; margin:9px 5px 0 0; color:#999;}
+.rTeamCon .conBox .tipTxt strong{font-weight:normal; margin:0 5px;}
+.rTeamCon .conBox .tipTxt b{font-weight:normal; float:left; display:inline;}
+.rTeamCon .conBox .report{float:right; display:inline;}
+.rTeamCon .conBox .report a{color:#999;}
+.rTeamCon .conBox .report a:hover{color:#00aaff;}
+
+.rTeamTag{padding:5px 35px 30px 10px; zoom:1;}
+.rTeamTag .tagLst{} 
+.tagLst ul li{display:inline-block; *display:inline; zoom:1; font-size:12px; height:22px;line-height:22px; padding:0 3px 0 10px; border:1px solid #a6a6a6; margin:0 25px 15px 0; position:relative; z-index:1; border-bottom:2px solid #a6a6a6;}
+.tagLst ul li b{position:absolute; background:url({/$siteurl.style/}/img/p/person.gif) no-repeat 0 -30px; width:14px; height:25px; right:-14px; top:-1px;}
+.rTeamTag .depTxt{font-size:12px; line-height:22px; color:#666; padding-top:5px; zoom:1;}
+ 
+.rTeam .tit{ height:35px; width:100%;background:url({/$siteurl.style/}/img/p/rum_bj.gif) repeat-x 0 center;}
+.rTeam .tit h2{width:160px; font-size:20px; display:inline-block;font-weight:normal; font-family:"微软雅黑"; color:#666; line-height:35px;height:35px;background:#fff;}
+.rTable{line-height:30px;}
+.rTable td i{padding-left:15px; margin-right:15px; zoom:1; border-left:1px solid #dadada; line-height:18px;}
+.rTable td i.gray{display:inline-block;width:40px;}
+.rTable td b{padding-right:15px;}
+.rTable td em{padding-right:15px; border-right:1px solid #dadada;}
+.rTable .fn12{font-size:12px;}
+
+.rTeamWork{}
+
+.rTeamWork .tagTxt{padding:5px 0; zoom:1;}
+.rTeamWork .fn12{color:#999; float:left; font-size:12px; margin-right:15px;}
+
+.rTeamWork .workCon{}
+.workCon .workLst{padding:15px 0 0 0; zoom:1;}
+.workCon dl{border-bottom:1px solid #e2e2e2; padding:15px 0; zoom:1;}
+.workLst ul li{width:68px;float:left;display:inline; text-align:center; font-size:12px; margin:0 12px 10px 0;}
+.workLst ul li table tr td.img{background:#f4f4f4;overflow:hidden;height:68px; text-align:center;}
+.workLst ul li table tr td div.box{width:68px;margin:0 auto;overflow:hidden; text-align:center;}
+.workLst ul li table tr td div.box a{display:block;}
+.workLst ul li table tr td div.box img{max-width:68px;max-height:68px;_width:68px;_height:68px; vertical-align:middle;}
+.workLst ul li table tr td.txt p{width:68px;height:24px;line-height:24px; text-align:center;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;-o-text-overflow:ellipsis;}
+.workLst ul li table tr td.txt p a:link,.workLst ul li p a:visited{color:#666;}
+.workLst ul li table tr td.txt p a:hover{color:#00aaff;}
+.workCon .tipTxt{font-size:12px; line-height:24px;}
+
+.rTeamTab{padding-top:10px; zoom:1;}
+.tab{border-bottom:1px solid #dadada;height:40px;}
+.tab a{height:39px;font-size:12px;line-height:39px;margin:0 4px;padding:0 4px;display:inline-block;float:left;display:inline;border:1px solid #fff;border-bottom:0;}
+.tab a.hbIconMoon{font-size:18px;}
+.tab a.cu{font-weight:bold;border:1px solid #dadada;border-bottom:1px solid #fff; padding:0 15px; margin:0 10px; zoom:1; color:#444; font-size:14px;}
+.tab a.tabCon{float:right; display:inline; margin-top:7px; height:24px; line-height:24px; padding:0 8px; margin-right:10px; zoom:1;}
+.rTeamBasF{padding:10px 10px 0 5px; z00m:1;}
+.rTeamBasFt{border-top:1px solid #dadada; background:#fafafa; padding:15px 0 20px 10px;zoom:1;overflow:hidden;}
+.rTeamBasFt h3{font-size:20px; font-weight:normal; line-height:30px; font-family:"微软雅黑"; color:#666; height:30px}
+.rTeamBasFt h3 b{float:left; display:inline; font-weight:normal;}
+.rTeamBasFt h3 a.report{float:right; font-family:"宋体"; font-size:12px; color:#999; font-weight:normal; margin-right:20px; display:inline;}
+.rTeamBasFt h3 a.report:hover{color:#00aaff;}
+.rTeamBasFt em{color:#999;}
+.infoFt{padding:20px 0 20px 0; zoom:1;}
+.infoFt .l{float:left; display:inline; width:50%;  border-right:1px solid #eee;}
+.infoFt .l .phoneIco{float:left; display:inline;}
+.infoFt .l .phoneIco i.hbFntWes{font-size:56px; margin:8px 10px 0 0; color:#999; float:left; display:inline;}
+.infoFt .l .phoneNu{float:left; display:inline;}
+.infoFt .l .phoneNu b.num{font-size:24px;}
+.infoFt .l .phoneNu .phoneVal{position:relative; z-index:1; display:inline-block;}
+.infoFt .l .phoneNu .phoneVal i{background:url({/$siteurl.style/}/img/p/person.gif) no-repeat 0 0; width:48px; height:15px; right:-55px; position:absolute; top:12px; line-height:0;font-size:0;}
+.infoFt .l .phoneNu .val i{background-position:0 -15px;}
+.infoFt .l .tipTxt{font-size:12px; color:#999; line-height:30px;}
+.infoFt .r{float:right; display:inline; width:48%;}
+.infoFt .r .tipTxt{font-size:12px; height:24px; line-height:24px;}
+.infoFt .r .tipTxt em{float:left; display:inline;}
+.infoFt .r .tipTxt b{float:left; display:inline; font-weight:normal;}
+.infoFt .r .tipTxt .mailVal{position:relative; z-index:1; display:inline-block;}
+.infoFt .r .tipTxt .mailVal i{background:url({/$siteurl.style/}/img/p/person.gif) no-repeat 0 0; width:48px; height:15px; right:-55px; position:absolute; top:6px; line-height:0;font-size:0;}
+.infoFt .r .tipTxt .val i{background-position:0 -15px;}
+.markTip{position:absolute; top:30px; right:10px;}
+.markTip a.hbFntWes{font-size:24px; color:#999;}
+.markTip a.hbFntWes:hover{color:#ff9600;}
+.mark a.hbFntWes{color:#ff9600;}
+.infoFt .ach{display:block; text-align:center; font-size:18px; font-family:"微软雅黑";}
+.infoFt .ser{text-align:center; display:block;font-size:18px; font-family:"微软雅黑";}
+.markTip .tooltip-inner{width:75px;}
+
+.workType{background:#bbb; padding:0 3px; margin-right:5px; color:#fff; font-size:12px;}
+
+
+/*相册大图预览*/
+.fancybox-wrap,
+.fancybox-skin,
+.fancybox-outer,
+.fancybox-inner,
+.fancybox-image,
+.fancybox-wrap iframe,
+.fancybox-wrap object,
+.fancybox-nav,
+.fancybox-nav span,
+.fancybox-tmp
+{padding: 0;margin: 0;border: 0;outline: none;vertical-align: top;}
+.fancybox-wrap {position: absolute;top: 0;left: 0;z-index: 8020;}
+.fancybox-skin {position: relative;background: #f9f9f9;color: #444;text-shadow: none;-webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px;}
+.fancybox-opened {z-index: 8030;}
+.fancybox-opened .fancybox-skin {-webkit-box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);-moz-box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);}
+.fancybox-outer, .fancybox-inner {position: relative;}
+.fancybox-inner {overflow: hidden;}
+.fancybox-type-iframe .fancybox-inner {-webkit-overflow-scrolling: touch;}
+.fancybox-error {color: #444;font: 14px/20px "Helvetica Neue",Helvetica,Arial,sans-serif;margin: 0;padding: 15px;white-space: nowrap;}
+.fancybox-image, .fancybox-iframe {display: block;width: 100%;height: 100%;}
+.fancybox-image {max-width: 100%;max-height: 100%;}
+#fancybox-loading, .fancybox-close, .fancybox-prev span, .fancybox-next span {background-image: url({/$siteurl.style/}/img/comshow/fancybox_sprite.png);}
+#fancybox-loading {position: fixed;top: 50%;left: 50%;margin-top: -22px;margin-left: -22px;background-position: 0 -108px;opacity: 0.8;cursor: pointer;z-index: 8060;}
+#fancybox-loading div {width: 44px;height: 44px;background: url({/$siteurl.style/}/img/comshow/fancybox_loading.gif) center center no-repeat;}
+.fancybox-close {position: absolute;top: -18px;right: -18px;width: 36px;height: 36px;cursor: pointer;z-index: 8040;}
+.fancybox-nav {position: absolute;top: 0;width: 40%;height: 100%;cursor: pointer;text-decoration: none;background: transparent url({/$siteurl.style/}/img/comshow/blank.gif); /* helps IE */-webkit-tap-highlight-color: rgba(0,0,0,0);z-index: 8040;}
+.fancybox-prev {left: 0;}
+.fancybox-next {right: 0;}
+.fancybox-nav span {position: absolute;top: 50%;width: 36px;height: 34px;margin-top: -18px;cursor: pointer;z-index: 8040;visibility: hidden;}
+.fancybox-prev span {left: 10px;background-position: 0 -36px;}
+.fancybox-next span {right: 10px;background-position: 0 -72px;}
+.fancybox-nav:hover span {visibility: visible;}
+.fancybox-tmp {position: absolute;top: -99999px;left: -99999px;visibility: hidden;max-width: 99999px;max-height: 99999px;overflow: visible !important;}
+/* Overlay helper */
+.fancybox-lock {overflow-y:hidden !important;width: auto;}
+.fancybox-lock body {overflow-y:scroll !important;}
+.fancybox-lock-test {overflow-y: hidden !important;}
+.fancybox-overlay {position: absolute;top: 0;left: 0;overflow: hidden;display: none;z-index: 8010;background: url({/$siteurl.style/}/img/comshow/fancybox_overlay.png);}
+.fancybox-overlay-fixed {position: fixed;bottom: 0;right: 0;}
+.fancybox-lock .fancybox-overlay {overflow: auto;overflow-y: scroll;}
+/* Title helper */
+.fancybox-title {visibility: hidden;font: normal 13px/20px "Helvetica Neue",Helvetica,Arial,sans-serif;position: relative;text-shadow: none;z-index: 8050;}
+.fancybox-opened .fancybox-title {visibility: visible;}
+.fancybox-title-float-wrap {position: absolute;bottom: 0;right: 50%;margin-bottom: -35px;z-index: 8050;text-align: center;}
+.fancybox-title-float-wrap .child {display: inline-block;margin-right: -100%;padding: 2px 20px;background: transparent;background: rgba(0, 0, 0, 0.8);-webkit-border-radius: 15px;-moz-border-radius: 15px;border-radius: 15px;text-shadow: 0 1px 2px #222;color: #FFF;font-weight: bold;line-height: 24px;white-space: nowrap;}
+.fancybox-title-outside-wrap {position: relative;margin-top: 10px;color: #fff;}
+.fancybox-title-inside-wrap {padding-top: 10px;}
+.fancybox-title-over-wrap {position: absolute;bottom: 0;left: 0;color: #fff;padding: 10px;background: #000;background: rgba(0, 0, 0, .8);}
+/*Retina graphics!*/
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5),
+	   only screen and (min--moz-device-pixel-ratio: 1.5),
+	   only screen and (min-device-pixel-ratio: 1.5){
+
+	#fancybox-loading, .fancybox-close, .fancybox-prev span, .fancybox-next span {
+		background-image: url({/$siteurl.style/}/img/comshow/fancybox_sprite@2x.png);
+		background-size: 44px 152px; /*The size of the normal image, half the size of the hi-res image*/
+	}
+
+	#fancybox-loading div {
+		background-image: url({/$siteurl.style/}/img/comshow/fancybox_loading@2x.gif);
+		background-size: 24px 24px; /*The size of the normal image, half the size of the hi-res image*/
+	}
+}
+
+
+
+#fancybox-thumbs {position: fixed;left: 0;width: 100%;overflow: hidden;z-index: 8050;}
+#fancybox-thumbs.bottom {bottom: 2px;}
+
+#fancybox-thumbs.top {top: 2px;}
+#fancybox-thumbs ul {position: relative;list-style: none;margin: 0;padding: 0;}
+#fancybox-thumbs ul li {float: left;padding: 1px;opacity: 0.5;}
+#fancybox-thumbs ul li.active {opacity: 0.75;padding: 0;border: 1px solid #fff;}
+#fancybox-thumbs ul li:hover {opacity: 1;}
+#fancybox-thumbs ul li a {display: block;position: relative;overflow: hidden;border: 1px solid #222;background: #111;outline: none;}
+#fancybox-thumbs ul li img {display: block;position: relative;border: 0;padding: 0;max-width: none;}
+</style>
+<div class="mod">
+    <div class="lngChange">
+        <div class="l">
+         	<em>简历编号：{/$resume_id/}</em><em>最近登录：{/$last_login_time|date_format:'%Y-%m-%d'/}</em>
+        </div>
+        {/if $applystation!=''/}<div class="r">应聘：{/$applystation/}</div>{//if/}
+        <div class="clear"></div>
+    </div>
+    <div class="rTeam rTeamBas">
+        <div class="photo">{/$photo/}</div>
+        <span class="markTip hbTip {/if $is_fav/}mark{//if/}"><a href="javascript:void(0);" id="btnFav" title="{/if $is_fav/}我已感兴趣的，点击取消{/else/}标为感兴趣{//if/}" class="hbFntWes" data-toggle="tooltip" data-placement="left" id="intlnk" >{/if $is_fav/}&#xf005;{/else/}&#xf006;{//if/}</a></span>
+        <!-- <span class="markTip mark hbTip" style="display:none;"><a href="" class="hbFntWes"  title="我已感兴趣的，点击取消">&#xf005;</a></span> -->
+        <div class="info">
+            <span class="infoT">
+                <p><b class="rName">{/$user_name/}</b><em>（{/get_name sex=$sex/}，{/$age/}{/if $marriage!=''&&$fertility!=''/}，{/get_name marriage=$marriage/}{/get_name fertility=$fertility/}{/elseif $marriage!=''/}，{/get_name marriage=$marriage/}{/elseif $fertility!=''/}，{/get_name fertility=$fertility/}{//if/}{/if $stature!=''&&$avoirdupois!=''/}，{/$stature/}cm/{/$avoirdupois/}kg{/elseif $stature!=''/}，{/$stature/}cm{/elseif $avoirdupois!=''/}，{/$avoirdupois/}kg{//if/}）</em></p>  
+                <p>{/if $degree!=''/}<i>{/get_name degree=$degree/}</i>{//if/}{/if $work_year!=''/}<i>{/$work_year/}</i>{/if $political_status!=''/}<i>{/get_name political=$political_status/}</i>{//if/}<i>{//if/}现居：{/$cur_area_name/}</i>{/if $native_place_name!=''/}<i class="end">户籍：{/$native_place_name/}</i>{//if/}</p>
+                </span>
+                <span class="infoC">
+                <p><b>希望从事：</b><i>{/if $exp_job==''/}——{/else/}{/$exp_job/}{/if $exp_job_level!=''/}（{/get_name job_level=$exp_job_level/}{/if $is_not_accept_lower_job_level==1&&$exp_job_level!='01'&&$exp_job_level!='02'/}，对低级别岗位没有兴趣{//if/}）{//if/}{//if/}</i></p>
+                <p><b>期望行业：</b><i>{/if $str_expect_callings==''/}--{/else/}{/$str_expect_callings/}{//if/}</i></p>
+                <p><b>期望月薪：</b><i>{/if $exp_salary==''||$exp_salary=='0'/}——{/else/}{/if $exp_salary=='negotiable'/}面议{/else/}{/get_name salary=$exp_salary/} 元/月{//if/} {/if $is_not_accept_lower_salary==1&&$exp_salary!='negotiable'&&$exp_salary!='01'/}（对低于此薪资的岗位没有兴趣）{//if/}{//if/}</i></p>
+                <p><b>意向地区：</b><i>{/if $exp_area_names==''/}——{/else/}{/$exp_area_names/}{/if $job_type==1&&$is_accept_parttime==1/}（可接受兼职）{/elseif $job_type==2/}（兼职）{/elseif $job_type==3/}（实习）{//if/}{//if/}</i></p>
+            </span>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div class="rTeam rTeamTab" id="divNavFlag" style="display:none">
+        <div class="tab">
+            <a id="flagWork" class="cu" k="wo">工作经验</a><a href="javascript:void(0)" k="ed">教育经历</a><a href="javascript:void(0)" k="lg">语言能力</a><a href="javascript:void(0)" k="sk">技能</a><a href="javascript:void(0)" k="pr">项目经验</a><a href="javascript:void(0)" k="ce">证书</a><a href="javascript:void(0)" k="ac">作品</a><a href="javascript:void(0)" k="pra">实践经验</a><a href="javascript:void(0)" k="hi">亮点标签 </a><a href="javascript:void(0)" k="ap">附加信息</a><a href="javascript:void(0)" k="linkway" class="tabCon btn2 btnsF12">查看联系方式</a>
+        </div>
+    </div>
+    {/if count($resume_works)>0/}
+    <div class="rTeam">
+    	<div class="tit" ><a id="wo"></a><h2>工作经验</h2></div>
+        <div class="rTable">
+        	<table width="100%" cellpadding="0" cellspacing="0">
+            	<tbody>
+            		{/foreach $resume_works as $key=>$value/}
+                	<tr>
+                    	<td class="gray" width="135" align="right" valign="top" style="padding:15px 25px 20px 0; zoom:1;">
+                        	<table>
+                            <tbody>
+                            	<tr><td align="right">{/$value['start_time']/}-{/$value['end_time']/}</td></tr>
+                                <tr align="right" style="font-size:12px;"><td>（{/$value['work_time']/}）</td></tr>
+                                </tbody>
+                            </table>
+                        </td>
+                        <td align="left" style="{/if $key!=count($resume_works)-1/}border-bottom:1px solid #eee;{//if/} padding:15px 0; zoom:1;">
+                        	<table>
+                                <tbody>
+                                    <tr>
+                                        <td>{/if $value['station']!=''/}{/if $value['job_type']!=''&&$value['job_type']!='1'/}<span class="workType">{/get_name job_type=$value['job_type']/}</span>{//if/}<b>{/$value['station']/}</b>{//if/}{/if $value['job_level']!=''/}<i>{/get_name job_level=$value['job_level']/}</i>{//if/}{/if $value['salary_month']!=''/}{/if $value['is_salary_show']!='1'/}<i>{/$value['salary_month']/}元/月</i>{//if/}{//if/}{/if $work_area_name!=''/}<i>{/$work_area_name/}</i>{//if/}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-size:12px;">{/$value['company_name']/}（{/get_name calling=$value['calling_id']/}{/if $value['com_property']!=''/}，{/get_name com_property=$value['com_property']/}{//if/}{/if $value['com_size']!=''/}，{/get_name com_size=$value['com_size']/}{//if/}）</td>
+                                    </tr>
+                                    {/if $value['work_content']!=''/}
+                                    <tr>
+                                        <td class="gray" style="line-height:24px; padding-top:8px; zoom:1; font-size:12px;"><p style="width:445px;">
+                                          {/html_encode content=$value['work_content']/}
+                                        </p></td>
+                                    </tr>
+                                    {//if/}
+                            	</tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    {//foreach/}
+                </tbody>
+            </table>
+        </div>
+        <div class="clear"></div>
+    </div>
+    {//if/}
+          
+    {/if count($resume_edus)>0||count($resume_trains)>0/}
+    <div class="rTeam">
+        <div class="tit"><a id="ed"></a><h2>教育& 培训经历</h2></div>
+        <div class="rTable">
+            <table width="100%" cellpadding="0" cellspacing="0">
+                <tbody>
+                	{/foreach $resume_edus as $key=>$value/}
+                    <tr>
+                        <td width="135" align="right" valign="top" class="gray" style="padding:15px 25px 15px 0; zoom:1;">{/if empty($value['start_time'])/}开始时间未填写{/else/} {/$value['start_time']|date_format:'%Y.%m'/}{//if/}-{/if empty($value['end_time'])/}至今{/else/}{/$value['end_time']|date_format:'%Y.%m'/}{//if/}</td>
+                        <td align="left" style="padding:15px 0; line-height:30px; zoom:1;{/if count($resume_trains)<=0&&$value@last/}{/else/}border-bottom:1px solid #eee;{//if/}">
+                           <table>
+                              <tbody>
+                                 <tr>
+                                    <td>{/if $value['degree']!=''/}<b>{/get_name degree=$value['degree']/}</b>{//if/}{/if $value['school']!=''/}<i>{/$value['school']/}</i>{//if/}{/if $value['major_desc']!=''/}<i>{/$value['major_desc']/}</i>{//if/}</td>
+                                 </tr>
+                                 {/if $value['edu_detail']!=''||$value['duty']!=''/}
+                                 <tr>
+                                    <td class="gray" style="line-height:24px; padding-top:8px; zoom:1; font-size:12px;">
+                                       {/if $value['edu_detail']!=''/}<p style="width:445px;">学习课程：{/$value['edu_detail']/}</p>{//if/}
+                                       {/if $value['duty']!=''/}<p>担任职务：{/$value['duty']/}</p>{//if/}
+                                    </td>
+                                 </tr>
+                                 {//if/}
+                              </tbody>
+                           </table>
+                        </td>
+                    </tr>
+                    {//foreach/}
+                    {/foreach $resume_trains as $key=>$value/}
+                    <tr>
+                        <td width="135" align="right" valign="top" class="gray" style="padding:15px 25px 15px 0; zoom:1;">{/if empty($value['start_time'])/}开始时间未填写{/else/} {/$value['start_time']|date_format:'%Y.%m'/}{//if/}-{/if empty($value['end_time'])/}至今{/else/}{/$value['end_time']|date_format:'%Y.%m'/}{//if/}</td>
+                        <td align="left" style="padding:15px 0; zoom:1;{/if $key!=count($resume_trains)-1/} border-bottom:1px solid #eee;{//if/}">
+                           <table>
+                              <tbody>
+                                 <tr>
+                                    <td>{/if $value['course']!=''/}<b>{/$value['course']/}</b>{//if/}{/if $value['institution']!=''/}<i>{/$value['institution']/}</i>{//if/}{/if $value['certificate']!=''/}<i class="end">获得证书：{/$value['certificate']/}</i>{//if/}</td>
+                                 </tr>
+                                 {/if $value['train_detail']!=''/}
+                                 <tr>
+                                    <td class="gray" style="line-height:24px; padding-top:8px; zoom:1; font-size:12px; line-height:30px;">
+                                      <p style="width:445px;">{/$value['train_detail']/}</p>
+                                    </td>
+                                 </tr>
+                                 {//if/}
+                              </tbody>
+                           </table>
+                        </td>
+                    </tr>
+                    {//foreach/}
+                </tbody>
+            </table>
+        </div>
+        <div class="clear"></div>
+    </div>
+    {//if/}
+    {/if count($resume_projects)>0/}
+    <div class="rTeam">
+        <div class="tit"><a id="pr"></a><h2>项目经验</h2><b></b><div class="clear"></div></div>
+        <div class="rTable">
+            <table width="100%" cellpadding="0" cellspacing="0">
+                <tbody>
+                    {/foreach $resume_projects as $key=>$value/}
+                    <tr>
+                        <td width="135" align="right" valign="top" class="gray" style="padding:15px 25px 15px 0; zoom:1;">
+                            <table>
+                                <tbody>
+                                    <tr><td align="right">{/$value['start_time']/}-{/$value['end_time']/}</td></tr>
+                                    <tr><td align="right" style="font-size:12px; padding-top:8px;">（{/$value['project_time']/}）</td></tr>
+                                </tbody>
+                            </table>
+                        </td>
+                        <td align="left" style="padding:15px 0; zoom:1;{/if $key!=count($resume_projects)-1/}border-bottom:1px solid #eee;{//if/}">
+                           <table>
+                              <tbody>
+                                 <tr>
+                                    <td>{/if $value['project_name']!=''/}<b>{/$value['project_name']/}</b>{//if/}{/if $value['duty']!=''/}<i><b>{/$value['duty']/}</b></i>{//if/}</td>
+                                 </tr>
+                                 {/if $value['project_detail']!=''||$value['main_duty']!=''/}
+                                 <tr>
+                                    <td class="fn12 gray" style="line-height:24px; padding-top:8px; zoom:1; font-size:12px">
+                                       {/if $value['project_detail']!=''/}<p style="width:445px; color:#666;">{/$value['project_detail']/}</p>{//if/}
+                                       {/if $value['main_duty']!=''/}<p style="width:445px;">{/$value['main_duty']/}</p>{//if/}
+                                    </td>
+                                 </tr>
+                                 {//if/}
+                              </tbody>
+                           </table>
+                        </td>
+                    </tr>
+                    {//foreach/}
+                </tbody>
+            </table>
+        </div>
+        <div class="clear"></div>
+    </div>
+    {//if/}
+
+    {/if count($resume_languages)>0/}	
+    <div class="rTeam">
+        <div class="tit"><a id="lg"></a><h2>语言能力</h2></div>
+        <div class="rTable">
+            <table width="100%" cellpadding="0" cellspacing="0">
+                <tbody>
+                    {/foreach $resume_languages as $key=>$value/}
+                    <tr>
+                    	<td width="160"></td>
+                        <td align="left" style="padding:15px 0;zoom:1; {/if $key!=count($resume_languages)-1/}border-bottom:1px solid #eee;{//if/}"><b>{/get_name language=$value['language_type']/}</b>{/if $value['skill_level']!=''/}<i>{/get_name skill_level=$value['skill_level']/}</i>{//if/}
+                        {/if $value['certificates'][0]['cert_name']!=''/}
+                        <i>
+                        {/section name=language loop=$value['certificates']/}
+                        {/if $smarty.section.language.last/}
+                			<span class="languageCe{/$value['certificates'][language]['language_id']/}">{/$value['certificates'][language]['cert_name']/}</span>
+                		{/else/}
+                			<span class="languageCe{/$value['certificates'][language]['language_id']/}">{/$value['certificates'][language]['cert_name']/}</span>，	
+                		{//if/}
+                    	{//section/}
+                        </i>
+                        {//if/}
+                        </td><!--
+                        {/if $value['cert_name']!=''/}<i>{/$value['cert_name']/}</i>{//if/}</td>-->
+                    </tr>
+                    {//foreach/}
+                </tbody>
+            </table>
+        </div>
+        <div class="clear"></div>
+    </div>
+    {//if/}
+
+    {/if count($resume_skills)>0/}
+    <div class="rTeam">
+        <div class="tit"><a id="sk"></a><h2>技能</h2></div>
+        <div class="rTable">
+            <table width="100%" cellpadding="0" cellspacing="0">
+                {/foreach $resume_skills as $key=>$value/}
+                <tr>
+                    <td align="left" width="160"></td>
+                    <td align="left" style="padding:15px 0;zoom:1;{/if $key@last/}border-bottom:1px solid #eee;{//if/}">
+                    	<table cellpadding="0" cellspacing="0" width="100%">
+                        	<tbody>
+                                <tr>
+                                    <td width="60" valign="top"><em class="gray">{/get_name skill_level=$key/}</em></td>
+                                    {/if $value!=''/}<td ><p>{/mb_substr($value,1,mb_strlen($value))/}</p></td>{//if/}
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                {//foreach/}
+            </table>
+        </div>
+        <div class="clear"></div>
+    </div>
+    {//if/}
+         
+    {/if count($resume_certificates)>0/}
+    <div class="rTeam">
+        <div class="tit"><a id="ce"></a><h2>证书</h2></div>
+        <div class="rTable">
+            <table width="100%" cellpadding="0" cellspacing="0">
+                <tbody>
+                    {/foreach $resume_certificates as $key=>$value/}
+                    <tr>
+                        <td width="160"></td>
+                        <td align="left" style="padding:15px 0; zoom:1;{/if $key!=count($resume_certificates)-1/}border-bottom:1px solid #eee;{//if/}">
+                        {/if $value['certificate_name']!=''/}<b>{/$value['certificate_name']/}</b>{//if/}{/if $value['gain_time']!=''/}<i>{/$value['gain_time']/}获得</i>{//if/}{/if $value['score']!=''/}<i>成绩：{/$value['score']/}</i>{//if/}{/if $value['certificate_no']!=''/}<i>编号：{/$value['certificate_no']/}</i>{//if/}
+                        </td>
+                    </tr>
+                    {//foreach/}
+                </tbody>
+            </table>
+        </div>
+        <div class="clear"></div>
+    </div>
+    {//if/}
+         
+    {/if count($resume_achievements)>0/}
+    <div class="rTeam rTeamWork">
+        <div class="tit"><a id="ac"></a><h2>我的作品</h2></div>
+        <div class="rTable workCon">
+            <table width="100%" cellpadding="0" cellspacing="0">
+                <tbody>
+                	{/foreach $resume_achievements as $key=>$value/}
+                    <tr>
+                        <td width="160"></td>
+                        <td>
+                            <dl {/if $key==count($resume_achievements)-1/}style="border:0;"{//if/}>
+                                <div class="tagTxt">{/$value['achievement_name']/}</div>
+                                {/if $value['achievement_description']!=''/}<p class="tipTxt gray" style="width:445px;">{/$value['achievement_description']/}</p>{//if/}
+                                <div class="workLst flexslider">
+                                    <ul class="slides">
+                                   	    {/foreach $achievement_attachments{/$value['achievement_id']/} as $key=>$val/}
+                                        {/if $val['achievement_extension']!=''&&count(explode($val['achievement_extension'],'.gif,.jpg,.jpeg,.png,.bmp'))>1/}
+                                        <li>
+                                            <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                                <tbody>
+                                                    <tr><td valign="middle" class="img" align="center"><div class="box"><a class="fancybox-thumbs{/$value['achievement_id']/}"  data-fancybox-group="thumb" onclick="return false;" href="{/$attachment_virt_path/}{/$val['achievement_path']/}"><img src="{/$val['achievement_thumb_path']/}"/></a></div></td></tr>
+                                                    {/if $val['attachment_name']!=''/}<tr><td valign="middle" class="txt" align="center"><p>{/$val['attachment_name']/}</p></td></tr>{//if/}
+                                                </tbody>
+                                            </table>
+                                        </li>
+                                        <script type="text/javascript">
+                                        	$('.fancybox-thumbs{/$value['achievement_id']/}').fancybox({
+                                        		closeBtn  : true,
+                                        		arrows    : true,
+                                        		title : function(current){
+                                          		return "<a href='"+$(this).attr('href')+"' target='_blank'>查看原图</a>";
+                                        	},
+                                        	maxWidth:1000,
+                                        	maxHeight:600,
+                                        		helpers:  {
+                                        	        title : {
+                                        	            type : 'float'
+                                        	        }
+                                        	    }
+                                        		
+                                        	});
+                                        </script>
+                                        {/else/}
+                                        <li>
+                                            <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                                <tbody>
+                                                    <tr>
+                                                        <td valign="middle" class="img" align="center">
+    	                                                    <div class="box">
+    	                                                    <a href="{/$attachment_virt_path/}{/$val['achievement_path']/}" target="_blank">
+    	                                                   {/if count(explode($val['achievement_extension'],'.doc,.docx'))>1/}
+    	                                                    <i style="height: 100%; padding: 0px; border: 0px none; display: inline-block; margin: 0px; line-height: 1.5; font-size: 40px; color:#999;" class="hbIconMoon">&#xe1b4;</i>
+    	                                                    {/elseif count(explode($val['achievement_extension'],'.pdf'))>1/}
+    	                                                    <i style="height: 100%; padding: 0px; border: 0px none; display: inline-block; margin: 0px; line-height: 1.5; font-size: 40px; color:#999;" class="hbIconMoon">&#xe1b2;</i>
+    	                                                    {/elseif count(explode($val['achievement_extension'],'.xls,.xlsx'))>1/}
+    	                                                    <i style="height: 100%; padding: 0px; border: 0px none; display: inline-block; margin: 0px; line-height: 1.5; font-size: 40px; color:#999;" class="hbIconMoon">&#xe1b5;</i>
+    	                                                    {/elseif count(explode($val['achievement_extension'],'.txt'))>1/}
+    	                                                    <i style="height: 100%; padding: 0px; border: 0px none; display: inline-block; margin: 0px; line-height: 1.5; font-size: 40px; color:#999;" class="hbIconMoon">&#xe025;</i>
+    	                                                    {/else/}
+    	                                                    <i style="height: 100%; padding: 0px; border: 0px none; display: inline-block; margin: 0px; line-height: 1.5; font-size: 40px; color:#999;" class="hbFntWes">&#xf0c6;</i>
+    	                                                    {//if/}
+    	                                                    </a>
+    	                                                    </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr><td valign="middle" class="txt" align="center"><p><a href="{/$attachment_virt_path/}{/$val['achievement_path']/}" target="_blank">{/$val['attachment_name']/}</a></p></td></tr>
+                                                </tbody>
+                                            </table>
+                                        </li>		 
+                                        {//if/}
+                                        {//foreach/}
+                                    </ul>
+                                    <div class="clear"></div>
+                                </div>
+                            </dl>
+                        </td>
+                    </tr>
+                    {//foreach/}
+                </tbody>
+            </table>
+        </div>
+     </div>
+    {//if/}
+         
+    {/if count($resume_practices)>0/}
+    <div class="rTeam">
+        <div class="tit"><a id="pra"></a><h2>实践经验</h2><b></b><div class="clear"></div></div>
+        <div class="rTable">
+            <table width="100%" cellpadding="0" cellspacing="0">
+                <tbody>
+                    {/foreach $resume_practices as $key=>$value/}
+                    <tr>
+                        <td width="135" align="right" valign="top" class="gray" style="padding:15px 25px 15px 0; zoom:1;">{/if empty($value['start_time'])/}开始时间未填写{/else/} {/$value['start_time']|date_format:'%Y.%m'/}{//if/}-{/if empty($value['end_time'])/}至今{/else/}{/$value['end_time']|date_format:'%Y.%m'/}{//if/}</td>
+                        <td align="left" style="padding:15px 0; zoom:1; {/if $key!=count($resume_practices)-1/}border-bottom:1px solid #eee;{//if/}">
+                           <table>
+                                <tbody>
+                                  	{/if $value['practice_name']!=''/}
+                                    <tr>
+                                        <td><b>{/$value['practice_name']/}</b></td>
+                                    </tr>
+                                    {//if/}
+                                    {/if $value['practice_detail']!=''/}
+                                    <tr>
+                                        <td class="fn12 gray" style="line-height:24px; padding-top:8px; zoom:1; font-size:12px">
+                                            <p style="width:445px;">{/$value['practice_detail']/}</p>
+                                        </td>
+                                    </tr>
+                                    {//if/}
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    {//foreach/}
+                </tbody>
+            </table>
+        </div>
+        <div class="clear"></div>
+    </div>
+    {//if/}
+         
+    {/if count($resume_highlights)>0||$appraise!=''/}
+    <div class="rTeam rTeamTag">
+        <div class="tit"><a id="hi"></a><h2>亮点标签</h2><b></b><div class="clear"></div></div>
+        <table>
+            <tbody>
+                <tr>
+                    <td width="160" align="right" valign="top" style="padding:15px 0; zoom:1;"></td>
+                    <td align="left" style="padding:15px 0; zoom:1;">
+                        <div class="tagLst">
+                            <ul>
+                                {/foreach $resume_highlights as $key=>$value/}
+                                <li>{/$value['light_desc']/}<b></b></li>
+                                {//foreach/}
+                            </ul>
+                        </div>
+                        {/if $appraise!=''/}<p class="depTxt" style="width:430px;">{/html_encode content=$appraise/}</p>{//if/}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    {//if/}
+
+    {/if count($resume_appends)>0/}
+    <div class="rTeam">
+        <div class="tit"><a id="ap"></a><h2>附加信息</h2></div>
+        <div class="rTable">
+            <table width="100%" cellpadding="0" cellspacing="0">
+                <tbody>
+                    {/foreach $resume_appends as $key=>$value/}
+                    {/if $value['topic_desc']!=''||$value['content']!=''/}
+                    <tr>
+                        {/if $value['topic_desc']!=''/}<td width="135" valign="top" align="right" style="padding:15px 25px 15px 0; zoom:1;" class="gray"> {/$value['topic_desc']/}</td>{//if/}
+                        <td align="left" valign="top" style="{/if $key!=count($resume_appends)-1/}border-bottom:1px solid #dadada;{//if/}padding:15px 0;">{/if $value['content']!=''/}<p style="font-size:12px; width:445px;">{/$value['content']/}</p>{//if/}</td>
+                    </tr>
+                    {//if/}
+                    {//foreach/}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {//if/}
+    <div class="rTeam rTeamBasF" id="linkwayContaner">
+        {/if $show_linkway == '1'/}
+        <div class="rTeamBasFt">
+            <h3><a id="linkway"></a><b>联系方式</b><a href="javascript:void(0)" id="reportPerson" onclick="reportPhone()" class="report">联系方式有误？请举报</a></h3>
+            <div class="infoFt">
+                <div class="l">
+                    <div class="phoneIco"><i class="hbFntWes">&#xf10b;</i></div>
+                    <div class="phoneNu">
+                        <p><span class="{/if $mobile_phone!=''/}phoneVal{//if/} {/if $mobile_phone_valid=='1'/}val{//if/}"><b class="num">{/$mobile_phone/}</b>{/if $mobile_phone_valid=='1'/}<i></i>{//if/}</span></p>
+                        <p class="tipTxt" id="phoneAddr">（归属地：<b>重庆</b>，外地座机拨打时请加拨“0”）</p>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="r">
+                    <p class="tipTxt"><em>邮箱：</em><span class="{/if $email!=''/}mailVal{//if/} {/if $email_is_validation=='1'/}val{//if/}"><b>{/$email/}</b>{/if $email_is_validation=='1'/}<i></i>{//if/}</span></p>
+                    {/if $qq!=''/}<p class="tipTxt"><em>Q Q：</em><b>{/$qq/}</b></p>{//if/}
+                    {/if $telephone!=''/}<p class="tipTxt"><em>座机：</em><b>{/$telephone/}</b></p>{//if/}
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+        {/else/}
+        <div class="rTeamBasFt"><div class="infoFt"><p><a href="javascript:void(0)" id="btnGetLinkway" class="ach">获取联系方式</a></p></div></div>
+        {//if/}
+    </div>
+</div>
+<iframe id="printIframe"  height="0" width="0" frameborder="0"></iframe>
+<script type="text/javascript">
+	var isDownLoad = false;
+	$('.hbTip').tooltip({
+	 	selector: "a[data-toggle=tooltip],p[data-toggle=tooltip]",html:true
+	});
+	Fixed_Box("#divNavFlag",200,0);
+	//浏览器的宽度发送改变时重新设置其样式
+	$(window).resize(function()
+	{
+		Fixed_Box("#divNavFlag",200,0);
+	}); 
+	$(document).ready(function(){
+		//查询归属地
+		searchAttribution();
+		//导航
+		$("#divNavFlag").find('a').click(function() {
+			var _self = $(this);
+			var _hight = $('#divNavFlag').height();
+			var flag = _self.attr("k");
+			if(flag=='top'){
+				$('html,body').animate({ scrollTop: 0 });
+				$('#flagWork').addClass('cu');
+			}else{
+				if(flag=='linkway'){
+					scroller(flag, 700 , _hight);
+				}else{
+					scroller(flag, 700 , _hight);
+					_self.addClass('cu').siblings().removeClass('cu');
+				}
+			}
+		});
+		
+		//获取联系方式
+		$('#btnGetLinkway').click(function(){			
+			//TODO 判断是否关闭了扣点的提示
+			var cookieValue = readCookie('downresumeprompt');
+			if (cookieValue && cookieValue.length > 0){
+			    $.getJSON('{/get_url rule="/download/getlinkway"/}',{resumeID: {/$resume_id/},companyID: {/$company_id/}}, function(json){
+					if (json&&json.error) {
+						$.message(json.error, {title:"获取联系方式", icon:'fail'});
+						return false;
+					}
+					$('#linkwayContaner').empty().html(json.contactway);
+					searchAttribution();
+
+					//标记分组逻辑
+					//go to..
+					$.showModal('{/get_url rule="/mark/markdown-resumeid-{/$resume_id/}-operate-down.html"/}',{title:'标记为感兴趣'});
+				});
+             }else{			
+				 $.showModal('{/get_url rule="/download/deductcountprompt"/}',{title:'获取联系方式',onclose:function(){
+					if (isDownLoad){
+						$.getJSON('{/get_url rule="/download/getlinkway"/}',{resumeID: {/$resume_id/},companyID: {/$company_id/}},function(json){
+							if(json&&json.error){
+								$.message(json.error,{title:"获取联系方式",icon:'fail'});
+								return false;
+							}
+							$('#linkwayContaner').empty().html(json.contactway);
+							searchAttribution();
+	
+							//标记分组逻辑
+							$.showModal('{/get_url rule="/mark/markdown-resumeid-{/$resume_id/}-operate-down.html"/}',{title:'标记为感兴趣'});
+						});
+					}
+				}
+				});
+             }
+		});
+
+		//感兴趣
+		$("#btnFav").click(function(){		
+			var obj = $(this);
+			$.getJSON('{/get_url rule="/fav/fav"/}',{resume_id:{/$resume_id/},company_id:{/$resume_id/},r:Math.random().toString().replace('.','0')},function(json){
+				if(json&&json.error){
+					$.message(json.error,{icon:'fail'});
+					return;
+				}
+				
+				if(json.fav_type == "add"){
+					obj.attr("data-original-title","我已感兴趣的，点击取消");
+					obj.parent().addClass('mark');
+					obj.html("&#xf005;");
+					$.showModal('{/get_url rule="/mark/markfav-resumeid-{/$resume_id/}-operate-fav.html"/}',{title:'标记为感兴趣'});
+					return;
+				}
+
+				if(json.fav_type == "cancel"){
+					$.anchorMsg("取消感兴趣成功",{timeout:1});
+					obj.attr("data-original-title","标为感兴趣");
+					obj.html("&#xf006;");
+					obj.parent().removeClass('mark');
+					return;
+				}
+				
+			});
+		});
+	});
+
+	//举报电话号码
+	function reportPhone(){
+		$.showModal('{/get_url rule="/report/index/" data="resume_id={/$resume_id/}&person_id={/$person_id/}&phone={/$mobile_phone/}"/}',{title:'举报联系方式'});
+		return false;
+	}
+
+	//查询归属地
+	function searchAttribution(){
+		//获取号码归属地
+		var tel = '{/$mobile_phone/}';
+		var regex = /^1[3|4|5|8][0-9]\d{4,8}$/;
+		if(!regex.test(tel)){
+			$('#phoneAddr').html('（归属地：<b>未知</b>，座机拨打异地手机请加拨“0”）');
+		}else{
+			 var url = 'http://tcc.taobao.com/cc/json/mobile_tel_segment.htm?tel='+tel;
+			  var isIE6 = false;
+			  if ($.browser.msie && ($.browser.version == "6.0") && !$.support.style) {
+				  isIE6 = true;
+				  url = 'https://www.baifubao.com/callback?cmd=1059&callback=phone&phone='+tel;
+			  }
+			  $.ajax({
+				 async:false,
+	             type: "post",
+	             url:url,
+	             dataType: "jsonp",
+	             contentType: "application/x-www-form-urlencoded; charset=utf-8",
+	             jsonp: "callback",
+	             success: function(json){
+	                if(isIE6){
+						if(json.data.area==''||json.data.area==undefined){
+							$('#phoneAddr').html('（归属地：<b>未知</b>，座机拨打异地手机请加拨“0”）');
+						}else{
+							$('#phoneAddr').html('（归属地：<b>'+json.data.area+'</b>，座机拨打异地手机请加拨“0”）');
+						}
+	                }else{
+	                	if(json.province==''||json.province==undefined){
+	    			  		$('#phoneAddr').html('（归属地：<b>未知</b>，座机拨打异地手机请加拨“0”）');
+	    				}else{
+	    					$('#phoneAddr').html('（归属地：<b>'+json.province+'</b>，座机拨打异地手机请加拨“0”）');
+	    				}
+	                } 
+	             },
+	             error:function (){   
+	            	 $('#phoneAddr').html('（归属地：<b>未知</b>，座机拨打异地手机请加拨“0”）');
+	             }
+	         });
+			//$.getScript("http://tcc.taobao.com/cc/json/mobile_tel_segment.htm?tel="+tel+'&callback=showAttribution&qq-pf-to=pcqq.c2c');
+		}
+	}
+	/*
+	//归属地回调
+	function showAttribution(json){
+		if(json.province==''||json.province==undefined){
+			$('#phoneAddr').html('');
+		}else{
+			$('#phoneAddr').html('（归属地：<b>'+decodeURIComponent(json.province)+'</b>，座机拨打异地手机请加拨“0”）');
+		}
+	}*/
+</script>

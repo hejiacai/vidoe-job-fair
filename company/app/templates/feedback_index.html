@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>意见反馈</title>
+	<link rel="stylesheet" type="text/css" href="{/version file='base.css'/}"/>
+	<link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}"/>
+	<link rel="stylesheet" href="{/version file='feedback.css'/}">
+	<script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.min.js'/}"></script>
+	{/$up_img_html.hand_html/}
+
+	<script type="text/javascript" src="{/version file='version.js'/}"></script>
+	<script type="text/javascript">
+		window.CONFIG = {
+			HOST: '{/$siteurl.style/}',
+			COMBOPATH: '/js/v2/'
+		}
+	</script>
+	<script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+
+	<script type="text/javascript" src="{/version file='global.js'/}"></script>
+
+	<script type="text/javascript" language="javascript" src="{/version file='ui_uploadify.js'/}"></script>
+	<script type="text/javascript" language="javascript" src="{/version file='dialog.js'/}"></script>
+	<script type="text/javascript" language="javascript" src="{/version file='confirmBox.js'/}"></script>
+	<style>
+		/*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+		::-webkit-scrollbar {
+			width: 4px; /*滚动条宽度*/
+			height: 4px; /*滚动条高度*/
+		}
+
+		/*定义滚动条轨道 内阴影+圆角*/
+		::-webkit-scrollbar-track {
+			border-radius: 10px; /*滚动条的背景区域的圆角*/
+		}
+
+		/*定义滑块 内阴影+圆角*/
+		::-webkit-scrollbar-thumb {
+			border-radius: 2px; /*滚动条的圆角*/
+			-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+		}
+	</style>
+</head>
+<body>
+<div class="feedback-type">
+	<!--<h4 class="class144">请选择反馈问题类型</h4>-->
+	<div class="feedback-check" {/if !$feedback_type/}style="height: 100px"{//if/}>
+		<!--{/if ($company['com_level']>1 && $company['end_time']>=date('Y-m-d H:i:s')&&$company['net_heap_id']==0)||$company['net_heap_id']>0/}-->
+			<!--<a href="javascript:void(0);" class="checkType {/if $feedback_type==1/}check{//if/}" data-feedtype="1">-->
+				<!--<em></em>-->
+				<!--售后服务-->
+			<!--</a>-->
+		<!--{//if/}-->
+		<!--<a href="javascript:void(0);" class="checkType {/if $feedback_type==2/}check{//if/}" data-feedtype="2">-->
+			<!--<em></em>-->
+			<!--系统功能-->
+		<!--</a>-->
+		<!--{/if $company['com_level']>1 && $company['end_time']>=date('Y-m-d H:i:s') && $company['recruit_type']!=3 && $company['is_bad']==0 && !empty($jobs)/}-->
+			<!--<a href="javascript:void(0);" class="checkType {/if $feedback_type==3/}check{//if/}" data-feedtype="3">-->
+				<!--<em></em>-->
+				<!--招聘效果-->
+			<!--</a>-->
+		<!--{//if/}-->
+		<!--<a href="javascript:void(0);" class="checkType {/if $feedback_type==4/}check{//if/}" data-feedtype="4">-->
+			<!--<em></em>-->
+			<!--其他-->
+		<!--</a>-->
+	</div>
+	{/if $feedback_type/}{/$innerHtml/}{//if/}
+</div>
+</body>
+{/if $feedback_type/}
+	<style>
+		.feedback-type {
+			height: 510px;
+			overflow-y: auto;
+			overflow-x: hidden;
+			/* margin: 0 0 20px 20px; */
+		}
+	</style>
+{//if/}
+
+<script>
+	var MakeFeedBack_redirect_url = '{/$MakeFeedBack_redirect_url/}';
+
+	var confirmBox, Dialog;
+	hbjs.use('@dialog,@confirmBox', function (m) {
+
+		var $ = m['jquery'];
+		confirmBox = m['widge.overlay.confirmBox'];
+		Dialog = m['widge.overlay.hbDialog'];
+	});
+	//解决ie8js不执行
+	if (typeof window.console === "undefined") {
+		window.console = {};
+		window.console.log = function (str) {
+		};
+	}
+	$(function () {
+		$('.checkType').on('click', function () {
+			var feedback_type = $(this).attr('data-feedtype');
+			var loadingDialog1 = loadingDialog();
+			window.parent.Feedback.set('initHeight', $(document).height());
+			setTimeout(function () {
+				window.parent.Feedback.setContent({
+					content: '{/get_url rule="/index/MakeFeedBack/"/}?feedback_type=' + feedback_type,
+				});
+				window.parent.Feedback.show();
+			}, 300);
+		});
+	});
+	$('.checkType').on('click', function () {
+		$(this).addClass('check').siblings().removeClass('check');
+	});
+	$(".JS-star").find("i").click(function () {
+		var _this = $(this);
+		console.log(_this.parents(".JS-star").get(0).starStatus);
+		if (_this.parents(".JS-star").get(0).starStatus) return;
+		setStar(_this);
+		return;
+	});
+	function setStar(obj, num) {
+		var _this = obj,
+				_val = _this.attr("data-value"),
+				_tStar = _this.parents(".JS-star");
+		_tWidth = parseInt(_this.parents(".JS-star").children('span')[0].style.width);
+		if (num) {
+			_tStar.find("span").css("width", num * 20 + "%");
+			_tStar.find("input").val(num);
+		} else if (_val) {
+			if (parseInt(_val) === 1 && _tWidth === 20) {
+				_tStar.find("span").css("width", "0%");
+				_tStar.find("input").val('0');
+			} else {
+				_tStar.find("span").css("width", _val * 20 + "%");
+				_tStar.find("input").val(_val);
+			}
+		}
+		return false;
+	}
+	$('input[name=match_level_familiarity]').val('0');
+	$('input[name=match_level_problem]').val('0');
+	$('input[name=match_level_service]').val('0');
+	$('input[name=match_level_response]').val('0');
+
+	function getType() {
+		var match_level_familiarity = Number($('input[name=match_level_familiarity]').val());
+		var match_level_problem = Number($('input[name=match_level_problem]').val());
+		var match_level_service = Number($('input[name=match_level_service]').val());
+		var match_level_response = Number($('input[name=match_level_response]').val());
+		if (!match_level_familiarity && (match_level_problem || match_level_service || match_level_response)) {
+			$('.tit').hide();
+			$('input[name=match_level_familiarity]').parents('.public-star').next('.tit').show();
+			return false;
+		} else if ((match_level_familiarity || match_level_response || match_level_service) && !match_level_problem) {
+			$('.tit').hide();
+			$('input[name=match_level_problem]').parents('.public-star').next('.tit').show();
+			return false;
+		} else if ((match_level_familiarity || match_level_problem || match_level_response) && !match_level_service) {
+			$('.tit').hide();
+			$('input[name=match_level_service]').parents('.public-star').next('.tit').show();
+			return false;
+		} else if ((match_level_familiarity || match_level_problem || match_level_service) && !match_level_response) {
+			$('.tit').hide();
+			$('input[name=match_level_response]').parents('.public-star').next('.tit').show();
+			return false;
+		} else {
+			$('.tit').hide();
+			return true;
+		}
+
+	}
+
+	//反馈职位
+	$('.chooseName').on('click', function () {
+		if ($(this).hasClass('chooseYes')) {
+			$(this).removeClass('chooseYes');
+			$(this).parent('.feedback-choose').next('label').hide();
+			var va = $(this).attr('data-id');
+			var choose_names = $('input[name=choose_names]').val();
+			if (choose_names == va) {
+				$('input[name=choose_names]').val('');
+			} else {
+				var choose_names = choose_names.replace(',' + va, "");
+				$('input[name=choose_names]').val(choose_names);
+			}
+		} else {
+			$(this).addClass('chooseYes');
+			$(this).parent('.feedback-choose').next('label').show();
+			$(this).parent('.feedback-choose').next('label').find('.choose').removeClass('chooseYes');
+			var va = $(this).attr('data-id');
+			var choose_names = $('#choose_names').val();
+			var res = choose_names.indexOf(va);
+			if (choose_names == '') {
+				$('input[name=choose_names]').val(va);
+			} else {
+				if (res == -1) {
+					$('input[name=choose_names]').val(choose_names + ',' + va);
+				}
+			}
+
+
+		}
+	});
+	$('.chooseReason').on('click', '.choose', function () {
+		var choose_resons = $('#choose_resons').val();
+		var reson = $(this).attr('data-type');
+		$(this).toggleClass('chooseYes');
+		if ($(this).hasClass('chooseYes')) {
+			if (choose_resons == '') {
+				$('input[name=choose_resons]').val(reson);
+			} else {
+				$('input[name=choose_resons]').val(choose_resons + ',' + reson);
+			}
+		} else {
+			if (choose_resons == reson) {
+				$('input[name=choose_resons]').val('');
+			} else {
+				var choose_resons = choose_resons.replace(',' + reson, "");
+				$('input[name=choose_resons]').val(choose_resons);
+			}
+		}
+	});
+	function checkreson() {
+		var flag = true;
+		var choose_names = $('#choose_names').val();
+		var namearr = choose_names.split(",");
+		$.each(namearr, function (index, item) {
+			var reson1 = $('#chossreason1_' + item).hasClass('chooseYes');
+			var reson2 = $('#chossreason2_' + item).hasClass('chooseYes');
+			if (!reson1 && !reson2) {
+				flag = false;
+			}
+		});
+		return flag;
+	}
+
+
+
+
+</script>
+<script>
+	var confirmBox, Dialog;
+	hbjs.use('@dialog,@confirmBox', function (m) {
+
+		var $ = m['jquery'];
+		confirmBox = m['widge.overlay.confirmBox'];
+		Dialog = m['widge.overlay.hbDialog'];
+	});
+
+	//错误提示 success-成功 fail-错误 warning-警告 question-疑问  info-信息 normal-正常
+	function msg_error_box(msg) {
+		confirmBox.timeBomb(msg ? msg : "参数错误!", {
+			name: 'fail',
+			timeout: 2000,
+			width: 70 + msg.length * 18
+		});
+		return false;
+	}
+
+	//成功提示 success-成功 fail-错误 warning-警告 question-疑问  info-信息 normal-正常
+	function msg_success_box(msg) {
+		confirmBox.timeBomb(msg ? msg : "成功!", {
+			name: 'success',
+			timeout: 1000,
+			width: 70 + msg.length * 18
+		});
+		return true;
+	}
+	function ajax_function(url, data, success_c, async, type) {
+		success_c = success_c ? success_c : {
+			success: function (data) {
+
+			},
+			error: function (data) {
+
+			}
+		};
+		type = type ? type : 'POST';
+		async = async ? async : false;//是否同步请求  //false-同步请求
+		if (!url || !success_c) {
+			layer.msg('参数错误', {icon: 5});
+		}
+		var re = false;
+		$.ajax({
+			type: type,
+			url: url,
+			data: data,//只要将表单序列化就可以了
+			async: async,//false-同步请求
+			dataType: 'json',
+			success: function (data) {
+				re = success_c.success(data);
+			},
+			error: function (request) {
+				layer.msg("数据请求失败.请稍后重试", {icon: 7});
+				re = success_c.error(request);
+				re = false;
+			}
+		});
+		return re;
+	}
+
+	//等待
+	var loadingDialog_1;
+	function loadingDialog(msg) {
+		msg = msg ? msg : '正在加载...';
+		var loading = '<div class="ui_dialog_loading">' + msg + '</div>';
+		if (!loadingDialog_1) {
+			loadingDialog_1 = new Dialog({
+				close: null,
+				idName: 'loadingDialog_1',
+				title: null,
+				content: loading,
+				isAjax: true
+			});
+			loadingDialog_1.hide_old = loadingDialog_1.hide;
+			loadingDialog_1.hide = function () {
+				loadingDialog_1.hide_old();
+				if ($('.hb_ui_dialog:not(:hidden)').length) {
+					$('.hb_ui_ui-mask').show();
+				}
+			};
+		} else {
+			loadingDialog_1.setContent({
+				content: loading,
+			});
+		}
+		loadingDialog_1.show();
+		$('.loadingDialog_1').css({border: '1px solid #a3a3a3', 'z-index': 100000});
+		return loadingDialog_1;
+	}
+	hbjs.use('@dialog,@confirmBox', function (m) {
+
+		var $ = m['jquery'];
+		confirmBox = m['widge.overlay.confirmBox'];
+		Dialog = m['widge.overlay.hbDialog'];
+		if (MakeFeedBack_redirect_url) {
+			var loadingDialog1 = loadingDialog('登录过期,请重新登录...');
+			setTimeout(function () {
+				window.parent.location.href = MakeFeedBack_redirect_url;
+			}, 600);
+		}
+	});
+
+</script>
+</html>

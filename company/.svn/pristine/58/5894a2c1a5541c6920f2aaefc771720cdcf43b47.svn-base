@@ -1,0 +1,56 @@
+<style>
+.interResBox{width:330px;font-size:14px;}
+.interResTxt{margin-bottom:10px;text-align: left;}
+.interResTxt span.formRad{display:block; height:70px; width:330px;text-align: left;}
+.interResTxt span.btn{display:block;width:330px; text-align:center;}
+.radioDiv{display:block;width:100px; padding-bottom: 8px; float:left;overflow: hidden; text-align: left;}
+</style>
+<div class="dgBox interResBox" id="self">
+	<input type="hidden" name ="recommendid" value="{/$recommendid/}" >
+        <input type="hidden" name ="inviteid" value="{/$inviteid/}" >
+	<div class="interResTxt" id="aresultContainer">
+        <span class="formRad">
+            {/foreach $recommend_status_arr as $k=>$status/}
+                {/if $k !=1 && $k!=2/}
+                    <label class="radioDiv"><input type="radio" value="{/$k/}" name="radWorkState" class="radio">{/$status/}</label>
+                {//if/}
+            {//foreach/}
+        </span>
+        <span class="btn"><a href="#" class="btn1 btnsF12" id="btnSetResultOk">确定</a><a href="#" class="btn3 btnsF12" id="btnSetResultCancel">取消</a></span>
+    </div>
+</div>
+<script type="text/javascript">
+    var auditionresult ={
+            initialize:function(){
+                $("#btnSetResultOk").click(function(){
+                    auditionresult.setresult();
+                });
+                $("#btnSetResultCancel").click(function(){
+                     auditionresult.auditoncancle();
+                });
+            },
+            setresult:function(){
+                var result = $('#aresultContainer').find("[type='radio']:checked").val();
+                if(result =='' || result== undefined){
+                     $.anchorMsg("请选择您要设置的状态",{ icon: 'warning' });return;
+                }
+                var recommendid = $('input[name="recommendid"]').val();
+                var inviteid = $('input[name="inviteid"]').val();
+                var arr = new Array('未知','合适','不合适','已邀请','拒绝面试','未参加面试','面试未过','已发offer','拒绝offer','已入职');
+                $.getJSON('{/get_url rule="/recommend/setStatus/"/}',{recommendid:recommendid,status:result,invite_id:inviteid},function(json) {
+                        if(!json.status){
+                             $.anchorMsg("设置面试结果失败",{ icon: 'warning' });
+                             return;
+                        }
+                        $.anchorMsg("设置面试结果成功");
+                        $("#self").closeDialog();
+                        recommend.setAuditionHtml(arr[result],result);
+                        return;
+                    });
+            },
+            auditoncancle:function(){
+               $("#self").closeDialog();
+            }
+    }
+    auditionresult.initialize();
+</script>

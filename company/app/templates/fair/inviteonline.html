@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+</head>
+<body>
+<style>
+.oneInvBox{width:440px;font-size:14px;}
+.oneInvBox .formMod .l{width:60px;}
+.oneInvBox .formMod .r{width:370px;}
+.oneInvBox .formMod .r .formTextarea textarea.textarea{height:60px;}
+.oneInvBox .oneInvForm .formBtn{margin:0 0 0 65px;}
+</style>
+<div class="dgBox oneInvBox">
+	<form id="formInviteOnLine" method="post" action="{/get_url rule='/fairinvite/doonlineinvite'/}">
+	<div class="oneInvForm">
+        <div class="formMod">
+            <div class="l">选择场次</div>
+            <div class="r">
+                <span id="tstDropscene" class="drop zindex"></span>
+                <span class="tipPos">
+                    <span class="tipLay">
+                    </span>
+                </span>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="formMod">
+            <div class="l">面试岗位</div>
+            <div class="r">
+                <span class="formText">
+                    <input id="txtFairJobName" name="txtFairJobName" type="text" class="text" style="width:210px;" />
+                </span>
+                <span class="tipPos">
+                    <span class="tipLay">
+                    </span>
+                </span>
+                <span class="tipTxt gray" style="width:320px; margin:0;">我们将短信通知{/$ta/}</span>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="formBtn"><a id="btnInvite" href="javascript:void(0);" class="btn1 btnsF14">发送邀请</a></div>
+    </div>
+    <input type="hidden" name="hddinviteresumeid" value="{/$resume_id/}" />
+    <input type="hidden" name="hddinviteresumeids" value="{/$resume_ids/}" />
+    </form>
+</div>
+<script>
+var inviteValid;
+var inviteonline={
+	initialize:function(){
+		//初始化控件
+		this._initControl();
+	},
+	_initControl:function(){
+		//初始化场次
+		$('#tstDropscene').droplist({selectValue:'{/$select_scene/}',noSelectClass:'gray',width:370,inputWidth:345,style:'width:353px;',hddName:'hddsceneid',items:{/$scene_json/},onSelect:function(i,name) {
+			$('#txtFairJobName').val('');
+		}});
+		$('#txtFairJobName').autocomplete('{/get_url rule="/fairinvite/getSuggestJobs"/}', 
+		{
+			extraParams: {scene_id: function(){return $('#tstDropscene').getDropListValue()}},
+ 			max: 12,    //列表里的条目数
+   			minChars: 0,    //自动完成激活之前填入的最小字符
+     		width: 400,     //提示的宽度，溢出隐藏
+     		scrollHeight: 300,   //提示的高度，溢出显示滚动条
+     		matchContains: true,    //包含匹配，就是data参数里的数据，是否只要包含文本框里的数据就显示
+     		autoFill: false,    //自动填充
+     		dataType: 'json',
+   			formatItem: function(row, i, max)
+   			{
+				return '<span class="autTempL"><b>'+row.jobname+'</b></span><span class="autTempR"></span>';
+     		},
+     		formatMatch: function(row, i, max)
+     		{
+     			return row.jobname;
+     		},
+     		formatResult: function(row)
+     		{
+     			return row.jobname;
+     		}
+     	}).result(function(event, row, formatted) {
+     		$('#formSingleInvite').find(':input[name="hddJobID"]').val(row.id);
+     	});
+		$.setIndex("zindex");
+		inviteValid = $("#formInviteOnLine").validate({
+		    rules: {
+				hddsceneid: { required: true },
+				txtFairJobName: { required: true, maxlength: 32 }
+		    },
+		    messages: {
+		    	hddsceneid:{required:'请选择场次<span class="tipArr"></span>'},
+		    	txtFairJobName:{required:'请输入面试岗位<span class="tipArr"></span>', maxlength: '面试岗位不能超过32字<span class="tipArr"></span>'}
+		    },
+		    errorElement: 'span',
+		    errorClasses: {
+		    	hddsceneid: { required: 'tipLayErr tipw180'},
+		    	txtFairJobName: { required: 'tipLayErr tipw180', maxlength: 'tipLayErr tipw180'}
+		    },
+		    errorPlacement: function(error, element) {
+				element.parent().nextAll().find('.tipLay').append(error);
+		    },
+		    success: function(label) {
+		    	label.text(" ");
+		    }
+		});
+		$('#btnInvite').click(function(){
+			var data = { operate: 'invite' };
+            $('#btnInvite').submitForm({ beforeSubmit: $.proxy(inviteValid.form,inviteValid),data:data, success: inviteonline.inviteSuccess, clearForm: false });
+            return false;
+        });
+	},
+	inviteSuccess:function(json){
+		if (json && json.error){
+			$.message(json.error, { title: "系统提示", icon: "fail" });
+			return;
+		}
+		if (json && json.success) {
+          	//成功
+       		$.anchorMsg(json.success, { onclose: function() {
+       			if (json && json.issingle){
+       				{/if !empty($obj) && !empty($callback)/}
+       					{/$obj/}.{/$callback/}(json.resumeid);
+       				{//if/}
+       			}else{
+       				{/if !empty($obj) && !empty($callback)/}
+   						{/$obj/}.{/$callback/}(json.resumeids);
+   					{//if/}
+       			}
+       			$('#btnInvite').closeDialog();
+         	}
+         	});
+	    }
+	}
+};
+inviteonline.initialize();
+</script>
+
+
+
+
+<!--<script>-->
+<!--$.setIndex("zindex");//为需要赋层级设置的元素设置class为zindex-->
+<!--$.focusColor('input.text');-->
+<!--$('#tstDrop').droplist({-->
+<!--	defaultTitle:'请选择',-->
+<!--	style:'width:353px;',-->
+<!--    noSelectClass:'gray',-->
+<!--    inputWidth:345,-->
+<!--    width:370,-->
+<!--    name:'hddSex',-->
+<!--    items:[{id:'1',name:'2013年11月2日“才聚两江”大型招聘会'},{id:'2',name:'2013年11月4日“才聚两江”大型招聘会'}],-->
+<!--    onSelect:function(i,name) {-->
+<!--	   	选中后的事件-->
+<!--}});-->
+<!--</script>-->
+</body>
+</html>

@@ -1,0 +1,13 @@
+<div class="linkSharePop">
+        <div class="linkSharePut">
+                <span>链接转发：</span>
+                <input type="text" value="{/$share_link/}"/>
+                <input type="text" name="linkCopyx" id="linkCopyx" value="{/$share_link/}我分享了一份简历，点击网址查看哦" />
+                <a href="javascript:void(0);" class="codeCopyBtn">复制</a>
+        </div>
+        <div class="linkShareCode">
+                <span>二维码转发：</span>
+                <img src="{/$share_img/}"/>
+                <em>打开手机扫码分享</em>
+        </div>
+</div>

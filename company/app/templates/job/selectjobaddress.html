@@ -1,0 +1,365 @@
+<style>
+	.selectaddItem {
+		border-bottom : 1px solid #f1f1f1;
+		padding       : 15px;
+		font-family   : "Microsoft yahei", "Microsoft YaHei", "微软雅黑"
+	}
+	.selectaddItem:last-child {
+		border : 0
+	}
+	.selectaddItem dt {
+		font-size : 16px;
+		color     : #666
+	}
+	.selectaddItem dd span {
+		float : right
+	}
+	.selectaddItem dd {
+		font-size   : 14px;
+		color       : #3d84b8;
+		padding-top : 10px
+	}
+	.selectaddItem dd a {
+		margin-left : 50px
+	}
+	.selectaddItem dd input {
+		margin-right : 5px
+	}
+	.selectaddItem .edit, .selectaddItem .delete {
+		display        : inline-block;
+		width          : 16px;
+		height         : 16px;
+		overflow       : hidden;
+		margin-right   : 5px;
+		vertical-align : -2px
+	}
+	.selectaddItem .edit {
+		background : url({/$siteurl.style/}/img/jobadd_delete.png) no-repeat
+	}
+	.selectaddItem .delete {
+		background : url({/$siteurl.style/}/img/jobadd_edit.png) no-repeat
+	}
+	.addressMod .drop {
+		z-index : 2;
+	}
+</style>
+<form action="###" id="selectjobaddress">
+	<div style="text-align:left;padding: 30px">
+		<p style='font-size: 18px;color: #333;border-bottom: 1px solid #dadada;padding-left: 15px;padding-bottom: 5px;font-weight: bold;font-family: "Microsoft yahei", "Microsoft YaHei", "微软雅黑"'>
+			选择工作地点
+			{/if $max_count>1/}
+				<span style="font-size: 12px;color: red">
+				职位在不同工作地点都有招聘，最多可选择{/$max_count/}个工作地点同时发布多个职位
+			</span>
+			{//if/}
+		</p>
+		<div id="selectAddressDiv">
+			<div style="height: 400px;overflow-y: auto">
+				{/foreach $address_list as $address/}
+					<dl class="selectaddItem clearfix" data-id="{/$address['id']/}">
+						<dt>{/$address["add_info"]/}{/if !$address['id']/}&nbsp;<span style="color:#999;">(公司地址)</span>{//if/}</dt>
+						<dd>
+				<span data-id="{/$address['id']/}" data-add-info="{/$address['add_info']/}" data-map-x="{/$address['map_x']/}" data-map-y="{/$address['map_y']/}" data-area-id="{/$address['area_id']/}">
+                    <a href="javascript:;" class="editMap"><i class="edit"></i>编辑</a>
+					{/if $address["id"]/}
+						<a href="javascript:;" class="deleteMap"><i class="delete"></i>删除</a>
+					{//if/}
+                </span>
+							{/if in_array($address['id'],$address_id)/}
+								<label><input type="checkbox" name="selectAddress" checked value="{/$address['id']/}"/>当前地址</label>
+							{/else/}
+								<label style="color:#999">
+									<input type="checkbox" name="selectAddress" value="{/$address['id']/}"/>选择该地址</label>
+							{//if/}
+						</dd>
+					</dl>
+				{//foreach/}
+			</div>
+			<p style="text-align: center;padding-top: 50px">
+				<a href="javascript:void(0);" style="width: 80px;text-align: center"
+				   class="btnsF16 btn1 publish" id="enterMapBtn">确定</a>
+				<a href="javascript:void(0);" style="width: 80px;text-align: center"
+				   class="btnsF16 btn1 publish" id="addMapBtn">添加新地址</a>
+			</p>
+		</div>
+	</div>
+</form>
+
+<script>
+	//解决IE8报console未定义
+	window.console = window.console || (function () {
+	    var c = {}; c.log = c.warn = c.debug = c.info = c.error = c.time = c.dir = c.profile
+	    = c.clear = c.exception = c.trace = c.assert = function () { };
+	    return c;
+	})();
+	
+	var se_id = '{/implode(',',$address_id)/}';
+	var Dialog, confirmBox;
+	hbjs.use('@confirmBox, @jobDialog', function (m) {
+		Dialog = m['widge.overlay.hbDialog'];
+		confirmBox = m['widge.overlay.confirmBox'];
+		var $ = m['cqjob.jobDialog'];
+		if (!o_mapDialog) {
+			return;
+		}
+		if (!mapDialog) {
+			mapDialog = new Dialog({
+				close: '╳',
+				idName: 'map_dialog2',
+				width: 750,
+				isAjax: true
+			});
+
+			mapDialog.on('closeX', function (e) {
+				mapDialog.hide();
+				var id = $("input[name=selectAddress]:checked").parent().parent().parent().attr("data-id");
+				o_mapDialog.setContent({
+					data: {id: id,max_count:'{/$max_count/}'}
+				});
+				o_mapDialog.show();
+			});
+			mapDialog.after('hide', function () {
+				if (areaDrop) {
+					areaDrop.destory();
+				}
+				if (baiduSearch) {
+					baiduSearch.dispose();
+				}
+			});
+		}
+
+		//添加，修改地图
+		o_mapDialog.query("#selectAddressDiv").on("click",".editMap, #addMapBtn", function(e){
+			var data;
+			var target = $(e.currentTarget);
+			if (target.hasClass("editMap")) {
+				var data_span = target.parent();
+				data = {
+					add_info: data_span.attr("data-add-info"),
+					map_x: data_span.attr("data-map-x"),
+					map_y: data_span.attr("data-map-y"),
+					area_id: data_span.attr("data-area-id"),
+					id: data_span.attr("data-id"),
+					orgin_id: $("input[name=selectAddress]:checked").parent().parent().parent().attr("data-id"),
+					max_count:'{/$max_count/}'
+				}
+			} else {
+				data = {
+					id: -1,
+					orgin_id: $("input[name=selectAddress]:checked").parent().parent().parent().attr("data-id"),
+					max_count:'{/$max_count/}'
+				};
+			}
+			mapDialog.setContent({
+				content:'{/get_url rule="/job/SetJobAddress/"/}',
+				data: data
+			});
+			o_mapDialog.hide();
+			mapDialog.show();
+		});
+
+		//删除地图
+		o_mapDialog.query("#selectAddressDiv").on("click",".deleteMap", function (e) {
+			var target = $(e.currentTarget);
+			if(target.parent().next().find("input[name=selectAddress]").is(":checked")){
+				$.message("选中地址不能删除", {title: "操作提示", icon: "fail"});
+				return false;
+			}
+
+			var id = target.parent().attr("data-id");
+
+			$.confirm('确认要删除该地址吗', '操作提示', function () {
+				$.post('{/get_url rule="/job/DeleteAddress/"/}', {id: id}, function (json) {
+					if (json && json.status) {
+						o_mapDialog.query("#selectAddressDiv .selectaddItem").each(function (i, n) {
+							if ($(n).attr("data-id") == id) {
+								$(n).remove();
+								return;
+							}
+						});
+						$.anchorMsg("删除成功");
+						return;
+					}
+
+				}, 'json');
+			});
+		});
+
+		//selectAddress
+		o_mapDialog.query("#selectAddressDiv").on("click", "[name=selectAddress]", function (e) {
+			var max_count = {/$max_count|default:5/};
+			var address_data = [];
+			var chk = $(':checkbox[name=selectAddress]');
+			for (var i = 0; i < chk.length; i++) {
+				if (chk.get(i).checked) {
+					var data_element = $(chk.get(i)).parent().prev();
+					var data_add_info = {
+						add_info: data_element.attr("data-add-info"),
+						map_x: data_element.attr("data-map-x"),
+						map_y: data_element.attr("data-map-y"),
+						area_id: data_element.attr("data-area-id"),
+						id: data_element.attr("data-id")
+					};
+					address_data.push(data_add_info);
+				}
+			}
+			if (max_count == 1) {
+				chk.prop("checked", false);
+				$(this).prop("checked", true);
+				return true;
+			}
+			if (address_data.length > max_count) {
+				return msg_error_box('最多选择' + max_count + '个工作地点');
+			}
+		});
+
+		//选择地址
+		{/if $max_count>1/}
+		o_mapDialog.query("#selectAddressDiv").on("click", "#enterMapBtn", function (e) {
+			var max_count = {/$max_count|default:5/};
+			var address_data = [];
+			var chk = $(':checkbox[name=selectAddress]');
+			for (var i = 0; i < chk.length; i++) {
+				if (chk.get(i).checked) {
+					var data_element = $(chk.get(i)).parent().prev();
+					var data_add_info = {
+						add_info: data_element.attr("data-add-info"),
+						map_x: data_element.attr("data-map-x"),
+						map_y: data_element.attr("data-map-y"),
+						area_id: data_element.attr("data-area-id"),
+						id: data_element.attr("data-id")
+					};
+					address_data.push(data_add_info);
+				}
+			}
+			if (address_data.length < 1) {
+				return msg_error_box('请选择工作地点');
+			}
+			if (address_data.length > max_count) {
+				return msg_error_box('最多选择' + max_count + '个工作地点');
+			}
+
+//			var pre_area_id = area_id.substring(0, 2);
+//			if (pre_area_id !== '03') {
+//				$("#salaryRefer").hide();
+//			} else {
+//				$("#salaryRefer").show();
+//			}
+			$('.addressMod .formText .addressMod_edit').remove();
+			$('.addressMod .formText #show_address_span').html('');
+			var address_ids = [];
+			$.each(address_data, function (key, value) {
+				//console.log(key, value);
+				var name_list = {
+					map_x_name: ["map_x[" + value.id + "]", value.map_x],
+					map_y_name: ["map_y[" + value.id + "]", value.map_y],
+					hddArea_name: ["hddArea[" + value.id + "]", value.area_id],
+					txtAddInfo_name: ["txtAddInfo[" + value.id + "]", value.add_info],
+					address_id_name: ["address_id[" + value.id + "]", value.id]
+				};
+				address_ids.push(value.id);
+				var addressMod_edit_html = '<input name="@@name" class="addressMod_edit" type="hidden" value="@@value"/>';
+				$.each(name_list, function (key1, value1) {
+					var _html = addressMod_edit_html.replace(/@@name/g, value1[0]);
+					_html = _html.replace(/@@value/g, value1[1]);
+					$('.addressMod .formText').append(_html);
+				});
+				if (!key && address_data.length >= 1){
+					$('.addressMod .formText #show_address_span').html(value.add_info);
+				}
+			});
+			if(address_data.length>1){
+				$('.addressMod .formText .address_count').html(address_data.length);
+				$('.addressMod .formText .show_address_count').show();
+			}else {
+				$('.addressMod .formText .show_address_count').hide();
+			}
+			$('input[name=address_ids]').val(address_ids.join(','));
+            $('.need').text(address_data.length * $('#need').val());
+			o_mapDialog.hide();
+//			if (jobAddValid) {
+//				if (jobAddValid.element(txtAddInfo)) {
+//					jobAddValid.element(hddArea);
+//				}
+//			}
+		});
+		{/else/}
+		o_mapDialog.query("#selectAddressDiv").on("click", "#enterMapBtn", function (e) {
+			var max_count = {/$max_count|default:5/};
+			var address_data = [];
+			var chk = $(':checkbox[name=selectAddress]');
+			for (var i = 0; i < chk.length; i++) {
+				if (chk.get(i).checked) {
+					var data_element = $(chk.get(i)).parent().prev();
+					var data_add_info = {
+						add_info: data_element.attr("data-add-info"),
+						map_x: data_element.attr("data-map-x"),
+						map_y: data_element.attr("data-map-y"),
+						area_id: data_element.attr("data-area-id"),
+						id: data_element.attr("data-id")
+					};
+					address_data.push(data_add_info);
+				}
+			}
+			if (address_data.length < 1) {
+				return msg_error_box('请选择工作地点');
+			}
+			if (address_data.length > max_count) {
+				return msg_error_box('最多选择' + max_count + '个工作地点');
+			}
+			address_data = address_data[0];
+
+			var pre_area_id = address_data.area_id.substring(0, 2);
+			if (pre_area_id !== '03') {
+				$("#salaryRefer").hide();
+			} else {
+				$("#salaryRefer").show();
+			}
+
+			$("input[name=map_x]").val(address_data.map_x);
+			$("input[name=map_y]").val(address_data.map_y);
+			var hddArea = $("input[name=hddArea]").val(address_data.area_id);
+			var txtAddInfo = $("input[name=txtAddInfo]").val(address_data.add_info);
+			$("input[name=address_id]").val(address_data.id);
+			$("#show_address_span").html(address_data.add_info);
+			o_mapDialog.hide();
+//			if(jobAddValid){
+//				if(jobAddValid.element(txtAddInfo)){
+//					jobAddValid.element(hddArea);
+//				}
+//			}
+		});
+		{//if/}
+
+		function checkSelect(name, min, max) {
+			var c = 0;
+			var chk = $(':checkbox[name=' + name + ']');
+			for (var i = 0; i < chk.length; i++) {
+				if (chk.get(i).checked)c++;
+			}
+			if (min && c < min) return false;
+			if (max && c > max) return false;
+			return c != 0;
+		}
+	});
+
+	//错误提示 success-成功 fail-错误 warning-警告 question-疑问  info-信息 normal-正常
+	function msg_error_box(msg) {
+		confirmBox.timeBomb(msg ? msg : "参数错误!", {
+			name: 'fail',
+			timeout: 1000,
+			width: 70 + msg.length * 18
+		});
+		return false;
+	}
+	//成功提示 success-成功 fail-错误 warning-警告 question-疑问  info-信息 normal-正常
+	function msg_success_box(msg) {
+		confirmBox.timeBomb(msg ? msg : "参数错误!", {
+			name: 'success',
+			timeout: 1000,
+			width: 70 + msg.length * 18
+		});
+		return true;
+	}
+
+</script>

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>企业微招聘-背景音乐</title>
+		<!-- <link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+		<link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}">
+		<link rel="stylesheet" type="text/css" href="{/version file='ratePoster.css'/}" /> -->
+	</head>
+	<body>
+		<div class="uploadMusicPop">
+			<img src="{/$siteurl.style/}/img/company/PC-loading.gif" id="loading" style="display:none"/>
+			<div class="uploadMusicx">
+				<span>
+					上传音乐<input type="file" id="uploadMusicBtn" name="videosup" />
+				</span>
+
+				<em>最大{/$file_info["size"]/}M，支持{/$file_info['ext']/}格式</em>
+				<i>音乐在H5中将循环播放</i>
+			</div>
+			<form name="music_list" >
+			<ul class="uploadMusicList">
+				{/foreach $default_list as $k=>$music/}
+				<li>
+					<span class="autoPlay" data-url="{/$href_path/}/{/$music['href']/}"></span>
+					<em class="musicx02">
+					<img src="{/$siteurl.style/}/img/company/mrecruit/currBg.gif" class="musicx04" />{/$music['music_name']/}
+					</em>
+					<em class="musicx03">00:00/00:20</em>
+					
+					<span data-href="{/$music['href']/}" class="pickon {/if $music['href']==$selected_href/}pickonCur{//if/}">
+						<img src="{/$siteurl.style/}/img/company/mrecruit/currBg.gif" class="musicx04" />
+						<i></i>选中
+					</span>
+					<audio src="{/$href_path/}/{/$music['href']/}" id="default_autoplay{/$k+1/}"></audio>
+				</li>
+				{//foreach/}
+				{/foreach $list as $k=>$music/}
+					<li>
+						<span class="autoPlay" data-url="{/$href_path/}/{/$music['href']/}"></span>
+						<em class="musicx02">
+							<img src="{/$siteurl.style/}/img/company/mrecruit/currBg.gif" class="musicx04" />
+							{/$music['music_name']/}
+							</em>
+						<em class="musicx03">00:00/00:20</em>
+						<span data-href="{/$music['href']/}" class="pickon {/if $music['is_select']==1/}pickonCur{//if/}">
+							<i></i>选中
+						</span>
+						<span data-href="{/$music['href']/}" class="delMusic"><i></i>删除</span>
+						<audio src="{/$href_path/}/{/$music['href']/}" id="self_autoplay{/$k+1/}"></audio>
+					</li>
+				{//foreach/}
+			</ul>
+			</form>
+			<!--音乐dream.mp3\houlai.mp3\kisme.mp3-->
+			<audio src="music/kisme.mp3" id="autoplay"></audio>
+			<div class="uploadMusicBtnx">
+				<a href="javascript:void(0)" class="btn1 btnsF14" id="btnTipdelete">确定</a>
+				<a href="javascript:void(0)" class="btn3 btnsF14" id="btnTipCancel">取消</a>
+			</div>
+		</div>
+<script type="text/javascript">
+	var href = '{/$selected_href/}';
+	
+	if(!$('.pickon').hasClass('pickonCur')){
+		$('.uploadMusicList li:first').find('.pickon').addClass('pickonCur');
+	}
+	
+	
+	$('.uploadMusicList').on('click','.pickon', function(){
+		$('.pickon').removeClass('pickonCur');
+		$(this).addClass('pickonCur');
+		href = $(this).attr('data-href');
+	});
+	
+	$('#btnTipdelete').click(function () {
+		$.post('/mrecruit/SelectMusic',{href:href},function (e) {
+			window.location.reload();
+        },'json')
+   });
+	
+	var audio = document.getElementById('autoplay');
+	$('.uploadMusicList').on('click','.autoPlay',function(){
+		$('.uploadMusicList li audio').each(function(i,e){
+			e.pause();
+		})
+		var audio=$(this).nextAll('audio')[0];
+		$(this).toggleClass('autoPlayShow');
+		// $('.musicx04').css('display','none');
+		var thisDateUrl = $(this).attr('data-url');
+		// $('#autoplay').attr('src',thisDateUrl);
+		if($(this).hasClass('autoPlayShow')){
+			$('.autoPlay').removeClass('autoPlayShow');
+			$(this).addClass('autoPlayShow');
+			// $(this).nextAll('.musicx04').css('display','block');
+			audio.play();
+		}else{
+			 audio.pause();
+			 // $('.musicx04').css('display','none');
+		}
+		// $('.uploadMusicList li .autoPlay').each(function(i,e){
+		// 	if($(e).hasClass('autoPlayShow')){
+		// 		$(e).click()
+		// 	}
+		// })
+	});
+	$('.uploadMusicList li audio').on('ended',function () {
+	   $('.autoPlay').removeClass('autoPlayShow');
+	});
+
+	
+//音乐时长
+{/foreach $default_list as $k=>$music/}
+	var default_autoplay{/$k+1/} = document.getElementById('default_autoplay{/$k+1/}');
+	if(default_autoplay{/$k+1/} != null){
+		var duration;
+        default_autoplay{/$k+1/}.load();
+        default_autoplay{/$k+1/}.oncanplay = function () {
+			$('#default_autoplay'+{/$k+1/}).prevAll('.musicx03').text(timeToMinute(default_autoplay{/$k+1/}.duration));
+		}
+	}
+{//foreach/}
+{/foreach $list as $k=>$music/}
+	var self_autoplay{/$k+1/} = document.getElementById('self_autoplay{/$k+1/}');
+	if(self_autoplay{/$k+1/} != null){
+	var duration;
+    self_autoplay{/$k+1/}.load();
+    self_autoplay{/$k+1/}.oncanplay = function () {
+		$('#self_autoplay'+{/$k+1/}).prevAll('.musicx03').text(timeToMinute(self_autoplay{/$k+1/}.duration));
+	}
+	}
+{//foreach/}
+
+
+
+// 秒转换分钟00:00:00格式
+function timeToMinute(times){
+       var t;
+        if(times > -1){
+            //var hour = Math.floor(times/3600);
+            var min = Math.floor(times/60) % 60;
+            var sec = times % 60;
+//          if(hour < 10) {
+//              t = '0'+ hour + ":";
+//          } else {
+//              t = hour + ":";
+//          }
+ 			console.log(min)
+            if(min < 10){
+            	t = "0" + min + ":";
+            }else{
+            	t = min + ":";
+            }
+            
+            if(sec < 10){t += "0";}
+            t += sec.toFixed(2);
+        }
+        t=t.substring(0,t.length-3);
+        return t;
+}
+</script>
+<script>
+
+
+	hbjs.use('@hbCommon, @jobDialog, @validator, @areaDrop, @confirmBox, @areaDrop', function(m) {
+		//var $ = m['product.hbCommon'].extend(m['cqjob.jobDialog']);
+		var Dialog = m['widge.overlay.hbDialog'];
+		var AreaDrop = m['product.areaDrop'];
+		var validatorForm = m['widge.validator.form'];
+		var ConfirmBox = m['widge.overlay.confirmBox']
+
+		//音乐上传
+		$('#uploadMusicBtn').change(function () {
+			var file_info = $('#uploadMusicBtn').get(0).files[0];// size k  name
+			if (!/\.(mp3)$/.test(file_info.name)) {
+				var msg = "文件类型必须是{/$file_info['ext']/}";
+				ConfirmBox.timeBomb(msg, {
+					name: 'fail',
+					timeout: 2000,
+					width: 18 * msg.length + 70
+				});
+				return false;
+			}
+
+			var max_size = parseInt('{/$file_info["size"]/}');
+			if(file_info.size > 1024*1024*max_size){
+				var msg = "文件大小不能超过{/$file_info['size']/}M";
+				ConfirmBox.timeBomb(msg, {
+					name: 'fail',
+					timeout: 2000,
+					width: 18 * msg.length + 70
+				});
+				return false;
+			}
+
+			//start up
+			var formData = new FormData();
+			var numAdd = 30;
+			formData.append("videosup",$("#uploadMusicBtn")[0].files[0]);
+			$('#loading').css('display','block');
+			$.ajax({
+				url:'/mrecruit/musicupV2/',
+				type:'post',
+				data: formData,
+				contentType: false,
+				processData: false,
+				success:function(res){
+				$('#loading').css('display','none');
+					numAdd++;
+					var _musict_html = '<li>'+
+						'<span class="autoPlay" data-url="{/$href_path/}/'+res.data.newname+'"></span>'+
+						'<em class="musicx02"><img src="{/$siteurl.style/}/img/company/mrecruit/currBg.gif" class="musicx04" />'+res.data.name+'</em>'+
+						'<em class="musicx03">00:20</em>'+
+						'<span data-href="'+ res.data.newname +'" class="pickon"><i></i>选中</span>'+
+					'<audio src="{/$href_path/}/'+ res.data.newname +'" id="autoplay'+numAdd+'"></audio>'+
+					'<span data-href="'+res.data.newname+'" class="delMusic"><i></i>删除</span>'+
+					'</li>';
+					$('.uploadMusicList').prepend(_musict_html);
+		//算时间
+		var add_autoplay = document.getElementById('autoplay'+numAdd);
+		if(add_autoplay != null){
+			var duration;
+	        add_autoplay.load();
+	        add_autoplay.oncanplay = function () {
+				$('#autoplay'+numAdd).prevAll('.musicx03').text(timeToMinute(add_autoplay.duration));
+			}
+		}
+				}
+			})
+
+
+		});
+		
+		
+
+		//取消弹窗
+		$('#btnTipCancel').click(function () {
+			rateMusic.hide();
+		});
+		//删除上传音乐
+		$('.uploadMusicList').on('click','.delMusic', function(){
+			//询问框
+			var _this = $(this);
+			ConfirmBox.confirm('确定删除当前音乐吗？','提示', function(obj){
+				var __this = this;
+				$.post("/mrecruit/musicdelV2",{href:_this.attr('data-href')},function (e) {
+					ConfirmBox.timeBomb('删除成功', {
+						name: 'success',
+						timeout: 1000,
+						width: 180
+					});
+					_this.parent('li').remove();
+					__this.hide();
+				},'json')
+
+			},{
+				width :300,
+				close : 'x'
+			});
+		});
+
+	})
+</script>
+	</body>
+</html>

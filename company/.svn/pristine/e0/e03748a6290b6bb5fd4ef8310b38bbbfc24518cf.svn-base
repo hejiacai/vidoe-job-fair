@@ -1,0 +1,860 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+</head>
+<body>
+<style>
+.invBox{width:500px;font-size:12px;}
+.invBox .invFormHd{border-bottom:1px solid #dadada; padding-bottom:10px;}
+.invBox .formMod{margin-bottom:10px;}
+.invForm .formMod .l{width:70px; font-size:12px;}
+.invForm .formMod .l i{font-size:14px;}
+.invForm .formMod .r{width:415px;}
+.invForm .formMod .r .formTextarea textarea.textarea{width:360px;height:50px;padding:0 0 0 5px;line-height:22px;font-size:12px;}
+.invForm .invFormTxt{margin:0 0 0 120px;color:#999;}
+.invForm .formText input.text{font-size:12px;}
+.invForm .formText .gray{color:#999; font-size:12px;}
+.invForm .formBtn{margin:20px 0 0 75px;}
+.invForm .sms{margin:10px 0 0 80px;}
+.invForm .sms .txt{color:#000; height:28px; line-height:20px;}
+.invForm .sms .txt em{color:#ff5400;}
+.invForm .sms .txt span {
+    color: #999;
+}
+.invForm .sms .txt img{ display: inline-block; vertical-align: -2px; margin-right: 5px;width:17px; height: 15px;}
+.invForm .sms .txt a{ color: #3D84B8;}
+.invForm .sms .txt a:hover{ color: #3D84B8; text-decoration: underline;}
+.invForm .sms .smsBox{width:368px;}
+.invForm .sms .smsBox .formTextarea textarea.textarea{width:360px; height:85px; font-size:12px; line-height:20px; text-align:left;}
+.invForm .smsT{background:#f2f2f2; position:relative; z-index:1; height:30px; line-height:30px;border:1px solid #dbdbdb; border-bottom:0; width:365px; float:left; display:inline;}
+.invForm .smsT .formRad input.radio{margin:9px 0 0 10px;margin:7px 0 0 10px\9;margin:8px 0 0 10px\11;*margin:3px 0 0 10px;}
+.invForm .smsT .formRad label{margin-right:0;}
+.invForm .smsT .tipTxt{float:left; display:inline;}
+.invForm .smsT b{background:url({/$siteurl.style/}/img/c/invit.jpg) no-repeat; width:13px; height:7px; position:absolute; left:63px; top:-7px;}
+.invForm .sms .smsC{width:367px; overflow:hidden; float:left; display:inline;}
+.save-comp{ position: fixed!important; top: 50%!important; margin-top: -270px;}
+.invBox{ height: 420px; overflow: hidden; overflow-y: auto;}
+.invForm .formMod .r{width:395px;}
+
+.warning_dialog{width:350px; background: #fff; border: 1px solid #ccc; padding: 0; position: absolute; z-index: 8; top: 160px; left: 110px; padding-bottom: 20px; display: none; font-family: "微软雅黑";}
+.warning_dialog p{ padding-left: 20px; font-size: 14px; line-height: 28px;}
+.warn_close_wrap{width:100%; height: 40px; background: #f3f3f3; border-bottom: 1px solid #dedede; margin-bottom: 20px;}
+.warn_close_wrap em,.warn_close_wrap span{ line-height: 40px; display: block; float: left;}
+.warn_close_wrap em{ color: #444; font-size: 16px; padding-left: 10px;}
+.warn_close_wrap span{ color: #444; font-size: 16px; float: right; padding: 0 10px; cursor: pointer;}
+
+
+.invForm .sms .interviewTipx{ background: #f2f2f2; border: 1px solid #cfcfcf;line-height:24px;padding:8px; overflow: hidden; height: auto; border-radius: 2px; margin-top: 8px;width:350px}
+</style>
+<form id="formSingleInvite" method="post" action="{/get_url rule='/invite/sendInviteSingle'/}">
+<input type="hidden" name="hddResumeID" value="{/$resumeID/}" />
+<input type="hidden" name="hddInviteType" value="{/$invitetype/}" />
+<input type="hidden" name="hddApplyID" value="{/$apply.apply_id/}" />
+<input type="hidden" name="recommendid" value="{/$recommendid/}" />
+<div class="dgBox invBox">
+    <div class="invForm">
+        <div class="formMod invFormHd">
+            <div class="l">选择模板<i>&nbsp;</i></div>
+            <div class="r">
+                <span id="templateDrop" class="drop zindex"></span>
+                <span class="tipPos">
+                    <span class="tipLay">
+                    </span>
+                </span>
+                <span class="tipTxt"><a href="javascript:void(0);" id="invLst">管理模板</a></span>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="formMod">
+            <div class="l">公司名称<i>*</i></div>
+            <div class="r">
+                <span id="companyDrop" class="drop zindex" style="margin-bottom:10px; {/if !empty($cur_com_id)/}display:none;{//if/}"></span>
+                <span class="tipPos" style="{/if !empty($cur_com_id)/}display:none;{//if/}">
+                   <span class="tipLay"></span>
+                </span>
+                <span>
+                    <select id="txtCompanyname" name="txtCompanyname" class="drop" style="width:355px;">
+                        {/$cur_company_str/}
+                    </select>
+                    <!--<input id="txtCompanyname" name="txtCompanyname" type="text" class="text" value="{/if !empty($company_shortname)/}{/$company_shortname/}{/else/}{/$company_name/}{//if/}" style="width:355px;">-->
+                </span>
+                <span class="tipPos">
+                   <span class="tipLay"></span>
+                </span>
+                <span class="tipTxt" style="width:375px; color:#999; margin:0;">推荐使用简称，如“长安集团”</span>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="formMod">
+            <div class="l">面试职位<i>*</i></div>
+            <div class="r">
+                <span class="formText">
+                    <input id="txtStation" name="txtStation" type="text" class="text" value="{/$apply.station/}" style="width:173px;">
+                    <input type="hidden" name="hddJobID" value="{/$apply.job_id/}" />
+                </span>
+                <span class="tipPos">
+                   <span class="tipLay">
+                   </span>
+                </span>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="formMod">
+            <div class="l">面试时间<i>*</i></div>
+            <div class="r">
+                <span id="dateDrop" class="drop zindex"></span>
+                <span class="tipTxt">&nbsp;</span>
+                <span id="timeDrop" class="drop zindex"></span>
+                <span id="spanCustomTime" class="formText" style="display:none;">
+                    <input disabled="disabled" id="txtCustomTime" name="txtCustomTime" type="text" class="text watermark" watermark="输入面试时间，如“明天”" style="width:165px;">
+                </span>
+                <span class="tipPos">
+                    <span class="tipLay">
+                    </span>
+                </span>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="formMod">
+            <div class="l">面试地点<i>*</i></div>
+            <div class="r">
+                <span class="formText">
+                    {/if $job_address/}
+                    <select id="address_select" style='padding:6px 5px;'>
+                        <option value="company_address" {/if $address_select=='company_address'/}selected{//if/}>公司地址</option>
+                        <option value="job_address" {/if $address_select=='job_address'/}selected{//if/}>工作地址</option>
+                    </select>
+                    <input id="txtAddress" name="txtAddress" type="text" class="text" value="{/$address/}" style="width:355px;margin-top:10px;display:block;">
+                    {/else/}
+                    <input id="txtAddress" name="txtAddress" type="text" class="text" value="{/$address/}" style="width:355px;">
+                    {//if/}
+                </span>
+                <span class="tipPos" style='top:40px;'>
+                    <span class="tipLay">
+                    </span>
+                </span>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="formMod">
+            <div class="l">联系人<i>*</i></div>
+            <div class="r">
+                <span class="formText">
+                    <input id="txtLinkman" name="txtLinkman" type="text" class="text" value="{/$link_man/}" style="width:173px;">
+                </span>
+                <span class="tipPos">
+                    <span class="tipLay">
+                    </span>
+                </span>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="formMod">
+            <div class="l">联系电话<i>*</i></div>
+            <div class="r">
+                <span class="formText">
+                    <input id="txtLinktel" name="txtLinktel" type="text" class="text" value="{/$link_tel/}" style="width:173px;">
+                </span>
+                <span class="tipPos">
+                    <span class="tipLay">
+                    </span>
+                </span>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="formMod">
+            <div class="l">其他<i>&nbsp;</i></div>
+            <div class="r" style="position:relative">
+                <span class="formTextarea">
+                    <textarea id="txtRemark" name="txtRemark" class="left textarea watermark" watermark="如需带什么资料等...">{/$remark/}</textarea>
+                </span>
+                <span class="tipPos">
+                    <span class="tipLay">
+                    </span>
+                </span>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="sms">
+            <div class="txt">我们将用<em>手机短信</em>、站内信、E-mail通知求职者</div>
+            <div class="smsBox">
+                <div class="smsT">
+                    <b></b>
+                    <span class="formRad">
+                        <input type="radio" value="1" name="smsType" id="radSimple" class="radio" checked="checked"><label for="radSimple">精简</label>
+                        <input type="radio" value="2" name="smsType" id="radComplete" class="radio"><label for="radComplete">完整</label>
+                    </span>
+                    <span class="tipTxt" id="smsTips">（包含时间、地点、联系方式、其它等）</span>
+                </div>
+                <div class="smsC">
+                    <div class="smsCon">
+                        <span class="formTextarea">
+                            <textarea class="textarea" name="txtSmsContent" id="txtSmsContent" readonly="readonly"></textarea>
+                        </span>
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <!-- 重庆新套餐-->
+            {/if $pricing_resource_data['isCqNewService']/}
+                {/if $cq_resume_num_release >= 1 && $is_not_downloadORapply/}
+                    <input type="hidden" value="{/if !empty($resumepoint)/}{/$resumepoint/}{/else/}1{//if/}"  name="point"/>
+                    {/if $pricing_resource_data['cq_release_point_message'] < 1 && $spread_overage < $point_message/}
+                    <div class="txt interviewTipx">
+                        <img src="{/$siteurl.style/}/img/company/video/eng_icon03.png" >发送邀请需消耗<em>1</em>个简历点，<em>短信将发送失败（短信数/推广金不足）</em>，仅能通过站内信、E-mail通知求职者！如需短信功能请联系<a href="javascript:void(0);" class="consultantPop">招聘顾问</a>
+                    </div>
+                    {/else/}
+                            <div class="txt" style="height:40px;line-height:24px;">
+                                发送邀请需消耗<em>1</em>个简历点和<em>1</em>条短信，剩余短信<em>{/$pricing_resource_data['cq_release_point_message']/}</em>条<br/>
+                                <span>（若短信不足则扣取<em>{/$point_message/}</em>元推广金{/if $pricing_resource_data['resource_type'] != 2/}/余额{//if/}）</span>
+                            </div>
+                    {//if/}
+                {/elseif $account_overage >= $account_overage_service_price && $is_not_downloadORapply/}
+                    <input type="hidden" value="{/if !empty($resumepoint)/}{/$resumepoint/}{/else/}1{//if/}"  name="point"/>
+                    {/if $pricing_resource_data['cq_release_point_message'] < 1 && $spread_overage < $point_message/}
+                        <div class="txt interviewTipx">
+                            <img src="{/$siteurl.style/}/img/company/video/eng_icon03.png" >发送邀请需消耗<em>{/$account_overage_service_price/}</em>元账户余额,<em>短信将发送失败（短信数/推广金不足），</em>仅能通过站内信、E-mail通知求职者！如需短信功能请联系<a href="javascript:void(0);" class="consultantPop">招聘顾问</a>
+                        </div>
+                    {/else/}
+                            <div class="txt" style="height:40px;line-height:24px;">
+                                发送邀请需消耗<em>{/$account_overage_service_price/}</em>元账户余额和<em>1</em>条短信，剩余短信<em>{/$pricing_resource_data['cq_release_point_message']/}</em>条<br/>
+                                <span>（若短信不足则扣取<em>{/$point_message/}</em>元推广金{/if $pricing_resource_data['resource_type'] != 2/}/余额{//if/}）</span>
+                            </div>
+                    {//if/}
+                {/elseif $is_spread_overage && $spread_overage+$account_overage >= $account_overage_service_price && $is_not_downloadORapply/}
+                    <input type="hidden" value="{/if !empty($resumepoint)/}{/$resumepoint/}{/else/}1{//if/}"  name="point"/>
+                    {/if $pricing_resource_data['cq_release_point_message'] < 1 && $spread_overage+$account_overage-$account_overage_service_price < $point_message/}
+                        <div class="txt interviewTipx">
+                            <img src="{/$siteurl.style/}/img/company/video/eng_icon03.png" >发送邀请需消耗<em>{/$account_overage_service_price/}</em>元推广金/余额,
+                            <em>短信将发送失败（短信数/推广金不足），</em>仅能通过站内信、E-mail通知求职者！如需短信功能请联系<a href="javascript:void(0);" class="consultantPop">招聘顾问</a>
+                        </div>
+                    {/else/}
+                        <div class="txt" style="height:40px;line-height:24px;">
+                            发送邀请需消耗<em>{/$account_overage_service_price/}</em>元推广金/余额和<em>1</em>条短信，剩余短信<em>{/$pricing_resource_data['cq_release_point_message']/}</em
+                            >条<br/>
+                            <span>（若短信不足则扣取<em>{/$point_message/}</em>元推广金{/if $pricing_resource_data['resource_type'] != 2/}/余额{//if/}）</span>
+                        </div>
+                    {//if/}
+                {/else/}
+                    {/if $pricing_resource_data['cq_release_point_message'] < 1 && $spread_overage < $point_message && $account_overage < $point_message/}
+                    <div class="txt interviewTipx">
+						<img src="{/$siteurl.style/}/img/company/video/eng_icon03.png" ><em style="color: #f00;">短信将发送失败（短信数/推广金不足）</em>，仅能通过站内信、E-mail通知求职者！如需短信功能请联系<a href="javascript:void(0);" class="consultantPop">招聘顾问</a>
+                    </div>
+                    {/else/}
+                    <div class="txt" style="height:40px;line-height:24px;">
+                        发送邀请需消耗<em>1</em>条短信，剩余短信<em>{/$pricing_resource_data['cq_release_point_message']/}</em>条<br/>
+                        <span>（若短信不足则扣取<em>{/$point_message/}</em>元推广金{/if $pricing_resource_data['resource_type'] != 2/}/余额{//if/}）</span>
+                    </div>
+                    {//if/}
+                {//if/}
+            {/else/}
+            <!-- 老套餐-->
+                {/if $isshowpoint/}
+                    <div class="txt" style="height:24px;line-height:24px;"><em>{/if !empty($resumelevel)/}{/$resumelevel/}{/else/}1星{//if/}</em>简历, 发送邀请将扣除<em>{/if !empty($resumepoint)/}{/$resumepoint/}{/else/}1{//if/}</em>个下载点</div>
+                {/else if $isshowspread/}
+                    <div class="txt" style="height:24px;line-height:24px;"><em>{/if !empty($resumelevel)/}{/$resumelevel/}{/else/}1星{//if/}</em>简历, 发送面试邀请将花费<em>{/$resumeconsume/}</em>元（将使用推广金代扣）</div>
+                {/else if $isshowconsume/}
+                    <div class="txt" style="height:24px;line-height:24px;"><em>{/$resumelevel/}</em>简历, 发送将花费<em>{/$resumeconsume/}</em>元</div>
+                {//if/}
+
+                {/if $memberinfo != 'not_member' && ($isshowspread || $isshowconsume)/}
+                    <div class="txt" style="height:24px;line-height:24px;">联系招聘顾问购买简历包可享受更多优惠</div>
+                {//if/}
+            {//if/}
+        </div>
+        <div id="inviteFormBtn" class="formBtn" style="margin-top: 10px;"><a href="javascript:void(0);" id="btnSendInvite" class="btn1 btnsF14">发送</a><a id="btnCancelInvite" href="javascript:void(0);" class="btn3 btnsF14">取消</a></div>
+    </div>
+	<!-- 招聘顾问弹窗 -->
+	<div class="warning_dialog">
+		<div class="warn_close_wrap">
+			<em>提示</em>
+			<span class="warn_close">×</span>
+		</div>
+		
+		<p>联系招聘顾问购买推广金，最高多送<b style="color:red;">50%</b></p>
+		{/if !empty($hrManager["user_name"])/}
+	<p>招聘顾问：{/$hrManager["user_name"]/}</p>
+	{//if/}
+	{/if !empty($hrManager["mobile"]) || !empty($customeruser["mobile"])/}
+	<p>联系电话：{/$tel_head/}转{/$hrManager["tel"]/} [9：00-18：00]</p>
+			<p>手机号码：{/$hrManager["mobile"]|default:$customeruser["mobile"]/}</p>
+	{/else/}
+	<p>联系电话：{/$huibo400/}</p>
+	{//if/}
+		<p style="margin-top:15px">
+	{/if !empty($hrManager["qq"]) || !empty($customeruser["qq"])/}
+	<a target="_blank" href="//wpa.qq.com/msgrd?v=3&uin={/trim($hrManager["qq"]|default:$customeruser["qq"])/}&site=qq&menu=yes">
+		<img src="{/$siteurl.style/}/img/newindex/qq.jpg" />
+	</a>
+	{/else/}
+	<a target="_blank" href="//wpa.qq.com/msgrd?v=3&uin=2851501279&site=qq&menu=yes">
+		<img src="{/$siteurl.style/}/img/newindex/qq.jpg" />
+	</a>
+	{//if/}
+		</p>
+	</div>
+	
+</div>
+</form>
+<script>
+    if(window.$ != undefined){
+        window.fix$ = window.$;
+    }
+try{
+    hbjs.use('@confirmBox, @form, @actions, @jobDialog, @jobDropList, @jobAutocomplete',
+        function(m) {
+		var $ = m['cqjob.jobValidate'].extend(
+			m['cqjob.jobForm'], m['cqjob.actions'], m['cqjob.jobDialog'],
+			m['cqjob.jobDropList'], m['cqjob.autocomplete']
+		);
+        factory($, m['widge.overlay.confirmBox']);
+    });
+} catch (ex) {
+    factory($);
+}
+
+function factory($, confirmBox) {
+
+var pWidth = 70,
+	fontWidth = 18;
+
+var tempCompanyname = '';
+var tempStation     = '';
+var tempDate        = '';
+var tempTime        = '';
+var tempCustomTime  = '';
+var tempAddress     = '';
+var tempLinkman     = '';
+var tempLinktel     = '';
+var tempRemark      = '';
+var inviteValid;
+
+var isSubmit = true;
+
+var inviteSingle = {
+    initialize : function() {
+        //初始化控件     
+        this._initControl();
+    },
+    _initControl : function() {
+        $('#inviteFormBtn').on('click', 'a', function (e) {
+            var target = e.currentTarget,
+                idName = $(target).attr('id');
+
+            if (idName === "btnSendInvite") {
+                inviteSingle.invite(target);
+            } else {
+                if ($('#btnSendInvite')[0].trigger) {
+                    $('#btnSendInvite')[0].trigger('close');
+                } else {
+                    $('#btnSendInvite').closeDialog();
+                }
+            }
+        });
+        
+        //初始化模板下拉控件
+        $('#templateDrop').droplist({
+            selectValue : '0',
+            noSelectClass : 'gray',
+            inputWidth : 155,
+            style : 'width:163px;*width:167px;',
+            hddName : 'hddTemplate',
+            items : {/$company_templates_json/},
+            onSelect : function(i, name) {
+                inviteSingle.setTemplate(i);
+            }
+        });
+
+        $("#companyDrop").droplist({
+            selectValue : '{/if !empty($cur_com_id)/}{/$cur_com_id/}{/else/}{/$this_cur_com_id/}{//if/}',
+            noSelectClass : 'gray',
+            maxScroll : 8,
+            inputWidth : 155,
+            style : 'width:163px;*width:167px;',
+            hddName : 'hddComId',
+            items : {/$accounts_json/},
+            onSelect : function(i, name) {
+                $.post("{/get_url rule='/invite/GetCompanyNames/'/}",{company_id:i},function(data){
+                    $("#txtCompanyname").html(data);
+                },'json');
+//                $("input[name=txtCompanyname]").val(name);
+                $("#txtStation").val("");
+                $("input[name=hddJobID]").val("");
+            }
+        });
+
+        //初始化面试日期下拉控件
+        $('#dateDrop').droplist({
+            defaultTitle : '请选择',
+            noSelectClass : 'gray',
+            inputWidth : 155,
+            style : 'width:163px;*width:167px;',
+            hddName : 'hddDate',
+            items : {/$date_json/},
+            onSelect : function (i, name) {
+                if (i == 99) {
+                    $('#timeDrop').hide();
+                    $('#spanCustomTime').show();
+                    $('#txtCustomTime').removeAttr('disabled');
+                    $(':input[name="hddtime"]').attr('disabled', 'disabled');
+                    $('#txtCustomTime').val('');
+                } else {
+                    $('#timeDrop').show();
+                    $('#spanCustomTime').hide();
+                    $('#txtCustomTime').attr('disabled', 'disabled');
+                    $(':input[name="hddtime"]').removeAttr('disabled');
+                    $('#timeDrop').setDropListValue('');
+                }
+            }
+        });
+
+        //初始化面试时间下拉控件
+        $('#timeDrop').droplist({
+            defaultTitle : '请选择',
+            maxScroll : 10,
+            noSelectClass : 'gray',
+            inputWidth : 80,
+            style : 'width:88px;*width:95px;',
+            hddName : 'hddtime',
+            items : [
+                {id:"8:00", name:"8:00"},
+                {id:"8:30", name:"8:30"},
+                {id:"9:00", name:"9:00"},
+                {id:"9:30", name:"9:30"},
+                {id:"10:00", name:"10:00"},
+                {id:"10:30", name:"10:30"},
+                {id:"11:00", name:"11:00"},
+                {id:"11:30", name:"11:30"},
+                {id:"12:00", name:"12:00"},
+                {id:"12:30", name:"12:30"},
+                {id:"13:00", name:"13:00"},
+                {id:"13:30", name:"13:30"},
+                {id:"14:00", name:"14:00"},
+                {id:"14:30", name:"14:30"},
+                {id:"15:00", name:"15:00"},
+                {id:"15:30", name:"15:30"},
+                {id:"16:00", name:"16:00"},
+                {id:"16:30", name:"16:30"},
+                {id:"17:00", name:"17:00"},
+                {id:"17:30", name:"17:30"},
+                {id:"18:00", name:"18:00"},
+                {id:"18:30", name:"18:30"},
+                {id:"19:00", name:"19:00"},
+                {id:"19:30", name:"19:30"},
+                {id:"20:00", name:"20:00"}
+            ],
+            onSelect : function(i,name) {}
+        });
+
+        $("#txtStation").on("focus",function(){
+           $(".autTempLst ul").css("overflow-y","scroll");
+        });
+        var txtStationAutocompleter=$('#txtStation').autocomplete('{/get_url rule="/invite/getSuggestJobs"/}', {
+            max : 20,//12,    //列表里的条目数
+            minChars : 0,    //自动完成激活之前填入的最小字符
+            width : 182,     //提示的宽度，溢出隐藏
+            scrollHeight : "auto",//290,   //提示的高度，溢出显示滚动条
+            matchContains : true,    //包含匹配，就是data参数里的数据，是否只要包含文本框里的数据就显示
+            autoFill : false,    //自动填充
+            dataType : 'json',
+            extraParams : {
+                company_id : function() {
+
+                    return $("input[name=hddComId]").val();
+                }
+            },
+            formatItem: function(row, i, max) {
+                return '<span class="autTempL"><b>' + row.jobname + '</b></span><span class="autTempR"></span>';
+            },
+            formatMatch: function(row, i, max) {
+                return row.jobname;
+            },
+            formatResult: function(row) {
+                return row.jobname;
+            }
+        }).result(function (event, row, formatted) {
+            $('#formSingleInvite').find(':input[name="hddJobID"]').val(row.id);
+        });
+		$(window).on('scroll resize',function(){
+			$('.autTemp.ac_results').hide()
+		})
+		$('#txtStation').parents('.dgBox.invBox').on('scroll',function(){
+			$('.autTemp.ac_results').hide()
+		})
+        $('.watermark').watermark2();
+        $.setIndex('zindex');
+
+        //自定义验证方法-不超过30个字符，一个汉字为2个字符
+        $.validator.addMethod("validateSmsContent", function (value, element) {
+            var inputLehgth = value.length;
+            if ($(':input[name="smsType"]:checked').val() == 2) {
+                return inputLehgth <= 118 && inputLehgth >= 1;
+            } else {
+                return inputLehgth <= 60 && inputLehgth >= 1;
+            }
+        }, '');
+        
+        inviteValid = $("#formSingleInvite").validate({
+            //ignore:"#txtOtherReward",
+            rules: {
+                txtCompanyname : {
+                    required: true, 
+                    rangelength : [1, 19]
+                },
+                txtStation : {
+                    required : true,
+                    rangelength : [1, 15]
+                },//validateJobStation: true//validateJobStationChinese: true
+                hddDate : {
+                    required : true
+                },
+                hddtime : {
+                    required: true
+                },
+                txtCustomTime : {
+                    required: true,
+                    rangelength:[1, 20]
+                },
+                txtAddress : {
+                    required: true,
+                    minlength : 1,
+                    maxlength: 60
+                },
+                txtLinkman : {
+                    required : true,
+                    minlength : 1,
+                    maxlength: 15
+                },
+                txtLinktel : { 
+                    required : true,
+                    tel : true
+                },
+                txtRemark : {
+                    maxlength : 200
+                },
+                txtSmsContent : {
+                    validateSmsContent : true
+                },
+                hddComId : {
+                    required : true
+                }
+            },
+            messages: {
+                txtCompanyname : {required: '请输入公司名称<span class="tipArr"></span>', rangelength : '请输入1-20个字<span class="tipArr"></span>'},
+                txtStation : {required : '请输入职位名称<span class="tipArr"></span>', rangelength : '请输入1-15个字<span class="tipArr"></span>'},
+                hddDate : {required : '请设置面试时间<span class="tipArr"></span>'},
+                hddtime : {required : '请设置面试时间<span class="tipArr"></span>'},
+                txtCustomTime:{required : '请设置面试时间<span class="tipArr"></span>', rangelength:'请输入1-20个字<span class="tipArr"></span>'},
+                txtAddress: { required : '请输入面试地点<span class="tipArr"></span>', minlength:'面试地点请输入1-60个字符<span class="tipArr"></span>',maxlength:'面试地点请输入1-60个字符<span class="tipArr"></span>' },
+                txtLinkman: {required:'请输入联系人<span class="tipArr"></span>', minlength:'联系人请输入1-15个字符<span class="tipArr"></span>',maxlength:'联系人请输入1-15个字符<span class="tipArr"></span>'},
+                txtLinktel: {required:'请输入联系电话<span class="tipArr"></span>',tel:'联系电话不正确<span class="tipArr"></span>'},
+                txtRemark:{maxlength:'其他信息不能超过200个字<span class="tipArr"></span>'},
+                hddComId : {required : '请选择代招的企业<span class="tipArr"></span>'}
+            },
+            //focusInvalid:false,
+            errorElement: 'span',
+            errorClasses: {
+                txtCompanyname : {required: 'tipLayErr tipw180', rangelength:'tipLayErr tipw180'},
+                //txtStation: { required: 'tipLayErr tipw180', validateJobStation:'tipLayErr tipw180',validateJobStationChinese:'tipLayErr tipw180'},
+                txtStation : {required : 'tipLayErr tipw180', rangelength:'tipLayErr tipw180'},
+                hddDate : {required : 'tipLayErr tipw180'},
+                hddtime : {required : 'tipLayErr tipw180'},
+                txtCustomTime : {required : 'tipLayErr tipw180', rangelength:'tipLayErr tipw180'},
+                txtAddress : {required : 'tipLayErr tipw180',minlength:'tipLayErr tipw180',maxlength:'tipLayErr tipw180'},
+                txtLinkman : {required : 'tipLayErr tipw180',minlength:'tipLayErr tipw180',maxlength:'tipLayErr tipw180'},
+                txtLinktel : {required : 'tipLayErr tipw180',tel:'tipLayErr tipw180'},
+                txtRemark : {maxlength : 'tipLayErr tipw180'},
+                hddComId : {required : 'tipLayErr tipw180'}
+            },
+            tipClasses:{
+                txtStation: 'tipLayTxt tipw150'
+            },
+            groups:{ datetime: 'hddDate hddtime txtCustomTime'},
+            errorPlacement: function(error, element) {
+                if (element.attr('name') == 'hddDate' || element.attr('name') == 'hddtime' || element.attr('name') == 'txtCustomTime'){
+                    element.parent().nextAll().find('.tipLay').append(error);
+                }else{
+                    element.parent().next().find('.tipLay').append(error);
+                }
+            },
+            success: function(label) {
+                label.text(" ");
+            }
+        });
+        $('#invLst').click(function() {
+            $.showModal('{/get_url rule="/interview/manageTemplate" data="obj=inviteSingle&callback=resetTemplates"/}'+'-v-'+Math.random(),{title:'邀请模板管理', zIndex: 1000000});
+        });
+
+        {/if empty($isfromdetail)/}
+        $('#btnCancelInvite').on('click', function(){
+            // if ($('#btnCancelInvite')[0].trigger){
+            //     $('#btnCancelInvite')[0].trigger('close');
+            // } else {
+            //     if(window.fix$ && window.fix$.fn.closeDialog){
+            //         //window.fix$('#btnCancelInvite').closeDialog();
+            //     } else {
+            //         $('#btnCancelInvite').closeDialog();
+            //     }
+            // }
+            
+	        console.log('进来了');
+            if($('#btnCancelInvite')[0].trigger){
+	                $('#btnCancelInvite')[0].trigger('close');
+	
+	        } else {
+				if(window.fix$ && window.fix$.fn.closeDialog){
+					window.fix$('#btnCancelInvite').closeDialog();
+				} else {
+					$('#btnCancelInvite').closeDialog();
+				}
+	        }
+            //$(this).closest('.dialogCon').find('._dialogHeader ._dialogClose')[0].click();
+        });
+        {//if/}
+
+		//招聘顾问弹窗
+		$('.consultantPop').click(function(){
+			$('.warning_dialog').show();
+		});
+		$('.warn_close').click(function(){
+			$('.warning_dialog').hide();
+		});
+
+        //切换短信模式
+        $(':input[name="smsType"]').click(function() {
+            if ($(this).val() == 2) {
+				var msg = '您不能使用该功能';
+                {/if base_lib_BaseUtils::nullOrEmpty($canComplete) || $canComplete != true/}
+				if(confirmBox){
+					confirmBox.timeBomb(msg, {
+						name: 'warning',
+						width: pWidth + msg.length * fontWidth
+					});
+				} else {
+					$.anchorMsg("您不能使用该功能", {icon: 'warning'});
+				}
+                return false;
+                {//if/}
+            }
+            inviteSingle.createSmsContent();
+        });
+
+        inviteSingle.createSmsContent();
+        setTimeout(inviteSingle.checkContentChange, 500);
+    },
+    checkContentChange: function() {
+        if (tempCompanyname != $.trim($('#txtCompanyname').val())
+            || tempStation != $.trim($('#txtStation').val())
+            || tempDate != $('#dateDrop').getDropListValue()
+            || tempTime != $('#timeDrop').getDropListValue()
+            || tempCustomTime != $.trim($('#txtCustomTime').val())
+            || tempAddress != $.trim($('#txtAddress').val())
+            || tempLinkman != $.trim($('#txtLinkman').val())
+            || tempLinktel != $.trim($('#txtLinktel').val())
+            || tempRemark != $.trim($('#txtRemark').val())) {
+            inviteSingle.createSmsContent();
+        }
+        setTimeout(inviteSingle.checkContentChange, 500);
+    },
+    createSmsContent: function(){
+        $('#smsTips').html('（包含时间、地点、联系方式、其它等）').removeClass('red');
+
+        tempCompanyname = $.trim($('#txtCompanyname').val());
+        tempStation     = $.trim($('#txtStation').val());
+        var sms_station = '';
+        if (tempStation != '') {
+            sms_station = '【' + tempStation + '】';
+        }
+
+        tempDate = $('#dateDrop').getDropListValue();
+        tempTime = $('#timeDrop').getDropListValue();
+        tempCustomTime = $.trim($('#txtCustomTime').val());
+
+        var sms_thetime = '';
+        if (tempDate) {
+            if (tempDate == 99) {
+                if (tempCustomTime != '') {
+                    sms_thetime = tempCustomTime;
+                }
+            } else {
+                var arrDate  = tempDate.split('-');
+                var sms_time = tempTime.replace(':', '点').replace('00', '');
+                sms_thetime  = parseInt(arrDate[1], 10) + '月' + parseInt(arrDate[2], 10) + '日' + sms_time;
+            }
+        }
+
+        if (sms_thetime != '') {
+            sms_thetime = ' 时间：' + sms_thetime;
+        }
+
+        tempAddress = $.trim($('#txtAddress').val());
+        var sms_address = '';
+        if (tempAddress != '') {
+            sms_address = ' 地点：' + tempAddress;
+        }
+
+        tempLinkman = $.trim($('#txtLinkman').val());
+        tempLinktel = $.trim($('#txtLinktel').val());
+        var sms_Link = tempLinkman + tempLinktel;
+        if (sms_Link != '') {
+            sms_Link = ' 联系：' + sms_Link;
+        }
+
+        tempRemark = $.trim($('#txtRemark').val());
+        var sms_remark = '';
+        if (tempRemark != '') {
+            sms_remark = ' 注：' + tempRemark;
+        }
+
+        if ($(':input[name="smsType"]:checked').val() == 1) {
+
+            $('#txtSmsContent').html(tempCompanyname + '通知您面试' + sms_station + '详情http://huibo.cn/AHMNz ');
+            if ($('#txtSmsContent').val().length > 60) {
+                $('#smsTips').html('（已超出' + ($('#txtSmsContent').val().length - 60) + '个字，请精简上面的内容）').addClass('red');
+            }
+        } else if ($(':input[name="smsType"]:checked').val() == 2) {
+
+            $('#txtSmsContent').html(tempCompanyname + '通知您面试' + sms_station + sms_thetime + sms_address + sms_Link + sms_remark);
+            if ($('#txtSmsContent').val().length > 100) {
+                $('#smsTips').html('（已超出' + ($('#txtSmsContent').val().length - 100) + '个字，请精简上面的内容）').addClass('red');
+            }
+        }
+    },
+    resetTemplates: function(type,template_id,template_name){
+        switch(type)
+        {
+            case 'add':
+                $('#templateDrop').addItem(template_id,template_name);
+                $('#templateDrop').setDropListValue(template_id);
+                break;
+            case 'del':
+                $('#templateDrop').delItem(template_id);
+                $('#templateDrop').setDropListValue(0);
+                break;
+            case 'mod':
+                $('#templateDrop').delItem(template_id);
+                $('#templateDrop').addItem(template_id,template_name);
+                $('#templateDrop').setDropListValue(template_id);
+                break;
+            default:
+                break;
+        }
+    },
+    setTemplate: function(templateId) {
+        $.getJSON('{/get_url rule="/invite/getTemplate" data="templateId=' + templateId + '"/}', function(data) {
+            if (data && data.error) {
+                $.message(data.error, { icon: 'fail' });
+                return;
+            }
+            if (typeof data.address != "undefined") {
+                $("#txtAddress").val("").val(data.address);
+            }
+            if (typeof data.link_man != "undefined") {
+                $("#txtLinkman").val("").val(data.link_man);
+            }
+            if (typeof data.link_tel != "undefined") {
+                $("#txtLinktel").val("").val(data.link_tel);
+            }
+            if (data.remark) {
+                $("#txtRemark").val("").val(data.remark);
+                $('#txtRemark').prev('label').hide();
+            }else{
+                $("#txtRemark").val("");
+                $('#txtRemark').prev('label').show();
+            }
+        });
+    },
+    invite : function(object) {
+
+		var inviteValidForm = $.proxy(inviteValid.form, inviteValid);
+		if(!inviteValidForm()){
+			isSubmit = true;
+			return;
+		}
+
+		if(!isSubmit){
+			alert('正在提交中...');
+			return;
+		}
+		isSubmit = false;
+
+        var data = {operate : "invite"};
+        $ (object).submitForm({
+            beforeSubmit : inviteValidForm,
+            data : data,
+            success : inviteSingle.successCallBack,
+            clearForm: false
+        });
+        return false;
+    },
+    successCallBack : function(json) {
+        // 提交form后，回调函数
+        if (json && json.error){
+            if(json.error == '短信数/推广金/余额不足'){
+                $(".dialog" , parent.document).hide();
+                $.showModal("{/get_url rule='/resume/resumeinfomsghtml'/}?type=2", {title:'提示', onclose:function(){
+                    window.top.location.reload();
+                }});
+            }else{
+                $.message(json.error, {title: "系统提示", icon: "fail", zIndex: 99999});
+            }
+            isSubmit = true;
+            return;
+        }
+        if (json && json.status) {
+            if (json.status == "succeed") {
+                {/if !base_lib_BaseUtils::nullOrEmpty($recommendid)/}
+                var recommendid = $("input[name='recommendid']").val();
+                $.getJSON('{/get_url rule="/recommend/setStatus/"/}', {
+                    recommendid : recommendid,
+                    status : 3
+                }, function (json) {
+                    if (json.status) {
+                        $.anchorMsg("设置面试结果成功", {zIndex: 99999});
+						isSubmit = true;
+                        recommend.refresh();
+                    }
+                });
+                {//if/}
+
+                $.anchorMsg("面试邀请发送成功", {
+                    zIndex: 99999,
+                    onclose: function() {
+                        if ($('#btnSendInvite')[0].trigger){
+                            $('#btnSendInvite')[0].trigger('close');
+                        } else {
+                            if(window.fix$ && window.fix$.fn.closeDialog){
+                                window.fix$('#btnSendInvite').closeDialog();
+                            } else {
+                                $('#btnSendInvite').closeDialog();
+                            }
+                        }
+						isSubmit = true;
+                        window.location.reload();
+                    }
+                });
+            } else if (json.status == "fail") {
+                //失败
+                $.anchorMsg("发送失败，请重试",{icon: 'fail', zIndex: 99999});
+				isSubmit = true;
+            }
+        }
+    }
+};
+    inviteSingle.initialize();
+    {/if $job_address/}
+    $("#address_select").on("change",function(){
+        var selected_address_key = $("#address_select").val();
+        if(selected_address_key == 'company_address'){
+            $("#txtAddress").val("{/$company_address/}");
+        }else{
+            $("#txtAddress").val("{/$job_address/}");
+        }
+    });
+    {//if/}
+}
+</script>
+</body>
+</html>

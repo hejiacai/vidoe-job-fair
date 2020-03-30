@@ -1,0 +1,186 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+<title>{/$title/}</title>
+<!–[if lt IE9]> 
+<script src="{/version file='html5.js'/}"></script> 
+<![endif]–>
+<link rel="stylesheet" type="text/css" href="{/version file="base.css"/}" />
+<link rel="stylesheet" type="text/css" href="{/version file="comback.css"/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}"/>
+
+<script type="text/javascript" language="javascript" src="{/version file="jquery-1.8.3.min.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="common.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="dialog.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="jquery.form.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='ui_validate.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="ui_menudisplay.js"/}"></script><!--响应式兼容-->
+<script type="text/javascript" language="javascript" src="{/version file="ui_inputFocus.js"/}"></script><!--输入框获取焦点-->
+<script type="text/javascript" language="javascript" src="{/version file="ui_hovchange.js"/}"></script><!--指向改变class-->
+<script type="text/javascript" language="javascript" src="{/version file="ui_drop.js"/}"></script><!--下拉模拟-->
+<style type="text/css">
+.part{}
+.part .hd{border-bottom:1px solid #dadada;height:39px;margin-bottom:10px;}
+.part .hd .l{float:left;display:inline;}
+.part .hd .l a{height:38px;line-height:38px;font-size:14px;margin:0 10px;padding:0 10px;display:inline-block;float:left;display:inline;border:1px solid #dadada;border-top:1px solid #dadada;border-bottom:0;background:#f1f1f1;color:#666;}
+.part .hd .l a.cu{font-weight:bold;border-top:1px solid #dadada;border-bottom:1px solid #fff;background:#fff;}
+.part .hd .l a.cu:hover{background:#fff;}
+.part .hd .l .tipLay{top:6px;left:-14px;}
+.part .hd .l .tipLayTxt{line-height:23px;background:#fffce3;border:1px solid #fad5a8;color:#d78727}
+.part .hd .l .tipLay .tipArr{top:9px;background:url({/$siteurl.style/}/img/common/contrl.gif) no-repeat 0 -5px;}
+
+
+.part .hd .r{float:right;display:inline;margin:5px 0 0;}
+.part .hd .r a i.hbFntWes{font-size:14px;margin:0 5px 0 0; vertical-align:middle;}
+.part .bd .lst ul li{border-bottom:1px dashed #dadada;padding:10px 0px 10px 34px;zoom:1; background:url({/$siteurl.style/}/img/company/msgIcon.png) left 14px no-repeat;}
+.part .bd .lst ul li p{float:left;display:inline;width:890px;line-height:24px;font-size:12px;}
+.part .bd .lst ul li b{ display:block; font-weight:normal; font-size:12px; color:#b2b2b2;}
+.part .bd .lst ul li a.delData{float:right;font-size:14px;margin:-20px 10px 0 0;display:none;color:#666;}
+.part .bd .lst ul li a.delData:hover{color:#333;}
+.part .bd .lst ul li.hov{background:url({/$siteurl.style/}/img/company/msgIcon.png) left 14px no-repeat #f7f7f7;}
+.part .bd .lst ul li.hov a.delData{display:inline;}
+.part .bd .noData{background:none;}
+
+.btnAllTit{ color:#295266; font-size:16px; padding-left:8px; border-left:3px solid #38b7ea; line-height:20px; margin-top:12px; font-weight:bold;}
+</style>
+<script type="text/javascript" src="{/version file='version.js'/}"></script>
+<script type="text/javascript">
+window.CONFIG = {
+	HOST: '{/$siteurl.style/}',
+	COMBOPATH: '/js/v2/'
+}
+</script>
+<script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+<script type="text/javascript" src="{/version file='global.js'/}"></script>
+</head>
+<body id="body">
+{/include 'new_header.html' cur='消息提醒'/}
+
+<div class="content" id="content">
+	<section class="section">
+		<hgroup>
+        	<div class="part">
+            	<!-- <div class="hd">
+                	<div class="l yahei">
+                		<a href="{/get_url rule="/message"/}" class="cu">提醒</a>
+                		<a href="{/get_url rule="/guestbook"/}">留言/咨询</a>
+                	</div>
+                    <div class="r">{/if $hasdata/}<a href="javascript:void(0)" class="btn3 btnsF12" id="btnAllDelete"><i class="hbFntWes">&#xf014;</i>删除全部</a>{//if/}</div>
+                    <div class="clear"></div>
+                </div> -->
+                
+                <div class="hd">
+                	<div class="l"><h2 class="btnAllTit">消息提醒</h2></div>
+                    <div class="r">{/if $hasdata/}<a href="javascript:void(0)" class="btn3 btnsF12" id="btnAllDelete"><i class="hbFntWes">&#xf014;</i>删除全部</a>{//if/}</div>
+                    <div class="clear"></div>
+                </div>
+                
+                <div class="bd">
+                    <div class="lst" id="lst">
+                        <ul>
+							{/if !empty($newBulletin)/}
+							{/foreach $newBulletin as $item1/}
+							<li class="">
+								<b>{/$item1['create_time']/}</b>
+								<p>{/$item1['content']/}</p>
+								<a data-id="{/$item1['id']/}" class="delData NewBulletin" style="cursor: pointer;">×</a>
+								<div class="clear"></div>
+							</li>
+							{//foreach/}
+							{//if/}
+
+                        	{/foreach $item as $key=>$value/}
+	                        <li class="">
+		                        <b>{/$value['time']/}</b>
+		                        <p>{/$value['content']/}</p>
+		                        <a v="{/$value['message_id']/}" href="javascript:void(0)" class="delData">×</a>
+		                        <div class="clear"></div>
+	                        </li>
+	                        {//foreach/}
+                        </ul>
+                    </div>
+                   <div id="page">{/$pager/}</div> 
+                   <div class="noData" style="display:{/if $hasdata/}none{//if/}">暂无提醒</div>
+                </div>
+            </div>
+        </hgroup>
+    </section>
+</div>
+{/include file="footer.html"/}
+{/include file="message_box_content.html"/}
+<section class="floatRT"><a href="{/get_url rule='/about/message' domain='main'/}" target="_blank" class="serviceLink">我有问题要反馈</a><b></b></section>
+<script>
+
+var $lst = $('#lst');
+$(document).ready(function() {
+	$.focusColor('input.text');
+	$.focusColor('textarea.textarea');	
+	$lst.find('li').hover(function(){
+		$(this).addClass('hov');
+	},function(){
+		$(this).removeClass('hov');
+	});
+	$('.NewBulletin').click(function(){
+		var id = $(this).attr('data-id');
+		$.post('{/get_url rule="/index/CloseNewBulletinMsg"/}',{id:id});
+		$.anchorMsg('删除成功！');
+		setTimeout('window.location.reload()',1000);
+
+	});
+});
+
+/**
+ * 消息
+ */
+var message = {
+	init:function() {
+		$('#lst').click(function(e){
+			 var target  = $(e.target);
+			 if(target.is('.delData')) {
+				var id = target.attr('v');
+				 if(id == undefined){
+					 return;
+				 }
+				$.getJSON('{/get_url rule="/message/Delete"/}',{messageid:id,operate:'single'},function(result){
+					if(typeof result.success !='undefined') {
+						$.anchorMsg(result.success);
+						target.closest('li').remove();
+						if($('#lst').find('li').length<=0) {
+							$('.noData').show();
+						}
+						
+					}else {
+						 $.anchorMsg(result.error, { icon: 'fail' }); 
+					}
+			 });
+		}
+	 });
+		$('#btnAllDelete').click(function(){
+		    if($('#lst ul').find('li').length<=0){
+		    	 $.anchorMsg('没有消息可删除', { icon: 'info' }); 
+		    	 return;
+			}
+			$.getJSON('{/get_url rule="/message/Delete"/}',{operate:'all'},function(result){
+				if(typeof result.success !='undefined') {
+					$.anchorMsg(result.success);
+					$('#lst').hide();
+					$('.noData').show();
+					$('#page').remove();
+				}else {
+					 $.anchorMsg(result.error, { icon: 'fail' }); 
+				}
+
+		});
+	});
+ }		
+};
+
+message.init();
+</script>
+{/include file="chat/chat.html"/}
+</body>
+</html>

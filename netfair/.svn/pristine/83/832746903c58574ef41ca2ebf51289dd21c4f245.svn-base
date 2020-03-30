@@ -1,0 +1,559 @@
+
+<link rel="stylesheet" type="text/css" href="{/version file='mobile.swiper.css'/}">
+<script type="text/javascript" language="javascript" src="{/version file='mobile.swiper.js'/}"></script>
+<script type="text/javascript" language="javascript"  src='{/version file="aliyun-webrtc-sdk-1.12.0.js"/}'></script>
+<style>
+	.xieyi .ui_dialog_title{background: #FFFFFF;}
+	.xieyi .videoPopBtn{border-top: none;}
+	.showTi{color: red;margin-bottom: 10px;}
+	.xieyi_title,.xieyi_content{text-align: left;padding: 10px 15px;}
+	.xieyi_content p{margin-bottom: 10px;}
+	.radio_vid{padding: 10px 15px;}
+	.check_come,#check_come{display: none;}
+	.xieyi,#xieyi{display: none;}
+	.szsj{font-size: 20px;color: #333333;margin-right: 10px;font-weight: bold;}
+	.spn_right{font-size: 14px;color: #cccccc;}
+	.setTime{overflow: hidden;
+    padding: 10px 15px;
+    border-bottom: 1px dashed #f3f3f3;}
+	.setTime a {float: right;
+    padding: 0 20px;
+    border-radius: 4px;
+    background: #51a1ff;
+    height: 30px;
+    line-height: 30px;
+    color: #fff;}
+	.setTime_left{float: left;}
+	.videoPopBtn{    width: 100%;
+    overflow: hidden;
+    padding: 18px 0;
+    border-top: 1px solid #f3f3f3;
+    text-align: center;}
+    .subcompNavbg{display:none;}
+	.saveState{    display: inline-block;
+    padding: 7px 41px;
+    border-radius: 4px;
+    background: #51a1ff;
+    color: #fff;}
+	.imgs{width:100%; position: absolute; top: 30px; left: 0;}
+	.swiper-container{width:100%}
+	.swiper-container-free-mode > .swiper-wrapper {
+	    -webkit-transition-timing-function: linear;    /*之前是ease-out*/
+	    -moz-transition-timing-function: linear;
+	    -ms-transition-timing-function: linear;
+	    -o-transition-timing-function: linear;
+	    transition-timing-function: linear;
+	    margin: 0 auto;
+	}
+	.swiper-container {margin: 0 auto;position: relative;overflow: hidden;z-index: 1;  }
+	.imgs .swiper-slide{ margin-right: 30px;}
+	.imgs .swiper-slide span{
+		display: inline-block;
+		height: 26px;
+		background: #99725c;
+		border-radius: 25px;
+		margin-bottom: 26px;
+		text-align: left;
+		padding-right: 12px;
+	}
+	.imgs .swiper-slide span.odd{ margin-left: 50px;}
+	.imgs .swiper-slide span img,.imgs .swiper-slide span em{ display: inline-block; vertical-align: middle;}
+	.imgs .swiper-slide span img{width:26px; height: 26px; border-radius: 50%;}
+	.imgs .swiper-slide span em{font-size: 14px; color: #fff; font-style: inherit;}
+	.scaleMorePop{width:500px; position: absolute; left: 50%; margin-left: -390px;  display: none; z-index: 50;}
+	.msgIcon{ 
+		display: none;
+		width: 0;
+	    height: 0;
+	     border-width: 0 10px 10px;
+		border-style: solid;
+		border-color: transparent transparent #fffbf6;
+		margin-left: 16px;
+		position: absolute;
+	}
+	.scaleMorePop div{background: #fffbf6; padding:10px;margin: 0 auto; font-size: 14px; line-height: 24px; text-align: left; overflow-y: auto; max-height: 300px;}
+	.compNavbg{ margin-bottom: 0!important;}
+</style>
+
+<div class="videoTopJobFair">
+	<div class="imgs">
+		<div class="swiper-container swiper-container-company">
+			<div class="swiper-wrapper">
+			{/foreach $person_action_history as $items/}
+				<div class="swiper-slide">
+					{/foreach $items as $v/}
+					<span>
+						<img src="{/$v['headphoto']/}" onerror="nofind('{/$v['default_photo']/}');"/>
+						<em>{/$v['str_lable']/}</em>
+					</span>
+					{//foreach/}
+				</div>
+			{//foreach/}
+			</div>
+		</div>
+	</div>
+	
+    <div class="videoTopJobFairMain">
+        <img src="{/$s_logo/}" class="video_top_img" {/if !$s_logo/}style="display:none;"{//if/}/>
+        <div class="videonewTopRt">
+			<h2>{/$s_title/}</h2>
+			<p>主办：{/$sponsor/}</p>
+			<p>时间：{/$shuang_xuan_time_str/}</p>
+			<p>规模：已报名{/$company_num/}家企业    {/$job_num/}个岗位     {/$apply_num/}人报名<a href="javascript:;" class="scaleMore" {/if empty($s_content)/}style="display:none;"{//if/}>详情</a></p>
+		</div>
+    </div>
+</div>
+<div class="videoNav">
+    <div class="videoNavMain">
+		<div class="videoNavlf">
+			<a href="{/get_url rule='/videohall/VideoInterviewHall'/}?sid={/$sid/}" {/if $par == '视频面试大厅'/}class="cur"{//if/}>视频面试大厅</a>
+			<a href="{/get_url rule='/videohall/JobWanters'/}?sid={/$sid/}" {/if $par == '求职者大厅'/}class="cur"{//if/}>求职者大厅</a>
+			<a href="{/get_url rule='/videohall/InterviewList'/}?sid={/$sid/}" {/if $par == '面试结果'/}class="cur"{//if/}>面试结果</a>
+			<a href="{/get_url rule='/videohall/Jobs'/}?sid={/$sid/}" {/if $par == '招聘职位'/}class="cur"{//if/}>招聘职位</a>
+		</div>
+		<div class="videoNavrt">
+			<p>
+			</p>
+			<span>名求职者已入场</span>
+		</div>
+    </div>
+</div>
+
+<div style="position: relative;width: 100%;">	
+	<img class="bg-cloud1" src="{/$siteurl.style/}/img/company/video/bg-cloud_01.png" alt="背景图">
+	<img class="bg-cloud2" src="{/$siteurl.style/}/img/company/video/bg-cloud_02.png" alt="背景图">
+	<img class="bg-cloud3" src="{/$siteurl.style/}/img/company/video/bg-cloud_03.png" alt="背景图">
+</div>
+<!-- 详情浮层 -->
+<span class="msgIcon"></span>
+<div class="scaleMorePop">
+	<div>{/$s_content/}</div>
+</div>
+<div id="public_dialog_kmAPP" style="display: none;">
+	<ul class="public_dialog_kmAPP_ul">
+		<li>
+			<div class="lyldialog_app-box clearfix">
+				<img src="{/$siteurl.style/}/img/blue/company/android1.png" />
+				<p style="font-size: 14px;color: #333"></p><p class="wxTip">微信扫码下载APP</p>
+				<span style="font-size: 12px;color: #666"></span>
+			</div>
+		</li>
+		<li>
+			<img src="{/$siteurl.style/}/img/blue/netfair/km_rq_help_right.jpg" >
+		</li>
+		<li>
+			<img src="{/$siteurl.style/}/img/blue/netfair/km_rq_help.jpg" >
+		</li>
+	</ul>
+</div>
+<!-- 入场检测弹出层 -->
+
+<div id="check_come">
+	<div>
+	 <form action="" method="get">
+	 <div class="setTime">
+		 <div class="setTime_left">
+			 <span class="szsj">设置面试时间</span><span class="spn_right">求职者仅能在该时间内申请视频面试</span>
+		 </div>
+		 <a href="javascript:void(0);" id="setButton" class="setInterviewTime">
+		 	设置
+		 </a>
+	 </div>
+	
+	 <div class="check_content" style="display: none;">
+		  
+		 <!-- <div class="content">选择面试方式</div> -->
+		 <div class="radio_vid">
+			 
+			 <div class="content" style="margin-bottom: 10px; font-weight: bold;">选择面试方式</div>
+			 <div style="text-align: left;"><label><input name="chat_type_radio" type="radio" value="1" />电脑面试 </label><span style="color: red; margin-left: 10px;">需准备摄像头、麦克风、耳机设备</span></div>
+			 <div style="text-align: left;"><label><input name="chat_type_radio" type="radio" value="2" />手机面试 </label><span style="color: red; margin-left: 10px;">需下载手机app</span></div>			 
+			 
+		 </div>
+		 <!-- <div class="radio_vid"></div> -->
+	 </div>
+		<div class="videoPopBtn">
+			<a href="javascript:void(0);" id="saveState">
+				保存
+			</a>
+		</div>
+		</form>
+		 </div>
+</div>
+
+<div id="xieyi" style="display: none;">
+	<div>
+	<div class="xieyi_title">
+		为保障活动顺利开展，面试当天及时处理以下情况：
+	</div>
+	<div class="xieyi_content">
+		<p>1.面试当天，如有求职者申请，请及时处理</p>
+		<p>2.初面通过的求职者，请及时邀约复面，并反馈结果</p>
+		<div class="showTi">如累计5个求职者超过30分钟未处理，将取消本场及后续场次参会资格</div>
+		<div><label><input name="is_agree_deal" type="checkbox" value="1" />我已阅读并同意该协议</label></div>
+	</div>
+	<div class="videoPopBtn">
+		<a href="javascript:void(0)" id="comeIn">
+			进入招聘会
+		</a>
+	</div>
+	</div>
+</div>
+
+<div class="deviceCheckDialog" style="display:none;">
+	<div class="deviceCheckDialog-box">
+		<p class="video-device">
+			<span>请插入: </span>
+			<span id="j_audioDevice_text" class="devicesuccess j_audioDevice_text">音频设备<i id="j_audioDevice" class="deviceIcon successIcon j_audioDevice"></i></span>
+			<span id="j_videoDevice_text" class="devicesuccess j_videoDevice_text">视频设备<i id="j_videoDevice" class="deviceIcon successIcon j_videoDevice"></i></span>
+			<span id="j_browser_text" class="devicesuccess j_browser_text">谷歌浏览器<i id="j_browser" class="deviceIcon successIcon j_browser"></i></span>
+			<span class="againCheckBtn">重新检测</span>
+		</p>
+		<div class="RQ-box">
+			<img id='rtcScanCodeImg' src="{/get_url rule='/video/RtcScanCode' domain='company'/}?job_id={/$base_job_id/}&resume_id={/$base_resume_id/}&net_apply_id={/$apply_id/}" >
+			<div class="saomaTip">汇博企业APP 扫一扫</div>
+			<div class="noHuiboAPP">没有汇博APP？<a href="javascript:void(0);" id="downloadErWeiMaBtn">点击下载</a></div>
+		</div>
+	</div>
+</div>
+<div class="downloadErWeiMaDialog" style="display:none;">
+	<div class="downloadErWeiMaDialog-box">
+		<img src="{/$siteurl.style/}/img/company/company_code.jpg" />
+		<p>微信扫一扫</p>
+	</div>
+</div>
+{/if $cur/}
+<div class="videoIhalMain secondinterview">
+	<div class="guide-tabbar">
+		<div class="guide-tabbar-li {/if $cur == '初面'/}guide-tabbar-liActive{//if/}" id="viedoOne"><a href="{/get_url rule='/videohall/VideoInterviewHall'/}?sid={/$sid/}">初面({/$interview_one_num/}人待面试)</a></div>
+		<div class="guide-icon">></div>
+		<div class="guide-tabbar-li {/if $cur == '复面'/}guide-tabbar-liActive{//if/}"><a href="{/get_url rule='/videohall/VideoInterviewBySecond'/}?sid={/$sid/}">复面({/$interview_second_num/}人)</a></div>
+		<div class="guide-icon">></div>
+		<div class="guide-tabbar-li {/if $cur == '通过'/}guide-tabbar-liActive{//if/}"><a href="{/get_url rule='/videohall/VideoInterviewBySecond'/}?sid={/$sid/}&type=2">{/$interview_second_pass_num/}人面试通过</a></div>
+	</div>
+{//if/}
+<script type="text/javascript">
+			var aliWebrtc = new AliRtcEngine();
+	var downloadErWeiMaDialog=null,deviceCheckDialog=null;
+	hbjs.use('@confirmBox, @jobDialog', function (m) {
+	    var ConfirmBox = m['widge.overlay.confirmBox'],
+	        Dialog = m['widge.overlay.hbDialog'],
+	        cookie = m['tools.cookie'],
+	        $ = m['jquery'].extend(m['cqjob.jobDialog']);
+			var close = '×';
+			var width = 600;
+			var zIndex = 9999;
+		var public_dialog_kmAPP = new Dialog({
+			idName: 'public_dialog_kmAPP',
+			title: 'APP下载',
+			width: 700,
+			close: 'x',
+			zIndex: 9999,
+			content:$('#public_dialog_kmAPP').html(),
+			isAjax: true
+		});
+		
+		var checkCome = new Dialog({
+			idName: 'check_come',
+			title: '活动设置',
+			width: 700,
+			zIndex: 9999,
+			content:$('#check_come').html(),
+			isAjax: true
+		});
+		
+		var checkXieyi = new Dialog({
+			idName: 'xieyi',
+			title: '活动协议',
+			width: 700,
+			zIndex: 9999,
+			content:$('#xieyi').html(),
+			isAjax: true
+		});
+		downloadErWeiMaDialog = new Dialog({
+		    close: close,
+		    idName: 'downloadErWeiMaDialog',
+		    title: '汇博APP下载',
+		    width: 380,
+		    zIndex: zIndex,
+			isAjax: true,
+		    content:$(".downloadErWeiMaDialog").html(),
+		});
+		deviceCheckDialog = new Dialog({
+		    close: close,
+		    idName: 'deviceCheckDialog',
+		    title: '无法检测到设备',
+		    width: width,
+		    zIndex: zIndex,
+			isAjax: true,
+		    content:$(".deviceCheckDialog").html()
+		});
+		deviceCheckDialog.query('#downloadErWeiMaBtn').on('click', function(){
+			deviceCheckDialog.hide();
+		    downloadErWeiMaDialog.show();
+		});
+		deviceCheckDialog.query('.againCheckBtn').on('click', function(){
+		    checkStyle(true);
+		});
+		var checkBlowsDialog = new Dialog({
+			idName: 'checkBlowsDialog',
+			title: '提示',
+			width: width,
+			zIndex: zIndex,
+			content:'<div class="checkBlowsDialog-box"><div class="checkBlows-con">您的浏览器型号或版本过低，部分功能可能无法使用，建议您更换谷歌浏览器</div><a href="{/$siteurl.style/}/down/chrome.exe" class="dowmloadChromBtn">下载谷歌浏览器</a></div>'
+		});
+		
+		if(isIE()){
+			checkBlowsDialog.show();
+			return false;
+		}
+		// $('#showPop').on('click', function(){
+		// 	checkCome.show();
+		// })
+		var check_in_type = Number('{/$check_in_type/}');
+		// var check_in_type = 1
+		console.log('弹出类型',check_in_type)
+		// if(check_in_type==1){
+		// 	checkCome.show();
+		// }else if(check_in_type==2){
+		// 	checkXieyi.show();
+		// }
+		// {/if !check_in_type== 1/},
+		// 	checkXieyi.show();
+		// {/else if check_in_type== 2/},
+		// 	checkCome.show();
+		// {//if/}
+		// $(document).ready(function(){
+		// 	checkXieyi.show();
+		// })
+		// $(document).ready(function(){
+		// 	checkCome.show();
+		// })
+		$('#showkm_RQbtn').on('click', function(){
+			public_dialog_kmAPP.show();
+		})
+        
+        checkCome.query("#saveState").on("click", function(){
+            var chat_type = $("input[name=chat_type_radio]:checked").val();
+             $.post("{/get_url rule='/videohall/SaveAction'/}", {sid: '{/$sid/}', chat_type: chat_type}, function (e) {
+                 if(e.status){
+                     checkCome.hide();
+                     checkXieyi.show();
+                     return;
+                 }
+
+                 ConfirmBox.timeBomb(e.msg,{
+                    name: 'fail',
+                    width:'auto',
+                    timeout : 2000
+                });
+                return;
+             }, 'json');
+        });
+
+        checkXieyi.query("#comeIn").on("click", function(){
+            var is_agree_deal = $("input[name=is_agree_deal]:checked").val();
+             $.post("{/get_url rule='/videohall/SaveAction'/}", {sid: '{/$sid/}', is_agree_deal: is_agree_deal}, function (e) {
+                 if(e.status){
+                     checkXieyi.hide();
+                     return;
+                 }
+                 
+                 ConfirmBox.timeBomb(e.msg,{
+                    name: 'fail',
+                    width:'auto',
+                    timeout : 2000
+                });
+                return;
+             },  'json');
+        });
+	});
+	
+	var mySwiperCompany = new Swiper('.swiper-container-company', {
+	    autoplay : true,
+	    autoplayDisableOnInteraction : false,
+	    speed:5000,
+	    loop : true,
+	    freeMode:true,
+	    slidesPerView : 5,
+	    slidesPerGroup : 1
+	});
+	
+	var studentStr = '{/$entry_num/}';
+	var studentHtml ='';
+//	 var studentTime = setInterval(student,10000);
+    student();
+	function student(){
+		studentHtml = '';
+		for(var i=0;i<studentStr.length;i++){
+			studentHtml += '<em>'+studentStr[i]+'</em>';
+		}
+		$('.videoNavrt p').html(studentHtml);
+	}
+	
+	
+	$('.imgs .swiper-slide span:odd').addClass('odd');
+	$('.videoSchoolIntro a').click(function(){
+		$(this).toggleClass('cur');
+		if($(this).hasClass('cur')){
+			$('.videoSchoolIntro span').css('height','auto');
+			$('.videoSchoolIntro a').text('收起更多');
+		}else{
+			$('.videoSchoolIntro span').css('height','20px');
+			$('.videoSchoolIntro a').text('查看更多');
+		}
+	});
+    $('.scaleMore').on('click', function(){
+        var thisTop = $(this).offset().top;
+        var thisLeft = $(this).offset().left;
+		$('.msgIcon').slideToggle().css({
+			top:thisTop+22,
+			left:thisLeft
+		});
+		$('.scaleMorePop').slideToggle().css('top',thisTop+32);
+    });
+    
+    function nofind(img){
+        var imgElement=event.srcElement;
+        $(imgElement).attr('src',img);
+        imgElement.onerror=null;// 控制不要一直跳动
+    }
+	function isIE() {
+		if(!!window.ActiveXObject || "ActiveXObject" in window){
+		  return true;
+		}else{
+		  return false;
+	　　 }
+	}
+	// var has_checked = false;
+		function checkStyle(isShowDialog1){
+			var isShowDialog = isShowDialog1 ? isShowDialog1 : false;
+			if(isIE()){
+				$('.j_videoDevice').addClass('failIcon').removeClass('successIcon');
+				$('.j_videoDevice_text').addClass('devicefail').removeClass('devicesuccess');
+				$('.j_audioDevice').addClass('failIcon').removeClass('successIcon');
+				$('.j_audioDevice_text').addClass('devicefail').removeClass('devicesuccess');
+				$('.j_browser').addClass('failIcon').removeClass('successIcon');
+				$('.j_browser_text').addClass('devicefail').removeClass('devicesuccess');
+				if(isShowDialog){
+					return false;
+				}
+			}
+            
+//            aliWebrtc.getDevices().then((re)=>{
+//            }).catch((error)=>{ 
+//              console.log(error.message)
+//            });
+			// if (!has_checked) {
+			    aliWebrtc.isSupport({isDebug: true}).then(function(re) {
+					if(!re.isSupported && isShowDialog){
+						deviceCheckDialog.show();
+						return false;	
+					}
+			        $('.j_videoDevice').removeClass('failIcon').addClass('successIcon');
+			        $('.j_videoDevice_text').removeClass('devicefail').addClass('devicesuccess');
+			        $('.j_audioDevice').removeClass('failIcon').addClass('successIcon');
+			        $('.j_audioDevice_text').removeClass('devicefail').addClass('devicesuccess');
+			        $('.j_browser').removeClass('failIcon').addClass('successIcon');
+			        $('.j_browser_text').removeClass('devicefail').addClass('devicesuccess');
+			        // has_checked = true;
+					if(isShowDialog){
+						return true;
+					}
+			    }).catch(function(error){
+                    console.log(error);
+			        //摄像头
+			        if (!error.videoDevice) {
+			            $('.j_videoDevice').addClass('failIcon').removeClass('successIcon');
+			            $('.j_videoDevice_text').addClass('devicefail').removeClass('devicesuccess');
+			        } else {
+			            $('.j_videoDevice').removeClass('failIcon').addClass('successIcon');
+			            $('.j_videoDevice_text').removeClass('devicefail').addClass('devicesuccess');
+			        }
+			        //音频设备
+			        if (!error.audioDevice) {
+			            $('.j_audioDevice').addClass('failIcon').removeClass('successIcon');
+			            $('.j_audioDevice_text').addClass('devicefail').removeClass('devicesuccess');
+			        } else {
+			            $('.j_audioDevice').removeClass('failIcon').addClass('successIcon');
+			            $('.j_audioDevice_text').removeClass('devicefail').addClass('devicesuccess');
+			        }
+			
+			        var browserVersion = error.browser_version;
+			        var versionNo = browserVersion.split(".");
+			        //浏览器
+			        if (error.browser == 'Chrome' && versionNo[0]>60) {
+			            $('.j_browser').removeClass('failIcon').addClass('successIcon');
+			            $('.j_browser_text').removeClass('devicefail').addClass('devicesuccess');
+			        } else {
+			            $('.j_browser').addClass('failIcon').removeClass('successIcon');
+			            $('.j_browser_text').addClass('devicefail').removeClass('devicesuccess');
+			        }
+					if(isShowDialog){
+						deviceCheckDialog.show();
+						return false;	
+					}
+					
+			    });
+			    // has_checked = true;
+			// }
+		}
+		       function checkVideo(msg,id){
+				   return
+		           if(!msg.isSupported){
+		               if(!msg.audioDevice){
+		                   $('.audioDevice').show();
+		               }else{
+		                   $('.audioDevice').hide();
+		               }
+		
+		               if(!msg.videoDevice){
+		                   $('.videoDevice').show();
+		               }else{
+		                   $('.videoDevice').hide();
+		               }
+		
+		               if(msg.browser.toLowerCase() != 'chrome'){
+		                   $('.browserDevice').show();
+		               }else{
+		                   $('.browserDevice').hide();
+		               }
+		
+		               $("#videoCheckTopDiv").show();
+		           }else{
+		               $("#videoCheckTopDiv").hide();
+		           }
+		
+		           if(id){
+		               if(!msg.isSupported){
+		                   checkVideoDialog.show();
+		                   return;
+		               }
+		
+		               $.ajax({
+		                   type: 'post',
+		                   url: '{/get_url rule="/videohall/StartInterview"/}',
+		                   data: {id: id},
+		                   dataType: 'json',
+		                   success: function (res) {
+		                       if(res.isNeedLogin){
+		                           window.location.reload();
+		                           return;
+		                       }
+		                       if(!res.status){
+		                           ConfirmBox.timeBomb(res.msg,{
+		                               name: 'fail',
+		                               width:'auto',
+		                               timeout : 2000
+		                           });
+									setTimeout("window.location.reload()",2000);
+		                           return;
+		                       }
+		//                        window.open("https:{/base_lib_Constant::COMPANY_URL_NO_HTTP/}/chat/?resume_id=" + res.data.resume_id + "&job_id=" + res.data.job_id + "&net_apply_id=" + res.data.id + "&sid=" + res.data.sid,"_blank");
+		//                        setTimeout(function(){ window.location.reload(); }, 3000);
+		                       window.location.href = "https:{/base_lib_Constant::COMPANY_URL_NO_HTTP/}/chat/?resume_id=" + res.data.resume_id + "&job_id=" + res.data.job_id + "&net_apply_id=" + res.data.id + "&sid=" + res.data.sid;
+		                   }
+		               });
+		           }
+		       }
+</script>

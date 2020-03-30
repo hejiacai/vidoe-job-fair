@@ -1,0 +1,544 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="Keywords" content="" />
+    <meta name="Description" content="" />
+    <title>兼职首页</title>
+    <!–[if lt IE9]>
+    <script src="//assets.huibo.com/js/html5.js?v=20150226"></script>
+    <![endif]–>
+    <link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='comback.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='firmcss.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='resumePartTime.css'/}" />
+    <script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.min.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='common.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='dialog.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='version.js'/}"></script>
+    <script type="text/javascript">
+      window.CONFIG = {
+        HOST: '//assets.huibo.com',
+        COMBOPATH: '/js/v2/'
+      }
+    </script>
+    <script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='global.js'/}"></script>
+<style>
+    .warning_dialog dl dd{margin-left:0px;}
+    .warning_dialog dl dd h4{ font-size: 18px; color:#00bab1;}
+    .warning_dialog dl dd p{ font-size: 14px; color: #666; line-height: 24px; padding-bottom:10px;}
+    /*微信关注公众号*/
+    .weixin-follow{padding-top:20px; text-align: center;margin: 0 auto;}
+    .weixin-follow-img{margin-bottom: 10px; border: 1px solid #f1f1f1;display: inline-block;}
+    .weixin-follow-img img{width: 170px;height: auto;}
+    .weixin-follow p{font-size: 14px;color: #999;text-align: center;}
+    p.weixin-follow-text-left{text-align: left;}
+    .weixin-follow-list{display: inline-block;margin: 24px auto; background: #f7f7f7;width:280px;padding:5px 10px 17px 10px;}
+    .weixin-follow-list li{float: left;width: 50%;margin-top: 12px;text-align: center;}
+    .weixin-follow-list li i{display: inline-block;width:15px;height: 15px;background: url("{/$siteurl.style/}/img/part/tpartyes.png") no-repeat;margin-right:8px;vertical-align: -2px;margin-right: 5px;}
+    .weixin-follow-jump{color: #999;font-size: 14px;text-align: right;margin-top: 60px;display: block;}
+    .weixin-follow-jump:hover{color: #3d84b8;}
+</style>
+</head>
+<body class="tpartDgray" style="background: #e9e9e9!important;">
+{/include file="new_header.html" par="兼职招聘" cur="首页"/}
+<!--new-->
+<div class="tpartcontMal clearfix">
+    <div class="tpartcontLf clearfix">
+        {/if $letter_info['code'] != 200 || !empty($fail_jobs)/}
+        <ul class="top-tit">
+            {/if $letter_info['code'] != 200/}
+            <li class="clearfix"> <i></i> {/$letter_info['msg']/}
+                {/if in_array($letter_info['code'],array(501,502,503,510,511))/}
+                <a href="{/get_url rule='/licencevalidate/index/'/}" target="_blank">上传资料></a>
+                {//if/}
+                {/if in_array($letter_info['code'],array(507,508,509))/}
+                <a href="{/get_url rule='/licencevalidate/index/'/}" target="_blank">重新认证></a>
+                {//if/}
+            </li>
+            {//if/}
+            {/if !empty($fail_jobs)/}
+            {/foreach $fail_jobs as $k=>$v/}
+            <li class="clearfix"> <i></i>您发布的职位｛{/$v['station']/}｝未通过审核，拒绝理由：{/$v['fail_reason']/}<a href="{/get_url rule='/partjob/jobV2'/}/job_id-{/$v['job_id']/}">立即修改></a></li>
+            {//foreach/}
+            {//if/}
+        </ul>
+        {//if/}
+        <ul class="top-con clearfix">
+            <li>
+                <h4>待处理</h4>
+                <a href="{/get_url rule='/partresume/index'/}status-1" target="_blank">{/$all_not_deal/}个</a>
+            </li>
+            <li>
+                <h4>24h将过期待处理</h4>
+                <a href="{/get_url rule='/partresume/index'/}status-1-is_end_limit-1" target="_blank">{/$end_apply_num/}个</a>
+            </li>
+            <li class="mark-par">
+                <h4>报名处理率 <i class="mark"></i></h4>
+                <a style="text-decoration: none;">{/$replay_rate/}%</a>
+                <div class="mark-con">
+                    <p>报名处理率=处理用户投递/用户总投递；</p>
+                    <p>回复率提升10%收到的简历数将提升20%</p>
+                </div>
+            </li>
+            <li class="mark-par" style="margin-right: 0px;">
+                <h4>信用等级 <i class="mark"  style="right: 30px;"></i>  </h4>
+                <a style="text-decoration: none;">{/$score_level['level']/}级/{/$partCompanyScore/}分</a>
+                <div class="mark-con mark-con-table" style="background: #fff;">
+                    <h4>对应等级积分</h4>
+                    <p class="haopinNum">
+                        <label>好评<i class="grenn1">+3</i>分</label>
+                        <label  style="margin:0 26px;">中评<i class="orange1">+0</i>分</label>
+                        <label>差评<i class="red1">-10</i>分</label>
+                    </p>
+                    <table class="haopin_list" style="width:100%;">
+                        <tbody>
+                        <tr>
+                            <th class="grenn1">积分</th>
+                            <th class="orange1">等级</th>
+                        </tr>
+                        <tr>
+                            <td class="grenn1">0-99分</td>
+                            <td class="orange1">0级</td>
+                        </tr>
+                        <tr>
+                            <td class="grenn1">100-119分</td>
+                            <td class="orange1">1级</td>
+                        </tr>
+                        <tr>
+                            <td class="grenn1">120-149分</td>
+                            <td class="orange1">2级</td>
+                        </tr>
+                        <tr>
+                            <td class="grenn1">150-179分</td>
+                            <td class="orange1">3级</td>
+                        </tr>
+                        <tr>
+                            <td class="grenn1">180-229分</td>
+                            <td class="orange1">4级</td>
+                        </tr>
+                        <tr>
+                            <td class="grenn1">230-279分</td>
+                            <td class="orange1">5级</td>
+                        </tr>
+                        <tr>
+                            <td class="grenn1">280-349分</td>
+                            <td class="orange1">6级</td>
+                        </tr>
+                        <tr>
+                            <td class="grenn1">350-429分</td>
+                            <td class="orange1">7级</td>
+                        </tr>
+                        <tr>
+                            <td class="grenn1">430-519分</td>
+                            <td class="orange1">8级</td>
+                        </tr>
+                        <tr>
+                            <td class="grenn1">520-619分</td>
+                            <td class="orange1">9级</td>
+                        </tr>
+                        <tr>
+                            <td class="grenn1">620-729分</td>
+                            <td class="orange1">10级</td>
+                        </tr>
+                        <tr>
+                            <td class="grenn1">730-849分</td>
+                            <td class="orange1">11级</td>
+                        </tr>
+                        <tr>
+                            <td class="grenn1">850-999分</td>
+                            <td class="orange1">12级</td>
+                        </tr>
+                        <tr>
+                            <td class="grenn1">1000-1199分</td>
+                            <td class="orange1">13级</td>
+                        </tr>
+                        <tr>
+                            <td class="grenn1">1200-1499分</td>
+                            <td class="orange1">14级</td>
+                        </tr>
+                        <tr>
+                            <td class="grenn1">1500-1999分</td>
+                            <td class="orange1">15级</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </li>
+        </ul>
+        <div class="tpartList-tit">
+            <a href="{/get_url rule='/part/index'/}c-1">招聘中（{/$count_on_job/}）</a>
+            <a href="{/get_url rule='/part/index'/}c-2">审核中（{/$count_check_job/}）</a>
+            <a href="{/get_url rule='/part/index'/}c-3">已拒绝（{/$count_notpass_job/}）</a>
+            <a href="{/get_url rule='/part/index'/}c-4" class="hover">已结束（{/$count_end_job/}）</a>
+        </div>
+        <div class="tpartList-list">
+            {/if !empty($job)/}
+            {/foreach $job as $k=>$v/}
+            <div class="tpartList-item tpartList-examine">
+                <div class="tpartList-item-msg clearfix">
+                    <div class="msg-head" style="max-width: 450px;">
+                        <h4><a href="{/get_url rule='/partjob/jobV2'/}job_id-{/$v['job_id']/}" target="_blank">{/$v['station']/}</a> <em class="extra-tit tit-gray">{/$v['status_str']/}</em>  </h4>
+                        <p>展现城市：{/$v['area_name']/}  &nbsp;&nbsp;过期时间：{/date("Y-m-d",strtotime($v['end_time']))/}</p>
+                    </div>
+                    <div class="msg-list-all">
+                        <div class="msg-list msg-list-gray" style="margin-top: 10px;">
+                            <a href="{/get_url rule='/partjob/jobV2'/}/job_id-{/$v['job_id']/}" class="again"><i></i>重新发布</a>
+                            <a href="javascript:del('{/$v['job_id']/}');" class="delete"><i></i>删除</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {//foreach/}
+            {//if/}
+        </div>
+        {/if empty($job)/}
+        <div id="no_data_show" class="no_data" style="background-color: rgb(255, 255, 255);">
+            <img src="{/$siteurl.style/}/img/common/nodata.png">
+            <p>暂无职位</p>
+        </div>
+        {//if/}
+    </div>
+    <div class="tpartcontRt" >
+        <div class="tpartRefreshBg">
+        	<!--描述：4月1日修改-->
+        	<div class="mark-par">
+	            {/if $is_agency==0 || is_null($is_agency)/}
+	            <a href="javascript:;" class="{/if !$show_app_bing_weixin/}setCompanyAgency{//if/} tpartPeBtn {/if $show_app_bing_weixin/}showWx{//if/}"><i></i>发布职位</a>
+	            {/else/}
+	            <a href="{/if $show_app_bing_weixin/}javascript:;{/else/}javascript:pubLimitDo(1,0);{//if/}" class="tpartPeBtn {/if $show_app_bing_weixin/}showWx{//if/}" id="setCompanyAgency"><i></i>发布职位</a>
+	            {//if/}
+            	<div class="bars">
+	            	<i class="mark"></i>
+	            	<div class="spanbox">
+	            		<span>免费:{/$has_pub_free_job_num/}/{/$can_pub_free_job_num/}</span>
+		            	<span id="pay_job_check">付费:<span>{/$has_pub_pay_job_num/}/{/$can_pub_pay_job_num/}</span></span>
+	            	</div>
+		            <div class="mark-con" style="top:28px;right: 50px;left: auto;width: 250px;">
+	                   	可同时免费发布10个职位，付费条数自购买日起1年内有效。
+	               	</div>
+		        </div>
+            </div>
+            <!--描述：4月1日修改完-->
+        </div>
+        <ul class="tpartProcess">
+           <li class="mark-par">兼职币：<strong>{/if empty($last_amount)/}0{/else/}{/$last_amount/}{//if/}个</strong>
+               <i class="mark" ></i>
+               <a href="javascript:void(0);" class="ordinary-buy buyPoint">购买</a>
+               <div class="mark-con" style="top:42px;right: 0;left: auto;width: 295px;">
+                   <p>兼职币用于查看求职者投递简历的联系方式</p>
+                   <p>1个兼职币=1份简历联系方式</p>
+                   <p>*每月系统免费赠送10个兼职币</p>
+               </div>
+           </li>
+           <li>账户余额：<strong>{/sprintf("%.2f", $companyresources['account_overage'])/}元</strong><a href="{/get_url rule='/pay/index'/}" target="_blank" class="ordinary-buy">充值</a> </li>
+        </ul>
+        <div class="tpartCash">
+            <div class="tpartService" >
+                <img src="{/$siteurl.style/}/img/part/tpartbanner03.png" width="60" height="73" />
+                <span>客服热线：{/$default_mobile/}</span>
+                <p><em>QQ:{/$default_qq/}</em>
+                    <a target=blank href=//wpa.qq.com/msgrd?V=3&uin={/$default_qq/}&Site=QQ客服&Menu=yes>
+                        <img border="0" SRC="{/$siteurl.style/}/img/part/tpartbanner04.png" alt="点击这里给我发消息"></a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{/include file="footer.html"/}
+
+<script type="text/javascript">
+  try {
+    hbjs.use(factory);
+  } catch(e) {
+    factory($);
+  }
+  function factory($){
+    $(window).scroll(function(){
+      if ($(document).scrollTop() > 120){
+        $('#sus').find('a.backTop').css({'display':'inline-block'});
+      }else{
+        $('#sus').find('a.backTop').css({'display':'none'});
+      }
+    });
+    $('#sus').find('a.backTop').click(function(){
+      $('html,body').animate({ scrollTop: 0 });
+    });
+  }
+</script>
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    //hm.src = "//hm.baidu.com/hm.js?fb51309e47424acd6e31c0bd2a65a5a1";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+<script type="text/javascript" language="javascript" src="//assets.huibo.com/js/track.js?v=20180620"></script>
+
+<section class="floatRT">
+    <a href="//www.huibo.com/about/message" target="_blank" class="serviceLink">我有问题要反馈</a><b></b>
+</section>
+
+
+</body>
+<script>
+    $('.mark').mouseenter(function () {
+      $(this).parents('.mark-par').addClass('hover');
+    }).mouseleave(function () {
+      $(this).parents('.mark-par').removeClass('hover');
+    });
+    var buy_job_num,pay_dialog,pay_job_check;
+    function del(job_id){
+        $.confirm('确认删除？',"提示",function () {
+            $.post("{/get_url rule='/part/DeleteJob/'/}",{job_id:job_id},function(data){
+                if(!data.status){
+                    $.anchor(data.msg,{icon:'fail'});
+                    return;
+                }
+                $.anchor(data.msg,{icon:'success'});
+                window.location.reload();
+            },'json');
+        });
+
+    }
+    hbjs.use('@select, @confirmBox, @areaMulitiple, @calling, @jobsort, @jobTooltip, @actions, @hbCommon, @dialog', function(m) {
+        var $ = m['jquery'],
+                select = m['widge.select'],
+                ConfirmBox = m['widge.overlay.confirmBox'],
+                cookie = m['tools.cookie'],
+                Dialog = m['widge.overlay.hbDialog'];
+
+        /* 弹窗 */
+        var setCompanyAgency = new Dialog({
+            idName : 'setCompanyAgencyDialog',
+            title : '设置招聘类型',
+            close : 'x',
+            isAjax : true,
+            width :300
+        });
+
+        pay_dialog = new Dialog({
+            idName : 'buy_part_money',
+            title : '购买兼职币',
+            close : 'x',
+            isAjax : true,
+            content:"{/get_url rule='/partorder/buyresumepoint'/}back_url-{/base_lib_Constant::COMPANY_URL_NO_HTTP/}/part/index",
+            width :530
+        });
+        pay_job_check = new Dialog({
+            idName : 'pay_job_dialog',
+            title : '付费发布职位数',
+            close : 'x',
+            isAjax : true,
+            content:"{/get_url rule='/part/payjoblist'/}back_url-{/base_lib_Constant::COMPANY_URL_NO_HTTP/}/part/index",
+            width :530,
+            zIndex:9999
+        });
+        buy_job_num = new Dialog({
+            idName : 'sendSmsSSSsss',
+            title : '购买发布条数',
+            close : 'x',
+            isAjax : true,
+            content:"{/get_url rule='/partorder/BuyJobNum'/}back_url-{/base_lib_Constant::COMPANY_URL_NO_HTTP/}/part/index",
+            width :580,
+            zIndex:9999
+        });
+        //  关注汇博兼职公众号
+        var weixinDialog = new Dialog({
+            idName : 'weixinDialog',
+            title : '关注微信公众号',
+            isAjax : true,
+            width :550
+        });
+        $('.buyPoint').on('click',function () {
+          pay_dialog.show();
+        });
+
+
+        $('#pay_job_check').click(function () {
+            pay_job_check.show();
+        })
+
+
+        var indexObj = {
+            init:function(){
+                if($(".tpartrateList dl").length==0){
+                    $("#no_data_show").show();
+                }
+
+                $(".setCompanyAgency").click(function(){
+                    var tourl = "{/get_url rule='/part/setCompanyAgency/callBackPage-index'/}";
+                    setCompanyAgency.setContent({
+                        isOverflow: true,
+                        content: tourl
+                    }).show().on('loadComplete', function(){
+                        //this.oneCloseEvent('#subButton');
+                        /* 弹窗 */
+                        var self = this;
+                        this.query("#subButton").on('click', function(){
+                            //提交
+                            var agency = $("input[name='agency']:checked").val();
+                            var params = {agency:agency};
+                            $.post('{/get_url rule="/part/setCompanyAgencyDo/"/}', params, function(data) {
+                                if(data.error){
+                                    ConfirmBox.timeBomb(data.error, {name : 'fail', width: 400});
+                                    self.hide();
+                                    return;
+                                }
+                                ConfirmBox.timeBomb(data.success, {name : 'success', width: 200});
+                                // indexObj.SelectCallBack();
+                                self.hide();
+                                //window.location.href = "{/$siteurl.company|replace:'http:':''/}/partjob/jobV2/";
+                                pubLimit(1,0);
+                            },"json");
+                        }).after('', function(){
+                            this.query('#subButton').off();
+
+                        })
+                    });
+                });
+//关注微信公众号弹窗
+                $('.showWx').click(function () {
+                    var html = '<div class="weixin-follow">' +
+                            '    <div class="weixin-follow-img">' +
+                            '        <img id="twd_url" src="https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket={/$ticket/}" alt="">' +
+                            '    </div>' +
+                            '    <p>微信扫码关注汇博兼职公众号</p>' +
+                            '    <ul class="weixin-follow-list clearfix">' +
+                            '        <li><i></i>快捷发布职位</li>' +
+                            '        <li><i></i>便捷职位管理</li>' +
+                            '        <li><i></i>投递微信处理</li>' +
+                            '        <li><i></i>免费群发短信</li>' +
+                            '    </ul>' +
+                            '    <p class="weixin-follow-text-left">注：汇博兼职服务号专用于兼职投递信息处理，全职招聘请关注汇博招聘服务号。</p>' +
+                            '    <a href="javascript:;" class="weixin-follow-jump">跳过</a>' +
+                            '</div>';
+
+                    //could show
+                    $.ajax({
+                        url: "{/$siteurl.company/}/part/IsBindWx",
+                        type: "post",
+                        data: {},
+                        dataType: 'json',
+                        success: function (res) {
+                            if (res.status) {
+                                if (res.is_show) {
+                                    if(res.ticket){$('#twd_url').attr('src',"https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket="+res.ticket)}
+                                    weixinDialog.show();
+                                    var checkStatus = setInterval(function () {
+                                        $.ajax({
+                                            url: "{/$mjianzhi_url/}/weixin/GetUserStatus",
+                                            type: "post",
+                                            data: {company_id:"{/$company_id/}"},
+                                            dataType: 'jsonp',
+                                            jsonp: "jsonpCallback",
+                                            success: function (res) {
+                                                if(res.status && res.can_go){
+
+                                                    $('.weixin-follow-jump').click();
+                                                    clearInterval(checkStatus);
+                                                }
+                                            }
+
+                                        })
+                                    },2500);
+                                }else{
+                                    $('.weixin-follow-jump').click();
+                                }
+                            } else {
+                                weixinDialog.show();
+                                setInterval(function () {
+                                    $.ajax({
+                                        url: "{/$mjianzhi_url/}/weixin/GetUserStatus",
+                                        type: "post",
+                                        data: {company_id:"{/$company_id/}"},
+                                        dataType: 'jsonp',
+                                        jsonp: "jsonpCallback",
+                                        success: function (res) {
+                                            if(res.status && res.can_go){
+                                                $('.weixin-follow-jump').click();
+                                            }
+                                        }
+
+                                    })
+                                },2500);
+                            }
+                        }
+                    })
+
+                    weixinDialog.setContent(html);
+                    weixinDialog.query('.weixin-follow-jump').on('click',function(){
+                        {/if $is_agency==0 || is_null($is_agency)/}
+                        weixinDialog.hide();
+                        var tourl = "{/get_url rule='/part/setCompanyAgency/callBackPage-index'/}";
+                        setCompanyAgency.setContent({
+                            isOverflow: true,
+                            content: tourl
+                        }).show().on('loadComplete', function(){
+                            //this.oneCloseEvent('#subButton');
+                            /* 弹窗 */
+                            var self = this;
+                            this.query("#subButton").on('click', function(){
+                                //提交
+                                var agency = $("input[name='agency']:checked").val();
+                                var params = {agency:agency};
+                                $.post('{/get_url rule="/part/setCompanyAgencyDo/"/}', params, function(data) {
+                                    if(data.error){
+                                        ConfirmBox.timeBomb(data.error, {name : 'fail', width: 400});
+                                        self.hide();
+                                        return;
+                                    }
+                                    ConfirmBox.timeBomb(data.success, {name : 'success', width: 200});
+                                   // indexObj.SelectCallBack();
+                                    self.hide();
+                                    //window.location.href = "{/$siteurl.company|replace:'http:':''/}/partjob/jobV2/";
+                                    pubLimit(1,0);
+                                },"json");
+                            }).after('', function(){
+                                this.query('#subButton').off();
+
+                            })
+                        });
+                        {/else/}
+
+                            //window.location.href="{/$siteurl.company|replace:'http:':''/}/partjob/jobV2/";
+                            pubLimit(1,0);
+                        {//if/}
+                        })
+
+
+                });
+            }
+        };
+        indexObj.init();
+
+        function pubLimit(type,job_id) {
+            weixinDialog.hide();
+            pubLimitDo(type,job_id)
+
+        }
+    })
+
+    function pubLimitDo(type,job_id) {
+        $.post('/part/pubNumLimit',{job_id:job_id,type:type},function (e) {
+            if(e.can_pub){
+
+                window.location.href="{/$siteurl.company|replace:'http:':''/}/partjob/jobV2/";
+            }
+            else{
+
+                //弹窗购买
+                buy_job_num.show();
+            }
+        },'json')
+    }
+
+</script>
+
+</html>

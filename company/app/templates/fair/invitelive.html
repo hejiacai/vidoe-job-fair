@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+</head>
+<body>
+<style>
+.boothBox{width:420px;font-size:12px;}
+.boothBox .formMod .l{width:410px; text-align:left;}
+.boothBox .formMod .r{width:410px;}
+.boothBox .formMod .r .formTextarea textarea.textarea{height:60px;}
+</style>
+<div class="dgBox boothBox">
+	<form id="formInvitelive" method="post" action="{/get_url rule='/fairinvite/doliveinvite'/}">
+	<div class="boothForm">
+        <div class="formMod">
+            <div class="l">您的展位号</div>
+            <div class="r">
+                <span class="formText">
+                    <input name="txtboothids" type="text" class="text" style="width:235px;" value="{/$booth_ids/}" />
+                </span>
+                <span class="tipPos">
+                    <span class="tipLay">
+                    </span>
+                </span>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="formMod">
+           <div class="l">我们将<em class="orange">免费</em>用手机短信通知您邀请到展位的求职者，短信示例：</div>
+           <div class="r">
+              <span class="formTextarea">
+                 <textarea name="txtcontent" disabled="disabled" class="textarea" style="width:410px;">{/$content/}</textarea>
+              </span>
+              <span class="tipPos">
+                    <span class="tipLay">
+                    </span>
+                </span>
+           </div>
+           <div class="clear"></div>
+        </div>
+        <div class="formBtn"><a id="btnInvite" href="javascript:void(0);" class="btn1 btnsF14">确定</a></div>
+        <input type="hidden" name="hddinvitelivesceneid" value="{/$scene_id/}" />
+        <input type="hidden" name="hddinviteliveresumeid" value="{/$resume_id/}" />
+    	<input type="hidden" name="hddinviteliveresumeids" value="{/$resume_ids/}" />
+    </div>
+    </form>
+</div>
+<script>
+var inviteValid;
+var invitelive={
+	initialize:function(){
+		//初始化控件
+		this._initControl();
+	},
+	_initControl:function(){
+		inviteValid = $("#formInvitelive").validate({
+		    rules: {
+				txtboothids: { required: true },
+				txtcontent: { required: true, maxlength: 50 }
+		    },
+		    messages: {
+		    	txtboothids:{required:'请输入您的展位号<span class="tipArr"></span>'},
+		    	txtcontent:{required:'短信内容不能为空<span class="tipArr"></span>', maxlength: '短信内容不能超过50字<span class="tipArr"></span>'}
+		    },
+		    errorElement: 'span',
+		    errorClasses: {
+		    	txtboothids: { required: 'tipLayErr tipw180'},
+		    	txtcontent: { required: 'tipLayErr tipw180', maxlength: 'tipLayErr tipw180'}
+		    },
+		    errorPlacement: function(error, element) {
+				element.parent().nextAll().find('.tipLay').append(error);
+		    },
+		    success: function(label) {
+		    	label.text(" ");
+		    }
+		});
+		$('#btnInvite').click(function(){
+			var data = { operate: 'invite' };
+			$('textarea[name="txtcontent"]').attr('disabled', false);
+            $('#btnInvite').submitForm({ beforeSubmit: $.proxy(inviteValid.form,inviteValid),data:data, success: invitelive.inviteSuccess, clearForm: false });
+            return false;
+        });
+	},
+	inviteSuccess:function(json){
+		if (json && json.error){
+			$.message(json.error, { title: "系统提示", icon: "fail" });
+			return;
+		}
+		if (json && json.success) {
+          	//成功
+       		$.anchorMsg(json.success, { onclose: function() {
+       			if (json && json.issingle){
+       				{/if !empty($obj) && !empty($callback)/}
+       					{/$obj/}.{/$callback/}(json.resumeid);
+       				{//if/}
+       			}else{
+       				{/if !empty($obj) && !empty($callback)/}
+   						{/$obj/}.{/$callback/}(json.resumeids);
+   					{//if/}
+       			}
+       			$('#btnInvite').closeDialog();
+         	}
+         	});
+	    }
+	}
+};
+invitelive.initialize();
+</script>
+
+
+
+
+
+
+<script>
+$.focusColor('input.text');
+</script>
+</body>
+</html>

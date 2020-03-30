@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />	
+</head>
+
+
+<body>
+<style>
+.batModBox{width:540px;font-size:14px;}
+.batModBox .formMod{
+	border-bottom:1px solid #dadada; margin:0; padding:7px 0;zoom:1;
+	width:510px;height:30px;position: relative}
+.batModBox .formMod .l{width:340px; text-align:left;float:left;}
+.batModBox .formMod .r{width:130px;float:right;padding-right:20px;}
+.batModBox .formMod .drop .dropSeld{font-size:12px;}
+.batModBox .batModForm{max-height:400px;#height:400px;overflow-x:hidden;overflow-y:auto;position: relative;zoom:1}
+.batModBox .formBtn{margin:20px 0 0 0; text-align:center;}
+.nojob_err_text{
+	padding:30px;
+}
+</style>
+{/if count($joblist) == 0/}
+	<div class="nojob_err_text">对不起，您还没有发布职位，请先发布职位吧！</div>
+	{/else/}
+<form id="formjob" method="post" action="{/get_url rule='/job/LevelUpdateDo/'/}">
+	
+	<div class="dgBox batModBox">
+		<div {/if count($joblist)>=8/}class="batModForm"{//if/}>
+		{/foreach $joblist as $job/}
+		<div class="formMod">
+			<div class="l">{/$job['station']/}<input type="hidden" name="hddjobID[]" value="{/$job['job_id']/}"/></div>
+			<div class="r">
+				<span id="span{/$job['job_id']/}" class="drop zlevelindex"></span>
+			</div>
+			<div class="clear"></div>
+		</div>
+		{//foreach/}
+	</div>
+	<div class="formBtn"><a href="javascript:void(0)" id="btnLevelSave" class="btn1 btnsF14">确定</a><a  id="btnLevelCancel" href="javascript:void(0)" class="btn3 btnsF14">取消</a></div>
+	
+
+</div>
+</form>
+<script>
+var jobLevel = {
+		initialize:function(){
+		{/foreach $joblist as $job/}
+			 $('#span{/$job['job_id']/}').droplist({selectValue:'{/$job['job_level']/}',noSelectClass:'gray',inputWidth:125,style:'width:133px;',hddName:'hddJoblevel{/$job['job_id']/}',items:{/$job_level_json/},onSelect:function(i,name) {
+			 }});
+		{//foreach/}
+			$.setIndex('zlevelindex');	
+			
+			$('#btnLevelSave').click(function(){
+				 $(this).submitForm({success: jobLevel.successCallBack, clearForm: false});
+			});
+			$('#btnLevelCancel').click(function(){
+				 $(this).closeDialog();
+			});
+			
+		},
+		successCallBack:function(result){
+			if(result.success) {
+                $.anchorMsg("更改岗位级别成功", { onclose: function() {
+                    $('#btnLevelSave').closeDialog();
+                }});
+			}else{
+				 $.anchorMsg(result.msg,{icon:'fail'});
+			}
+		}
+	};
+	jobLevel.initialize();
+	var job = $("#formjob .formMod"),lent = job.length;
+	job.each(function(){
+		var _this = $(this);
+		_this.css({"z-index":lent - _this.index()});
+	});
+</script>
+{//if/}
+</body>
+</html>

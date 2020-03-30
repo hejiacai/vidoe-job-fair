@@ -1,0 +1,79 @@
+{/if $list/}
+	<div class="businessHallList">
+	{/foreach $list as $item/}
+		<div class="businessHallListx">
+			<div class="businessHallLix">
+				<img src="{/$item.company_logo_path_name/}" />
+				<p>
+					{/*<b>{/$item.company_shortname/}</b>*/}
+					<b>{/$item.company_name/}</b>
+					<span>{/$item.size_text/}
+						<i>|</i>{/$item.property_text/}
+						<i>|</i>{/$item.calling_text/}</span>
+				</p>
+			</div>
+			<span class="businessHallLix02">
+			{/*
+			{/if $item.company_bright_spot/}
+				{/if mb_strlen($item.company_bright_spot) > 40/}
+					{/mb_substr($item.company_bright_spot,0,40,'utf-8')/}...
+				{/else/}
+					{/$item.company_bright_spot/}
+				{//if/}
+			{//if/}
+			*/}
+			
+			{/* 福利 */}
+			{/if $item.company_reward_data/}
+				{/foreach $item.company_reward_data as $k => $reward/}
+					{/if $k != count($item.company_reward_data)-1/}
+						{/$reward/}、
+					{/else/}
+						{/$reward/}
+					{//if/}
+				{//foreach/}
+			{//if/}
+			
+			</span>
+			<div class="businessHallLix03">
+				{/foreach $jobs[$item.company_id] as $k => $job/}
+				{/if $k < 3/}
+				<a href="javascript:;">
+					<span>
+					{/$_strlen = 14/}
+					{/if $item.interview_status == 2 && $job.is_end/}
+					{/$_strlen = 10/}
+					(已停招)
+					{//if/}
+					{/if mb_strlen($job.station) > $_strlen/}
+						{/mb_substr($job.station,0, $_strlen, 'utf-8')/}
+					{/else/}
+						{/$job.station/}
+					{//if/}
+					</span>
+					<em>{/$job.min_salary/}-{/$job.max_salary/}</em>
+				</a>
+				{//if/}			
+				{//foreach/}
+			</div>
+			<div class="businessHallLix04">
+				<a href="javascript:;" class="businessHallBtn"><i></i>申请视频面试</a>
+				{/if count($jobs[$item.company_id]) > 3/}
+				<a href="javascript:;" class="businessHallMore">查看更多职位>></a>
+				{//if/}
+			</div>
+		</div>	
+	{//foreach/}
+	</div>
+{/else/}
+    {/if $page==1/}
+		<div class="noApplyVideo">
+		    <img src="{/$siteurl.style/}/img/company/video/eng_icon10.png" >
+			暂无数据  
+		</div>
+    {/else/}
+		<div class="noApplyVideo">
+			暂无更多数据
+		</div>
+    {//if/}
+{//if/}

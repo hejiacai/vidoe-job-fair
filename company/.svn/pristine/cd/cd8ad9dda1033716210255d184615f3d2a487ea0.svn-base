@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+<title>{/$title/}职位</title>
+<!–[if lt IE9]> 
+<script src="{/version file='html5.js'/}"></script>
+<![endif]–>
+<link rel="stylesheet" type="text/css" href="{/version file="base.css"/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file="comback.css"/}" />
+<link rel="stylesheet" type="text/css" href="{/version file="icons.css"/}" />
+<script type="text/javascript" src="{/version file='version.js'/}"></script>
+<script type="text/javascript">
+window.CONFIG = {
+    HOST: '{/$siteurl.style/}',
+    COMBOPATH: '/js/v2/'
+}
+</script>
+<script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+<script type="text/javascript" src="{/version file='global.js'/}"></script>
+<style type="text/css">
+    .section{font-family: "微软雅黑";font-weight: normal;}
+    .section .l {float: left;width: 350px; height: 335px;}
+    .section .r {float: left;width: 600px; height: 335px;}
+    .section .r p {line-height: 24px;}
+    .section h1 {padding-top: 60px;font-size: 16px;}
+    .section h2 {font-size: 16px;}
+    .section a {display: block;float: left;width: 130px;margin: 0px 60px 0px -2px;text-align: center;}
+    .section .l i{background:url({/$siteurl.style/}/img/company/query.png) no-repeat; width: 60px; height: 60px;display: block;margin: 62px 0 0 283px}
+    .section .item-box {margin-top: 20px;}
+    .section .item-box .back-home {width:131px; background-color: #67BCE5; color:#fff;display: inline-block;height: 31px;line-height: 31px;margin-top: 0px;}
+</style>
+</head>
+<body id="body">
+    {/include 'new_header.html' cur='{/$title_name/}职位'/}
+    <div class="content" id="content">
+        <section class="section">
+            <div class="l">
+                <i></i>
+            </div>
+            <div class="r">
+                <h1>温馨提示：您还没有开通服务</h1>
+                <h2 style="margin-bottom:20px;">开通服务过后就可以{/$title_name/}职位了</h2>
+                {/if $hrManager['user_name']/}<p class="lt">招聘顾问：{/$hrManager["user_name"]/}</p>{//if/}
+                {/if $hrManager['tel']/}
+                <p class="lt">联系电话：{/$tel_head/}转{/$hrManager["tel"]/} [9：00-18：00]</p>
+                {/else/}
+                <p class="lt">联系电话：{/$HuiboPhone400/}</p>
+                {//if/}
+                {/if $hrManager['mobile']/}<p class="lt">手机号码：{/$hrManager["mobile"]|default:$customeruser["mobile"]/}</p>{//if/}
+            </div>
+            <div style="clear:both"></div>
+        </section>
+    </div>
+</body>
+</html>

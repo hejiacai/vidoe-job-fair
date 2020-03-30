@@ -1,0 +1,167 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>{/$title/}</title>
+<!--[if lt IE9] -->
+<script src="{/version file='html5.js'/}"></script>  
+<!-- [endif] -->
+    <link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='job-manage.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}" />
+    <script type="text/javascript">
+        window.CONFIG = {
+            HOST: '{/$siteurl.style/}',
+            COMBOPATH: '/js/v2/'
+        }
+    </script>
+    <script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='global.js'/}"></script>
+<style>
+    body{font-size: 14px;color: #444;font-family: "microsoft yahei";}
+    .boutique-posts{margin: 30px;text-align: left;}
+    .boutique-posts h4,.boutique-posts h5,.boutique-posts h6{color: #666;font-size: 14px;line-height: 24px;}
+    .boutique-posts h3{font-weight: bold;color: #444;margin: 10px 0;cursor: pointer;}
+    .boutique-posts h6 span{color: #ff0000;font-size: 14px;}
+    .boutique-posts h6 a{color: #2b6fad;font-size: 14px;text-decoration: underline;}
+    .boutique-posts h6 a:hover{color: #66bce4;}
+    .boutique-posts p{color: #999;font-size: 14px;margin-top: 5px;}
+    .boutique-posts h3 i{display: inline-block;width: 16px;height: 16px;background: url("{/$siteurl.style/}/img/company/setboutique.png") no-repeat;vertical-align: -2px;margin-right: 5px;}
+    .boutique-posts h3.unsetBout i{background-position: 0 -38px;}
+    .boutique-posts h3.setBout i{background-position: 0 -19px;}
+
+    .boutique-posts .formBtn .btn1 {
+        border: none;
+        background: #66bce4;
+        box-shadow: none;
+    }
+    .boutique-posts .formBtn .btn1:hover {
+        background: #31a2d6;
+    }
+    .boutique-posts .formBtn .btn3 {
+        background: #eee;
+        color: #999;
+        border: none;
+        box-shadow: none;
+    }
+
+</style>
+</head>
+<body >
+<div class="boutique-posts">
+    <h4>请先将此职位设为精品职位，只有精品职位才能进行置顶推广或精准推广。 </h4>
+    <h3 {/if $point_job_refresh_last > 0/}class="bout setBout"{/else/}class="bout"{//if/}>
+        <i></i>同时将此职位设置为精品职位
+    </h3>
+    {/if $is_pay_in24 == 1/}
+        <h6>此职位已扣过精品点，24小时内不会重复扣点</h6>
+    {/else/}
+        {/if $point_job_refresh_last > 0/}
+            <h5>剩余精品点：{/$point_job_refresh_last/}</h5>
+        {/else/}
+            <h6><span>剩余精品点不足</span>{/if $companyresources['resource_type'] == 2/},请联系主账号为您分配更多资源{/else/}，请先<a href="javascript:void(0);" id="getPoint">购买精品点</a>{//if/}</h6>
+        {//if/}
+        <p>精品职位每展示24小时需要消耗1个精品点</p>
+    {//if/}
+
+    <div class="formBtn" style="margin-top: 20px;text-align: center;">
+        <a href="javascript:void(0);" id="btnSendInvite" class="btn1 btnsF14">确定</a>
+        <a id="btnCancelInvite" href="javascript:void(0);" class="btn3 btnsF14">取消</a>
+    </div>
+    <input type="hidden" name="job_id" id="job_id" value="{/$job_id/}">
+</div>
+<script>
+    var from = '{/$from/}';
+    //var dialog_msg;
+    hbjs.use('@imageEditor, @confirmBox, @jobsort, @orderActions', function(m) {
+
+        var $ = m['cqjob.jobsort'];
+        var Dialog = m['widge.overlay.hbDialog'],
+                ConfirmBox = m['widge.overlay.confirmBox'],
+                orderActions = m['product.orderActions'];
+
+//        dialog_msg = new Dialog({
+//            close : 'X',
+//            idName : 'job_dialog',
+//            width : 520,
+//            isOverflow : false,
+//            isAjax : true
+//        });
+
+        // 招聘人信息
+        $("#getPoint").on("click", function (e) {
+
+            dialog_msg.setContent({
+                'title' : '购买精品点',
+                'content' : '{/get_url rule="/index/GetHRManager/"/}'
+            }).show();
+            parent.dialog.hide();
+        });
+
+        $(".boutique-posts").find("h3").click(function(){
+            $(this).toggleClass("setBout");
+        });
+
+        $("#btnCancelInvite").click(function(){
+            parent.dialog.hide();
+        });
+
+        //提交
+        $('#btnSendInvite').on('click', function () {
+            var job_id = $("#job_id").val();
+            var class_name = $(".boutique-posts").find("h3").hasClass("setBout");
+            var is_set_job_quality = 0;
+            if(class_name){
+                is_set_job_quality = 1;
+            }
+
+            //没有勾选，直接关闭弹窗
+            if(is_set_job_quality != 1){
+                parent.dialog.hide();
+                return;
+            }
+
+            var data = {
+                job_id: job_id,
+                is_set_job_quality: is_set_job_quality,
+                from:from
+            };
+            $.post("{/get_url rule='/index/SetJobQualitySpreadDo'/}", data, function (data) {
+                console.log(data);
+                if (!data.status) {
+                    ConfirmBox.timeBomb(data.msg, {
+                        name: 'fail',
+                        timeout: 3000,
+                        width: data.msg*18 + 20,
+                        zIndex: 999999
+                    });
+                    return false;
+                }
+                ConfirmBox.timeBomb(data.msg, {
+                    name: 'success',
+                    timeout : 3000,
+                    width : data.msg*18 + 20,
+                    zIndex : 999999,
+                    callback : function (e) {
+                        if(from == 'spreadjob'){
+                            window.location.reload();
+                        }else if(from == 'job_top'){
+                            //弹出职位置顶界面
+                            parent.dialog.setContent({
+                                'title' : '置顶推广',
+                                'content' : '{/get_url rule="/spread/top/" data="jobid='+job_id+'&obj=joblist&callback=topJob&v='+Math.random()+'"/}'
+                            }).show();
+                            //parent.dialog.hide();
+                        }else{
+                            window.location.href = "{/get_url rule='/spreadjob/index'/}";
+                        }
+
+                    }
+                });
+
+            });
+        });
+    });
+</script>
+</body>
+</html>

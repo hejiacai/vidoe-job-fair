@@ -1,0 +1,1168 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+<meta name="renderer"  content="webkit|ie-comp|ie-stand"/>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+<title>{/$title/}</title>
+<!–[if lt IE9]> 
+<script type="text/javascript" src="{/version file='html5.js'/}"></script> 
+<![endif]–>
+<script type="text/javascript" language="javascript" src="{/version file="jquery-1.8.3.min.js"/}"></script>
+<link rel="stylesheet" type="text/css" href="{/version file='comback.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='firmcss.css'/}" />
+
+<link rel="stylesheet" type="text/css" href="{/version file="v2-reset.css"/}" />
+<link rel="stylesheet" type="text/css" href="{/version file="v2-widge.css"/}" />
+<link rel="stylesheet" type="text/css" href="{/version file="perback.css"/}" />
+<link rel="stylesheet" type="text/css" href="{/version file="v2-resume.css"/}" />
+<link rel="stylesheet" type="text/css" href="{/version file="base.css"/}" />
+<link rel="stylesheet" type="text/css" href="{/version file="resumeTate.css"/}" />
+<link rel="stylesheet" type="text/css" href="{/version file="resumePoint.css"/}" />
+
+<script type="text/javascript" language="javascript" src="{/version file='jplayer.js'/}"></script>
+<script type="text/javascript" src="{/version file='jquery.rotate.min.js'/}"></script>
+
+<link rel="stylesheet" type="text/css" href="{/version file='jplayer.blue.monday.css'/}" />
+<script type="text/javascript" src="{/version file='version.js'/}"></script>
+<script type="text/javascript">
+window.CONFIG = {
+    HOST: '{/$siteurl.style/}',
+    COMBOPATH: '/js/v2/'
+}
+var fancboxid = [];
+</script>
+<script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+<script type="text/javascript" src="{/version file='global.js'/}"></script>
+<script type="text/javascript">
+    hbjs.loadJS('{/$siteurl.style/}/js/v2/cqjob/common.js');
+</script>
+<style type="text/css">
+.subSta{display:inline-block;width:95px; height:13px;}
+.subSta00{ background:url({/$siteurl.style/}/img/pcstaricon.png) 0 0 no-repeat;}
+.subSta01{ background:url({/$siteurl.style/}/img/pcstaricon.png) 0 -13px no-repeat;}
+.subSta02{ background:url({/$siteurl.style/}/img/pcstaricon.png) 0 -26px no-repeat;}
+.subSta03{ background:url({/$siteurl.style/}/img/pcstaricon.png) 0 -39px no-repeat;}
+.subSta04{ background:url({/$siteurl.style/}/img/pcstaricon.png) 0 -52px no-repeat;}
+.subSta05{ background:url({/$siteurl.style/}/img/pcstaricon.png) 0 -65px no-repeat;}
+.nolink{color:#333}
+.nolink a{color:#216ab5}
+.nolink a:hover{color:#0af}
+.infor-box .name span i{display:block;}
+
+/*======顶部提示窗======*/
+.weChatip{ overflow:hidden;width:460px; text-align:left;position:absolute;}
+.weChatip img{ display:block; margin-left:50px; position:absolute;}
+.subWtip01{width:94%; padding:9px; border:1px solid #ffe4b5; background:#fefce8; overflow:hidden; margin-top:7px;}
+.subWtip02{ float:left;width:420px; color:#e5a408;}
+.subWtip02 a{ color:#3d84b8;}
+.subWtip02 span{ color:#f00;}
+.subWtip02 a:hover{ text-decoration:underline;}
+.wChatBtn{ display:block; float:right; width:7px; height:7px; background:url({/$siteurl.style/}/img/c/firm02.png) no-repeat; margin-top:4px;}
+.resFixt{ margin-left:20px; margin-bottom: 20px; border-bottom:1px dashed #ccc; padding-bottom:8px; padding-top: 15px; width: 760px;}
+.resFixt b{ color:#09c; font-size:14px; padding-right:12px;}
+.resFixt span{color:#09c;}
+
+.star{width:18px;height: 28px;background: url({/$siteurl.style/}/img/c/iconq.jpg) center top no-repeat;display: inline-block;vertical-align: -15px}
+.starCur{background: url({/$siteurl.style/}/img/c/iconq1.jpg) center top no-repeat; margin-top: 1px}
+#star-alert{position: absolute;width:155px;background-color: #00c0c7;border-radius: 5px;margin-left:85px;font-size:14px;color: #fff;font-family:"微软雅黑";margin-top: -1px;#margin-top:40px; display: none;z-index: 1000000;}
+#star-alert li:nth-child(2n){background-color: #00b1b8}
+#star-alert li:last-child{border-radius: 5px}
+#star-alert li{padding:5px 10px}
+#star-alert a{font-size:12px;color:#8efbff}
+#star-alert a:hover{color:#fff;text-decoration: underline}
+#star-alert li i{float: right;display: inline-block;font-size:14px;}
+/*弹窗*/
+.yaoqing-alert{margin:30px;color:#999;font-size:14px;line-height: 22px}
+.yaoqing-alert dt{float: left;width:121px;height: 121px;margin-right: 20px}
+.yaoqing-alert .t1{color:#0ea5a0;font-size:24px;font-family: '微软雅黑';margin-bottom: 15px}
+.yaoqing-alert .t2{margin-bottom: 15px}
+.yaoqing-alert .t2 span{color:#ff6563}
+.yaoqing-alert .link2{color:#3f74c2;font-size:14px;margin-left: 10px}
+
+.attest_alert{height: 40px;line-height: 40px;background-color: #fffadd;color:#eb6f0b;font-size:14px;margin:10px 20px;padding:0 15px}
+.attest_alert a{float:right;}
+.attest_alert a:hover{ color: #0af; text-decoration: underline;}
+    /*相册大图预览*/
+.fancybox-wrap,
+.fancybox-skin,
+.fancybox-outer,
+.fancybox-inner,
+.fancybox-image,
+.fancybox-wrap iframe,
+.fancybox-wrap object,
+.fancybox-nav,
+.fancybox-nav span,
+.fancybox-tmp {padding: 0;margin: 0;border: 0;outline: none;vertical-align: top;}
+.fancybox-wrap {position: absolute;top: 0;left: 0;z-index: 8020;}
+.fancybox-skin {position: relative;background: #f9f9f9;color: #444;text-shadow: none;-webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px;}
+.fancybox-opened {z-index: 8041}
+.fancybox-opened .fancybox-skin {-webkit-box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);-moz-box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5)}
+.fancybox-outer, .fancybox-inner {position: relative}
+.fancybox-inner {overflow: hidden;margin:0 auto}
+.fancybox-type-iframe .fancybox-inner {-webkit-overflow-scrolling: touch;}
+.fancybox-error {color: #444;font: 14px/20px "Helvetica Neue",Helvetica,Arial,sans-serif;margin: 0;padding: 15px;white-space: nowrap;}
+.fancybox-image, .fancybox-iframe {display: block;width: 100%;height: 100%;}
+.fancybox-image {max-width: 100%;max-height: 100%;}
+#fancybox-loading, .fancybox-close, .fancybox-prev span, .fancybox-next span {background-image: url({/$siteurl.style/}/img/comshow/fancybox_sprite.png);}
+#fancybox-loading {position: fixed;top: 50%;left: 50%;margin-top: -22px;margin-left: -22px;background-position: 0 -108px;opacity: 0.8;cursor: pointer;z-index: 8060;}
+#fancybox-loading div {width: 44px;height: 44px;background: url({/$siteurl.style/}/img/comshow/fancybox_loading.gif) center center no-repeat;}
+.fancybox-close {position: absolute;top: -18px;right: -18px;width: 36px;height: 36px;cursor: pointer;z-index: 8040;}
+.fancybox-nav {position: absolute;top: 0;width: 30%;height: 100%;text-align: center;cursor: pointer;text-decoration: none;background: transparent url({/$siteurl.style/}/img/comshow/blank.gif); /* helps IE */-webkit-tap-highlight-color: rgba(0,0,0,0);z-index: 8040;}
+.fancybox-nav span {position: absolute;top: 50%;width: 36px;height: 34px;margin-top: -18px;cursor: pointer;z-index: 8040}
+.fancybox-prev{left:-100px}
+.fancybox-next{right: -100px}
+.fancybox-prev span{left:0px;background: url({/$siteurl.style/}/img/comshow/fancybox_sprite.png);}
+.fancybox-next span{right:0px;background: url({/$siteurl.style/}/img/comshow/fancybox_sprite.png);}
+.fancybox-tmp {position: absolute;top: -99999px;left: -99999px;visibility: hidden;max-width: 99999px;max-height: 99999px;overflow: visible !important;}
+.fancybox-next span {
+  right: 10px;
+  background-position: 0 -72px;
+}
+.fancybox-prev span {
+  left: 10px;
+  background-position: 0 -36px;
+}
+/* Overlay helper */
+.fancybox-lock {overflow: hidden !important;width: auto;}
+.fancybox-lock body {overflow: hidden !important;}
+.fancybox-lock-test {overflow-y: hidden !important;}
+.fancybox-overlay {position: absolute;top: 0;left: 0;overflow: hidden;display: none;z-index: 8010;background: url({/$siteurl.style/}/img/comshow/fancybox_overlay.png);}
+.fancybox-overlay-fixed {position: fixed;bottom: 0;right: 0;}
+.fancybox-lock .fancybox-overlay {overflow: auto;overflow-y: scroll;}
+/* Title helper */
+.fancybox-title {visibility: hidden;font: normal 13px/20px "Helvetica Neue",Helvetica,Arial,sans-serif;position: relative;text-shadow: none;z-index: 8050;}
+.fancybox-opened .fancybox-title {visibility: visible;}
+.fancybox-title-float-wrap {height: 25px}
+.fancybox-title-float-wrap .child {display:block;line-height: 24px}
+.fancybox-title-float-wrap .child a{color:#3d84b8;float:right}
+.fancybox-title-float-wrap .child font{color:#333}
+.fancybox-title-outside-wrap {position: relative;margin-top: 10px;color: #fff;}
+.fancybox-title-inside-wrap {padding-top: 10px;}
+.fancybox-title-over-wrap {position: absolute;bottom: 0;left: 0;color: #fff;padding: 10px;background: #000;background: rgba(0, 0, 0, .8);}
+/*Retina graphics!*/
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5),
+       only screen and (min--moz-device-pixel-ratio: 1.5),
+       only screen and (min-device-pixel-ratio: 1.5){
+
+    #fancybox-loading, .fancybox-close, .fancybox-prev span, .fancybox-next span {
+        background-image: url({/$siteurl.style/}/img/comshow/fancybox_sprite@2x.png);
+        background-size: 44px 152px; /*The size of the normal image, half the size of the hi-res image*/
+    }
+
+    #fancybox-loading div {
+        background-image: url({/$siteurl.style/}/img/comshow/fancybox_loading@2x.gif);
+        background-size: 24px 24px; /*The size of the normal image, half the size of the hi-res image*/
+    }
+}
+
+#fancybox-thumbs {position: fixed;left: 0;width: 100%;overflow: hidden;z-index: 8050;}
+#fancybox-thumbs.bottom {bottom: 2px;}
+
+#fancybox-thumbs.top {top: 2px;}
+#fancybox-thumbs ul {position: relative;list-style: none;margin: 0;padding: 0;}
+#fancybox-thumbs ul li {float: left;padding: 1px;opacity: 0.5;}
+#fancybox-thumbs ul li.active {opacity: 0.75;padding: 0;border: 1px solid #fff;}
+#fancybox-thumbs ul li:hover {opacity: 1;}
+#fancybox-thumbs ul li a {display: block;position: relative;overflow: hidden;border: 1px solid #222;background: #111;outline: none;}
+#fancybox-thumbs ul li img {display: block;position: relative;border: 0;padding: 0;max-width: none;}
+.nberN04{overflow: visible}
+#see_mobile{background: #42B6C5;font-size:14px;color:#fff;float:right;border-radius: 2px;padding:5px 10px;margin-right:75px;margin-top:-5px;cursor: pointer}
+.sumeMainRight ul li a em.smIcon11{background: url({/$siteurl.style/}/img/account/add_appfx.png) 0 0 no-repeat;width:22px;height: 16px;margin-right: 4px}
+.sumeMainRight ul li a:hover em.smIcon11{background: url({/$siteurl.style/}/img/account/add_appfx.png) 0 -25px no-repeat}
+.sumeMainRight ul li a em.smIcon12{background: url({/$siteurl.style/}/img/account/add_appfx.png) 0 -51px no-repeat;width:18px;height: 16px}
+.sumeMainRight ul li a:hover em.smIcon12{background: url({/$siteurl.style/}/img/account/add_appfx.png) 0 -76px no-repeat}
+{/if $from =="email"/}
+/*搜索*/
+.new_search{width:960px;margin: 0 auto;padding:10px 20px;background-color: #fff;height: 42px;overflow: hidden}
+.new_search .text{width:820px;height: 40px;border:1px solid #4bb6e7;padding:0 10px;line-height: 40px;float:left}
+.new_search .sub_mit{font-family: "Microsoft YaHei";width:118px;height: 42px;background: #4bb6e7 url("{/$siteurl.style/}/img/newindex/hbcompany05.png") 13px center no-repeat;border:0px; text-indent: 20px;color:#fff;font-size:16px;float:left;cursor: pointer}
+.new_search .sub_mit:hover{background: #31a2d6 url("{/$siteurl.style/}/img/newindex/hbcompany05.png") 13px center no-repeat}
+ /*微信二维码*/
+.weiCodeTop{ text-align:center;width:138px; border:1px solid #dadada; background:#fff; padding-bottom:10px; position: absolute;top:130px; right:50%; margin-right:-650px;}
+.weiCodeTop img{ display:block; padding:4px; border:1px solid #e8e8e8; margin:10px auto 5px auto;}
+.weiCodeTop span{ line-height:20px; color:#444;}
+.navLst{ padding:0px;}
+header{margin-bottom:0px; height:auto;}
+.resumeMain{margin-top:15px;}
+.compNavbg{margin-bottom:15px!important;}
+{//if/}
+ 
+.video_list li{position: relative;z-index: 1;cursor: pointer}
+.video_list .play{    background: url({/$siteurl.style/}/img/cp/video.png) no-repeat;
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -20px;
+    margin-top: -20px;
+   z-index: 3;
+}
+.resumeVideoTit{width:774px; overflow: hidden; height: 38px; border: 1px solid #fee6e8; background:url({/$siteurl.style/}/img/app/newapp/resumeVideo.png) 12px center #ffeeef no-repeat; margin:0px 0 20px 10px;}
+.resumeVideoTit span{ display: block; line-height: 38px; font-size: 14px; color: #86685e; padding-left: 45px;}
+.resumeVideoTit span b{ font-size: 16px; color: #ff565e;}
+
+.video_list u{display: block;width: 100%;height: 100%;position: absolute;z-index: 2;background: #000;opacity: 0.5;filter:Alpha(opacity=50);left:0;top:0}
+.video_list li:hover u{opacity: 0.1;filter:Alpha(opacity=10);}
+.nberN05x li b{width:70px; float:left;}
+.nberN05x li div{width:620px;float:left; overflow: hidden;}   
+.resumeVideoTx{ display: block; font-size: 15px; color: #999;margin:20px 0 0 54px; line-height: 16px;}
+.resumeVideoTx em{ color: #438de1; cursor: pointer;}
+
+/*照片简历*/
+*{ list-style: none;}
+.photoList{overflow: hidden; margin: 30px 15px 0 54px;}
+.photoList li{width:100%; overflow: hidden; cursor: pointer;}
+.photoList li a{ display: block; max-width: 100%; height: auto;}
+.photoList li a img{ display: block;max-width:100%; height: auto;width: 100%;}
+.photo_m_master{width:100%; height: 100%; background: url({/$siteurl.style/}/img/comshow/fancybox_overlay.png);position: fixed;bottom: 0;right: 0; z-index: 100; display: none;}
+.photoMagnify{width:800px;height: auto; position: fixed; top: 10%; left: 50%; margin-left: -400px; z-index: 101; display: none;}
+.photoMagnify p{width:100%; overflow: hidden;position: relative; z-index:10}
+.photoMagnify p span{ cursor: pointer; width: 48px; height: 48px; display: block; background: #0af; color: #fff; text-align: center; line-height: 36px; margin:0 auto;margin-top:20px;  color: #fff;}
+.photoMagnify p span#imgleft{ background: url({/$siteurl.style/}/img/job/newjob/sprite_prev.png) no-repeat;}
+.photoMagnify p span#imgright{background: url({/$siteurl.style/}/img/recRoate3.png);}
+.photoMagnify a{ display: block; background: url({/$siteurl.style/}/img/recClose.png) no-repeat; width: 32px; height: 32px; float: right;}
+.photoMagnify img{ display: block; max-width: 100%; height: auto; margin: 0 auto; max-height: 600px;}
+#RouteDataImg{max-width: 100%;width:800px; margin: 0 auto;}
+.sumeNtit em.titIcon15,.sumeNtit em.titIconNew16 {
+    width: 17px;
+    height: 20px;
+    background: url({/$siteurl.style/}/img/jianli.png) no-repeat;
+    margin-right: 8px;
+}
+.sumeNtit em.titIconNew16{
+	background: url({/$siteurl.style/}/img/www/job/rad_upload.png) 3px 0 no-repeat;
+	vertical-align: -8px;
+	margin-right: 12px;
+}
+.photoMagnify p.rotaeTop{ position: fixed; bottom: 10%; width:800px}
+.sumeNtit{width: 180px;}
+.sumeNtit a:hover{ color: #3D84B8;text-decoration: underline;}
+.yqQual{height: 30px;background: #66bce4;font-size: 14px;color: #fff;line-height: 30px;border-radius: 2px;margin-right: 10px;width: 121px;display: inline-block;}
+.yqQual:hover{ background: #31a2d6; color: #fff;}
+.dialog{
+	padding:0;
+}
+/*简历详情*/
+.resumeKuaimiTipsx{width:776px; overflow: hidden; background: #fbfafa; padding: 7px 0; margin: 15px 0 15px 10px;} 
+.resumeKuaimiTipsx a{ display: block; float: left;width:43px; height: 43px; background: #ff5150; border-radius: 8px; margin: 0 10px; font-size: 20px; color: #fff; line-height: 43px; text-align: center;} 
+.resumeKuaimiTipsx p{ text-align: left; float: left; font-size: 12px; color: #bd9b9b;}
+.resumeKuaimiTipsx p span{ display: block; font-size: 15px; color: #fb5958; font-weight: bold;}
+
+/*分享到微信*/
+.linkSharePop{width:500px; overflow: hidden; padding: 30px; margin: 0 auto;}
+.linkSharePut{ overflow: hidden; position: relative;}
+.linkSharePut span,.linkSharePut input,.linkSharePut a{ line-height: 32px; display: block; float: left; font-size: 14px;}
+.linkSharePut input{width:300px; height: 30px; line-height: 30px; color: #444; padding: 0 8px; margin-right: 10px; border: 1px solid #ccc;}
+.linkSharePut input#linkCopyx{position: absolute; opacity: 0; top: 0; left: 0; height: 1px;}
+.linkSharePut a{ display: block;height: 32px; line-height: 32px;width:100px; text-align: center; background: #2b6fad; color: #fff; border-radius: 4px;}
+.linkShareCode{ overflow: hidden; padding-top: 30px;}
+.linkShareCode span{ display: block; font-size: 14px; text-align: left;}
+.linkShareCode img{ display: block; width:130px; height: 130px; margin:20px auto 10px auto;}
+.linkShareCode em{ display: block; text-align: center; font-size: 12px;}
+</style>
+<style>
+	/*2019.5.20新增样式*/
+	.nberN02 .poor{color: #36b1c0;}
+	.nberN03 .poor-place{
+		color:#333;
+		max-width: 10em;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+</style>
+</head>
+
+<body style="padding-bottom: 55px;">
+{/if $from =="email"/}
+{/include file="new_header.html" par="全职招聘" cur=""/}
+{/else/}
+<div class="resumeThead">
+    <div class="resumeTop">
+        <div>
+            <a href="{/$homePage/}"></a>
+            <span></span>
+        </div>
+    </div>
+</div>
+{//if/}
+{/if $from =="email"/}
+<div class="new_search">
+<a href="{/get_url rule="/resumesearchnew/"/}" style="cursor:text">
+    <input type="text" name="station" id="searchStation" placeholder="从360万人才简历中找找合适的人吧" class="text">
+    <input type="submit" id="searchResume" value="简历搜索" class="sub_mit"/>
+  </a>
+</div>
+{//if/}
+<div class="resumeMain clearfix">
+    <div class="sumeMainLeft">
+        <input type="hidden" id="hddCurrResumeId" value="{/$resume_id/}" />
+        <input type="hidden" id="hddapplyid" value="{/$applyid/}" />
+        <input type="hidden" id="hddsrc" value="{/$src/}" />
+
+        {/if $show_person_class_tip == 1/}
+        <div class="resFixt"><b>温馨提示</b><span>该简历是由汇博网人才推荐部为您收录的简历</span></div>
+        {//if/}
+
+        {/if count($historyrecords) > 0 || count($historyrecordagos) > 0/}
+        <!-- 展开操作记录 -->
+        <div id="historyContainer" class="smNumberUp" style='display:block'>
+            <a {/if count($historyrecords) <= 0/}data-status="0"{/else/}data-status="1"{//if/} href="javascript:;" class="sberUp">收起操作记录<i></i></a>
+            <ul>
+                {/foreach $historyrecords as $key => $value/}
+                <li {/if $value@index gt 5/} isMore="1" style="display:none"{//if/}>
+                    <span>{/$value['time']/}</span>
+                    <em>{/$value['content']/}</em>
+                </li>
+                {//foreach/}
+                
+                {/foreach $historyrecordagos as $key => $value/}
+                <li isMore="1" style="display:none">
+                    <span>{/$value['time']/}</span>
+                    <em>{/$value['content']/}</em>
+                </li>
+                {//foreach/}
+                
+                {/if count($historyrecords) > 6 || (count($historyrecords) > 0 && count($historyrecordagos) > 0)/}
+                <li id="moreHistory" class="fot"><a href="javascript:" id="btnMoreHistory">查看更早记录</a></li>
+                {//if/}
+            </ul>
+        </div>
+        {//if/}
+
+        <div class="smNumber">
+            <span>简历编号：{/$resume_id/}</span>
+            {/if count($historyrecords) > 0 || count($historyrecordagos) > 0/}
+            <a style='display:none' href="javascript:;">展开操作记录<i></i></a>
+            {//if/}
+            {/if $is_interested/}
+            <font style="line-height: 44px; padding-left: 20px; color: #fb5958;">该求职者被其他公司感兴趣，抢人才要趁早哦！</font>
+            {//if/}
+            <span class="sberRt">最近登录：{/$last_login_time|date_format:'%Y.%m.%d'/}</span>
+        </div>
+
+        <!--{/if $is_audit == 1/}-->
+        <!--{/else if $is_audit == 0/}-->
+        <!--<div class="attest_alert"><a href='{/base_lib_Constant::COMPANY_URL_NO_HTTP/}/licencevalidate/' target='_blank'>重新上传营业执照>></a>企业营业执照审核认证失败，需重新上传验证，待审核通过后即可查看完整简历</div>-->
+        <!--{/else if $is_audit == 2/}-->
+        <!--<div class="attest_alert">企业营业执照审核中，待审核通过后可查看完整简历</div>-->
+        <!--{/else/}-->
+        <!--<div class="attest_alert"><a href="{/base_lib_Constant::COMPANY_URL_NO_HTTP/}/licencevalidate/" target='_blank'>上传营业执照>></a>企业未进行营业执照审核，待审核通过后可查看完整简历"</div>-->
+        <!--{//if/}-->
+        <!--/mj new end-->
+        <div class="numberName" style="margin-bottom: 20px;">
+            {/if !empty($avatar)/}
+            <img class='nberImg' id="avatarImgBox" width="140" height="140" src="{/$avatar|replace:'http:':''/}" alt="" />
+            {/else/}
+            <img class='nberImg' width="140" height="140" src="{/$siteurl.style/}/img/v2/resumeM/head-defects.jpg" />
+            {//if/}
+
+            <div class="numberNx">
+                <div class="nberN01">
+                    <span style="height:37px;">{/$user_name/}</span>
+                </div>
+
+                <div class="nberN02" style='padding-top:0px;'>
+                    {/if $sex!=''/}<span>{/get_name sex=$sex/}</span>{//if/}
+                    {/if $age!=''/}<em>|</em>
+                    <span>{/$age/}</span>{//if/}
+                    {/if $degree!=''/}<em>|</em>
+                    <span>{/get_name degree=$degree/}</span>{//if/}
+                    {/if $work_year!=''/}<em>|</em>
+                    <span>{/$work_year/}</span>{//if/}
+                    {/if $stature!=''/}<em>|</em>
+                    <span>{/$stature/}cm</span>{//if/}
+                    {/if $avoirdupois!=''/}<em>|</em>
+                    <span>{/$avoirdupois/}kg</span>{//if/}
+                    {/*{/if $marriage!=''/}<em>|</em>*/}
+                    {/*<span>{/get_name marriage=$marriage/}{/if $fertility!=''/}{/get_name fertility=$fertility/}{//if/}</span>{//if/}*/}
+                    {/if $political_status!=''/}<em>|</em><span>{/get_name political=$political_status/}</span>{//if/}
+                    <!-- @update 新增贫困地区 2019-5-16-->
+                    {/if $_person_exp['is_poor_family']/}
+			            <!--是贫困家庭-->
+			            <em>|</em><span class="poor">贫困建档家庭</span>
+			        {/else/}
+			            <!--不是贫困家庭-->
+			        {//if/}
+                    
+                </div>
+
+                <div class="nberN03">
+                    {/if $native_place_name!=''/}<span>户籍：</span>{/$native_place_name/}{//if/}
+                    <!-- @update 新增贫困地区 2019-5-16-->
+                    {/if $_person_exp['is_poor_family']/}
+			            <!--是贫困家庭-->
+			            (<span class="poor-place">{/$_person_exp['family_address']/}</span>)&nbsp;&nbsp;&nbsp;&nbsp;
+			        {/else/}
+			            <!--不是贫困家庭-->
+			        {//if/}
+                    {/if $cur_area_name!=''/}<span>现居：</span>{/$cur_area_name/}{/else/}&nbsp;{//if/}
+                </div>
+            </div>
+        </div>
+
+		
+         {/if count($video_list)>0/}
+        <div class="resumeVideoTit">
+        	<span>该求职者精心准备了<b>短视频简历</b>，如果对其感兴趣可滑到简历底部观看 !</span>
+        </div>
+         {//if/}
+        {/if $exp_job || $exp_area_names || $str_expect_callings || $str_expect_jobsorts || $job_state_text/}
+        
+        <!--简历详情-->
+        {/if $is_kuaimi/}
+		<div class="resumeKuaimiTipsx">
+			<a href="{/base_lib_Constant::KUAI_MI_COMPANY_NO_HTTP/}" target="_blank">快米</a>
+			<p>
+				<span>该简历投递于快米工作</span>快米工作为汇博旗下专注蓝领招聘平台
+			</p>
+		</div>
+        {//if/}
+        
+        <div class="sumeNtit">
+            <em class="titIcon01"></em>
+            求职意向
+        </div>
+        {//if/}
+        <ul class="nberN05">
+            {/if $exp_job/}
+            <li>
+                <b>希望从事：</b>
+                <p>{/$exp_job/}
+                    <em>{/if $job_type==1&&$is_accept_parttime==1/}（可以接受兼职）{/elseif $job_type==2/}（兼职）{/elseif $job_type==3/}（实习）{//if/}</em>
+                    {/if $exp_job_level!=''/}<i>|</i>{/get_name job_level=$exp_job_level/}{//if/}
+                    {/if $exp_salary>0/}<i>|</i>
+                    {/if $exp_salary=='negotiable'/}面议{/else/}{/get_name salary=$exp_salary/} 元/月{//if/}
+                    {/else/}<i>|</i>面议{//if/}
+                    {/if $is_not_accept_lower_salary==1&&$exp_salary!='negotiable'&&$exp_salary!='01'/}<em>（不低于此薪资）</em>
+                    {//if/}
+                </p>
+            </li>
+            {//if/}
+            
+            {/if $exp_area_names/}
+            <li>
+                <b>工作地点：</b>
+                <p>{/$exp_area_names/}</p>
+            </li>
+            {//if/}
+            
+            {/if $str_expect_callings/}
+            <li>
+                <b>期望行业：</b>
+                <p>{/$str_expect_callings/}</p>
+            </li>
+            {//if/}
+
+            {/if $str_expect_jobsorts/}
+            <li>
+                <b>期望类别：</b>
+                <p>{/$str_expect_jobsorts/}</p>
+            </li>
+            {//if/}
+
+            {/if $job_state_text/}
+            <li>
+                <b>求职状态：</b>
+                <p>{/get_name apply_status=$job_state_id/}{/if $accession_time/}<i>|</i>{/get_name accession_time=$accession_time/}{//if/}</p>
+            </li>
+            {//if/}
+        </ul>
+        {/if !base_lib_BaseUtils::nullOrEmpty($appraise)/}
+        <style>
+            .nberN06 p{text-indent:30px}
+        </style>
+        <div class="sumeNtit appraiseContent">
+            <em class="titIcon02"></em>
+            自我评价
+        </div>
+        <div class="nberN06"  style="overflow: hidden; text-indent:30px">{/html_encode content=$appraise/}</div>
+        {//if/}
+            
+        {/if count($resume_works) > 0/}
+        <div class="sumeNtit">
+            <em class="titIcon03"></em>
+            工作/实习经历
+        </div>
+        {/foreach $resume_works as $key => $value/}
+        <div class="nberN07 nberN11 {/if $value@last/}nberN11last{//if/}">
+            <p class="nberTit1">{/$value['start_time']/}-{/$value['end_time']/}<span>{/if $value['work_time']/}[{/$value['work_time']/}]{//if/} {/get_name job_type=$value['job_type']/} {/if $value['is_creator']=='1'/}[创始人]{//if/}</span></p>
+            <p class="nberTit2"><b>{/$value['station']/}</b>
+                {/if $value['department']/}<span>({/$value['department']/})</span>{//if/}
+                {/if !empty($value['job_level'])/}<span> {/get_name job_level=$value['job_level']/}</span>{//if/}
+                {/if $value['is_salary_show'] != '1' && $value['salary_month']/}<i>|</i><span>{/$value['salary_month']/}元/月</span>{//if/}
+            </p>
+            <p class="nberTit3"><b>{/$value['company_name']/}</b>
+            {/if (!empty($value['calling_id']))/}
+            <span>{/get_name calling=$value['calling_id']/}</span>
+            {//if/}
+            {/if (!empty($value['com_property']))/}
+                <i>|</i><span>{/get_name com_property=$value['com_property']/}</span>
+            {//if/}
+            {/if (!empty($value['rewards']))/}<i>|</i><span>$value['rewards']</span>{//if/}
+            {/if (!empty($value['com_size']))/}<i>|</i><span>{/get_name com_size=$value['com_size']/}</span></p>{//if/}
+            <ul class="nberN05 nberN05x" style="margin:0;">
+                {/if !empty($value['work_content'])/}
+                <li>
+                    <b>工作职责：</b>
+                    <div>
+                     <p>{/html_encode content=$value['work_content']/}</p>
+                    </div>
+                </li>
+                {//if/}
+             
+            </ul>
+        </div>
+        {//foreach/}
+        {//if/}
+        
+        {/if count($resume_edus) > 0 || count($resume_trains) > 0/}
+        <div class="sumeNtit" style="margin-top:20px;">
+            <em class="titIcon04"></em>
+            教育/培训经历
+        </div>
+        <div class="nberN08" style="margin-bottom:20px">
+            {/foreach $resume_edus as $key=>$value/}
+            <div class="nber8bg {/if $value@last && empty($resume_trains)/}nber8Last{//if/}" style=" padding:10px 0;">
+                {/if !empty($value['start_time']) || !empty($value['end_time'])/}<p class="nberTit1">{/if empty($value['start_time'])/}开始时间未填写{/else/} {/$value['start_time']|date_format:'%Y.%m'/}{//if/}-{/if empty($value['end_time'])/}至今{/else/}{/$value['end_time']|date_format:'%Y.%m'/}{//if/}</p>{//if/}
+                <p class="nberTit2">{/if $value['degree']!=''/}<b>{/get_name degree=$value['degree']/}</b>{//if/}{/if $value['school']!=''/}<i>|</i><span>{/$value['school']/}</span>{//if/}{/if $value['major_desc']!=''/}<i>|</i><span>{/$value['major_desc']/}</span>{//if/}</p>
+                <ul class="nberN05 nberN05x" style="margin:0;">
+                    {/if $value['school_score']!=''/}
+                        <li>
+                            <b>在校成绩：</b>
+                            <div>
+                                <p>{/$value['school_score']/}</p>
+                            </div>
+                        </li>
+                    {//if/}
+                    {/if $value['duty']!=''/}
+                        <li>
+                            <b>校内职务：</b>
+                            <div>
+                                <p>{/$value['duty']/}</p>
+                            </div>
+                        </li>
+                    {//if/}
+                     {/if $value['edu_detail']!=''/}<li>
+                        <b>专业课程：</b>
+                        <div>
+                            <p>{/html_encode content=$value['edu_detail']/}</p>
+                        </div>
+                     </li>
+                     {//if/}
+                </ul>
+            </div>
+            {//foreach/}
+            {/foreach $resume_trains as $key=>$value/}
+            <div class="nber8bg {/if $value@last/}nber8Last{//if/}">
+                {/if !empty($value['start_time']) || !empty($value['end_time'])/}<p class="nberTit1">{/if empty($value['start_time'])/}开始时间未填写{/else/} {/$value['start_time']|date_format:'%Y.%m'/}{//if/}-{/if empty($value['end_time'])/}至今{/else/}{/$value['end_time']|date_format:'%Y.%m'/}{//if/}<span>培训</span></p>{//if/}
+                <p class="nberTit2">{/if $value['course']!=''/}<b>{/$value['course']/} </b>{//if/}{/if $value['institution']!=''/}<span>{/$value['institution']/}</span>{//if/}{/if $value['certificate']!=''/}<i>|</i><span>{/$value['certificate']/}</span>{//if/}</p>
+             </div>
+            {//foreach/}
+        </div>
+        {//if/}
+
+        {/if count($resume_winningrecord) > 0/}
+            <div class="sumeNtit">
+                <em class="titIcon14"></em>
+                获奖经历
+            </div>
+            <div class="nberN07">
+                <ul class="nberN05 nberN05x" style="margin:0;">
+                    {/foreach $resume_winningrecord as $key => $value/}
+                        <li>
+                            <b>{/$value['winning_time']/} </b>
+                            <div>
+                                <p>{/$value['winning_name']/}
+                                    {/if $value['winning_desc']/}
+                                    ({/$value['winning_desc']/})
+                                    {//if/}
+                                </p>
+                            </div>
+                        </li>
+                    {//foreach/}
+                </ul>
+            </div>
+        {//if/}
+        
+        {/if $isshowresumeinfo/}
+        {/if count($resume_projects) > 0/}
+        <div class="sumeNtit" style="width: 180px">
+            <em class="titIcon05"></em>
+            校内外项目经验
+        </div>
+        <div class="nberN08" style="margin-bottom:20px">
+            {/foreach $resume_projects as $key => $value/}
+            <div class="nber8bg{/if $value@last/} nber8Last{//if/}" style=" padding:10px 0;">
+                {/if !empty({/$value['start_time']/}) || !empty({/$value['end_time']/})/}<p class="nberTit1">{/if empty($value['start_time'])/}开始时间未填写{/else/} {/$value['start_time']/}{//if/}-{/if empty($value['end_time'])/}至今{/else/}{/$value['end_time']/}{//if/}</p>{//if/}
+                <p class="nberTit2">{/if $value['project_name']!=''/}<b>{/$value['project_name']/}</b>{//if/}{/if $value['duty']!=''/}<span class="orange">担任：{/$value['duty']/}</span>{//if/}</p>
+                <ul class="nberN05 nberN05x" style="margin:0;">
+                    {/if $value['project_detail'] != ''/}
+                    <li>
+                        <b>项目介绍：</b>
+                        <div>
+                        <p>{/$value['project_detail']/}</p>
+                        </div>
+                    </li>
+                    {//if/}
+                    {/if $value['main_duty'] != ''/}
+                    <li>
+                        <b>项目经历：</b>
+                        <div>
+                            <p>{/html_encode content=$value['main_duty']/}</p>
+                        </div>
+                    </li>
+                    {//if/}
+                </ul>
+            </div>
+            {//foreach/}
+        </div>
+        {//if/}
+        {/else/}
+        <!--项目经验-->
+        <div class="sumeNtit">
+            <em class="titIcon05"></em>
+            项目经验
+        </div>
+        <div class="nberN08">
+            <div class="nber8bg nber8Last">
+                <!--没数据时显示-->
+                <p class="nberTit2"><b>你暂未通过企业认证，认证后即可查看完整简历</b></p>
+            </div>
+        </div>
+        <!--/-->
+        {//if/}
+        {/if count($resume_languages)>0/}
+        <div class="sumeNtit">
+            <em class="titIcon06"></em>
+            语言能力
+        </div>
+        <div class="nberN07">
+            {/foreach $resume_languages as $key => $value/}
+            <p class="nberTit2 nberTit2x"><b>{/get_name language=$value['language_type']/}</b>
+                {/if $value['skill_level'] != ''/}<span>{/get_name skill_level=$value['skill_level']/}</span>{//if/}
+                {/if $value['certificates'][0]['cert_name'] != ''/}
+                    <i>|</i>
+                    <span>
+                    {/section name=language loop=$value['certificates']/}
+                    {/if $smarty.section.language.last/}
+                    {/$value['certificates'][language]['cert_name']/}
+                    {/else/}
+                    {/$value['certificates'][language]['cert_name']/}，  
+                    {//if/}
+                    {//section/}
+                    </span>
+                {//if/}
+            </p>
+            {//foreach/}
+        </div>
+        {//if/}
+
+        {/if count($resume_skills) > 0/}
+        <div class="sumeNtit">
+            <em class="titIcon07"></em>
+            技能专长
+        </div>
+        <div class="nberN07">
+            {/foreach $resume_skills as $key => $value/}
+            <p class="nberTit2 nberTit2x">
+            <b>{/$value['skill_name']/}</b><span>{/get_name skill_level=$value['skill_level']/}</span>
+            </p>            
+            {//foreach/}
+        </div>
+        {//if/}
+
+        {/if count($resume_certificates) > 0/}
+        <div class="sumeNtit">
+            <em class="titIcon08"></em>
+            证书
+        </div>
+        <div class="nberN07">
+            {/foreach $resume_certificates as $key => $value/}
+            <p class="nberTit2 nberTit2x">
+            <b>{/$value['certificate_name']/}</b><span>{/$value['gain_time']/}获得</span>
+            </p>        
+            {//foreach/}
+        </div>
+        {//if/}
+        
+        {/if count($resume_appends) > 0/}
+        <div class="sumeNtit">
+            <em class="titIcon09"></em>
+            其他信息
+        </div>
+        <div class="nberN07">
+            <ul class="nberN05 nberN05x" style="margin:0;">
+                {/foreach $resume_appends as $key => $value/}
+                {/if $value['topic_desc'] != '' || $value['content'] != ''/}
+                <li>
+                    {/if $value['topic_desc'] != ''/}<b>{/$value['topic_desc']/}：</b>{//if/}
+                    <div>
+                    {/if $value['content'] != ''/}<p>{/html_encode content=$value['content']/}</p>{//if/}
+                    </div>
+                </li>
+                {//if/}
+                {//foreach/}
+            </ul>
+        </div>
+        {//if/}
+        
+        {/if $isshowresumeinfo/}
+        {/if !empty($resume_albums)/}
+        <div class="sumeNtit">
+            <em class="titIcon10"></em>
+            照片展示
+        </div>
+        <ul class="nberN09">
+            {/foreach $resume_albums as $key => $value/}
+            <li><img src="{/base_lib_Constant::YUN_ASSETS_URL_NO_HTTP/}{/$value['photo']/}" style="width:230px;height:230px"/></li>
+            {//foreach/}
+        </ul>
+        {//if/}
+        {/else/}
+        <div class="sumeNtit">
+            <em class="titIcon10"></em>
+            照片展示
+        </div>
+        <div class="nberN08">
+            <div class="nber8bg nber8Last">
+                <!--没数据时显示-->
+                <p class="nberTit2"><b>你暂未通过企业认证，认证后即可查看完整简历</b></p>
+            </div>
+        </div>
+        {//if/}
+
+        {/if count($resume_achievements)>0/}
+        <div class="sumeNtit">
+            <em class="titIcon11"></em>
+            作品展示
+        </div>
+        <ul class="nberN10">
+            {/foreach $resume_achievements as $key_resume_achievement => $value_resume_achievement/}
+            <li data-achievementid="{/$value_resume_achievement['achievement_id']/}" data-des="{/$value_resume_achievement['achievement_description']/}" data-name="{/$value_resume_achievement['achievement_name']/}">
+                <span href="javascript:" data-achievementid="{/$value_resume_achievement['achievement_id']/}">
+                    {/section name=attachment loop = $value_resume_achievement['attachments']/}             
+                    {/if $smarty.section.attachment.first/}                     
+                    {/if $value_resume_achievement['attachments'][attachment].achievement_extension == 'jpg' || $value_resume_achievement['attachments'][attachment].achievement_extension == 'bmp' || $value_resume_achievement['attachments'][attachment].achievement_extension == 'gif'
+                                || $value_resume_achievement['attachments'][attachment].achievement_extension == 'jpeg' || $value_resume_achievement['attachments'][attachment].achievement_extension == 'png'/}    
+                    <img src="{/$value_resume_achievement['attachments'][attachment].achievement_thumb_path/}" />
+                    {/else if ($value_resume_achievement['attachments'][attachment].achievement_extension == 'doc' || $value_resume_achievement['attachments'][attachment].achievement_extension == 'docx')/}  
+                    <img class="defimg" src="{/$siteurl.style/}/img/v2/resumeM/doc.jpg" />
+                    {/else if ($value_resume_achievement['attachments'][attachment].achievement_extension == 'ppt' || $value_resume_achievement['attachments'][attachment].achievement_extension == 'pptx')/}  
+                    <img class="defimg" src="{/$siteurl.style/}/img/v2/resumeM/ppt.jpg" />
+                    {/else if ($value_resume_achievement['attachments'][attachment].achievement_extension == 'xls' || $value_resume_achievement['attachments'][attachment].achievement_extension == 'xlsx')/}  
+                    <img class="defimg" src="{/$siteurl.style/}/img/v2/resumeM/xls.jpg" />
+                    {/else if ($value_resume_achievement['attachments'][attachment].achievement_extension == 'pdf')/}  
+                    <img class="defimg" src="{/$siteurl.style/}/img/v2/resumeM/pdf.jpg" />
+                    {/else if ($value_resume_achievement['attachments'][attachment].achievement_extension == 'txt')/}  
+                    <img class="defimg" src="{/$siteurl.style/}/img/v2/resumeM/txt.jpg" />
+                    {//if/}
+                    {//if/}
+                    {//section/}
+                </span>
+                <a href="javascript:">{/$value_resume_achievement['achievement_name']/}</a>
+                {/foreach $value_resume_achievement['attachments'] as $key_resume_attachment => $value_resume_attachment/}
+                <a class="fancybox-thumbs{/$value_resume_attachment['achievement_id']/}"  data-fancybox-group="thumb" style="display:none" extension="{/$value_resume_attachment['achievement_extension']/}" onclick="return false;" 
+                    {/if $value_resume_attachment['achievement_extension'] == 'jpg' || $value_resume_attachment['achievement_extension'] == 'bmp' || $value_resume_attachment['achievement_extension'] == 'gif' || $value_resume_attachment['achievement_extension'] == 'jpeg' || $value_resume_attachment['achievement_extension'] == 'png'/}
+                    href="{/$attachment_virt_path/}{/$value_resume_attachment['achievement_path']/}"
+                    {/elseif ($value_resume_attachment['achievement_extension'] == 'doc' || $value_resume_attachment['achievement_extension'] == 'docx')/}  
+                    href="{/$siteurl.style/}/img/v2/resumeM/doc_big.jpg" real_heaf="{/$attachment_virt_path/}{/$value_resume_attachment['achievement_path']/}"
+                    {/elseif ($value_resume_attachment['achievement_extension'] == 'ppt' || $value_resume_attachment['achievement_extension'] == 'pptx')/}  
+                    href="{/$siteurl.style/}/img/v2/resumeM/ppt_big.jpg" real_heaf="{/$attachment_virt_path/}{/$value_resume_attachment['achievement_path']/}"  
+                    {/elseif ($value_resume_attachment['achievement_extension'] == 'xls' || $value_resume_attachment['achievement_extension'] == 'xlsx')/}  
+                    href="{/$siteurl.style/}/img/v2/resumeM/xls_big.jpg" real_heaf="{/$attachment_virt_path/}{/$value_resume_attachment['achievement_path']/}"  
+                    {/elseif ($value_resume_attachment['achievement_extension'] == 'pdf')/}  
+                    href="{/$siteurl.style/}/img/v2/resumeM/pdf_big.jpg" real_heaf="{/$attachment_virt_path/}{/$value_resume_attachment['achievement_path']/}"  
+                    {/elseif ($value_resume_attachment['achievement_extension'] == 'txt')/}  
+                    href="{/$siteurl.style/}/img/v2/resumeM/txt_big.jpg" real_heaf="{/$attachment_virt_path/}{/$value_resume_attachment['achievement_path']/}"  
+                    {//if/}
+                >
+                </a>
+                {//foreach/}
+                <script type="text/javascript">fancboxid.push({/$value_resume_achievement['achievement_id']/});</script>                
+            </li>
+            {//foreach/}
+        </ul>
+        {//if/}
+
+        {/if $isshowresumeinfo/}
+        {/if count($resume_practices) > 0/}
+        <div class="sumeNtit">
+            <em class="titIcon12"></em>
+            实践经验
+        </div>
+        <div class="nberN08">
+            {/foreach $resume_practices as $key=>$value/}
+            <div class="nber8bg {/if $value@last/}nber8Last{//if/}">
+                {/if $value['start_time'] || $value['end_time']/}
+                <p class="nberTit1">
+                    {/if empty($value['start_time'])/}开始时间未填写{/else/} {/$value['start_time']/}{//if/}-{/if empty($value['end_time'])/}至今{/else/}{/$value['end_time']/}
+                    {//if/}
+                </p>
+                {//if/}
+                {/if $value['practice_name']!=''/}<p class="nberTit2"><b>{/$value['practice_name']/}</b></p>{//if/}
+                <ul class="nberN05 nberN05x" style="margin:0;">
+                    {/if $value['practice_detail'] != ''/}
+                    <li>
+                        <b>实践经历：</b>
+                        <div>
+                            <p>{/html_encode content=$value['practice_detail']/}</p>
+                        </div>
+                    </li>
+                    {//if/}
+                </ul>
+            </div>
+            {//foreach/}
+        </div>
+        {//if/}
+        {/else/}
+        <div class="sumeNtit">
+            <em class="titIcon12"></em>
+            实践经验
+        </div>
+        <div class="nberN08">
+            <div class="nber8bg nber8Last">
+                <!--没数据时显示-->
+                <p class="nberTit2"><b>你暂未通过企业认证，认证后即可查看完整简历</b></p>
+            </div>
+        </div>
+        {//if/}
+        {/if $isshowresumeinfo/}
+            {/if count($video_list)>0/}
+            <div class="sumeNtit">
+                <em class="titIcon13"></em>
+                视频简历
+            </div>
+            <div class="video_list">
+                <span class="resumeVideoTx">建议使用谷歌或IE9及以上版本浏览器观看或直接使用企业APP<em id="scanSeeVideo">扫码观看</em></span>
+                <ul class="nberN09" style="margin-top: 20px;">
+                    {/foreach $video_list as $video/}
+                        <li data-video='{/$video.video_id/}'>
+                            <img src="{/$video.video_image_url/}" style="width:230px;height:230px">
+                            <i class="play"></i>
+                            <u></u>
+                        </li>
+                    {//foreach/}
+                </ul>
+            </div>
+
+            {//if/}
+        {/else/}
+            <div class="sumeNtit">
+                <em class="titIcon12"></em>
+                视频简历
+            </div>
+            <div class="nberN08">
+                <div class="nber8bg nber8Last">
+                    <!--没数据时显示-->
+                    <p class="nberTit2"><b>你暂未通过企业认证，认证后即可查看完整简历</b></p>
+                </div>
+            </div>
+        {//if/}
+        
+
+        {/if $src=='apply' && !empty($resume_image_list)/}
+        <div class="sumeNtit">
+            <em class="titIcon15"></em>
+            图片简历
+        </div>
+            <div class="photoList">
+                {/foreach $resume_image_list as $value/}
+                    <li>
+                    	<a href="{/$value.full_image_url/}" target="_blank" title="点击查看原图">
+                            <img src="{/$value.full_image_url/}" />
+                    	</a>
+                    </li>
+                {//foreach/}
+            </div>
+        {//if/}
+        {/if !empty($annex)/}
+        <div class="sumeNtit" style="position: relative">
+            <em class="titIconNew16"></em>
+            附件简历
+            {/if $annex['file_type']==1/}
+            <span style="position: absolute; width: 500px; right: -520px; font-size: 12px; color: #999; font-weight: 300;">如无法在线查看，请点击下载： <a href="{/base_lib_Constant::STYLE_URL/}{/$annex['file_list'][0][1]/}">{/$user_name/}的附件.doc</a></span>
+            {//if/}
+        </div>
+            <div class="photoList"  style="position: relative; margin-bottom: 30px; height:{/if $annex['file_type']==2/}auto{/else/}730px{//if/}; overflow: hidden;">
+
+                {/foreach $annex['file_list'] as $value/}
+                {/if $annex['file_type']==2/}
+                    <li>
+                    	<a href="{/base_lib_Constant::STYLE_URL/}{/$value[1]/}" target="_blank" title="点击查看原图">
+                            <img src="{/base_lib_Constant::STYLE_URL/}{/$value[1]/}" />
+                    	</a>
+                    </li>
+                {/else/}
+                <iframe src='https://view.officeapps.live.com/op/view.aspx?src={/base_lib_Constant::STYLE_URL/}{/$value[1]/}' width='100%' height='842' style="position: absolute; top: -88px; bottom:0px; border: none;" frameborder='1'></iframe>
+                {//if/}
+                {//foreach/}
+                
+            </div>
+        {//if/}
+        
+    </div>
+    
+</div>
+
+<!---->
+<iframe id="printIframe"  height="0" width="0" frameborder="0"></iframe>
+<div class="footer">©{/date("Y")/} 汇博网 版权所有</div>
+<input type="hidden" id="have_download_resume" name="have_download_resume" value="{/$downloaded/}" />
+
+<!-------------------------------------------------------------------------2018-05-10 新增修改简历相关------------------------------------------------------------->
+
+
+<ul id="star-alert">
+    {/foreach $resumelevelAll as $level/}
+    <li><i>￥{/$level['consume']/}</i>{/$level['resume_level_name']/}</li>
+    {//foreach/}
+    {/if $member_info == 'not_member'/}<li><a href="{/get_url rule="/index/memberdetail/"/}" target="_blank">成为会员，简历低至2元</a></li>{//if/}
+</ul>
+<!--图片旋转 -->
+    <div class="photo_m_master"></div>
+    <div class="photoMagnify">
+        <p>
+                <!--<span id="imgleft"></span>-->
+                <a href="javascript:;" class="closePhoto"></a>
+                
+        </p>
+        <div id='RouteDataImg'></div>
+        <p class="rotaeTop">
+            <span id="imgright" title="旋转图片"></span>
+        </p>
+    </div>
+<script type="text/javascript">
+//window.console = window.console || (function () {
+//	    var c = {}; c.log = c.warn = c.debug = c.info = c.error = c.time = c.dir = c.profile
+//	    = c.clear = c.exception = c.trace = c.assert = function () { };
+//	    return c;
+//	})();
+	
+var isDownLoad     = false,
+    resume_id      = "{/$resume_id/}",
+    company_id     = "{/$company_id/}",
+    person_id      = "{/$person_id/}";
+
+var ConfirmBox;
+hbjs.use('tools.cookie, widge.overlay.hbDialog, widge.overlay.confirmBox, product.hbCommon', function(cookie, Dialog, confirmBox, hbCommon, $, util) {
+    var isIE = !window.XMLHttpRequest,
+        isIE6 = !-[1,] && isIE;
+    $ = $.extend(hbCommon);
+
+    ConfirmBox = confirmBox;
+    
+    var historyContainer     = $('#historyContainer'),
+        historyList          = historyContainer.children('ul'),
+        historyItem          = historyList.children('li'),
+        historyMore          = historyItem.last(),
+        historyShowMsg       = '隐藏历史记录<i class="hbFntWes">&#xf106;</i>',
+        historyHidMsg        = '显示历史记录<i class="hbFntWes">&#xf107;</i>'   
+
+        //备注
+        $('.smNumber a').click(function(){
+            $('.smNumberUp').slideDown();
+            $(this).hide();
+        })
+        $('.sberUp').click(function(){
+            $('.smNumberUp').slideUp();
+            $('#historyContainer').find('li[isMore="1"]').hide();
+            $('#moreHistory').show();
+            $('.smNumber a').show();
+        })
+        $('#btnMoreHistory').click(function(){
+            $('#moreHistory').hide();
+            $('#historyContainer').find('li[isMore="1"]').show();
+        })
+        
+    {/if !empty($avatar_big)/}
+    $('#avatarImgBox').on('mouseover', function (e) {
+        $.showPhotoHD(this, null, '{/base_lib_Constant::YUN_ASSETS_URL_NO_HTTP/}{/$avatar_big/}');
+    });
+    {//if/}
+
+
+
+    eventName = [
+        '#btnSaveComputer',
+        '#btnNetWorkSuccessInvite',
+        '#btnNetWorkInvite',
+        '#btnFairInvite',
+        '#btnJeject',
+        '#btnGetLinkway2',
+        '#btnRemark',
+        '#btnFav',
+        '#relLnk',
+        '#btnPrint',
+        '#btnDelete',
+        '#btnReport'
+    ];
+ 
+    var dialog_msg_liao = new Dialog({
+        close: '╳',
+        idName: 'liaoyiliao',
+        width: 'auto',
+        title: '提示',
+        isAjax: true,
+        isOverflow : false
+    });
+    var pWidth = 70,
+        fontWidth = 18;
+    
+    function getDomID(name) {
+        return name.replace('#', '');
+    }
+    function showModel(icon, msg) {
+        confirmBox.timeBomb(msg, {
+            name: icon,
+            width: pWidth + msg.length * fontWidth
+        });
+    }
+    
+    $(".save-comp").on("click", ".charge", function() {
+        dialog.hide();
+    })
+
+
+    $('#btnReportClose').on('click', function() {
+        $('#reportLinkway').hide();
+    });        
+ //    $("#go_on_vip").on('click',function(){
+ //        dialog.resetSize('auto').setContent({
+    //      title: '续费',
+    //      content: '{/get_url rule="/account/showApplyVipTipsV2/"/}'
+    //  }).show();
+ //    });
+    
+    // $("#open_vip").on('click',function(){
+    //  dialog.resetSize('auto').setContent({
+    //      title: '开通会员',
+    //      content: '{/get_url rule="/account/showApplyVipTipsV2/"/}'
+    //  }).show();
+                       
+    // });
+    
+    $("body").on("click", "#closeClick", function() {
+        dialog.hide();
+    });
+
+    $('#btnReport2').on('click',function(){
+        report2();
+    });
+
+        dialog_msg = new Dialog({
+            close: '╳',
+            idName: 'buyPoints',
+            width: 400,
+            title: '提示',
+            isAjax: true,
+            isOverflow : false,
+            content: '{/get_url rule="/index/ShowHRManagerMsg/"/}'
+        });
+    $(".save-comp").on("click", '.close', function() {
+        dialog.hide();
+    });
+
+    $('#btnNetWorkSuccessInvite1').on('click', function(){
+
+        var not_area_limit = '{/$not_area_limit/}';
+        if (not_area_limit==0) {
+            dialog_msg.show();return;
+        }
+        $('#btnNetWorkSuccessInvite').trigger('click');
+    });
+    $('#btnNetWorkInvite1').on('click', function(){
+        var not_area_limit = '{/$not_area_limit/}';
+        if (not_area_limit==0) {
+            dialog_msg.show();return;
+        }
+
+        $('#btnNetWorkInvite').trigger('click');
+    });
+    $('#btnJeject1').on('click', function(){
+        $('#btnJeject').trigger('click');
+    });
+
+
+
+    $('#btnGetLinkway22').on('click', function(){
+        var not_area_limit = '{/$not_area_limit/}';
+        if (not_area_limit==0) {
+            dialog_msg.show();return;
+        }
+        $('#btnGetLinkway2').trigger('click');
+    });
+
+    //视频弹窗
+    var lyldialog111 = new Dialog({
+        idName: 'save-comp',
+        title: '视频简历',
+        width: 400,
+        close: 'x',
+        isAjax: true
+    });
+    lyldialog111.setContent('<div class="clearfix" style="padding: 20px 0 20px 20px"><img src="{/get_url rule='/apply/SendToWorkMatePng/'/}?src={/$src/}&resume_id={/$resume_id/}&src_id={/$src_id/}" style="float:left;margin-right: 18px" /><p style="font-size: 14px;color: #333">视频简历</p><p style="font-size: 14px;color: #333;padding-top:5px;margin-bottom: 15px">用汇博企业APP，扫码进入聊天</p><span style="font-size: 12px;color: #666">没有企业APP？<a href="javascript:;" id="downLoadApp">点击下载</a></span></div>');
+    $("#scanSeeVideo").on("click",function(e){
+        lyldialog111.show();
+        lyldialog111.query("#downLoadApp").on("click",function(){
+            lyldialog111.hide();
+            lyldialog.show();
+        });
+        return false;
+    });
+
+    $(".video_list").on("click","li",function(e){
+        var video_id = $(this).attr("data-video");
+        dialog.resetSize("auto").setContent({
+            isOverflow : true,
+            title : '查看视频',
+            content : '{/get_url rule="/resume/ShowVideo/" data="resume_id={/$resume_id/}&video_id=' + video_id + '"/}'
+        }).off('loadComplete').on('loadComplete', function() {
+           
+        }).show();
+    });
+    
+});
+
+hbjs.use('cqjob.fancybox-thumbs', function($) {
+    $.each(fancboxid, function (index, val) {
+        $('.fancybox-thumbs' + val).fancybox({
+            closeBtn  : true,
+            arrows    : true,
+            title : function(current) {
+                if ($(this).attr('extension') == 'jpg'
+                    || $(this).attr('extension') == 'bmp'
+                    || $(this).attr('extension') == 'gif'
+                    || $(this).attr('extension') == 'jpeg'
+                    || $(this).attr('extension') == 'png') {
+
+                    return "<a href='" + $(this).attr('href') + "' target='_blank'>查看原图</a>";
+                } else {
+                    return "<a href='" + $(this).attr('real_heaf') + "' target='_blank'>下载文件</a>";
+                }
+            },
+            maxWidth : 1000,
+            maxHeight : 600,
+            helpers : {
+                title : {
+                    type : 'float'
+                }
+            }
+        }); 
+    });
+
+    $('.nberN10').on('click', 'li span', function (e) {
+        var item = $(e.currentTarget),
+            attrid = item.attr('data-achievementid');
+        $('.fancybox-thumbs' + attrid).eq(0).trigger('click');
+    });
+});
+</script>
+</body>
+</html>

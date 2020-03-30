@@ -1,0 +1,114 @@
+<!doctype html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+<title>{/$title/}</title>
+<!–[if lt IE9]> 
+<script src="{/version file='html5.js'/}"></script>  
+<![endif]–>
+<link rel="stylesheet" type="text/css" href="{/version file="v2-reset.css"/}" />
+<link rel="stylesheet" type="text/css" href="{/version file="comback.css"/}" />
+<link rel="stylesheet" type="text/css" href="{/version file="icons.css"/}" />
+<link rel="stylesheet" type="text/css" href="{/version file="v2-widge.css"/}" />
+<link rel="stylesheet" type="text/css" href="{/version file="v2-pay.css"/}" />
+<link rel="stylesheet" type="text/css" href="{/version file="v2-pay.css"/}" />
+<script type="text/javascript" src="{/version file='version.js'/}"></script>
+<script type="text/javascript">
+window.CONFIG = {
+    HOST: '{/$siteurl.style/}',
+    COMBOPATH: '/js/v2/'
+}
+</script>
+<script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+<script type="text/javascript" src="{/version file='global.js'/}"></script>
+<style>
+.tgj_table{width:100%;margin:20px 0 10px 0}
+.tgj_table th{padding:11px 12px 12px}
+.tgj_table td{padding:12px 5px 11px}
+.tgj_table th,.tgj_table td{border-bottom:1px solid #f2f2f2;text-align: center;color:#444}
+.tgj_table th{border-bottom:1px solid #ccc;}
+#log_type{
+	padding: 5px 10px;
+    border: 1px solid #ccc;
+    background: #fff;
+    margin-left: 5px;
+ }
+</style>
+</head>
+<body id="body">
+{/include file="new_header.html" par="企业管理" cur="资金管理"/}
+<div class="resumentNbg clearfix">
+{/include 'economicnav.html' par="消费记录"/}
+<div id="pay-main" class="rMentRt" style="background:#fff; overflow:hidden;">        
+    <div class="pay-container">
+        <div class="pay-tab">
+            <a href="/pay/paylist">余额消费记录</a>
+            <a href="/spread/history">推广金消费记录</a>
+            <a href="/part/partlist">兼职消费记录</a>
+            <a href="/consumelog/history" class="cur">其他消费记录</a>
+        </div>
+
+        <div style="margin-top: 10px">
+            <span>货币类型</span>
+            <select onchange = "checkLawyerType();" id="log_type">
+                <option value="">不限</option>
+                <option value="1" {/if $log_type == 1/}selected{//if/}>简历点</option>
+                <option value="2" {/if $log_type == 2/}selected{//if/}>刷新点</option>
+                <option value="3" {/if $log_type == 3/}selected{//if/}>精品点</option>
+                <option value="4" {/if $log_type == 4/}selected{//if/}>聊一聊</option>
+                <option value="6" {/if $log_type == 6/}selected{//if/}>短信</option>
+            </select>
+        </div>
+        {/if !empty($items)/}
+        <div style="padding:0px">
+
+            <table class="tgj_table" width="100%">
+                <tr>
+                    <th style="text-align:center;width:250px;">时间</th>
+                    <th style="text-align:center;width:479px;">操作</th>
+                    <th style="text-align:center;width:160px;">操作人</th>
+                    <th style="text-align:center;width:100px">货币类型</th>
+                    <th style="text-align:center;width:100px">详情</th>
+                </tr>
+                 {/foreach $items as $key => $value/}
+                <tr>
+                    <td>{/$value['log_time']/}</td>
+                    <td>{/$value['log_msg']/}</td>
+                    <td>{/$value['user_name']/}</td>
+                    <td>{/$value['log_type']/}</td>
+                    <td>
+                        {/if $value['log_type']=='视频面试'/}
+                        {/$value['point']/}
+                        {/else/}
+                        {/number_format($value['point'], 0)/}
+                        {//if/}
+                    </td>
+                </tr>
+                {//foreach/}
+            </table> 
+            <dl class="clearfix" style="line-height: 25px;margin:0 55px;">
+            </dl>
+            <div class="page">{/$pager/}</div>
+        </div>
+        {/else/}
+        <div class="noData">暂无其他消费记录</div>
+        {//if/}
+    </div>    
+</div>
+</div>
+<div id="sus" class="sus"><a class="backTop hbFntWes" title="返回顶部" href="javascript:void(0);" style="display: none;">&#xf0d8;</a></div>
+{/include file="footer.html"/}
+<section class="floatRT"><a href="{/get_url rule='/about/message' domain='main'/}" target="_blank" class="serviceLink">我有问题要反馈</a><b></b></section>
+<script type="text/javascript">
+    function checkLawyerType() {
+        var objS = document.getElementById("log_type");
+        var get_type = objS.options[objS.selectedIndex].value; //获取选中的货币类型
+        window.location.href='{/get_url rule="/consumelog/history" data="log_type='+get_type+'"/}'
+    };
+</script>
+{/include file="chat/chat.html"/}
+</body>
+</html>
+

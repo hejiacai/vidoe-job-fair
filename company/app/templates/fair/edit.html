@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+</head>
+<body>
+<style>
+.editJobBox{width:500px;}
+.editJobBox .form .formMod{}
+.editJobBox .form .formMod .l{width:70px;}
+.editJobBox .form .formMod .r{width:420px;}
+.editJobBox .formMod .formTextarea textarea.textarea{width:395px; height:100px;}
+.editJobBox .formBtn{margin:0 0 0 76px;}
+</style>
+<div class="dgBox editJobBox">
+	<div class="form">
+		<form id="formEditFairJob" method="post" action="{/get_url rule='/fairjob/jobeditdo'/}">
+        <div class="formMod">
+        	<div class="l">职位名称</div>
+            <div class="r">
+            	<span class="formText"><input name="txtStation" type="text" class="text" style="width:200px;" value="{/$job.station/}" /></span>
+                <span class="tipPos">
+                    <span class="tipLay">
+                    </span>
+                </span>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="formMod">
+        	<div class="l">职位详情</div>
+            <div class="r">
+            	<span class="formTextarea">
+                    <textarea class="textarea" name="txtContent">{/$job.content/}</textarea>
+                </span>
+                <span class="tipPos">
+                    <span class="tipLay">
+                    </span>
+                </span>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <input type="hidden" name="hddmodsceneid" value="{/$job.scene_id/}"/>
+        <input type="hidden" name="hddmodjobid" value="{/$job_id/}"/>
+        <div class="formBtn"><a id="btnEditJob" href="javascript:void(0);" class="btn1 btnsF14">保存</a></div>
+        </form>
+    </div>
+</div>
+<script>
+var editJobValid;
+var editjob={
+	initialize:function(){
+		//初始化控件
+		this._initControl();
+	},
+	_initControl:function(){
+		$.validator.addMethod("validateJobStation", function(value, element) {
+            if (value.caseLength() > 30) {
+                return false;
+            }
+            return true;
+
+        }, '职位名称长度不能大于30<span class="tipArr"></span>');
+		editJobValid = $("#formEditFairJob").validate({
+		    rules: {
+				txtStation: {
+		            required: true,
+		            validateJobStation: true
+		        },
+        		txtContent: { required: true, maxlength: 4000}
+		    },
+		    messages: {
+		    	txtStation:{required:'请输入职位名称<span class="tipArr"></span>'},
+		    	txtContent:{required:'请输入职位详情<span class="tipArr"></span>', maxlength: '职位详情不能超过4000字<span class="tipArr"></span>'}
+		    },
+		    errorElement: 'span',
+		    errorClasses: {
+		    	txtStation: { required: 'tipLayErr tipw180', validateJobStation: 'tipLayErr tipw180'},
+		    	txtContent: { required: 'tipLayErr tipw180', maxlength: 'tipLayErr tipw180'}
+		    },
+		    errorPlacement: function(error, element) {
+				element.parent().nextAll().find('.tipLay').append(error);
+
+		    },
+		    success: function(label) {
+		    	label.text(" ");
+		    }
+		});
+		$('#btnEditJob').click(function(){
+			var data = { operate: 'editJob' };
+            $('#btnEditJob').submitForm({ beforeSubmit: $.proxy(editJobValid.form,editJobValid),data:data, success: editjob.editSuccess, clearForm: false });
+            return false;
+        });
+	},
+	editSuccess:function(json){
+		if (json && json.error){
+			$.message(json.error, { title: "系统提示", icon: "fail" });
+			return;
+		}
+		if (json && json.success) {
+          	//成功
+       		$.anchorMsg(json.success, { onclose: function() {
+       			{/if !empty($obj) && !empty($callback)/}
+       				{/$obj/}.{/$callback/}(json.sceneid);
+       			{//if/}
+       			$('#btnEditJob').closeDialog();
+         	}
+         	});
+	    }
+	}
+};
+editjob.initialize();
+</script>
+</body>
+</html>

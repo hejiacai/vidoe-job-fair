@@ -1,0 +1,148 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+	<!--<link rel="stylesheet" type="text/css" href="{/version file="resumePoint.css"/}" />-->
+</head>
+<body>
+{/if $no_price/}
+	<!--需要充值弹窗-->
+	<div class="gainContact">
+		<div class="gainCon01">
+			<span>{/$params['name']/}简历：<em>￥{/$params['price']/}</em></span>
+			<span>现金余额：<em>￥{/sprintf("%.1f", $params['account_overage'])/}</em></span>
+			<a target="_blank" href='{/get_url rule="/pay/"/}'>立即充值</a>
+		</div>
+		<span class="contMoney02">联系方式3个月内查看无需重复付费，如需保留请导出保存本地</span>
+		<div class="gainTact">
+			<ul class="tactLeft">
+				<li class="odd"><b>1星</b><span>1简历点</span><em>原价￥10</em></li>
+				<li><b>2星</b><span>3简历点</span><em>原价￥20</em></li>
+				<li class="odd"><b>3星</b><span>6简历点</span><em>原价￥30</em></li>
+				<li><b>4星</b><span>10简历点</span><em>原价￥40</em></li>
+				<li class="odd"><b>5星</b><span>15简历点</span><em>原价￥60</em></li>
+			</ul>
+			<div class="tactRigth">
+				<div class="pointPhone02">
+					<span>028-62520468<em>王先生</em></span>
+					<span>17784306172&nbsp;<em>廖女士</em></span>
+				</div>
+				<span class="tact01">更多优惠</span>
+				<div class="tactTit02">
+					<span>收到简历全免费 </span>
+					<span>职位优先展示 </span>
+					<span style="width:85px">职位自动刷新</span>
+					<span>职位发布上限100</span>
+					<span>面试短信免费...</span>
+				</div>
+				<div class="tact03">
+					<a href="#" class="tactBtn">电话咨询</a>
+					<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=2851501286&site=qq&menu=yes">在线沟通</a>
+					<a href='{/get_url rule="/index/memberdetail/"/}' target="_blank" style="margin-right: 0;">更多介绍</a>
+				</div>
+			</div>
+		</div>
+	</div>
+{/else/}
+	{/if $params['code'] == base_service_company_resources_code::DOWNLOAD_USE_POINT/}
+	<!--简历点弹窗-->
+	<dl class="gainContMoney">
+		<dt>
+			<img src="{/$siteurl.style/}/img/company/cjl.jpg"/>
+		</dt>
+		<dd>
+			<div class="contMoney01">
+				<span>{/$params['name']/}简历：<em>{/$params['point']/}简历点</em></span>
+				<span>简历点余额：<em>{/$companyresources['over_resume_down_num']/}简历点</em></span>
+			</div>
+			<span class="contMoney02">联系方式3个月内查看无需重复付费，如需保留请导出保存本地</span>
+			<a id="btnDeduct" href="javascript:void(0);" class="contMoney03">立即获取联系电话</a>
+		</dd>
+	</dl>
+	{/else/}
+	<div class="gainContact">
+		<div class="gainCon01">
+			{/if $params['code'] == base_service_company_resources_code::DOWNLOAD_USE_SPREAD/}
+			<!--推广金-->
+			<span>{/$params['name']/}简历：<em>{/$params['price']/}推广金</em></span>
+			<span>推广金余额：<em>{/$companyresources['spread_overage']/}</em></span>
+			{/else/}
+			<!--余额支付-->
+			<span>当前余额：<em>￥{/sprintf("%.1f", $companyresources['account_overage'])/}</em></span>
+			<span>{/$params['name']/}简历：<em>￥{/$params['price']/}</em></span>
+			{//if/}
+			<a id="btnDeduct" href="javascript:void(0);">立即获取联系电话</a>
+		</div>
+		<span class="contMoney02">联系方式3个月内查看无需重复付费，如需保留请导出保存本地</span>
+		<div class="gainTact">
+			<ul class="tactLeft">
+				<li class="odd"><b>1星</b><span>1简历点</span><em>原价￥10</em></li>
+				<li><b>2星</b><span>3简历点</span><em>原价￥20</em></li>
+				<li class="odd"><b>3星</b><span>6简历点</span><em>原价￥30</em></li>
+				<li><b>4星</b><span>10简历点</span><em>原价￥40</em></li>
+				<li class="odd"><b>5星</b><span>15简历点</span><em>原价￥60</em></li>
+			</ul>
+			<div class="tactRigth">
+				<div class="pointPhone02">
+					<span>028-62520468<em>王先生</em></span>
+					<span>17784306172&nbsp;<em>廖女士</em></span>
+				</div>
+				<span class="tact01">更多优惠</span>
+				<div class="tactTit02">
+					<span>收到简历全免费 </span>
+					<span>职位优先展示 </span>
+					<span style="width:85px">职位自动刷新</span>
+					<span>职位发布上限100</span>
+					<span>面试短信免费...</span>
+				</div>
+				<div class="tact03">
+					<a href="#" class="tactBtn">电话咨询</a>
+					<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=2851501286&site=qq&menu=yes">在线沟通</a>
+					<a href='{/get_url rule="/index/memberdetail/"/}' target="_blank" style="margin-right: 0;">更多介绍</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	{//if/}
+{//if/}
+
+
+<script type="text/javascript">
+
+try{
+	hbjs.use('cqjob.jobValidate, cqjob.jobForm, cqjob.jobDialog, tools.cookie', function($, form, jobDialog, cookie){
+		factory($.extend(form, jobDialog), cookie);
+        $('.tactBtn').hover(function(){
+            $('.pointPhone02').toggle();
+        });
+	});
+} catch (ex) {
+	factory($);
+}
+function factory($, cookie) {
+	var isdownloadTrue = true;
+	$('#btnDeduct').on('click', function() {
+		if(isdownloadTrue){
+			isdownloadTrue = false;
+			isDownLoad = true;
+			if ($('#chkdeductPro').is(':checked')) {
+				cookie ? cookie.set('downresumeprompt', 'true') : writeCookie('downresumeprompt','true');
+			}
+			
+			{/if $recommend_id/}
+			var recommend_id = {/$recommend_id/};
+			var resume_id    = {/$resume_id/};
+			recommend.resumeDown(resume_id, recommend_id);
+			{//if/}
+	
+			dialog.hide();
+		}
+		
+	});
+}
+</script>
+</body>
+</html>

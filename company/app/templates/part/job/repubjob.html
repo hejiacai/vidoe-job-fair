@@ -1,0 +1,935 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+<title>{/$title/}</title>
+<!–[if lt IE9]> 
+<script type="text/javascript" language="javascript" src="{/version file='html5.js'/}"></script>
+<![endif]–>
+<link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='v2-reset.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='comback.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='tJob_style.css'/}" />
+
+<script type="text/javascript" src="{/version file='version.js'/}"></script>
+<script type="text/javascript">
+window.CONFIG = {
+	HOST: '{/$siteurl.style/}',
+	COMBOPATH: '/js/v2/'
+}
+</script>
+<script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+<script type="text/javascript" src="{/version file="global.js"/}"></script>
+<script type="text/javascript">
+hbjs.loadJS('{/$siteurl.style/}/js/v2/cqjob/common.js');
+</script>
+<script type="text/javascript" src="//api.map.baidu.com/api?v=2.0&ak=33f9256a1a1ba5a80eb40f8ed45bce3c"></script>
+<style>
+.all input {margin-right: 2px; vertical-align: middle;}
+input:disabled{background-color:#f0f0f0!important;}
+.contactWayLst{padding:5px;zoom:1;padding:10px;background:#f1f1f1;}
+.contactWayLst p{margin-bottom:10px}
+.contactWayLst p label{width:615px;margin-left:5px}
+</style>
+</head>
+<body class="tjob_main">
+	<!---延用以前-->
+	{/include file="new_header.html" par="兼职招聘" cur="职位管理"/}
+	<!---延用以前 end--> 
+    <!--new-->
+    <div class="tjob_from">
+    	<p class="tjob_from_title"><strong>重新发布职位</strong></p>
+    	<div class="alert_box"><img src="{/$siteurl.style/}/img/part/new_iconcomp01.png" />重新发布后，需要重新进行审核 </div>
+    	<div class="from">
+    		<form id="tjobForm">
+    			<div class="formMod">
+                    <div class="l">兼职名</div>
+                    <div class="r">
+                        <span class="formText">
+                            <input type="text" value="{/if $jobdata['station']/}{/$jobdata['station']/}{//if/}" placeholder="兼职名" name="txtStation" class="text">
+                        </span>
+                        <span class="tipPos">
+                            <span class="tipLay">
+                            <span data-for="txtStation" generated="true" class="tipBar tipw120"></span></span>
+                        </span>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="formMod">
+                    <div class="l">兼职类型</div>
+                    <div class="r">
+                    	<div id="jobTypeSelecter" class="dropv2" style="width:359px">
+                        	<b class="hbFntWes dropIco">&#xf0d7;</b>
+                            <label style="color:#ccc">请选择兼职类型</label>
+                        </div>
+                        <span class="tipPos">
+                            <span class="tipLay">
+                            <span data-for="jobType" generated="true" class="tipBar tipw120"></span></span>
+                        </span>
+                     </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="formMod">
+                    <div class="l">是否对求职者收费</div>
+                    <div class="r">
+                        <div id="feeSelect" class="dropv2" style="width:110px">
+                            <b class="hbFntWes dropIco">&#xf0d7;</b>
+                            <label></label>
+                        </div>
+                        <span id="feeDetail" class="formText" style="display:none">
+                            <input type="text" value="{/$jobdata['fee']/}" name="txtFeeDetail" class="text" style="width:100px;margin-left:20px;">
+                            <span class="tjob_dayTxt">元</span>
+                        </span>
+                        <span id="feeTip" class="formText" style="display:none">
+                            <span class="tjob_dayTxt">承诺免费后如被举报对求职者收费，会被关闭招聘资格</span>
+                        </span>
+                        <span class="tipPos">
+                            <span class="tipLay">
+                                <span data-for="txtFee" generated="true" class="tipBar tipw120" style="width:150px;"></span>
+                            </span>
+                        </span>
+                        <span class="tipPos">
+                            <span class="tipLay">
+                                <span data-for="txtFeeDetail" generated="true" class="tipBar tipw120"></span>
+                            </span>
+                        </span>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="formMod">
+                        <div class="l">工作周期</div>
+                        <div id="phoneDiv" class="r" style="width:480px;">
+                            <span class="formText">
+                                <input type="text" id="stime" name="stime" class="text" style="width:166px;#width:165px;" readonly="readonly" {/if $jobdata['long_recruit']==1/}disabled="disabled"{//if/}>
+                            </span>
+                            <span class="tipTxt">-&nbsp;</span>
+                            <span class="formText">
+                                <input type="text" id="etime" name="etime" class="text" style="width:166px;#width:164px;" readonly="readonly" {/if $jobdata['long_recruit']==1/}disabled="disabled"{//if/}>
+                            </span>
+                            <span class="formText" style="margin:7px 0px 0 10px;">
+                                <input type="checkbox" value="1" name="long_recruit" id="recruitchb" style="display:inline-block; vertical-align:-2px;" {/if $jobdata['long_recruit']==1/}checked="checked"{//if/}>
+                                <label for="recruitchb">长期招聘</label>
+                            </span>
+                            <span class="tipPos">
+                                <span class="tipLay">
+                                <span data-for="rtime" generated="true" class="tipBar tipw120"></span></span>
+                            </span>
+                            <div class="clear"></div>
+                            <table class="tjob_timetable" style="float:left">
+                        	<tr>
+                        		<th>&nbsp;</th>
+                        		<th>周一</th>
+                        		<th>周二</th>
+                        		<th>周三</th>
+                        		<th>周四</th>
+                        		<th>周五</th>
+                        		<th>周六</th>
+                        		<th>周日</th>
+                        	</tr>
+                        	<tr>
+                        		<th>上午</th>
+                        		{/foreach $freetime['01'] as $k=>$v/}
+                        		<td><input data-mark='isneed' {/if in_array($k,$jobfreetime)/}checked="checked"{//if/} name='worktime[]' type="checkbox" value='{/$k/}'/></td>
+                        		{//foreach/}
+                        	</tr>
+                        	<tr>
+                        		<th>下午</th>
+                        		{/foreach $freetime['02'] as $k=>$v/}
+                        		<td><input data-mark='isneed' {/if in_array($k,$jobfreetime)/}checked="checked"{//if/} name='worktime[]' type="checkbox" value='{/$k/}'/></td>
+                        		{//foreach/}
+                        	</tr>
+                        	<tr>
+                        		<th>晚上</th>
+                        		{/foreach $freetime['03'] as $k=>$v/}
+                        		<td><input {/if in_array($k,$jobfreetime)/}checked="checked"{//if/} name='worktime[]' type="checkbox" value='{/$k/}'/></td>
+                        		{//foreach/}
+                        	</tr>
+                        </table>
+                        <span class="tipPos" style="margin-top:10px">
+                            <span class="tipLay">
+                            <span data-for="worktime[]" generated="true" class="tipBar tipw120"></span></span>
+                        </span>
+                        <div class="clear"></div>
+                        
+                        <span style="display:block;float:left">请点击勾选你的工作时间</span>
+                        <label class="all" style='float:right;margin-right:110px;#margin-right:110px'><input id="upAllSelect" style="display:inline-block;vertical-align: -2px;margin-right:4px;" type="checkbox" class="chb" />全选</label>
+                        </div>
+                        <div class="clear"></div>
+                </div>
+                <div class="formMod">
+                    <div class="l">详细时间</div>
+                    <div class="r">
+                        <span class="formTextarea">
+                            <textarea name="timeInfo" class="textarea" placeholder="非必填，填写如每天上班时间等信息">{/if $jobdata['time_detail']/}{/$jobdata['time_detail']/}{//if/}</textarea>
+                        </span>
+                        <span class="tipPos">
+                            <span class="tipLay">
+                            <span data-for="timeInfo" generated="true" class="tipBar tipw120"></span></span>
+                        </span>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="formMod">
+                    <div class="l">招聘人数</div>
+                    <div class="r">
+                        <span class="formText">
+                            <input type="text" {/if $jobdata['apply_count']/}value="{/$jobdata['apply_count']/}"{//if/} placeholder="请输入你要招聘的人数" name="applynums" class="text" style="width:200px">&nbsp;&nbsp;人
+                        </span>
+                        <span class="tipPos">
+                            <span class="tipLay">
+                            <span data-for="applynums" generated="true" class="tipBar tipw120"></span></span>
+                        </span>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="formMod">
+                    <div class="l">性别要求</div>
+                    <div class="r">
+                        <div id="sexSelecter" class="dropv2" style="width:110px">
+                        	<b class="hbFntWes dropIco">&#xf0d7;</b>
+                            <label>不限</label>
+                        </div>
+                    </div>
+                    <div class="l" style="width:138px">学历要求</div>
+                    <div class="r">
+                        <div id="degreeSelecter" class="dropv2" style="width:110px">
+                        	<b class="hbFntWes dropIco">&#xf0d7;</b>
+                            <label>不限</label>
+                        </div>
+                        
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="formMod">
+                    <div class="l">工资待遇</div>
+                    <div class="r">
+                    	<span class="formText">
+                            <input type="text" {/if $jobdata['salary']/}value="{/$jobdata['salary']/}"{//if/} placeholder="请输入工资" name="salary" class="text" style="width:116px">
+                        </span>
+                        
+                        <div id="priceSelecter1" class="dropv2" style="float:left;width:110px;margin-left:10px">
+                        	<b class="hbFntWes dropIco">&#xf0d7;</b>
+                            <label>元/天</label>
+                        </div>
+                        
+                        <div id="priceSelecter2" class="dropv2" style="float:left;width:110px;margin-left:10px">
+                        	<b class="hbFntWes dropIco">&#xf0d7;</b>
+                            <label>日结</label>
+                        </div>
+                        
+                        <span class="tipPos">
+                            <span class="tipLay">
+                            <span data-for="salary" generated="true" class="tipBar tipw120"></span></span>
+                        </span>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="formMod">
+                    <div class="l">工作地点</div>
+                    <div class="r addressMod" style="z-index:7">
+                        <span class="formText zIndex" id="curarea" style="z-index:7"></span>
+                    	<span class="formText">
+                            <input type="text" value="{/$jobdata['address']/}" placeholder="请输入详细地点" id='txtAddress' name="txtAddress" class="text" style="width:138px">
+                        </span>
+                        <span class="tipPos">
+                            <span class="tipLay">
+                            <span data-for="dataAddress" generated="true" class="tipBar tipw120"></span></span>
+                        </span>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                 <div class="formMod">
+                    <div class="l">地图标注</div>
+                    <div class="r" style="position:relative" >
+                        <span id="mapCon" class="formMap" style="width:370px;height:200px;border:1px solid #d5d5d5"></span>
+                        <div id="mapTip" class="mapTip" style="bottom:10px;left:20px"><a href="javascript:">保存</a>请将下面的图标拖动到工作地点后，点击保存</div>
+                        <input type="hidden" id="hidMapX" name="hidMapX" value="{/if $jobdata['map_x']/}{/$jobdata['map_x']/}{//if/}" />
+                        <input type="hidden" id="hidMapY" name="hidMapY" value="{/if $jobdata['map_x']/}{/$jobdata['map_y']/}{//if/}" />
+                        <input type="hidden" id="saveMap" name="saveMap" value="" />
+                        <span class="tipPos">
+                            <span class="tipLay">
+                            <span data-for="saveMap" generated="true" class="tipBar tipw120"></span></span>
+                        </span>
+                        
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="formMod">
+                    <div class="l">工作要求</div>
+                    <div class="r">
+                        <span class="formTextarea">
+                            <textarea name="workContent" class="textarea" placeholder="请输入你对该兼职的工作要求及工作内容的描述">{/if $jobdata['position_require']/}{/$jobdata['position_require']/}{//if/}</textarea>
+                        </span>
+                        <span class="tipPos">
+                            <span class="tipLay">
+                            <span data-for="workContent" generated="true" class="tipBar tipw120"></span></span>
+                        </span>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="formMod">
+                    <a name="info" id="info"></a>
+                    <div class="l">是否需要面试</div>
+                    <div class="r tjob_miansi">
+                       <label style="float:left; margin-left:20px"><input type="radio" {/if $jobdata['need_invite']/}checked="checked"{//if/} name='needinvite' value='1'/>是</label>
+                       <label style="float:left"><input type="radio" {/if !$jobdata['need_invite']/}checked="checked"{//if/} name='needinvite' value='0'/>否</label>
+                       <span class='tips'>求职者报名后是否需要面试再录用</span>
+                       <span class="tipPos">
+                            <span class="tipLay">
+                            <span data-for="needinvite" generated="true" class="tipBar tipw120"></span></span>
+                        </span>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <!--<div class="formMod">-->
+                    <!--<div class="l">咨询电话</div>-->
+                    <!--<div class="r">-->
+                        <!--<span class="formText">-->
+                            <!--<input type="text" value="{/if $jobdata['link_tel']/}{/$jobdata['link_tel']/}{//if/}" placeholder="请输入提供给求职者咨询的电话" name="linkway" class="text">-->
+                        <!--</span>-->
+                        <!--<span class="tipPos">-->
+                            <!--<span class="tipLay">-->
+                            <!--<span data-for="linkway" generated="true" class="tipBar tipw120"></span></span>-->
+                        <!--</span>-->
+                    <!--</div>-->
+                    <!--<div class="clear"></div>-->
+                <!--</div>-->
+
+                <div class="formMod">
+                    <div class="l">职位发布人</div>
+                    <div class="r">
+                        <span class="formText">
+                            <select name="param_account_id" style="float:left;margin-top: 4px;min-width: 120px;height:30px">
+                                {/foreach $company_account_info as $v/}
+                                <option id="account_info_{/$v['account_id']/}" data-mobile="{/$v['mobile_phone']/}" data-link="{/$v['link_tel']/}" value="{/$v['account_id']/}" {/if $v['account_id'] == $jobdata['account_id']/}selected{//if/} > {/$v['user_name']/}</option>
+                                {//foreach/}
+                            </select>
+                        </span>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="formMod">
+                    <div class="l">联系方式</div>
+                    <div class="r contactWayLst">
+                        <p><input class="radio" name="newLinkway" id="way1" value="4" {/if empty($jobdata['link_way']) || $jobdata['link_way'] == 4/}checked="checked"{//if/} type="radio"><label for="way1">发布人手机号 <em id="u_moblie">{/$company_account_info[$jobdata['account_id']]['mobile_phone']/}</em></label></p>
+                        <p><input class="radio" name="newLinkway" id="way3" value="5" {/if $jobdata['link_way'] == 5/}checked="checked"{//if/} type="radio"><label for="way1">发布人办公电话<em id="u_tel">{/$company_account_info[$jobdata['account_id']]['link_tel']/}</em></label></p>
+                        <p><input class="radio" name="newLinkway" id="way2" value="1" {/if $jobdata['link_way'] == 1/}checked="checked"{//if/} type="radio"><label for="way2">其他电话</label></p>
+                        <div class="newContact" style="{/if $jobdata['link_way'] != 1/}display:none;{//if/}">
+                            <ul>
+                                <li>
+                                    <span class="formText"><label class="txtLabel" for="txtLinkTel" style="display: block;"></label>
+                                        <input id="txtLinkTel" name="txtLinkTel" {/if $jobdata['link_way'] != 1/}disabled="disabled"{//if/}   value="{/$jobdata['link_tel']/}" style="width:120px;" class="text conPeople watermark"  type="text">
+                                    </span>
+                                    <span class="formText" style="margin-left:10px;"><label class="txtLabel" for="txtLinkPart" style="display: block;"></label>
+                                        <input id="txtLinkPart" name="txtLinkPart" {/if $jobdata['link_way'] != 1/}disabled="disabled"{//if/}  value="{/$jobdata['link_part']/}" style="width:80px;" class="text conPhone watermark"  type="text">
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="tipPos" style="top:97px;left:10px">
+                     <span id="error_txtLinkTel">
+                            <span class="tipLay">
+                            <span data-for="txtLinkTel" generated="true" class="tipBar tipw120"></span></span>
+                        </span>
+                        <span id="error_txtLinkPart">
+                            <span class="tipLay">
+                            <span data-for="txtLinkPart" generated="true" class="tipBar tipw120"></span></span>
+                        </span>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+
+                <div class="formMod">
+                    <div class="l">职位有效期</div>
+                    <div class="r">
+                        <span class="formText">
+                            <input type="text" value="{/if $jobdata['valid_days']/}{/$jobdata['valid_days']/}{//if/}" name="txtValidDays" class="text" style="width:80px">
+                        </span>
+                        <span class="tjob_dayTxt" style="float:left">天</span>
+                        <span class="tjob_txt" style="float:left">最多20天，如需更久请在过期后重新发布</span>
+                        <span class="tipPos">
+                            <span class="tipLay">
+                            <span data-for="txtValidDays" generated="true" class="tipBar tipw120"></span></span>
+                        </span>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="formBtn"><a class="btnsF16 btn1" id="btnSaveAddress" href="javascript:void(0);">提交</a></div>
+           	</form>
+    	</div>    	
+    </div>
+    <!--new end-->
+{/include file="footer.html"/}
+
+<script type="text/javascript">
+hbjs.use('tools.cookie, widge.select, widge.calendar.calendar, widge.validator.form, widge.overlay.confirmBox, product.hbCommon, cqjob.areaSimple', function(cookie, Select, Calendar, ValidatorForm, ConfirmBox, $, areaSimple){
+	$('#upAllSelect').click(function(){
+		ischecked = $(this).attr('checked');
+		allcheck = $('input[data-mark="isneed"]');
+		if(ischecked == 'checked'){
+			allcheck.each(function(i){
+				$(this).attr('checked',true);
+			});
+		}else{
+			allcheck.each(function(i){
+				$(this).attr('checked',false);
+			});
+		}		
+	});
+	$.extend(areaSimple);
+	$('input:text, textarea').placeHolder();
+	var pWidth = 70,
+		fontWidth = 18;
+
+	$('input:text, textarea').placeHolder();
+
+
+    //联系人和联系电话相关
+    var newLinkWayRadio = $(':input[name="newLinkway"]');
+    var _tmp_phone = '{/$jobdata['link_tel']/}';
+    var _tmp_part = '{/$jobdata['link_part']/}';
+    var linkMan_controll = {
+        init:function(){
+            newLinkWayRadio.click(function(){
+                if($(this).val() == '1'){
+                    $('div.newContact').show();
+                    $('div.newContact').find(':input').attr('disabled',false);
+                    //增加错误判断
+                    $('input[name=txtLinkTel]').val(_tmp_phone).focus().blur();
+                    $('input[name=txtLinkPart]').val(_tmp_part).focus().blur();
+                } else {
+                    if(15811111111 != $('input[name=txtLinkTel]').val())
+                        _tmp_phone = $('input[name=txtLinkTel]').val();
+                    if('00000' != $('input[name=txtLinkPart]').val())
+                        _tmp_part = $('input[name=txtLinkPart]').val();
+                    if($(this).val() == '4'){
+                        if(!$('#u_moblie').html()){
+                            $.message("该发布人没有填写手机号哟~", {title: "操作提示", icon: "fail"});
+                        }
+                    }
+                    $('div.newContact').hide();
+                    $('div.newContact').find(':input').attr('disabled','disabled');
+                    //取消错误判断
+                    $('input[name=txtLinkTel]').val('15811111111').focus().blur();
+                    $('input[name=txtLinkPart]').val('00000').focus().blur();
+
+
+
+                }
+            });
+            $('select[name=param_account_id]').change(function(){
+                $('#u_moblie').html($('#account_info_'+$(this).val()).attr('data-mobile'));
+                $('#u_tel').html($('#account_info_'+$(this).val()).attr('data-link'));
+            });
+        }
+    };
+    linkMan_controll.init();
+
+
+	var jobTypeSelecter = new Select({
+        trigger: $('#jobTypeSelecter'),
+        className: 'dropv2_select',
+        align: {baseXY: [0, '100%-1']},
+        selectName: 'jobType',
+        dataSource: [{label: '请选择兼职类型', value: ''}].concat({/$partjobsorts/}),
+        maxHeight: 200,
+        selectedValue: "{/$jobdata['jobsort_id']/}",
+        selectCallback: {
+            isDefault: true
+        }
+    });
+    
+    var sexSelecter = new Select({
+        trigger: $('#sexSelecter'),
+        className: 'dropv2_select',
+        align: {baseXY: [0, '100%-1']},
+        selectName: 'sex',
+        dataSource: [{label: '不限', value: '0'}].concat({/$sex/}),
+        selectedValue: "{/$jobdata['sex']/}",
+        selectCallback: null
+    });
+    
+    var degreeSelecter = new Select({
+        trigger: $('#degreeSelecter'),
+        className: 'dropv2_select',
+        align: {baseXY: [0, '100%-1']},
+        selectName: 'degree',
+        dataSource: [{label: '不限', value: '0'}].concat({/$degree/}),
+        selectedValue: "{/$jobdata['degree']/}",
+        maxHeight: 200,
+        selectCallback: null
+    });
+    
+    var priceSelecter1 = new Select({
+        trigger: $('#priceSelecter1'),
+        className: 'dropv2_select',
+        align: {baseXY: [0, '100%-1']},
+        selectName: 'txtUnit',
+        dataSource: [{label: '请选择', value: '0'}].concat({/$units/}),
+        selectedValue: "{/$jobdata['salary_unit']/}",
+        selectCallback: null
+    });
+    
+    var priceSelecter2 = new Select({
+        trigger: $('#priceSelecter2'),
+        className: 'dropv2_select',
+        align: {baseXY: [0, '100%-1']},
+        selectName: 'txtType',
+        dataSource: [{label: '请选择', value: '0'}].concat({/$salarytypes/}),
+        selectedValue: "{/$jobdata['salary_type']/}",
+        selectCallback: null
+    });
+
+    var feeSelect = new Select({
+        trigger: $('#feeSelect'),
+        className: 'dropv2_select',
+        align: {baseXY: [0, '100%-1']},
+        selectName: 'txtFee',
+        dataSource: [{label: '请选择', value: ''}, {label: '免费', value: '1'}, {label: '收费', value: '2'}],
+        selectedIndex: {/intval($jobdata['fee_type'])/},
+        selectCallback: {
+            isDefault: true
+        }
+    });
+
+	var t1 = '2012-01-01';
+	var t2 = '2028-01-01';
+	var c1 = new Calendar({
+		trigger: $('#stime'), 
+		range: [t1, null]
+	})
+	var c2 = new Calendar({
+		trigger: $('#etime'),
+		range: [null, t2]
+	})
+	
+	c1.on('selectDate', function(date){
+		c2.range([date.value, t2]);
+	});
+	c2.on('selectDate', function(date){
+		c1.range([t1, date.value]);
+	});
+	
+	function checkPriceLength(element, param){
+		var val = element.val(),
+			index = val.indexOf('.'),
+			subval = val.substring(0, index < 0 ? val.length : index);
+		return subval.length < 5;
+	}
+	
+	var rules = {
+			txtStation: {
+				required: true,
+				match: /^[\u4e00-\u9fa5_a-zA-Z0-9]+$/,
+				range: [3, 12]
+			},
+			jobType: 'required',
+			stime: 'required',
+			etime: 'required',
+            txtFee: 'required',
+			timeInfo: {
+				max: 50
+			},
+			applynums: {
+				required: true,
+				rangeNum: [1, 999]
+			},
+			salary: {
+				required: true,
+				price: true
+			},
+			hidArea: {
+				match: /^(030\d{3}|031[0-245]\d{2}|0313|031[6789]|03[2-9]\d)$/
+			},
+			txtAddress: {
+				required: true,
+				max: 30
+			},
+			saveMap: 'required',
+			workContent: {
+				required: true,
+				min: 20,
+				max: 500
+			},
+            txtLinkTel: 'required phone',
+            txtLinkPart:{
+                match: /^[0-9]{0,5}$/
+            },
+			needinvite: {
+				required: true
+			},
+			txtValidDays: {
+				required: true,
+				match: /^(0|[1-9]\d*)$/,
+				number: true,
+				rangeNum: [1, 20]
+			}
+		},
+		errorMsgs = {
+			txtStation: {
+				required: '请输入兼职名<span class="tipArr"></span>',
+				match: '请输入正确的兼职名<span class="tipArr"></span>',
+				range: '请输入3-12个字<span class="tipArr"></span>'
+			},
+			jobType: '请选择兼职类型<span class="tipArr"></span>',
+			stime: '请选择开始时间<span class="tipArr"></span>',
+			etime: '请选择结束时间<span class="tipArr"></span>',
+			timeInfo: '最多输入50个字<span class="tipArr"></span>',
+            txtFee: '请选择是否对求职者收费<span class="tipArr"></span>',
+			applynums: {
+				required: '请输入招聘人数<span class="tipArr"></span>',
+				rangeNum: '请输入4位以下数字<span class="tipArr"></span>'
+			},
+			salary: {
+				required: '请输入工资<span class="tipArr"></span>',
+				price: '格式不正确，请输入正确的工资<span class="tipArr"></span>',
+				checkPriceLength: '请输入五位以下数字<span class="tipArr"></span>'
+			},
+			hidArea: '请选择乡镇<span class="tipArr"></span>',
+			txtAddress: {
+				required: '请输入详细地址<span class="tipArr"></span>',
+				max: '最多输入30个字<span class="tipArr"></span>'
+			},
+			saveMap: '请选择地图标注后保存<span class="tipArr"></span>',
+			workContent: {
+				required: '请输入工作要求<span class="tipArr"></span>',
+				min: '最少输入20字<span class="tipArr"></span>',
+				max: '最多输入500字<span class="tipArr"></span>'
+			},
+            txtLinkTel: {
+                required: '请输入联系电话<span class="tipArr"></span>',
+                phone: '请输入正确的联系电话<span class="tipArr"></span>'
+            },
+            txtLinkPart:{
+                match: '请输入1-5位的分机号<span class="tipArr"></span>'
+            },
+			needinvite: {
+				required: '请选择是否需要面试<span class="tipArr"></span>'
+			},
+			txtValidDays: {
+				required: '请输入有效期<span class="tipArr"></span>',
+				match: '请输入正确的数字<span class="tipArr"></span>',
+				number: '请输入数字<span class="tipArr"></span>',
+				rangeNum: '请输入1-20<span class="tipArr"></span>'
+			}
+		};
+	rules['worktime\[\]'] = 'required';
+	errorMsgs['worktime\[\]'] = '请勾选工作时间<span class="tipArr"></span>';
+	
+	var tjobForm = $('#tjobForm');
+	var validator = new ValidatorForm({
+		element: tjobForm,
+		rules: rules,
+		errorMessages: errorMsgs,
+		errorElement: 'span.tipBar',
+		groups: {
+			rtime: 'stime etime',
+			dataAddress: 'hidArea txtAddress'
+		},
+		keepKey: true
+	});
+	validator.addMethod('checkPriceLength', checkPriceLength);
+	validator.addRules('salary', 'checkPriceLength');
+
+
+    function addRulesTime(){
+        validator.addRules('stime', 'required');
+        validator.addRules('etime', 'required');
+        validator.addErrorMessages('stime', '请选择开始时间<span class="tipArr"></span>');
+        validator.addErrorMessages('etime', '请选择结束时间<span class="tipArr"></span>');
+        validator.addGroup({rtime: 'stime etime'});
+    }
+    function removeRulesTime(){
+        validator.removeGroup('rtime');
+    }
+    
+    var recruitchb = $('#recruitchb');
+    if(recruitchb.is(':checked')){
+        removeRulesTime();
+    } else {
+        addRulesTime();
+    }
+    
+    recruitchb.click(function(){
+        var ischecked = $(this).is(':checked');
+        if(ischecked){
+            removeRulesTime();
+            recruitchb.parent().next('.tipPos').find('.tipLay').attr('style','display:none;');
+            $('#etime').val('').css('background-color','#f0f0f0').attr('disabled','disabled');
+            $('#stime').val('').css('background-color','#f0f0f0').attr('disabled','disabled');
+        } else {
+            addRulesTime();
+            recruitchb.parent().next('.tipPos').find('.tipLay').removeAttr('style');
+            $('#etime').css('background-color','#fff').removeAttr('disabled');
+            $('#stime').css('background-color','#fff').removeAttr('disabled');
+        }       
+    });
+    
+
+
+
+
+    var hidFeeDetailRules = {txtFeeDetail: {required:true, match:/^([1-9][\d]{0,7}|0)(\.[\d]{1,2})?$/}},
+        hidFeeDetailMsg = {txtFeeDetail: {required:'请输入金额<span class="tipArr"></span>',match:'请输入正确的金额<span class="tipArr"></span>'}}
+
+    if (feeSelect.attrs.selectedIndex == 2) {
+        $("#feeDetail").show();
+        validator.addRules(hidFeeDetailRules);
+        validator.addErrorMessages(hidFeeDetailMsg);
+    }
+
+    feeSelect.on("change", function (e) {
+        if (e.value == 2 && $("#feeDetail").is(":hidden")) {
+            $("#feeTip").hide();
+            $("#feeDetail").show();
+            validator.addRules(hidFeeDetailRules);
+            validator.addErrorMessages(hidFeeDetailMsg);
+        } else if(e.value == 1 && $("#feeTip").is(":hidden")){
+            $("#feeDetail").hide();
+            $("#feeTip").show();
+            validator.removeRules('txtFeeDetail');
+        } else {
+            $("#feeDetail").hide();
+            $("#feeTip").hide();
+            validator.removeRules('txtFeeDetail');
+        }
+    });
+	
+	var tipLayErrClass = 'tipLayErr';
+	validator.on('invalid', function(e){
+		e.label.addClass(tipLayErrClass);
+	});
+	validator.on('pass', function(e){
+		e.label.removeClass(tipLayErrClass);
+	});
+	
+	jobTypeSelecter.on('change', function(e){
+		validator.checkElement(this.get('selectName'));
+	});
+	
+	var submitHTML = [
+			'<p style="margin-bottom:30px">发布职位后，求职者一旦报名职位信息就不能修改，确认发布吗？</p>',
+			'<div><label class="checkbox_a"><input id="isCheckShow" type="checkbox" value="1" />下次不再提示</label></div>'
+		].join('');
+	
+	$('#btnSaveAddress').on('click', function(e){
+		var isCheckShow = true,ifshow = cookie.get('confirm_repubJob_partjob');
+		if(ifshow == 'show_none') {
+			isCheckShow = false;	
+		}
+		if(isCheckShow){
+			ConfirmBox.confirm(submitHTML, '确认发布', function(){
+				isCheckShow = this.query('#isCheckShow').prop('checked');
+				if(isCheckShow){
+					var exp = new Date();
+					exp.setTime(exp.getTime() + 365 * 24 * 3600000);
+					cookie.set('confirm_repubJob_partjob', 'show_none', {expires:exp});
+				}
+				this.hide();
+				submitResult();	
+			}, null, {width:300});
+		} else {
+			submitResult();
+		}
+	});
+	
+	function submitResult(){
+		validator.submit(function(e){
+			$.ajax({
+	            url:"/partjob/RepubJobDo/job_id-{/$jobdata['job_id']/}",
+	            type:"post",
+	            dataType: "json",
+	            contentType: "application/x-www-form-urlencoded; charset=utf-8",
+	            data: tjobForm.serialize(),
+	            success:function(json){
+	                if(!(json.success||false)){
+						ConfirmBox.alert(json.error, null, { title: '保存失败' });
+	                    return false;
+	                }
+					var msg = '保存成功';
+					ConfirmBox.timeBomb(msg, {
+						name: 'success',
+						width: pWidth + msg.length * fontWidth,
+						timeout: 1000
+					});
+					setTimeout("location.href='/part'",1000);
+	                return false;
+	            }
+	        });
+	        return false;
+		});
+	}
+	
+	/*-- map start--*/
+	var map = new BMap.Map("mapCon");
+	var initPt;
+	var initArea;
+	var map,marker;
+
+	$('#curarea').singleArea({hddName:'hidArea',showLevel:3, hidLevel:1, selectArea:'{/$jobdata["area_id"]/}',onSelect:function(a){
+		var geo = new BMap.Geocoder();
+		geo.getPoint(a.areaName, relocateCallback, '');
+		validator.checkElement($('#hidArea'));
+	}});
+		//$.setIndex('zIndex');
+
+		initMap();
+
+		$('#txtAddress').focusin(function(){
+			var addr = $(this).val();
+			var areaDesc = '';
+			if(addr == ''){
+				var areas = $('#curarea').getAreaNames();
+				for(var i=0;i<areas.length;i++){
+					areaDesc += areas[i] ;
+				}
+				$(this).val(areaDesc);
+				addr = areaDesc;
+			}
+			if(addr != ''){
+				var geo = new BMap.Geocoder();
+				geo.getPoint(addr, relocateCallback, '');
+			}
+		});
+
+		$('#txtAddress').focusout(function(){
+			var addr = $(this).val();
+			if(addr != ''){
+				var geo = new BMap.Geocoder();
+				geo.getPoint(addr, relocateCallback, '');   //缺一个城市名
+			}
+		});
+
+	function relocateCallback(point){
+		if(point == null) return;
+		map.setCenter(point);
+		marker.setPosition(point);
+		$('#hidMapX').val(marker.getPosition().lng);
+		$('#hidMapY').val(marker.getPosition().lat);
+		$('#hidMapZoom').val(map.getZoom());
+	}
+
+	function initMap(){
+		var mapX = $('#hidMapX').val();
+		var mapY = $('#hidMapY').val();
+		var mapZoom = $('#hidMapZoom').val();
+		if(typeof mapZoom =='undefined' || mapZoom == ''){
+			mapZoom = 15;
+		}
+
+		var initPt = null;
+		if(typeof mapX != 'undefined' && mapX!='' && typeof(mapY) != 'undefined' && mapY!=''){
+			initPt = new BMap.Point(mapX,mapY);
+		}
+
+		var address = $('#txtAddress').val();
+
+		//这个逻辑由于单选地区控件是异步加载的，所以这里可能始终取的是空值，暂时保留吧
+		var areaDesc = '';
+		var areas = $('#curarea').getAreaNames();
+		for(var i=0;i<areas.length;i++){
+			areaDesc += areas[i] ;
+		}
+
+		var defaultPt = new BMap.Point(106.553057,29.565468);
+		var gc = new BMap.Geocoder();
+
+
+		//在加载完成，确定中心点后，设置标注点
+		map.addEventListener('load',function(){
+			var pt = null;
+			if(initPt!=null){
+				pt = initPt;
+			}
+			else{
+				pt = new BMap.Point(map.getCenter().lng,map.getCenter().lat);
+			}
+
+			var myIcon = new BMap.Icon("{/$siteurl.style/}/img/common/maplabel.png", new BMap.Size(33,50));
+			marker = new BMap.Marker(pt,{icon:myIcon});  // 创建标注
+			map.addOverlay(marker);              // 将标注添加到地图中
+			marker.enableDragging();
+			marker.setTitle('请拖动至兼职工作位置');
+
+			var label = new BMap.Label("请拖动至兼职工作位置",{offset:new BMap.Size(35,5)});
+			marker.setLabel(label);
+
+			//添加事件，在拖动时去掉文字提示
+			marker.addEventListener('dragstart',function(){
+				label.setStyle({display:'none'});
+			});
+			var mapTip = $('#mapTip'),
+				hidMapX = $('#hidMapX'),
+				hidMapY = $('#hidMapY'),
+				hidMapZoom = $('#hidMapZoom');
+			mapTip.show().children('a').on('click', function(){
+				hidMapX.val(marker.getPosition().lng);
+				hidMapY.val(marker.getPosition().lat);
+				hidMapZoom.val(map.getZoom());
+				var msg = "保存成功";
+				ConfirmBox.timeBomb(msg, {
+					name: 'success',
+					width: pWidth + msg.length * fontWidth,
+					timeout: 1000
+				});
+				$('#saveMap').val('1');
+				mapTip.hide();
+				validator.checkElement($('#saveMap'));
+			});
+			
+			marker.addEventListener('dragend',function(e){
+				//hidMapX.val(marker.getPosition().lng);
+				//hidMapY.val(marker.getPosition().lat);
+				//hidMapZoom.val(map.getZoom());
+				mapTip.show();
+				/*
+				gc.getLocation(e.point, function(rs){
+					
+					var addComp = rs.addressComponents;
+					if(getAreasData(addComp.district)){
+						$('#txtAddress').val(addComp.street + addComp.streetNumber);
+					} else {
+						$('#txtAddress').val('');
+					}
+				});*/
+			});
+		});
+
+		if(initPt != null){
+			map.centerAndZoom(new BMap.Point(mapX,mapY), mapZoom);
+		}
+		else if(address != ''){
+			map.centerAndZoom(defaultPt,mapZoom);
+			var geo = new BMap.Geocoder();
+			geo.getPoint(address, relocateCallback, '');
+		}
+		else if(areaDesc!=''){
+			map.centerAndZoom(defaultPt,mapZoom);
+			var geo = new BMap.Geocoder();
+			geo.getPoint(areaDesc, relocateCallback, '');
+		}
+		else{
+			map.centerAndZoom(defaultPt, mapZoom);
+		}
+
+
+		map.addControl(new BMap.NavigationControl());               // 添加平移缩放控件
+		map.addControl(new BMap.MapTypeControl());          //添加地图类型控件
+		map.addControl(new BMap.OverviewMapControl());              //添加默认缩略地图控件
+		map.enableScrollWheelZoom();                            //启用滚轮放大缩小
+
+		map.addEventListener('zoomend',function(){
+			$('#hidMapZoom').val(map.getZoom());
+		});
+	}
+	/*-- map end--*/
+
+});
+</script>
+</body>
+</html>

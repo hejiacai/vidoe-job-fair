@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="Keywords" content="" />
+        <meta name="Description" content="" />
+        <title>汇博人才网-招聘职位</title>
+        <!–[if lt IE9]>
+        <script src="{/version file='html5.js'/}"></script>
+        <![endif]–>
+        <link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+        <link rel="stylesheet" type="text/css" href="{/version file='comback.css'/}" />
+        <link rel="stylesheet" type="text/css" href="{/version file='video_eng.css'/}" />
+        <link rel="stylesheet" type="text/css" href="{/version file='m_font_style.css'/}">
+        <link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}">
+		<script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.min.js'/}"></script>
+        
+        <script type="text/javascript" src="{/version file='version.js'/}"></script>
+        <script type="text/javascript">
+            window.CONFIG = {
+                HOST: '{/$siteurl.style/}',
+                COMBOPATH: '/js/v2/'
+            }
+        </script>
+        <script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+        <script type="text/javascript" src="{/version file='global.js'/}"></script>
+        <script type="text/javascript" language="javascript" src="{/version file='confirmBox.js'/}"></script>
+        <script type="text/javascript" language="javascript" src="{/version file='dialog.js'/}"></script>
+        <script type="text/javascript" language="javascript" src="{/version file='WdatePicker.js'/}"></script>
+	</head>
+	<body style="background: #f6f7f8;">
+    {/include 'schoolnet/hallhead.html' par='招聘职位'/} 
+	<div class="videoIhalMain">
+		
+		<div class="videointerviewTitle">
+			<p>
+				<i></i>
+				<span>已报名职位管理</span>
+			</p>
+			<a href="javascript:void(0);" id="showAddJobPop">新增职位</a>
+		</div>
+		
+		<table class="jobhunterTab">
+			<tr>
+				<th>名称</th>
+				<th>状态</th>
+				<th>操作</th>
+			</tr>
+            {/foreach $list as $v/}
+			<tr>
+				<td>{/$v['station']/}</td>
+				<td>已通过</td>
+				<td>
+					<a href='{/get_url rule="/job/mod"/}job_id-{/$v["job_id"]/}-mod_type-edit' target='_blank'>编辑</a>
+					<!--<a href="#" style="color: #ef4f45;">删除</a>-->
+				</td>
+			</tr>
+			{//foreach/}
+		</table>
+		
+	</div>
+    <div class="jian_dialog" style="padding:15px;font-family:'微软雅黑';line-height:30px;display:none;" id="jian_dialog">
+    <p>由于职位需学校方审核，新增职位请联系工作人员</p>
+    <p>工作人员：吴老师</p>
+    <p>手机号码：13452851611</p>
+        <p style="margin-top:15px">
+            <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=123123&site=qq&menu=yes">
+                <img src="{/$siteurl.style/}/img/newindex/qq.jpg" />
+            </a>
+        </p>
+    </div>
+<script type="text/javascript">
+    hbjs.use('@confirmBox, @jobDialog', function (m) {
+        var ConfirmBox = m['widge.overlay.confirmBox'],
+            Dialog = m['widge.overlay.hbDialog'],
+            $ = m['jquery'].extend(m['cqjob.jobDialog']);
+    
+        var jdialog = new Dialog({
+                close: 'x',
+                idName: 'addJob_dialog',
+                title: '详情咨询',
+                width: 380,
+                content:$("#jian_dialog").html()
+            });
+            
+        $("#showAddJobPop").on('click', function(){
+            jdialog.show();
+        });
+    });
+</script>
+	</body>
+</html>

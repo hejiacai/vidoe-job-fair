@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>浏览记录</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="{/version file='base.css'/}">
+		<style>
+			.share_brow_history{width:480px; overflow: hidden; text-align: left; padding: 20px 0; margin: 0 auto;}
+			.brow_historyx li{ overflow: hidden;padding:0 20px;}
+			.brow_historyx li:nth-child(even){ background: #fbfbfb;}
+			.brow_historyx li span,.brow_historyx li em{ font-size: 14px; color: #444; display: block; float: left; line-height: 45px;}
+			.brow_historyx li em{ float: right;}
+			.shareNot{ overflow: hidden; text-align: center; color: #999; padding: 50px; font-size: 14px;}
+		</style>
+    </head>
+    <body>
+    	<div class="share_brow_history">
+        {/if $list/}
+        <ul class="brow_historyx">
+            {/foreach $list as $index=> $v/}
+            <li {/if $index%2==1/}class="bgfa"{//if/}>
+				<span>{/$v['log_type_str']/}</span>
+				<em>{/$v['log_date']/}</em>
+			</li>
+            {//foreach/}
+        </ul>
+        {/$page/}
+        {/else/}
+        <div class="shareNot">暂无数据……</div>
+        {//if/}
+        </div>
+    </body>
+</html>

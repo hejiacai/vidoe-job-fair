@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="Keywords" content="" />
+        <meta name="Description" content="" />
+        <title>汇博人才网-求职者大厅</title>
+        <!–[if lt IE9]>
+        <script src="{/version file='html5.js'/}"></script>
+        <![endif]–>
+        <link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+        <link rel="stylesheet" type="text/css" href="{/version file='comback.css'/}" />
+        <link rel="stylesheet" type="text/css" href="{/version file='video_eng.css'/}" />
+        <link rel="stylesheet" type="text/css" href="{/version file='m_font_style.css'/}">
+        <link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}">
+
+		<script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.min.js'/}"></script>
+        
+        <script type="text/javascript" src="{/version file='version.js'/}"></script>
+        <script type="text/javascript">
+            window.CONFIG = {
+                HOST: '{/$siteurl.style/}',
+                COMBOPATH: '/js/v2/'
+            }
+        </script>
+        <script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+        <script type="text/javascript" src="{/version file='global.js'/}"></script>
+        <script type="text/javascript" language="javascript" src="{/version file='confirmBox.js'/}"></script>
+        <script type="text/javascript" language="javascript" src="{/version file='dialog.js'/}"></script>
+        <script type="text/javascript" language="javascript" src="{/version file='WdatePicker.js'/}"></script>
+        
+	</head>
+	<body>
+        {/include 'schoolnet/hallhead.html' par=$par/} 
+		<div class="interDetection">
+			
+			<div class="interDetection500">
+			<h2>为保障您的面试效果，请先按步骤完成电脑设置</h2>
+			<ul>
+				<li>
+					<em class="interNumber">1</em>
+					<span class="interTit01">
+						安装谷歌浏览器<a href="{/$siteurl.style/}/down/chrome.exe">下载</a>
+					</span>
+					<div class="interFacility">
+						<span>
+							<img src="{/$siteurl.style/}/img/company/video/eng_icon19.png" >
+							<em>浏览器检测</em>
+							<b {/if !$browser_not_ok/}class="sure"{//if/}></b>
+						</span>
+					</div>
+				</li>
+				<li>
+					<em class="interNumber">2</em>
+					<span class="interTit01">
+						链接设备<em>刷新页面查看效果</em>
+					</span>
+					<div class="interFacility">
+						<span>
+							<img src="{/$siteurl.style/}/img/company/video/eng_icon17.png" >
+							<em>麦克风</em>
+							<b class="audioDevice"></b>
+						</span>
+						<span>
+							<img src="{/$siteurl.style/}/img/company/video/eng_icon18.png" >
+							<em>音频设备</em>
+							<b class="audioDevice"></b>
+						</span>
+						<span>
+							<img src="{/$siteurl.style/}/img/company/video/eng_icon16.png" >
+							<em>摄像头</em>
+							<b class="videoDevice"></b>
+						</span>
+					</div>
+				</li>
+				<li>
+					<em class="interNumber">3</em>
+					<span class="interTit01">
+						放大麦克风
+					</span>
+					<span class="procedure">操作流程</span>
+				</li>
+				<li>
+					<em class="interNumber">4</em>
+					<span class="interTit01">
+						设置面试时间<a href="javascript:;" class="setInterviewTime">设置面试时间</a>{/if !empty($list)/}<a href="javascript:void(0);" class="red">已设置</a>{//if/}
+					</span>
+					<span class="interTit02">学生在设置的面试时间内申请视频面试</span>
+				</li>
+			</ul>
+			<div class="interVideoPopBtn">
+				<a href="javascript:;" id="complete_btn">完成</a>
+			</div>
+			</div>
+		</div>
+		
+        <div class="procedurePop" style="display:none;">
+            <img src="{/$siteurl.style/}/img/company/video/eng_icon22.jpg" >
+        </div>
+        
+        <script type="text/javascript" language="javascript"  src='{/version file="aliyun-webrtc-sdk-1.9.0.min.js"/}'></script>
+        <script type="text/javascript" language="javascript">
+        var interviewTimeDialog;
+        hbjs.use('@confirmBox, @jobDialog', function (m) {
+            var ConfirmBox = m['widge.overlay.confirmBox'],
+                Dialog = m['widge.overlay.hbDialog'],
+                cookie = m['tools.cookie'],
+                $ = m['jquery'].extend(m['cqjob.jobDialog']);
+
+
+            var close = '×';
+            var width = 600;
+            var zIndex = 9999;
+            var title = '面试时间设置';
+
+            interviewTimeDialog = new Dialog({
+                close: close,
+                idName: 'informTraining_dialog',
+                title: title,
+                width: width,
+                zIndex: zIndex
+            });
+            var checkVideoDialog = new Dialog({
+                close: close,
+                idName: 'checkVideo_dialog',
+                title: '电脑麦克风设置流程',
+                width: width,
+                zIndex: zIndex,
+                content:$(".procedurePop").html()
+            });
+
+            $('#complete_btn').on('click', function(){
+                var msg = '';
+                {/if !$list && $browser_not_ok/}
+                    msg = '请使用新版本谷歌浏览器并设置面试时间.';
+                {/else if !$list/}
+                    msg = '请设置面试时间.';
+                {/else if $browser_not_ok/}
+                    msg = '请使用新版本谷歌浏览器.';
+                {//if/}
+                    
+//                if(msg != ''){
+//                   ConfirmBox.timeBomb(msg,{
+//                                name: 'fail',
+//                                width:'auto',
+//                                timeout : 4000
+//                    });
+//                    return; 
+//                }
+                AliRtcEngine.isSupport().then(re => {
+                    checkVideo(re, true, msg);
+                }).catch(err => {
+                    checkVideo(err, true, msg);
+                });    
+            });
+            
+            $('.procedure').on('click', function(){
+                checkVideoDialog.show();
+            });
+            $('.setInterviewTime').on('click', function(){
+                interviewTimeDialog.setContent('{/get_url rule="/videohall/InterviewTimeList"/}?sid={/$sid/}').show(); 
+            });
+            $(".informTraining_dialog .ui_dialog_close").click(function(){
+                window.location.reload();
+            });
+
+            AliRtcEngine.isSupport().then(re => {
+                checkVideo(re, false, '');
+            }).catch(err => {
+                checkVideo(err, false, '');
+            });
+
+            function checkVideo(res, complete_click, msg){
+                if(!res.audioDevice){
+                    $('.audioDevice').removeClass('sure');
+                }else{
+                    $('.audioDevice').addClass('sure');
+                }
+
+                if(!res.videoDevice){
+                    $('.videoDevice').removeClass('sure');
+                }else{
+                    $('.videoDevice').addClass('sure');
+                }
+
+                if(complete_click){
+                    if(!res.audioDevice && !res.videoDevice){
+                        msg += '请插入音频/视频设备.';
+                    }else if(!res.audioDevice){
+                        msg += '请插入音频设备.';
+                    }else if(!res.videoDevice){
+                        msg += '请插入视频设备.';
+                    }else if(!res.isSupported){
+                        msg += '设备初始化失败.';
+                    }
+                    if(msg != ''){
+                        ConfirmBox.timeBomb(msg,{
+                                    name: 'fail',
+                                    width:'auto',
+                                    timeout : 4000
+                        });
+                        return;
+                    }
+                    var expires_time = new Date("{/date('Y/m/d 00:00:00',strtotime('+1 day'))/}");
+                    cookie.set('school_videohall_equipment_check_today',1,{expires:expires_time,path:'/',domain:"{/base_lib_Constant::COOKIE_DOMAIN/}"});
+                    window.location.reload();
+                }
+                
+            }
+            
+        });
+        </script>
+	</body>
+</html>

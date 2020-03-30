@@ -1,0 +1,66 @@
+<style>
+	.hangye{width:680px;padding:15px}
+	.hangye table{border:1px solid #eee}
+	.hangye th,.hangye td{border-bottom:1px solid #eee;padding:5px 0;background-color: #f8f8f8}
+	.hangye th{width:140px;text-align: center;font-size:14px;font-weight:bold;border-right:1px solid #eee}
+	.hangye td{padding-left:10px;padding-right:10px;font-size:12px}
+	.hangye td label{display: inline-block;padding-right:15px;margin:5px 0}
+	.hangye td label input{vertical-align: middle;margin-right:3px}
+	.hangye tr:nth-child(2n) td,.hangye tr:nth-child(2n) th{background-color: #fff}
+</style>
+<div style="padding:15px" class="hangye">
+	<div style="max-height: 400px;#height:400px;overflow-y:auto">
+	<table width="100%">
+		{/foreach $callings as $calling/}
+                    <tr>
+			<th>{/$calling['calling_name']/}</th>
+			<td>
+                            {/foreach $calling['subItem'] as $subItem/}
+				<label><input {/if $subItem['calling_id']==$calling_id/}disabled="disabled"{//if/} name="calling" value="{/$subItem['calling_id']/}" data-name="{/$subItem['calling_name']/}" type="radio" /><span {/if $subItem['calling_id']==$calling_id/}style="color:#ccc"{//if/}>{/$subItem['calling_name']/}</span></label>
+                             {//foreach/}
+			</td>
+		</tr>
+                {//foreach/}
+	</table>
+	</div>
+	<div class="dialogFooter" style="background-color: #fff;margin-top: 15px;border-top: 0px">
+    	<!--<a id="btnSortSave" href="javascript:void(0);" class="btn1 btnsF12">确定</a>-->
+    	<a id="btnSortClose" href="javascript:void(0);" class="btn3 btnsF12">取消</a>
+    </div>
+</div>
+<script>
+if(window.$ != undefined){
+	window.fix$ = $;
+}
+try {
+	hbjs.use(factory);
+} catch(e) {
+	factory($);
+}
+
+function factory($){
+     var calling = {
+		initialize:function(){
+			var btnSortClose = $("#btnSortClose");
+			$('.hangye').on('change', 'input', function(e){
+				var target = $(e.currentTarget);
+				var calling_id = target.val();
+				var calling_name = target.attr('data-name');
+				var type = {/$type/};
+				updateCalling(calling_id, calling_name, type, $);
+				btnSortClose.trigger('click');
+			});
+			btnSortClose.on('click', function(){
+				 if(window.fix$ && window.fix$.fn.closeDialog){
+				 	console.log(window.fix$(this))
+					 $(this).closeDialog();
+				 } else {
+				 	 $(this).closeDialog();
+				 }
+			})
+		}            
+    }
+    calling.initialize();
+}
+
+</script>

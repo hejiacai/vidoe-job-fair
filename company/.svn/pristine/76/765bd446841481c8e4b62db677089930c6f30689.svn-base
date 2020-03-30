@@ -1,0 +1,3616 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="Keywords" content="" />
+	<meta name="Description" content="" />
+	<title>{/$title/}</title>
+	<!–[if lt IE9]>
+	<script src="{/version file='html5.js'/}"></script>
+	<![endif]–>
+	<link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+	<link rel="stylesheet" type="text/css" href="{/version file='comback.css'/}" />
+	<link rel="stylesheet" type="text/css" href="{/version file='firmcss.css'/}" />
+	<link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}" />
+	<link rel="stylesheet" type="text/css" href="{/version file='company_index_v2.css'/}" />
+	<link rel="stylesheet" type="text/css" href="{/version file='m_font_style.css'/}" />
+
+	<script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.min.js'/}"></script>
+	<script type="text/javascript" language="javascript" src="{/version file='common.js'/}"></script>
+	<script type="text/javascript" language="javascript" src="{/version file='dialog.js'/}"></script>
+	<script type="text/javascript" language="javascript" src="{/version file='mediaquery.js'/}"></script><!--响应式兼容-->
+	<script type="text/javascript" language="javascript" src="{/version file='ui_menudisplay.js'/}"></script><!--下拉菜单-->
+	<script type="text/javascript" language="javascript" src="{/version file='ui_inputFocus.js'/}"></script><!--输入框获取焦点-->
+	<script type="text/javascript" language="javascript" src="{/version file='ui_hovchange.js'/}"></script><!--指向改变class-->
+	<!--<script type="text/javascript" language="javascript" src="{/version file='ui_dragsort.js'/}"></script>--><!--拖动插件-->
+	<script type="text/javascript" language="javascript" src="{/version file='jquery.form.js'/}"></script>
+	<script type="text/javascript" language="javascript" src="{/version file='ui_validate.js'/}"></script>
+	<script type="text/javascript" language="javascript" src="{/version file='ui_dropdownlist.js'/}"></script><!--下拉模拟-->
+	<script type="text/javascript" src="{/version file='version.js'/}"></script>
+	<script type="text/javascript">
+		window.CONFIG = {
+			HOST: '{/$siteurl.style/}',
+			COMBOPATH: '/js/v2/'
+		}
+	</script>
+	<script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+	<script type="text/javascript" language="javascript" src="{/version file='global.js'/}"></script>
+	<script>
+		$(document).ready(function(e) {
+			$('.firmMagContx p a').hover(function(){
+				$(this).toggleClass('cut')
+			});
+		});
+	</script>
+	<style>
+		.js-over-height{height:440px;overflow: hidden}
+		.header-img{display: inline-block;width:60px;height:60px;border-radius: 60px;background: #66a5ea;font-size:20px;color:#fff;line-height: 60px;text-align: center}
+		ul li a p span .color-red{color:red;display: inline;}
+		.icon-ji,.icon-ding{width:16px;height: 16px!important;line-height: 16px!important;background: url({/$siteurl.style/}/img/v2/job/ma-icon.jpg) -26px 0 no-repeat;display: inline-block;vertical-align: middle;margin-left: 3px;float: left;margin-top:13px}
+		.icon-spread{width:30px;height: 16px!important;line-height: 16px!important;background: url({/$siteurl.style/}/img/v2/job/spread.jpg) 0px 0 no-repeat;display: inline-block;vertical-align: middle;margin-left: 3px;float: left;margin-top:13px}
+		.icon-ding{background-position: 0 0}
+		#js_click_import a:hover{ color:#ff3948;}
+
+		.quseSurvey{width:428px; overflow:hidden; position:fixed; top:50%; left:50%; margin:-260px 0 0 -219px; z-index:10000; }
+		.quse_img{ display:block;}
+		.quseBg{width:374px; overflow:hidden; background:#fff; padding:0 20px 20px 20px; text-align:left; }
+		.quseTita{ font-size:14px; color:#444; line-height:24px;text-indent:40px; overflow:hidden; margin-top:8px;}
+		.quseTita b{ color:#ffa200;}
+		.quseTitb{ margin:25px 0px; overflow:hidden; padding:15px 18px; overflow:hidden; background:#fef7e8; color:#604e29; line-height:24px; border-radius:10px;}
+		.quseBtn{ display:block; width:282px; height:48px; background:#ffa200; color:#fff; font-size:18px; margin:0 auto; border-radius:4px; text-align:center; line-height:48px;}
+		.quseBtn:hover{ background:#e39002; color:#fff;}
+		.quseClose{ display:block;}
+		.quse_bdimg{width:width:428px; height:198px; overflow:hidden; background:url({/$siteurl.style/}/img/mobile/survey_img.png) no-repeat;}
+		.quse_bdimg a{ display:block;width:26px; height:26px; float:right;}
+		.hb_ui_dialog .ui_dialog_title {  font-size: 16px;  }
+		.hb_ui_dialog .ui_dialog_title {  text-align: left;  }
+
+		#calling_advert{width:140px}
+		#calling_advert a{ display:block; margin-bottom: 10px;}
+
+		.cmpAnnunciate{width:670px;  background: #fffadd; padding:0px 10px; text-indent: 10px; font-size: 14px; color:#604e29; overflow: hidden;}
+		.cmpAnnunciateTip{width:100%; height: 40px; line-height: 40px;  overflow: hidden;}
+		.cmpAnnunciateTip span{color:#ff5400;font-size: 14px; cursor: pointer; text-decoration: underline;}
+		.cmpAnnunciateTit{border-top: 1px solid #f6e5a6; padding-top: 10px; overflow: hidden; font-size: 12px; color: #604e29; line-height: 20px; text-indent:0px; display: none; padding-bottom: 10px;}
+
+		.marketTip{width:100%; overflow:hidden; text-align: right;margin-top: 10px;}
+		.marketTip i,.marketTip span{ display: inline-block; vertical-align: middle;}
+		.marketTip i{width:17px; height: 17px; background: url({/$siteurl.style/}/img/company/market.jpg) no-repeat; margin-right: 4px;}
+		.marketTip span{color: #fe7920; text-decoration: underline; cursor: pointer;}
+
+		.marketPopx,.morePopx{width:380px; overflow: hidden; position: absolute; z-index: 10; margin-left: 290px; display: none;}
+		.marketPopx i.markeIcon,.morePopx i{ display: block;width:7px; height: 6px; background: url({/$siteurl.style/}/img/company/marketIcon.png) no-repeat; margin-left: 180px; position: relative;}
+		.marketPop,.morePopx span{ display: block; padding: 5px 0px; background: #fffadd; border: 1px solid #f6e5a6; text-align: center; margin-top: -1px;}
+		.marketPop span{ display: inline-block; padding-right: 20px; color: #604e29;}
+		.marketPop span.last{ padding-right: 0px;}
+		.questSurvey{ display: none;width:690px; height: 60px;background: url({/$siteurl.style/}/img/company/companyBanner.jpg) no-repeat bottom;background-color: #fff;}
+		.morePopx{ display: block;width:260px; margin-left: -193px;}
+		.morePopx i{ margin-left: 207px;}
+		.morePopx span em{ display: inline-block; margin-left: 10px; font-size: 14px; color: #f60; cursor: pointer;}
+		/*2018-06-13改版*/
+		.user-infor-box .infor a{  color: #3D84B8;}
+		.user-infor-box .infor a:hover{color:#09c;text-decoration:none;}
+		.wh-money-list{display: inline-block; }
+		.money p .wh-money-list em{color: #2b6fad;font-style: normal;font-family: "Microsoft YaHei";}
+		.money p a i{display: inline-block; width: 16px;height: 16px;vertical-align: -3px;margin-right: 5px; background:url({/$siteurl.style/}/img/c/new_index/natural_icon_tit.png) no-repeat; }
+		.money p a{color: #666;margin-right: 6px;}
+		.money p a:hover{color: #2b6fad;text-decoration: underline;}
+		.money p .wh-money-list:hover em{text-decoration: none;}
+		.money p .btnxcut1:hover{color: #2b6fad; text-decoration: underline;}
+		.scedTit span{color: #444;}
+		.two-weeks{border: none;background: #fff;}
+		.reversionList li{margin-right: 0px;}
+		.two-weeks .number{font-size: 14px;color: #444;vertical-align: 0;}
+		.flowAPP-dialog .ui_dialog_container{overflow-y: scroll;height: 550px;}
+		.reversionList li .orang{width: 220px;font-size: 12px;}
+		.text-blue{color: #ff5400;margin-left: 5px;font-size: 15px;text-decoration: underline;}
+		.text-blue:hover{color: #ff5400;text-decoration: underline;}
+		.comp_infor .money em{margin: 0;}
+		.user-infor-box .weixinApp a:hover{color: #2b6fad;text-decoration: underline;}
+		#show_alt i, .refresh-job .alert-warniong .arrdown-icon{left: 96px; top:-6px;transform: rotate(180deg);-ms-transform:rotate(180deg); 	/* IE 9 */
+			-moz-transform:rotate(180deg); 	/* Firefox */
+			-webkit-transform:rotate(180deg); /* Safari 和 Chrome */
+			-o-transform:rotate(180deg); 	/* Opera */}
+		.refresh-job .alert-warniong{left: 86px;}
+		.scedTit a{margin-top: 2px;}
+		.wh-go-up{display: inline-block;width: 10px;height: 13px;background: url({/$siteurl.style/}/img/c/new_index/go_up.png) no-repeat;background-position: -13px 0; }
+		.wh-go-up:hover{background-position: 0 0;}
+		/*代运营*/
+		/*.freshList{overflow:inherit;}*/
+		.freshList li{overflow:visible;position: relative}
+		.freshList li .subFresh01 .daiyunying{float: left;}
+		.freshList li .subFresh01 .daiyunying img{padding-left: 0px;margin-top: 13px;}
+		/*.freshList li .subFresh01 .daiyunying{position: relative;}*/
+		.freshList li a, .freshList li span{overflow: inherit;}
+		.freshList li a {
+			padding-left: 3px;
+		}
+
+		.freshList li .subFresh08 a {
+			padding: 0;
+			position: relative;
+			padding-left: 5px;
+		}
+		.freshList li .subFresh08 a.set-pro {
+			box-sizing: border-box;
+			height: 20px;
+			line-height: 20px;
+			margin-top: 10px;
+		}
+		.freshList li .subFresh08 a div {
+			position: fixed;
+			top: 35px;
+			left: -95px;
+			width: 204px;
+			background: #fffadd;
+			z-index: 5;
+			color: #604e29;
+			padding: 8px 10px;
+			display: none;
+			font-size: 14px;
+			box-sizing: border-box;
+			border: 1px solid #f6e5a6;
+		}
+		/*.freshList li .subFresh08 a:hover div {*/
+		/*display: block;*/
+		/*}*/
+		/*.freshList li .subFresh01 .daiyunying p{display: none;position: absolute;padding-left: 4px;height: auto;line-height: 24px; margin-top: 5px; left:0;top: 100%;width: 176px;border: 1px solid #f6e5a6;color: #604e29;background: #fffadd;font-size: 12px;}*/
+		/*.freshList li .subFresh01 .daiyunying p img{position: absolute;  top: -6px;  left: 10px;  margin-top: 0;transform: rotate(180deg);  -ms-transform: rotate(180deg);  -moz-transform: rotate(180deg);  -webkit-transform: rotate(180deg);  -o-transform: rotate(180deg);}*/
+		/*.freshList li .subFresh01 .daiyunying:hover p{display: inline-block;}*/
+
+		/*企业风采*/
+
+		.money p a.wh-companyShow i{background:url({/$siteurl.style/}/img/company/companyshow.png) no-repeat;margin-left: 2px;background-position: 2px 0px;}
+		/*.money p a.wh-companyShow{color:#999;}*/
+		.money p a.wh-companyShow-on i{background-position: 0px 0px;}
+		.money p a.wh-companyShow-on{color:#666;}
+		.money p a.wh-companyShow-on:hover{color: #2b6fad;}
+
+
+		/*用户协议*/
+		.protocolUsage{ text-align: left;width:780px; margin: 20px; color: #444;}
+		.usagex{ display: block; line-height: 24px;}
+		.protocolUx{width:718px; border: 1px solid #f0f0f0; padding: 30px; margin: 30px 0; height: 390px; overflow-y: scroll;}
+		.protocolUx h2{ font-weight: bold; width:100%; text-align: center; font-size: 14px; padding-bottom: 30px;}
+		.protocolUx p{ color: #666; line-height: 26px;}
+		.protocolUx p b{ font-weight: bold; color: #333;}
+		.isProtocolx{ display: block; margin: 20px auto;text-align: center;}
+		.isProtocolx input{ display: inline-block; vertical-align: -2px; }
+		.protocolUsageBtn{ display: block; width:150px; height: 40px; margin: 20px auto; background: #66bce4; text-align: center; line-height: 40px; color: #fff; border-radius: 4px;}
+		.protocolUsageBtn:hover{ color: #fff; background: #4fb4e3;}
+		/*海報生成*/
+		.toPic{background: #f8f9fb;border-radius: 8px;padding: 18px 12px;cursor: pointer;margin: 10px 0;}
+		.toPic img,.toPic div{float: left;}
+		.toPic img{margin-top: 4px;}
+		.toPic div{margin-left: 14px;}
+		.toPic div h4{font-size: 16px;color: #444;font-weight: bold;}
+		.toPic div p{font-size: 14px;color: #444;}
+		.toPic .toPic_icon{float: right;margin-top: 14px;}
+		.sharePoster p{font-size: 14px;color: #444;margin: 20px 0;}
+
+
+		.job_dialogs .succ-cancel-pro {
+			padding: 15px 28px;
+			text-align: left;
+			font-size: 14px;
+		}
+		.job_dialogs .succ-cancel-pro .txt {
+			margin-bottom: 20px;
+		}
+		.job_dialogs .succ-cancel-pro .btns {
+			overflow: hidden;
+			text-align: center;
+		}
+		.job_dialogs .succ-cancel-pro .btns div {
+			display: inline-block;
+			font-size: 16px;
+			line-height: 20px;
+			padding: 5px 20px;
+			border-radius: 4px;
+			cursor: pointer;
+		}
+		.job_dialogs .succ-cancel-pro .btns .ok {
+			background: #66bce4;
+			color: #fff;
+			margin-right: 20px;
+		}
+		.job_dialogs .succ-cancel-pro .btns .ok:hover {
+			background: #31a2d6;
+		}
+		.job_dialogs .succ-cancel-pro .btns .cancel {
+			background: #ccc;
+			color: #999;
+		}
+
+		.refresh-job {
+			float: left;
+			margin-left: 15px;
+		}
+		.fRmendConat {
+			padding-bottom: 30px;
+		}
+		.stop_job_dialog .dialogFooter {
+			border: none;
+			background: #fff;
+			text-align: center;
+			padding-bottom: 20px;
+		}
+		.btn1, .btn1:link, .btn1:visited {
+			border: none;
+			background: #66bce4;
+			box-shadow: none;
+		}
+		.btn1:hover {
+			background: #31a2d6;
+		}
+		.btn3, .btn3:link, .btn3:visited {
+			background: #eee;
+			color: #999;
+			border: none;
+			box-shadow: none;
+		}
+		.confirm-close-job-con {
+			padding: 30px 30px !important;
+		}
+		.new-alert-pop{color:#604e29; overflow: hidden;}
+		.new-alert-pop span{color:#ff7920;}
+
+		/*edit 2018/12/25*/
+		.user-infor-box .weixinApp {
+			font-size: 12px;
+		}
+		.user-infor-box .weixinApp a {
+			cursor: pointer;
+		}
+		.user-infor-box .weixinApp .sub-user {
+
+		}
+		.user-infor-box .weixinApp i.sub {
+			background: url({/$siteurl.style/}/img/company/sub-user.png) no-repeat;
+			color: #2b6fad;
+			position: relative;
+			top: 4px;
+			display: inline-block;
+			width: 16px;
+			height: 16px;
+		}
+
+		.xf-schedule .share-title {
+			background: url({/$siteurl.style/}/img/company/share.png) no-repeat;
+			padding-left: 30px;
+			background-position: 0 1px;
+			font-size: 16px;
+			margin-bottom: 9px;
+		}
+		.xf-schedule .share-other {
+			overflow: hidden;
+			padding-top: 5px;
+		}
+		.xf-schedule .share-other div {
+			float: left;
+			margin-right: 30px;
+			color: #2b6fad;
+		}
+		.xf-schedule .share-other div i {
+			color: #2b6fad;
+			margin-right: 5px;
+			font-weight: bold;
+		}
+		.xf-schedule .share-other div a {
+			color: #2b6fad;
+			cursor: pointer;
+		}
+		.xf-schedule .share-other div a.share {
+			padding-left: 18px;
+			background: url({/$siteurl.style/}/img/company/share-img.png) no-repeat;
+			background-size: 14px;
+			background-position: 0px 3px;
+		}
+		.xf-schedule .share-other div a.link {
+			padding-left: 18px;
+			background: url({/$siteurl.style/}/img/company/link-bg.png) no-repeat;
+			background-size: 16px;
+			background-position: 0px 3px;
+		}
+		.xf-schedule .share-other div a:hover {
+			text-decoration: underline;
+		}
+
+		.freshList li {
+			position: relative;
+		}
+
+		.freshList li .share-box {
+			position: absolute;
+			top: 8px;
+			left: -100px;
+			border: 2px solid #cdcdcd;
+			white-space: nowrap;
+			display: none;
+			line-height: 20px;
+			height: 20px;
+			padding: 0 3px 0 24px;
+			background: #fff url({/$siteurl.style/}/img/company/share.png) no-repeat;
+			background-size: 16px 16px;
+			background-position: 4px 2px;
+			z-index: 10;
+			cursor: pointer;
+		}
+		.freshList li:hover .share-box{
+			display: inline;
+		}
+		.freshList li .share-box .share-link{
+			line-height: 20px;
+			height: 20px;
+			float: none;
+			padding-left: 0;
+			width: auto;
+			display: inline;
+		}
+		.freshList li .share-box .share-h5{
+			line-height: 20px;
+			height: 20px;
+			float: none;
+			padding-left: 0;
+			width: auto;
+			display: inline;
+		}
+
+		.new-alert-pop{color:#604e29; overflow: hidden;}
+		.new-alert-pop span{color:#ff7920;}
+		.money p .wh-money-list em.fail {
+			margin-left: 1px;
+			font-size: 12px;
+			background: #ed7066;
+			color: #fff;
+			padding: 0 4px;
+			border-radius: 4px;
+			line-height: 18px;
+			height: 18px;
+			display: inline-block;
+		}
+		.money p a.wh-companyShow em.fail {
+			margin-left: 3px;
+			font-size: 12px;
+			background: #ed7066;
+			color: #fff;
+			padding: 0 4px;
+			border-radius: 4px;
+			line-height: 18px;
+			height: 18px;
+			display: inline-block;
+			position: relative;
+			top: -1px;
+		}
+		/*满意度评分*/
+		.companyGrade{ display: block;width:113px; height: 108px; background: url({/$siteurl.style/}/img/grade_img01.png) no-repeat; position: fixed; top: 50%; left: 50%; margin: -54px 0 0 -620px;}
+		/*新增数据过低气泡提示2019-01-23*/
+		.reversionList li .number i,.reversionList li .number a{ display: inline-block;width: 10px;height: 13px;background: url({/$siteurl.style/}/img/c/new_index/go_down.png) no-repeat; vertical-align: -2px; margin-left: 5px; position: absolute; top: 5px;}
+		.reversionList li.resCur .number i,.reversionList li.resCur .number a{ height: 22px; background-position: -27px 0;}
+		.reversionList li.resCur{ z-index: 4;}
+		.reversionList li .resOrang{
+			color: #604e29;
+			font-size: 14px;
+			border: 1px solid #f6e5a6;
+			background: #fffadd;
+			padding: 5px 10px;
+			position: absolute;
+			left: 0px;
+			top: 26px;
+			z-index: 2;
+			display: none;
+			width: 220px;
+			text-align: center;
+		}
+		.reversionList li.resCur .resOrang{ display: block;}
+		.reversionList li .resMore{ text-align: right; color: #3D84B8; text-decoration: underline;}
+		.freshList li .subFresh02,.freshList li .subFresh04{width:30px;}
+
+
+		.resume_complete{
+			position: fixed;
+			bottom:210px;
+		}
+.completeTip {color: #fff;position: absolute;top: 27px;width: 245px;height:38px;line-height:38px;left: -3px;font-size: 12px;padding: 0px 10px;border-radius:17px;background-color: rgba(76,76,76,0.85);}
+.completeTip .showCompleteList {padding-right: 10px;box-sizing: border-box;display: inline-block;}
+.completeTip .closeTip	{position: absolute;right: 18px;top: 16px;display: block;width: 10px;height: 10px;line-height: 16px;text-align: center;cursor: default;}
+.completeTip .showCompleteList a {margin-right: 0 !important;text-decoration: underline;color: #fff !important;}
+.completeTip .showCompleteList .lineFirst {color: #FFC103;}
+span.completeTip::before {position: absolute;border: 9px solid;border-color: transparent transparent rgba(76,76,76,0.85) transparent;content: '';top: -18px;left: 40px;}
+</style>
+</head>
+<body>
+
+{/if count($advLst) > 0/}
+<!--<div class="banner">-->
+<!--<a href="javascript:void(0);" class="compClose"></a>-->
+<!--<div class="lst flexBanner">-->
+<!--<ul class="slides" id="flexBannerList">-->
+<!--{/foreach $advLst as $adv/}-->
+<!--<li>-->
+<!--<a target="_blank" href="{/if stripos($adv['url'],'http://')===FALSE/}http://{//if/}{/$adv.url/}">-->
+<!--<img src="{/get_assets img="{/$advpath/}{/$adv["img"]/}"/}"  />-->
+<!--</a>-->
+<!--</li>-->
+<!--{//foreach/}-->
+<!--</ul>-->
+<!--</div>-->
+<!--</div>-->
+{//if/}
+
+{/include file="new_header.html" par="全职招聘" cur="首页"/}
+
+<div id="body_content" style="font-family:'微软雅黑'">
+	{/if $open_grade/}<a  id="grade" class="companyGrade"></a>{//if/}
+	<div class="firmHomeBg" style="min-height: 530px;">
+		<div class="firmHlt">
+			<!--广告-->
+			<!--<a href="https://h5.youzan.com/v2/feature/JbTdCZ7NIU?ps=760" target="_blank" style="display:block;"><img src="{/$siteurl.style/}/img/company/huibo_welfare.jpg" width="690" height="60" /></a>-->
+
+			<a href="{/get_url rule='/topicpage/hbcollege' domain='main'/}/index.html" class="questSurvey" target="_blank"></a>
+			{/if $newBulletin['is_show_yellow_strip']==true/}
+			<div class="cmpAnnunciate" >
+				<div class="cmpAnnunciateTip">升级维护公告：<span onclick="showNewBulletin();">{/$newBulletin['title']/}</span></div>
+				<!--<div class="cmpAnnunciateTit">-->
+				<!--1、现有精准推广的职位将暂停使用，预扣的推广金将自动退回，新版精准推广升级上线；<br />-->
+				<!--2、新版精准推广需重新开启才能生效-->
+				<!--<br />3、置顶将实行新规则：一个行业的一个职位类别（二级）的职位，如果置顶的职位超过5个，那么系统会随机选择该行业5个置顶职位展示（每次刷新和搜索，这5个职位都可能会随机变动）。  如：“广告/会展”行业的“售后/客服”职位类别下的置顶职位超过5个，则在求职者搜索时，会在已置顶的职位中随机选择5个职位展示。-->
+				<!--</div>-->
+			</div>
+			{//if/}
+			{/if in_array($audit_code,array(501,502,503,504,505,506,507,508,509,510,511)) || in_array($is_audit, [4, 5]) || in_array($hrlicence, [1, 2]) || $not_has_map_job_num > 0/}
+			<div class="new-alert-pop">
+				<div>
+					{/if $not_has_map_job_num >0/}
+					<p style="width:660px; display:block;">
+						<i class="warning-icon"></i>
+						<span>有{/$not_has_map_job_num/}个职位地址坐标未完善，请尽快完善</span>
+						<a href="/index/joblist/" target="_blank">去完善&gt;&gt;</a>
+					</p>
+					{//if/}
+
+					{/if in_array($audit_code,array(501,502,503))/}
+					<p>
+						<i class="warning-icon"></i>
+						{/$audit_msg/}
+						<a href="/licencevalidate/" target="_blank" style="float:right">上传资料&gt;&gt;</a>
+					</p>
+					{/elseif in_array($audit_code,array(504,505,506))/}
+					<p>
+						<i class="warning-icon"></i>
+						{/$audit_msg/}
+					</p>
+
+					{/elseif in_array($audit_code,array(507,508,509))/}
+					<p>
+						<i class="warning-icon"></i>
+						{/$audit_msg/}
+						<a href="/licencevalidate/" target="_blank" style="float:right">重新认证&gt;&gt;</a>
+					</p>
+					{/elseif in_array($audit_code,array(510,511))/}
+					<p style="width:660px; display:block;">
+						<i class="warning-icon"></i>
+						{/$audit_msg/}
+						<a href="/licencevalidate/" target="_blank" style="float:right">下载/上传委托书&gt;&gt;</a>
+					</p>
+					{/else if $is_audit == 0 || ($is_audit == 5 && !$is_local_company)/}
+					<p>
+						<i class="warning-icon"></i>
+						<span>您的公司还没进行实名认证，赶快去进行验证吧</span>
+						<a href="/licencevalidate/" target="_blank" style="float:right">公司认证&gt;&gt;</a>
+					</p>
+
+					{/else if $is_audit == 4/}
+					<p>
+						<i class="warning-icon"></i>
+						<span>您公司营业执照属于临时认证，到期时间为{/$audit_expire/}，请尽快重新上传</span>
+						<a href="/licencevalidate/index/action-againUpload" target="_blank" style="float:right">重新认证&gt;&gt;</a>
+					</p>
+					{//if/}
+
+					{/if $hrlicence == 1/}
+					<p style="width:560px; display:block; float: left;"><i class="warning-icon"></i><span>您的人力资源许可证还没有上传哦。</span>
+						<a href="/hrlicence/index" target="_blank">立即上传&gt;&gt;</a>
+					</p>
+
+					{/else if $hrlicence == 2/}
+					<p style="width:560px; display:block; float: left;">
+						<i class="warning-icon"></i>
+						<span>您的人力资源许可证没有通过审核。{/if !empty($hrlicence_reason)/}<span title="{/$hrlicence_reason/}">原因：{/base_lib_BaseUtils::cutstr($hrlicence_reason,32,'utf-8','','…')/}</span>{//if/}</span>
+						<a href="/hrlicence/index" target="_blank">重新上传&gt;&gt;</a>
+					</p>
+
+					{//if/}
+				</div>
+			</div>
+			{//if/}
+
+			<!--{/if $memberinfo == "member"/}-->
+			<!--<a href="{/$siteurl.style/}/spread/detail" target="_blank" style="display:block;"><img src="{/$siteurl.style/}/img/company/popularize02.png" width="612" height="52" /></a>-->
+			<!--{//if/}-->
+
+			<!--需要判断是否显示吗-->
+
+			{/*
+			{/if !empty($calling_advert_middle)/}
+			<div id="scrollTop">
+				<ul>
+					{/foreach $calling_advert_middle as $k=>$v/}
+					<li><a class="md_index_banner" href="http://{/$v['url']/}" target="_blank"><img src="{/$v['img_url']/}" /></a></li>
+					<!--<li><a href="{/$siteurl.style/}/CompanyImages/a_dv_img/11695_2836187.jpg" /></a></li>-->
+					<!--<li><a href="{/$siteurl.style/}/CompanyImages/a_dv_img/11698_4775630.jpg" /></a></li>-->
+					{//foreach/}
+				</ul>
+			</div>
+			{//if/}*/}
+			{/if !empty($calling_advert_middle)/}
+			<style>
+				.slideImg{width:612px;height:60px;overflow: hidden;display: block;position: relative}
+				.slideImg .slides img,.slideImg .slides li{width:612px;height:60px;float:left;overflow: hidden}
+				.slideImg .flex-control-paging{position:absolute;right:5px;text-align:center;top:30px;top:40px\9;z-index:3;float:right;margin:0px;#width:80px}
+				.slideImg .flex-control-paging li{height:20px;overflow: hidden;display: inline-block;height:20px;#float:left}
+				.slideImg .flex-control-paging a{display:inline-block;width:8px;height:0;padding-top:8px;background:#000;overflow:hidden;border-radius:50%;filter:alpha(opacity=50);-moz-opacity:0.50;opacity:0.50;margin:0 3px;cursor: pointer}
+				.slideImg .flex-control-paging a.flex-active {background:#00f6ff;filter:alpha(opacity=100);-moz-opacity:1;opacity:1}
+			</style>
+			<div class="slideImg flexBanner">
+				<ul class="slides" id="flexBannerList">
+					{/foreach $calling_advert_middle as $k=>$v/}
+					<li><a class="md_index_banner" href="http://{/$v['url']/}" target="_blank" adv_id="{/$v['adv_id']/}" area="calling_advert"><img src="{/$v['img_url']/}" /></a></li>
+					{//foreach/}
+				</ul>
+			</div>
+			{//if/}
+
+			<a href="{/get_url rule="/resumesearchnew/"/}">
+			<div class="new_search">
+				<input type="text" name="station" id="searchStation" placeholder="从{/$ShowResumeNum/}人才简历中找找合适的人吧" class="text md_index_resume_search"/><input type="submit" id="searchResume" value="简历搜索" class="sub_mit"/>
+			</div>
+			</a>
+
+			<!--新的--简历回复率和职位列表 -->
+			<div class="job-content-news">
+				<!--近两周处理率-->
+				<fieldset class="two-weeks">
+					<!--<legend class="title"><strong>近两周</strong>（{/$reversion_date_range/}）</legend>-->
+					<ul class="reversionList  clearfix">
+						<li class="item" style="width: 150px;">
+							<i class="icon-question ques"></i>
+							<span>简历回复率:</span>
+							<span class="number">{/$reversion_rate['reply_rate']/}% {/if $reversion_rate['reply_rate']<50 || $reversion_rate['reply_rate']=='低于20'/}<i></i>{//if/}</span>
+							<p class="orang">
+								简历回复率=最近2周企业处理简历数/投递简历数；回复率提升10%收到的简历数将提升20%
+							</p>
+							<p class="resOrang">
+								数据过低，影响招聘效果
+							</p>
+						</li>
+						<li class="item" style="width:170px;">
+							<i class="icon-question ques"></i>
+							<span>简历回复时长:</span>
+							<span class="number">{/$reversion_rate['avg_time']/}{/$reversion_rate['day_hour']/}
+                                {/if ($reversion_rate['avg_time']>2&&$reversion_rate['day_hour']=='天')/}
+                                <i></i>
+                                {//if/}
+                            </span>
+							<p class="orang">简历回复时长是最近2周企业处理投递简历的平均回复时长；处理越及时可能收到的简历就越多哦~</p>
+							<p class="resOrang">
+								数据过低，影响招聘效果
+							</p>
+						</li>
+						<li class="item" style="width:170px;">
+							<i class="icon-question ques"></i>
+							<span>职位相符度得分:</span>
+							<span class="number" style="{/if !$appraise_appraise.population_avg_level/}color:#999;{//if/}">{/if $appraise_appraise.population_avg_level/}{/$appraise_appraise.population_avg_level/}分{/else/}暂无{//if/}
+								{/if !empty($appraise_appraise.population_avg_level)&&$appraise_appraise.population_avg_level<3.5/}
+                                <a href="{/get_url rule='/specification/StarAppraise'/}" target="_blank"></a>
+                                {//if/}
+                            </span>
+							<p class="orang">职位相符度得分为最近半年收到求职者面试评价的平均得分；改进近期面试体验，评分会升高哦~</p>
+							<p class="resOrang" style="text-align: left;">
+								数据过低，影响招聘效果；点击图标查看如何提升！
+							</p>
+						</li>
+						{/if count($company_account_info)>1&&$is_main/}
+						<li style="width:50px; padding-left: 0;z-index: 5;">
+							<a href="javascript:void(0);" id="moreAppraise" class="number resMore">更多></a>
+							<div class="morePopx" >
+								<i></i>
+								<span>查看完整数据，了解各HR招聘情况<em>×</em></span>
+							</div>
+						</li>
+						{//if/}
+					</ul>
+				</fieldset>
+				<!--/近两周-->
+
+				<!--职位刷新-->
+				<div class="pub-job-select clearfix">
+					<span class="title">招聘人：</span>
+					<div class="simulation-select" id="simulation-select">
+						<p class="select-value" style="color:#999"><i class="arrdown-icon"></i>{/if !empty($account_id)/}{/if !empty({/$company_account_info[$account_id]['user_name']/})/}{/base_lib_BaseUtils::cutstr($company_account_info[$account_id]['user_name'],6,'utf-8','','...')/}{/else/}{/$company_account_info[$account_id]['user_id']/}{//if/}{/else/}请选择招聘人{//if/}</p>
+						<ul class="select-list">
+							<li><a class="md_index_account_select" href="{/$siteurl.company|replace:'http:':''/}/index?all=1" data-id="">不限</a></li>
+							{/foreach $company_account_info as $v/}
+							<li><a class="md_index_account_select" href="{/$siteurl.company|replace:'http:':''/}/index?account_id={/$v['account_id']/}" data-id="{/$v['account_id']/}">{/if !empty($v['user_name'])/}{/base_lib_BaseUtils::cutstr($v['user_name'],8,'utf-8','','...')/}{/else/}{/$v['user_id']/}{//if/}</a></li>
+							{//foreach/}
+						</ul>
+						<input type="hidden" value="0" />
+					</div>
+
+					<div class="refresh-job">
+						<a href="/partjob/addjobselect/" target="_blank" class="firmRefresh md_index_pubjob">发布职位</a>
+
+						{/if ($companyresources['refresh_today_overplus']|default:0)==0/}
+						<div class="alert-warniong mgt15" style="top:40px;display: none;">
+							<a class="close" href="javascript:void(0)" id="closeRefreshTip">×</a>
+							<i class="arrdown-icon"></i>
+							<p style="height: 101px;width: 330px">
+								<img src="{/$siteurl.style/}/img/account/add_appresume.jpg" style="float: left;margin-right: 20px" />
+								<span style="font-size: 14px;color: #333;display: block;padding-top: 5px;padding-bottom: 20px">使用<font style="color: #f00">汇博企业APP</font>，免费刷新职位。快速提升职位浏览量。</span>
+								<span style="color: #999;font-size: 12px">扫码安装汇博企业APP，支持安卓 IOS</span>
+							</p>
+						</div>
+						{//if/}
+					</div>
+
+				</div>
+				<style>
+					#importP a{padding:0px !important; height:auto !important; line-height: inherit !important; float: none; display: inline-block; overflow:visible; font-size:12px;}
+					.freshList li .subFresh06{width: 60px;position: relative;overflow: visible;}
+					.freshList li .subFresh06 div{width:100%;height:100%;overflow: hidden;}
+					.freshList li span, .freshList .subFresh05, .freshList .subFresh02{padding-left:5px;}
+					.freshList li .subFresh01{width: 225px;}
+				</style>
+				<!--职位列表管理 -->
+				<div style="">
+					<ul class="freshList clearfix {/if count($job_lists)>10/}js-over-height{//if/}">
+
+						<li class="freshGray clearfix" >
+							<span class="subFresh01">职位名称</span>
+							<span class="subFresh06">招聘人</span>
+							<span class="subFresh03">待回复</span>
+							<span class="subFresh04">未读</span>
+							<!--<span class="subFresh05">待定</span>-->
+							<span class="subFresh02">收到</span>
+							<span class="subFresh07">刷新时间</span>
+							<span class="subFresh08" style="padding-left: 10px;">操作</span>
+						</li>
+
+						{/if $importData['is_import']==1/}
+						<li style="padding-left: 0;">
+							<p style="padding: 5px 10px;border:1px solid #fbaba9;background: #fff2ef;color: #444;font-size: 12px;" id="importP">
+								<a id="js_click_import" href="javascript:void(0);" style="color: #d5535d;text-decoration: underline;float: right !important; height:auto; line-height:18px;">一键导入汇博</a>
+								{/$importData['stationstring']/}
+							</p>
+						</li>
+						{//if/}
+						{/if count($job_lists) > 0/}
+						{/foreach $job_lists as $k => $job/}
+
+						{/if $job['promiseStop'] ==1/}
+						<li class ="{/if $k%2==1/}freshGraybg {//if/}freshRedColor clearfix">
+
+
+							<a href='{/$job["job_link"]/}' style="color:#ff1919" title="{/$job['station']/}{/if $job['check_state'] ==4/}&#10审核中{//if/}" target="_blank" class="subFresh01">
+								<font style="max-width:107px">{/base_lib_BaseUtils::cutstr($job['station'],16,'utf-8','','…')/}</font>
+								<!--急聘-->
+								{/if !base_lib_BaseUtils::nullOrEmpty($job.urgent_mark) && $job.urgent_mark == true/}
+								<i class="icon-ji" title="{/$job.urgent_end_date/}截止"></i>
+								{//if/}
+								<!--置顶-->
+								{/if !base_lib_BaseUtils::nullOrEmpty($job.top_mark) && $job.top_mark == true/}
+								<i class="icon-ding"  title="已在{/$job.top_count/}个关键词列表中置顶"></i>
+								{//if/}
+
+								<!--职位精准推广-->
+								{/if in_array($job.job_id,$EffectSpreadJob_ids)/}
+								<i class="icon-spread" ></i>
+								{//if/}
+								{/if in_array($job['re_apply_type'], [2, 5])/}
+								<img style="float: left;margin-right:3px;" title="{/$job['re_apply_type']/}天内回复" src="{/$siteurl.style/}/img/c/new_index/{/$job['re_apply_type']/}.png"/>
+								{//if/}
+								{/if $job['agency_state']==1 || $job['agency_state']==2/}
+								<!--<div class="daiyunying"  >-->
+								<img src="{/$siteurl.style/}/img/c/new_index/daiyunying.jpg" style="float: left;margin-left:3px" width="42px" tit="此职位由汇博代为发布及运营"/>
+								<!--<p><img src="{/$siteurl.style/}/img/c/new_index/firmicon22.png" alt="">此职位由汇博代为发布及运营</p>-->
+								<!--</div>-->
+								{//if/}
+								{/if $job['is_quality'] == 1/}
+								<i class="icon-ji" title="精品"></i>
+								{//if/}
+							</a>
+								<span class="subFresh06"><div>{/$job['account_user_name']/}</div>
+								{/if  $job['check_state'] != 4 && $company_level > 0 && $CompanyAuditStatus == '认证通过'/}
+								<span class="share-box" data-id="{/$job['job_id']/}">
+										分享（<a class="share-link md_index_mh5" href="javascript:viod(0);">海报</a>/<a class="share-h5 md_index_mh5" href='{/get_url rule="/index/TemplateStatisticalByH5" data="type=3"/}' target="_blank">H5页面</a>）
+									</span>
+								{//if/}
+								</span>
+							<!--待回复-->
+							<a class="subFresh03" target='_blank'{/if $job['no_reply_num'] >0/} href='/apply/Index/?job_id={/$job.job_id/}' {//if/}>{/$job['no_reply_num']/}{/if $job['no_reply_num'] >0/}<i></i>{//if/}</a>
+							<!--未读-->
+							<a class="subFresh04" target='_blank' {/if $job['applyNotReadCount']>0/}href='/apply/Index/?child_status=2&job_id={/$job.job_id/}'{//if/}>{/$job['applyNotReadCount']/}</a>
+							<!--待定-->
+							<!--<a class="subFresh05" target='_blank'{/if $job['wait_deal_num'] >0/} href='/apply/Index/?job_id={/$job.job_id/}' {//if/}>{/$job['wait_deal_num']/}{/if $job['wait_deal_num'] >0/}<i></i>{//if/}</a>-->
+							<!--收到-->
+								<span class="subFresh02">{/$job['applyCount']/}
+									{/if $job['is_show_recommend_tip'] && empty($recommend_tip_cookie)/}
+									<div class="autoRecommenTip">
+										收到简历少？试试<a href='{/get_url rule="/recommend/index" data="type=1&job_id={/$job['job_id']/}"/}' target="_blank" data-recommendjob="{/$job['job_id']/}" class="recommend_job">推荐的简历</a><a class="closeTipBtn" href="javascript:void(0);">x</a>
+									</div>
+									{//if/}
+								</span>
+							<span class="subFresh07">{/$job['refresh_time']/}</span>
+								<span class="subFresh08">
+									<a href="javascript:;" class="job_close md_index_close" data-id="{/$job['job_id']/}" style="margin-right: 10px">关闭</a>
+									<!--<a href="javascript:;" class="lazy" data-id="{/$job['job_id']/}">延期</a>-->
+								</span>
+
+						</li>
+						{/else/}
+						<li class ="{/if $k%2 == 1/}freshGraybg{//if/} clearfix">
+							<a {/if $job['check_state'] != 4/}href='{/$job["job_link"]/}'{//if/} title="{/$job['station']/}{/if $job['check_state'] == 4/}&#10审核中{//if/}" target="_blank" class="subFresh01 clearfix {/if $job['check_state'] == 4/} check_status{//if/}" style="cursor:pointer;">
+
+							<font style="max-width:99px">{/base_lib_BaseUtils::cutstr($job['station'], 16, 'utf-8', '', '…')/}</font>
+							<!--急聘-->
+							{/if !base_lib_BaseUtils::nullOrEmpty($job.urgent_mark) && $job.urgent_mark == true/}
+							<i class="icon-ji" title="{/$job.urgent_end_date/}截止"></i>
+							{//if/}
+							<!--置顶-->
+							{/if !base_lib_BaseUtils::nullOrEmpty($job.top_mark) && $job.top_mark == true/}
+							<i class="icon-ding"  title="已在{/$job.top_count/}个关键词列表中置顶"></i>
+							{//if/}
+							<!--职位精准推广-->
+							{/if in_array($job.job_id,$EffectSpreadJob_ids)/}
+							<i class="icon-spread" ></i>
+							{//if/}
+							{/if $job['check_state'] == 4/}
+							<img title="待审核" src="{/$siteurl.style/}/img/c/new_index/shen.png" class="shen" style="float: left; margin-left:3px;margin-right:3px;padding-left:0" />
+							{/else/}
+							{/if in_array($job['re_apply_type'], [2, 5])/}
+							<img style="float: left;margin-right:3px" title="{/$job['re_apply_type']/}天内回复" src="{/$siteurl.style/}/img/c/new_index/{/$job['re_apply_type']/}.png"/>
+							{//if/}
+							{//if/}
+							{/if $job['agency_state']==1 || $job['agency_state']==2/}
+							<!--<div class="daiyunying" style="float: left;margin-right:3px" >-->
+							<img title="此职位由汇博代为发布及运营" src="{/$siteurl.style/}/img/c/new_index/daiyunying.jpg" style="float: left;margin-right:3px;margin-top: 13px;" width="42px"/>
+							<!--<p><img src="{/$siteurl.style/}/img/c/new_index/firmicon22.png" alt="">此职位由汇博代为发布及运营</p>-->
+							<!--</div>-->
+							{//if/}
+							{/if $job['is_quality'] == 1/}
+							&nbsp;<span style="background: #dbaa5b;color: #fff;line-height: 16px;font-size: 12px;height: 16px;padding: 0 2px;margin-top: 13px;margin-left: 2px;">精</span>
+							{//if/}
+							</a>
+
+									<span class="subFresh06"><div>{/$job['account_user_name']/}</div>
+									{/if  $job['check_state'] != 4 && $company_level > 0 && $CompanyAuditStatus == '认证通过'/}
+									<span class="share-box" data-id="{/$job['job_id']/}">
+										分享（<a class="share-link md_index_mh5" href="javascript:viod(0);">海报</a>/<a class="share-h5 md_index_mh5" target="_blank" href="{/get_url rule='/index/TemplateStatisticalByH5' data='type=3'/}">H5页面</a>）
+									</span>
+									{//if/}
+									</span>
+							<!--待回复-->
+							<a class="subFresh03" target='_blank'{/if $job['no_reply_num'] >0/} href='/apply/Index/?job_id={/$job.job_id/}' {//if/}>{/$job['no_reply_num']/}{/if $job['no_reply_num'] >0/}<i></i>{//if/}</a>
+							<!--未读-->
+							<a class="subFresh04" target='_blank' {/if $job['applyNotReadCount']>0/}href='/apply/Index/?child_status=2&job_id={/$job.job_id/}'{//if/}>{/$job['applyNotReadCount']/}</a>
+							<!--待定-->
+							<!--<a class="subFresh05" style="color:#2b6fad" target='_blank'{/if $job['wait_deal_num'] >0/} href='/apply/Index/?job_id={/$job.job_id/}' {//if/}>{/$job['wait_deal_num']/}{/if $job['wait_deal_num'] >0/}<i></i>{//if/}</a>-->
+							<!--收到-->
+									<span class="subFresh02">{/$job['applyCount']/}
+										{/if $job['is_show_recommend_tip'] && empty($recommend_tip_cookie)/}
+										<div class="autoRecommenTip">
+											收到简历少？试试<a href='{/get_url rule="/recommend/index" data="type=1&job_id={/$job['job_id']/}"/}' target="_blank" data-recommendjob="{/$job['job_id']/}" class="recommend_job">推荐的简历</a><a class="closeTipBtn" href="javascript:void(0);">x</a>
+										</div>
+										{//if/}
+									</span>
+							{/if $job['no_reply_num'] > 0/}<i></i>{//if/}
+							<!--到期时间-->
+							<span class="subFresh07">{/$job['refresh_time']/}</span>
+								<span class="subFresh08" style="position: relative">
+									<a href="javascript:;"  class="cd-refresh-job md_index_refresh" data-refresh="{/$job['is_free_refresh']/}" data-id="{/$job['job_id']/}" style="margin-right: 5px">刷新</a>
+
+										<a href="javascript:;"  class="set-pro {/if $job['can_do']/}{/if $job['is_quality'] == 1/}stop_job_quality{/else/}{/if $can_boutique_job/}set_job_quality{/else/}no_boutique_job{//if/}{//if/}{/else/} unable{//if/}" data-user="{/$job['account_user_name']/}"  data-pay="{/$job['is_pay']/}" data-id="{/$job['job_id']/}" style="margin-right: 5px">{/if $job['is_quality'] == 1/}取消精品{/else/}设为精品{//if/}
+											<div>精品职位显示在免费职位之前</div>
+										</a>
+
+
+
+									<a href="javascript:;"  class="job_close md_index_close"  data-id="{/$job['job_id']/}" style="margin-right:0px">关闭</a>
+									<!--{/if $job['is_show_lazy']/}<a href="javascript:;" class="lazy" data-id="{/$job['job_id']/}">延期</a>{//if/}-->
+								</span>
+
+						</li>
+						{//if/}
+
+						{/if $k == ($promiseStopSize - 1)/}
+						<!-- 分隔线 -->
+						<li class="freshOne">
+							<p><i></i><span style="color:#999">以上停招的承诺职位请将简历回复完</span></p><!--会员-->
+						</li>
+						{//if/}
+						{//foreach/}
+						{/else/}
+						{//if/}
+						{/if $memberinfo != 'member'/}
+						{//if/}
+					</ul>
+					{/if count($job_lists) > 10/}
+					<p style="margin-top:10px" align="right" id="jobMore">
+						<a target="_blank">查看更多<img src="{/$siteurl.style/}/img/company/company_icon_v2_move1.jpg" style="vertical-align: -2px;margin-left:6px" /></a>
+					</p>
+					{//if/}
+
+					<!--2018/6/19 企业招聘中心及区县职位列表调整 新增内容-->
+					<style>
+						.no-data-con div.none-job-data {
+							text-align: center;
+
+						}
+						.on-data-con div.none-job-data a {
+							float: none;
+							display: inline;
+							line-height: 30px;
+						}
+					</style>
+
+					<div class="no-data-con" style="margin-top: 10px;">
+						<div class="none-job-data" style="display: {/if count($job_lists) > 0/}none{//if/}" >您还没有发布职位哦~<a href="{/get_url rule='/partjob/addjobselect/'/}" target="_blank">立即免费发布职位</a></div>
+					</div>
+				</div>
+
+				<div class="marketTip" style="">
+					<i></i>
+					<a class="md_index_upremmon" href="{/get_url rule='/spreadjob/index/'/}"><span>精准推广，增加曝光，提升效果！</span></a>
+				</div>
+
+				<div class="marketPopx marketPopx1" style="display: none;">
+					<i class="markeIcon"></i>
+					<div class="marketPop">
+
+						<span>正在推广职位：{/count($EffectSpreadJob_ids)/} </span>
+						<span>今日展示量：<i id="spreadJobSeeCount">正在统计...</i></span>
+						<span class="last">今日点击量：<i id="spreadClickCount">正在统计...</i></span>
+					</div>
+				</div>
+			</div>
+
+			<!--<div class="job-content-news">-->
+			<!--<p style="margin-top: 15px; display: inline-block; overflow: hidden; width:100%;color: #999;">昨日（{/date("Y-m-d",strtotime('-1 day'))/}） <a target="_blank" href="{/get_url rule="/readjob/CompanyVisit"/}" style="float:right;color:#2b6fad">更多数据 ></a> </p>-->
+			<!--<ul style="margin-top: 5px; overflow: hidden;">-->
+			<!--<li style="width:33.33%; float: left;">职位浏览量：<a target="_blank" href="{/get_url rule="/readjob/CompanyVisit"/}" style="color: #2b6fad">{/$job_visit_number['job_visit_count']/}</a></li>-->
+			<!--<li style="width:33.33%; float: left;">简历投递量：<a target="_blank" href="{/get_url rule="/readjob/CompanyVisit"/}" style="color: #2b6fad">{/$job_visit_number['job_apply_count']/}</a></li>-->
+			<!--<li style="width:33.33%; float: left;">面试邀请量：<a target="_blank" href="{/get_url rule="/readjob/CompanyVisit"/}" style="color: #2b6fad">{/$job_visit_number['job_invite_count']/}</a></li>-->
+			<!--</ul>-->
+			<!--</div>-->
+
+			<style>
+				.job-seeker-list {
+				}
+				.job-seeker-list h3 {
+					overflow: hidden;line-height: 24px;
+					margin-bottom: 10px;
+				}
+				.job-seeker-list h3 p.title {
+					float: left;
+					color: #444;
+					font-size: 16px;
+				}
+				.job-seeker-list h3 p.refresh-num {
+					float: right;color: #999;font-size: 12px;
+				}
+				.job-seeker-list ul {
+					overflow: hidden;
+					padding-bottom: 10px;
+				}
+				.job-seeker-list li {
+					float: left;
+					margin:0 10px 10px 0;
+					width: 210px;
+					box-sizing: border-box;
+					border: 1px dashed #f1f1f1;
+				}
+				.job-seeker-list li a {
+					display: block;
+					cursor: pointer;
+					overflow: hidden;
+					color: #666;
+				}
+				.job-seeker-list li.last-seeker {
+					margin-right: 0;
+				}
+				.job-seeker-list li .info-con {
+					overflow: hidden;
+					padding: 10px;
+					background: #fafafa;
+				}
+				.job-seeker-list li .avatar {
+					float: left;
+					width: 40px;
+					height: 40px;
+					background-color: #ccc;
+					margin-top: 2px;
+					margin-right: 10px;
+					border-radius: 50%;
+				}
+				.job-seeker-list li .info {
+					float: left;
+					width: 136px;
+				}
+				.job-seeker-list li .info .name {
+					font-size: 16px;color: #444;
+				}
+				.job-seeker-list li .info .other {
+					font-size: 12px;color: #666;
+					overflow: hidden;
+					white-space: nowrap;
+					text-overflow: ellipsis;
+					width:136px;
+					height:18px;
+					line-height:18px;
+				}
+
+				.job-seeker-list li .order-job {
+					margin:10px 10px 0 10px;
+					overflow: hidden;
+					text-overflow: ellipsis;
+					white-space: nowrap;
+					width:188px;
+					color: #666;
+					height: 21px;
+					line-height: 21px;
+				}
+				.job-seeker-list li .order-place {
+					margin:8px 10px 12px 10px;
+					overflow: hidden;
+					text-overflow: ellipsis;
+					white-space: nowrap;
+					color: #666;
+					width:188px;
+					height: 21px;
+					line-height: 21px;
+				}
+
+				.company-list {
+				}
+				.company-list h3 {
+					overflow: hidden;line-height: 24px;
+					margin-bottom: 10px;
+				}
+				.company-list h3 .title {
+					float: left;
+					font-size: 16px;
+					color: #444;
+				}
+				.company-list h3 .refresh-num {
+					float: right;color: #999;font-size: 12px;
+				}
+				.company-list ul {
+					overflow: hidden;
+					padding-bottom: 10px;
+				}
+				.company-list li {
+					overflow: hidden;
+					width: 320px;
+					box-sizing: border-box;
+					border: 1px dashed #f1f1f1;
+					float: left;
+					height: 60px;
+					margin-bottom: 10px;
+				}
+				.company-list li a {
+					display: block;
+					padding: 10px;
+					overflow: hidden;
+					cursor: pointer;
+					color: #444;
+				}
+
+				.company-list li.odd {
+					margin-right: 10px;
+				}
+
+				.company-list li img {
+					display: block;
+					box-sizing: border-box;
+					border:1px solid #f6f6f6;
+					width: 40px;
+					height: 40px;
+					float: left;
+					margin-right: 8px;
+					border-radius: 50%;
+				}
+				.company-list li .name {
+					font-size: 16px;
+					height: 40px;
+					float: left;
+					width: 115px;
+					padding-right: 10px;
+					border-right: 1px dashed #f0f0f0;
+					margin-right: 10px;
+					line-height: 20px;
+					overflow: hidden;
+					text-overflow: ellipsis;
+					-webkit-line-clamp: 2;
+					-webkit-box-orient: vertical;
+					display: -webkit-box;
+					display: flex;
+					align-items:center;
+				}
+				.company-list li .pub-job {
+					float: left;
+					height: 40px;
+					text-align: center;
+					margin-right: 15px;
+				}
+				.company-list li .pub-job span {
+					font-size: 16px;
+				}
+				.company-list li .pub-job p {
+					color: #999;
+					font-size: 12px;
+				}
+				.company-list li .get-resume {
+					float: left;
+					height: 40px;
+					text-align: center;
+				}
+				.company-list li .get-resume span {
+					font-size: 16px;
+				}
+				.company-list li .get-resume  p {
+					color: #999;
+					font-size: 12px;
+				}
+
+			</style>
+			<style>
+				div.not-vip-box {
+					padding-bottom: 20px;
+				}
+				.not-vip-box .title {
+					color: #444;
+					font-size: 16px;
+					font-weight: bold;
+					overflow: hidden;
+				}
+				.not-vip-box .title a.buy-now {
+					font-size: 14px;
+					color: #fff;
+					background: #66bce4;
+					width: 76px;
+					height: 30px;
+					line-height: 30px;
+					font-weight: normal;
+					display: inline-block;
+					text-align: center;
+					border-radius: 3px;
+					float: right
+				}
+				.not-vip-box .title a.know-more {
+					color: #4bb6e7;
+					font-weight: 400;
+					font-size: 14px;
+					margin-left: 10px;
+					display: inline;
+					background-color: #fff;
+					cursor: pointer;
+					float: right;
+					line-height: 30px;
+				}
+				.not-vip-box .open-vip-teiqan {
+					margin-top: 10px;
+				}
+				.membershipDuex{width:415px; overflow: hidden;  margin: 20px; text-align: left;}
+				.duex01{ display: block; color: #444; line-height: 22px;}
+				.duex01 i{ color: #f00;}
+				.duez{ overflow: hidden; color: #444;padding-left: 108px;}
+				.duez span{ display: block; }
+				.duez span.duez01{ color: #999; padding: 20px 0 10px 0;}
+				.duez span.duez01 b{ font-weight: normal; color: #444; font-size: 16px; font-weight: bold; padding-right: 10px;}
+				.duez span.duez02{ line-height: 30px; color: #444;}
+				.duez span.duez02 b{ font-weight: normal; color: #999;}
+			</style>
+			
+			<!--左侧非会员-->
+
+
+			{/if count($recommend) > 0/}
+
+			<!-- 推荐的简历 -->
+			<div class="firmConTopBg">
+				<div class="firmRmendTit">
+					<span>推荐人才</span>
+					{/if $recommend_resume_num > 0/}
+					<a href="/recommend/index/?type=2" class="md_index_remmonperson_more" target="_blank">更多<img src="{/$siteurl.style/}/img/company/company_icon_v2_move2.jpg" style="margin-left:3px" /></a>
+					{/else/}
+					<a href="/recommend/index/?type=1" class="md_index_remmonperson_more" target="_blank">更多<img src="{/$siteurl.style/}/img/company/company_icon_v2_move2.jpg" style="margin-left:3px" /></a>
+					{//if/}
+				</div>
+				<div class="firmRmendBox">
+					{/foreach $recommend as $key=>$value/}
+					{/if $value['recommend_id'] > 0/}
+					<a class="firmRmendItem md_index_remmonperson_list" target="_blank" href = '{/get_url rule="/recommend/recommendResumeInfo/" data="type=network&src=recommend&recommendid={/$value['recommend_id']/}&resumeid={/$value['resume_id']/}"/}'>
+					{/else/}
+					<a class="firmRmendItem md_index_remmonperson_list" target="_blank" href = '{/get_url rule="/resume/resumeshow/" data="type=network&src=recommend&resumeid={/$value['resume_id']/}"/}'>
+					{//if/}
+					{/if $value['recommend_type'] == 3/}
+					<div class="firmRmendTumb">
+						<img src="{/$siteurl.style/}/img/company/orange_tumb.jpg"/>&nbsp;猎头推荐
+					</div>
+					{//if/}
+					{/if $value['recommend_type'] == 1 || $value['recommend_type'] == 2/}
+					<div class="firmRmendTumb">
+						<img src="{/$siteurl.style/}/img/company/orange_tumb.jpg"/>&nbsp;猎头推荐
+					</div>
+					{//if/}
+						<img src="{/if $value['small_photo']/}{/$value['small_photo']/}{/else/}{/$siteurl.style/}/img/c/new_resume/headportrait.png{//if/}" alt="" class="firmRmendImg" />
+						<div class="firmRmendRight">
+							<div class="firmRmendName">{/$value['user_name']/}</div>
+							<div>{/$value['sex']/}/{/$value['start_work']/}/{/$value['age']/}</div>
+						</div>
+						<div class="firmRmendEdu">
+							{/if $value['school']/}<span>{/$value['school']/}</span>{/else/}<span>未填写学校</span>{//if/}<u>|</u>
+							{/if $value['major_desc']/}<span>{/$value['major_desc']/}</span>{/else/}<span>未填写专业</span>{//if/}<u>|</u>
+							{/if $value['degree']/}<span>{/$value['degree']/}</span>{//if/}
+						</div>
+						<div class="firmRmendWork">
+							{/if $value['station']/}<span class='bold'>{/$value['station']/}</span>{//if/}
+							{/if $value['company_name']/}<u>|</u><span>{/$value['company_name']/}</span>{//if/}
+						</div>
+					</a>
+					{//foreach/}
+				</div>
+				
+			</div>
+			{//if/}
+			
+			<!--2018/6/19 企业招聘中心及区县职位列表调整 新增内容-->
+
+			{/if !empty($recommend_resume)/}
+			<div class="not-vip-box">
+				<div class="job-seeker-list">
+					<h3 >
+						<p class="title">他们正在汇博网寻找工作</p>
+						<p class="refresh-num">最近7天刷新简历{/$refresh_times/}次</p>
+					</h3>
+					<ul>
+						{/foreach $recommend_resume as $k=>$v/}
+						<li class="{/if ($k+1)%3==0/}last-seeker{//if/}">
+							<a href="{/get_url rule='/resume/resumeshow/'/}type-network-resumeid-{/$v['resume_id']/}" target="_blank">
+								<div class="info-con" >
+									<img class="avatar" src="{/$v['photo']/}"/>
+									<div class="info">
+										<p class="name">{/$v['user_name']/}</p>
+										<p class="other" >{/$v['start_work']/}，{/$v['sex']/}，{/$v['age']/}岁</p>
+									</div>
+								</div>
+								<div class="order-job">期望工作：{/$v['str_expect_callings']/}</div>
+								<div class="order-place">期望地点：{/$v['area_name']/}</div>
+							</a>
+						</li>
+						{//foreach/}
+					</ul>
+				</div>
+			</div>
+			{/if $company_level<=1/}
+			{/if !empty($recommend_companys)/}
+			<div class="not-vip-box">
+				<div class="company-list">
+					<h3>
+						<p class="title">他们正在汇博网寻找人才</p>
+						<p class="refresh-num">最近7天获取简历{/$download_total/}份</p>
+					</h3>
+					<ul>
+						{/foreach $recommend_companys as $k=>$v/}
+						<li class="{/if $k==0||$k==2||$k==4/}odd{//if/}">
+							<a href="{/$v['company_path']/}" target="_blank">
+								<img src="{/$v['logo_path']/}"/>
+								<div class="name">{/$v['company_name']/}</div>
+								<div class="pub-job">
+									<span>{/$v['job_count']/}</span>
+									<p>发布职位</p>
+								</div>
+								<div class="get-resume">
+									<span>{/$v['down_total']/}</span>
+									<p>获取简历</p>
+								</div>
+							</a>
+						</li>
+						{//foreach/}
+					</ul>
+				</div>
+			</div>
+			{//if/}
+			{//if/}
+			{//if/}
+			<!---->
+			
+			<!--最近招聘会 -->
+		</div>
+
+		<!--右侧-->
+		<div class="firmHrt">
+			<div class="user-infor-box">
+				<!--职位联系人-->
+				<dl class="clearfix">
+					<dt>
+						{/if !empty($account_user_info['head_photo'])/}
+						<img src="{/$account_user_info['head_photo']/}" />
+						{/else/}
+						<span class="header-img">{/base_lib_BaseUtils::cutstr($account_user_info['user_name'],1,'utf-8','','')/}</span>
+						{//if/}
+					</dt>
+					<dd class="infor">
+						<!--<strong class="name">{/$account_user_info['user_id']/}</strong>-->
+						<!--<span class="zhiwei">-->
+						<!--{/$account_user_info['user_name']/}-->
+						<!--{/if !empty($account_user_info['user_name']) && !empty($account_user_info['station'])/}/ {//if/}-->
+						<!--{/$account_user_info['station']/}-->
+						<!---->
+						<!--{/if empty($account_user_info['user_name']) || empty($account_user_info['station'])/}-->
+						<!--<a target="_blank" href="{/$siteurl.company|replace:'http:':''/}/account/accountmanage/">待完善</a>-->
+						<!--{//if/}-->
+						<!--</span>-->
+						<strong class="name">{/$account_user_info['user_id']/} <a href="/account/editAccount/account_id-{/$account_user_info['account_id']/}" class="text-blue md_index_selfdetail" style="font-size: 14px;" target="_blank">查看资料</a> </strong>
+					<span class="zhiwei">
+						{/if $is_login_app/}
+						<a href="javascript:;" class="btnx3" style="cursor: default">企业版APP<span class="green">（在线<img src="{/$siteurl.style/}/img/company/company_icon_v2_offline.jpg" />）</span></a>
+						{/else/}
+						<a href="javascript:;" class="btnx3" style="cursor: default;color:#999">企业版APP（离线<img src="{/$siteurl.style/}/img/company/company_icon_v2_online.jpg" />）</a>
+						{//if/}
+					</span>
+
+					</dd>
+				</dl>
+				<p class="weixinApp">
+					{/if $bindweixin/}
+					<a class="btnx2 unbindWeixin md_index_unbindwx" href="javascript:;" data-value='{/$open_id/}'><i></i>解绑微信</a>
+					{/else/}
+					<a class="btnx2 md_index_unbindwx" target="_blank" href="{/get_url rule="/account/weixin/"/}" style="color:#ff5400"><i></i>请绑定微信</a>
+					{//if/}
+
+					<em>|</em>
+					{/if !empty($related_list[$account_user_info['account_id']])/}<a href='javascript:;' data-account='{/$account_user_info["account_id"]/}' class='unRelatedPerson btnx3 md_index_unbindapp' data-value='{/$related_list[$account_user_info["account_id"]]["person_id"]/}'><i></i>解绑app</a>
+					{/else/}<a href="javascript:;" class="btnx3 md_index_unbindapp" id="appbind" data-id="{/$account_user_info['account_id']/}"><i></i>绑定APP</a>{//if/}
+
+					<!--{/if $is_login_app/}-->
+					<!--<a href="javascript:;" class="btnx3" style="cursor: default"><i></i>企业版APP<span class="green">(在线<img src="{/$siteurl.style/}/img/company/company_icon_v2_offline.jpg" />)</span></a>-->
+					<!--{/else/}-->
+					<!--<a href="javascript:;" class="btnx3" style="cursor: default;color:#999"><i></i>企业版APP(离线<img src="{/$siteurl.style/}/img/company/company_icon_v2_online.jpg" />)</a>-->
+					<!--{//if/}-->
+					{/if $is_main/}
+					<em>|</em><i class="sub"></i>
+					<a class="sub-user" href="{/get_url rule='/account/accountmanage'/}">子账号管理</a>
+					{//if/}
+				</p>
+			</div>
+			<!--企业信息-->
+			<div class="comp_infor">
+				<dl class="clearfix">
+					<dt>
+						<input type="hidden" id="delete_logo" value='{/$companyinfo["company_logo_path"]/}'>
+						<a href="javascript:void(0)" class="img upLOGO">
+							<img id="logo_path" src="{/$logo_path/}" />
+							<span>上传LOGO</span>
+						</a>
+					</dt>
+					<dd class="infor">
+						<h2><a class="md_index_selfnameclick" href="/account/" target="_blank">{/$companyinfo['company_shortname']/}</a></h2>
+						<p class="name">{/if !$companyinfo['company_shortname']/}<a href="/account/" target="_blank">{/$companyinfo['company_name']/}</a>{/else/}{/$companyinfo['company_name']/}{//if/}</p>
+						<!--<p>{/if !empty($companyinfo['link_tel'])/}{/$companyinfo['link_tel']/} {/$companyinfo['linkman']/}{/else/} 还未填写{//if/}</p>-->
+						<!--<p class="butn2"><a href="/company/modify/"><i></i>编辑资料</a>（<span>{/$companyInfoPercent/}%</span>）</p>-->
+						<p class="num" style="margin-top: 5px;">余额：<strong>{/sprintf("%.2f", $companyresources['account_overage'])/}元</strong><a href="{/get_url rule='/pay/'/}" class="md_index_czmoney text-blue" target="_blank">充值</a></p>
+					</dd>
+				</dl>
+				<div class="money">
+					<!--<p class="butn"><a href="{/get_url rule='/pay/'/}" target="_blank">充值</a></p>-->
+					<!--<div>-->
+					<!--<span>-->
+					<!--{/if $is_audit == '0' || $is_audit == 5/}<a target='_blank' href="/licencevalidate/index/action-againUpload" class="btnx1"><i></i>未认证</a>{//if/}-->
+					<!---->
+					<!--{/if $companyinfo['is_audit'] == '1' && $is_audit !=5/}-->
+					<!--<a {/if $is_audit=='4'/}target='_blank' href="/licencevalidate/index/action-againUpload"{/else/}href="javascript:void(0)" style="cursor:default;"{//if/} class="btnx1 btnxcut1"><i></i>已认证{/if $companyinfo['audit_state'] == '2'/}(临时){/else if $companyinfo['audit_state'] == '3'/}(待补){//if/}</a>-->
+					<!--{//if/}-->
+					<!--{/if $is_audit == '2'/}<a href="javascript:void(0)" class="btnx1" style="cursor:default;"><i></i>认证中</a>{//if/}-->
+					<!--{/if $is_audit == '3'/}<a target='_blank' href="/licencevalidate/index/action-againUpload" class="btnx1"><i></i>认证失败</a>{//if/}-->
+					<!--</span>-->
+					<!--<em>|</em>-->
+					<!--<a href="{/$siteurl.company|replace:'http:':''/}/index/TemplateStatisticalByH5" class="btnx3 btnxcut3" id="weiBtn" target="_blank"><i></i>微招聘</a>-->
+					<!--<p class="num">账户余额：<strong>{/sprintf("%.2f", $companyresources['account_overage'])/}元</strong></p>-->
+					<!--</div>-->
+					<p style="position: relative">
+						<a href="/company/modify/" class="wh-money-list md_index_editdeail" ><i style="background-position: 0 0;background:url({/$siteurl.style/}/img/c/new_index/ziliao.png)"></i>企业资料</a>
+						<a href="/commoncoupon/" target="_blank" class="md_index_moneymg"><i  style="background-position: -21px 0;"></i>资金管理</a>
+<!--						{/if $CompanyAuditStatus/}-->
+<!--						{/if $CompanyAuditStatus=='认证通过'/}-->
+<!--						<a href="/licencevalidate" class="wh-money-list btnxcut1 md_index_com_verify"><i style="background-position: 0 -23px;"></i>企业认证</a>-->
+<!--						{/else/}-->
+<!--						<a href="/licencevalidate" class="wh-money-list md_index_com_verify" style="color: #999;"><i style="background: url({/$siteurl.style/}/img/c/new_index/natural_icon_tit_02.png) no-repeat;background-position: 1px 0px;"></i>企业认证</a>-->
+<!--						{//if/}-->
+<!--						{//if/}-->
+						{/if $show_light==1/}
+						<a href="/environment/" target="_blank" class="wh-companyShow wh-companyShow-on md_index_com_intrest">
+							<!--<font {/if show_light==0/}color="gray" title='上传企业环境,产品项目介绍,高管团队,提升企业吸引力'{//if/}>-->
+							<i></i>企业风采
+						</a>
+						{/else/}
+						<a href="/environment/" target="_blank" class="wh-companyShow md_index_com_intrest">
+							<!--<font {/if show_light==0/}color="gray" title='上传企业环境,产品项目介绍,高管团队,提升企业吸引力'{//if/}>-->
+							<i></i>企业风采
+						</a>
+						{//if/}
+						<span class="completeTip" style="{/if !$recruitment_result_show && ($companyInfoPercent < 70 || $show_light != 1)/}display: none;{/else/}display: black;{//if/}">
+							<span class="showCompleteList">
+								<span class="lineFirst">提升招聘效果：</span>
+								<a href="{/get_url rule='/company/modify/'/}">企业信息</a>、
+								<a href="{/get_url rule='/environment/index/'/}">企业风采</a>
+							</span>
+							<span class="closeTip"><img src="{/$siteurl.style/}/img/chacha.png" width="10px" height="10px"></span>
+						</span>
+					</p>
+					<p style="display: none">
+						{/if $CompanyAuditStatus/}
+						{/if $CompanyAuditStatus=='认证通过'/}
+						<a href="/licencevalidate" class="wh-money-list btnxcut1 md_index_com_verify"><i style="background-position: 0 -23px;"></i>企业认证</a>
+						{/else/}
+						<a href="/licencevalidate" class="wh-money-list md_index_com_verify" style="color: #999;"><i style="background: url({/$siteurl.style/}/img/c/new_index/natural_icon_tit_02.png) no-repeat;background-position: 1px 0px;"></i>企业认证 <em class="fail">未认证</em></a>
+						{//if/}
+						{//if/}
+						{/if $show_light==1/}
+						<a href="/environment/" target="_blank" class="wh-companyShow wh-companyShow-on md_index_com_intrest">
+							<!--<font {/if show_light==0/}color="gray" title='上传企业环境,产品项目介绍,高管团队,提升企业吸引力'{//if/}>-->
+							<i></i>企业风采
+						</a>
+						{/else/}
+						<a href="/environment/" target="_blank" class="wh-companyShow md_index_com_intrest">
+							<!--<font {/if show_light==0/}color="gray" title='上传企业环境,产品项目介绍,高管团队,提升企业吸引力'{//if/}>-->
+							<i></i>企业风采<em class="fail">未完善</em>
+						</a>
+						{//if/}
+					</p>
+					{/if $show_light==0/}
+					<div class="marketPopx companyShow" style="font-size: 14px;color: #604e29;margin-left: 22px;">
+						<i class="markeIcon"></i><div class="marketPop"> 上传企业环境、产品项目介绍、高管团队，提升企业吸引力</div>
+					</div>
+					{//if/}
+				</div>
+			</div>
+			<div class="xf-schedule">
+				<div class="share-title">
+					<a href="javascript:;" id="share_effect_list_btn md_index_zpenjoy">
+						<em id="share_effect_num">{/if $share_effect_num/}{/$share_effect_num/}{//if/}</em><img src="{/$siteurl.style/}/img/company/company_icon_v2_move2.jpg" style="margin-left:10px" />
+					</a>
+					招聘分享
+				</div>
+				<!--<h2 class="scedTit">-->
+				<!--<span>子账号<b style="font-size: 14px;">-可开通多账号，同时招聘</b></span>-->
+				<!--<a href="{/$siteurl.company|replace:'http:':''/}/account/accountmanage">管理<img src="{/$siteurl.style/}/img/company/company_icon_v2_move2.jpg" style="margin-left:3px"></a>-->
+				<!--</h2>-->
+				{/if $recruit_type==1/}
+				<!--<div class="toPic clearfix " id="{/if count($job_lists)>0/}sharePoster{/else/}sharePosterNone{//if/}">-->
+				<!--<img src="{/$siteurl.style/}/img/company/company_pic_01.png" alt="">-->
+				<!--<div>-->
+				<!--<h4>分享招聘海报到朋友圈</h4>-->
+				<!--<p>让招聘信息被更多人看到</p>-->
+				<!--</div>-->
+				<!--<img class="toPic_icon" src="{/$siteurl.style/}/img/company/company_go_pic.png" alt="">-->
+				<!--</div>-->
+				{//if/}
+				<!--<h2 class="scedTit" style="margin-top: 10px;">-->
+				<!--<span>微招聘<b style="font-size: 14px;">-社交分享招聘新模式</b></span>-->
+				<!--<a href="{/$siteurl.company|replace:'http:':''/}/index/TemplateStatisticalByH5" class="btnx3 btnxcut3" id="weiBtn" target="_blank">分享<img src="{/$siteurl.style/}/img/company/company_icon_v2_move2.jpg" style="margin-left:3px"></a>-->
+				<!--</h2>-->
+				<div class="share-other">
+					<div id="share_img_poster"><a class="share md_index_mh5" >图片海报</a></div>
+					<div id="share_h5"><a class="link md_index_mh5" href="javascript:void(0);">H5页面</a></div>
+				</div>
+			</div>
+			<!--今日面试日程-->
+			<div class="xf-schedule">
+				<h2 class="scedTit"><span>今日面试日程<b>（共{/count($no_audition_items)/}人）</b></span><a class="md_index_invit_detail" href="{/get_url rule='/invite/'/}">详情 <img src="{/$siteurl.style/}/img/company/company_icon_v2_move2.jpg" style="margin-left:3px"></a></h2>
+				<!--暂无面试-->
+				{/if empty($no_audition_items)/}
+				<div class="schedule-line">
+					<i></i>
+					<span>今日暂无面试</span>
+				</div>
+				{/else/}
+				<ul class="scedList">
+					{/foreach $no_audition_items as $k=>$invite/}
+					{/if $k <= 2/}
+					<li><a class="md_index_invit_data" href="{/get_url rule="/resume/resumeshow/"/}type-network-resumeid-{/$invite['resume_id']/}-src-invite-invitid-{/$invite['invite_id']/}" target="_blank">{/$invite['audition_time_day']/}&nbsp;{/$invite['audition_time_hour']/}&nbsp;&nbsp;{/$invite['user_name']/}&nbsp;{/$invite['station']/}</a></li>
+					{//if/}
+					{//foreach/}
+				</ul>
+				{//if/}
+				<h2 class="scedTit scedTit02"><span>已面试待答复<b>（共{/count($has_audition_items)/}人）</b></span><a class="md_index_hadinvit_detail" href="{/get_url rule='/invite/'/}?search_type=2">详情 <img src="{/$siteurl.style/}/img/company/company_icon_v2_move2.jpg" style="margin-left:3px"></a></h2>
+				<!--暂无面试-->
+				{/if empty($has_audition_items)/}
+				<div class="schedule-line">
+					<i></i>
+					<span>暂无待答复人员</span>
+				</div>
+				{/else/}
+				<ul class="scedList">
+					{/foreach $has_audition_items as $k=>$invite/}
+					{/if $k <= 2/}
+					<li><a class="md_index_hadinvit_data" href="{/get_url rule="/resume/resumeshow/"/}type-network-resumeid-{/$invite['resume_id']/}-src-invite-invitid-{/$invite['invite_id']/}" target="_blank">{/$invite['audition_time_day']/}&nbsp;{/$invite['audition_time_hour']/}&nbsp;&nbsp;{/$invite['user_name']/}&nbsp;{/$invite['station']/}</a></li>
+					{//if/}
+					{//foreach/}
+				</ul>
+				{//if/}
+			</div>
+			<!--套餐信息-->
+			<div class="clear"></div>
+			<style>
+				.diamond-2019-con {border-top: 1px solid #f1f1f1;padding: 30px 20px 10px;}
+				.diamond-2019-con .head {position: relative;padding-bottom: 20px;}
+				.diamond-2019-con .head .name {
+					font-size: 16px;
+					line-height: 1;
+					display: block;
+					margin-bottom: 5px;
+					color: #3D84B8;
+				}
+				.diamond-2019-con .head .txt {color: #666;}
+				.diamond-2019-con .head .date {position: absolute;top: 0;right: 0;font-size: 12px;color: #999;}
+				.diamond-2019-con .body {
+
+				}
+				.diamond-2019-con .body .job-num {box-sizing: border-box;padding: 20px;background: #fafafa;margin-bottom: 4px;}
+				.diamond-2019-con .body .job-num .num {
+					line-height: 1;
+					margin-bottom: 8px;
+				}
+				.diamond-2019-con .body .job-num .num a {font-size: 16px;margin-right: 5px;}
+				.diamond-2019-con .body .job-num .txt {color: #999;font-size: 12px;line-height: 1;}
+				.diamond-2019-con .body .item-con {overflow: hidden;margin-bottom: 10px;}
+				.diamond-2019-con .body .item-con .item {float: left;width: 50%;box-sizing: border-box;margin-bottom: 4px;}
+				.diamond-2019-con .body .item-con  .l {
+					padding-right: 4px;
+				}
+				.diamond-2019-con .body .item-con .item .inner {background: #fafafa;padding: 12px 20px;}
+				.diamond-2019-con .body .item-con .item .inner .num {font-size: 16px;line-height: 1;display: inline-block;margin-bottom: 8px;color: #3D84B8;}
+				.diamond-2019-con .body .item-con .item .inner .item-name {line-height: 1;}
+				.diamond-2019-con .contact-con {
+
+				}
+				.diamond-2019-con .contact-con .name {font-size: 16px;}
+				.diamond-2019-con .contact-con .name span {font-size: 14px;color: #999;margin-left: 8px;}
+				.diamond-2019-con .contact-con .contact {
+					margin-bottom: 2px;
+				}
+				.diamond-2019-con .contact-con .tel {margin-bottom: 2px;}
+				.diamond-2019-con .contact-con .qq {margin-bottom: 10px;}
+				.diamond-2019-con .contact-con .chat {display: inline-block;}
+				.diamond-2019-con .contact-con .chat a {
+
+				}
+				.diamond-2019-con .contact-con .chat a img {
+					height: 22px;
+					width: 78px;
+				}
+			</style>
+			<div class="diamond-2019-con">
+				<div class="head">
+					<a class="name">{/$company_resource_info['pricing_name']/}</a>
+					<p class="txt">联系招聘顾问购买，获得更多折扣</p>
+					<div class="date">{/if $company_resource_info['end_time'] != ''/}{/date("Y-m-d",strtotime($company_resource_info['end_time']))/}到期{//if/}</div>
+				</div>
+				<div class="body">
+					<div class="job-num">
+						{/if $companyinfo['com_level']==1 && $companyinfo['site_type']==4/}
+						<div class="num"><a>{/if $job_count>=5/}0{/else/}{/5-$job_count/}{//if/}</a>本月可发布职位次数</div>
+						{/else/}
+						<div class="num"><a>{/if ($company_resource_info['job_release_num']+$company_resource_info['job_boutique_release'])<0/}0{/else/}{/$company_resource_info['job_release_num']+$company_resource_info['job_boutique_release']/}{//if/}</a>可发布职位</div>
+						<div class="txt">
+							(免费职位：{/if $company_resource_info['job_release_num']<0/}0{/else/}{/$company_resource_info['job_release_num']/}{//if/}/{/$company_resource_info['pricing_free_job_num']/}&nbsp;&nbsp;
+							精品职位：{/if $company_resource_info['job_boutique_release']<0/}0{/else/}{/$company_resource_info['job_boutique_release']/}{//if/}/{/$company_resource_info['pricing_job_boutique']/})
+						</div>
+						{//if/}
+					</div>
+					<div class="item-con">
+						<div class="item l">
+							<div class="inner">
+								<a class="num">{/$company_resource_info['point_job_boutique']-$company_resource_info['point_job_boutique_use']/}</a>
+								<div class="item-name">剩余精品点</div>
+							</div>
+						</div>
+						<div class="item">
+							<div class="inner">
+								<a class="num">{/$company_resource_info['point_job_refresh']-$company_resource_info['point_job_refresh_use']/}</a>
+								<div class="item-name">剩余刷新点</div>
+							</div>
+						</div>
+						<div class="item l">
+							<div class="inner">
+								<a class="num">{/$company_resource_info['resume_num_release']|default:0/}</a>
+								<div class="item-name">剩余简历点</div>
+							</div>
+						</div>
+						<div class="item">
+							<div class="inner">
+								<a class="num">{/$companyresources['spread_overage']/}元</a>
+								<div class="item-name">剩余推广金</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--招聘顾问-->
+			<!--疑问联系顾问 -->
+			{/if $hasHRManager || $hasCustomer/}
+			<ul class="fRmendConat" style="position: relative; min-height: 90px;">
+				{/if $hasHRManager/}
+				<li>
+					<p class="name"><b>{/$hrManager['user_name']/}</b><span>招聘顾问</span></p>
+					<p class="mid">
+						{/if !empty($hrManager['tel'])/}
+						<span>{/if $site_type==5/}028-62520468{/else/}{/$tel_head/}转{/$hrManager['tel']/}{//if/}</span>
+						{//if/}
+
+						{/if !empty($hrManager['mobile'])/}
+						<span>{/$hrManager['mobile']/}(微信同号)</span>
+						{//if/}
+
+						{/if !empty($hrManager['qq'])/}
+						<span>QQ:{/$hrManager['qq']/}</span>
+						<span><a class="md_index_qq" style="padding-left:0px;" target="_blank" href="//wpa.qq.com/msgrd?v=3&uin={/trim($hrManager["qq"])/}&site=qq&menu=yes">
+								<img border="0"  width="79" height="25" src="//wpa.qq.com/pa?p=2:{/trim($hrManager["qq"])/}:51" alt="点击这里给我发消息" title="点击这里给我发消息"/>
+							</a></span>
+						{/else/}
+						<script charset="utf-8" type="text/javascript" src="//wpa.b.qq.com/cgi/wpa.php?key=XzkzODA0MDQyNl8xMjgzMTBfNDAwODg3Mjg4N18"></script>
+						{//if/}
+					</p>
+				</li>
+				{//if/}
+
+				{/if $hasCustomer/}
+				<li>
+					<p><b>{/$customeruser['user_name']/}</b><span style="color:#ccc">客服顾问 &nbsp;&nbsp;</span></p>
+					<p class="mid">
+						{/if !empty($customeruser['tel'])/}
+						<span {/if empty($customeruser['qq'])/}style="vertical-align: 5px;"{//if/}>{/$tel_head/}转{/$customeruser['tel']/}</span>
+						{//if/}
+
+						{/if !empty($customeruser['mobile'])/}
+						<span style="padding:0 40px;{/if empty($customeruser['qq'])/}vertical-align: 5px;{//if/}">{/$customeruser['mobile']/}(微信同号)</span>
+						{//if/}
+
+						{/if !empty($customeruser['qq'])/}
+						<span>QQ:{/$customeruser['qq']/}</span>
+						<span><a class="md_index_qq" style="padding-left:0px;" target="_blank" href="//wpa.qq.com/msgrd?v=3&uin={/trim($customeruser["qq"])/}&site=qq&menu=yes">
+							<img border="0"  width="79" height="25" src="//wpa.qq.com/pa?p=2:{/trim($customeruser["qq"])/}:51" alt="点击这里给我发消息" title="点击这里给我发消息"/>
+							</a></span>
+						{/else/}
+						<script charset="utf-8" type="text/javascript" src="//wpa.b.qq.com/cgi/wpa.php?key=XzkzODA0MDQyNl8xMjgzMTBfNDAwODg3Mjg4N18"></script>
+						{//if/}
+					</p>
+				</li>
+				{//if/}
+			</ul>
+			{/else/}
+			<ul class="fRmendConat" style="position: relative; min-height: 90px;">
+				<li>
+					<p class="titWeight" style="padding-top:5px;">
+						<span style="vertical-align:middle;">客服热线：{/$huibo400/}</span>
+						<span style="padding-left:30px;">QQ:2851501279</span>
+					</p>
+				</li>
+				<li>
+					<p class="titWeight">
+						<a class="md_index_qq"  target="_blank" href="//wpa.qq.com/msgrd?v=3&uin=2851501279&site=qq&menu=yes" style="padding-left:30px;">
+							<img src="{/$siteurl.style/}/img/c/new_index/firmicon06.png" width="94" height="24" />
+						</a>
+					</p>
+				</li>
+			</ul>
+			{//if/}
+		</div>
+		<div class="clear"></div>
+		<style>
+			.joinqqGroup{top:315px}
+		</style>
+		<div id="calling_advert" style="position:absolute; margin-left: 510px; left: 50%; top: 136px;">
+			<a target="_blank" adv_id="{/$v['adv_id']/}" area="calling_advert" class="calling_advert"><img src="{/$siteurl.style/}/img/company/company_code.jpg" width="100" /></a>
+			{/if !empty($calling_advert)/}
+			{/foreach $calling_advert as $k=>$v/}
+			<a href="http://{/$v['url']/}" target="_blank" adv_id="{/$v['adv_id']/}" area="calling_advert" class="calling_advert"><img src="{/$v['img_url']/}" width="140" height="90" /></a>
+			{//foreach/}
+			{//if/}
+
+			{/if $promotion['is_effect'] == 1/}
+			{/if in_array($area_id,$promotion['area_ids']) || in_array($calling_id,$promotion['calling_ids'])/}
+			<a href="#" class="promotion"><img src="{/$siteurl.style/}/img/company/panyMoneyNew.png" width="100" height="66" /></a>
+			{//if/}
+			{//if/}
+							
+		</div>
+
+		<!--<a href="{/$siteurl.style/}/img/company/company_r0311.jpg" /></a>-->
+		<!--<a href="{/$siteurl.style/}/img/company/company_r0330.jpg" /></a>-->
+	</div>
+
+	<style>
+		.showPromotionMain{ width:100%; height:100%; background:#000; position:fixed; z-index:4; display: none; left:0px; top:0px; opacity:0.2; filter:alpha(opacity=20); -moz-opacity:0.2;}
+		.showPromotionMain1{ width:100%; height:100%; background:#000; position:fixed; z-index:4; display: block; left:0px; top:0px; opacity:0.2;}
+		.pop-prom-bg{width:427px; overflow:hidden; position:fixed; top:26%; left:50%; margin:0 0 0 -213px; z-index:5; font-family:"微软雅黑";}
+		.promImg{ display:block;width:427px; height:192px; background:url({/$siteurl.style/}/img/company/promImg2.png) no-repeat;}
+		.pop-prom-top{width:100%; position:relative; overflow:hidden;}
+		.radiusProm{ display:block;width:40px; height:40px; position:absolute; top:0px; right:0px;}
+		.moneyProm{ display:block;width:100%; text-align:center; color:#fff; font-size:54px;position:absolute; text-indent:-20px; top:20%; left:0px;}
+		.moneyProm em{ font-size:24px;}
+		.pop-prom-bm{width:384px; text-align:left; padding:15px; background:#fff; overflow:hidden;}
+		.prom-bm01,.prom-bm03{ display:block; color:#666; font-size:14px; line-height:24px;}
+		.prom-bm02,.prom-bm04{ display:block; color:#666; font-size:14px; line-height:24px; text-indent:2em;}
+		.prom-bm02 em,.prom-bm04 em{ color:#ffa200; font-size:14px;}
+		.prom-btn{ display:block;width:384px; height:45px; background:#2ccc9b; margin-top:20px; border-radius:4px; line-height:45px; text-align:center; color:#fff; font-size:15px;}
+		.prom-bm03,.prom-bm04,.prom-bm05,.prom-bm06{ display:block;}
+		.prom-bm03{ font-size:13px;}
+		.prom-bm04 em{ font-weight:bold; color:#666;}
+		.prom-bm05{ text-indent:0px; padding:6px 0 3px 0; font-size:12px;}
+		.prom-bm06{ overflow:hidden; padding-bottom:5px; font-size: 12px;}
+		.prom-bm06 em{  font-size:14px;}
+		.prom-bm06 em b{ color:#ffa200; font-size:14px;}
+		.prom-bm05 a{ display:inline-block; font-size:12px; padding-left: 10px; color:#25c99e; text-decoration:underline; cursor: pointer;}
+		.prom-bm07{ padding:5px 8px; background:#eafff8; border:1px dashed #2ccc9b; margin:6px 0;}
+		.prom-bm07 b{ display:block; color:#2ccc9b; line-height:20px; padding-bottom:3px; font-size:14px;}
+		.prom-bm07 span{ display:block; font-size:14px; color:#666; line-height:20px;}
+		.prom-bm08 a{ display:inline-block; float:right;}
+	</style>
+	<div class="showPromotionMain">
+
+	</div>
+
+
+	{/if $promotion['is_effect'] == 1 && empty($ShowEveryDay) && $companyinfo['is_audit'] == '1'/}
+	{/if (in_array($area_id,$promotion['area_ids']) || in_array($calling_id,$promotion['calling_ids']))/}
+	<div class="showPromotionMain" style="display: block;">
+
+	</div>
+	<div class="pop-prom-bg" style=" display:block; z-index: 10002" id="showPromotionContent3">
+		<div class="pop-prom-top">
+			<a href="#" class="radiusProm"></a>
+			<span class="moneyProm" style="font-size:62px; top:18%;">免费领</span>
+			<div class="promImg"></div>
+		</div>
+		<div class="pop-prom-bm">
+			{/if in_array($calling_id,$promotion['calling_ids'])/}
+			<span class="prom-bm04 prom-bm05" style="padding-top:0px;">邀请您推荐更多<em>{/$company_Calling/}</em>企业注册汇博人才网，每推荐一个企业注册成功（通过营业执照审核），奖励您<em style=" color:#ffa200;">{/$promotion['share_price']/}元</em>推广金！</span>
+			{/elseif in_array($area_id,$promotion['area_ids'])/}
+			<span class="prom-bm04 prom-bm05" style="padding-top:0px;">邀请您推荐更多<em>{/$company_Areaname/}</em>企业注册汇博人才网，每推荐一个企业注册成功（通过营业执照审核），奖励您<em style=" color:#ffa200;">{/$promotion['share_price']/}元</em>推广金！</span>
+			{//if/}
+
+			<div class="prom-bm07">
+				<b>领奖条件：</b>
+        <span>1. 推荐的企业通过您的分享链接或邀请码注册
+<br />2. 推荐的企业注册并上传营业执照，通过审核</span>
+			</div>
+			<span class="prom-bm06" style="padding-top:8px;">您的邀请码是：<em><b style="color:#666;">{/$promotion_code_link['code']/}</b></em>
+				<!--<a onclick="copyToClipboard('{/$promotion_code/}');" id="code123">复制邀请码</a>-->
+			</span>
+    		<span class="prom-bm06 prom-bm08">您的推广链接：{/$promotion_code_link['shortLink']/}
+				<!--<a onclick="copyToClipboard('{/$siteurl.main/}/company/register?flagkey={/$company_flag/}');" class="copy">复制链接</a>-->
+			</span>
+			<script type="text/javascript">
+				function thisSetCookie(name, value) { //设置cookie
+					var expire = new Date();
+					expire.setTime({/$tomorrow/});
+					var path ="";
+					expire = '; expires=' + expire.toGMTString();
+					document.cookie = name + '=' + escape(value) + expire+path;
+				}
+				window.onload(thisSetCookie('isShowEveryDay','true'));
+			</script>
+		</div>
+	</div>
+	{//if/}
+	{//if/}
+
+	<div class="pop-prom-bg" style=" display:none; z-index: 10002" id="showPromotionContent">
+		<div class="pop-prom-top">
+			<a href="#" class="radiusProm"></a>
+			<span class="moneyProm" style="font-size:62px; top:18%;">免费领</span>
+			<div class="promImg"></div>
+		</div>
+		<div class="pop-prom-bm">
+			{/if in_array($calling_id,$promotion['calling_ids'])/}
+			<span class="prom-bm04 prom-bm05" style="padding-top:0px;">邀请您推荐更多<em>{/$company_Calling/}</em>企业注册汇博人才网，每推荐一个企业注册成功（通过营业执照审核），奖励您<em style=" color:#ffa200;">{/$promotion['share_price']/}元</em>推广金！</span>
+			{/elseif in_array($area_id,$promotion['area_ids'])/}
+			<span class="prom-bm04 prom-bm05" style="padding-top:0px;">邀请您推荐更多<em>{/$company_Areaname/}</em>企业注册汇博人才网，每推荐一个企业注册成功（通过营业执照审核），奖励您<em style=" color:#ffa200;">{/$promotion['share_price']/}元</em>推广金！</span>
+			{//if/}
+
+			<div class="prom-bm07">
+				<b>领奖条件：</b>
+        <span>1. 推荐的企业通过您的分享链接或邀请码注册
+<br />2. 推荐的企业注册并上传营业执照，通过审核</span>
+			</div>
+			<span class="prom-bm06" style="padding-top:8px;">您的邀请码是：<em><b style="color:#666;">{/$promotion_code_link['code']/}</b></em>
+				<!--<a onclick="copyToClipboard('{/$promotion_code/}');" id="code123">复制邀请码</a>-->
+			</span>
+    		<span class="prom-bm06 prom-bm08">您的推广链接：{/$promotion_code_link['shortLink']/}
+				<!--<a onclick="copyToClipboard('{/$siteurl.main/}/company/register?flagkey={/$company_flag/}');" class="copy">复制链接</a>-->
+			</span>
+			<!--<a href="#" class="prom-btn">推荐给朋友</a>-->
+		</div>
+	</div>
+	{/if !empty($prolist['promotionlist'])/}
+	<div class="showPromotionMain" style="display: block;">
+
+	</div>
+	<div class="pop-prom-bg" style="display:block; z-index: 10001;" id="showPromotionContent1">
+		<div class="pop-prom-top">
+			<a href="#" class="radiusProm"></a>
+			<span class="moneyProm">{/$prolist['promotion_price']/}<em>元</em></span>
+			<div class="promImg"></div>
+		</div>
+		<div class="pop-prom-bm">
+			<span class="prom-bm03">感谢您的推荐：</span>
+			<span class="prom-bm04"><em>{/$prolist['promotionlist']/}</em>，营业执照审核通过。推广金已存入您的账户！</span>
+			<span class="prom-bm04 prom-bm05">推荐企业注册，审核成功，可再获{/$prolist['share_price']/}元推广金。<a class="promotion">查看详情>></a></span>
+
+		</div>
+	</div>
+	{//if/}
+	<!--{/if !empty($prolist['reglist'])/}-->
+	<!--<div class="showPromotionMain" style="display: block;">-->
+
+	<!--</div>-->
+	<!--<div class="pop-prom-bg" style="display:block;" id="showPromotionContent2">-->
+	<!--<div class="pop-prom-top">-->
+	<!--<a href="#" class="radiusProm"></a>-->
+	<!--<span class="moneyProm">{/$prolist['price']/}<em>元</em></span>-->
+	<!--<div class="promImg"></div>-->
+	<!--</div>-->
+	<!--<div class="pop-prom-bm">-->
+	<!--<span class="prom-bm01">感谢您注册汇博网：</span>-->
+	<!--<span class="prom-bm02">您获得了<em>{/$prolist['registered_price']/}元</em>推广金，营业执照审核通过以后，将存入您的账户！</span>-->
+	<!--<span class="prom-bm04" style="text-indent: 0px;"><b style="color:#ffa200">推广金</b>可用于下载简历</span>-->
+	<!--<span class="prom-bm04 prom-bm05">推荐企业注册，审核成功，可再获{/$prolist['share_price']/}元推广金。</span>-->
+	<!--<span class="prom-bm06"><a href="{/get_url rule='/spread/index'/}">查看详情>></a></span>-->
+	<!--</div>-->
+	<!--</div>-->
+	<!--{//if/}-->
+
+	{/if $promotion['is_effect'] == 1 && empty($ShowPromotion)/}
+	{/if (in_array($area_id,$promotion['area_ids']) || in_array($calling_id,$promotion['calling_ids'])) && in_array($is_audit,[0,2])/}
+	<div class="showPromotionMain" style="display: block;">
+
+	</div>
+	<div class="pop-prom-bg" style="display:block; z-index: 10000" id="showPromotionContent2">
+		<div class="pop-prom-top">
+			<a href="#" class="radiusProm"></a>
+			<span class="moneyProm">{/$prolist['registered_price']/}<em>元</em></span>
+			<div class="promImg"></div>
+		</div>
+		<div class="pop-prom-bm">
+			<span class="prom-bm01">感谢您注册汇博网：</span>
+			<span class="prom-bm02">您获得了<em>{/$prolist['registered_price']/}元</em>推广金，营业执照审核通过以后，将存入您的账户！</span>
+
+			{/if $is_audit == 0/}
+			<a href="javascript:isPromotionShowLQ();" class="prom-btn">立即领取</a>
+			{/else $is_audit == 2/}
+			<span class="prom-bm04 prom-bm05">推荐企业注册，审核成功，可再获{/$prolist['share_price']/}元推广金。<a class="promotion">查看详情>></a></span>
+			<span class="prom-bm06 prom-bm08" style="font-size:12px; padding-top:5px;">请复制推荐链接，分享给朋友：{/$promotion_code_link['shortLink']/}</span>
+			<script type="text/javascript">
+				window.onload(cookieutility.set('isShowPromotionShowFX','true'));
+			</script>
+			{//if/}
+		</div>
+	</div>
+	{//if/}
+	{//if/}
+
+	{/include file="msgpop.html"/}
+	{/include file="footer.html"/}
+	<section class="floatRT">
+		<a href="{/get_url rule='/about/message' domain='main'/}" target="_blank" class="serviceLink">我有问题要反馈</a><b></b>
+	</section>
+	<!-- 企业招聘首页 -->
+	{/if count($qq_group_arr)>0/}
+	<div class="joinqqGroup" style="display: none">
+		<img src="{/$siteurl.style/}/img/c/new_index/joinqq.jpg" width="140" height="141" />
+		{/foreach $qq_group_arr as $v/}
+		<p>
+			<b>{/$v['qq_group']/}</b>
+			<span>{/$v['group_name']/}</span>
+		</p>
+		{//foreach/}
+	</div>
+	{//if/}
+
+	<script  type="text/javascript">
+        var action_url = '{/$siteurl.style/}';
+        if(typeof action_dom == 'object'){}else{
+            action_dom = [];
+        }
+        action_dom.push( ['.share-link', 40]);
+        action_dom.push( ['#share_img_poster', 39]);
+        action_dom.push( ['.share-h5', 48]);
+        action_dom.push( ['#share_h5', 47]);
+
+        action_dom.push( ['.md_index_banner', 120]);
+        action_dom.push( ['.md_index_resume_search', 121]);
+        action_dom.push( ['.md_index_account_select', 122]);
+        action_dom.push( ['.md_index_pubjob', 123]);
+        action_dom.push( ['.md_index_timerefresh', 124]);
+        action_dom.push( ['.md_index_muchrefresh', 125]);
+        action_dom.push( ['.md_index_close', 126]);
+        action_dom.push( ['.md_index_refresh', 127]);
+        action_dom.push( ['.md_index_delay', 128]);
+        action_dom.push( ['.md_index_upremmon', 129]);
+
+        action_dom.push( ['.md_index_remmonperson_more', 130]);
+        action_dom.push( ['.md_index_remmonperson_list', 131]);
+        action_dom.push( ['.md_index_fire_list', 132]);
+        action_dom.push( ['.md_index_fire_dz', 133]);
+        action_dom.push( ['.md_index_selfdetail', 134]);
+        action_dom.push( ['.md_index_unbindwx', 135]);
+        action_dom.push( ['.md_index_unbindapp', 136]);
+        action_dom.push( ['.md_index_selfnameclick', 137]);
+        action_dom.push( ['.md_index_czmoney', 138]);
+        action_dom.push( ['.md_index_editdeail', 139]);
+        action_dom.push( ['.md_index_moneymg', 140]);
+        action_dom.push( ['.md_index_com_verify', 141]);
+        action_dom.push( ['.md_index_com_intrest', 142]);
+        action_dom.push( ['.md_index_zpenjoy', 143]);
+        action_dom.push( ['.md_index_mh5', 144]);
+
+        action_dom.push( ['.md_index_invit_detail', 145]);
+        action_dom.push( ['.md_index_invit_data', 146]);
+        action_dom.push( ['.md_index_hadinvit_detail', 147]);
+        action_dom.push( ['.md_index_hadinvit_data', 148]);
+        action_dom.push( ['.md_index_qq', 149]);
+        action_dom.push( ['.md_chat', 150]);
+
+
+
+        /**
+         *   120=> 'banner图',
+         121=> '简历搜索',
+         122=> '招聘人选择',
+         123=> '发布职位',
+         124=> '定时刷新',
+         125=> '批量刷新',
+         126=> '关闭',
+         127=> '刷新',
+         128=> '延期',
+         129=> '精准推广，增加曝光，提升效果！',
+         130=> '推荐人才--更多',
+         131=> '推荐人才--人才列表',
+         132=> '最近招聘会--招聘会列表',
+         133=> '最近招聘会--我要定展',
+         134=> '企业面板--查看资料',
+         135=> '绑定/解绑微信',
+         136=> '绑定/解绑app',
+         137=> '企业测试简称',
+         138=> '充值',
+         139=> '编辑资料',
+         140=> '资金管理',
+         141=> '企业认证',
+         142=> '企业风采',
+         143=> '招聘分享--浏览记录',
+         144=> '图片海报--H5页面',
+         145=> '面试日程--详情',
+         146=> '面试日程--内容数据',
+         147=> '已面试待答复--详情',
+         148=> '已面试待答复--数据内容',
+         149=> 'qq交谈',
+         150=> '聊一聊',
+         */
+
+
+	</script>
+	<div class="md_index_resume_search" data-expain="md use,never delete it!" style="display:none"></div>
+	<div class="md_index_muchrefresh" data-expain="md use,never delete it!" style="display:none"></div>
+    <script type="text/javascript" language="javascript" src="{/version file='action.js'/}"></script>
+
+	<script type="text/javascript">
+		var MakeGrade_redirect_url = '{/$MakeGrade_redirect_url/}';
+		hbjs.use('@dialog,@confirmBox', function (m) {
+
+			var $ = m['jquery'];
+			confirmBox = m['widge.overlay.confirmBox'];
+			Dialog = m['widge.overlay.hbDialog'];
+			if (MakeGrade_redirect_url) {
+				var loadingDialog1 = loadingDialog('登录过期,请重新登录...');
+				setTimeout(function () {
+					window.parent.location.href = MakeGrade_redirect_url;
+				}, 600);
+			}
+		});
+	</script>
+	<script type="text/javascript">
+		var Grade;
+		hbjs.use('@validator, @fileUploader, @confirmBox, @hbCommon', function(m){
+
+			var validator = m['widge.validator.form'];
+			var fileUploader = m['widge.fileUploader'];
+			var ConfirmBox = m['widge.overlay.confirmBox'];
+			var Dialog = m['widge.overlay.hbDialog'];
+			var $ = m['product.hbCommon'];
+
+			var companyname = '{/$companyname/}';
+			var agreementHtml = '<div class="protocolUsage">\n' +
+					'\t\t\t<span class="usagex">尊敬的企业客户，感谢您使用汇博网！为了响应国务院《人力资源市场暂行条例》，提高求职者对企业的信任度，我们对企业《使用协议》进行了调整。请您务必阅读以下协议内容。再次对使用汇博网表示感谢！\n' +
+					'</span>\n' +
+					'\t\t\t<div class="protocolUx">\n' +
+					'\t\t\t\t<h2>使用协议</h2>\n' +
+					'\t\t\t\t<p>\n' +
+					'\t\t\t\t\t甲方：'+companyname+'<br />\n' +
+					'乙方：重庆聚焦人才服务有限公司<br />\n' +
+					'鉴于：甲乙双方本着互惠互利的原则，经友好协商，依据实际情况，在原合同基础上变更合同条款内容，特订立以下补充协议，以资共同遵守：<br />\n' +
+					'一、汇博网只能用于合法的特定目的，即雇主寻找雇员和个人寻找职业。汇博网明确禁止任何其他用途，企业必须保证不用于以下任何一种途径：<br />\n' +
+					'1、为汇博网的竞争同行发布职位，并用此方法寻求与雇主联络业务。<br />\n' +
+					'2、未经合同明确书面许可，发布第三方招聘信息和代第三方招聘的行为或冒用其他公司名义招聘。<br />\n' +
+					'3、将营业执照借给其他企业开账号，以及将账号借给其他企业使用。<br />\n' +
+					'4、在招聘过程中，向求职者收取费用，包含但不限于收费模特，KTV收费服务员，收费中介等收费的职位或行业。<br />\n' +
+					'5、为了尽可能的规避求职者的风险，全面禁止以下行业及部分风险职位通过汇博网发布招聘信息：<br />\n' +
+					'（1）直销业、保险行业、其他诈骗行业、传销行业。  <br /> \n' +
+					'（2）汇博网的同行业公司、非人力资源中介公司、收费中介公司、要求求职者自己出钱的投资理财公司。<br />\n' +
+					'（3）娱乐会所：包含但不限于夜总会、浴场洗浴、按摩场所等可能会涉及色情、准色情的行业。<br />\n' +
+					'（4）手工兼职：包含但不限于兼职打字员、工艺品制作、制作打火机或圆珠笔等职位或行业、淘宝信誉代刷、代购等虚拟兼职的职位或行业。<br />\n' +
+					'（5）岗位职责描述虚假不实，故意以高薪、高收入等为诱饵吸引求职者或其他可能导致求职者误解的职位。<br />\n' +
+					'（6）包含但不限于发布陪聊、视频陪聊、包房公主、包房少爷、私人游伴等职位。<br />\n' +
+					'6、对于以下4种行为，如果被3人举报属实，该职位自动变为审核不通过，该公司自动暂停招聘服务：\n' +
+					'<br />（1）以服装、培训、介绍工作等为由变相欺诈收费；<br />（2）娱乐会所、博彩等涉嫌赌博、色情；<br />\n' +
+					'（3）冒用该公司名义招聘；<br />（4）保险代理人\n' +
+					'<br /><b>在汇博网上，企业被求职者举报为以上行为，经核实属实，将对该企业进行关闭服务，且不退款处理。</b><br />\n' +
+					'\n' +
+					'二、在汇博网上进行招聘，甲方须及时向乙方提供营业执照等各类相关手续所需的证件，中介和培训机构等特殊行业须提供相关业务所需的资质证件或证明。<br />\n' +
+					'1、培训学校/机构等代招航空地勤类收费职位的代招机构须提供以下资料：<br />\n' +
+					'①　提供培训机构（学校）的办学许可证<br />\n' +
+					'②　培训机构提供盖公章的授权委托书 <br />\n' +
+					'③　被授权单位及个人的营业执照、身份证复印件<br />\n' +
+					'2、给代招国家机构类、事业单位类等职位的企业须提供以下资料：<br />\n' +
+					'①　人力资源代招机构提供人力资源许可证和代招证明<br />\n' +
+					'②　非人力资源类企业提供代招证明<br />\n' +
+					'3、进行海外招聘的企业须提供以下资料：<br />\n' +
+					'①　提供人力资源许可证和代招证明<br />\n' +
+					'②　提供资质证书（对外劳务合作经营资格）或者是跟有资质证书公司之间的代招协议<br />\n' +
+					'三、在汇博网上，对以下行业或企业进行打标：<br />\n' +
+					'①　人力资源公司为其他企业代招，将该企业打标为“代招机构”；<br />\n' +
+					'②　企业存在假借招聘名义进行培训招生的行为，经核实后，将该企业打标为“假招聘转招生”；<br />\n' +
+					'③　企业实际为KTV，经核实后，将该企业打标为“KTV”；<br />\n' +
+					'④　企业进行海外招聘，经核实后，将该企业打标为“海外招聘”。<br />\n' +
+					'<br /><b>任何经汇博网确认已违反了相关法律法规、本公司法律声明、网站使用规则及使用协议的某一项或多项的用户，汇博网有权决定是否给予其暂停使用或终止使用的处理，且已付费用不予退还。</b>\n' +
+					'\t\t\t\t</p>\n' +
+					'\t\t\t</div>\n' +
+					'\t\t\t<label class="isProtocolx">\n' +
+					'\t\t\t\t<input type="checkbox" name="isProtocol" id="" value="" />\n' +
+					'\t\t\t\t我已仔细阅读以上内容并同意遵守《使用协议》\n' +
+					'\t\t\t</label>\n' +
+					'\t\t\t<a href="javascript:void(0);" class="protocolUsageBtn">确定</a>\n' +
+					'\t\t</div>';
+
+            var shareEffectDialog = new Dialog({
+                idName: 'shareeffect-dialog',
+                title: '浏览记录',
+                content: "{/get_url rule='/index/shareEffectList/'/}",
+                close: 'X',
+                width:500,
+                height:400
+            }); 
+            shareEffectDialog.on('closeX', function(){
+                $.ajax({
+							url : "{/get_url rule='/index/GetShareEffectNum/'/}",
+							type : "GET",
+							dataType : "JSON",
+							success : function(result) {
+                                var num = result.share_effect_num || '';
+                                $('#share_effect_num').text(num);
+                            }
+                        });
+            });
+            $("#share_effect_list_btn").on('click', function(){
+                shareEffectDialog.show();
+            });
+			var agreementDialog = new Dialog({
+				idName: 'agreement-dialog',
+				title: '',
+				content: agreementHtml,
+				close: '',
+				width:850,
+				height:700,
+				zIndex:100000
+			});
+			var have_agreement = '{/$have_agreement/}';
+			if (have_agreement==1){
+				agreementDialog.hide();
+			}else{
+				agreementDialog.show();
+			}
+			$('.protocolUsageBtn').click(function(){
+
+				var isProtocol =  $("input[name='isProtocol']").prop('checked');
+				if (!isProtocol){
+					var msg = '请仔细阅读以上内容并同意遵守《使用协议》';
+					ConfirmBox.timeBomb(msg, {
+						name : "warning",
+						timeout : 1000,
+						width: 400,
+						zIndex:100001
+					});
+				}else{
+					$.getJSON('{/get_url rule="/index/SaveAgreement/"/}', function (result) {
+						if (result.status) {
+							ConfirmBox.timeBomb(result.msg, {
+								name : "success",
+								timeout : 1000,
+								width: 200
+							});
+							window.location.reload();
+						}else{
+							ConfirmBox.timeBomb(result.msg, {
+								name : "fail",
+								timeout : 1000,
+								width: 200
+							});
+						}
+					});
+				}
+			});
+
+			var blindAppHtml =
+					'<style>\n' +
+					'        .app-flow{padding: 34px 0 70px 60px;text-align: left;}\n' +
+					'        .app-flow-tit{color: #444;font-size: 16px;padding-bottom: 20px;}\n' +
+					'        .app-flow-tit span{color: #ff5400;}\n' +
+					'    </style>\n' +
+					'<div class="app-flow">\n' +
+					'    <p class="app-flow-tit">1、添加子账号，如已添加略过此步骤<span>（可直接绑定管理员账号）</span></p>\n' +
+					'    <img src="{/$siteurl.style/}/img/account/flow_01.jpg" alt="" width="178" height="40" style="margin-bottom: 30px;">\n' +
+					'    <p class="app-flow-tit">2、打开app，用<span>汇博求职者账号</span>登陆,没有则右上角注册即可</p>\n' +
+					'    <img src="{/$siteurl.style/}/img/account/flow_02.jpg" alt="" width="810" height="358">\n' +
+					'    <p class="app-flow-tit">3、进入“我的”，点击“请绑定”，输入添加的直聘子账号或企业主账号，即绑定成功！</p>\n' +
+					'    <img src="{/$siteurl.style/}/img/account/flow_03.jpg" alt="" width="810" height="350">\n' +
+					'</div>';
+			var blindAppDialog = new Dialog({
+				idName: 'flowAPP-dialog',
+				title: '绑定app操作流程说明',
+				content: blindAppHtml,
+				close: '╳',
+				width: 900,
+				height:600
+			});
+
+			var blindAppDialog_new = new Dialog({
+				idName: 'flowAPP-dialog',
+				title: '手机号绑定',
+				content: "",
+				close: '╳',
+				width: 600,
+				initHeight:350
+			});
+			$('#appbind').on('click', function(){
+				/* blindAppDialog.show();*/
+				var account_id = $(this).attr('data-id');
+				blindAppDialog_new.setContent({content:"{/get_url rule='/account/AccountBind/'/}?account_id="+account_id}).show();
+			});
+
+			$(".unbindWeixin").on("click", function () {
+				var openid = $(this).attr('data-value');
+				ConfirmBox.confirm('确定解除绑定吗？', '解绑微信', function () {
+					$.getJSON('{/get_url rule="/account/unbindweixin/"/}', {openid: openid}, function (result) {
+						if (!result.status) {
+							alert(result.msg);
+						}
+						window.location.reload();
+					});
+				}, {
+					width: 300,
+					close: 'x'
+				});
+			});
+			$(".unRelatedPerson").on("click", function () {
+				var person_id = $(this).attr('data-value');
+				var account_id = $(this).attr("data-account");
+				ConfirmBox.confirm('确定解除绑定吗？', '解绑app', function () {
+					$.getJSON('{/get_url rule="/account/delRelatedPerson/"/}', {
+						person_id: person_id,
+						account_id: account_id
+					}, function (result) {
+						if (result.error) {
+							alert(result.error);
+						}
+						window.location.reload();
+					});
+				}, {
+					width: 300,
+					close: 'x'
+				});
+			});
+
+			Grade = new Dialog({
+				close: 'x',
+				idName: 'grade_dialog',
+				title: '满意度评价',
+				width: 700,
+				initHeight: 180,
+				autoHeight: false,
+				content: '{/get_url rule="/index/MakeGrade/"/}',
+				isAjax: false,
+				zIndex:10010
+			});
+
+			var moreAppraise = new Dialog({
+				close: 'x',
+				idName: 'moreAppraise',
+				title: '招聘状况',
+				width: 650,
+				initHeight: 180,
+				autoHeight: true,
+				content: '{/get_url rule="/index/RecruitStatus/"/}',
+				isAjax: false,
+				zIndex:10010
+			});
+
+			$('#moreAppraise').click(function(){
+				moreAppraise.show();
+			});
+			$('.unable').click(function(){
+				var user=$(this).attr('data-user');
+				{/if $resource_type=='2'/}
+				var msg = '该职位由账号（'+user+'）发布，请登录该账号操作';
+				{/else/}
+				var msg ="该职位由分配模式子账号（"+user+"）发布，请登录该子账号操作";
+				{//if/}
+					ConfirmBox.timeBomb(msg, {
+						name : "fail",
+						timeout : 1500,
+						width: msg.length*20
+					});
+				});
+
+			$('#grade').click(function(){
+				Grade.show();
+			});
+
+			$(function(){
+				var cookie_grade_id = '{/$cookie_grade_id/}';
+				var open_grade = '{/$open_grade/}';
+				if (cookie_grade_id=='' && open_grade>0) {
+					Grade.show();
+				}
+			})
+		});
+	</script>
+
+	<script type="text/javascript">
+
+		try {
+			hbjs.use(factory);
+		} catch(e) {
+			factory($);
+		}
+
+		function factory($){
+			$(window).scroll(function(){
+				if ($(document).scrollTop() > 120){
+					$('#sus').find('a.backTop').css({'display':'inline-block'});
+				}else{
+					$('#sus').find('a.backTop').css({'display':'none'});
+				}
+			});
+			$('#sus').find('a.backTop').click(function(){
+				$('html,body').animate({ scrollTop: 0 });
+			});
+		}
+	</script>
+
+	<script type="text/javascript">
+		var  Feedback,dialog,dialog_msg,resumeCompleteDialog;
+		var poster_msg = '{/$poster_msg/}';
+		var job_num_poster = '{/$has_pub_job/}';
+		var poster_job_id = '{/$poster_job_id/}';
+		var is_share_h5 = '{/$is_share_h5/}';
+		hbjs.use('@css3, @jobFlexSlider,@imageEditor, @confirmBox, @jobsort, @orderActions', function(m) {
+			var imageEditor     = m['widge.imageEditor'],
+					ConfirmBox      = m['widge.overlay.confirmBox'],
+					Dialog          = m['widge.overlay.hbDialog'],
+					util            = m['base.util'],
+					cookie          = m['tools.cookie'],
+					orderAction     = m['product.orderActions'],
+					$               = m['jquery'].extend(m['cqjob.jobsort'], m['cqjob.jobFlexSlider']),
+					uploadDialog = new Dialog({
+						close: 'x',
+						idName: 'ui_company_dialog',
+						title: '请上传有识别性的logo图片',
+						width: 700,
+						content: '{/$siteurl.company|replace:"http:":""/}/company/uploadCompanyLogo/',
+						isAjax: true
+					}),
+					fontSize = 18,
+					pWidth = 70,
+					stopDialog   = new Dialog({
+						close : 'X',
+						idName : 'stop_job_dialog',
+						title : '职位停招',
+						width : 400,
+						isOverflow : false,
+						isAjax : true
+					}),
+					imgEditor;
+			//一键导入
+			var  importDialog = new Dialog({
+				close: 'x',
+				idName: 'click_import_dialog',
+				title: '请选择要导入的职位',
+				width: 700,
+				content: '{/$siteurl.company|replace:"http:":""/}/index/getOuterJobs/',
+				isAjax: true
+			});
+
+			//2019.6.17自动推荐气泡
+			$('.autoRecommenTip').on('click','a',function(){
+				var tomorrow = new Date("{/date('Y/m/d 00:00:00',strtotime('+14 day'))/}");
+				var recommend_cookie_pre = "recommend_tip_cookie_"+'{/$account_id11/}';
+
+				cookie.set(recommend_cookie_pre,'is_click_recommend',{expires:tomorrow,path:'/',domain:"{/base_lib_Constant::COOKIE_DOMAIN/}"});
+				if($(this).is('.closeTipBtn')){
+					console.log(0)
+					$(this).parent('.autoRecommenTip').hide()
+				}
+			})
+
+			$('.closeTipBtn').on('click',function(){
+				$(this).parent('.autoRecommenTip').hide()
+			})
+			//2019.6.3更新
+			//简历完善度
+			resumeCompleteDialog = new Dialog({
+				close: 'x',
+				idName: 'resume_complete_dialog',
+				title: '简历完善度调研',
+				content: "{/get_url rule='/answer/index/'/}",
+				width:'auto',
+				isAjax: true
+			})
+			$('.resume_complete').on('click',function(){
+				resumeCompleteDialog.show()
+			})
+
+			//通知：置顶规则修改预告
+			$('.cmpAnnunciateTip span').click(function(){
+				$('.cmpAnnunciateTit').slideToggle();
+			});
+			$("#js_click_import").click(function(){
+				importDialog.show();
+			});
+			$("body").delegate('#importClose',"click",function(){
+				importDialog.hide();
+				return false;
+			});
+			var  JobCheck = new Dialog({
+				close: 'x',
+				idName: 'click_import_dialog',
+				title: '系统提示',
+				width: 300,
+				content: '<div style="padding:35px 15px; ">该职位正在审核中，暂不能预览。如需修改，请到职位管理编辑</div>',
+				isAjax: true
+			})
+
+			$(".check_status").click(function(){
+				JobCheck.show();
+			});
+
+			//海报
+			var sharePoster=  '<div class="sharePoster">' +
+					'<p>使用微信扫码生成招聘海报</p>' +
+					'<img src="{/get_url rule='/poster/PostCode'/}" alt="">' +
+			'<p>分享招聘海报让更多朋友帮你转发、为你推荐人才吧</p>' +
+			'</div>'
+			var sharePosterDialog = new Dialog({
+				idName: 'sharePoster-dialog',
+				title: '分享招聘海报',
+				content: sharePoster,
+				close: '╳',
+				width: 400,
+				height:300
+			});
+			dialog = new Dialog({
+				close : 'X',
+				idName : 'job_dialogs',
+				width : 425,
+				isOverflow : false,
+				isAjax : true
+			});
+			dialog_msg = new Dialog({
+				close : 'X',
+				idName : 'job_dialogss',
+				width : 425,
+				isOverflow : false,
+				isAjax : true
+			});
+
+			$('#sharePoster').on('click', function(){
+				sharePosterDialog.show();
+			});
+			$('.no_boutique_job').on('click',function(){
+				{/if $resource_type=='2'/}
+				var msg = "设置失败！最多只能设置{/$company_resource_info['pricing_job_boutique']/}个精品职位，请联系主账号为您分配更多资源";
+				{/else/}
+				var msg = "设置失败！最多只能设置{/$company_resource_info['pricing_job_boutique']/}个精品职位，请联系客服";
+				{//if/}
+					ConfirmBox.timeBomb(msg, {
+						name: 'fail',
+						timeout: 3000,
+						width: msg*18 + 20,
+						zIndex: 999999
+					});
+				})
+			$('.cd-refresh-job').on('click',function(){
+				var job_id  = $(this).attr('data-id');
+				var refresh = $(this).attr('data-refresh');
+				var cd_show_refresh = cookieutility.get("cd_show_refresh");
+				if(cd_show_refresh == 'not_show' || refresh==1){
+					$.post("{/get_url rule='/index/refreshDo'/}",{job_id:job_id},function (data){
+						if(!data.status){
+							if(data.code == 502){
+								dialog_msg.setContent({
+									'title' : '提示',
+									'content' : '{/get_url rule="/index/GetHRManager/"/}from-refresh'
+								}).show();
+							}else{
+								ConfirmBox.timeBomb(data.msg, {
+									name: 'fail',
+									timeout: 3000,
+									width: data.msg*18 + 20,
+									zIndex: 999999
+								});
+							}
+							return false;
+						}
+						ConfirmBox.timeBomb(data.msg, {
+							name: 'success',
+							timeout: 2000,
+							width: data.msg*18 + 20,
+							zIndex: 999999,
+							callback:function(){
+								window.location.reload();
+							}
+						});
+					},'json')
+				}else{
+					dialog.setContent({
+						'title' : '刷新职位',
+						'content' : '{/get_url rule="/index/Refresh"/}job_id-'+job_id
+					}).show();
+				}
+			});
+			//设置精品职位
+			$(".set_job_quality").on("click", function (e) {
+				var job_id = $(this).attr("data-id");
+				var is_pay = $(this).attr("data-pay");
+				var quality_type = "add";
+				var cd_show_quality = cookieutility.get("cd_show_quality");
+				if(cd_show_quality == 'not_show'|| is_pay==1){
+					var data = {
+						job_id: job_id,
+						quality_type: quality_type
+					};
+					$.post("{/get_url rule='/index/JobQualityDo'/}", data, function (data) {
+						if (!data.status) {
+							if(data.data.code == 501){
+								//精品点不足，弹出招聘联系人信息框
+								//$(".job_dialog").hide();
+								dialog_msg.setContent({
+									'title' : '设置精品职位',
+									'content' : '{/get_url rule="/index/GetHRManager/"/}'
+								}).show();
+							}else {
+								ConfirmBox.timeBomb(data.msg, {
+									name: 'fail',
+									timeout: 3000,
+									width: data.msg*18 + 20,
+									zIndex: 999999
+								});
+							}
+							return false;
+						}
+						//停招了职位
+						if(data.data.is_stop_job){
+							console.log('性感JS，在线打桩！');
+							dialog.setContent({
+								'title' : '取消精品职位',
+								'content' : "<div class='succ-cancel-pro'><div class='txt'><div style='font-size: 16px;color: #1bb867;font-weight: bold;margin-bottom: 8px;'>取消精品成功</div>由于您的免费职位数已用完，此职位暂时无法展示。建议您及时关闭不再招聘的免费职位，再去“职位管理-已结束招聘”的职位列表中重新发布此职位。</div> <div class='btns'><div class='ok'>确定</div></div></div>"
+							}).show();
+						}else{
+							ConfirmBox.timeBomb(data.msg, {
+								name: 'success',
+								timeout: 2000,
+								width: data.msg*18 + 20,
+								zIndex: 999999,
+								callback:function(){
+									window.location.reload();
+								}
+							});
+						}
+
+
+
+					});
+				}else{
+					dialog.setContent({
+						'title' : '设置精品职位',
+						'content' : '{/get_url rule="/index/JobQuality/" data="job_id='+job_id+'&quality_type='+quality_type+'&v='+Math.random()+'"/}'
+					}).show();
+				}
+
+			});
+
+
+			$('.job_dialogs').on('click','.succ-cancel-pro .ok',function () {
+				console.log('确定操作row1911');
+				window.location.reload(true);
+				dialog.hide();
+			})
+			$('.job_dialogs').on('click','.succ-cancel-pro .cancel',function () {
+				console.log('取消操作row1915');
+				window.location.reload(true);
+				dialog.hide();
+			})
+
+			//取消精品职位
+			$(".stop_job_quality").on("click", function (e) {
+				var job_id = $(this).attr("data-id");
+				var quality_type = "cancel";
+
+				dialog.setContent({
+					'title' : '取消精品职位',
+					'content' : '{/get_url rule="/index/JobQuality/" data="job_id='+job_id+'&quality_type='+quality_type+'&v='+Math.random()+'"/}'
+				}).show();
+			});
+
+			$('#sharePosterNone').on('click', function(){
+				var msg = "您当前没有在招职位，无法生成招聘海报";
+				ConfirmBox.timeBomb(msg, {
+					name : "warning",
+					timeout : 1000,
+					width: fontSize * msg.length + pWidth
+				});
+			})
+
+
+			stopDialog.after('hide', function(){
+				if(stopDialog.query('.replyAndStop').length){
+					stopDialog.query('.replyAndStop').off('click');
+				}
+				this.off('loadComplete');
+			});
+			//系统后台提示
+			var informTraining2 = new Dialog({
+				close : 'X',
+				idName : 'informTraining_dialog',
+				title : '温馨提示',
+				width : 625,
+				isOverflow : false,
+				isAjax : true,
+				zIndex:9999
+			});
+
+//			$("#js_inforCompany2").click(function(){
+//				informTraining2.setContent('<style>.informTraining_dialog .ui_dialog_title{font-family: "Microsoft YaHei"}</style><div style="padding:15px 20px;text-align: left;font-family: \'Microsoft YaHei\"\', \'微软雅黑\'"><p style="font-size: 14px;color: #444;line-height: 24px;text-indent: 28px;margin-bottom: 15px">尊敬的客户：为了更好的维护汇博网企业会员权益，高效满足企业人才招聘需求，汇博网系统将于2018年1月1日起全面升级，届时将停止非会员的职位发布功能。为避免对您的工作带来不便，请及时与您的招聘顾问联系，再次感谢您一直以来对汇博网的信任与支持</p><p style="text-align: right;font-size: 14px;color: #666;padding-top: 20px">汇博网（huibo.com）<br />2017年12月12日</p></div>').show();
+//				return false;
+//			});
+
+
+			//金牌面试官  20170714
+			var gold = new Dialog({
+				close : 'X',
+				idName : 'informTraining_dialog',
+				title : '汇博网 · 永川区人力资源公益沙龙',
+				width : 535,
+				isOverflow : false,
+				isAjax : true,
+				zIndex:9999
+			});
+			$("#js_gold").click(function(){
+				gold.setContent('<div style="text-align: center;padding:25px 55px 45px 55px;font-family: \'Microsoft YaHei\';line-height: 23px"><img src="{/$siteurl.style/}/img/infro_company_gold2017.jpg" /><p style="font-size: 18px;color: #ff7200;border-top:1px solid #ff7200;border-bottom: 1px solid #ff7200;height: 38px;line-height: 38px;width: 320px;margin: 10px auto 25px">7月29日（周六）下午 / 永川名豪酒店</p><strong style="font-size: 18px;color: #ff7200">分享嘉宾：肖老师</strong><p style="font-size: 14px;color: #333;margin-top: 15px;font-weight: bold">高级人力资源管理师、现任某世界500强企业人力资源部部长<br />曾任重庆某大型上市公司招聘经理和人力负责人</p><p style="font-size: 14px;color: #666;margin-top: 15px;margin-bottom: 20px;text-align: left">17年人力管理经验，十年制造业人力资源管理工作经验和上市公司、世界500强企业工作背景。担任过企业内部高级讲师，多次为重庆本地企业、HR协会进行授课。精通现代企业人力资源管理实务和理论，在集团化管控、员工招聘、培训与开发、组织绩效、员工关系等板块有丰富的实操经验，是一位实战派的人力资源专家。</p><p style="color: #ff7200;font-size: 18px;font-weight:blod;background: #fff3ec;height: 38px;line-height: 38px;border-radius: 5px;margin: 0 10px">咨询：15696154943 / 15023087231</p></div>').show();
+				return false;
+			});
+
+			$('.morePopx span em').on('click', function(){
+				$('.morePopx').hide();
+				var tomorrow = new Date("{/date('Y/m/d 00:00:00',strtotime('+10 day'))/}");
+				cookie.set('isShowMorePopx','show',{expires:tomorrow,path:'/',domain:"{/base_lib_Constant::COOKIE_DOMAIN/}"});
+			});
+
+			var isShowMorePopx = cookie.get('isShowMorePopx');
+			if(isShowMorePopx == 'show'){
+				$('.morePopx').hide();
+			}else{
+				$('.morePopx').show();
+			}
+
+
+			var joblist = {
+				initialize : function() {
+					//是否显示提示框
+					var isShowAutoMaticTip = cookie.get('isShowAutoMaticTip');
+					/*if (isShowAutoMaticTip == null || isShowAutoMaticTip == "") {
+					 $("#show_alt").show();
+					 }*/
+					$('.showClose').click(function() {
+						$('#show_alt').hide();
+						cookie.set('isShowAutoMaticTip', 'true');
+					});
+				},
+				delayJob : function(job_id) {
+					/*
+					 $.showModal('{/get_url rule="/job/DelaySingle/" data="job_id=' + job_id + '&obj=joblist&callback=delayJobCallback&v=' + Math.random() + '"/}', {title:'职位延期'});
+					 */
+
+					stopDialog.setContent({
+						title: '职位延期',
+						content: '{/get_url rule="/job/DelaySingle/" data="job_id=' + job_id + '&obj=joblist&callback=delayJobCallback&v=' + Math.random() + '"/}'
+					}).show();
+					stopDialog.on('loadComplete', function(){
+						this.addCloseEvent(this.query('#btnDelayCancel'));
+					});
+
+				},
+				delayJobCallback : function(job_id, end_time) {
+					$("#li" + job_id).find('td:eq(5)').html('<em class="gray" title="' + end_time + '结束招聘">' + end_time + '</em>');
+				},
+				delayJobsCallback : function(job_id,end_time) {
+					window.location.reload();
+				}
+			};
+			joblist.initialize();
+
+			//职位相关操作
+			var job_manager = {
+				init:function(){
+					$('.job_close').click(function(){
+						job_manager.toStopJobs($(this).attr('data-id'),false);
+					});
+					$('.lazy').click(function(){
+						joblist.delayJob($(this).attr('data-id'));
+					});
+					$('.share-link').click(function(){
+						job_manager.showJobSharePosters($(this).parent('.share-box').attr("data-id"));
+					});
+					$('#share_img_poster').click(function(){
+
+						job_manager.showPostersMsg();
+					});
+					$('#share_h5').click(function(){
+						if(is_share_h5 == 1){
+							var msg = "您当前没有在招职位，无法生成H5分享";
+							ConfirmBox.timeBomb(msg, {
+								name : "fail",
+								timeout : 3000,
+								width: fontSize * msg.length + pWidth
+							});
+							return false
+						}else if(is_share_h5 == 2){
+							var msg = "您当前职位不能公开展示，无法生成H5分享";
+							ConfirmBox.timeBomb(msg, {
+								name : "fail",
+								timeout : 3000,
+								width: fontSize * msg.length + pWidth
+							});
+							return false
+						}else{
+							window.open('{/get_url rule='/index/TemplateStatisticalByH5' data='type=4'/}')
+						}
+					});
+				},
+				showJobSharePosters:function(job_id){
+					$.showModal('{/get_url rule="/poster/GetPic/" data="job_id='+job_id+'"/}',{title:"分享海报"});
+				},
+				showPostersMsg:function(){
+					if(poster_msg != '') {
+						$.anchorMsg(poster_msg, {icon: 'fail'});
+						return;
+					}
+					if(job_num_poster == 1){
+						job_manager.showJobSharePosters(poster_job_id);
+					}else{
+						window.open("{/get_url rule='/createposter/index'/}","_blank");
+					}
+				},
+				toStopJobs:function(jobidArr,is_only) {
+					var jobid    = jobidArr;
+					var applyUrl = "/apply/index-job_id-"+jobid;
+					var title_message = '关闭职位';
+					/**判断先**/
+
+					var usertype = cookie.get('usertype'),
+							userid = cookie.get('userid'),
+							accountid = cookie.get('accountid'),
+							isLogin = (!!userid && (usertype == 'c') && !!accountid);
+
+					if(!isLogin){
+						window.location.href = window.location.href;
+						return;
+					}
+
+					$.getJSON("{/get_url rule='/index/GetNoreplycount'/}-jids-"+jobid, null, function (data) {
+						if (parseInt(data.count) > 0) {
+							var tipHTML = [
+								'<div class="warning_dialog">',
+								'<dl><dt></dt>',
+								'<dd>',
+								'<p><font color="red">' + data.names + '</font>' + data.promise_jids.length + '个职位中还有' + data.count + '份简历未进行回复，请先回复完简历后再关闭职位。</p>',
+								'</dd></dl>',
+								'<div style="text-align:text;width:340px;border:1px solid #fff;">',
+								'<a href="javascript:void(0);" class="cpromisetip replyAndStop" style="margin-right:15px;">回绝简历并关闭职位</a>',
+								'<a href="' + applyUrl + '" class="cpromisetip graybutn" target="_blank" style="margin-right:0px;">手动回复简历</a>',
+								'</div>',
+								'</div>'
+							].join('');
+							if(is_only == 'not_refresh')
+								jobRefreshDialog.hide();
+
+							stopDialog.setContent({
+								title: '职位停招',
+								content: tipHTML
+							}).show();
+							stopDialog.query('.replyAndStop').on('click', function (e) {
+								$.getJSON('/index/stopandreplyall-jids-' + jobid, null, function (data) {
+									if (parseInt(data.status) > 0) {
+										$.anchorMsg(data.msg);
+										if(is_only != 'not_refresh'){
+											setTimeout(function() {
+												window.location.href = window.location.href;
+											}, 1500);
+										}
+									} else {
+										if (typeof data.msg != 'undefined') {
+											$.anchorMsg(data.msg, {
+												icon : 'fail'
+											});
+										} else {
+										}
+									}
+								});
+
+								stopDialog.hide();
+							});
+
+							/*stopDialog.query('a.graybutn').on('click', function (e) {
+							 stopDialog.hide();
+							 });*/
+						} else if(is_only == 'not_refresh'){
+							ConfirmBox.confirm("关闭（停止招聘）后，不再被求职者看到，确定关闭吗？","关闭职位",function(obj){
+								this.hide();
+								$.getJSON('/job/BatchStopJobDo-', {hddjobID:jobid}, function (result) {
+									if(result.success) {
+										$.anchorMsg("关闭成功 ");
+										$.getJSON('{/get_url rule="/index/GetNotFreshJobs/" data="v='+Math.random()+'"/}', null, function (data) {
+											jobRefreshDialog.hide();
+											if(data.not_refresh_num > 0)
+												showJobRefreshDialog(data);
+											else
+												window.location.reload();
+
+										});
+									}else{
+										$.anchorMsg("关闭失败",{icon:'fain'});
+									}
+								});
+							},null,{width:300});
+
+						}else {
+							/*
+							 if(!is_only)
+							 title_message = '关闭职位';
+							 */
+							//stopDialog.setCp
+							stopDialog.setContent({
+								'title': '关闭职位',
+								'content': '/job/BatchStopJob?jobids='+jobid
+							}).show();
+							stopDialog.on('loadComplete', function(){
+								this.addCloseEvent(this.query('#btnStopJobCancel'));
+							});
+
+							//$.showModal('/job/BatchStopJob?jobids='+jobid, {title:title_message});
+						}
+					});
+				}
+			};
+			job_manager.init();
+
+			$(".ques").mouseover(function(){
+				$(".reversionList li").each(function(i,obj){
+					if($(obj).hasClass('hover')) $(obj).removeClass('hover');
+				});
+				$(this).parent().addClass('hover');
+			});
+
+			$(".ques").mouseout(function(){
+				$(this).parent().removeClass('hover');
+			});
+
+			$(".number i").mouseover(function(){
+				$(".reversionList li").each(function(i,obj){
+					if($(obj).hasClass('resCur')) $(obj).removeClass('resCur');
+				});
+				$(this).parents('li').addClass('resCur');
+			});
+
+			$(".number i").mouseout(function(){
+				$(this).parents('li').removeClass('resCur');
+			});
+
+			$('.upLOGO').on('click', function(e){
+				uploadDialog.show();
+			});
+			uploadDialog.after('hide', function(){
+				this.query('#newPopQuit').off('click');
+				imgEditor.destory();
+			});
+			uploadDialog.on('loadComplete', function() {
+				var uploadPanel = this.query('#uplogo1'),
+						editPanel = this.query('#dropImageContainer'),
+						dropImage = this.query('#dropImage'),
+						uploadingDialog;
+
+				imgEditor = new imageEditor({
+					imageCroperConfig: {
+						element: dropImage,//目标
+						handle: '#dragDiv',
+						color: '#f1f1f1',
+						width: dropImage.width(),
+						height: dropImage.height()
+					},
+					fileUploaderConfig: {
+						imageURL: '{/$logo_virt_path/}'
+					},
+					trigger: this.query('#newPopSave')
+				});
+				imgEditor.on('startUpload', function(e){
+					var msg = "正在上传...";
+					uploadingDialog = ConfirmBox.timeBomb(msg, {
+						name : "warning",
+						timeout : 100000,
+						width: fontSize * msg.length + pWidth
+					});
+				}).on('progresed', function(e){
+					this._imgFileName = e.data.name;
+					this._imgType = e.data.thumb_type;
+					this._imgRatio = e.data.thumb_ratio;
+					this.loadImage(e.url);
+
+					uploadingDialog.hide();
+					uploadPanel.hide();
+					editPanel.show();
+
+					var preview1 = editPanel.find('#preview120'),
+							preview2 = editPanel.find('#preview160');
+
+					this.addPreview(preview1, 120, 120);
+					this.addPreview(preview2, 160, 160);
+
+				}).on('progressError', function(e){
+
+//					uploadingDialog.hide();
+					if(e.errorMsg != undefined){
+						ConfirmBox.timeBomb(e.errorMsg, {
+							name : "fail",
+							timeout : 3000,
+							width: fontSize * e.errorMsg.length + pWidth
+						});
+						return;
+					}
+
+					if(e.data.status == 0){
+						ConfirmBox.timeBomb(e.data.errorMsg, {
+							name : "fail",
+							timeout : 3000,
+							width: fontSize * e.data.errorMsg.length + pWidth
+						});
+					}
+
+				}).on('save', function(e){
+					var self = this;
+					$.ajax({
+						url: '{/$siteurl.company|replace:"http:":""/}/company/saveLogo',
+						data: {
+							cropX: e.cropX,
+							cropY: e.cropY,
+							cropH: e.cropH,
+							cropW: e.cropW,
+							cropPH: e.cropPH,
+							cropPW: e.cropPW,
+							url: e.url,
+							name: this._imgFileName,
+							thumb_type: this._imgType,
+							thumb_ratio: this._imgRatio
+						},
+						success: function(e){
+							e = util.json(e);
+							if(e.state){
+								$('#hidLogo').val(e.image_path);
+								//上传头像
+								var del_logo = $('#delete_logo').val();
+								$.post("/index/editLogoPath", {'logo_path':e.image_path,'del_logo':del_logo},
+										function(data){
+											if (data.error) {
+												$.anchorMsg(data.error);return;
+											}
+											$('#logo_path').attr('src',"{/$logo_base_path/}"+e.image_path);
+											$('#delete_logo').val(e.image_path);
+											uploadDialog.hide();
+											delete self._imgFileName;
+											delete self._imgType;
+											delete self._imgRatio;
+										}, "json");
+
+							}
+						}
+					});
+				});
+
+				imgEditor.imageCroper.on('loadSuccess', function(){
+					uploadPanel.hide();
+					editPanel.show();
+				}).on('loadError', function(){
+					delete this._imgFileName;
+					delete this._imgType;
+					delete this._imgRatio;
+					uploadPanel.show();
+					editPanel.hide();
+					var msg = '加载图片失败';
+					ConfirmBox.timeBomb(msg, {
+						name : "fail",
+						timeout : 1000,
+						width: fontSize * msg.length + pWidth
+					});
+				});
+
+				this.query('#newPopQuit').on('click', function(){
+					uploadDialog.hide();
+				});
+			});
+
+			$('#ttp').click(function(){
+				var jdialog = new Dialog({
+					close: 'x',
+					idName: 'jian_dialog',
+					title: '详情咨询',
+					width:380,
+					zIndex:9999
+				});
+
+
+				var thtml =	['<style>.jian_dialog{text-align:left}</style>',
+					'<div class="warning_dialog" style="padding:15px;font-family:\'微软雅黑\';line-height:30px">',
+					'<p>联系招聘顾问购买推广金，最高多送<b style="color:red;">50%</b></p>',
+					{/if !empty($hrManager["user_name"])/}
+				'<p>招聘顾问：{/$hrManager["user_name"]/}</p>',
+				{//if/}
+				{/if !empty($hrManager["mobile"]) || !empty($customeruser["mobile"])/}
+				'<p>联系电话：{/$tel_head/}转{/$hrManager["tel"]/} [9：00-18：00]</p>',
+						'<p>手机号码：{/$hrManager["mobile"]|default:$customeruser["mobile"]/}</p>',
+				{/else/}
+				'<p>联系电话：{/$huibo400/}</p>',
+				{//if/}
+					'<p style="margin-top:15px">',
+				{/if !empty($hrManager["qq"]) || !empty($customeruser["qq"])/}
+				'<a target="_blank" href="//wpa.qq.com/msgrd?v=3&uin={/trim($hrManager["qq"]|default:$customeruser["qq"])/}&site=qq&menu=yes">',
+						'<img src="{/$siteurl.style/}/img/newindex/qq.jpg" />',
+						'</a>',
+				{/else/}
+				'<a target="_blank" href="//wpa.qq.com/msgrd?v=3&uin=2851501279&site=qq&menu=yes">',
+						'<img src="{/$siteurl.style/}/img/newindex/qq.jpg" />',
+						'</a>',
+				{//if/}
+					'</p>',
+					'</div>'].join('');
+				jdialog.setContent(thtml).show();
+			});
+			$('.promotion').click(function(){
+				$.post('{/get_url rule="/promotion/AjaxSetPrmotionNumber/"/}');
+				$('.showPromotionContent2').hide();
+				$('.showPromotionMain').toggle();
+				$('#showPromotionContent').toggle();
+			});
+			$('.radiusProm').click(function(){
+				$('.showPromotionMain').hide();
+				$('#showPromotionContent').hide();
+				$('#showPromotionContent1').hide();
+				$('#showPromotionContent2').hide();
+				$('#showPromotionContent3').hide();
+			});
+
+			//省外同行认证的企业，每天提示一次可刷新职位
+			{/if $need_prompt_refresh_tip/}
+			function setHasPromptRefreshTip(){
+				var tomorrow = new Date("{/date('Y/m/d 00:00:00',strtotime('+1 day'))/}");
+				cookie.set('has_prompt_refresh_tip',1,{expires:tomorrow,path:'/',domain:"{/base_lib_Constant::COOKIE_DOMAIN/}"});
+			}
+			var promptRefreshTipNum = 0;
+			var promptRefreshTip = setInterval(function(){
+				//推广金出来了，这个就不出来了
+				if($(".showPromotionMain").is(":visible")){
+					clearInterval(promptRefreshTip);
+					return;
+				}
+				promptRefreshTipNum++;
+				if(promptRefreshTipNum == 10){
+					clearInterval(promptRefreshTip);
+					ConfirmBox.confirm("一键刷新所有职位，让您的职位优先展示","刷新职位",function(){
+						this.hide();
+						setHasPromptRefreshTip();
+					},function(){
+						this.hide();
+						setHasPromptRefreshTip();
+						$("#refreshAll").click();
+					},{width:300,cancelBtn: '<button class="button_a button_a_red">一键刷新</button>',confirmBtn: '<button class="button_a cancelbtn">取消</button>'});
+				}
+			},1000);
+			{//if/}
+				// 刷新简历
+				$('#refreshAll').on('click',function(){
+					var _this = $(this);
+					if(_this.hasClass('locked')){
+						return false;
+					}
+					_this.addClass('locked');
+
+					var url = '{/get_url rule="/index/refreshAll/" data="v='+Math.random()+'"/}';
+
+					var tipDialog = new Dialog({
+						close: 'x',
+						idName: 'refresh_dialog',
+						title: '系统提示',
+						width: 440
+					});
+					var tipDialogTS = new Dialog({
+						close: 'x',
+						idName: 'refresh_dialog',
+						title: '系统提示',
+						width: 300
+					});
+
+					{/if $isEnd/}
+					var tiphtml = "<div style='padding:30px 15px;text-align: center;'><img style='display:inline-block; vertical-align: middle; padding-right: 10px;' src='{/$siteurl.style/}/img/company/query.png'>非会员不能刷新职位</div>";
+					tipDialogTS.setContent({ content:tiphtml}).show();
+					_this.removeClass('locked');
+					return false;
+					{//if/}
+						$.getJSON(url, null, function (json) {
+							if (!json.status) {
+								_this.removeClass('locked');
+								if (json.not_member) {
+									var tiphtml = [
+										'<div class="not-member">',
+										'<p style="margin-bottom: 10px;">今天的免费刷新机会已用完，可以联系招聘顾问开通会员，获得更多的刷新机会，并且刷新的职位可优先展示</p>',
+										{/if !empty($hrManager["user_name"])/}
+									'<p class="lt"><b>招聘顾问：</b>{/$hrManager["user_name"]/}</p>',
+									{//if/}
+									{/if !empty($hrManager["mobile"]) || !empty($customeruser["mobile"])/}
+									'<p class="lt"><b>联系电话：</b>{/$tel_head/}转{/$hrManager["tel"]/} [9：00-18：00]</p>',
+											'<p class="lt"><b>手机号码：</b>{/$hrManager["mobile"]|default:$customeruser["mobile"]/}</p>',
+									{/else/}
+									'<p class="lt"><b>联系电话：</b>{/$huibo400/}</p>',
+									{//if/}
+										'<p style="margin-top:20px">',
+									{/if !empty($hrManager["qq"]) || !empty($customeruser["qq"])/}
+									'<a target="_blank" href="//wpa.qq.com/msgrd?v=3&uin={/trim($hrManager["qq"]|default:$customeruser["qq"])/}&site=qq&menu=yes">',
+											'<img src="{/$siteurl.style/}/img/newindex/qq.jpg" />',
+											'</a>',
+									{/else/}
+									'<a target="_blank" href="//wpa.qq.com/msgrd?v=3&uin=2851501279&site=qq&menu=yes">',
+											'<img src="{/$siteurl.style/}/img/newindex/qq.jpg" />',
+											'</a>',
+									{//if/}
+										'</p>',
+										'</div>'
+								].join('');
+									tipDialog.setContent({title:'友情提示', content:tiphtml}).show();
+								} else {
+										$.getJSON('{/get_url rule="/index/GetNotFreshJobs/" data="v='+Math.random()+'"/}', null, function (data) {
+											if(data.not_refresh_num > 0){
+												var tiphtml = ['<style>.refresh_dialog{text-align:left}.hb_ui_dialog .ui_dialog_container{padding:0px}.jian_dialog{text-align:left}.warning_dialog{padding:30px 20px 20px 20px}</style>',
+													'<div class="warning_dialog">',
+													'<dl><dt></dt>',
+													'<dd style="line-height:40px">',
+													' <p>请刷新剩余职位</p>',
+													'</dd></dl>',
+													'</div>',
+													'<div class="actuBtn dialogFooter" style="border-top:0px;background:#f3f3f3;padding:7px;text-align:right;">',
+													'<a href="javascript:void(0);" id="close" class="btn1 btnsF12" style="background:#66bce4;border:0px;box-shadow:none">免费刷新剩余职位</a>',
+													'</div>'
+												].join('');
+
+												tipDialog.setContent(tiphtml).show();
+
+												tipDialog.query('#close').on('click', function() {
+													showJobRefreshDialog(data);
+													tipDialog.hide();
+												});
+											}else{
+												$.message(json.msg, {title:'系统提示', icon:'fail'});
+											}
+										});
+										return;
+									}
+								} else if (json.items.params.packageCount >= json.items.params.newCount) {
+										torefreshDo();
+										_this.removeClass('locked');
+									} else {
+										$.getJSON('{/get_url rule="/index/GetNotFreshJobs/" data="v='+Math.random()+'"/}', null, function (data) {
+											var cancel_str = "取&nbsp;消";
+											if(data.not_refresh_num > 0)
+												cancel_str = "免费刷新剩余职位";
+											var tiphtml = ['<style>.refresh_dialog{text-align:left}.hb_ui_dialog .ui_dialog_container{padding:0px}.jian_dialog{text-align:left}.warning_dialog{padding:30px 20px 20px 20px}</style>',
+												'<div class="warning_dialog">',
+												'<dl><dt style="margin-top:5px"></dt>',
+												'<dd style="line-height:25px">',
+												' <p>今日的刷新次数（'+json.items.params.packageCount+'次）已用完，付费刷新将花费'+json.items.params.consume+'元。<br /><span style="color:#999">（优先使用推广金代扣）</span></p>',
+												'</dd></dl>',
+												'</div>',
+												'<div class="actuBtn dialogFooter" style="border-top:0px;background:#f3f3f3;padding:7px;text-align:right;">',
+												'<a href="javascript:void(0);" class="btn1 btnsF12" id="btnSet" style="background:#66bce4;border:0px;box-shadow:none">付费刷新</a>',
+												'<a href="javascript:void(0);" id="close" class="btn3 btnsF12" style="background:#fff;border:0px;box-shadow:none">'+cancel_str+'</a>',
+												'</div>'
+											].join('');
+
+											tipDialog.setContent(tiphtml).show();
+
+											tipDialog.query('#close').on('click', function() {
+												if(data.not_refresh_num > 0)
+													showJobRefreshDialog(data);
+												tipDialog.hide();
+											});
+
+											tipDialog.query('#btnSet').on('click', function() {
+												tipDialog.hide();
+												orderAction.show({
+													data : json,
+													submit : function() {
+														torefreshDo();
+														this.hide();
+
+													}
+												});
+												return;
+											});
+											_this.removeClass('locked');
+										});
+									}
+								});
+
+					});
+
+				function torefreshDo() {
+					$('#refreshAll').removeClass('locked');
+					$.getJSON('{/get_url rule="/index/refreshAllDo/" data="v=' + Math.random() + '"/}', null, function (json) {
+						if (json.fail) {
+							$.message(json.failitem, {title: '系统提示', icon: 'fail'});
+							return;
+						}
+						if (json.success) {
+							$("#divRefreshTime").html(json.refreshtime);
+							$("#refreshTimeSpan").show();
+							if(json.not_refresh_num == 0){      //没有未刷新的职位
+								$.anchorMsg('刷新全部职位成功');
+								setTimeout(function() {
+									window.location.href = window.location.href;
+								}, 500);
+								return;
+							}else{          //单独刷新的职位
+								showJobRefreshDialog(json);
+							}
+
+						}
+						return;
+					});
+				}
+				var jobRefreshDialog;
+				function showJobRefreshDialog(json){
+					var has_refreshed_job_num = parseInt(json.job_num);
+					jobRefreshDialog = new Dialog({
+						idName: 'jobRefreshDialog',
+						width: 540,
+						height:340,
+						title: '职位刷新提示',
+						close:"×",
+						isOverflow: false,
+						isAjax: false
+					});
+					var jobRefreshHtml = '<div style="padding:10px">'+
+							'<style>.jobRefreshDialog{text-align: left;font-family: "Microsoft YaHei";line-height: 25px}.jobRefreshDialog table{width:100%}.jobRefreshDialog th{font-size: 14px;color: #999;padding: 15px 10px 10px 10px;text-align: center}.jobRefreshDialog td{height:48px;line-height: 24px;font-size: 14px;color: #666;text-align: center;padding-left:10px;padding-right: 10px}.jobRefreshDialog .one td{background-color: #fafafa}.jobRefreshDialog a{color: #2b6fad;margin: 0 10px}.jobRefreshDialog a:hover{color}</style>'+
+							'<p style="font-size: 14px;color: #666;border-bottom: 1px dashed #e9e8e8;padding-bottom: 10px">已批量刷新 '+has_refreshed_job_num+' 条职位信息<br />'+json.not_refresh_num+' 条职位信息没有自动刷新。 原因：48小时未查看投递的简历。<br />如需刷新请在列表中手动刷新，如已停招请关闭职位</p>'+
+							'<div style="height:190px;overflow-y: auto"><table style="width: 100%">'+
+							'<tr><th style="text-align: left" width="50%">职位名称</th><th>招聘人</th><th>待回复</th><th>操作</th></tr>';
+					$.each(json.not_refresh_job_list, function(i, n){
+						if(i%2 == 0)
+							jobRefreshHtml += '<tr class="one"><td style="text-align: left">'+n.station+'</td><td>'+n.account_user_name+'</td><td>'+n.no_reply_num+'</td><td><a data-id="'+n.job_id+'" href="javascript:;" class="singleRefrsh">刷新</a><a data-id="'+n.job_id+'" href="javascript:;" style="margin-right: 0" class="job_close md_index_close">关闭</a></td></tr>';
+						else
+							jobRefreshHtml += '<tr><td style="text-align: left">'+n.station+'</td><td>'+n.account_user_name+'</td><td>'+n.no_reply_num+'</td><td><a data-id="'+n.job_id+'" href="javascript:;" class="singleRefrsh">刷新</a><a data-id="'+n.job_id+'" href="javascript:;" style="margin-right: 0" class="job_close md_index_close">关闭</a></td></tr>';
+					});
+					jobRefreshHtml += '</table></div></div>';
+
+					jobRefreshDialog.setContent(jobRefreshHtml).show();
+					//弹窗中关闭职位
+					jobRefreshDialog.query('.job_close').on('click', function() {
+						//jobRefreshDialog.hide();
+						job_manager.toStopJobs($(this).attr('data-id'),'not_refresh');
+						stopDialog.on('closeX', function(){
+							$.getJSON('{/get_url rule="/index/GetNotFreshJobs/" data="v='+Math.random()+'"/}', null, function (data) {
+								if(data.not_refresh_num > 0)
+									showJobRefreshDialog(data);
+								else
+									window.location.reload();
+							});
+						});
+						return;
+					});
+					//弹窗中刷新职位
+					jobRefreshDialog.query('.singleRefrsh').on('click', function() {
+						jobRefreshDialog.hide();
+						$.getJSON('{/get_url rule="/index/singleRefrshDo/" data="v=' + Math.random() + '"/}', {refresh_job_id:$(this).attr('data-id')}, function (data) {
+							if(data.status){
+								$.message("<div style='text-align:center'><b>职位刷新成功</b><br/>请及时处理该职位收到的简历</div>", {title: '提示'});
+							}else{
+								$.message(data.msg, {title: '系统提示', icon: 'fail'});
+							}
+
+							$.getJSON('{/get_url rule="/index/GetNotFreshJobs/" data="v='+Math.random()+'"/}', null, function (data) {
+								if(data.not_refresh_num > 0)
+									showJobRefreshDialog(data);
+								else
+									window.location.reload();
+							});
+						});
+						return;
+					});
+					//关闭弹窗时刷新页面
+					jobRefreshDialog.on('closeX', function(){
+						window.location.href = window.location.href;
+					});
+				}
+
+				/* 分享提示 */
+				var shareHTML = [
+					"<div class='shareList'>",
+					"<h2 style='color:#1abc9c; font-size:18px; margin-bottom:10px;'>分享招聘宣传到朋友圈，让同事和你一起招聘</h2>",
+					"<p style='color:#666; font-size:14px; line-height:24px;margin-bottom:20px;'>用微信扫描下方二维码，分享到朋友圈即可<br />",
+					"邀请同事去朋友圈分享，TA的朋友很可能就会是你的新同事哦~</p>",
+					"</div>",
+					"<div class='img'><img src='{/base_lib_Constant::MOBILE_URL/}/companylikes/qrcode/flag-' /></div>"
+				].join('');
+				var shareDialog = new Dialog({
+					close: 'x',
+					idName: 'ui_company_share_dialog',
+					width: 500,
+					title: '',
+					content: shareHTML,
+					isAjax: true
+				});
+
+				$("#share").on("click", function() {
+					shareDialog.show();
+				});
+				{/if !empty($calling_advert_middle) && count($calling_advert_middle) > 1/}
+				$('.flexBanner').flexslider({
+					animation:"slide",
+					direction:"vertical",
+					itemWidth:0,
+					itemMargin:0,
+					prevText:'&#xf053;',
+					nextText:'&#xf054;',
+					pauseOnAction:false,
+					pauseOnHover:true,
+					slideshowSpeed:5000,
+					move:3
+				});
+				{//if/}
+					$('.compClose').click(function(){
+						$('.banner').slideUp('slow');
+					});
+					//判断有没有cookie
+					var hidShowWeixin = cookie.get('hidShowWeixin');
+					if(hidShowWeixin !="true"){
+						$('.in-tit').show();
+					}
+					$('.btnx3').click(function(){
+						$('.in-tit').hide();
+						if(hidShowWeixin !="true"){
+							cookie.set('hidShowWeixin',true,"","/");
+						}
+					});
+					$('.tabList2').click(function(){
+						$(this).addClass('cut');
+						$('.tabList1').removeClass('cut');
+						$('.tabList3').hide();
+						$('.tabList4').show();
+					});
+					$('.tabList1').click(function(){
+						$(this).addClass('cut');
+						$('.tabList2').removeClass('cut');
+						$('.tabList4').hide();
+						$('.tabList3').show();
+					})
+
+					//面试评价关闭
+					{/if !$is_allow_appraise/}
+					$("#appealSwitch").click(function(){
+						ConfirmBox.confirm("确定要公开面试评价吗？","公开面试评价",function(obj){
+							var self = this;
+							self.hide();
+							$.post('{/get_url rule="/appraise/changeAppeal/"/}',{"value":1},function(result){
+								if(result.error){
+									$.message(result.error, { title: '系统提示', icon: 'fail' });
+								}else{
+									$.anchorMsg(result.success);
+									$("#appealSwitch").parent(".appealSwitchNotice").remove();
+								}
+							},"json");
+						});
+					});
+					{//if/}
+						$("#wixinAlt .close").click(function(){
+							$(this).parent().hide();
+							cookie.set('showHeadWeixinTip',1,{expires:'',path:'/',domain:"{/base_lib_Constant::COOKIE_DOMAIN/}"});
+							return false;
+						});
+
+						/*微信气泡提醒2015-12-10 end */
+						{/if isset($notMarkJobidsArr) && count($notMarkJobidsArr)>0/}
+						var jobSortDialog = new Dialog({
+							close: 'x',
+							idName: 'jobSortUpdate',
+							width: 800,
+							title: '',
+							content: '{/get_url rule="/index/updateJobSort/" data="jobids={/$notMarkJobids/}"/}',
+							isAjax: true
+						});
+
+						jobSortDialog.on('loadStart', function(){
+							this._isOverflow = true;
+						}).on('loadComplete', function(){
+							this.query(".btn-gray").on("click",function(e){
+								jobSortDialog.hide();
+							});
+							var _s = this
+							this.query(".btn-yellow").on("click",function(e){
+								//提交
+								$.ajax({
+									url : "{/get_url rule='/index/UpdateJobSortDo/'/}",
+									type : "GET",
+									dataType : "JSON",
+									data : _s.query("#formjobsort").serialize(),
+									success : function(result) {
+										if(result.error){
+											ConfirmBox.timeBomb(result.error, {
+												name : "warning",
+												timeout : 1000,
+												width: fontSize * result.error.length + pWidth
+											});
+										}else{
+											ConfirmBox.timeBomb(result.success, {
+												name : "success",
+												timeout : 1000,
+												width: fontSize * result.success.length + pWidth
+											});
+											jobSortDialog.hide();
+										}
+									}
+
+								});
+								//_s.query("#formjobsort").submitForm({success:jobSortSuccessCallBack,clearForm: false});
+							});
+							{/foreach $notMarkJobidsArr as $id/}
+							this.query('#dropJobsort{/$id/}').jobsort({
+								max:2,hddName:'hidJobsort[{/$id/}]',
+								isLimit:true,isAll:false
+							});
+							{//foreach/}
+							}).show();
+
+						{//if/}
+
+							{/if $calling_mark/}
+							var callingDialog = new Dialog({
+								close: 'x',
+								idName: 'selectCalling',
+								width: 800,
+								title: '',
+								content: '{/get_url rule="/index/selectCalling/"/}',
+								isAjax: true
+							});
+							callingDialog.on('loadStart', function(){
+								this._isOverflow = true;
+							}).on('loadComplete', function(){
+								this.query(".btn-gray").on("click",function(e){
+									callingDialog.hide();
+								});
+								var _s = this
+								this.query(".btn-yellow").on("click",function(e){
+									//提交
+									$.ajax({
+										url : "{/get_url rule='/index/UpdateCallingDo/'/}",
+										type : "GET",
+										dataType : "JSON",
+										data : _s.query("#formcalling").serialize(),
+										success : function(result) {
+											if(result.error){
+												ConfirmBox.timeBomb(result.error, {
+													name : "warning",
+													timeout : 1000,
+													width: fontSize * result.error.length + pWidth
+												});
+											}else{
+												ConfirmBox.timeBomb(result.success, {
+													name : "success",
+													timeout : 1000,
+													width: fontSize * result.success.length + pWidth
+												});
+												callingDialog.hide();
+											}
+										}
+
+									});
+									//_s.query("#formjobsort").submitForm({success:jobSortSuccessCallBack,clearForm: false});
+								});
+							}).show();
+							{//if/}
+								$('#outer_Jobs').on('click',function(data){
+
+								});
+
+
+							});
+
+		function jobSortSuccessCallBack(json){
+			console.log(json);
+		}
+
+		var is_ajaxspread_query = false;
+		$(function() {
+			$('.marketTip span').hover(function(){
+				var spreadJobSeeCount = $('#spreadJobSeeCount').html();
+				var spreadClickCount = $('#spreadClickCount').html();
+				if((spreadJobSeeCount == "正在统计..." || spreadClickCount == "正在统计...") && is_ajaxspread_query == false){
+					is_ajaxspread_query = true;
+					$.ajax({
+						url: '{/$siteurl.company|replace:"http:":""/}/index/AjaxSpreadJobStatistics/',
+						dataType : 'json',
+						success: function(e){
+							$('#spreadJobSeeCount').html(e.spreadJobSeeCount == -1 ? 0 : e.spreadJobSeeCount);
+							$('#spreadClickCount').html(e.spreadClickCount == -1 ? 0 : e.spreadClickCount);
+							is_ajaxspread_query = false;
+						}
+					});
+				}
+				$('.marketPopx1').toggle();
+			});
+//			var star01=$('#weiBtn'),starList=$('.in-tit');
+//			starList.css("left",star01.position().left-10);
+			$('.wh-companyShow').hover(function(){
+				$('.companyShow').toggle();
+			})
+
+
+			$('#auto-refresh').click(function() {
+				var fn     = $(this),
+						autostatus = $('#refreshStatus').val();
+
+				$.getJSON("{/get_url rule='/index/autorefesh'/}", {
+					auto_status : autostatus
+				}, function (data) {
+					if (data.status == "error") {
+						$.message(data.info, {
+							title: '系统提示', icon: 'fail'
+						});
+						return;
+					}
+					if (data.status == "success") {
+						if (autostatus == 1) {
+							fn.addClass('cut');
+							$('#refreshStatus').val(0);
+							$('.autorefreshtime').show();
+						} else {
+							fn.removeClass('cut');
+							$('#refreshStatus').val(1);
+							$('.autorefreshtime').hide();
+						}
+						$.anchorMsg(data.info);
+					}
+				});
+			});
+
+			$("#auto-refresh").mouseover(function(){
+				$("#show_alt").show();
+			}).mouseout(function(){
+				$("#show_alt").hide();
+			});
+
+			/*搜索*/
+			$("#searchResume").click(function(){
+				$('.md_index_resume_search').click()
+			    var station = $("#searchStation").val();
+				window.location.href = "{/$siteurl.company|replace:'http:':''/}/resumesearchnew/index/station-"+station;
+			});
+
+			/*刷新提示条*/
+			$("#closeRefreshTip").click(function(){
+				$(this).parent().hide();
+				return false;
+			});
+
+			$('#calling_advert,#flexBannerList').on('click', 'a', function(e){
+				var self = $(e.currentTarget);
+				var advert_id = self.attr('adv_id');
+				var area = self.attr('area');
+				var data = {advert_id:advert_id,area:area};
+				$.post('{/$siteurl.main/}/ad/adverVisit/',data);
+			});
+		})
+
+		function refreshAll(){
+			$.getJSON('{/get_url rule="/index/refreshAll/" data="v='+Math.random()+'"/}', function(json) {
+				if(json.error){
+					$.message(json.error, { title: '系统提示', icon: 'fail' });
+					return;
+				}
+				if(json.fail){
+					$.message(json.failitem, { title: '系统提示', icon: 'fail' });
+					return;
+				}
+				if(json.success){
+					$("#divRefreshTime").html(json.refreshtime);
+					$("#refreshTimeSpan").show();
+					$.anchorMsg('刷新全部职位成功');
+				}
+				return;
+			});
+		}
+
+		function startVip(){
+			var title = '开通会员';
+			$.showModal('{/get_url rule="/account/showApplyVipTipsV2/"/}',{title:title});
+		}
+		//升级维护公告start
+		{/if $newBulletin['is_show']==true/}
+		showNewBulletin();
+		{//if/}
+			function showNewBulletin(){
+				var thisid = "{/$newBulletin['id']/}";
+				$.showModal('{/get_url rule="/index/showNewBulletin/"/}?id='+thisid,{title:'升级维护公告',onclose:function(){closeShowNewBulletin()}});
+			}
+			function closeShowNewBulletin(){
+				var thisid = "{/$newBulletin['id']/}";
+				$.post('{/get_url rule="/index/CloseNewBulletin"/}',{id:thisid});
+			}
+			//升级维护公告end
+
+			{/if !empty($calling_advert_middle) && count($calling_advert_middle) > 1/}
+			var srolObj = $("#scrollTop").find("ul"),timeSrol = null;
+			function getSrol(){
+				timeSrol = setInterval(function(){
+					srolObj.stop().animate({"margin-top":-52},200,function(){
+						$(srolObj.find("li").eq(0)).appendTo(srolObj.css("margin-top","0px"));
+					});
+				},7000);
+			}
+			srolObj.hover(function(){
+				timeSrol && clearInterval(timeSrol);
+			},function(){
+				getSrol();
+			});
+			getSrol();
+			{//if/}
+
+
+				//招聘人
+				var simuSselect = $("#simulation-select");
+				simuSselect.hover(function(){
+					$(this).find(".select-list").show();
+				},function(){
+					$(this).find(".select-list").hide();
+				});
+				//更多
+				$("#jobMore").click(function(){
+					$(this).prev("ul").toggleClass("js-over-height");
+					return false;
+				});
+				function isPromotionShowLQ(){
+					cookieutility.set('isShowPromotionShowLQ','true');
+					window.location.href = '{/get_url rule="/licencevalidate/index"/}';
+				}
+				function copyToClipboard(txt) {
+					if (window.clipboardData) {
+						window.clipboardData.clearData();
+						clipboardData.setData("Text", txt);
+						alert("复制成功！");
+					} else if (navigator.userAgent.indexOf("Opera") != -1) {
+						window.location = txt;
+					} else if (window.netscape) {
+						try {
+							netscape.security.PrivilegeManager.enablePrivilege("UniversalXPConnect");
+						} catch (e) {
+							alert("被浏览器拒绝！\n请在浏览器地址栏输入'about:config'并回车\n然后将 'signed.applets.codebase_principal_support'设置为'true'");
+						}
+						var clip = Components.classes['@mozilla.org/widget/clipboard;1'].createInstance(Components.interfaces.nsIClipboard);
+						if (!clip)
+							return;
+						var trans = Components.classes['@mozilla.org/widget/transferable;1'].createInstance(Components.interfaces.nsITransferable);
+						if (!trans)
+							return;
+						trans.addDataFlavor("text/unicode");
+						var str = new Object();
+						var len = new Object();
+						var str = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);
+						var copytext = txt;
+						str.data = copytext;
+						trans.setTransferData("text/unicode", str, copytext.length * 2);
+						var clipid = Components.interfaces.nsIClipboard;
+						if (!clip)
+							return false;
+						clip.setData(trans, null, clipid.kGlobalClipboard);
+						alert("复制成功！");
+					}
+				}
+
+	</script>
+	<script>
+		$('.freshList li .subFresh08 a.set-pro').hover(function (e) {
+			// $(this).find('div').show().css('top',$(this).offset().top+30).css('left',$(this).offset().left)
+			$(this).find('div').show().css('top',e.clientY+20).css('left',e.clientX)
+		},function (e) {
+			$(this).find('div').hide();
+		})
+
+		//      $('.freshList li').hover(function (e) {
+		//          console.log('hhh');
+		//          // $(this).find('.share-link').show().css('top',e.clientY).css('left',e.clientX)
+		//          $(this).find('.share-link').show();
+		//      },function (e) {
+		//          $(this).find('.share-link').hide();
+		//      })
+		$('.closeTip').click(function () {
+			$('.completeTip').css({
+				'display': 'none'
+			});
+			var tomorrow = new Date("{/date('Y/m/d 00:00:00',strtotime('+1 day'))/}");
+			var recruitment_result_show = "recruitment_result_show";
+
+			cookie.set(recruitment_result_show,true,{expires:tomorrow,path:'/',domain:"{/base_lib_Constant::COOKIE_DOMAIN/}"});
+		});
+		function getCookie(name){
+			var reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)"),
+					arr = document.cookie.match(reg);
+			if (arr != null) {
+				return unescape(arr[2]);
+			} else {
+				return null;
+			}
+		}
+		function setCookie(name, value, hours){
+			var str = name + "=" + escape(value);
+			if (hours > 0) {
+				var date = new Date();
+				date.setTime(date.getTime() + hours * 3600 * 1000);
+				str += "; expires=" + date.toGMTString();    // toGMTstring将时间转换成字符串
+			}
+			//写入Cookie
+			document.cookie = str;
+		}
+		var isShowCompleteInfo = getCookie('recruitment_result_show');
+		if(!isShowCompleteInfo) {
+			$('.completeTip').css({
+				'display': 'block'
+			});
+		}else {
+			$('.completeTip').css({
+				'display': 'none'
+			});
+		}
+	</script>
+
+	{/include file="common/showdialog.html" dialog_box ="$dialog_box"/}
+
+	{/include file="chat/chat.html"/}
+</body>
+
+</html>

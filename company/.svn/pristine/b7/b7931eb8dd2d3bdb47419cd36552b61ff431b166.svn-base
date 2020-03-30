@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>{/$title/}</title>
+	<!--–[if lt IE9]-->
+	<script src="//hm.baidu.com/hm.js?fb51309e47424acd6e31c0bd2a65a5a1"></script>
+	<script type="text/javascript" language="javascript" src="{/version file='html5.js'/}"></script>
+	<!--[endif]–-->
+	<link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+	<link rel="stylesheet" type="text/css" href="{/version file='m_font_style.css'/}">
+	<link rel="stylesheet" type="text/css" href="{/version file='comback.css'/}" />
+	<link rel="stylesheet" type="text/css" href="{/version file='resument2015.css'/}" />
+	<link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}" />
+	<link rel="stylesheet" type="text/css" href="{/version file='layer.css'/}" />
+	<script type="text/javascript">
+		window.CONFIG = {
+			HOST: '{/$isteurl.style/}',
+			COMBOPATH: '/js/v2/'
+		}
+	</script>
+	<script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+	<script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.min.js'/}"></script>
+	<script type="text/javascript" language="javascript" src="{/version file='layer.js'/}"></script>
+	<script type="text/javascript" language="javascript" src="{/version file='common.js'/}"></script>
+	<script type="text/javascript" language="javascript" src="{/version file='dialog.js'/}"></script>
+	<script type="text/javascript" language="javascript" src="{/version file='ui_inputFocus.js'/}"></script>
+	<script type="text/javascript" language="javascript" src="{/version file='ui_tooltip.js'/}"></script>
+	<script type="text/javascript" language="javascript" src="{/version file='ui_validate.js'/}"></script>
+	<script type="text/javascript" language="javascript" src="{/version file='jquery.form.js'/}"></script>
+	<script type="text/javascript" language="javascript" src="{/version file='ui_dropdownlist.js'/}"></script>
+	<script type="text/javascript" language="javascript" src="{/version file='ui_autocomplete.js'/}"></script>
+	<script type="text/javascript" language="javascript" src="{/version file='jquery.email.tip.js'/}"></script>
+	<script type="text/javascript" language="javascript" src="{/version file='jquery.metadata.js'/}"></script>
+
+	<script type="text/javascript" src="{/version file='WdatePicker.js'/}"></script>
+	<link rel="stylesheet" type="text/css" href="{/version file='offer.css'/}" />
+	<script type="text/javascript">
+		hbjs.loadJS('{/$siteurl.style/}/js/v2/cqjob/common.js');
+	</script>
+	<style type="text/css">
+		.offerDatas .offerTable{ text-align: center;}
+		.drop .dropSeld{ background: #fff;}
+		.offerDatas tbody tr .name { padding-left: 10px;padding-right: 10px; line-height: 25px;max-width: 200px;}
+        .overtext{white-space: normal; text-overflow: clip;overflow: visible;}
+		.qq_newsz{ margin-left: 262px!important;}
+		.inaccurate {width: 132px;height: 24px;background: url({/$siteurl.style/}/img/company/Inaccurate.png)no-repeat 0 0;padding-left: 10px;display: none;line-height: 24px;position: absolute;top: 0;left: 0;}
+		.incontent {font-size: 12px;color: #666666;}
+		.goSet {font-size: 12px;color: #4da1ff;}
+		.resumentNbg-new {overflow: visible;}
+	</style>
+</head>
+
+<body id="body">
+{/include 'new_header.html' par="全职招聘" cur='数据报表'/}
+
+
+<div class="resumentNbg resumentNbg-new">
+	{/if $left_type==2/}
+	{/include 'resume/apply/nav.html' cur="offer管理"/}
+	{/else/}
+	<div class="rMentLt">
+		<dl class="rMentDl">
+			<dd>
+				<a class="md_job_zd" href="{/get_url rule='/readjob/CompanyVisit'/}" >
+					<i class="icon-menu-work"></i><span>职位诊断</span>
+				</a>
+			</dd>
+			<dd class="cut">
+				<a class="md_recruit_effect" href="{/get_url rule='/readjob/recruitmenteffect'/}">
+					<i class="icon-svg28"></i><span>投递简历报表</span>
+				</a>
+			</dd>
+			<dd>
+				<a class="md_recruit_effect" href="{/get_url rule='/readjob/GetResemeRecruitmentEffect'/}">
+					<i class="icon-svg40"></i><span>获取简历报表</span>
+				</a>
+			</dd>
+		</dl>
+	</div>
+	{//if/}
+
+	<!-- 右侧内容 -->
+	<div class="rMentRt" style="background: #fff;">
+		<div class="content">
+			<hgroup>
+				<div class="part part1">
+					<form id="frmInvite" method="get" action="{/get_url rule='/readjob/RecruitmentEffect/'/}" class="offerSearch">
+						<input type="hidden" name="left_type" value="{/$left_type/}">
+						<!-- 筛选条件 -->
+						<div class="filterOptions">
+							<span>时间：</span>
+							<div class="xkTabSelect inB filter_startTime">  <input readonly="readonly" class="text" id="time_s" type="text" onClick="WdatePicker({onpicked: doCheck,dateFmt: 'yyyy-MM-dd'})" name="time_s" style=" border: 1px solid #ddd;height: 33px;
+    line-height: 31px;padding-left: 10px;" value="{/$time_s/}"/>
+
+							</div>
+							<span class="timeConnetLine">~</span>
+							<div class="xkTabSelect inB">  <input  class="text" id="time_e" type="text" readonly="readonly" onClick="WdatePicker({onpicked: doCheck,dateFmt: 'yyyy-MM-dd'})" name="time_e" style=" border: 1px solid #ddd;height: 33px;
+    line-height: 31px;padding-left: 10px;" value="{/$time_e/}"/>
+
+							</div>
+							<span>招聘负责人：</span>
+							<div class="xkTabSelect inB"><span id="recruitmentManager" class="drop zindex" style="z-index: 5;"></span></div>
+							<div class="clearfix" style="padding-top: 18px;">
+
+							{/if $is_show_company_search/}
+							<span>公司：</span>
+							<div class="xkTabSelect inB"><span id="jobCompany" class="drop zindex"></span></div>
+							{//if/}
+
+							<span>职位：</span>
+							<div class="xkTabSelect inB"><span id="tstDropJob" class="drop zindex"></span></div>
+							
+							<label style="padding-top:6px; margin-right: 15px;">
+								<input class="md_stopjob"  type="checkbox" value="1" id="showStopJob" style="display:inline-block; vertical-align:-1px;" {/if !empty($show_not_use_job)/}checked="checked"{//if/}>
+								&nbsp;包含停招职位
+							</label>
+
+							<!-- 搜索按钮 -->
+							<input type="button" value="搜索" id="go_search" class="mianshiSearchBtn md_recruit_select">
+							<input type="button" value="导出Excel" id="exel_smit" class="mianshiSearchBtn md_recruit_excel">
+							<input type="hidden" name="show_not_use" value="{/if !empty($show_not_use_job)/}1{/else/}0{//if/}">
+							<input type="hidden" name="execl" value="0">
+							<input type="hidden" name="page" value="{/$cur_page/}">
+							</div>
+						</div>
+					</form>
+
+					<div class="offerTipsx">
+						<img src="{/$siteurl.style/}/img/company/video/eng_icon09.png" >
+						<span>需及时设置面试结果和入职结果，以免面试和入职数据不准确</span>
+						<a class="md_recruit_set" href="/apply/index/status-1" target="_blank">去设置</a>
+					</div>
+
+					<div class="offerDatas">
+						{/if !empty($list)/}
+						<table class="offerTable">
+							<thead class="offerTbHead">
+								<tr>
+									<th width="200" class="name">招聘职位</th>
+									<th width="150">收到简历</th>
+									<th width="158">邀请面试	</th>
+									<th width="158">面试爽约	</th>
+									<th width="162">面试未通过</th>
+									<th width="163">面试通过</th>
+									<th width="150">入职人数</th>
+								</tr>
+							</thead>
+							<tbody>
+								{/foreach $list as $v/}
+								<tr>
+									<td class="name overtext" tips="{/$v['station']/}">{/$v['station_new']/}</td>
+									<td class="overtext pos">{/$v['total_count']/}</td>
+									<td class="overtext"><a target="_blank" href="{/get_url rule='/apply/index'/}?status=1&job_id={/$job_id/}&son_account_id={/$son_account_id/}&account_id={/$company_id/}&invite_source=1">{/$v['invit_num']/}</a></td>
+									<th width="158" class="{/if $v['need_remin']/}break{//if/}"><a target="_blank" href="{/get_url rule='/invitev1/index'/}?audition_result=8&job_id={/$job_id/}&son_account_id={/$son_account_id/}&account_id={/$company_id/}&invite_source=1">{/$v['fail_num']/}</a></th>
+									<td class="overtext {/if $v['need_remin']/}notpass{//if/}"><a target="_blank" href="{/get_url rule='/invitev1/index'/}?audition_result=2&job_id={/$job_id/}&son_account_id={/$son_account_id/}&account_id={/$company_id/}&invite_source=1">{/$v['notpass_num']/}</a></td>
+									<td class="overtext {/if $v['need_remin']/}pass{//if/}"><a target="_blank" href="{/get_url rule='/invitev1/index'/}?audition_result=1&job_id={/$job_id/}&son_account_id={/$son_account_id/}&account_id={/$company_id/}&invite_source=1">{/$v['pass_num']/}</a></td>
+									<td class="overtext {/if $v['need_remin']/}finalper{//if/}"><a target="_blank" href="{/get_url rule='/invitev1/index'/}?audition_result=9&job_id={/$job_id/}&son_account_id={/$son_account_id/}&account_id={/$company_id/}&invite_source=1">{/$v['entry_num']/}</a></td>
+								</tr>
+								{//foreach/}
+							</tbody>
+						</table>
+						{/else/}
+						<div class="noData">
+							<p>未找到数据，请更换筛选条件再试！</p>
+						</div>
+						{//if/}
+
+					</div>
+				</div>
+			</hgroup>
+			{/$page/}
+		</div>
+	</div>
+<div class="j_time_search_btn" data-explain="do not delete!" style="display: none"></div>
+<div class="j_username_search_btn" data-explain="do not delete!" style="display: none"></div>
+<div class="inaccurate">
+		<span class="incontent">数据不准确？<a target="_blank" href="{/get_url rule='/apply/index'/}?status=1&job_id={/$job_id/}&son_account_id={/$son_account_id/}&account_id={/$company_id/}&invite_source=1" class="goSet">去设置</a></span>
+	</div>
+<script  type="text/javascript">
+    var action_url = '{/$siteurl.style/}';
+    action_dom = [
+        ['.md_job_zd', 420],
+        ['.md_recruit_effect', 421],
+        ['.md_recruit_select', 422],
+        ['.md_recruit_set', 423],
+        ['.md_recruit_excel', 424],
+    ];
+</script>
+<script type="text/javascript" language="javascript" src="{/version file='action.js'/}"></script>
+	<script type="text/javascript">
+	var showModel;
+	var doCheck;
+    hbjs.use('@validator, @fileUploader, @confirmBox, @hbCommon, @jobDialog', function(m){
+        var ConfirmBox = m['widge.overlay.confirmBox'];
+        var $ = m['product.hbCommon'].extend(m['cqjob.jobDialog']);
+		
+		var pWidth = 80,fontWidth = 18;
+		showModel = function(icon, msg) {
+			ConfirmBox.timeBomb(msg, {
+				name: icon,
+				width: pWidth + msg.length * fontWidth
+			});
+		}
+	doCheck= function(){
+		var time_s = $('#time_s').val();
+		var time_e = $('#time_e').val();
+		if(!time_s || !time_e){
+			// alert("开始时间或者结束时间不能为空")
+			showModel('fail', '开始时间或者结束时间不能为空');
+			// $.ConfirmBox.timeBomb('开始时间或者结束时间不能为空', '提示');
+			return 0;
+		}
+		if(time_s > time_e){
+			// alert("开始时间不能大于结束时间")
+			showModel('fail', '开始时间不能大于结束时间');
+			// $.ConfirmBox.timeBomb('开始时间不能大于结束时间', '提示');
+			return 0;
+		}
+		$('#frmInvite').submit()
+	}
+})
+
+//招聘负责人recruitmentManager
+		$('#recruitmentManager').droplist({
+		    defaultTitle : '',
+		    style : 'width:105px;',
+		    noSelectClass : '#444',
+		    inputWidth : 105,
+		    width : 128,
+		    hddName : 'account_id',
+		    items : {/$job_people/},
+			selectValue : '{/$son_account_id/}',
+		    maxScroll : 10,
+		    onSelect : function(i, name) {
+		    	//选中后的事件
+        		$("input[name=job_id]").val('');//清空职位
+		    	$('#frmInvite').submit()
+			}
+		});
+	
+	//职位	
+	    $('#tstDropJob').droplist({
+	        defaultTitle : '全部职位',
+	        style : 'width:150px;',
+	        noSelectClass : '#444',
+	        inputWidth : 150,
+	        width : 173,
+	        hddName : 'job_id',
+	        items : {/$jobs_json/},
+	    	selectValue : '{/$job_id/}',
+	        maxScroll : 10,
+	        onSelect : function(i, name) {
+	        	//选中后的事件
+	        	$('#frmInvite').submit()
+	    	}
+	    });
+	//公司
+		$('#jobCompany').droplist({
+		    defaultTitle : '',
+		    style : 'width:105px;',
+		    noSelectClass : '#444',
+		    inputWidth : 105,
+		    width : 128,
+		    hddName : 'company_id',
+		    items : {/$accounts/},
+			selectValue : '{/$company_id/}',
+		    maxScroll : 10,
+		    onSelect : function(i, name) {
+		    	//选中后的事件
+        		$("input[name=job_id]").val('');//清空职位
+		    	$('#frmInvite').submit()
+			}
+		});	
+		
+	$("#showStopJob").change(function(){
+        if (!$("#showStopJob").attr("checked")) {
+            //不包含停招职位
+            isShowStopJob = 2;
+            $("input[name=show_not_use]").val(0);
+        }else{
+            $("input[name=show_not_use]").val(1);
+
+		}
+        $("input[name=job_id]").val('');//清空职位
+	    $('#frmInvite').submit()
+	})
+
+
+
+	$('#exel_smit').click(function(){
+		$("input[name=execl]").val(1);
+		// $('#frmInvite').submit();
+		doCheck();
+        $("input[name=execl]").val(0);
+	})
+    $('#go_search').click(function(){
+        $("input[name=execl]").val(0);
+        // $('#frmInvite').submit();
+		doCheck();
+    })
+
+	
+
+	</script>
+	<script type="text/javascript">
+		$('.inaccurate').mouseenter(function(e){
+			$(this).show()
+		})
+		$('.inaccurate').mouseleave(function(e){
+			$(this).hide()
+		})
+		$('.break').mouseenter(function(e){
+			var rMentLt_left = $('.rMentLt').offset().left
+			var rMentRt_top = $('.rMentRt').offset().top
+			var top = $(this).offset().top - rMentRt_top + $(this).height()/2 - 12
+			var left = $(this).offset().left - rMentLt_left + 74
+			$('.inaccurate').show()
+			$('.inaccurate').css({'top':top+'px','left':left+'px'})
+		})
+		$('.break').mouseleave(function(e){
+			$('.inaccurate').hide()
+		})
+		$('.notpass').mouseenter(function(e){
+			var rMentLt_left = $('.rMentLt').offset().left
+			var rMentRt_top = $('.rMentRt').offset().top
+			var top = $(this).offset().top - rMentRt_top + $(this).height()/2 - 12
+			var left = $(this).offset().left - rMentLt_left + 74
+			$('.inaccurate').show()
+			$('.inaccurate').css({'top':top+'px','left':left+'px'})
+		})
+		$('.notpass').mouseleave(function(e){
+			$('.inaccurate').hide()
+		})
+		$('.pass').mouseenter(function(e){
+			var rMentLt_left = $('.rMentLt').offset().left
+			var rMentRt_top = $('.rMentRt').offset().top
+			var top = $(this).offset().top - rMentRt_top + $(this).height()/2 - 12
+			var left = $(this).offset().left - rMentLt_left + 74
+			$('.inaccurate').show()
+			$('.inaccurate').css({'top':top+'px','left':left+'px'})
+		})
+		$('.pass').mouseleave(function(e){
+			$('.inaccurate').hide()
+		})
+		$('.finalper').mouseenter(function(e){
+			var rMentLt_left = $('.rMentLt').offset().left
+			var rMentRt_top = $('.rMentRt').offset().top
+			var top = $(this).offset().top - rMentRt_top + $(this).height()/2 - 12
+			var left = $(this).offset().left - rMentLt_left + 74
+			$('.inaccurate').show()
+			$('.inaccurate').css({'top':top+'px','left':left+'px'})
+		})
+		$('.finalper').mouseleave(function(e){
+			$('.inaccurate').hide()
+		})
+	</script>
+</div>
+
+{/include file="msgpop.html"/}
+{/include file="footer.html"/}
+{/include file="chat/chat.html"/}
+</body>
+</html>

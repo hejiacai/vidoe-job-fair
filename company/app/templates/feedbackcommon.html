@@ -1,0 +1,222 @@
+<style>
+	html {
+		height: auto;
+	}
+
+	.feedback-has {
+		color: #ff0c0c;
+	}
+	.icon-daizhao{background: #ff9b00;  color: #feffff;  border-radius: 2px;font-size: 12px;padding: 0px 4px;vertical-align: 2px;}
+	
+</style>
+<form id="form1">
+	<input type="hidden" name="feedback_type" value="{/$feedback_type/}">
+	<input type="hidden" name="own_man" value="{/$heapinfo['own_man']/}">
+	<input type="hidden" name="own_dept" value="{/$heapinfo['own_dept']/}">
+	{/if $feedback_type==1||$feedback_type==2||$feedback_type==4/}
+		<div class="feedback-textarea">
+			<textarea name="content" id="content" cols="30" rows="6" placeholder="请输入您的意见和建议~"></textarea>
+		</div>
+		<div class="feedback-img">
+			<h4 class="class144">图片上传（非必选)</h4>
+			{/$up_img_html.html/}
+		</div>
+		<div class="feedback-tel">
+			<h4 class="class144">请留下联系电话，我们会尽快为您解决（非必填）</h4>
+			<div class="feedback-input">
+				<input type="text" placeholder="请输入您的电话" value="{/if $bind_mobile_phone/}{/$bind_mobile_phone/}{/elseif  $companyaccount['mobile_phone']/}{/$companyaccount['mobile_phone']/}{/elseif  $companyaccount['link_tel']/}{/$companyaccount['link_tel']/}{//if/}" name="tel" id="tel">
+			</div>
+		</div>
+	{//if/}
+	<!--{/if $feedback_type==1||$feedback_type==2||$feedback_type==4/}-->
+		<!--<div class="feedback-img">-->
+			<!--<h4 class="class144">请上传问题截图<em>（选填）</em></h4>-->
+			<!--{/$up_img_html.html/}-->
+		<!--</div>-->
+		<!--{/if $feedback_type==1 && !empty($heapinfo)/}-->
+			<!--<div class="feedback-evaluate">-->
+				<!--<h4 class="class144 bold" style="margin-top: 5px;">对招聘顾问<span>{/get_user user_id=$heapinfo['own_man']/}</span>进行评价 <em>（选填）</em></h4>-->
+				<!--<ul class="eval-list">-->
+					<!--<li>-->
+						<!--<em>产品功能熟悉度</em>-->
+						<!--<p class="public-star JS-star">-->
+							<!--<span id="familiarity"></span>-->
+							<!--<label>-->
+								<!--<i data-value="1"></i><i data-value="2"></i><i data-value="3"></i><i data-value="4"></i><i data-value="5"></i>-->
+								<!--<input value="0" name="match_level_familiarity" type="hidden" id="match_level_familiarity">-->
+							<!--</label>-->
+						<!--</p>-->
+						<!--<span class="tit">请对该项进行评分</span>-->
+					<!--</li>-->
+					<!--<li>-->
+						<!--<em>问题处理能力</em>-->
+						<!--<p class="public-star JS-star">-->
+							<!--<span id="problem"></span>-->
+							<!--<label><i data-value="1"></i><i data-value="2"></i><i data-value="3"></i><i data-value="4"></i><i data-value="5"></i>-->
+								<!--<input value="0" name="match_level_problem" type="hidden" id="match_level_problem">-->
+							<!--</label>-->
+						<!--</p>-->
+						<!--<span class="tit">请对该项进行评分</span>-->
+					<!--</li>-->
+					<!--<li>-->
+						<!--<em>服务态度</em>-->
+						<!--<p class="public-star JS-star">-->
+							<!--<span id="service"></span>-->
+							<!--<label><i data-value="1"></i><i data-value="2"></i><i data-value="3"></i><i data-value="4"></i><i data-value="5"></i>-->
+								<!--<input value="0" name="match_level_service" type="hidden">-->
+							<!--</label>-->
+						<!--</p>-->
+						<!--<span class="tit">请对该项进行评分</span>-->
+					<!--</li>-->
+					<!--<li><em>响应速度</em>-->
+						<!--<p class="public-star JS-star">-->
+							<!--<span id="response"></span>-->
+							<!--<label><i data-value="1"></i><i data-value="2"></i><i data-value="3"></i><i data-value="4"></i><i data-value="5"></i>-->
+								<!--<input value="0" name="match_level_response" type="hidden">-->
+							<!--</label>-->
+						<!--</p>-->
+						<!--<span class="tit">请对该项进行评分</span>-->
+					<!--</li>-->
+				<!--</ul>-->
+			<!--</div>-->
+		<!--{//if/}-->
+	<!--{/elseif $feedback_type==3/}-->
+		<!--<div class="feedback-pro">-->
+			<!--<h4 class="class144">请选择需要反馈的职位及问题</h4>-->
+			<!--<div class="fenndback-position" style="max-height: 260px;overflow-y: auto;">-->
+				<!--<ul>-->
+					<!--<li>-->
+						<!--<h4>在招职位<em>（至少选择1个）</em></h4>-->
+						<!--<h4>问题类型<em>（至少选择1条）</em></h4>-->
+					<!--</li>-->
+					<!--<input type="hidden" name="choose_names" id="choose_names" value="">-->
+					<!--<input type="hidden" name="choose_resons" id="choose_resons" value="">-->
+					<!--{/foreach $jobs as $key=>$val/}-->
+						<!--{/if !in_array($val.job_id,$feedback_jobids)/}-->
+							<!--<li>-->
+								<!--<a href="javascript:void(0);" class="feedback-choose" title="{/$val.station/}">-->
+									<!--<span class="choose chooseName" data-id="{/$val.job_id/}"><i></i>{/if mb_strlen($val.station)>10/}{/mb_substr($val.station,0,10)/}...{/else/}{/$val.station/}{//if/}</span>-->
+									<!--{/if $val['company_id']!=$company_id/}<span class="icon-daizhao">代招</span>{//if/}-->
+								<!--</a>-->
+								<!--<label class="chooseReason">-->
+									<!--<span class="choose" data-type="chossreason1_{/$val.job_id/}" id="chossreason1_{/$val.job_id/}"><i></i>投递少</span><span class="choose" data-type="chossreason2_{/$val.job_id/}" id="chossreason2_{/$val.job_id/}"><i></i>找不到合适简历</span>-->
+
+								<!--</label>-->
+							<!--</li>-->
+						<!--{/else/}-->
+							<!--<li>-->
+								<!--<a href="javascript:void(0);" title="{/$val.station/}"><span class="choose chooseNone"><i></i>{/if mb_strlen($val.station)>10/}{/mb_substr($val.station,0,10)/}...{/else/}{/$val.station/}{//if/} </span>-->
+									<!--{/if $val['company_id']!=$company_id/}<span class="icon-daizhao">代招</span>{//if/}-->
+								<!--</a>-->
+								<!--<span class="feedback-has">（已反馈过此职位）</span>-->
+							<!--</li>-->
+						<!--{//if/}-->
+					<!--{//foreach/}-->
+				<!--</ul>-->
+			<!--</div>-->
+		<!--</div>-->
+		<!--<div class="feedback-tel">-->
+			<!--<h4 class="class144">请留下您的联系方式</h4>-->
+			<!--<div class="feedback-input">-->
+				<!--<input type="text" placeholder="请输入联系电话" value="{/if $bind_mobile_phone/}{/$bind_mobile_phone/}{/elseif  $companyaccount['mobile_phone']/}{/$companyaccount['mobile_phone']/}{/elseif  $companyaccount['link_tel']/}{/$companyaccount['link_tel']/}-->
+        <!--{//if/}" name="tel" id="tel">-->
+			<!--</div>-->
+		<!--</div>-->
+	<!--{//if/}-->
+	<div class="formBtn" style="margin-top: 35px;text-align: center;">
+		<a href="javascript:void(0);" class="btn1 btnsF14" id="send">确定</a>
+	</div>
+</form>
+<script>
+	var webAppName;
+	var webUserAgent;
+	var resolution;
+	var referer;
+
+	url = window.location.href;
+	webAppName = navigator.appName;
+	webUserAgent = navigator.userAgent;
+	resolution = window.screen.width + '*' + window.screen.height;
+	$(function () {
+		var up_options_{/$up_img_html.id/} = {
+			up_id: '.{/$up_img_html.id/}',
+			auto: {/$up_img_html.config.auto/},
+			BASE_URL: "{/$up_img_html.config.BASE_URL/}",
+			fileNumLimit: 2,//文件数量 默认5个 每张1M fileSingleSizeLimit: 1024 * 1024,
+			fileSingleSizeLimit: {/$up_img_html.config.fileSingleSizeLimit/},//每个文件大小
+			file_name: '{/$up_img_html.config.file_name/}',//返回接收上传的文件名称隐藏域
+			fileVal: '{/$up_img_html.config.fileVal/}',//上传接收name
+			defaults_files: {/$up_img_html.config.defaults_files/},//默认文件
+			accept: {/$up_img_html.config.accept/},//允许文件类型
+			formData: {/$up_img_html.config.form_data/},//上传删除携带参数
+			server: '{/get_url rule="/index/Picture/"/}',
+			deleteServer: '{/get_url rule="/index/DelTempFile/"/}',
+			error_hint_fun: function (msg) {
+				msg_error_box(msg);
+			},
+			confirm_hint_fun: function (confirm_msg, deleteServerAjax) {
+				confirmBox.confirm(confirm_msg, "提示", function (obj) {
+					this.hide();
+					deleteServerAjax();
+				}, {width: 300});
+			},
+		};
+		uploader_img = $('.{/$up_img_html.id/}').powerWebUpload(up_options_{/$up_img_html.id/});
+
+		$('#send').click(function () {
+			var content = $('#content').val();
+			var tel = $.trim($('#tel').val());
+			var feedback_type = '{/$feedback_type/}';
+			var choose_names = $('input[name=choose_names]').val();
+
+			if (feedback_type != 3 && (content == '' || content.length < 10)) {
+				$.anchorMsg('意见反馈内容最少输入10个字!', {icon: 'fail'});
+			} else if (tel && tel.length > 18) {
+                $.anchorMsg('联系电话不能超过18位数!', {icon: 'fail'});
+            } else if (feedback_type == 3 && choose_names == '') {
+				$.anchorMsg('在招职位至少选择一个!', {icon: 'fail'});
+			} else {
+				if (feedback_type == 3) {
+					var ress = checkreson();
+					if (!ress) {
+						$.anchorMsg('在招职位至少选择一个问题类型!', {icon: 'fail'});
+						return;
+					}
+				}
+				if (feedback_type == 1) {
+					var re = getType();
+					if (!re)
+						return;
+				}
+				$.ajax({
+					type: 'post',
+					url: '{/get_url rule="/index/AddCompanyImprove/"/}',
+					data: $('#form1').serialize() + '&url=' + url + '&webAppName=' + webAppName + '&webUserAgent=' + webUserAgent + '&resolution=' + resolution,//只要将表单序列化就可以了
+					async: false,//false-同步请求
+					dataType: 'json',
+					success: function (data) {
+						if (data.status) {
+							$.anchorMsg(data.msg, {icon: 'success'});
+							setTimeout(function () {
+								window.parent.Feedback.hide();
+							}, 1000);
+						} else {
+							//提示错误
+							if (data.isNeedLogin) {
+								$.anchorMsg('离开太久了,请重新登录!', {icon: 'fail'});
+							} else {
+								$.anchorMsg(data.msg, {icon: 'fail'});
+							}
+						}
+
+
+					},
+					error: function (request) {
+						$.anchorMsg("数据请求失败.请稍后重试", {icon: 'fail'});
+						re = false;
+					}
+				});
+			}
+		})
+	})
+</script>

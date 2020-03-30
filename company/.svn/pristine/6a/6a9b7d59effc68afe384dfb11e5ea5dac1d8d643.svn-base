@@ -1,0 +1,304 @@
+{/*消息页面公共按钮处理事件*/}
+<link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}"/>
+<script type="text/javascript" src="{/version file='version.js'/}"></script>
+<script type="text/javascript">
+	window.CONFIG = {
+		HOST: '{/$siteurl.style/}',
+		COMBOPATH: '/js/v2/'
+	}
+</script>
+<script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+
+<script type="text/javascript" src="{/version file='global.js'/}"></script>
+<script>
+	var confirmBox, Dialog;
+	hbjs.use('@dialog,@confirmBox', function (m) {
+		var $ = m['jquery'];
+		confirmBox = m['widge.overlay.confirmBox'];
+		Dialog = m['widge.overlay.hbDialog'];
+		$('.AgencyEmpx .empList:last').css('border', 'none');
+	});
+
+	//确定框
+	function confirm_box(msg, success_c, but_title) {
+		success_c = success_c ? success_c : {
+			success: function (data) {
+
+			},
+			error: function (data) {
+
+			}
+		};
+		var width = msg.length * 18 + 70;
+		width = width > 600 ? 600 : width;
+		return confirmBox.confirm(msg, but_title ? but_title : "提示",
+				function (data) {
+					this.hide();
+					if ('success' in success_c) {
+						success_c.success(data);
+					}
+				}, function (data) {
+					this.hide();
+					if ('error' in success_c) {
+						success_c.error(data);
+					}
+				}, {width: width});
+	}
+
+	//新建弹窗 hbDialog
+	function start_dialog(url_obj, idName, title, width, isAjax) {
+		if (!(typeof url_obj == "object" ) || url_obj instanceof String) {
+			url_obj = {url: url_obj, data: null};
+		}
+		if (url_obj.data) {
+			url_obj.data = jQuery.param(url_obj.data);
+		}
+		if (!url_obj.url) {
+			msg_error_box("请指定打开窗体的地址");
+			return false;
+		}
+		var space_mark = url_obj.url.indexOf('?') > 0 ? url_obj.data ? "&" : '' : '?';
+		url_obj.data = url_obj.data ? url_obj.data : '';
+		var add_info = new Dialog({
+			close: 'x',
+			idName: idName,
+			title: title ? title : '信息',
+			width: width ? width : 700,
+			content: url_obj.url + space_mark + url_obj.data,
+			isAjax: isAjax
+		});
+		add_info.on('closeX', function (e) {
+			add_info.destory();
+		});
+		return add_info;
+	}
+
+	//错误提示 success-成功 fail-错误 warning-警告 question-疑问  info-信息 normal-正常
+	function msg_error_box(msg) {
+		confirmBox.timeBomb(msg ? msg : "参数错误!", {
+			name: 'fail',
+			timeout: 2000,
+			width: 70 + msg.length * 18
+		});
+		return false;
+	}
+
+	//成功提示 success-成功 fail-错误 warning-警告 question-疑问  info-信息 normal-正常
+	function msg_success_box(msg) {
+		confirmBox.timeBomb(msg ? msg : "成功!", {
+			name: 'success',
+			timeout: 1000,
+			width: 70 + msg.length * 18
+		});
+		return true;
+	}
+
+	//等待
+	var loadingDialog_1;
+	function loadingDialog(msg) {
+		msg = msg ? msg : '正在加载...';
+		var loading = '<div class="ui_dialog_loading">' + msg + '</div>';
+		if (!loadingDialog_1) {
+			loadingDialog_1 = new Dialog({
+				close: null,
+				idName: 'loadingDialog_1',
+				title: null,
+				content: loading,
+				isAjax: true
+			});
+			loadingDialog_1.hide_old = loadingDialog_1.hide;
+			loadingDialog_1.hide = function () {
+				loadingDialog_1.hide_old();
+				if ($('.hb_ui_dialog:not(:hidden)').length) {
+					$('.hb_ui_ui-mask').show();
+				}
+			};
+		}else{
+			loadingDialog_1.setContent({
+				content: loading,
+			});
+		}
+		loadingDialog_1.show();
+		$('.loadingDialog_1').css({border: '1px solid #a3a3a3', 'z-index': 100000});
+		return loadingDialog_1;
+	}
+
+	//ajax 提交 返回状态不确定
+	function ajax_function(url, data, success_c, async, type) {
+		success_c = success_c ? success_c : {
+			success: function (data) {
+
+			},
+			error: function (data) {
+
+			}
+		};
+		type = type ? type : 'POST';
+		async = async ? async : false;//是否同步请求  //false-同步请求
+		if (!url || !success_c) {
+			msg_error_box('参数错误');
+		}
+		var re = false;
+		$.ajax({
+			type: type,
+			url: url,
+			data: data,//只要将表单序列化就可以了
+			async: async,//false-同步请求
+			dataType: 'json',
+			success: function (data) {
+				re = success_c.success(data);
+			},
+			error: function (request) {
+				msg_error_box("数据请求失败.请稍后重试");
+				re = success_c.error(request);
+				re = false;
+			}
+		});
+		return re;
+	}
+
+
+	//提交公用方法  表单  统一处理拦截错误信息 code 200
+	function ajax_form_function(form, success_c, async, type) {
+		success_c = success_c ? success_c : {
+			success: function (data) {
+
+			},
+			error: function (data) {
+
+			}
+		};
+		type = type ? type : 'POST';
+		async = async ? async : false;//是否同步请求  //false-同步请求
+		if (!form || !success_c) {
+			msg_error_box('参数错误');
+		}
+		var re = false;
+		$.ajax({
+			type: type,
+			url: $(form).attr('action'),
+			data: $(form).serialize(),//只要将表单序列化就可以了
+			async: async,//false-同步请求
+			dataType: 'json',
+			success: function (data) {
+				if (data.code == '200') {
+					if ('success' in success_c) {
+						re = success_c.success(data);
+					}
+				} else {
+					//提示错误
+					msg_error_box(data.msg);
+					if ("error" in success_c) {
+						re = success_c.error(data);
+					}
+				}
+			},
+			error: function (request) {
+				msg_error_box("数据请求失败.请稍后重试");
+				re = false;
+			}
+		});
+		return re;
+	}
+
+	//提交公用方法  统一处理拦截错误信息
+	function ajax_request_function(url, data, success_c, async, type) {
+		success_c = success_c ? success_c : {
+			success: function (data) {
+
+			},
+			error: function (data) {
+
+			}
+		};
+		type = type ? type : 'POST';
+		async = async ? async : false;//是否同步请求  //false-同步请求
+		if (!url || !success_c) {
+			msg_error_box('参数错误');
+		}
+		var re = false;
+		$.ajax({
+			type: type,
+			url: url,
+			data: data,//只要将表单序列化就可以了
+			async: async,//false-同步请求
+			dataType: 'json',
+			success: function (data) {
+				if (data.code == '200') {
+					if ('success' in success_c) {
+						re = success_c.success(data);
+					}
+				} else {
+					//提示错误
+					msg_error_box(data.msg);
+					if ('error' in success_c) {
+						re = success_c.error(data);
+					}
+				}
+			},
+			error: function (request) {
+				msg_error_box('数据请求失败.请稍后重试');
+				re = false;
+			}
+		});
+		return re;
+	}
+
+	//获取get数据
+	function urlGet(get, href) {
+		get = get ? get : 'get';
+		href = href ? href : window.location.href;
+		var aQuery = href.split("?");//取得Get参数
+		if (get == 'url') {
+			return aQuery[0];
+		}
+		var aGET = {};
+		if (aQuery[1] && aQuery[1].length > 1) {
+			aGET = split_get_param(decodeURI(aQuery[1]));
+		}
+		return aGET;
+	}
+
+	function split_get_param(get_param) {
+		var aBuf = get_param.split("&"), aGET = {};
+		for (var i = 0, iLoop = aBuf.length; i < iLoop; i++) {
+			if (aBuf[i]) {
+				var aTmp = aBuf[i].split("=");//分离key与Value
+				if (aTmp[0] != '' && aTmp[1] != '') {
+					aGET[aTmp[0]] = aTmp[1];
+				}
+			}
+		}
+		return aGET;
+	}
+</script>
+<script>
+
+	//申诉处理
+	var job_all;
+	$('.company_msg_job_complaint').on('click', function (e) {
+		e.preventDefault();//阻止默认提交
+		var href = $(this).attr('href');
+		if (!href) {
+			msg_error_box('请求错误,请稍后重试...');
+		}
+		var loadingDialog1 = loadingDialog('请稍等...');
+		var get_data = urlGet('get', href);
+		var url = "{/get_url rule="/message/CheckJobAuditAllegeTimes"/}";
+		ajax_request_function(url, get_data, {
+			success: function (data) {
+				loadingDialog1.hide();
+				var url_obj = {url: href};
+				job_all = start_dialog(url_obj, 'JobAuditAllege', '申诉', 500, false);
+				job_all.show();
+			}, error: function (data) {
+				loadingDialog1.hide();
+				msg_error_box(data.msg);
+			}
+		}, true);
+	});
+
+</script>
+
+{/*消息页面公共按钮处理事件 END*/}
+

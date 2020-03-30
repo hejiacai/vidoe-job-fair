@@ -1,0 +1,147 @@
+{/include_php 'app/controller/applynav.php'/}
+<div class="rMentLt">
+    <dl class="rMentDl">
+        <dt><em></em>收到的简历</dt>
+        <dd class="{/if $cur == "待处理简历"/}cut{//if/}">
+            <a class="md_wait_replay" href="{/get_url rule="/apply"/}" ><em></em><span>待回复简历</span>
+                {/if $apply_status_count[0]['not_do'] > 0/}
+                <i>{/if $apply_status_count[0]['not_do'] > 99/}99+{/else/}{/$apply_status_count[0]['not_do']/}{//if/}</i>
+                {//if/}
+            </a>
+        </dd>
+        <dd class="{/if $cur == "已邀请简历"/}cut{//if/}">
+            <a class="md_had_invit" href="{/get_url rule='/apply/index' data='status=1'/}"><em></em><span>已邀请简历</span></a>
+        </dd>
+        <dd class="{/if $cur == "不合适的简历"/}cut{//if/}">
+            <a class="md_not_fit" href="{/get_url rule='/apply/index' data='status=3'/}"><em></em><span>不合适的简历</span></a>
+        </dd>
+        <dd class="{/if $cur == "自动过滤简历"/}cut{//if/}">
+            <a class="md_auto_faiter" href="{/get_url rule='/apply/index' data='status=9'/}"><em></em><span>自动过滤简历</span>
+                {/if $apply_status_count[0]['automatic'] > 0/}
+                <i>{/if $apply_status_count[0]['automatic'] > 99/}99+{/else/}{/$apply_status_count[0]['automatic']/}{//if/}</i>
+                {//if/}
+            </a>
+        </dd>
+    </dl>
+    <dl class="rMentDl">
+        <dt><em></em>面试简历管理</dt>
+        <dd class="{/if $cur == "面试管理"/}cut{//if/}">
+            <a href="{/get_url rule="/invitev1"/}?left_type=2" ><em></em><span>面试管理</span>
+            </a>
+        </dd>
+        <dd class="{/if $cur == "offer管理"/}cut{//if/}">
+            <a href="{/get_url rule="/offermanager"/}?left_type=2"><em></em><span>offer管理</span></a>
+        </dd>
+    </dl>
+    <ul class="rMentUl">
+        <li>
+            <a href="{/get_url rule='/download'/}" class="{/if $par == '下载的简历'/}cut{//if/}  md_get_resume">
+                <em class="mentIcon01"></em>获取的简历
+            </a>
+        </li>
+        <li>
+            <a href="{/get_url rule='/readjob'/}" class="{/if $cur == '谁看过我的职位'/}cut{//if/} md_who_seeme">
+                <em class="mentIcon05"></em>谁看过我的职位{/if $who_see_me_has_new/}<i style="left: 170px;"></i>{//if/}
+            </a>
+        </li>
+        <li>
+            <a href="{/get_url rule='/recommend'/}" class="{/if $par == '推荐的简历'/}cut{//if/}  md_remmon_resume">
+                <em class="mentIcon02"></em>推荐的简历{/if $recommend_red_point/}<i></i>{//if/}
+                
+            </a>
+        </li>
+        <li>
+            <a href="{/get_url rule='/fav'/}" class="{/if $par == '收藏的简历'/}cut{//if/}  md_fav_resume">
+                <em class="mentIcon03"></em>收藏的简历
+            </a>
+        </li>
+        <li>
+            <a href="{/get_url rule='/recycle'/}" class="{/if $par == '回收站'/}cut{//if/}  md_del_site">
+                <em class="mentIcon04"></em>回收站
+            </a>
+        </li>
+    </ul>
+</div>
+<script>
+    var action_url = '{/$siteurl.style/}';
+
+    $('.md_wait_replay').click(function () {
+        do_save_click(184,$(this).attr('log_data'));
+    })
+
+    $('.md_had_invit').click(function () {
+        do_save_click(185,$(this).attr('log_data'));
+    })
+    $('.md_not_fit').click(function () {
+        do_save_click(186,$(this).attr('log_data'));
+    })
+    $('.md_auto_faiter').click(function () {
+        do_save_click(187,$(this).attr('log_data'));
+    })
+    $('.md_get_resume').click(function () {
+        do_save_click(188,$(this).attr('log_data'));
+    })
+    $('.md_who_seeme').click(function () {
+        do_save_click(189,$(this).attr('log_data'));
+    })
+    $('.md_remmon_resume').click(function () {
+        do_save_click(190,$(this).attr('log_data'));
+    })
+    $('.md_fav_resume').click(function () {
+        do_save_click(191,$(this).attr('log_data'));
+    })
+    $('.md_del_site').click(function () {
+        do_save_click(192,$(this).attr('log_data'));
+    })
+
+    /**
+     184=> '待回复简历',
+     185=> '已邀请简历',
+     186=> '不合适简历',
+     187=> '自动过滤简历',
+     188=> '获取的简历',
+     189=> '谁看过我的职位',
+     190=> '推荐的简历',
+     191=> '收藏的简历',
+     192=> '回收站',
+     */
+
+    function do_save_click(log_type,log_data) {
+        var img = new Image();
+
+        var _static_visit_sys = '';
+        if ("ontouchstart" in window) {
+            _static_visit_sys = isWeiXin() ? 'weixin':'mobile';//移动端 -  //区分 触屏端  微信
+
+        } else {
+            _static_visit_sys = 'pc';
+        }
+        var area_id = _static_visit_sys=='pc' ? getCookie('ip_area_info'):getCookie('M_area_info');
+        area_id = area_id ? area_id : '0300';
+        img.src = action_url + "/js/action_log.js?v="+ Math.random() +'&'+ $.param({
+            log_type: log_type,
+            log_data: log_data,
+            visit_sys: _static_visit_sys,
+            area_id: area_id
+        });
+
+    }
+
+    function isWeiXin(){
+        var ua = window.navigator.userAgent.toLowerCase();
+        if(ua.match(/MicroMessenger/i) == 'micromessenger'){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    function getCookie(name)
+    {
+        var arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)");
+        if(arr=document.cookie.match(reg))
+            return unescape(arr[2]);
+        else
+            return null;
+    }
+</script>

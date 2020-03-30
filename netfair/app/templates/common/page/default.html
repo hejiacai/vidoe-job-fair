@@ -1,0 +1,36 @@
+{/if $total_page!=0/}
+<div class="page">
+		{/if $prepg/}
+			<a href="{/if $prepg/}{/$prepg/}{/else/}javascript:void(0);{//if/}">&lt;</a>
+		{//if/}
+		
+		{/if $pages/}
+	        {/foreach $pages as $page/}
+				{/if $page.page==1/}
+					<a {/if $currpage==1/} href="javascript:void(0);" class="cu" {/else/} href="{/$page.url/}" {//if/}>1</a>		
+					{/if $currpage>6/}
+					<a href="javascript:void(0)" class="morePage">...</a>
+					{//if/}
+				{//if/}
+	
+				{/if ($page.page>=$page_show_start) && ($page.page<=$page_show_end)/}
+					<a {/if $currpage==$page.page/} href="javascript:void(0);" class="cu" {/else/} href="{/$page.url/}" {//if/}>{/$page.page/}</a>
+				{//if/}
+	
+				{/if $page.page == $total_page/}
+					{/if $currpage+4<$total_page/}
+						<a href="javascript:void(0)" class="morePage">...</a>
+					{//if/}
+					
+					{/if $total_page>1/}
+						<a {/if $currpage==$page.page/} href="javascript:void(0);" class="cu" {/else/} href="{/$page.url/}" {//if/}>{/$page.page/}</a>
+					{//if/}
+				{//if/}
+	        {//foreach/}
+	    {//if/}
+        
+        {/if $nextpg/} 
+        	<a href="{/if $nextpg/}{/$nextpg/}{/else/}javascript:void(0);{//if/}">&gt;</a>
+        {//if/}
+</div>
+{//if/}

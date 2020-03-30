@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+
+    {/include_php file='app/controller/kuaimihead.php'/}
+    <link rel="stylesheet" type="text/css" href="{/version file='v2-reset.css,v2-icons.css,v2-widge.css,v2-job.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='base.css'/}"/>
+    <link rel="stylesheet" type="text/css" href="{/version file='kuaimijob.css'/}"/>
+
+    <script type="text/javascript" src="{/version file='jquery-1.8.3.min.js'/}"></script>
+    <script type="text/javascript" src="{/version file='common.js'/}"></script>
+    <script type="text/javascript" src="{/version file='dialog.js'/}"></script>
+    <script type="text/javascript">
+        window.CONFIG = {
+            HOST: '{/$siteurl["style"]/}',
+            COMBOPATH: '/js/v2/'
+        }
+    </script>
+    <script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+    <script type="text/javascript" src="{/version file='global.js'/}"></script>
+    <style type="text/css">
+        .kuaimi-logo{width:110px;}
+        .go_company{cursor: pointer}
+        .header-nav ul li.active {
+            background-color: #ff7574;
+           
+        }
+		.jobList-header{margin-bottom: 20px;}
+    </style>
+</head>
+<body>
+<div class="header jobList-header">
+    <div class="header-nav">
+        <ul>
+            {/foreach $_head_data['company_modules'] as $k=>$module/}
+            <li class="{/if $module['id'] == 7/}active{//if/}"><a href="{/$siteurl['kmcompany']/}{/$module['url']/}">{/$module['name']/}</a></li>
+            {//foreach/}
+        </ul>
+    </div>
+</div>
+<script>
+    hbjs.use('@jobDialog, @actions', function(m) {
+        var cookie = m['tools.cookie'];
+        var $ = m['cqjob.actions'].extend( m['cqjob.jobDialog']);
+        var confirmBox = m['widge.overlay.confirmBox'];
+
+        $('#logOut').click(function () {
+            $.ajax({
+                url:"{/$siteurl['kmcompany']/}/login/DoLogout",
+                type: "post",
+                data:{},
+                dataType: 'json',
+                success: function (res) {
+                    window.location.href = "{/$siteurl['kmcompany']/}";
+                }
+            })
+        })
+
+        $('#goMessage').click(function(){
+            window.location.href = "{/$siteurl['kmcompany']/}/message";
+        })
+        $('#goCompany,.go_company').click(function(){
+            window.location.href = "{/$siteurl['kmcompany']/}/company";
+        })
+    })
+
+
+    $('.header-top .header-top-inner .info').hover(function (e) {
+        $(e.currentTarget).toggleClass('info-active')
+    })
+
+    $('.header-top .header-top-inner .company').hover(function (e) {
+        $(e.currentTarget).toggleClass('company-active')
+    })
+
+    $('.header-top .header-top-inner .quit').hover(function (e) {
+        $(e.currentTarget).toggleClass('quit-active')
+    })
+</script>
+</body>
+</html>
+

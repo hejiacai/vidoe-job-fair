@@ -1,0 +1,11 @@
+<div class="pagination">
+    <ul>
+        <li{/if !$prepg/} class="disabled"{//if/}><a href="{/if $prepg/}{/$prepg/}{/else/}javascript:;{//if/}">&laquo;</a></li>
+        {/if $pages/}
+        {/foreach $pages as $page/}
+        <li{/if $page.page eq $currpage/} class="active"{//if/}><a href="{/$page.url/}">{/$page.page/}</a></li>
+        {//foreach/}
+        {//if/}
+        <li{/if !$nextpg/} class="disabled"{//if/}><a href="{/if $nextpg/}{/$nextpg/}{/else/}javascript:;{//if/}">&raquo;</a></li>
+    </ul>
+</div>

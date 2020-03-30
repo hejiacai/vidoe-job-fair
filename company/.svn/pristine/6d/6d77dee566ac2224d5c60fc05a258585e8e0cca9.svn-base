@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{/$title/}</title>
+    <link rel="stylesheet" type="text/css" href="{/version file='base.css'/}"/>
+    <script type="text/javascript">
+        hbjs.loadJS('{/$siteurl.style/}/js/v2/cqjob/common.js');
+    </script>
+    <script type="text/javascript">
+        window.CONFIG = {
+            HOST: '{/$siteurl.style/}',
+            COMBOPATH: '/js/v2/'
+        }
+    </script>
+    <script type="text/javascript" src="{/version file='version.js'/}"></script>
+    <script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+    <script type="text/javascript" src="{/version file='global.js'/}"></script>
+    <style>
+    	*{ font-family: "微软雅黑";}
+    	body{margin: 0px;}
+        .hb_ui_prt{z-index: 10015!important;}
+    </style>
+</head>
+<body style="margin: 0px;">
+<div id="inviteFormBtn" class="" style="margin: 20px;">
+    <div><em>本次获取需要消费 {/(int)$need_spent/} 个兼职币</em>确认获取联系方式吗？</div>
+    <div class="formBtn" style="margin-top: 20px;text-align: right;">
+        <a id="btnCancelInvite" href="javascript:void(0);" class="btn3 btnsF14 dialogClose _dialogClose">取消</a>
+        <a href="javascript:void(0);" id="btnSendInvite" class="btn1 btnsF14">获取</a>
+    </div>
+</div>
+{/include file='./common/showloading.html'/}
+<script>
+    var pay_dialog,getwayDialog;
+    
+    hbjs.use(' @confirmBox', function(m){
+        var confirmBox = m['widge.overlay.confirmBox'],
+        	Dialog = m['widge.overlay.hbDialog'],
+            fontSize = 18,
+            pWidth = 70
+//            $ = m['jquery'];
+			pay_dialog = new Dialog({
+	            idName : 'payid',
+	            title : '兼职币不足，请选择购买',
+	            close : 'x',
+	            isAjax : true,
+	            //content:"累计消费100元及以上即可申请普通电子发票，开票请添加qq2851501212提交信息，核实后2~4个工作日内发送您邮箱。",
+	            width :540,
+	            //zIndex:10910
+	        });
+        var limit = true;
+        $('#btnSendInvite').click(function () {
+            var _that = $(this);
+           if(limit){
+                limit = false;
+
+               showLoading()
+                $.post('/partresume/MobileWatchedDo?applyid={/$apply_id/}',{},function (e) {
+                    closeLoading()
+                    limit = true;
+                    if(e&&!e.status){
+
+                        if(e.code && e.code == 113){
+
+                            confirmBox.timeBomb(e.msg, {
+                                name : 'fail',
+                                timeout : 1500,
+                                width: fontSize * e.msg.length + pWidth
+                            })
+                            setTimeout(function () {
+                            	var url=encodeURI("{/$buy_url/}");
+                            	pay_dialog.setContent({
+                            		content:url
+                            	}).show()
+                                //pay_dialog = $.showModal(encodeURI("{/$buy_url/}"), {title: '兼职币不足，请选择购买',defind_index:10006,noclick:true});
+                                getwayDialog.hide();
+                            },1500)
+
+                            return false;
+                        }
+                        confirmBox.timeBomb(e.msg, {
+                            name : 'fail',
+                            timeout : 3000,
+                            width: fontSize * e.msg.length + pWidth
+                        })
+                    }else{
+                        confirmBox.timeBomb(e.msg, {
+                            name : 'success',
+                            timeout :3000,
+                            width: fontSize * e.msg.length + pWidth
+                        });
+                        setTimeout(function () {
+                            window.location.reload();
+                        },1200)
+                    }
+                },'json')
+           }
+        })
+
+
+//        $('#btnCancelInvite').click(function(){
+//            $(this).closeDialog();
+//        });
+    });
+
+
+
+
+</script>
+</body>
+</html>

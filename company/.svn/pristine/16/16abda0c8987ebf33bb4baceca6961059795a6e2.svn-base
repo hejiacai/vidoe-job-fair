@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+<!–[if lt IE9]> 
+<script src="{/version file='html5.js'/}"></script>  
+<![endif]–>
+<link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='comback.css'/}" />
+<!--<link rel="stylesheet" type="text/css" href="{/version file="v2-reset.css"/}" />-->
+<link rel="stylesheet" type="text/css" href="{/version file="job-manage.css"/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}" />
+<script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.min.js'/}"></script>
+<script type="text/javascript">
+window.CONFIG = {
+  HOST: '{/$siteurl.style/}',
+  COMBOPATH: '/js/v2/'
+}
+</script>
+<script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+<script type="text/javascript" src="{/version file="global.js"/}"></script>
+<title>微招聘</title>
+<style>
+body{ background:#e9e9e9;}
+.invite-wei{ padding:30px 25px; background:#fff; width:950px; margin:0 auto; text-align:left; font-family: "微软雅黑"}
+.invite-tit{ font-size:18px; line-height:20px; color:#333; font-weight:bold; padding-bottom:20px;}
+.invite-scan{width:953px; height:205px; background:url({/$siteurl.style/}/img/c/weixin/wei_img03.jpg) no-repeat; margin-bottom:30px;}
+.scan-img{ display:block; float:left; margin:33px 0 0 213px;background:#fff;width:150px;height:150px}
+.sub-scan-vite{width:377px; float:left; margin:56px 0 0 19px; position:relative;}
+.scan-vite{width:377px; background:#d9f5ff; padding:10px 0px;}
+.scan-vite li{width:185px; text-align:center; float:left;}
+.scan-vite li.line-lf{ border-left:1px dashed #9ed3ed; width:188px;}
+.scan-vite li span{ display:block; padding:5px 0 5px 0; font-size:20px; font-weight:bold; color:#0d97d0;}
+.scan-vite li p{ color:#0d97d0; padding-bottom:4px;}
+.scan-btn{ display:block; height:45px; font-size:16px; color:#fff; text-align:center; line-height:45px; background:#0ba1de;}
+.scan-btn:hover{ background:#0d97d0; color:#fff;}
+.scan-link{width:391px; height:76px; background:url({/$siteurl.style/}/img/c/weixin/wei_img05.png) no-repeat; overflow:hidden; position:absolute; top:128px; left:-5px; color:#333;}
+.scan-link p{ padding:25px 0 0 30px;}
+.scan-link span{ display:block; padding:0 0 0 30px; color:#666; font-family:Arial, Helvetica, sans-serif;}
+.scan-intro{ overflow:hidden; color:#666; font-size:16px; line-height:26px;}
+.scan-img02{ display:block; margin:20px auto;}
+</style>
+</head>
+<body id="body">
+{/include file="new_header.html" par="全职招聘"/} 
+<div class="invite-wei">
+	<h2 class="invite-tit">汇博微招聘</h2>
+    <div class="invite-scan">
+    	<img src="{/$image_url/}" class="scan-img" />
+        <div class="sub-scan-vite">
+        	<ul class="scan-vite clearfix">
+            	<li>
+                    <span>{/$total_likes/}</span>
+                    <p>最近十天点击量</p>
+                </li>
+                <li class="line-lf">
+                	<span>{/$real_likes/}</span>
+                    <p>最近十天点赞数</p>
+                </li>
+            </ul>
+            <a href="javascript:;" class="scan-btn" id="copyUrl">复制二维码链接</a>
+            <div class="scan-link" id="showCopyLink" style="display:none">
+            	<p>请手动复制以下链接：</p>
+                <span>{/$share_url/}</span>
+            </div>
+        </div>
+    </div>
+    <h2 class="invite-tit">了解微招聘</h2>
+    <div class="scan-intro">
+    微招聘是通过朋友圈等社交网络分享招聘页面，通过周围的人病毒式分享传播，提高招聘效果，我们会将您的企业信息
+招聘职位等资料自动填充进手机招聘页面中，并且会随时更新资料和职位信息。
+    </div>
+    <h2 class="invite-tit" style="padding-top:20px;">分享方法</h2>
+    <img src="{/$siteurl.style/}/img/c/weixin/wei_img04.jpg" width="692" height="131"  class="scan-img02"/>
+    <h2 class="invite-tit">复制二维码链接</h2>
+    <div class="scan-intro">如果你需要在海报或其他地方用到更大尺寸的二维码，可以点击上方“复制二维码链接”，复制后通过二维码生成软件
+下载适合尺寸的二维码即可。</div>
+</div>
+{/include file="footer.html"/}
+<section class="floatRT"><a href="{/get_url rule='/about/message' domain='main'/}" target="_blank" class="serviceLink">我有问题要反馈</a><b></b></section>
+<script>
+    $("#copyUrl").click(function(){
+        var _this = $(this);
+         //alert(s); 
+         if(_this.hasClass("has-show-link")){
+              $("#showCopyLink").hide();
+              _this.removeClass("has-show-link");
+              return;
+         }
+        var s = "{/$share_url/}";
+        if (window.clipboardData) { 
+            window.clipboardData.setData("Text", s);
+            alert("已经复制到剪切板！"+ "\n" + s); 
+        } else{
+            _this.addClass("has-show-link");
+            $("#showCopyLink").show();
+        }
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+	<link rel="stylesheet" type="text/css" href="{/version file="m_font_style.css"/}">
+</head>
+<body>
+<style>
+.downBox{width:360px;font-size:12px;}
+.downBox dl dt{font-size:14px;line-height:24px;margin-bottom:10px;}
+.downBox dl dd{line-height:20px;}
+.downBox .downBtn{margin:10px 0 10px;height:40px;}
+.downBox .downBtn .l{float:left;display:inline;margin:6px 0 0;}
+.downBox .downBtn .r{float:right;display:inline;}
+.downBox .downBtn .l input{float:left;display:inline;vertical-align:middle;margin:4px 3px 0 0;*margin:-2px 3px 0 0; cursor:pointer;}
+.downBox .downBtn .l label{float:left;vertical-align:middle;cursor:pointer;font-size: 14px;}
+.downBox .downBtn .l label i.icon-icon-01 {
+	color: #1bb867;
+}
+.downBox .downBtn .l label i {
+	font-size: 16px;
+	margin-right: 5px;
+	position: relative;
+	top: 2px;
+}
+
+
+</style>
+<div class="dgBox downBox">
+	<dl>
+		{/if !$isCqNewService/}
+			{/if $params['code'] == base_service_company_resources_code::DOWNLOAD_USE_POINT/}
+			<dt><em style="color:#d90000;">{/$params['name']/}简历</em>，获取联系方式将扣除<em style="color:#d90000;">{/$params['point']/}</em>个下载点，再次打开该简历时，不会重复扣点！</dt>
+			{/else if $params['code'] == base_service_company_resources_code::DOWNLOAD_USE_SPREAD/}
+			<dt><em style="color:#d90000;">{/$params['name']/}简历</em>，{/if $account_type != 'not_member'/}简历点不足，{//if/}使用推广金扣费，获取该简历需花费<em style="color:#d90000;">{/$params['price']/}</em>元，下次打开该简历时，不会重复扣费。</dt>
+
+			{/if $account_type != "not_member"/}
+			<dt style="margin-bottom:0px;"><em style="color:#d90000;">联系招聘顾问购买简历包可享受更多优惠</em></dt>
+			{//if/}
+			{/else/}
+			<dt><em style="color:#d90000;">{/$params['name']/}简历</em>，{/if $account_type != 'not_member'/}简历点不足，{//if/}使用余额扣费，获取该简历需花费<em style="color:#d90000;">{/$params['price']/}</em>元，下次打开该简历时，不会重复扣费。</dt>
+
+			{/if $account_type != "not_member"/}
+			<dt style="margin-bottom:0px;"><em style="color:#d90000;">联系招聘顾问购买简历包可享受更多优惠</em></dt>
+			{//if/}
+			{//if/}
+		{/else/}
+			{/if $cq_resume_num_release >= 1/}
+			<dt>获取联系方式将扣除<em style="color:#d90000;">1</em>个简历点，再次打开该简历时不会重复扣点！</dt>
+			{/elseif $params['account_overage']+$params['spread_overage'] >= $account_overage_service_price/}
+			<dt>获取联系方式将扣除<em style="color:#d90000;">{/$account_overage_service_price/}</em>元账户余额/推广金，再次打开该简历时不会重复扣点！</dt>
+			{//if/}
+		{//if/}
+    </dl>
+    <div class="downBtn">
+		<div class="l">
+			<input type="checkbox" id="chkdeductPro" style="display: none;"/>
+			<label for="chkdeductPro"><i class="icon-uniE6002"></i>下次不再提示</label>
+		</div>
+		<!--<div class="r" style="text-align: center;margin-bottom: 15px;"><a id="btnDeduct" href="javascript:void(0);" class="btn4 btnsF14">立即获取联系方式</a></div>-->
+	</div>
+	<div class="r" style="text-align: center;margin-bottom: 15px;"><a id="btnDeduct" href="javascript:void(0);" class="btn4 btnsF14">立即获取联系方式</a></div>
+    <font style='color: #999999;'>（下载过联系方式的简历，我们会为您保存3个月，若想长期查看使用，记得导出保存到本机上）</font>
+</div>
+<script type="text/javascript">
+try{
+	hbjs.use('cqjob.jobValidate, cqjob.jobForm, cqjob.jobDialog, tools.cookie', function($, form, jobDialog, cookie){
+		factory($.extend(form, jobDialog), cookie);
+	});
+} catch (ex) {
+	factory($);
+}
+function factory($, cookie) {
+	$('#btnDeduct').on('click', function() {
+		isDownLoad = true;
+		if ($('#chkdeductPro').is(':checked')) {
+			cookie ? cookie.set('downresumeprompt', 'true') : writeCookie('downresumeprompt','true');
+		}
+		
+		{/if $recommend_id/}
+		var recommend_id = {/$recommend_id/};
+		var resume_id    = {/$resume_id/};
+		recommend.resumeDown(resume_id, recommend_id);
+		{//if/}
+
+		if (this.trigger) {
+			this.trigger('close');
+		} else {
+			$(this).closeDialog();
+		}
+	});
+}
+
+$('.downBox .downBtn .l label').on('click',function () {
+	if(!$('#chkdeductPro').is(':checked')) {
+	    console.log('asas')
+	    $(this).find('i').removeClass('icon-uniE6002 ').addClass('icon-icon-01');
+	}else {
+        $(this).find('i').removeClass('icon-icon-01').addClass('icon-uniE6002 ');
+	}
+})
+</script>
+</body>
+</html>

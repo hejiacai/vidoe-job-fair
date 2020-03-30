@@ -1,0 +1,731 @@
+<?php
+/**
+ * 企业offer编辑控制器
+ */
+class controller_offertemplate extends components_cbasepage {
+
+    private static $offer_template_max = 10;
+
+    function __construct() {
+		parent::__construct();
+    }
+
+    public function pageindex($inPath) {
+        $pathdata = base_lib_BaseUtils::saddslashes($this->getUrlParams($inPath));
+        $job_id = base_lib_BaseUtils::getStr($pathdata['job_id'],'int','');
+        $template_job_id = base_lib_BaseUtils::getStr($pathdata['template_job_id'],'int',0);
+        $invite_id = base_lib_BaseUtils::getStr($pathdata['invite_id'],'int','');
+        $is_change = base_lib_BaseUtils::getStr($pathdata['is_change'],'int','');
+
+        $service_company_resume_jobinvite = new base_service_company_resume_jobinvite();
+        $invite_info = $service_company_resume_jobinvite->getInviteByCompany($invite_id,$this->_userid,"invite_id,resume_id,company_id,job_id,person_id");
+        if(empty($invite_info)){
+            return false;
+        }
+
+        if(empty($job_id)){
+            $job_id = $invite_info['job_id'];
+            if(empty($is_change)){
+                $template_job_id = $job_id;
+            }
+        }
+
+        $this->_aParams['job_id'] = $job_id;
+        $this->_aParams['invite_id'] = $invite_id;
+
+        //获取企业信息
+        $service_company_company = new base_service_company_company();
+        $company_items = "company_id,company_flag,company_name,address,company_shortname,company_logo_path,link_mobile";
+        $company_info = $service_company_company->getCompany($this->_userid,1,$company_items);
+        if(empty($company_info)){
+            return false;
+        }
+
+        $company_info['company_name'] = empty($company_info['company_shortname']) ? $company_info['company_name'] : $company_info['company_shortname'];
+        $this->_aParams['company_info'] = $company_info;
+        //企业logo
+        $xml = SXML::load('../config/company/company.xml');
+        if (!is_null($xml)) {
+            $VirtualName = $xml->VirtualName;//虚拟目录名 CompanyImages
+            $LogoFolder  = $xml->LogoFolder;// <!--logo文件夹名-->
+            $logoTempfolder = $xml->LogoTempFolder;
+        }
+
+        $this->_aParams['logo'] = empty($company_info['company_logo_path'])
+            ? base_lib_Constant::STYLE_URL . "/img/job/newjob/newJob_57.png"
+            : base_lib_Constant::YUN_ASSETS_URL_NO_HTTP . '/' . $VirtualName . '/' . $LogoFolder . '/' . $company_info['company_logo_path'];
+
+        //获取默认模板信息
+        $service_company_offer_template = new base_service_company_offer_template();
+        $service_company_job_job = new base_service_company_job_job();
+        $default_template = $service_company_offer_template->getDefaultTemplateByCompany($this->_userid,$template_job_id);
+        if($default_template === false){
+            return false;
+        }
+
+        //没有模板信息，构造通用模板信息
+        if(empty($default_template)){
+            //获取职位信息
+            $job_info = $service_company_job_job->getJob($job_id,"job_id,station,add_info");
+            $default_template['template_name'] = "通用模板";
+            $default_template['template_type'] = 1;
+            $default_template['template_job_user'] = "您好";
+            $default_template['template_job_station'] = $job_info['station'];
+            $default_template['tpl_wellcome'] = "您好!".PHP_EOL."恭喜您通过面试，现为您正式发送录用通知书";
+            $default_template['tpl_wellcome_txt'] = "<p>您好!</p><p>恭喜您通过面试，现为您正式发送录用通知书</p>";
+            $default_template['template_job_salary'] = "";
+            $default_template['template_job_probation_time'] = "3个月";
+            $default_template['template_job_join_time'] = "";
+            $default_template['template_link_probation_addres'] = $job_info['add_info'];
+            //获取联系人 ，发offer的账号
+            $service_company_account = new base_service_company_account();
+            $account_id = base_lib_BaseUtils::getCookie('accountid');
+            $account_info = $service_company_account->getAccount($account_id,"account_id,user_name,mobile_phone");
+            $default_template['template_link_man'] = $account_info['user_name'];
+            $default_template['template_link_way'] = $account_info['mobile_phone'];
+            $default_template['template_matter_list'] = "请携带材料准时到达，如有问题请电话联系。";
+            $default_template['template_matter_means'] = "1.身份证原件及复印件正反面。2.学历证明原件及复印件";
+            $default_template['template_footnote'] = "我公司提供优厚的待遇和环境，欢迎加入团队！";
+            $default_template['tpl_wellcome_show'] = 1;
+            $default_template['template_job_station_show'] = 1;
+            $default_template['template_job_salary_show'] = 1;
+            $default_template['template_job_probation_time_show'] = 1;
+            $default_template['template_job_join_time_show'] = 1;
+            $default_template['template_link_probation_addres_show'] = 1;
+            $default_template['template_link_man_show'] = 1;
+            $default_template['template_link_way_show'] = 1;
+            $default_template['template_matter_list_show'] = 1;
+            $default_template['template_matter_means_show'] = 1;
+            $default_template['template_footnote_show'] = 1;
+            $default_template['template_company_show'] = 1;
+            $default_template['template_job_reward_show'] = 0;
+            $default_template['tempalte_style'] = 2;
+
+        }
+
+
+        if($default_template['tpl_wellcome']){
+            $default_template['tpl_wellcome_txt'] = "<p>".str_replace(PHP_EOL,"</p><p>",$default_template['tpl_wellcome'])."</p>";
+        }
+        if($default_template['template_footnote']){
+            $default_template['template_footnote_txt'] = "<p>".str_replace(PHP_EOL,"</p><p>",$default_template['template_footnote'])."</p>";
+        }
+        if($default_template['template_matter_list']){
+            $default_template['template_matter_list_txt'] = "<p>".str_replace(PHP_EOL,"</p><p>",$default_template['template_matter_list'])."</p>";
+        }
+        if($default_template['template_matter_means']){
+            $default_template['template_matter_means_txt'] = "<p>".str_replace(PHP_EOL,"</p><p>",$default_template['template_matter_means'])."</p>";
+        }
+        
+        $this->_aParams['default_template'] = $default_template;
+
+        //获取模板列表
+        $template_list = $service_company_offer_template->getTemplateList($this->_userid);
+        
+        $template_types = base_lib_BaseUtils::getPropertys($template_list,"template_type");
+        $job_ids = base_lib_BaseUtils::getPropertys($template_list,"job_id");
+        $template_list = base_lib_BaseUtils::multi_array_sort($template_list, 'template_type', SORT_ASC);
+
+        $this->_aParams['template_list'] = $template_list;
+        $this->_aParams['has_ty_template'] = in_array(1,$template_types) ? true : false;
+        if($this->_aParams['has_ty_template'] && count($template_list) == 1){
+            $this->_aParams['is_ty_cut'] = true;
+        }else{
+            $this->_aParams['is_ty_cut'] = in_array($template_job_id,$job_ids) ? false : true;
+        }
+        //$this->_aParams['is_ty_cut'] = count($template_list) == 1 ? true : (in_array($template_job_id,$job_ids) ? false : true);
+        $this->_aParams['is_ty_cut1'] = in_array($template_job_id,$job_ids) ? false : true;
+        //获取用户信息
+        $service_person_person = new base_service_person_person();
+        $person_info = $service_person_person->getPersonByPersonID($invite_info['person_id'],"person_id,user_name,sex,mobile_phone,email");
+        $person_info['user_name'] = mb_substr($person_info['user_name'],0,1);
+        $this->_aParams['person_info'] = $person_info;
+
+        //获取在招职位列表
+        $service_company_job_offer = new base_service_company_job_offer();
+        $base_service_common_jobstatus = new base_service_common_jobstatus();
+        $job_list =  $service_company_job_job->getJobList($this->_userid,'',$base_service_common_jobstatus->use,'job_id,station');
+
+        $this->_aParams['job_list'] = $job_list;
+
+        return $this->render('./offer/editoffer.html', $this->_aParams);
+    }
+
+
+    /**
+     * 保存offer模板
+     * @param $inPath
+     */
+    public function pagesaveOfferTemplate($inPath)
+    {
+        $pathdata = base_lib_BaseUtils::saddslashes($this->getUrlParams($inPath));
+        //保存模板
+        $pathdata['save_type'] = 1;
+        //验证模板数据
+        $template_data = $this->checkTemplateData($pathdata);
+        $account_id = base_lib_BaseUtils::getCookie('accountid');
+        $template_data['create_account_id'] = $account_id;
+//        var_dump($template_data);exit();
+        //保存模板信息
+        $service_company_offer_template = new base_service_company_offer_template();
+        $result = $service_company_offer_template->addOfferTemplateByCompany($this->_userid, $template_data);
+        if(!$result){
+            echo json_encode(['status' => false, 'msg' => "保存职位信息模板失败"]);
+            exit();
+        }
+        echo json_encode(['status' => true, 'msg' => "保存职位信息模板成功"]);
+        exit();
+    }
+
+    /**
+     * 发送模板
+     */
+    public function pageSendOffer($inPath){
+        $pathdata = base_lib_BaseUtils::saddslashes($this->getUrlParams($inPath));
+        $send_type = base_lib_BaseUtils::getStr($pathdata['send_type'],'int','1');
+        $invite_id = base_lib_BaseUtils::getStr($pathdata['invite_id'],'int','');
+        //发送offer
+        $pathdata['save_type'] = 2;
+        if(empty($invite_id)){
+            echo json_encode(['status' => false, 'msg' => "参数错误"]);
+            exit();
+        }
+
+        //验证模板数据
+        $template_data = $this->checkTemplateData($pathdata);
+        $account_id = base_lib_BaseUtils::getCookie('accountid');
+
+        //是否保存为模板
+        if ($send_type == 2) {
+            $template_data['create_account_id'] = $account_id;
+            $service_company_offer_template = new base_service_company_offer_template();
+            $result = $service_company_offer_template->addOfferTemplateByCompany($this->_userid, $template_data);
+
+            if (!$result) {
+                echo json_encode(['status' => false, 'msg' => "添加职位模板信息失败"]);
+                exit();
+            }
+        }
+
+        //发送offer
+        $service_company_job_offer = new base_service_company_job_offer();
+        $send_result = $service_company_job_offer->sendOffer($template_data, $this->_userid, $invite_id, $account_id);
+        if(!$send_result['status']){
+            echo json_encode(['status' => false, 'msg' => $send_result['msg']]);
+            exit();
+        }
+
+        $img_url = "/offertemplate/GetQrcode/?send_offer_id={$send_result['send_offer_id']}&person_id={$send_result['person_id']}";
+
+        echo json_encode(['status' => true, 'msg' => "发送成功" ,'send_offer_id' => $send_result['send_offer_id'], 'person_id' => $send_result['person_id'], 'img_url' => $img_url]);
+        exit();
+    }
+
+    /**
+     * 发送模板
+     */
+    public function pageCheckOfferData($inPath){
+        $pathdata = base_lib_BaseUtils::saddslashes($this->getUrlParams($inPath));
+        $send_type = base_lib_BaseUtils::getStr($pathdata['send_type'],'int','1');
+        $invite_id = base_lib_BaseUtils::getStr($pathdata['invite_id'],'int','');
+
+
+        if(!$this->isLogin()){
+            echo json_encode(['status' => false,'code' => 501, 'msg' => "未登录，请先登录"]);exit();
+        }
+
+        $pathdata['save_type'] = 3;
+        //验证模板数据
+        $template_data = $this->checkTemplateData($pathdata);
+
+        echo json_encode(['status' => true, 'msg' => "验证通过"]);
+    }
+
+    public function pageGetQrcode($inPath){
+        $pathdata = base_lib_BaseUtils::saddslashes($this->getUrlParams($inPath));
+        $send_offer_id = base_lib_BaseUtils::getStr($pathdata['send_offer_id'],'int','');
+        $person_id = base_lib_BaseUtils::getStr($pathdata['person_id'],'int','');
+        $service_company_job_offer = new base_service_company_job_offer();
+        ob_clean();
+        $url = $service_company_job_offer->getSmsVisitUrl($person_id,$send_offer_id,1);
+        SQrcode::png1($url,4,1);
+    }
+
+    /**
+     * 删除模板
+     * @param $inPath
+     */
+    public function pagedelOfferTemplate($inPath){
+        $pathdata = base_lib_BaseUtils::saddslashes($this->getUrlParams($inPath));
+        $template_id = base_lib_BaseUtils::getStr($pathdata['template_id'],'int','');
+        if(empty($template_id)){
+            echo json_encode(['status' => false, 'msg' => "参数错误"]);
+            exit();
+        }
+        $service_company_offer_template = new base_service_company_offer_template();
+        $service_company_offer_template->delOfferTemplate($template_id);
+
+        echo json_encode(['status' => true, 'msg' => "删除模板成功"]);
+        exit();
+    }
+
+    /**
+     * 验证模板数据
+     * @param $pathdata
+     * @return array
+     */
+    private function checkTemplateData($pathdata){
+        $validator = new base_lib_Validator();
+        $template_data = array();
+        if($pathdata['save_type'] == 1 || $pathdata['save_type'] == 3){
+            $modelName = base_lib_BaseUtils::getStr($pathdata['modelName'], 'string', '');
+        }else{
+            $modelName = base_lib_BaseUtils::getStr($pathdata['modelName'], 'string', '');
+            //获取短信发送电话号
+            $send_phone = base_lib_BaseUtils::getStr($pathdata['send_phone'], 'string', '');
+            $validator->getMobile($send_phone,"请输入正确的手机号码");
+            $template_data['send_phone'] = $send_phone;
+            $send_email = base_lib_BaseUtils::getStr($pathdata['send_email'], 'string', '');
+            if($send_email){
+                $validator->getEmail($send_email,"请输入正确的电子邮箱");
+                $template_data['send_email'] = $send_email;
+            }
+
+        }
+
+        //欢迎语
+        $tpl_wellcome = base_lib_BaseUtils::getStr($pathdata['tpl_wellcome'], 'string', '');
+        $template_job_user = base_lib_BaseUtils::getStr($pathdata['template_job_user'], 'string', '');
+        $tpl_wellcome_show = base_lib_BaseUtils::getStr($pathdata['tpl_wellcome_show'], 'int', '');
+        //入职职位
+        $template_job_station = base_lib_BaseUtils::getStr($pathdata['template_job_station'], 'string', '');
+        $template_job_station_show = base_lib_BaseUtils::getStr($pathdata['template_job_station_show'], 'int', '');
+        //入职时间
+        $template_job_join_time = base_lib_BaseUtils::getStr($pathdata['template_job_join_time'], 'string', '');
+        $template_job_join_time_show = base_lib_BaseUtils::getStr($pathdata['template_job_join_time_show'], 'int', '');
+        //试用期
+        $template_job_probation_time = base_lib_BaseUtils::getStr($pathdata['template_job_probation_time'], 'string', '');
+        $template_job_probation_time_show = base_lib_BaseUtils::getStr($pathdata['template_job_probation_time_show'], 'int', '');
+
+        //综合薪资
+        $template_job_salary = base_lib_BaseUtils::getStr($pathdata['template_job_salary'], 'string', '');
+        $template_job_salary_show = base_lib_BaseUtils::getStr($pathdata['template_job_salary_show'], 'int', '');
+
+        //福利待遇
+        $template_job_reward = base_lib_BaseUtils::getStr($pathdata['template_job_reward'], 'string', '');
+        $template_job_reward_show = base_lib_BaseUtils::getStr($pathdata['template_job_reward_show'], 'int', '');
+
+        //入职地点
+        $template_link_probation_addres = base_lib_BaseUtils::getStr($pathdata['template_link_probation_addres'], 'string', '');
+        $template_link_probation_addres_show = base_lib_BaseUtils::getStr($pathdata['template_link_probation_addres_show'], 'int', '');
+        //上班地点
+        $template_link_work_addres = base_lib_BaseUtils::getStr($pathdata['template_link_work_addres'], 'string', '');
+        $template_link_work_addres_show = base_lib_BaseUtils::getStr($pathdata['template_link_work_addres_show'], 'int', '');
+
+        //联系电话
+        $template_link_way = base_lib_BaseUtils::getStr($pathdata['template_link_way'], 'string', '');
+        $template_link_way_show = base_lib_BaseUtils::getStr($pathdata['template_link_way_show'], 'int', '');
+
+        //联系人
+        $template_link_man = base_lib_BaseUtils::getStr($pathdata['template_link_man'], 'string', '');
+        $template_link_man_show = base_lib_BaseUtils::getStr($pathdata['template_link_man_show'], 'int', '');
+
+        //补充说明
+        $template_footnote = base_lib_BaseUtils::getStr($pathdata['template_footnote'], 'string', '');
+        $template_footnote_show = base_lib_BaseUtils::getStr($pathdata['template_footnote_show'], 'int', '');
+
+        //企业名片
+        $address = base_lib_BaseUtils::getStr($pathdata['address'], 'string', '');
+        $link_mobile = base_lib_BaseUtils::getStr($pathdata['link_mobile'], 'string', '');
+        $template_company_show = base_lib_BaseUtils::getStr($pathdata['template_company_show'], 'string', '');
+
+        //入职事项及资料
+        $template_matter_list = base_lib_BaseUtils::getStr($pathdata['template_matter_list'], 'string', '');
+        $template_matter_list_show = base_lib_BaseUtils::getStr($pathdata['template_matter_list_show'], 'int', '');
+        $template_matter_means = base_lib_BaseUtils::getStr($pathdata['template_matter_means'], 'string', '');
+        $template_matter_means_show = base_lib_BaseUtils::getStr($pathdata['template_matter_means_show'], 'int', '');
+
+        $tempalte_style = base_lib_BaseUtils::getStr($pathdata['tempalte_style'], 'int', '1');
+
+
+        if (empty($modelName)) {
+            echo json_encode(['status' => false, 'msg' => "请选择需要保存的职位模板"]);
+            exit();
+        }
+
+        //保存的职位模板
+        $job_id = "";
+        if ($modelName == "tongyong") {
+            $template_type = 1;
+        } else {
+            $template_type = 2;
+            $job_id = $modelName;
+        }
+        $template_data['template_type'] = $template_type;
+        $template_data['job_id'] = $job_id;
+
+
+        //欢迎语
+        if (base_lib_BaseUtils::nullOrEmpty($tpl_wellcome_show)) {
+            $tpl_wellcome_show = 1;
+            if (empty($tpl_wellcome)) {
+                $validator->addErr("请输入欢迎语");
+//                echo json_encode(['status' => false, 'msg' => "请输入欢迎语"]);
+//                exit();
+            }
+            if (mb_strlen($tpl_wellcome) - mb_substr_count($tpl_wellcome,PHP_EOL) > 200) {
+                $validator->addErr(mb_strlen($tpl_wellcome)."欢迎语已超过200字");
+//                echo json_encode(['status' => false, 'msg' => "欢迎语已超过200字，修改失败"]);
+//                exit();
+            }
+        }
+
+        $template_data['template_job_user'] = $template_job_user;
+        $template_data['tpl_wellcome_show'] = $tpl_wellcome_show;
+        $template_data['tpl_wellcome'] = $tpl_wellcome;
+        $template_data['tempalte_style'] = $tempalte_style;
+
+        //职位相关
+        if (base_lib_BaseUtils::nullOrEmpty($template_job_station_show)) {
+            $template_job_station_show = 1;
+            if (empty($template_job_station)) {
+                $validator->addErr("请输入入职职位名称");
+            }
+            if (mb_strlen($template_job_station)  - mb_substr_count($template_job_station,PHP_EOL) > 50) {
+                $validator->addErr("入职职位名称已超过50字");
+            }
+        }
+        $template_data['template_job_station_show'] = $template_job_station_show;
+        $template_data['template_job_station'] = $template_job_station;
+
+        if($template_data['template_type'] == 1){
+            $template_data['template_name'] = "通用模板";
+        }else{
+            $service_company_job_job = new base_service_company_job_job();
+            $job_info = $service_company_job_job->getJob($job_id,"job_id,station");
+            $template_data['template_name'] = $job_info['station'];
+        }
+
+        //入职时间
+        if (base_lib_BaseUtils::nullOrEmpty($template_job_join_time_show)) {
+            $template_job_join_time_show = 1;
+            if (empty($template_job_join_time) && $pathdata['save_type'] != 1) {
+                $validator->addErr("请输入入职时间");
+//                echo json_encode(['status' => false, 'msg' => "请输入入职时间"]);
+//                exit();
+            }
+        }
+
+        $template_data['template_job_join_time_show'] = $template_job_join_time_show;
+        $template_job_join_time = str_replace("年","-",$template_job_join_time);
+        $template_job_join_time = str_replace("月","-",$template_job_join_time);
+        $template_job_join_time = str_replace("日","",$template_job_join_time);
+        $template_job_join_time = str_replace("点",":00:00",$template_job_join_time);
+        $template_data['template_job_join_time'] = date("Y-m-d H",strtotime($template_job_join_time));
+
+        //试用期
+        if (base_lib_BaseUtils::nullOrEmpty($template_job_probation_time_show)) {
+            $template_job_probation_time_show = 1;
+            if (empty($template_job_probation_time)) {
+                $validator->addErr("请输入试用期");
+//                echo json_encode(['status' => false, 'msg' => "请输入试用期"]);
+//                exit();
+            }
+            if (mb_strlen($template_job_probation_time)  - mb_substr_count($template_job_probation_time,PHP_EOL) > 50) {
+                $validator->addErr("试用期已超过50字");
+//                echo json_encode(['status' => false, 'msg' => "试用期已超过50字，修改失败"]);
+//                exit();
+            }
+        }
+        $template_data['template_job_probation_time_show'] = $template_job_probation_time_show;
+        $template_data['template_job_probation_time'] = $template_job_probation_time;
+
+        //综合薪资
+        if (base_lib_BaseUtils::nullOrEmpty($template_job_salary_show)) {
+            $template_job_salary_show = 1;
+            if (empty($template_job_salary) && $pathdata['save_type'] != 1) {
+                $validator->addErr("请输入综合薪资");
+//                echo json_encode(['status' => false, 'msg' => "请输入综合薪资"]);
+//                exit();
+            }
+            if (mb_strlen($template_job_salary)  - mb_substr_count($template_job_salary,PHP_EOL) > 50) {
+                $validator->addErr("综合薪资已超过50字");
+//                echo json_encode(['status' => false, 'msg' => "综合薪资已超过50字，修改失败"]);
+//                exit();
+            }
+        }
+        $template_data['template_job_salary_show'] = $template_job_salary_show;
+        $template_data['template_job_salary'] = $template_job_salary;
+
+        //福利待遇
+        if (base_lib_BaseUtils::nullOrEmpty($template_job_reward_show)) {
+            $template_job_reward_show = 1;
+            if (empty($template_job_reward)) {
+                $validator->addErr("请输入福利待遇");
+//                echo json_encode(['status' => false, 'msg' => "请输入福利待遇"]);
+//                exit();
+            }
+            if (mb_strlen($template_job_reward)  - mb_substr_count($template_job_reward,PHP_EOL) > 50) {
+                $validator->addErr("福利待遇已超过50字，修改失败");
+//                echo json_encode(['status' => false, 'msg' => "福利待遇已超过50字，修改失败"]);
+//                exit();
+            }
+        }
+        $template_data['template_job_reward_show'] = $template_job_reward_show;
+        $template_data['template_job_reward'] = $template_job_reward;
+        //入职地点
+        if (base_lib_BaseUtils::nullOrEmpty($template_link_probation_addres_show)) {
+            $template_link_probation_addres_show = 1;
+            if (empty($template_link_probation_addres)) {
+                $validator->addErr("请输入入职地点");
+//                echo json_encode(['status' => false, 'msg' => "请输入入职地点"]);
+//                exit();
+            }
+            if (mb_strlen($template_link_probation_addres)  - mb_substr_count($template_link_probation_addres,PHP_EOL) > 50) {
+                $validator->addErr("入职地点已超过50字");
+//                echo json_encode(['status' => false, 'msg' => "入职地点已超过50字，修改失败"]);
+//                exit();
+            }
+        }
+        $template_data['template_link_probation_addres_show'] = $template_link_probation_addres_show;
+        $template_data['template_link_probation_addres'] = $template_link_probation_addres;
+
+        //上班地点
+        if (base_lib_BaseUtils::nullOrEmpty($template_link_work_addres_show)) {
+            $template_link_work_addres_show = 1;
+            if (empty($template_link_work_addres)) {
+                $validator->addErr("请输入上班地点");
+//                echo json_encode(['status' => false, 'msg' => "请输入上班地点"]);
+//                exit();
+            }
+            if (mb_strlen($template_link_work_addres)  - mb_substr_count($template_link_work_addres,PHP_EOL) > 50) {
+                $validator->addErr("上班地点已超过50字");
+//                echo json_encode(['status' => false, 'msg' => "上班地点已超过50字，修改失败"]);
+//                exit();
+            }
+        }
+        $template_data['template_link_work_addres_show'] = $template_link_work_addres_show;
+        $template_data['template_link_work_addres'] = $template_link_work_addres;
+
+        //联系人
+        if (base_lib_BaseUtils::nullOrEmpty($template_link_man_show)) {
+            $template_link_man_show = 1;
+            if (empty($template_link_man)) {
+                $validator->addErr("请输入联系人");
+//                echo json_encode(['status' => false, 'msg' => "请输入联系人"]);
+//                exit();
+            }
+            if (mb_strlen($template_link_man)  - mb_substr_count($template_link_man,PHP_EOL) > 50) {
+                $validator->addErr("联系人已超过50字");
+//                echo json_encode(['status' => false, 'msg' => "联系人已超过50字，修改失败"]);
+//                exit();
+            }
+        }
+        $template_data['template_link_man_show'] = $template_link_man_show;
+        $template_data['template_link_man'] = $template_link_man;
+
+        //联系电话
+        if (base_lib_BaseUtils::nullOrEmpty($template_link_way_show)) {
+            $template_link_way_show = 1;
+            if (empty($template_link_way)) {
+                $validator->addErr("请输入求职者手机号");
+//                echo json_encode(['status' => false, 'msg' => "请输入联系电话"]);
+//                exit();
+            }
+
+            if (mb_strlen($template_link_way)  - mb_substr_count($template_link_way,PHP_EOL) > 50) {
+                $validator->addErr("求职者手机号已超过50字");
+//                echo json_encode(['status' => false, 'msg' => "联系电话已超过50字，修改失败"]);
+//                exit();
+            }
+        }
+
+        $template_data['template_link_way_show'] = $template_link_way_show;
+        $template_data['template_link_way'] = $template_link_way;
+
+        //补充说明
+        if (base_lib_BaseUtils::nullOrEmpty($template_footnote_show)) {
+            $template_footnote_show = 1;
+            if (empty($template_footnote)) {
+                $validator->addErr("请输入补充说明");
+//                echo json_encode(['status' => false, 'msg' => "请输入补充说明"]);
+//                exit();
+            }
+            if (mb_strlen($template_footnote)  - mb_substr_count($template_footnote,PHP_EOL) > 500) {
+                $validator->addErr("补充说明已超过500字");
+//                echo json_encode(['status' => false, 'msg' => "补充说明已超过500字，修改失败"]);
+//                exit();
+            }
+        }
+        $template_data['template_footnote_show'] = $template_footnote_show;
+        $template_data['template_footnote'] = $template_footnote;
+
+        //企业名片
+        if (base_lib_BaseUtils::nullOrEmpty($template_company_show)) {
+            $template_company_show = 1;
+            if (empty($address)) {
+                $validator->addErr("请输入公司地址");
+//                echo json_encode(['status' => false, 'msg' => "请输入公司地址"]);
+//                exit();
+            }
+            if (mb_strlen($address)  - mb_substr_count($address,PHP_EOL) > 50) {
+                $validator->addErr("公司地址已超过50字");
+//                echo json_encode(['status' => false, 'msg' => "公司地址已超过50字，修改失败"]);
+//                exit();
+            }
+
+            if (empty($link_mobile)) {
+                $validator->addErr("请输入公司电话");
+//                echo json_encode(['status' => false, 'msg' => "请输入公司电话"]);
+//                exit();
+            }
+            if (mb_strlen($link_mobile)  - mb_substr_count($link_mobile,PHP_EOL) > 50) {
+                $validator->addErr("公司电话已超过50字");
+//                echo json_encode(['status' => false, 'msg' => "公司电话已超过50字，修改失败"]);
+//                exit();
+            }
+        }
+        $template_data['template_company_show'] = $template_company_show;
+        $template_data['template_company_address'] = $address;
+        $template_data['template_company_link_way'] = $link_mobile;
+
+        //入职事项
+        if (base_lib_BaseUtils::nullOrEmpty($template_matter_list_show)) {
+            $template_matter_list_show = 1;
+            if (empty($template_matter_list)) {
+                $validator->addErr("请输入入职事项");
+//                echo json_encode(['status' => false, 'msg' => "请输入入职事项"]);
+//                exit();
+            }
+            if (mb_strlen($template_matter_list)  - mb_substr_count($template_matter_list,PHP_EOL) > 500) {
+                $validator->addErr("入职事项已超过500字");
+//                echo json_encode(['status' => false, 'msg' => "入职事项已超过500字，修改失败"]);
+//                exit();
+            }
+        }
+        $template_data['template_matter_list_show'] = $template_matter_list_show;
+        $template_data['template_matter_list'] = $template_matter_list;
+
+        //携带材料
+        if (base_lib_BaseUtils::nullOrEmpty($template_matter_means_show)) {
+            $template_matter_means_show = 1;
+            if (empty($template_matter_means)) {
+                $validator->addErr("请输入携带材料");
+//                echo json_encode(['status' => false, 'msg' => "请输入携带材料"]);
+//                exit();
+            }
+            if (mb_strlen($template_matter_means)  - mb_substr_count($template_matter_means,PHP_EOL) > 500) {
+                $validator->addErr("携带材料已超过500字");
+//                echo json_encode(['status' => false, 'msg' => "携带材料已超过500字，修改失败"]);
+//                exit();
+            }
+        }
+
+        if($validator->has_err){
+            $msg = implode(',',$validator->err);
+            echo json_encode(['status' => false, 'msg' => $msg]);
+            exit();
+        }
+        $template_data['template_matter_means_show'] = $template_matter_means_show;
+        $template_data['template_matter_means'] = $template_matter_means;
+
+        return $template_data;
+    }
+
+
+
+    /**
+     * 验证是否能保存模板
+     * @param $inPath
+     */
+    public function pageCheckSaveTemplate($inPath){
+        $pathdata = base_lib_BaseUtils::saddslashes($this->getUrlParams($inPath));
+        $template_type = base_lib_BaseUtils::getStr($pathdata['template_type'],'string','');
+
+        if(empty($template_type)){
+            echo json_encode(['status' => false, 'msg' => "请选择需要保存的职位模板"]);
+            return;
+        }
+
+        //检查模板数
+        $service_company_offer_template = new base_service_company_offer_template();
+        $template_list = $service_company_offer_template->getTemplateList($this->_userid);
+
+        if(count($template_list) >= self::$offer_template_max){
+            echo json_encode(['status' => false, 'msg' => "最多保存".self::$offer_template_max."个职位模板，请删除现有模板再保存"]);
+            return;
+        }
+        //保存的是否为通用模板
+        if($template_type == "tongyong"){
+            $template_list = base_lib_BaseUtils::array_key_assoc($template_list,"template_type");
+            if($template_list[1]){
+                echo json_encode(['status' => false, 'msg' => "模板“通用模板”已有模板，是否覆盖？",'code' => 310]);
+                return;
+            }
+        }else{
+            $template_list = base_lib_BaseUtils::array_key_assoc($template_list,"job_id");
+
+            if($template_list[$template_type]){
+                echo json_encode(['status' => false, 'msg' => "职位“{$template_list[$template_type]['template_name']}”已有模板，是否覆盖？",'code' => 310]);
+                return;
+            }
+        }
+        echo json_encode(['status' => true, 'msg' => "成功"]);
+        return;
+    }
+
+    /**
+     * 通过其他方式发送offer
+     */
+    public function pageOtherSendOffer($inPath){
+        $pathdata = base_lib_BaseUtils::saddslashes($this->getUrlParams($inPath));
+        $send_type = base_lib_BaseUtils::getStr($pathdata['send_type'],'int','');
+        $send_offer_id = base_lib_BaseUtils::getStr($pathdata['send_offer_id'],'int','');
+        $person_id = base_lib_BaseUtils::getStr($pathdata['person_id'],'int','');
+        if(empty($send_type) || empty($send_offer_id) || empty($person_id)){
+            echo json_encode(['status' => false, 'msg' => "参数错误"]);
+            return;
+        }
+        $service_person_person = new base_service_person_person();
+        $service_company_company = new base_service_company_company();
+        $service_company_job_offer = new base_service_company_job_offer();
+
+        $person_info = $service_person_person->getPersonByPersonID($person_id,"person_id,user_name");
+        if(empty($person_info)){
+            echo json_encode(['status' => false, 'msg' => "参数错误"]);
+            return;
+        }
+        $company_info = $service_company_company->getCompany($this->_userid,1,"company_id,company_name");
+        $validator = new base_lib_Validator();
+        if($send_type == 1){
+            //邮箱发送
+            $email = base_lib_BaseUtils::getStr($pathdata['linkNum'],'string','');
+            $validator->getEmail($email,"请输入正确的电子邮箱");
+            if($validator->has_err){
+                echo json_encode(['status' => false, 'msg' => $validator->err[0]]);
+                return;
+            }
+            $subject = "【{$company_info['company_name']}】录用通知书";
+            $url = $service_company_job_offer->getSmsVisitUrl($person_id,$send_offer_id,2);
+            $content = $person_info['user_name']."您好,".$company_info['company_name']."公司向您发送了录用通知书，<a href='{$url}'>点击查看</a>";
+            base_lib_Mail::send($email, $subject, $content);
+        }
+        if($send_type == 2){
+            //短信发送
+            $mobile_phone = base_lib_BaseUtils::getStr($pathdata['linkNum'],'string','');
+            $validator->getMobile($mobile_phone,"请输入正确的手机号码");
+            if($validator->has_err){
+                echo json_encode(['status' => false, 'msg' => $validator->err[0]]);
+                return;
+            }
+            //获取短连接
+            $sort_url = $service_company_job_offer->getSmsVisitUrl($person_id,$send_offer_id,1);
+            $msg_content = $person_info['user_name']."您好,".$company_info['company_name']."公司向您发送了录用通知书，点击查看  {$sort_url}";
+            base_lib_SMS::send($mobile_phone,$msg_content);
+        }
+
+        echo json_encode(['status' => true, 'msg' => "发送成功"]);
+        return;
+    }
+
+}

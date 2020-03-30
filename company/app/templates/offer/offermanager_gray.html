@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>offer管理_汇博网</title>
+	<!--–[if lt IE9]-->
+	<script src="//hm.baidu.com/hm.js?fb51309e47424acd6e31c0bd2a65a5a1"></script>
+	<script type="text/javascript" language="javascript" src="{/version file='html5.js'/}"></script>
+	<!--[endif]–-->
+	<link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+	<link rel="stylesheet" type="text/css" href="//assets.huibo.com/css/m_font_style.css?v=20191220" />
+	<link rel="stylesheet" type="text/css" href="{/version file='comback.css'/}" />
+	<link rel="stylesheet" type="text/css" href="{/version file='resument2015xiaofei.css'/}" />
+	<link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}" />
+	<link rel="stylesheet" type="text/css" href="{/version file='layer.css'/}" />
+	<script type="text/javascript">
+		window.CONFIG = {
+			HOST: '{/$isteurl.style/}',
+			COMBOPATH: '/js/v2/'
+		}
+	</script>
+	<script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+	<script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.min.js'/}"></script>
+	<script type="text/javascript" language="javascript" src="{/version file='layer.js'/}"></script>
+	<script type="text/javascript" language="javascript" src="{/version file='common.js'/}"></script>
+	<script type="text/javascript" language="javascript" src="{/version file='dialog.js'/}"></script>
+	<script type="text/javascript" language="javascript" src="{/version file='ui_inputFocus.js'/}"></script>
+	<script type="text/javascript" language="javascript" src="{/version file='ui_tooltip.js'/}"></script>
+	<script type="text/javascript" language="javascript" src="{/version file='ui_validate.js'/}"></script>
+	<script type="text/javascript" language="javascript" src="{/version file='jquery.form.js'/}"></script>
+	<script type="text/javascript" language="javascript" src="{/version file='ui_dropdownlist.js'/}"></script>
+	<script type="text/javascript" language="javascript" src="{/version file='ui_autocomplete.js'/}"></script>
+	<script type="text/javascript" language="javascript" src="{/version file='jquery.email.tip.js'/}"></script>
+	<script type="text/javascript" language="javascript" src="{/version file='jquery.metadata.js'/}"></script>
+
+	<script type="text/javascript" src="{/version file='WdatePicker.js'/}"></script>
+	<!-- <link rel="stylesheet" type="text/css" href="{/version file='WdatePicker.css'/}" /> -->
+	<link rel="stylesheet" type="text/css" href="{/version file='offer.css'/}" />
+	<script type="text/javascript">
+		hbjs.loadJS('{/$siteurl.style/}/js/v2/cqjob/common.js');
+	</script>
+	<style>
+		.rMentRt{ position:relative;width:980px!important;}
+		.rMentLt{ margin-right: 0;}
+		.rMentDl dd{ background: #fff;}
+    .subMetx .com {width: 140px; float: left;}
+    .subMetx .job {width: 180px;}
+    </style>
+
+	<style>
+		.dwonLoadx{width:390px; text-align: left; background: #fff; overflow: hidden; border:1px solid #f1f1f1; position: absolute; top:0;  left:0; z-index: 10;}   
+        .dwonLoadx h2{width:100%; height:30px; background:#f1f1f1;overflow: hidden;}
+        .dwonLoadx h2 a{ display:block; float: right; height:30px; line-height:30px;width:30px; text-align: center; line-height: 30px; font-size:16px; color: #333;}
+        .rMentBtn p a{ margin-right:10px;}
+        /*修改切换按钮后的样式*/
+        .newMsgList li a.cut{
+          color: #333;
+          background: #fff;
+          border: 1px solid #e4e4e4;
+          border-bottom: 1px solid #fff;
+          position: relative;
+          z-index: 10;
+          font-weight: bold;
+          margin-top:1px;
+        }
+        .newMsgList li a{
+          display: inline-block;
+          height: 38px;
+          line-height: 38px;
+          padding: 0 15px;
+          font-size: 14px;
+          position: relative;
+          z-index: 1;
+          zoom: 1;
+          background: #f1f1f1;
+          border: 1px solid #e4e4e4;
+          color: #4d4d4d;
+        }
+        .newMsgList li{
+          float: left;
+          display: inline;
+          margin: 1px 10px 0 0;
+          height: 38px;
+          line-height: 38px;
+        }
+
+        .mRtake {
+            display:none;
+            font-size: 10px;
+            z-index: 12;
+            width:400px;
+            border: 5px solid #666666;
+            left: 50%;
+            margin-left: -200px;
+        }
+        .dialogBtn{ padding-top: 5px; background: #fafafa;    border-top: 1px solid #ebebeb;}
+        #e1 {
+            padding: 10px;
+            background: #f1f1f1;
+            font-size: 16px;
+        }
+        #e2 {
+            padding-top: 15px;
+            color: #8a9499;
+            font-family: "微软雅黑";
+            font-size: 14px;
+            font-weight: normal;
+            padding-left: 4%;
+        }
+        #msg_content {
+                        border: 1px solid #cec9c9;width: 345px; padding: 5px;height: 100px;margin:10px 4%;
+                        font-size: 14px;
+                    }
+        .num-count {
+            text-align: right;
+            padding-right: 6%;
+            padding-bottom: 10px;
+        }
+        body{ font-family: "微软雅黑"; font-size: 14px;}
+    </style>
+	<!-- 日期选择器样式 -->
+	<style>
+		.makTime b,.makTime input,.makTime span{ display: block; float: left; height: 28px; line-height: 28px;}
+        .makTime b{ margin-left: 10px; font-weight: normal;}
+        .makTime input{width:120px; text-indent: 8px; border: 1px solid #e8e8e8;}
+        .makTime span{ padding: 0 10px;}
+        /*修改切换按钮后的样式*/
+        .newMsgList li a.cut{
+            color: #333;
+            background: #fff;
+            border: 1px solid #e4e4e4;
+            border-bottom: 1px solid #fff;
+            position: relative;
+            z-index: 10;
+            font-weight: bold;
+            margin-top:1px;
+        }
+        .newMsgList li a{
+            display: inline-block;
+            height: 38px;
+            line-height: 38px;
+            padding: 0 15px;
+            font-size: 14px;
+            position: relative;
+            z-index: 1;
+            zoom: 1;
+            background: #f1f1f1;
+            border: 1px solid #e4e4e4;
+            color: #4d4d4d;
+        }
+        .newMsgList li{
+            float: left;
+            display: inline;
+            margin: 1px 10px 0 0;
+            height: 38px;
+            line-height: 38px;
+
+        }
+
+
+        .mRtake {
+            display:none;
+            font-size: 10px;
+            z-index: 12;
+            width:400px;
+            border: 5px solid #666666;
+            left: 50%;
+            margin-left: -200px;
+        }
+        .dialogBtn{ padding-top: 5px; background: #fafafa;    border-top: 1px solid #ebebeb;}
+        #e1 {
+            padding: 10px;
+            background: #f1f1f1;
+            font-size: 16px;
+        }
+        #e2 {
+            padding-top: 15px;
+            color: #8a9499;
+            font-family: "微软雅黑";
+            font-size: 14px;
+            font-weight: normal;
+            padding-left: 4%;
+        }
+        #msg_content {
+            border: 1px solid #cec9c9;width: 345px; padding: 5px;height: 100px;margin:10px 4%;
+            font-size: 14px;
+        }
+        .num-count {
+            text-align: right;
+            padding-right: 6%;
+            padding-bottom: 10px;
+        }
+        body{ font-family: "微软雅黑"; font-size: 14px;}
+		.hasHiredPop div{ overflow: hidden; padding-bottom: 10px;}
+		.hasHiredPop span,.hasHiredPop input{ display: block; float: left; line-height: 30px; color: #222;}
+		.hasHiredPop input{ border: 1px solid #ccc; margin-left: 10px; text-indent: 8px;}
+    </style>
+
+</head>
+
+<body id="body">
+{/if $left_type==1/}
+{/include 'new_header.html' par="全职招聘" cur='面试管理'/}
+{/else/}
+{/include 'new_header.html' par="全职招聘" cur='简历管理'/}
+{//if/}
+
+
+<div class="resumentNbg">
+	{/include 'resume/apply/nav.html' par="offer管理" cur="offer管理"/}
+	<!-- 右侧内容 -->
+	<div class="rMentRt">
+		<div class="content">
+			<hgroup>
+				<div class="part part1">
+					<form id="frmInvite" method="get" action="{/get_url rule='/offermanager/index/'/}" class="offerSearch">
+						<input type="hidden" name="left_type" value="{/$left_type/}">
+						<!-- 面试状态 -->
+						<div class="offerStatus">
+							<span>状态：</span>
+							<ul class="statusList">
+								<li class="is_send {/if $re_con['is_send']==0/}curStatus{//if/}" data-value='0'><a href="{/get_url rule='/offermanager/'/}?left_type={/$left_type/}&is_send=0"><span></span>未发offer</a></li>
+								<li class="is_send {/if $re_con['is_send']==1/}curStatus{//if/}" data-value='1'><a href="{/get_url rule='/offermanager/'/}?left_type={/$left_type/}&is_send=1"><span></span>已发offer</a></li>
+							</ul>
+							<input type="hidden" name="is_send" value="{/$re_con['is_send']/}"/>
+						</div>
+
+						<!-- 筛选条件 -->
+						<div class="filterOptions">
+							<span>职位：</span>
+							<div class="xkTabSelect inB"><span id="tstDropJob" class="drop zindex"></span></div>
+
+
+							<!-- 面试时间 -->
+							{/if $re_con['is_send']==1/}
+							<div class="makSelect makTime inB">
+								<b>发送日期：</b>
+								<input type="text" id="startDay" name="s_time" value="{/$re_con['s_time']/}"  autocomplete='off' onClick="WdatePicker({onpicked:function(){$('.j_time_search_btn').click();submit();},oncleared:function(){$('.j_time_search_btn').click();submit();}})">
+								<span>~</span>
+								<input type="text" id="endDay" name="e_time" value="{/$re_con['e_time']/}"  autocomplete='off' onClick="WdatePicker({onpicked:function(){$('.j_time_search_btn').click();submit();},oncleared:function(){$('.j_time_search_btn').click();submit();}})">
+							</div>
+							{//if/}
+
+							<!-- 姓名 -->
+							<div class="nameSearch inB">
+								姓名：
+								<input type="text" value="{/$re_con['name']/}" name="name" placeholder="请输入"  autocomplete='off'>
+							</div>
+
+							<!-- 搜索按钮 -->
+							<input type="button" value="搜索" class="mianshiSearchBtn">
+						</div>
+					</form>
+					
+					<div class="offerTips">
+						<a href="javascript:;">（数据仅保存3个月）</a>
+					</div>
+					
+					<div class="offerDatas">
+						{/if !empty($list)/}
+						<table class="offerTable">
+							<thead class="offerTbHead">
+								<tr>
+									<th width="80" class="name">姓名</th>
+									<th width="150">职位</th>
+									<th width="128">电话</th>
+									<th width="162">发送日期</th>
+									<th width="93">状态</th>
+									<th width="120">操作</th>
+								</tr>
+							</thead>
+							<tbody>
+								
+								{/foreach $list as $v_list/}
+									<tr>
+										<td class="name overtext"><a class="j_resume_detail_btn" target="_blank" href="/resume/resumeshow/type-network-resumeid-{/$v_list['resume_id']/}-src-invite-invitid-{/$v_list['invite_id']/}">{/$v_list['user_name']/}</a></td>
+										<td class="overtext pos" title="{/$v_list['station']/}">{/$v_list['station']/}</td>
+										<td class="overtext">{/$v_list['mobile_phone']/}</td>
+										<td class="overtext">{/if $v_list['is_offer_send']/}{/$v_list['send_time_show']/}{/else/}-{//if/}</td>
+										<td class="overtext">{/if $v_list['is_offer_send']/}已发送{/else/}未发{//if/}</td>
+										<td class="overtext" invite="{/$v_list['invite_id']/}" station="{/$v_list['station']/}">
+											<a class="j_send_offer_btn"  target="_blank" href="/offertemplate/index/invite_id-{/$v_list['invite_id']/}">发送</a>
+											{/if $v_list['is_offer_send']==1/}<a class="j_see_btn"  target="_blank" href="/offermanager/VisitOffer/invite_id-{/$v_list['invite_id']/}">查看</a>{//if/}
+											<a href="javascript:;" class="hasHired" {/if $v_list['audition_result']==9/}style="display:none;"{//if/}>已入职</a>
+										</td>
+									</tr>
+								{//foreach/}
+							
+							</tbody>
+						</table>
+						{/else/}
+						<div class="noData">
+							<p>未找到数据，请更换筛选条件、关键词再试！</p>
+	                        <!-- <a class="btn" href="javascript:void(0);" id="btnClearFilterSearch"><i class="hbFntWes">&#xf014;</i>清空筛选/搜索条件</a></p> -->
+						</div> 
+						{//if/}
+					</div>
+				</div>
+			</hgroup>
+			{/$pager/}
+		</div>
+	</div>
+<div class="j_time_search_btn" data-explain="do not delete!" style="display: none"></div>
+<div class="j_username_search_btn" data-explain="do not delete!" style="display: none"></div>
+<script  type="text/javascript">
+    var action_url = '{/$siteurl.style/}';
+    action_dom = [
+        ['#tstDropJob', 393],
+        ['.j_time_search_btn', 394],
+        ['.j_username_search_btn', 395],
+        ['.j_resume_detail_btn', 396],
+        ['.j_send_offer_btn', 397],
+        ['.j_see_btn', 398],
+    ];
+</script>
+<script type="text/javascript" language="javascript" src="{/version file='action.js'/}"></script>
+
+	<script type="text/javascript">
+        $('.mianshiSearchBtn').on('click', function(){
+            if($.trim($('input[name=name]').val()))
+                $('.j_username_search_btn').click();
+            $('#frmInvite').submit();
+        });
+	    $('#tstDropJob').droplist({
+	        defaultTitle : '全部职位',
+	        style : 'width:105px;',
+	        noSelectClass : '#444',
+	        inputWidth : 105,
+	        width : 128,
+	        hddName : 'station',
+	        items : {/$job_list/},
+	    	selectValue : '{/$re_con["station"]/}',
+	        maxScroll : 10,
+	        onSelect : function(i, name) {
+	        	//选中后的事件
+	        	$('#frmInvite').submit()
+	    	}
+	    });
+	    /*选择发送状态*/
+	   	// $('.is_send').on('click',function() {
+	   	// 	var val = $(this).attr("data-value");
+	   	// 	console.log(val)
+	   	// 	$('input[name="is_send"]').val(val)
+	   	// 	$('#frmInvite').submit()
+	   	// })
+	hbjs.use('tools.cookie, widge.overlay.hbDialog, widge.overlay.confirmBox, product.hbCommon', function(cookie, Dialog, confirmBox, hbCommon, $, util) {
+	    var pWidth = 70,
+	        fontWidth = 18;
+	    function showModel(icon, msg) {
+	        confirmBox.timeBomb(msg, {
+	            name: icon,
+	            width: pWidth + msg.length * fontWidth
+	        });
+	    }	
+		//已入职
+		$('.hasHired').click(function(){
+            var station = $(this).parent().attr('station');
+            var invite_id = $(this).parent().attr('invite');
+            var entry_time = "{/date('Y-m-d')/}";
+            var hasHiredStr = '<div class="hasHiredPop"><div><span>入职时间</span><input type="text" onclick="WdatePicker()" id="entryData" value="'+entry_time+'" /></div><div><span>入职职位</span><input type="text" id="entryJobx" value="'+station+'" /></div></div>';
+			confirmBox.confirm(hasHiredStr,'入职设置', function(obj){
+				var _this = this;
+				entry_time = $('#entryData').val();
+				station = $('#entryJobx').val();
+				if(entry_time == ''){
+				   showModel('fail','请选择入职时间');
+				   return;
+				}
+                if(station == ''){
+				   showModel('fail','请填写入职职位');
+				   return;
+				}
+					
+				$.ajax({
+                    url : "{/get_url rule='/invitev1/entryJob'/}",
+                    type : "post",
+                    dataType : "json",
+                    data : {
+                        station : station,
+                        invite_id : invite_id,
+                        entry_time : entry_time
+                    },
+                    success : function(json) {
+                        if(json.isNeedLogin){
+                            window.location.reload();
+                            return;
+                        }
+                       if (!json.status) {
+                       	showModel('fail',json.msg);
+                           return;
+                       }
+                       showModel('success','操作成功');
+                       setTimeout(function() {
+                       	window.location.reload();
+                       }, 2000);
+                    }
+                });
+			},{
+				width:260,
+				close : 'x',
+				confirmBtn: '<a href="javascript:;" class="btn1 btnsF12" id="submitBtn">确定</a>',
+				cancelBtn: '<a href="javascript:;" class="btn3 btnsF12" id="submitBtn">取消</a>'
+			});
+		});
+		
+    });
+		
+		
+	</script>
+	<div class="clear"></div>
+</div>
+
+{/include file="msgpop.html"/}
+{/include file="footer.html"/}
+{/include file="chat/chat.html"/}
+</body>
+</html>

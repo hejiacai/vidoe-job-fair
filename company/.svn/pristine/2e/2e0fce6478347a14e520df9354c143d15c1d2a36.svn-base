@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<style>
+.repBox{width:500px;}
+.repBox .formTextarea{float:none;margin-bottom:10px;}
+.repBox .formTextarea textarea.textarea{width:495px;height:95px;}
+.repBox .txt{line-height:24px;font-size:12px;margin-bottom:10px;}
+.repBox .txt b{font-weight:normal;color:#999;}
+.repBox .repBtn{ text-align:right;}
+</style>
+</head>
+<body>
+<form action="{/get_url rule="/guestbook/reply/"/}" method="post">
+<input type="hidden" name="operate" value="reply" />
+<input type="hidden" name="guestid"  id="hddGuestId" value="{/$guestid/}" />
+<div class="dgBox repBox">
+	<div class="formTextarea">
+    	<textarea class="textarea" name="txtReplyContent"></textarea>
+    </div>
+    <div class="txt"><b>{/$personname/}</b>{/$content/}</div>
+    <div class="repBtn">
+    	<a href="javascript:void(0)" class="btn1 btnsF14" id="btnReply">回复</a><a href="javascript:void(0)" id="btnCancel" class="btn3 btnsF14">取消</a>
+    </div>
+</div>
+</form>
+<script type="text/javascript">
+$('#btnReply').click(function(){
+   $(this).submitForm({success:function(result){
+		if(result.success) {
+			$.anchorMsg(result.success);
+			$('#btnReply').closeDialog();
+			guestbook.replySuccess(result.id,result.content);
+		}else {
+			$.anchorMsg(result.error, { icon: 'fail' }); 
+		}
+   }
+   });
+});
+
+$('#btnCancel').click(function(){
+	$(this).closeDialog();
+});
+</script>
+</body>
+</html>

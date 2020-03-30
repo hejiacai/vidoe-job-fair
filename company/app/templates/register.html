@@ -1,0 +1,567 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>{/$title/}</title>
+<meta name="description" content="汇博网为企业提供网络招聘、现场招聘、校园招聘、招聘外包和HR培训等在内的全方位的人力资源服务,根据企业的不同需求提供不同的招聘服务，帮助企业轻松、高效招聘人才。" />
+<!--[if lt IE9] -->
+<script src="{/version file='html5.js'/}"></script>  
+<!-- [endif] -->
+
+<link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='login.css'/}" />
+
+<script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.min.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='common.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='jquery.form.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='dialog.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='ui_validate.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='ui_inputFocus.js'/}"></script><!--输入框获取焦点-->
+<script type="text/javascript" language="javascript" src="{/version file='jplayer.js'/}"></script>
+<link rel="stylesheet" type="text/css" href="{/version file='jplayer.blue.monday.css'/}" />
+<style>
+    #iplay_id:hover{cursor:pointer}
+</style>
+</head>
+<body>
+<header>
+	<div class="headerCon">
+    	<div class="logo"><a href="{/$siteurl.main/}"></a><b>企业注册</b></div>
+    </div>
+</header>
+<section class="content" id="content">
+<form id="formReg" action="{/get_url rule="/register/post/"/}" method="post">
+      <input type="hidden" name="from" value="{/$from/}"/>
+      <input type="hidden" name="referer" value="{/$referer/}"/>
+      {/if isset($is_part) && $is_part == true/}
+        <input type="hidden" name="is_part" value="1"/>
+      {//if/}
+	<div class="reg cReg">
+    	<div class="regL">
+        	
+            <div class="box">
+            	<p class="tit">公司信息</p>
+                <div class="regForm">
+                    <div class="formMod">
+                        <span class="formText">
+                        	<label for="txtCompanyName" class="txtLabel">公司名称</label><input type="text" id="txtCompanyName" name="txtCompanyName" style="width:310px;" class="text" /> 
+                        </span>
+                        <span class="tipPos">
+                            <span class="tipLay">
+                                
+                            </span>
+                        </span>
+                        <div class="clear"></div>
+                    </div>
+                    
+                    <div class="formMod">
+                        <span class="formText">
+                        	<label for="txtLinkman" class="txtLabel">联系人</label><input type="text" id="txtLinkman" name="txtLinkman" style="width:310px;" class="text" /> 
+                        </span>
+                        <span class="tipPos">
+                            <span class="tipLay">
+                            </span>
+                        </span>
+                        <div class="clear"></div>
+                    </div>
+                    
+                    <div class="formMod">
+                        <span class="formText">
+                        	<label for="txtZoneNo" class="txtLabel none">区号</label><input type="text" id="txtZoneNo" maxlength="4" value="023" name="txtZoneNo" style="width:50px;" class="text" />
+                        </span>
+                        <span class="tipTxt">&nbsp;</span>
+                        <span class="formText">
+                        	<label for="txtPhoneNo" class="txtLabel">固定电话</label><input type="text" id="txtPhoneNo" maxlength="11" name="txtPhoneNo" style="width:158px;" class="text" /> 
+                        </span>
+                        <span class="tipTxt">&nbsp;</span>
+                        <span class="formText" id="spanExtNo">
+                        	<label for="txtExtNo" class="txtLabel">分机号</label><input type="text" id="txtExtNo" maxlength="6" name="txtExtNo" style="width:50px;" class="text" /> 
+                        </span>
+                        <span class="tipPos">
+                            <span class="tipLay">
+                            </span>
+                        </span>
+                        <div class="clear"></div>
+                    </div>
+                    
+                    <div class="formMod">
+                        <span class="formText">
+                        	<label for="txtMobilePhone" class="txtLabel">手机号码</label><input type="text" id="txtMobilePhone" name="txtMobilePhone" style="width:310px;" class="text" /> 
+                        </span>
+                        <span class="tipPos">
+                            <span class="tipLay">
+                            </span>
+                        </span>
+                        <div class="clear"></div>
+                    </div>
+                    
+                    <p class="tit">帐户信息（用于登录汇博人才网）</p>
+                    <div class="formMod">
+                        <span class="formText">
+                        	<label for="txtUserID" class="txtLabel">用户名</label><input type="text" id="txtUserID" name="txtUserID" style="width:310px;" class="text" /> 
+                        </span>
+                        <span class="tipPos">
+                            <span class="tipLay">
+                            </span>
+                        </span>
+                        <div class="clear"></div>
+                    </div>
+                    
+                    <div class="formMod">
+                        <span class="formText"><label for="txtPassword" class="txtLabel">创建密码</label><input type="password" id="txtPassword" name="txtPassword" style="width:310px;" class="text" /></span>
+                        <span class="tipPos">
+                            <span class="tipLay">
+                            </span>
+                        </span>
+                        <span style="clear:both;width:100%;margin:0;display:none" id="pwdTipTxt" class="tipTxt">密码强度：<em class="red">弱</em></span>
+                        <div class="clear"></div>
+                    </div>
+                    
+                    <div class="formMod">
+                        <span class="formText"><label for="txtVerifyPassword" class="txtLabel">确认密码</label><input type="password" id="txtVerifyPassword" name="txtVerifyPassword" style="width:310px;" class="text" /></span>
+                        <span class="tipPos">
+                            <span class="tipLay">
+                            </span>
+                        </span>
+                        <div class="clear"></div>
+                    </div>
+                    <input type="hidden" name="hidSiteType" value="{/$site_type/}" />
+                    <div class="formMod">
+                        <input type="hidden" name="hidValidation" value="{/$need_vcode/}" />
+                        <input type="hidden" name="hidSeed" value="{/$seed/}" />
+                        <span class="formText">
+                            <label class="txtLabel" for="txtCatcha">验证码</label>
+                            <input type="text" style="display:inline-block;vertical-align:middle;width:100px;" id="txtCatcha" name="txtCatcha" class="text" data-seed="{/$seed/}"/><img id="imgCode" src="{/get_url rule="/register/verify/" data="seed={/$seed/}"/}" style="display:inline-block;vertical-align:middle;margin:0 10px;"/><a id="btnCode" href="javascript:void(0)" style="display:inline-block;vertical-align:middle;">换一换</a>
+                        </span>
+                        <div class="clear"></div>
+                        <p style="color:#666;font-weight:bold;margin-top:5px;font-size:12px;display:none">验证码请输入颜色相同的4个字符</p>
+                    </div>
+                    <div class="prot">点击注册即表示您同意<a href="javascript:void(0)" id="btnPact">《汇博企业会员注册协议》</a></div>
+                    <div class="formBtn"><a href="javascript:void(0)" id="btnRegister" class="btn1 btnsF16">立即注册</a></div>
+                </div>
+            </div>
+        </div>
+        <div class="regR" style="height:760px;">
+        	<div class="txt">
+            	<h4>在汇博找到优秀人才！</h4>
+                <dl>
+                    <dt>信赖</dt>
+                    <dd>{/$cur_year-2002/}年专注招聘</dd>
+                    <dd>西南地区资深招聘品牌</dd>
+                    <dd>20万+企业共同的选择</dd>
+                </dl>
+                <dl>
+                    <dt>海量</dt>
+                    <dd>320万份有效简历</dd>
+                    <dd>每日10万人才在线找工作</dd>
+                </dl>
+                <dl>
+                    <dt>专业</dt>
+                    <dd>“2对1”人事助理服务</dd>
+                    <dd style="width:360px">汇博猎头、招聘外包(RPO)、汇博兼职、HR学院</dd>
+                    <dd>为您提供一站式招聘服务</dd>
+                </dl>
+                <!--<dl class="regRScroll">
+                    <dt>此刻正在发生：</dt>
+                    <dd id="dlComScroll">
+                    	<div class="txtScroll" id="ddComScroll">
+                    	<p><a href="#">余女士</a><em>1秒前</em><b>寻</b><a href="#">仓库主管、</a><a href="#">内勤类职位</a></p>
+                    	<p><a href="#">刘先生</a><em>5秒前</em><b>寻</b><a href="#">主办施工员，</a><a href="#">小型项目生产经理类职位</a></p>
+                    	<p><a href="#">余女士</a><em>8秒前</em><b>寻</b><a href="#">仓库主管、</a><a href="#">内勤类职位</a></p>
+                    	<p><a href="#">刘先生</a><em>12秒前</em><b>寻</b><a href="#">主办施工员，</a><a href="#">小型项目生产经理类职位</a></p>
+                    	<p><a href="#">余女士</a><em>15秒前</em><b>寻</b><a href="#">仓库主管、</a><a href="#">内勤类职位</a></p>
+                    	<p><a href="#">刘先生</a><em>17秒前</em><b>寻</b><a href="#">主办施工员，</a><a href="#">小型项目生产经理类职位</a></p>
+                    	<p><a href="#">余女士</a><em>22秒前</em><b>寻</b><a href="#">仓库主管、</a><a href="#">内勤类职位</a></p>
+                    	<p><a href="#">刘先生</a><em>25秒前</em><b>寻</b><a href="#">主办施工员，</a><a href="#">小型项目生产经理类职位</a></p>
+                    	<p><a href="#">余女士</a><em>28秒前</em><b>寻</b><a href="#">仓库主管、</a><a href="#">内勤类职位</a></p>
+                    	</div>
+                   	</dd>
+                </dl>
+            --></div>
+            <a class="video" id="iplay_id"></a>
+        </div>
+        <div class="clear"></div>
+    </div>
+</form>
+</section>
+{/include file="footer.html"/}
+<section class="floatRT"><a href="{/get_url rule='/about/message' domain='main'/}" target="_blank" class="serviceLink">我有问题要反馈</a><b></b></section>
+<div class="protTxt" id="divPact" style="display:none;">
+	<p class="strong">www.huibo.com所提供的各项服务的所有权和经营权归重庆聚焦人才有限公司所有。</p>
+    <p>招聘单位、信息发布商（统称注册公司）和求职者，三方行为必须接受本协议条款的制约；若您不接受本协议的条款，请勿使用本网站，否则后果自负。该协议一经接受立即生效。</p>
+    <dl>
+        <dt>1.信息的发布</dt>
+        <dd>
+            <p>不得发布任何违反有关法律规定、社会道德的信息； 不得发布任何与本网站求职、招聘目的不相适的信息； 不得发布任何不完整、虚假的信息； 用户对所发布的信息的真实性、正确性及其产生的后果承担完全责任。</p>
+        </dd>
+    </dl>
+    <dl>
+        <dt>2.信息的使用</dt>
+        <dd>
+            <p>招聘单位仅可就本单位招聘目的使用求职者的简历信息，禁止使用本网站进行中介代招； 求职者仅可因应聘某职位，使用招聘单位发布的招聘信息； 本网站提供的其它信息，仅与其相应内容有关的目的而被使用；</p>
+            <p>不得将任何本网站的信息用作任何商业目的。 任何用户不得通过打印、下载、拷贝或其他方式再造其他用户的可辨认的信息。未经特定用户同意的上述任何操作都被严格禁止。</p>
+        </dd>
+    </dl>
+    <dl>
+        <dt>3.信息的公开</dt>
+        <dd>
+            <p>在本网站所登录的任何信息，均有可能被任何本网站的访问者浏览，也可能被错误使用。本网站对此将不予承担任何责任。</p>
+        </dd>
+    </dl>
+    <dl>
+        <dt>4.信息的准确性</dt>
+        <dd>
+            <p>任何在本网站发布的信息，均必须符合合法、准确、及时、完整、真实的原则。但本网站将不能保证所有由第三方提供的信息，或本网站自行采集的信息完全准确。使用者了解，对这些信息的使用，需要经过进一步核实。本网站对访问者未经自行核实误用本网站信息造成的任何损失不予承担任何责任。</p>
+        </dd>
+    </dl>
+    <dl>
+        <dt>5.信息更改与删除</dt>
+        <dd>
+            <p>除了信息的发布者外，任何访问者不得更改或删除他人发布的任何信息。本网站有权根据其判断保留修改或删除任何不适信息之权利。</p>
+        </dd>
+    </dl>
+    <dl>
+        <dt>6.版权、商标权</dt>
+        <dd>
+            <p>本网站的图形、图像、文字、声音、相片及其程序，广告中的全部内容、电子邮件的全部内容等，均属www.huibo.com的版权，受商标法及相关知识产权法律保护。未经www.huibo.com书面许可，任何人不得下载、复制、再使用。在本网发布信息之商标，归其相应的商标所有权人，受商标法保护。</p>
+        </dd>
+    </dl>
+    <dl>
+        <dt>7、注册信息使用</dt>
+        <dd>
+            <p>注册会员所提供的个人资料将会被www.huibo.com统计、汇总，在我们的严格管理下，为www.huibo.com的广告商及合作者提供依据。 为了提供更完善的服务，www.huibo.com会不定期地通过注册会员留下的电子邮件同该会员保持联系。同时，我们会定期电子贺卡、资讯或电子杂志给注册会员。</p>
+            <p>www.huibo.com承诺：在未经访问者授权同意的情况下，www.huibo.com不会将访问者的个人资料泄露给第三方。但以下情况除外。</p>
+            <p class="indent">1) 根据执法单位之要求或为公共之目的向相关单位提供个人资料； </p>
+            <p class="indent">2) 由于您将用户密码告知他人或与他人共享注册帐户，由此导致的任何个人资料泄露；</p>
+            <p class="indent">3) 由于黑客攻击、计算机病毒侵入或发作、因政府管制而造成的暂时性关闭等影响网络正常经营之不可抗力而造成的个人资料泄露、丢失、被盗用或被窜改等；</p>
+            <p class="indent">4) 由于与www.huibo.com链接的其它网站所造成之个人资料泄露及由此而导致的任何法律争议和后果；律争议和后果；</p>
+            <p class="indent">5) 为免除访问者在生命、身体或财产方面之急迫危险。</p>
+        </dd>
+    </dl>
+    <dl>
+        <dt>8.自责</dt>
+        <dd>
+            <p>所有使用本网站的用户，对使用本网站信息和在本网站发布信息的被使用，承担完全责任。 用户必须同意独自承担由于登录www.huibo.com或通过www.huibo.com登录到其他站点而形成的全部风险。</p>
+            <p>所有用户独立承担与他人交流信息及发送应聘/招聘意向所造成的后果。本公司不担保用户发送给另一方用户的资料的真实性、精确性与可靠性。用户对所接受的资料的信任纯属个人风险。</p>
+            <p>www.huibo.com一经发现任何有违反本协议或侵犯法律的行为，有权马上解除该用户的会员资格及禁止其再次登录本网站。 www.huibo.com保留删除一切非法的、辱骂性的及不健康的资料的权力。</p>
+        </dd>
+    </dl>
+    <dl>
+        <dt>9.服务终止</dt>
+        <dd>
+            <p>本网站有权在预先通知或不予通知的情况下终止任何免费服务。</p>
+        </dd>
+    </dl>
+    <dl>
+        <dt>10.争议处理</dt>
+        <dd>
+            <p>本网站因正常的系统维护、系统升级，或者因网络拥塞而导致网站不能访问，本网站不承担任何责任。 </p>
+            <p>本协议服从中华人民共和国法律解释；用户与www.huibo.com双方都必须遵守中华人民共和国的司法管辖。如发生本协议相关条款与中华人民共和国法律相抵触时，则该条款将按相关法律重新解释，而其他条款则依旧保持对用户产生法律效力和影响。</p>
+        </dd>
+    </dl>
+    <dl>
+        <dt>11.免责条款</dt>
+        <dd>
+            <p>本网并无随时监视此网址，但保留对其实施实时监视的权利。对于他方输入的，不是本网发布的材料，本网概不负任何法律责任。应聘信息发布方必须对其存入简历中心的个人简历及材料的格式、内容的准确性和合法性独立承担一切法律责任。招聘信息的发布方对其在职位数据库公布的材料独立承担一切法律责任。 本网不保证对某一种职位描述会有一定数目的使用者来浏览，也不保证会有一位特定的使用者来浏览。对于其他网址链接在本网址的内容，本网概不负法律责任。 </p>
+        </dd>
+    </dl>
+	<dl>
+	    <dt>12.责任承担</dt>
+	    <dd>
+	        <p>您理解并同意，您应承担您企业账号下所有活动产生的全部责任。</p>
+<p>您使用汇博网产品或服务时将遵从国家、地方法律法规、行业惯例和社会公共道德；不会利用汇博网提供的服务进行存储、发布、传播如下信息和内容：违反国家法律法规政策的任何内容（信息）；违反国家规定的政治宣传和/或新闻信息；涉及国家秘密和/或安全的信息；封建迷信和/或淫秽、色情、下流的信息或教唆犯罪的信息；博彩有奖、赌博游戏；违反国家民族和宗教政策的信息；妨碍互联网运行安全的信息；侵害他人合法权益的信息和/或其他有损于社会秩序、社会治安、公共道德的信息或内容;您同时承诺不得为他人发布上述不符合国家规定和/或本服务条款约定的信息内容提供任何便利，包括但不限于设置URL、BANNER链接等;</p>
+<p>当存在如下情形之一时，汇博网有权对您名下帐号进行冻结：（1）国家法律、法规、政策、法律文书的规定；（2）国家有权机关要求进行冻结的；（3）您使用汇博网服务的行为涉嫌违反国家法律法规及行政规定的；（4）当您的帐号操作、信息读取等存在异常时；（5）您遭到他人投诉，且对方已经提供了一定证据的；（6）当您的账号操作可能产生风险的其他情况。</p>
+<p>汇博网按照前述规定对您的帐号进行冻结后，将通过邮件、站内信、短信或电话等方式通知您按照相应的程序进行申诉。如果您按要求进行申诉并经汇博网审核通过的，汇博网将立即解除帐号冻结措施；如果您未在规定时间内进行申请，或您的申诉未能通过汇博网审核的，则您确认汇博网有权长期冻结。</p>
+	    </dd>
+	</dl>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+	$.focusblur('input.text');
+});
+//用户名是否被注册
+$.validator.addMethod('IsRegistered', function(value, element) {
+    var result = false;
+    $.ajax({
+        url: '{/get_url rule="/register/checkUserName"/}',
+        cache: false,
+        async: false,
+        type: 'post',
+        dataType: 'json',
+        data: { txtUserID: $("#txtUserID").val()},
+        success: function(json) {
+            if (json && json.state) {
+                result = true;
+            } else {
+                result = false;
+            }
+        }
+    });
+    return result;
+}, '该用户名已注册，请更换');
+
+$("#btnCode").on("click", function() {
+    $(this).prev('img').attr('src', '/register/verify?seed={/$seed/}&r='+Math.random());
+    return false;
+});
+
+//密码验证规则
+$.validator.addMethod("inputRegValiPwd", function(value, element) {
+    var pwd = $('#txtPassword').val();
+    var userName = $('#txtUserID').val();
+    var patten = new RegExp('^[0-9]+$');
+    if (userName == pwd) {
+        errorMsg = "密码和用户名不能相同<span class='tipArr'></span>";
+        return false;
+    }
+    var pwd_reg_length = /^\w{6,18}$/; 
+    var pwd_reg_1      = /[0-9]+/;
+    var pwd_reg_2      = /[a-zA-Z]+/;
+    var pwd_reg_3      = /([\w])\1{3,}/;
+    var pwd_reg_4      = /[^\w]/;
+    
+    if(!pwd_reg_length.test(pwd) || pwd_reg_4.test(pwd)){
+        errorMsg = "密码为6-18位数字、字母、下划线组合<span class='tipArr'></span>";
+        return false;
+    }
+    if(!pwd_reg_1.test(pwd) || !pwd_reg_2.test(pwd)){
+        errorMsg = "密码为数字、字母、下划线组合<span class='tipArr'></span>";
+        return false; //密码为数字、字母、下划线组合 
+    }
+    if(pwd_reg_3.test(pwd)){
+        errorMsg = "密码不能重复4个或以上字符<span class='tipArr'></span>";
+        return false;//密码不能重复4个或以上字符
+    }
+    
+    return true;
+}, function() { return errorMsg; });
+
+
+//区号验证规则
+$.validator.addMethod("inputRegValiZone", function(value, element, param) {
+    if (this.optional(element))
+        return "dependency-mismatch";
+    var reg = param;
+    if (typeof param == 'string') {
+        reg = new RegExp(param);
+    }
+    return reg.test(value);        
+}, '区号格式不正确');
+
+//手机号码验证规则
+$.validator.addMethod("inputRegValiMobile", function(value, element, param) {
+    if (this.optional(element))
+        return "dependency-mismatch";
+    var reg = param;
+    if (typeof param == 'string') {
+        reg = new RegExp(param);
+    }
+    return reg.test(value);        
+}, '手机号码格式不正确');
+
+var speed;
+var lis;
+var divtop;
+var height;
+var nav_today;
+var timer;
+
+var register={
+	formRegValid:null,
+	intervalPwd: null,	
+	init:function(){
+		register.formRegValid=$('#formReg').validate({
+			rules:{
+				txtCompanyName:{required:true,rangelength:[1,200]},
+				txtLinkman:{required:true,rangelength: [1, 60]},
+			    txtZoneNo:{inputRegValiZone:'^[0-9]{3}[0-9]?$'},
+			    txtPhoneNo:{required:true,match:'^[0-9]{6,11}$'},
+			    txtExtNo:{number:true},
+			    txtMobilePhone:{inputRegValiMobile:'^[1][0-9]{10}$'},
+			    txtUserID:{required:true,rangelength: [3, 30],match:'^[A-Za-z0-9_]*$',IsRegistered:true},
+			    txtPassword:{required:true,rangelength:[6, 18],inputRegValiPwd:true},
+			    txtVerifyPassword:{required:true,rangelength:[6, 18],equalTo:"#txtPassword"}
+			},
+			messages:{
+				txtCompanyName:{required:'请输入贵公司营业热照上的公司名称<span class="tipArr"></span>',rangelength:'1-200个字组成<span class="tipArr"></span>'},
+				txtLinkman:{required:'请填写联系人<span class="tipArr"></span>',rangelength:'1-60个字组成<span class="tipArr"></span>'},
+				txtZoneNo:{inputRegValiZone:'请填写正确的区号<span class="tipArr"></span>'},
+				txtPhoneNo:{required:'请填写联系电话<span class="tipArr"></span>',match:'请输入6-11位的数字<span class="tipArr"></span>'},
+				txtExtNo:{number:'分机号码为数字<span class="tipArr"></span>'},
+				txtMobilePhone:{inputRegValiMobile:'请填写正确的手机号码<span class="tipArr"></span>'},
+				txtUserID:{required:'请填写用户名<span class="tipArr"></span>',rangelength:'用户名3-30位字符<span class="tipArr"></span>',match:'用户名为字母、数字、下划线组成<span class="tipArr"></span>',IsRegistered:'该用户名已被注册，请更换<span class="tipArr"></span>'},
+				txtPassword:{required:'请填写密码<span class="tipArr"></span>',rangelength:'密码6-16位字符<span class="tipArr"></span>'},
+				txtVerifyPassword:{required:'请确认密码<span class="tipArr"></span>',rangelength:'密码6-16位字符<span class="tipArr"></span>',equalTo:'两次密码不一致<span class="tipArr"></span>'}
+			},
+			errorClasses:{
+				txtCompanyName:{required: 'tipLayErr tipw200',rangelength: 'tipLayErr tipw150'},
+				txtLinkman:{required: 'tipLayErr tipw150',rangelength: 'tipLayErr tipw150'},
+				txtZoneNo:{inputRegValiZone: 'tipLayErr tipw150'},
+				txtPhoneNo:{required:'tipLayErr tipw180',match: 'tipLayErr tipw180'},
+				txtExtNo:{number: 'tipLayErr tipw150'},
+				txtMobilePhone:{inputRegValiMobile:'tipLayErr tipw180'},
+				txtUserID:{required: 'tipLayErr tipw150',rangelength: 'tipLayErr tipw180',match:'tipLayErr tipw180',IsRegistered:'tipLayErr tipw180'},
+				txtPassword:{required: 'tipLayErr tipw150',rangelength: 'tipLayErr tipw220',match: 'tipLayErr tipw150',inputRegValiPwd:'tipLayErr tipw220'},
+				txtVerifyPassword:{required: 'tipLayErr tipw150',rangelength: 'tipLayErr tipw220',equalTo:'tipLayErr tipw150'}
+		    },
+		    tips:{
+		    	txtCompanyName:'请与贵公司营业执照注册名保持一致<span class="tipArr"></span>',
+		    	txtLinkman:'1-60为汉字组成<span class="tipArr"></span>',
+		    	txtUserID:'3-30位字符字母、数字、下划线组成<span class="tipArr"></span>',
+		    	txtMobilePhone:'手机号码11位数字组成<span class="tipArr"></span>',
+		    	txtPassword:'密码为6-18位数字、字母、下划线组合<span class="tipArr"></span>',
+		    	txtVerifyPassword:'密码为6-18位数字、字母、下划线组合<span class="tipArr"></span>'
+		    },
+		    tipClasses:{
+		    	txtCompanyName:'tipLayTxt tipw200',
+		    	txtLinkman:'tipLayTxt tipw120',
+		    	txtUserID:'tipLayTxt tipw200',
+		    	txtMobilePhone:'tipLayTxt tipw180',
+		    	txtPassword:'tipLayTxt tipw220',
+		    	txtVerifyPassword:'tipLayTxt tipw220'
+		    },
+		    groups:{
+		    	phoneNum:'txtPhoneNo txtExtNo txtZoneNo'
+		    },
+		    onkeyup:false,
+		    errorElement: 'span',
+		    errorPlacement: function(error, element)
+		    {
+			    if(element.attr('name')=='txtExtNo'||element.attr('name')=='txtPhoneNo'||element.attr('name')=='txtZoneNo'){
+			    	element.parent().nextAll().find('.tipLay').append(error);
+			    }else{
+		    		element.parent().next().find('.tipLay').append(error);   
+			    }                           
+		    },
+		    success: function(label)
+			{
+				label.text(" ");
+			}
+		});
+		//协议
+		$('#btnPact').click(function(){
+			$.showModal('#divPact',{ contentType: 'selector',showMask: true, dw: "600", title: '注册协议'});
+		});
+		//提交
+		$('#btnRegister').click(function(){
+			$('#btnRegister').submitForm({beforeSubmit: $.proxy(register.formRegValid.form,register.formRegValid), success: register.successCallback, clearForm: false });
+			return false;
+		});
+		//密码强度计算
+		$('#txtPassword').focus(function(){
+			register.intervalPwd = window.setInterval(register.pwdDynamic, 200);
+		}).blur(function(){
+			window.clearInterval(register.intervalPwd);
+		});
+		//滚动字幕
+		register.scroll();
+                $("#iplay_id").click(function(){
+                    $.showModal('{/get_url rule="/login/playVideo/"/}', { title: '关于汇博' });
+                });
+	},
+	scroll:function(){
+		 speed = 100;
+		 divtop = 0;
+		 lis = $('#ddComScroll p').clone();
+         $('#ddComScroll').append(lis);
+         height = $('#ddComScroll').height();
+         nav_today = $('#dlComScroll');
+         timer = window.setInterval(register.marqueeUp, speed);
+
+         $("#dlComScroll").mouseover(function() {
+             clearTimeout(timer);
+         }).mouseout(function() {
+             timer = window.setInterval(register.marqueeUp, speed);
+         });
+	},
+	marqueeUp: function() {
+        nav_today.scrollTop(divtop);
+        divtop++
+        if (divtop + nav_today.height() >= height) {
+            divtop = height / 2 - nav_today.height();
+        }
+    },
+	successCallback:function(json){
+		if (json && json.error) {
+            $.message(json.error,{ icon: 'warning' });
+            if (json.vcodeerr) {
+                $("#txtCatcha").focus();
+                $("#txtCatcha").val('');
+                $("#btnCode").click();
+            }
+            return;
+        }
+        $.anchorMsg(json.successMsg);
+        {/if $is_part/}
+            window.location.href ='{/get_url rule="/part/"/}';//兼职跳转到兼职页面
+        {/else/}
+            window.location.href ='{/get_url rule="/index/"/}';//直接跳转到企业首页 sx 7.20
+        {//if/}
+	},
+	pwdStrong:function(pwd){
+ 		//密码强度计算
+ 		var modes =0,pwd_len =pwd.length,i=0,codeTemp;
+ 		for(i;i<pwd_len;i++){
+ 			codeTemp = pwd.charCodeAt(i);
+ 			if(codeTemp>=48 && codeTemp<=75){
+ 				modes |=1;
+ 			}
+ 			else if(codeTemp>65&&codeTemp<=90){
+ 				modes |=2;
+ 			}
+ 			else if(codeTemp>97 && codeTemp<122){
+ 				modes |=4;
+ 			}
+ 			else{
+ 				modes |=8;
+ 			}
+ 		}
+ 		var modeNum=0;
+ 		for(i=0;i<4;i++){
+ 			if(modes & 1) modeNum++;
+ 			modes>>>=1;
+ 		}
+ 		return modeNum;
+ 	},
+ 	pwdDynamic:function(){
+ 		var password  = $('#txtPassword').val()
+ 			,strongBox = $('#pwdTipTxt')
+ 			,fn = this;
+
+ 		if(password == ''){
+ 			strongBox.hide();
+ 			return;
+ 		}
+
+ 		strongBox.show();
+
+ 		var modeNum = register.pwdStrong(password);
+ 		
+ 		if(modeNum <=1){
+ 			$(strongBox).find('em').removeClass().addClass('red').html('弱');
+ 		}
+ 		else if(modeNum == 2){
+ 			if(password.length<6){
+ 				$(strongBox).find('em').removeClass().addClass('red').html('弱');
+ 			}
+ 			else{
+ 				$(strongBox).find('em').removeClass().addClass('orange').html('中');
+ 			}
+ 		}
+ 		else if(modeNum >2){
+ 			if(password.length<6){
+ 				$(strongBox).find('em').removeClass().addClass('red').html('弱');
+ 			}
+ 			else if(password.length > 6 && password.length<10){
+ 				$(strongBox).find('em').removeClass().addClass('orange').html('中');
+ 			}
+ 			else{
+ 				$(strongBox).find('em').removeClass().addClass('green').html('强');
+ 			}
+ 		}
+ 	}	
+}
+register.init();
+</script>
+</body>
+</html>

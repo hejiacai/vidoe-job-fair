@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+<title>汇博网_招聘中心_我的账户</title>
+<!–[if lt IE9]> 
+<script src="{/version file='html5.js'/}"></script>  
+<![endif]–>
+<link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='comback.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='icons.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}" />
+
+<script type="text/javascript" src="{/version file='version.js'/}"></script>
+<script type="text/javascript">
+window.CONFIG = {
+	HOST: '{/$siteurl.style/}',
+	COMBOPATH: '/js/v2/'
+}
+</script>
+<script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+<script type="text/javascript" src="{/version file='global.js'/}"></script>
+<!--引用的字体样式-->
+<link rel="stylesheet" type="text/css" href="{/version file='m_font_style.css'/}" />
+
+<!--引用的公共样式-->
+<link rel="stylesheet" type="text/css" href="{/version file='accountindex.css'/}">
+<style>
+			/*导航图标样式*/
+.rMentUl li a em.mentIcon01{ background:url({/$siteurl.style/}/img/account/account1.png) no-repeat;}
+.rMentUl li a.cut em.mentIcon01{ background:url({/$siteurl.style/}/img/account/account2.png) no-repeat;}
+.rMentUl li a em.mentIcon02{ background:url({/$siteurl.style/}/img/account/resource1.png) no-repeat;}
+.rMentUl li a.cut em.mentIcon02{ background:url({/$siteurl.style/}/img/account/resource2.png) no-repeat;}
+		</style>
+</head>
+<body id="body">
+{/include file="new_header.html" par="企业管理" cur="账号管理"/}
+<div class="content resumentNbg" id="content">
+	<div class="rMentLt">
+	    <ul class="rMentUl">
+	        <li>
+	            <a href="{/get_url rule='/account/accountManage'/}">
+	                <em class="mentIcon01"></em>账号管理
+	            </a>
+	        </li>
+	        <li>
+            	<a href="{/get_url rule='/account/resourcelist'/}" class="cut">
+	                <em class="mentIcon02"></em>资源分配详情
+	            </a>
+	        </li>
+	    </ul>
+	</div>
+  <div class="account-management rMentRt">
+  	<div class="manage-content">
+  		<table id="manage-content">
+  			<tr>
+  				<th class="tal">账户信息</th>
+                <th>资源模式</th>
+                {/if $isCqNewService/}
+                <th>职位数</th>
+  				<th>简历点</th>
+  				<th>推广金</th>
+  				<th>刷新点</th>
+  				<th>聊一聊</th>
+  				<th>短信数</th>
+                {/else if $isNewService/}
+                <th>免费职位数</th>
+  				<th>精品职位数</th>
+  				<th>简历点</th>
+  				<th>推广金</th>
+  				<th>刷新点</th>
+  				<th>精品点</th>
+                {//if/}
+  				<th>操作</th>
+  			</tr>
+            {/foreach $account_list as $v/}
+            <tr>
+  				<td class="account-info">
+  						{/if $v['has_head_photo']/}<img src="{/$siteurl.style/}{/$v['head_photo']/}" alt="" />{/else/}<span class="header-img">{/$v['head_photo']/}</span>{//if/}
+  						<div class="info-right">
+  							<div class="info-top">{/$v['user_id']/}</div>
+  							<div class="info-bottom">
+                                {/$v['user_name']/}
+                                {/if $v['station']/}
+                                    /{/$v['station']/}
+                                {//if/}</div>
+  						</div>
+  						{/if $v['is_main']/}
+  						<p class="admin-tag">主账号</p>
+                        {//if/}
+               </td>
+                {/if $v['resource_type']  == 1/}
+                <td>共享模式</td>
+                    {/if !$v['is_main']/}
+                    <td>/</td>
+                    <td>/</td>
+                    <td>/</td>
+                    <td>/</td>
+                    <td>/</td>
+                    <td>/</td>
+                    {/else if $isCqNewService/}
+                    <td {/if !$ser_data_remin['job_num']/}class="colorred"{//if/}>{/$ser_data_remin['job_num']/}</td>
+                    <td {/if !$ser_data_remin['resume_num']/}class="colorred"{//if/}>{/$ser_data_remin['resume_num']/}</td>
+                    <td {/if $ser_data_remin['spread'] == 0.00/}class="colorred"{//if/}>{/$ser_data_remin['spread']/}</td>
+                    <td {/if !$ser_data_remin['point_job_refresh']/}class="colorred"{//if/}>{/$ser_data_remin['point_job_refresh']/}</td>
+                    <td {/if !$ser_data_remin['point_chat']/}class="colorred"{//if/}>{/$ser_data_remin['point_chat']/}</td>
+                    <td {/if !$ser_data_remin['point_message']/}class="colorred"{//if/}>{/$ser_data_remin['point_message']/}</td>
+                    {/else if $isNewService/}
+                    <td {/if !$ser_data_remin['job_num']/}class="colorred"{//if/}>{/$ser_data_remin['job_num']/}</td>
+                    <td {/if !$ser_data_remin['job_boutique']/}class="colorred"{//if/}>{/$ser_data_remin['job_boutique']/}</td>
+                    <td {/if !$ser_data_remin['resume_num']/}class="colorred"{//if/}>{/$ser_data_remin['resume_num']/}</td>
+                    <td {/if $ser_data_remin['spread'] == 0.00/}class="colorred"{//if/}>{/$ser_data_remin['spread']/}</td>
+                    <td {/if !$ser_data_remin['point_job_refresh']/}class="colorred"{//if/}>{/$ser_data_remin['point_job_refresh']/}</td>
+                    <td {/if !$ser_data_remin['point_job_boutique']/}class="colorred"{//if/}>{/$ser_data_remin['point_job_boutique']/}</td>
+                    {//if/}
+                {/else if $isCqNewService/}
+                <td>分配模式</td>
+                <td {/if !$v['account_ser']['job_num']/}class="colorred"{//if/}>{/$v['account_ser']['job_num']/}</td>
+                <td {/if !$v['account_ser']['resume_num']/}class="colorred"{//if/}>{/$v['account_ser']['resume_num']/}</td>
+                <td {/if $v['account_ser']['spread'] == 0.00/}class="colorred"{//if/}>{/$v['account_ser']['spread']/}</td>
+                <td {/if !$v['account_ser']['point_job_refresh']/}class="colorred"{//if/}>{/$v['account_ser']['point_job_refresh']/}</td>
+                <td {/if !$v['account_ser']['point_chat']/}class="colorred"{//if/}>{/$v['account_ser']['point_chat']/}</td>
+                <td {/if !$v['account_ser']['point_message']/}class="colorred"{//if/}>{/$v['account_ser']['point_message']/}</td>
+                {/else if $isNewService/}
+                <td>分配模式</td>
+                <td {/if !$v['account_ser']['job_num']/}class="colorred"{//if/}>{/$v['account_ser']['job_num']/}</td>
+                <td {/if !$v['account_ser']['job_boutique']/}class="colorred"{//if/}>{/$v['account_ser']['job_boutique']/}</td>
+                <td {/if !$v['account_ser']['resume_num']/}class="colorred"{//if/}>{/$v['account_ser']['resume_num']/}</td>
+                <td {/if $v['account_ser']['spread'] == 0.00/}class="colorred"{//if/}>{/$v['account_ser']['spread']/}</td>
+                <td {/if !$v['account_ser']['point_job_refresh']/}class="colorred"{//if/}>{/$v['account_ser']['point_job_refresh']/}</td>
+                <td {/if !$v['account_ser']['point_job_boutique']/}class="colorred"{//if/}>{/$v['account_ser']['point_job_boutique']/}</td>
+                {//if/}
+  				<td data-id="{/$v['account_id']/}">
+  					{/if !$v['is_main']/}<a class="divide_resource" href="javascript:;">编辑</a>{//if/}
+                </td>
+  			</tr>
+            {//foreach/}
+        </table>
+  	</div>
+  </div>
+</div>
+
+{/include file="./footer.html"/}
+<section class="floatRT"><a href="{/get_url domain='main' rule='/about/message'/}" target="_blank" class="serviceLink">我有问题要反馈</a><b></b></section>
+<script type="text/javascript">
+var release_point_sub_account = '4';
+
+hbjs.use('@confirmBox, @hbCommon', function(m){
+
+	var Dialog = m['widge.overlay.hbDialog'];
+	var $ = m['product.hbCommon'];
+	
+    var divideResourceDialog = new Dialog({
+		idName: 'adduser-dialog',
+		title: '资源模式',
+		isAjax: true,
+		close: '╳',
+		width: 520
+	});
+    $('.divide_resource').on('click', function(){
+        var account_id = $(this).parent().attr('data-id');
+        divideResourceDialog.setContent({content:"{/get_url rule='/account/divideSer/'/}?account_id="+account_id}).show();
+    });
+    $('.adduser-dialog').on('click','.gray-btn',function(){
+    	divideResourceDialog.hide()
+    })
+});
+
+</script>
+</body>
+</html>

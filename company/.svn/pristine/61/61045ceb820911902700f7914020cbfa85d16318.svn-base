@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="{/version file="base.css"/}">
+		<link rel="stylesheet" type="text/css" href="{/version file="v2-widge.css"/}">
+		<link rel="stylesheet" type="text/css" href="{/version file="icons.css"/}">
+        <link rel="stylesheet" type="text/css" href="{/version file='ratePoster.css'/}" />
+	<script type="text/javascript" src="{/version file="jquery-1.8.3.js"/}"></script>
+	<script type="text/javascript">
+window.CONFIG = {
+	HOST: '//assets.huibo.com',
+	COMBOPATH: '/js/v2/'
+}
+</script>
+<script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+<script type="text/javascript" src="{/version file="global.js"/}"></script>
+<script type="text/javascript">
+	hbjs.loadJS('{/version file="common.js"/}');
+</script>
+<style type="text/css">
+	.hb_ui_dialog .ui_dialog_container{ padding: 0;}
+	.welfareAmend_dialog .dialogFooter{ 
+		text-align: right;
+		background-color: #fafafa;
+	    padding: 10px 10px;
+	    border-top: 1px solid #ebebeb;
+	    text-align: right;
+    }
+	.rateImgList div {
+		position: relative;
+		width: 9999px;
+	}
+</style>
+	</head>
+	<body>
+		<div class="gpHeader">
+			<div>
+				<span>生成招聘海报<i>编辑中</i></span>
+				<a href="{/$company_url/}">返回首页</a>
+			</div>
+		</div>
+		<div class="ratePosterMain">
+			<div class="ratePosterLeft">
+				
+				<div class="clear"></div>
+				<div class="rateImgMain">
+					<div class="rateImgx">
+						<a href="{/$img_arr[$cur-1]['url']/}" target="_blank" title="点击放大">
+						<img src="{/$img_arr[$cur-1]['url']/}" /></a>
+					</div>
+					<div class="rateImgz">
+						<div class="rateImgList">
+							<div id="imgBox">
+                                {/foreach $img_arr as $k=>$v/}
+								<span {/if $cur==$v['key']/}class="cut" {//if/} data-key="{/$v['key']/}" data-url="{/$v['url']/}">
+									<i></i>
+									<img src="{/$v['url']/}" />
+                                </span>
+                                {//foreach/}
+							</div>
+						</div>
+						<a href="javascript:void(0);" class="rateImgLeft"></a>
+						<a href="javascript:void(0);" class="rateImgRight"></a>
+					</div>
+				</div>
+                <input type="hidden" id="imgKey" value="{/$cur/}" name="imgKey"/>
+			</div>
+			<div class="ratePosterRight">
+				<a href="javascript:window.history.back();" class="editRatex" style="margin-left: 0;"><i></i>退出编辑</a>
+				<div class="rateWelfare">
+					<div class="rateFarex">
+						福利待遇<a href="javascript:void(0);" class="welfareAmend">修改</a>
+					</div>
+					<div class="rateFarez">
+                        {/foreach $cur_reward as $v/}
+						<span>{/$v/}</span>
+                        {//foreach/}
+					</div>
+					<input type="hidden" name="welfareHide" id="welfareHide" value="" />
+                    <input type="hidden" name="welfareNameHide" id="welfareNameHide" value="{/implode(',',$cur_reward)/}" />
+				</div>
+				<div class="rateJobVcy">
+					<div class="rateVcyx">
+						<h2>招聘职位</h2>
+						<div class="reateEditTipx" style="display: none;">
+							<span>
+								仅能选择在招职位<b>（最多7个），超出3个</b>请在手机上查看完整效果
+							</span>
+						</div>
+					</div>
+					<div class="rateVcyz">
+                        {/foreach $job_posted as $k=>$v/}
+						<span>
+							<em>{/$v['station']/}</em>
+							<i data-id="{/$v['job_id']/}"></i>
+						</span>
+                        {//foreach/}
+					</div>
+					<div class="rateVcys">
+                        {/foreach $job_list as $k=>$v/}
+						<span data-id='{/$v['job_id']/}' {/if in_array($v['job_id'],$job_posted_ids)/}class="cut"{//if/} title="{/$v['station']/}"><i></i>{/$v['station']/}</span>
+                        {//foreach/}
+					</div>
+					<input type="hidden" name="vcyHide" id="vcyHide" value="{/implode(',',$job_posted_ids)/}" />
+					<div class="rateArea">
+						<b>公司地址</b>
+						<a href="javascript:void(0);" class="areaAmend">修改</a>
+						<span class="areaShow"><i></i>{/$cur_address/}</span>
+					</div>
+					<input type="hidden" name="areaHide" id="areaHide" value="{/$cur_address_id/}" />
+					<div class="rateForm">
+						<a href="javascript:void(0);" class="ratePreview">预览</a>
+						<a href="javascript:void(0);" class="rateSave">保存修改</a>
+					</div>
+				</div>
+			</div>
+		</div>
+<script type="text/javascript">
+hbjs.use('@confirmBox', function(m) {
+
+	var	ConfirmBox = m['widge.overlay.confirmBox'],
+		Dialog = m['widge.overlay.hbDialog'],
+		fontSize = 18,
+		pWidth = 70;
+	
+	var welfareAmend = new Dialog({
+		idName : 'welfareAmend_dialog',
+		title : '福利待遇',
+		width : 590,
+		isOverflow : false,
+		isAjax : true
+	});
+	var rateAreaPop = new Dialog({
+		idName : 'welfareAmend_dialog',
+		title : '公司地址',
+		width : 500,
+		isOverflow : false,
+		isAjax : true
+	});
+	
+	var welfareHtml = '<div class="rateWelfarePop">'+
+		'<span class="ratePopTips">最多可选择4项</span>'+
+		'<div class="setWelfare">'+
+            {/foreach $reward as $k=>$v/}
+		'<a href="javascript:;" date-rewardid="{/$v["reward_id"]/}" data-type="default"><em>{/$v["reward_name"]/}</em></em><i class="hbIconMoon"></i></a>'+
+        {//foreach/}
+
+		'</div>'+
+		'<div class="ratePopput">'+
+		'<input name="other_reward" id="other_reward" type="text" placeholder="添加自定义，最多4个字" style="padding:5px;margin:0 15px 20px 0">'+
+		'<a style=" vertical-align: 3px;" href="javascript:void(0);" class="btn1 btnsF12" id="addOtherReward">添加</a>'+
+		'<span id="rateMsg"></span>'+
+		'</div>'+
+		'<div class="dialogFooter">'+
+		'<a id="btnReardSave" href="javascript:void(0);" class="btn1 btnsF12">确定</a>'+
+		'<a id="btnRwardCancel" href="javascript:void(0);" class="btn3 btnsF12">取消</a>'+
+		'</div></div>';
+	var rateAreaPopHtml = '<div class="rateAreaPop">'+
+		'<div class="rateAreaData">'+
+            {/foreach $address as $k=>$v/}
+		'<span data-id="{/$v["id"]/}"><i></i>{/$v['add_info']/}{/if empty($v['id'])/}（公司地址）{//if/}</span>'+
+        {//foreach/}
+		'</div>'+
+		'<div class="dialogFooter">'+
+		'<a id="btnAreaSave" href="javascript:void(0);" class="btn1 btnsF12">确定</a>'+
+		'<a id="btnAreaCancel" href="javascript:void(0);" class="btn3 btnsF12">取消</a>'+
+		'</div></div>';
+	//修改福利待遇
+	$('.welfareAmend').on('click', function(){
+		welfareAmend.setContent(welfareHtml).show();
+		welfareAmendx();
+		//选中福利
+		$(document).on('click','.setWelfare a', function(){
+			$(this).toggleClass('cur');
+			var swLength = $('.setWelfare a.cur').length;
+			if(swLength > 4){
+				$(this).removeClass('cur');
+				ConfirmBox.timeBomb('最多只能选择4项福利',{
+                    name: 'fail',
+                    timeout : 2000,
+                    width:fontSize * 10 + pWidth
+                });
+				return false;
+			}
+			
+		});
+		//自定义添加福利
+		$('#addOtherReward').click(function(){
+			var setWelfareNum = parseInt($('.setWelfare a:last-child').attr('date-rewardid'))+1;
+            var other_reward = $.trim($("#other_reward").val());
+			var addSetWelfare = '<a href="javascript:;" date-rewardid="0'+setWelfareNum+'" data-type="default"><em>'+other_reward+'</em><i class="hbIconMoon"></i></a>';
+			if(other_reward == ''){
+				$('#rateMsg').text('添加福利不能为空');
+				
+			}else if(other_reward.length > 4){
+				$('#rateMsg').text('添加职位福利超过4个字符');
+			}else{
+				$('.setWelfare').append(addSetWelfare);
+				$('#rateMsg').text('');
+			}
+		});
+		//确定添加福利
+		$('#btnReardSave').click(function(){
+			var welfareAry = [];
+			var welfareStr = '';
+            var welfarNameAry = [];
+            var welfareNameStr = '';
+			var welfareHtml = '';
+			var swLength = $('.setWelfare a.cur').length;
+			if(swLength < 1){
+				ConfirmBox.timeBomb('至少选择1项福利',{
+                    name: 'fail',
+                    timeout : 2000,
+                    width:fontSize * 8 + pWidth
+                });
+			}else{
+				
+				$('.setWelfare .cur').each(function(key,value){
+					welfareAry.push($(value).attr('date-rewardid'));
+					welfareStr = welfareAry.join(',');
+                    welfarNameAry.push($(value).find('em').text());
+                    welfareNameStr = welfarNameAry.join(',');
+					welfareHtml += '<span>'+$(value).find('em').text()+'</span>';
+				});
+				$('#welfareHide').val(welfareStr);
+                $('#welfareNameHide').val(welfareNameStr);
+				$('.rateFarez').html(welfareHtml);
+				welfareAmend.hide();
+				$(document).off('click','.setWelfare a');
+				
+			}
+		});
+	//取消弹窗
+		$('#btnRwardCancel').click(function(){
+			welfareAmend.hide();
+			$(document).off('click','.setWelfare a');
+		});
+	});
+	
+	if($('.rateVcys .cut').length > 3){
+		$('.reateEditTipx').css('display','block');
+	}
+//选择招聘职位
+	$('.rateVcys span').click(function(){
+		$(this).toggleClass('cut');
+		var rateVcysLth = $('.rateVcys .cut').length;
+		var vcyAry = [];
+		var vcyStr = '';
+		var vcyStrx = '';
+//        if(rateVcysLth < 1){
+//            $(this).addClass('cut');
+//            ConfirmBox.timeBomb('至少选择2个在招职位',{
+//                name: 'fail',
+//                timeout : 2000,
+//                width:fontSize * 10 + pWidth
+//            });
+//            return false;
+//        }
+		if(rateVcysLth > 3){
+			$('.reateEditTipx').css('display','block');
+		}else{
+			$('.reateEditTipx').css('display','none');
+		}
+		if(rateVcysLth > 7){
+			$(this).removeClass('cut');
+			ConfirmBox.timeBomb('最多只能选择7个在招职位',{
+                name: 'fail',
+                timeout : 2000,
+                width:fontSize * 12 + pWidth
+            });
+			return false;
+		}
+		$('.rateVcys .cut').each(function(i,n){
+			vcyAry.push($(n).attr('data-id'));
+			vcyStrx += '<span><em>'+$(n).text()+'</em><i data-id="'+$(n).attr('data-id')+'"></i></span>'
+		});
+		vcyStr = vcyAry.join(',');
+		$('#vcyHide').val(vcyStr);
+		$('.rateVcyz').html(vcyStrx);
+		
+	});
+//删除当前选择的在招职位
+	$(document).on('click','.rateVcyz span i', function(){
+        var rateVcyzLength = $('.rateVcyz span').length;
+//        if(rateVcyzLength <= 1){
+//            ConfirmBox.timeBomb('至少选择2个在招职位',{
+//                name: 'fail',
+//                timeout : 2000,
+//                width:fontSize * 9 + pWidth
+//            });
+//            return false;
+//        }
+		if(rateVcyzLength < 5){
+			$('.reateEditTipx').css('display','none');
+		}
+		var thisId = $(this).attr('data-id');
+        var vcyAry = [];
+        var vcyStr = '';
+		$(this).parent().remove();
+		$('.rateVcys span').each(function(i,n){
+			if(thisId == $(n).attr('data-id')){
+				$(n).removeClass('cut');
+			}
+		});
+        $('.rateVcys .cut').each(function(i,n){
+            vcyAry.push($(n).attr('data-id'));
+        });
+        vcyStr = vcyAry.join(',');
+        $('#vcyHide').val(vcyStr);
+	});
+//修改公司地址
+	$('.areaAmend').on('click', function(){
+		rateAreaPop.setContent(rateAreaPopHtml).show();
+        var areaHideId = $('#areaHide').val();
+        $('.rateAreaData span').each(function(i,n){
+             if($(n).attr('data-id') == areaHideId){
+                 $(n).addClass('cut');
+             }
+        })
+
+		$('.rateAreaData span').click(function(){
+			$(this).addClass('cut').siblings().removeClass('cut');
+		});
+		$('#btnAreaSave').click(function(){
+			var rateAreaDatax = $('.rateAreaData .cut').text();
+			var rateAreaDataLth = $('.rateAreaData .cut').length;
+			var thisId = $('.rateAreaData .cut').attr('data-id');
+			if(rateAreaDataLth < 1){
+				ConfirmBox.timeBomb('请选择1个公司地址',{
+	                name: 'fail',
+	                timeout : 2000,
+	                width:fontSize * 9 + pWidth
+	            });
+	            return false;
+			}
+			$('.areaShow').html('<i></i>'+rateAreaDatax+'');
+			$('#areaHide').val(thisId);
+			rateAreaPop.hide();
+		});
+		$('#btnAreaCancel').click(function(){
+			rateAreaPop.hide();
+		});
+	});
+	if($('.rateImgList span').length <=3){
+			$('.rateImgLeft,.rateImgRight').hide();
+	}
+	
+	//跳转时海报的位置
+	$('.rateImgList div span').ready(function(){
+		if($('.rateImgList div span').length<=3){
+	            return
+	        }else {
+	            if($('#imgKey').val()-1<2){
+	                $('.rateImgList div').css({'left':0+'px'})
+	                return;
+	            }
+	            if($('#imgKey').val()-1<=$('.rateImgList div span').length-1 && $('#imgKey').val()-1>$('.rateImgList div span').length-3) {
+	                $('.rateImgList div').css({'left':-(($('.rateImgList div span').eq($('#imgKey').val()-1).outerWidth(true))*($('.rateImgList div span').length-3))+'px'});
+	                return;
+	            }
+	        }
+        $('.rateImgList div').css({'left':-(($('#imgKey').val()-1)*($('.rateImgList div span').eq($('#imgKey').val()-1).outerWidth(true)))+'px'})
+     });
+	
+//选择分享海报
+	$(document).on('click','.rateImgList span', function(){
+        var _that =  $(this);
+        _that.addClass('cut').siblings().removeClass('cut');
+        var thisIndex = _that.index();
+        console.log('111',thisIndex)
+        var thisId = _that.attr('data-key');
+        $('#imgKey').val(thisId);
+        var url = _that.attr("data-url");
+        $('.rateImgx img').attr('src',url);
+        $('.rateImgx a').attr('href',url);
+
+        if($('.rateImgList div span').length<=3){
+            return
+        }else {
+            if(thisIndex<2){
+                $('.rateImgList div').animate({'left':0+'px'})
+                return;
+            }
+            if(thisIndex<=$('.rateImgList div span').length-1 && thisIndex>$('.rateImgList div span').length-3) {
+                $('.rateImgList div').animate({'left':-(($(this).outerWidth(true))*($('.rateImgList div span').length-3))+'px'});
+                return;
+            }
+        }
+        $('.rateImgList div').animate({'left':-((thisIndex-1)*($(this).outerWidth(true)))+'px'})
+	});
+    $('.ratePreview').on("click",function(){
+        var rewards = $('#welfareNameHide').val();
+        var address_id = $('#areaHide').val();
+        var job_ids = $('#vcyHide').val();
+        var poster_type = $('#imgKey').val();
+        var rateVcyzLength = $('.rateVcyz span').length;
+        if(rateVcyzLength < 2){
+            ConfirmBox.timeBomb('至少选择2个在招职位',{
+                name: 'fail',
+                timeout : 2000,
+                width:fontSize * 9 + pWidth
+            });
+            return false;
+        }
+        $('.rateImgx img').attr('src',"{/$company_url/}/createposter/AjaxPoster/job_ids-"+job_ids+"-address_id-"+address_id+"-rewards-"+rewards+"-poster_type-"+poster_type);
+        $('.rateImgx a').attr('href',"{/$company_url/}/createposter/AjaxPoster/job_ids-"+job_ids+"-address_id-"+address_id+"-rewards-"+rewards+"-poster_type-"+poster_type);
+        $('#imgBox').html('');
+
+        var html = '';
+        for(var i=0;i<6;i++){
+            html += '<span  data-key="'+(i+1)+'" data-url="{/$company_url/}/createposter/AjaxPoster/job_ids-'+job_ids+'-address_id-'+address_id+'-rewards-'+rewards+'-poster_type-'+(i+1)+'">'+
+                    ' <i></i>'+
+                    '<img src="{/$company_url/}/createposter/AjaxPoster/job_ids-'+job_ids+'-address_id-'+address_id+'-rewards-'+rewards+'-poster_type-'+(i+1)+'" />'+
+                    '</span>';
+        }
+        $('#imgBox').html(html);
+        $('#imgBox span').eq(poster_type-1).addClass('cut');
+    })
+    $('.rateSave').on("click",function(){
+        var rewards = $('#welfareNameHide').val();
+        var address_id = $('#areaHide').val();
+        var job_ids = $('#vcyHide').val();
+        var poster_type = $('#imgKey').val();
+        var rateVcyzLength = $('.rateVcyz span').length;
+        if(rateVcyzLength < 2){
+            ConfirmBox.timeBomb('至少选择2个在招职位',{
+                name: 'fail',
+                timeout : 2000,
+                width:fontSize * 9 + pWidth
+            });
+            return false;
+        }
+        $.post("{/get_url rule='/createposter/saveposter/'/}",{rewards:rewards,address_id:address_id,job_ids:job_ids,poster_type:poster_type},function(r){
+            if(!r.status){
+                //$.anchor(r.msg,{icon:"fail"});
+                return;
+            }
+            //$.anchor(r.msg,{icon:"success"});
+            window.location.href = "{/$company_url/}/createposter/index/id-"+ r.poster_id;
+        },'json');
+    })
+});
+
+function welfareAmendx(){
+	var mendStr = $('#welfareHide').val();
+	var mendAry = mendStr.split(',');
+	var mendAryx = [];
+	$('.setWelfare a').each(function(key,value){
+		for(x in mendAry){
+			if(mendAry[x] == $(value).attr('date-rewardid')){
+				$(value).addClass('cur');
+			}
+		}
+	});
+
+}
+
+
+
+//左右按钮选择海报
+	$('.rateImgLeft').on('click',function () {
+		console.log( $('.rateImgList div span.cut').index(),$('.rateImgList div span').length);
+		if($('.rateImgList div span.cut').index()<=0){
+			$('.rateImgList div span').eq($('.rateImgList div span').length-1)[0].click()
+		}else{
+        	$('.rateImgList div span').eq($('.rateImgList div span.cut').index()-1)[0].click()
+        }
+    })
+    $('.rateImgRight').on('click',function () {
+		if($('.rateImgList div span.cut').index()>=$('.rateImgList div span').length-1){
+			$('.rateImgList div span').eq(0)[0].click()
+		}else{
+        	$('.rateImgList div span').eq($('.rateImgList div span.cut').index()+1)[0].click()
+        }
+    })
+
+</script>
+    </body>
+</html>

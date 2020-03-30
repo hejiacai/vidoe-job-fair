@@ -1,0 +1,661 @@
+<!doctype html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<meta name="Keywords" content=""/>
+	<meta name="Description" content=""/>
+	<title>{/$title/}</title>
+	<!–[if lt IE9]>
+	<script src="{/version file='html5.js'/}"></script>
+	<![endif]–>
+	<link rel="stylesheet" type="text/css" href="{/version file="v2-reset.css"/}"/>
+	<link rel="stylesheet" type="text/css" href="{/version file="comback.css"/}"/>
+	<link rel="stylesheet" type="text/css" href="{/version file="icons.css"/}"/>
+	<link rel="stylesheet" type="text/css" href="{/version file="v2-widge.css"/}"/>
+	<link rel="stylesheet" type="text/css" href="{/version file="v2-pay.css"/}"/>
+	<script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.min.js'/}"></script>
+	<script type="text/javascript" src="{/version file='version.js'/}"></script>
+	<script type="text/javascript">
+        window.CONFIG = {
+            HOST: '{/$siteurl.style/}',
+            COMBOPATH: '/js/v2/'
+        }
+	</script>
+	<script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+	<script type="text/javascript" src="{/version file='global.js'/}"></script>
+	<style type="text/css">
+		.warning_dialog {padding: 25px 25px 15px;}
+		.allotCouponCash_li {
+			padding: 1px 10px;
+			margin-top: 5px;
+			border: 1px solid #f1f1f1;
+			background: #fafafa;
+			width: auto;
+			display: inline-block;
+			cursor: pointer;
+		}
+		.allotCouponCash_li b { font-weight: normal; font-size: 20px; color: #f60;}
+		.allotCouponCash_li.forbidden_Cash {
+			background: #ccc;
+			border: 1px solid #ccc;
+		}
+		.allotCouponCash_li.allotCouponCash_select {
+			border: 1px solid #EA9B25;
+			background: url({/$siteurl.style/}/img/v2/selected_a.jpg) right 14px #FEF6EB no-repeat;
+			color: #8A4937;
+		}
+	</style>
+</head>
+<body id="body">
+{/*include 'new_header.html' cur='企业管理'*/}
+{/include file="new_header.html" par="企业管理" cur="资金管理"/}
+<div class="resumentNbg clearfix">
+	{/include 'economicnav.html' par="账户充值"/}
+	<div id="pay-main" class="rMentRt" style="background:#fff; overflow:hidden;">
+
+		<div class="pay-container">
+
+			<div class="pay-tab">
+				<a class="{/if !$allot/}cur{//if/}" href="{/get_url rule="/pay/index"/}">在线充值</a>
+				<a class="{/if $allot/}cur{//if/}" href="{/get_url rule="/pay/index"/}allot-1">招聘服务购买</a>
+				<a href="{/get_url rule="/pay/list/"/}">充值记录</a>
+				<a href="{/get_url rule="/pay/partlist/"/}">兼职充值记录</a>
+				<a href="{/get_url rule="/spread/"/}">推广金详情</a>
+			</div>
+			<div id="pay-form" class="pay-form">
+				<dl>
+					<dt>服务金额：</dt>
+					<dd>
+						<input class="text_b priceInput" onkeyup="value=value.replace(/[^\d]/g,'')" name='txtAmount' id="txtAmount"/>元
+					</dd>
+				</dl>
+				{/if $allotCouponCash_data/}
+					<dl>
+						<dt>现&nbsp;金&nbsp;券：</dt>
+						<dd>
+							{/foreach $allotCouponCash_data as $val/}
+								<div class="allotCouponCash_li"
+									 data_id="{/$val.id/}"
+									 data_money="{/$val.money/}"
+									 data_consume="{/$val.consume/}">
+									<b>{/$val.money/}元</b>
+									现金券
+									最低消费: {/if $val.consume>0/}{/$val.consume/}{/else/}不限制{//if/}
+									有效期: {/$val.validity_date_s/}-{/$val.validity_date_e/}
+								</div>
+							{//foreach/}
+						</dd>
+					</dl>
+					<dl>
+						<dt></dt>
+						<dd>
+							<strong class="account_num_strong" style="color:#d73937;font-size:14px;font-family: '微软雅黑';">
+								需支付
+								<span class="account_num">
+								--
+							</span>
+								元
+							</strong>
+						</dd>
+					</dl>
+				{//if/}
+
+				<dl class="pay-group-list">
+					<dt>支付方式：</dt>
+					<dd id="pay-group-list">
+						<div class="card-tab">
+							<a href="javascript:" style="display: none"><em></em>银行卡</a>
+							<a href="javascript:" style="display: none"><em></em>信用卡</a>
+							<a class="cur" href="javascript:"><em></em>支付宝</a>
+							<a href="javascript:"><em></em>微信</a>
+						</div>
+						<ul id="bankList" style="display: none">
+							<li>
+								<label><input name="card" type="radio" value="1025"/><span><img src="{/$siteurl.style/}/img/v2/pay/logo/工商银行.gif" alt=""/></span></label>
+							</li>
+							<li>
+								<label><input name="card" type="radio" value="3080"/><span><img src="{/$siteurl.style/}/img/v2/pay/logo/招商银行.gif" alt=""/></span></label>
+							</li>
+							<li>
+								<label><input name="card" type="radio" value="105"/><span><img src="{/$siteurl.style/}/img/v2/pay/logo/建设银行.gif" alt=""/></span></label>
+							</li>
+							<li>
+								<label><input name="card" type="radio" value="103"/><span><img src="{/$siteurl.style/}/img/v2/pay/logo/农业银行.gif" alt=""/></span></label>
+							</li>
+							<li>
+								<label><input name="card" type="radio" value="104"/><span><img src="{/$siteurl.style/}/img/v2/pay/logo/中国银行.gif" alt=""/></span></label>
+							</li>
+							<li>
+								<label><input name="card" type="radio" value="301"/><span><img src="{/$siteurl.style/}/img/v2/pay/logo/交通银行.gif" alt=""/></span></label>
+							</li>
+							<li>
+								<label><input name="card" type="radio" value="311"/><span><img src="{/$siteurl.style/}/img/v2/pay/logo/华夏银行.gif" alt=""/></span></label>
+							</li>
+							<li>
+								<label><input name="card" type="radio" value="309"/><span><img src="{/$siteurl.style/}/img/v2/pay/logo/兴业银行.gif" alt=""/></span></label>
+							</li>
+							<li>
+								<label><input name="card" type="radio" value="305"/><span><img src="{/$siteurl.style/}/img/v2/pay/logo/民生银行.gif" alt=""/></span></label>
+							</li>
+							<li>
+								<label><input name="card" type="radio" value="3230"/><span><img src="{/$siteurl.style/}/img/v2/pay/logo/中国邮政储蓄银行.gif" alt=""/></span></label>
+							</li>
+							<li>
+								<label><input name="card" type="radio" value="313"/><span><img src="{/$siteurl.style/}/img/v2/pay/logo/中信银行.gif" alt=""/></span></label>
+							</li>
+							<li>
+								<label><input name="card" type="radio" value="342"/><span><img src="{/$siteurl.style/}/img/v2/pay/logo/重庆农商银行.gif" alt=""/></span></label>
+							</li>
+							<li>
+								<label><input name="card" type="radio" value="312"/><span><img src="{/$siteurl.style/}/img/v2/pay/logo/光大银行.gif" alt=""/></span></label>
+							</li>
+							<li>
+								<label><input name="card" type="radio" value="306"/><span><img src="{/$siteurl.style/}/img/v2/pay/logo/广发银行.gif" alt=""/></span></label>
+							</li>
+							<li>
+								<label><input name="card" type="radio" value="307"/><span><img src="{/$siteurl.style/}/img/v2/pay/logo/平安银行.gif" alt=""/></span></label>
+							</li>
+							<li>
+								<label><input name="card" type="radio" value="314"/><span><img src="{/$siteurl.style/}/img/v2/pay/logo/上海浦东发展银行.gif" alt=""/></span></label>
+							</li>
+							<li>
+								<label><input name="card" type="radio" value="326"/><span><img src="{/$siteurl.style/}/img/v2/pay/logo/上海银行.gif" alt=""/></span></label>
+							</li>
+							<li>
+								<label><input name="card" type="radio"/><span><img src="{/$siteurl.style/}/img/v2/pay/logo/其他银行.gif" alt=""/></span></label>
+							</li>
+
+						</ul>
+
+						<ul id="cardList" style="display:none">
+
+							<li>
+								<label><input name="card" type="radio" value="1027"/><span><img src="{/$siteurl.style/}/img/v2/pay/logo/工商银行.gif" alt=""/></span></label>
+							</li>
+							<li>
+								<label><input name="card" type="radio" value="308"/><span><img src="{/$siteurl.style/}/img/v2/pay/logo/招商银行.gif" alt=""/></span></label>
+							</li>
+							<li>
+								<label><input name="card" type="radio" value="1054"/><span><img src="{/$siteurl.style/}/img/v2/pay/logo/建设银行.gif" alt=""/></span></label>
+							</li>
+							<li>
+								<label><input name="card" type="radio" value="106"/><span><img src="{/$siteurl.style/}/img/v2/pay/logo/中国银行.gif" alt=""/></span></label>
+							</li>
+							<li>
+								<label><input name="card" type="radio" value="3112"/><span><img src="{/$siteurl.style/}/img/v2/pay/logo/华夏银行.gif" alt=""/></span></label>
+							</li>
+							<li>
+								<label><input name="card" type="radio" value="3051"/><span><img src="{/$siteurl.style/}/img/v2/pay/logo/民生银行.gif" alt=""/></span></label>
+							</li>
+							<li>
+								<label><input name="card" type="radio" value="3121"/><span><img src="{/$siteurl.style/}/img/v2/pay/logo/光大银行.gif" alt=""/></span></label>
+							</li>
+							<li>
+								<label><input name="card" type="radio" value="3231"/><span><img src="{/$siteurl.style/}/img/v2/pay/logo/中国邮政储蓄银行.gif" alt=""/></span></label>
+							</li>
+							<li>
+								<label><input name="card" type="radio" value="3241"/><span><img src="{/$siteurl.style/}/img/v2/pay/logo/杭州银行.jpg" alt=""/></span></label>
+							</li>
+							<li>
+								<label><input name="card" type="radio" value="303"/><span><img src="{/$siteurl.style/}/img/v2/pay/logo/宁波银行.gif" alt=""/></span></label>
+							</li>
+							<li>
+								<label><input name="card" type="radio" value="3261"/><span><img src="{/$siteurl.style/}/img/v2/pay/logo/上海银行.gif" alt=""/></span></label>
+							</li>
+							<li>
+								<label><input name="card" type="radio" value="301"/><span><img src="{/$siteurl.style/}/img/v2/pay/logo/交通银行.gif" alt=""/></span></label>
+							</li>
+							<li>
+								<label><input name="card" type="radio" value="309"/><span><img src="{/$siteurl.style/}/img/v2/pay/logo/兴业银行.gif" alt=""/></span></label>
+							</li>
+							<li>
+								<label><input name="card" type="radio" value="307"/><span><img src="{/$siteurl.style/}/img/v2/pay/logo/平安银行.gif" alt=""/></span></label>
+							</li>
+							<li>
+								<label><input name="card" type="radio" value="334"/><span><img src="{/$siteurl.style/}/img/v2/pay/logo/青岛银行.gif" alt=""/></span></label>
+							</li>
+							<li>
+								<label><input name="card" type="radio" value=""/><span><img src="{/$siteurl.style/}/img/v2/pay/logo/其他银行.gif" alt=""/></span></label>
+							</li>
+
+						</ul>
+
+					</dd>
+
+				</dl>
+				<dl>
+					<dt>&nbsp;</dt>
+					<dd>
+
+						<button id="paySubmit" class="button_b" type="button">确认支付</button>
+						<p>充值遇到问题？<a href="javascript:void(0);" class="reportproblem">点击反馈</a></p>
+
+					</dd>
+
+				</dl>
+			</div>
+		</div>
+	</div>
+</div>
+{/include file="footer.html"/}
+<section class="floatRT"><a href="{/get_url rule='/about/message' domain='main'/}" target="_blank" class="serviceLink">我有问题要反馈</a><b></b></section>
+<script type="text/javascript">
+    var confirmBox, Dialog;
+    hbjs.use('@dialog,@confirmBox', function (m) {
+
+        var $ = m['jquery'];
+        confirmBox = m['widge.overlay.confirmBox'];
+        Dialog = m['widge.overlay.hbDialog'];
+    });
+
+    //错误提示 success-成功 fail-错误 warning-警告 question-疑问  info-信息 normal-正常
+    function msg_error_box(msg) {
+        confirmBox.timeBomb(msg ? msg : "参数错误!", {
+            name: 'fail',
+            timeout: 2000,
+            width: 70 + msg.length * 18
+        });
+        return false;
+    }
+
+    //成功提示 success-成功 fail-错误 warning-警告 question-疑问  info-信息 normal-正常
+    function msg_success_box(msg) {
+        confirmBox.timeBomb(msg ? msg : "成功!", {
+            name: 'success',
+            timeout: 1000,
+            width: 70 + msg.length * 18
+        });
+        return true;
+    }
+
+    function ajax_function(url, data, success_c, async, type) {
+        success_c = success_c ? success_c : {
+            success: function (data) {
+
+            },
+            error: function (data) {
+
+            }
+        };
+        type = type ? type : 'POST';
+        async = async ? async : false;//是否同步请求  //false-同步请求
+        if (!url || !success_c) {
+            layer.msg('参数错误', {icon: 5});
+        }
+        var re = false;
+        $.ajax({
+            type: type,
+            url: url,
+            data: data,//只要将表单序列化就可以了
+            async: async,//false-同步请求
+            dataType: 'json',
+            success: function (data) {
+                re = success_c.success(data);
+            },
+            error: function (request) {
+                layer.msg("数据请求失败.请稍后重试", {icon: 7});
+                re = success_c.error(request);
+                re = false;
+            }
+        });
+        return re;
+    }
+
+    //等待
+    var loadingDialog_1;
+
+    function loadingDialog(msg) {
+        msg = msg ? msg : '正在加载...';
+        var loading = '<div class="ui_dialog_loading">' + msg + '</div>';
+        if (!loadingDialog_1) {
+            loadingDialog_1 = new Dialog({
+                close: null,
+                idName: 'loadingDialog_1',
+                title: null,
+                content: loading,
+                isAjax: true
+            });
+            loadingDialog_1.hide_old = loadingDialog_1.hide;
+            loadingDialog_1.hide = function () {
+                loadingDialog_1.hide_old();
+                if ($('.hb_ui_dialog:not(:hidden)').length) {
+                    $('.hb_ui_ui-mask').show();
+                }
+            };
+        } else {
+            loadingDialog_1.setContent({
+                content: loading,
+            });
+        }
+        loadingDialog_1.show();
+        $('.loadingDialog_1').css({border: '1px solid #a3a3a3', 'z-index': 100000});
+        return loadingDialog_1;
+    }
+
+
+    var wxialog;
+    hbjs.use('@tabs,@confirmBox,@verifier,@actions', function (m) {
+
+        var accountrecharge = {
+            newwindow: null
+        };
+        var tabIndex = 2,
+            Dialog = m['widge.overlay.hbDialog'],
+            $ = m['jquery'].extend(m['cqjob.actions']),
+            listTab = $('#pay-group-list'),
+            tab = new m['widge.tabs']({
+                element: listTab,
+                tabName: '.card-tab',
+                itemName: 'a',
+                contentName: 'ul',
+                className: 'cur',
+                tabIndex: tabIndex
+            }),
+            fontSize = 18,
+            pWidth = 70,
+            len = listTab.find('ul').length,
+            IE678 = /\bMSIE [678]\.0\b/.test(navigator.userAgent),
+            radios = [];
+
+        $.focusColor('input.priceInput', null, function () {
+            if (verifier.price(priceInput)) {
+                $(this).removeClass('error');
+            } else {
+                $(this).addClass('error');
+            }
+        });
+
+        for (var i = 0; i < len; i++) {
+            radios[i] = new m['widge.changeClass']({
+                container: listTab,
+                element: 'ul:eq(' + i + ')',
+                trigger: 'label',
+                className: 'sel',
+                isParent: false,
+                triggerType: 'click'
+            });
+            if (IE678) {
+                radios[i].on('click', function (e) {
+                    var child = e.child;
+                    e.child.children('input').prop('checked', true);
+                });
+            }
+        }
+        tab.on('changeIn', function (e) {
+            if (e.index === tabIndex) return;
+            tabIndex = e.index;
+            if (radios[e.oldIndex]) {
+                var element = radios[e.oldIndex].getElement();
+                $('label', element).removeClass('sel');
+                $('input:checked', element).prop('checked', false);
+            }
+        });
+
+        var form = $('#pay-form'),
+            priceInput = form.find('input[name=txtAmount]'),
+            priceMsg = '请输入金额',
+            payMsg = '请选择银行',
+            confirmBox = m['widge.overlay.confirmBox'],
+            verifier = m['module.verifier'],
+            radioName = ['#bankList', '#cardList'],
+            payRadio, data;
+
+
+        $('.reportproblem').on("click", function () {
+            $("#feedback").click();
+        })
+        $('#showpop').on('click', function () {
+            var jdialog = new Dialog({
+                close: 'x',
+                idName: 'jian_dialog',
+                title: '详情咨询',
+                width: 380
+            });
+            var thtml = ['<style>.jian_dialog{text-align:left}</style>',
+                '<div class="warning_dialog" style="padding:15px;font-family:\'微软雅黑\';line-height:30px">',
+                '<p>联系招聘顾问购买推广金，可享受更多优惠</p>',
+				{/if !empty($hrManager["user_name"])/}
+                '<p>招聘顾问：{/$hrManager["user_name"]/}</p>',
+				{//if/}
+				{/if !empty($hrManager["mobile"])/}
+                '<p>联系电话：{/$tel_head/}转{/$hrManager["tel"]/} [9：00-18：00]</p>',
+                '<p>手机号码：{/$hrManager["mobile"]/}</p>',
+				{/else/}
+                '<p>联系电话：400-1010-970</p>',
+				{//if/}
+                '	<p style="margin-top:15px">',
+				{/if !empty($hrManager["qq"])/}
+                '		<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin={/trim($hrManager["qq"])/}&site=qq&menu=yes">',
+                '        	<img src="{/$siteurl.style/}/img/newindex/qq.jpg" />',
+                '        </a>',
+				{/else/}
+                '		<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=2851501279&site=qq&menu=yes">',
+                '        	<img src="{/$siteurl.style/}/img/newindex/qq.jpg" />',
+                '        </a>',
+				{//if/}
+                '    </p>',
+                '</div>'].join('');
+
+            jdialog.setContent(thtml).show();
+        })
+        wxialog = new Dialog({
+            close: 'x',
+            idName: 'wx_dialog',
+            title: '微信支付',
+            width: 450,
+            height: 490,
+            isAjax: true,
+            zIndex: 10000000000
+        });
+        $('#paySubmit').on('click', function () {
+            if (!verifier.price(priceInput)) {
+                confirmBox.timeBomb(priceMsg, {
+                    name: 'fail',
+                    width: pWidth + fontSize * priceMsg.length,
+                    timeout: 1000
+                });
+                priceInput.addClass('error').focus();
+                return;
+            }
+            var price = priceInput.removeClass('error').val();
+            if (/^(\d+\.\d{3,})$/.test(price)) {
+                priceInput.val(price.substr(0, price.indexOf('.') + 3));
+            }
+            if ($('.allotCouponCash_li.allotCouponCash_select').length > 1) {
+                return msg_error_box('抵扣现金券获取失败!');
+            }
+            data = {
+                txtAmount: priceInput.val(),
+                type: tabIndex < 2 ? 2 : tabIndex + 1,
+                allot_cash_id: $('.allotCouponCash_li.allotCouponCash_select').attr('data_id'),
+                allot_cash_money: $('.allotCouponCash_li.allotCouponCash_select').attr('data_money'),
+                is_com_service: 1
+            };
+
+            if (tabIndex < 2) {
+                payRadio = form.find(radioName[tabIndex] + ' input[type=radio]');
+                if (!verifier.required(payRadio)) {
+                    confirmBox.timeBomb(payMsg, {
+                        name: 'fail',
+                        width: pWidth + fontSize * payMsg.length
+                    });
+                    return;
+                }
+                data.bank = verifier.elementValue(payRadio);
+            }
+
+            if (tabIndex == 2) {
+                accountrecharge.newwindow = window.open('about:blank');
+            }
+            $.ajax({
+                url: '{/get_url rule="/pay/addorder/"/}',
+                type: 'get',
+                dataType: 'json',
+                data: data,
+                success: function (e) {
+                    if (e.error) {
+                        confirmBox.timeBomb(e.error, {
+                            name: 'fail',
+                            width: pWidth + fontSize * e.error.length
+                        });
+                        accountrecharge.newwindow.close();
+                        return;
+                    }
+
+                    if (tabIndex == 3) {
+                        var wxUrl = "{/get_url rule='/pay/WxPay/'/}?code_url=" + e.url + "&orderno=" + e.order;
+                        wxialog.setContent(wxUrl).show();
+                        return;
+                    } else {
+                        accountrecharge.newwindow.location.href = e.url;
+                        //window.open( e.url)
+                    }
+                    confirmBox.confirm(
+                        '请您在新打开的网上银行页面进行支付，支付完成前请不要关闭该窗口',
+                        '温馨提醒',
+                        function () {
+                            var self = this;
+                            $.ajax({
+                                url: '{/get_url rule="/pay/CheckOrder/"/}',
+                                type: 'get',
+                                dataType: 'json',
+                                data: {orderno: e.order},
+                                success: function (e) {
+                                    self.hide();
+                                    if (e.error) {
+                                        confirmBox.timeBomb(e.error, {
+                                            name: 'fail',
+                                            width: fontSize * e.error.length
+                                        });
+                                        accountrecharge.newwindow.close();
+                                        return;
+                                    }
+                                    // window.location.href = '{/get_url domain="company"/}';
+                                    // window.history.go(-1);
+                                    // window.document.location.reload();
+                                    if (e.state == '0') {
+                                        confirmBox.alert(
+                                            [
+                                                '<h3>支付未成功！</h3>',
+                                                '<p>可能是以下原因导致：</p>',
+                                                '<ul><li>在新打开的窗口中并完成支付的操作</li>',
+                                                '<li>可能是由于系统延迟，请稍后在“我的账号”中查询余额变化！</li></ul>'
+                                            ].join(''),
+                                            null,
+                                            {
+                                                title: '温馨提醒',
+                                                close: 'x',
+                                                width: 440,
+                                                confirmBtn: '<button class="button_a button_a_red">我知道了</button>'
+                                            }
+                                        );
+                                    } else {
+                                        window.location.href = '{/get_url domain="company"/}';
+                                    }
+                                }
+                            });
+                        },
+                        {
+                            width: 440,
+                            close: 'x',
+                            confirmBtn: '<button class="button_a button_a_red">支付成功</button>',
+                            cancelBtn: '<button class="button_a cancelbtn">支付失败，重试</button>'
+                        }
+                    );
+                }
+            });
+            return false;
+        });
+
+        var is_mount_keyup = false;
+        //输入金额--检测最低消费
+        $('[name=txtAmount]').on('keyup', function () {
+            var txtAmount = Number($(this).val());
+            var _is_click = false;
+            if (txtAmount) {
+                if ($('.allotCouponCash_li').length) {
+                    $('.allotCouponCash_li').removeClass('allotCouponCash_select');
+                    $('.allotCouponCash_li').each(function (key, value) {
+                        var id = $(value).attr('data_id');
+                        var money = Number($(value).attr('data_money'));
+                        var consume = Number($(value).attr('data_consume'));
+                        if (!id) {
+                            return msg_error_box('现金券参数错误!');
+                        }
+                        $(value).addClass('forbidden_Cash');
+                        if (txtAmount >= consume && txtAmount > money) {
+                            $(value).removeClass('forbidden_Cash');
+                            if (!_is_click) {
+                                _is_click = true;
+                                is_mount_keyup = true;
+                                $(this).click();//不自动选中
+                                // $('.account_num_strong .account_num').html(txtAmount);
+                            }
+                        }
+                    });
+                    if (!_is_click) {
+                        $('.account_num_strong .account_num').html(txtAmount);
+                    }
+                } else {
+                    $('.account_num_strong .account_num').html(txtAmount);
+                }
+            } else {
+                $('.allotCouponCash_li').removeClass('forbidden_Cash');
+            }
+        });
+        //点击切换优惠劵
+        $('.allotCouponCash_li').on('click', function () {
+            var forbidden_Cash = $(this).hasClass('forbidden_Cash');
+            if (forbidden_Cash) return false;
+            $(this).siblings('.allotCouponCash_li').removeClass('allotCouponCash_select');
+            $(this).toggleClass('allotCouponCash_select');
+            var is_select = $(this).hasClass('allotCouponCash_select');
+            var txtAmount = Number($('[name=txtAmount]').val());
+            var id = $(this).attr('data_id');
+            if (is_select && !is_mount_keyup) {
+                var is_used = false;
+                var url = "{/get_url rule='/pay/CheckAllotCouponBusiness'/}";
+                ajax_function(url, {allot_cash_id: id}, {
+                    success: function (data) {
+                        if (data.code == 200) {
+                            is_used = data.data.is_used;
+                        }
+                    }
+                });
+                if (is_used) {
+                    $(this).toggleClass('allotCouponCash_select');
+                    return msg_error_box("您的招聘顾问正在帮你使用该优惠券");
+                }
+            }
+            is_mount_keyup = false;
+            if (is_select && txtAmount) {
+                var money = Number($(this).attr('data_money'));
+                var consume = Number($(this).attr('data_consume'));
+                if (!id) {
+                    return msg_error_box('现金券参数错误!');
+                }
+
+                if (txtAmount >= consume && txtAmount > money) {
+                    $(this).removeClass('forbidden_Cash');
+                    var surplus = txtAmount - money;
+                    $('.account_num_strong .account_num').html(surplus);
+                } else {
+                    $(this).addClass('forbidden_Cash');
+                    $('.account_num_strong .account_num').html('--');
+                }
+            } else {
+                if (!is_select && txtAmount) {
+                    $('.account_num_strong .account_num').html(txtAmount);
+                } else {
+                    $('.account_num_strong .account_num').html('--');
+                }
+            }
+        });
+
+    });
+
+</script>
+{/include file="chat/chat.html"/}
+</body>
+</html>

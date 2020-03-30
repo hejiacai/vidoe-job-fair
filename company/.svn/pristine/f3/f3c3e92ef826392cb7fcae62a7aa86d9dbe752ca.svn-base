@@ -1,0 +1,1866 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+<title>{/$title/}</title>
+<!–[if lt IE9]>
+<script src="{/version file='html5.js'/}"></script>  
+<![endif]–>
+<link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='comback.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='firmcss.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}" />
+
+<!--
+<script type="text/javascript" language="javascript" src="{/version file="jquery-1.8.3.min.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="common.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="dialog.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="mediaquery.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="ui_menudisplay.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="ui_inputFocus.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="ui_hovchange.js"/}"></script>
+<!--<script type="text/javascript" language="javascript" src="{/version file="ui_dragsort.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="jquery.form.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='ui_validate.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="ui_dropdownlist.js"/}"></script>
+-->
+
+
+<script type="text/javascript" src="{/version file="version.js"/}"></script>
+<script type="text/javascript">
+window.CONFIG = {
+	HOST: '{/$siteurl.style/}',
+	COMBOPATH: '/js/v2/'
+}
+</script>
+<script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="global.js"/}"></script>
+<script type="text/javascript">
+hbjs.use(function($){
+	$('.firmMagContx p a').hover(function(){
+		$(this).toggleClass('cut')									  
+	});
+});
+</script>	
+<style type="text/css">
+#show_banner{height:30px;background:#FFFCE3;width:1000px;border:1px solid #FAD5A8;margin:0px auto 0px;;display:block;cursor:pointer;line-height:30px;position:relative;top:-10px;}
+#show_alt{top: -16px; width:290px;left:5px;line-height: 22px;margin: 0;padding: 10px; position: absolute;background-color: #fdf7d5;
+    border: 1px solid #fcde81;}
+#show_alt i{   background: url("{/$siteurl.style/}/img/c/new_index/firmicon22.png") no-repeat;bottom: -6px;display: block;height: 6px;left: 74px;position: absolute; width: 10px;}
+
+/* 企业百强首页样式文件 */
+.homePopBg{width:660px; height:231px; background:url({/$siteurl.style/}/img/ranking/hbpopular15.jpg); overflow:hidden;}
+.homePopTit01{width:660px; overflow:hidden; text-align:center; color:#0a758c; font-family:"宋体"; padding-top:70px; font-size:12px;}
+.homePopTit02,.homePopTit03{ overflow:hidden; margin:15px 0 0 90px;}
+.homePopTit02 p,.homePopTit03 p{ font-size:14px; color:#fff; display:block; float:left;}.homePopTit02 p span,.homePopTit03 p span{ color:#ff0; font-weight:bold;}
+.homePopTit04{ overflow:hidden; margin:20px 0 0 77px;} 
+.homePopTit04 a.homeShareBtn{ display:block;width:181px; height:36px; background:url({/$siteurl.style/}/img/ranking/hbpopular16.png) no-repeat; float:left;}
+.homePopTit04 a.homeShareBtn:hover{ background-position:0 -36px;}
+.homePopTit04 a.homeShareBtn1{ display:block;width:181px; height:36px; background:url({/$siteurl.style/}/img/ranking/hbpopular19.png) no-repeat; float:left}
+.homePopTit04 a.homeShareBtn1:hover{ background-position:0 -36px;}
+.homePopTit04 a.homeSBtn{ float:left; text-align:center; padding-left:30px; text-decoration:underline;display:block; height:36px; line-height:36px; color:#88f2ff;}
+.homePopBgx{background:url({/$siteurl.style/}/img/ranking/hbpopular18.jpg);}
+.homePopTit05{ overflow:hidden; font-size:16px; font-weight:bold; color:#00525c; text-align:center;padding:78px 0 0 0}
+.homePopTit06{ overflow:hidden; font-size:14px; color:#fff; text-align:center;}
+.homePopTit06 b{ color:#ff0; padding:0 3px;}
+.homePopTit07{width:590px; height:30px; background:url({/$siteurl.style/}/img/ranking/hbpopular17.png) no-repeat; margin:0 auto; overflow:hidden; margin-top:18px;}
+.homePopTit07 b,.homePopTit07 span{ font-size:12px; font-family:"宋体"; display:block; color:#fff; line-height:30px; float:left;}
+.homePopTit07 b{ padding:0 45px 0 10px;}
+
+.ui_company_share_dialog{
+	text-align:left;font-family:"微软雅黑"
+}
+.ui_company_share_dialog .ui_dialog_container{
+	padding:15px 20px;
+}
+.ui_company_share_dialog .pTityewBg{
+	background: url({/$siteurl.style/}/img/ranking/hbpopular08.jpg) left -126px no-repeat;
+	padding:0 22px;height:auto;width:auto;
+}
+.ui_company_share_dialog .pTityewBg p{
+	line-height:16px;padding:0 0 6px;color:#0a8fbc;
+}
+.ui_company_share_dialog .pTityewBg p em{ color:#0cd3b9;}
+.ui_company_share_dialog .img{text-align:center;}
+.ui_company_share_dialog .shareList1 {
+	color:#2abbb4;
+}
+.ui_company_share_dialog .shareList1 h3{font-size:14px;font-weight:bold}
+.updateSay{ display: block;width:1000px;margin:-10px auto 20px auto; height:40px; background:#fdf7d5; border:1px solid #fcde81; color:#3d84b8; text-align: left; text-indent: 10px; font-family: "微软雅黑"; line-height: 40px; font-size: 14px; font-weight: bold;}
+
+.homePopy{width:660px; height:140px;}
+.homePopy img{ display:block;}
+
+/* 非会员-会员特权介绍 */
+.hhy-box{border: 1px solid #dcf1f6;margin-top: 20px}
+.hhy-box .tit{background-color: #dcf1f6;height: 35px;padding:10px 15px;color:#3c7481;font-size:16px;line-height: 35px}
+.hhy-box .tit .orge{color:#eb7f00}
+.hhy-box .tit .blue2{font-size:14px;color:#708e96;margin-left: 15px}
+.hhy-box .tit .gray{font-size:14px;color:#333}
+.hhy-box .playm{display: inline-block;width:72px;height: 30px;background: url({/$siteurl.style/}/img/c/icon.jpg) no-repeat;text-indent: -999px;overflow: hidden;vertical-align: middle;margin-left: 15px}
+.hhy-box .con{padding: 15px}
+.hhy-box .t1,.hhy-box .t2{margin:5px}
+.hhy-box .t1 span,.hhy-box .t2 span{background: url({/$siteurl.style/}/img/c/txt.jpg) no-repeat;display: inline-block;width:76px;height: 15px}
+.hhy-box .t2 span.s1{background-position:0 -16px}
+.hhy-box .t2 span.s2{background-position:0 -33px;width:180px;height: 18px;vertical-align: middle;margin-left: 30px;margin-right: 15px}
+.hhy-box .t2 a{font-weight:normal;color:#6699cc;font-family:"宋体";font-size:12px}
+.hhy-box .t2 a:hover{color:#1a6dc1}
+.hhy-box .tlist1{margin: 10px 0 20px}
+.hhy-box .tlist1 li,.hhy-box .tlist2 li{width:155px; height: 62px;text-align: right;float:left;margin:0 5px;padding:0 15px}
+.hhy-box .tlist1 li{background-color: #76c2af;color:#fff;font-weight:bold;line-height: 62px;font-size:14px}
+.hhy-box .tlist1 li em,.hhy-box .tlist2 li em{display: inline-block;background: url({/$siteurl.style/}/img/c/icon.jpg) no-repeat;float:left;margin-top: 16px}
+.hhy-box .tlist1 li em.u1{background-position: 0 -40px;width: 40px;height: 32px}
+.hhy-box .tlist1 li em.u2{background-position: -50px -40px;width: 40px;height: 33px}
+.hhy-box .tlist1 li em.u3{background-position: -100px -40px;width: 41px;height: 40px;margin-top: 12px}
+.hhy-box .tlist2 li{background-color: #e6e6e6;margin: 5px;color:#999;font-size:12px}
+.hhy-box .tlist2 li strong{display: block;margin-top: 10px;font-size:14px}
+.hhy-box .tlist2 li em{width: 40px;height: 40px;margin-top: 11px}
+.hhy-box .tlist2 li em.u1{background-position: 0 -90px}
+.hhy-box .tlist2 li em.u2{background-position: -50px -90px}
+.hhy-box .tlist2 li em.u3{background-position: -100px -90px}
+.hhy-box .tlist2 li em.u4{background-position: 0 -140px;width: 38px;height: 37px;margin-top: 13px}
+.hhy-box .tlist2 li em.u5{background-position: -48px -140px;width: 25px;height: 43px;margin-left: 5px}
+.hhy-box .tlist2 li em.u6{background-position: -82px -140px;width: 41px;height: 45px}
+
+/*回复率样式*/
+.reversion{padding: 20px 15px 10px;font-size: 12px;font-family: "微软雅黑";color: #666;}
+.reversion p{overflow: hidden;padding-bottom: 6px;}
+.reversionList{border:1px solid #DBDBDB; display:block;text-align:center;padding:10px 2px}
+.reversionList li span{display: inline-block;min-width: 80px;}
+
+.firmCondiTion{width:660px; height:140px;background: url({/$siteurl.style/}/img/c/new_index/condition3.jpg) no-repeat;}
+.firmCondiTion a{ display:block; float:right;width:170px; height:40px; margin:82px 176px 0 0;}
+
+/*指定行业非会员显示*/
+.hy_newbox{border:1px solid #e0f2f4;border-top:3px solid #91e1de;margin-top:20px}
+.hy_newbox .ntitle{padding:10px}
+.hy_newbox .ntitle strong{color:#01bab2;font-size:18px;margin-right: 10px}
+.hy_newbox li{width:30%;float:left;margin-left: 10px;margin: 5px 0 10px 10px}
+.hy_newbox li i{background-color: #01bab4;color:#fff;display: inline-block;width:24px;height: 24px;line-height: 24px;text-align: center;border-radius: 24px;margin-right: 5px}
+.hy_newbox .blink{text-align: center;margin-top: 10px}
+.hy_newbox .blink a{color:#00b6ac;font-size:14px;font-weight:bold;background-color: #e0f2f2;padding:7px;display: block}
+.hy_newbox .blink a:hover{background-color:#00bab1;color:#fff}
+
+/*=====20150901导航改版=====*/
+.banner{width:100%; height:79px; overflow:hidden; position:relative; z-index:1;}
+header,.hdCon{ background:#f0f0f0;}
+.hdCon{ height:30px;}
+.hdL .logo{ height:30px; line-height:30px; color:#8e8e8e; font-family:"宋体"; font-size:12px;}
+.hdR ul li,.hdR ul li a.lnk,.hdR ul .navLst a{ height:30px; line-height:30px;}
+.hdR ul .navLst i{ margin:10px 5px 0 0;}
+.hdR ul li.wemChatlist{width:100px;}
+.hdR ul .navLst:hover a,.hdR ul .navLst a:hover{ color:#888;}
+.hdR ul li.wemChatlist a,.hdR ul li.wemChatlist a:hover{ height:30px; line-height:32px; color:#888;background:url({/$siteurl.style/}/img/c/new_index/weChat06.png) 0 center no-repeat}
+.compNavbg{width:100%; overflow:hidden; background:#fff; margin-bottom:20px;}
+.compNav{width:1000px; height:50px; overflow:hidden; margin:0 auto; text-align:left;}
+.compLogo{ display:block; float:left;width:144px; height:30px; background:url({/$siteurl.style/}/img/c/new_index/compLogo.png) no-repeat; margin:10px 0;}
+.compList{ float:left; padding-left:60px;}
+.compList li{ float:left;}
+.compList li a{ display:block; width:120px; text-align:center; height:50px; line-height:50px; font-size:16px; font-family:"微软雅黑"; color:#2a2623;}
+.compList li.cut a{ font-weight:bold; color:#004d92; background:url({/$siteurl.style/}/img/c/new_index/hbcompany02.png) center bottom no-repeat;}
+.comPost{ display:block; float:right;width:110px; height:30px; line-height:30px; font-family:"微软雅黑"; background:url({/$siteurl.style/}/img/c/new_index/hbcompany03.png) 15px center no-repeat #66bce4; text-indent:40px; margin-top:10px; color:#fff; border-radius:4px;}
+.comPost:hover{background:url({/$siteurl.style/}/img/c/new_index/hbcompany03.png) 15px center no-repeat #5ca8cc; color:#fff;}
+.subcompNavbg{width:100%; overflow:hidden; background:#2b6fad; height:36px; text-align:left;}
+.subcompMage{width:1000px; margin:0 auto;}
+.subcompNav{ float:left; overflow:hidden;}
+.subcompNav li{ float:left; display:none;}
+.subcompNav li a{ display:block; float:left; color:#fff; color:#d2e5f6; font-family:"微软雅黑"; height:16px; line-height:16px; padding:0 20px; border-right:1px solid #23598c;border-left:1px solid #368ad9; margin-top:11px;}
+.subcompNav li a.first{ border-left:none;}
+.subcompNav li a.last{ border-right:none;}
+.subcompNav li a.cut{ font-weight:bold; color:#fff;}
+.subcompNav li.tabList3{ margin-left:13px;}
+.subcompNav li.tabList4{ margin-left:217px;}
+.subcompRt{ float:right;}
+.subcompRt a{ display:block; height:36px; padding-left:20px; line-height:36px; color:#d2e5f6; float:left; font-family:"微软雅黑"; }
+.subcompRt a.compHome{ background:url({/$siteurl.style/}/img/c/new_index/hbcompany04.png) left center no-repeat; margin-right:20px;}
+.subcompRt a.compSch{ background:url({/$siteurl.style/}/img/c/new_index/hbcompany05.png) left center no-repeat;}
+.comPostBg,.comPostBgcut{ width:110px; height:50px; overflow:hidden; float:right;background:url({/$siteurl.style/}/img/c/new_index/weChat07.png) center bottom no-repeat;}
+/*====顶部广告图====*/
+.banner .flexslider {margin:0; padding:0;}
+.banner .flexslider .slides > li {display: none; -webkit-backface-visibility: hidden;} 
+.banner .flexslider .slides img {width: 100%; display: block;}
+.banner .flex-pauseplay span {text-transform: capitalize;}
+
+.banner .flex-viewport { max-height:2000px; -webkit-transition: all 1s ease; -moz-transition: all 1s ease; -o-transition: all 1s ease; transition: all 1s ease; width:100%;height:79px;}
+.banner .flex-viewport ul, .banner .flex-viewport li{height:100%}
+.banner .loading .flex-viewport{max-height: 79px; }
+.banner .flexslider .slides{zoom: 1; }
+
+.banner ul.slides li img{width:100%;height:80px;}
+
+.banner .flex-control-nav {width: 100%; position: absolute; left:0px; bottom: 5px; text-align:center;}
+.banner .flex-control-nav li {margin: 0 6px; display: inline-block; zoom: 1; *display: inline;}
+.banner .flex-control-paging li a {width: 8px; height: 8px; display: block; background: #666; background: #88919a; cursor: pointer; text-indent:9999em; overflow:hidden; -webkit-border-radius: 20px; -moz-border-radius: 20px; -o-border-radius: 20px; border-radius: 20px; -webkit-box-shadow: inset 0 0 3px rgba(0,0,0,0.3); -moz-box-shadow: inset 0 0 3px rgba(0,0,0,0.3); -o-box-shadow: inset 0 0 3px rgba(0,0,0,0.3); box-shadow: inset 0 0 3px rgba(0,0,0,0.3); }
+.banner .flex-control-paging li a:hover { background: #7cc363;  }
+.banner .flex-control-paging li a.flex-active { background: #7cc363; cursor: default; }
+
+.banner .flex-control-thumbs {margin: 5px 0 0; position: static; overflow: hidden;}
+.banner .flex-control-thumbs li {width: 25%; float: left; margin: 0;}
+.banner .flex-control-thumbs img {width: 100%; display: block; opacity: 0.7; cursor: pointer;}
+.banner .flex-control-thumbs img:hover {opacity: 1;}
+.banner .flex-control-thumbs .flex-active {opacity: 1; cursor: default;}
+.compClose{ display:block;width:20px; height:20px; background:url("{/$siteurl.style/}/img/c/new_index/compClose.png") 0 0 no-repeat; position:absolute; left:50%; top:9px; margin-left:505px; z-index:5;}
+.compClose:hover{background:url("{/$siteurl.style/}/img/c/new_index/compClose.png") -20px 0 no-repeat;}
+
+.compTitMage{width:1000px; overflow:hidden; height:350px; background:#fff; margin:20px auto; text-align:left;}
+.compTitMage h2{ font-size:18px; font-family:"微软雅黑"; font-weight:bold; width:940px; height:45px; line-height:45px; border-bottom:1px solid #f0f0f0; margin:20px auto;}
+.compTitMage h2 em{ display:inline-table; vertical-align:middle; height:20px; border-left:3px solid #66bce4; padding-right:10px;}
+.compTitMage p{ display:block; text-align:center; padding-top:80px;}
+.compTitMage p a{ font-family:"微软雅黑"; border-radius:4px; display:inline-block;width:220px; height:60px; background:#18c7d2; font-size:20px; font-weight:bold; line-height:60px; text-align:center; color:#fff;}
+.compTitMage p a.orange{ margin-left:60px; background:#ff8a00; color:#fff;}
+.compTitMage p a:hover{ background:#14a8b3;}
+.compTitMage p a.orange:hover{ background:#e57a00;}
+.jian_dialog{text-align: left;}
+.warning_dialog {padding: 25px 25px 15px;}
+
+/*=====改版新增样式=====*/
+.newcompInfo{width:100%; overflow:hidden; background:#fdf7d5; padding:8px 0 0px 0;}
+.newcompInfo p{ padding:0 20px 0px 48px; margin-bottom:8px; display:block; overflow:hidden; background:url({/$siteurl.style/}/img/c/new_index/new_iconcomp01.png) 20px 1px no-repeat; font-family:"宋体";}
+.newcompInfo p span{ display:block; float:left;color:#ed6802; width: 450px;}
+.newcompInfo p a{ display:block; float:right; color:#ed6802;width: 75px;}
+.newcompInfo p a:hover{ color:#cf5300; text-decoration:underline;}
+.comp_infor dt span{width:100px; height:12px; line-height: 12px;}
+.comp_infor dt span i{ height:16px; text-align:center; color:#135693; font-family:"宋体"; font-size:12px; line-height:16px; color:#135693; background:#aacceb;}
+.comp_infor .infor p{ color:#666;}
+.comp_infor .infor div{ padding-top:2px; position:relative;}
+.comp_infor .infor div em,.comp_infor .infor div a,.comp_infor .infor div a i,.comp_infor .money .butn2 a{ display:inline-block; vertical-align:middle; font-family:"宋体";font-size:12px;}
+.comp_infor .infor div a.btnx1{ background:url({/$siteurl.style/}/img/c/new_index/new_iconcomp02cut.png) left top no-repeat #fff; color:#b2b2b2;  padding-left:20px; height:16px;}
+.comp_infor .infor div a.btnxcut1{background:url({/$siteurl.style/}/img/c/new_index/new_iconcomp02.png) left top no-repeat #fff; color:#2b6fad;}
+.comp_infor .infor div em{ color:#d8e1ea; padding:0 5px;}
+.comp_infor .infor div a.btnx2{ color:#b2b2b2; background:#fff;}
+.comp_infor .infor div a.btnx2 i{width:17px; padding-right:3px; height:14px; background:url({/$siteurl.style/}/img/c/new_index/new_iconcomp06.png) 0 0 no-repeat;}
+.comp_infor .infor div a.btnxcut2{ color:#2b6fad;}
+.comp_infor .infor div a.btnxcut2 i{width:17px; padding-right:3px; height:14px; background:url({/$siteurl.style/}/img/c/new_index/new_iconcomp06.png) 0 -14px no-repeat;}
+.comp_infor .infor div a.btnx3 i{width:18px; padding-right:5px; height:18px; background:url({/$siteurl.style/}/img/c/weixin/wei_img01.png) no-repeat;}
+.comp_infor .infor div b{display:none;width:120px; height:32px; font-size:12px; font-family:"宋体"; position:absolute; top:22px; right:18px; font-weight:normal; color:#604e29; line-height:40px; text-indent:9px;background:url({/$siteurl.style/}/img/c/weixin/wei_img02.png) no-repeat;}
+.comp_infor .money .butn2 a{ color:#999;}
+.comp_infor .money .butn3 a i{ display:inline-block; vertical-align:-4px; background:url({/$siteurl.style/}/img/c/new_index/wei_img01.png) 0 0 no-repeat;width:14px; height:15px; padding-right:6px;}
+.comp_infor .money .butn2 a:hover{ color: #53bdf9}
+
+.comp_infor .money .butn2 a i{ display:inline-block; vertical-align:-4px; padding-right:5px;width:14px; height:15px;background:url({/$siteurl.style/}/img/c/new_index/new_iconcomp07.png) 0 0 no-repeat;}
+.comp_infor .money .butn2 a:hover i{background:url({/$siteurl.style/}/img/c/new_index/new_iconcomp07.png) 0 -15px no-repeat;}
+.comp_infor .money .butn a{ background:url({/$siteurl.style/}/img/c/new_index/new_iconcomp08.png) 10px 8px #66bce4 no-repeat; border-radius:2px; text-align:center;}
+.comp_infor .money .butn a:hover{background:url({/$siteurl.style/}/img/c/new_index/new_iconcomp08.png) 10px 8px #00aaff no-repeat;}
+.comp_infor .infor{ padding-left:16px;}
+.comp_infor .money .num span{ font-size:22px; color:#f36861;}
+.comp_infor .money{ text-align:right;}
+.comp_infor .infor{ border:none;}
+.comp_infor .infor h2{ line-height: 18px;}
+.comp_infor .money .butn{ margin-top:8px;}
+.comp_infor .money .num{ margin-top:23px;}
+.comp_infor .infor h2{ margin-bottom:8px; color:#444;}
+.numInfor{width:100%; overflow:hidden; background:#f5f5f5; margin-top:18px;}
+.numInfor li{ float:left; height:70px; font-family:"微软雅黑";}
+.numInfor li.subInfor01{width:175px; border-right:1px solid #fff;}
+.numInfor li.subInfor01 .num01{ color:#fa7d00; padding:16px 0 6px 10px;}
+.numInfor li.subInfor01 .num01 em{ display:inline-block; vertical-align:middle; width:16px; height:16px; padding-right:6px; background:url({/$siteurl.style/}/img/c/new_index/new_iconcomp04.png) no-repeat;}
+.numInfor li.subInfor01 .num02,.numInfor li.subInfor03{ color:#999; font-family:"宋体"; font-size:12px; padding-left:10px; text-align:center;}
+.numInfor li.subInfor02 span,.numInfor li.subInfor03 span{ display:block; text-align:center;color:#2b6fad; font-size:16px; font-weight:bold; font-family:"微软雅黑"; padding-top:16px;}
+
+.numInfor li.subInfor02 span i,.numInfor li.subInfor03 span i{ display:block; color:#999; font-size:12px; font-family:"宋体"; font-weight:normal;}
+.numInfor li.subInfor01 .num02{ text-align:left;}
+
+.numInfor li.subInfor02{width:101px; border-right:1px solid #fff; padding-left:0px;}
+.numInfor li.subInfor03{width:95px; border-right:1px solid #fff;padding-left:0px;}
+.numInfor li.subInfor03 span.gray{color:#b2b2b2;}
+
+.numInfor li.last{ border:none;}
+.firmRmendLit li a.subRmlit03{ border-radius:2px;}
+.fRmendConat li{width:auto;}
+.fRmendConat li p{width:auto; display:block;}
+.fRmendConat li p.mid span,.fRmendConat li p.mid a{ vertical-align:middle;}
+.firmHlt .msg-box {margin-bottom: 10px;}
+
+
+.compTitMage{width:1000px; overflow:hidden; height:350px; background:#fff; margin:20px auto; text-align:left;}
+.compTitMage h2{ font-size:18px; font-family:"微软雅黑"; font-weight:bold; width:940px; height:45px; line-height:45px; border-bottom:1px solid #f0f0f0; margin:20px auto;}
+.compTitMage h2 em{ display:inline-table; vertical-align:middle; height:20px; border-left:3px solid #66bce4; padding-right:10px;}
+.compTitMage p{ display:block; text-align:center; padding-top:80px;}
+.compTitMage p a{ font-family:"微软雅黑"; border-radius:4px; display:inline-block;width:220px; height:60px; background:#18c7d2; font-size:20px; font-weight:bold; line-height:60px; text-align:center; color:#fff;}
+.compTitMage h2{ border-bottom:none; margin-bottom:0px; color:#296195; font-weight:normal;}
+.compTitMage p.num{ padding:0px 20px 0 52px; color:#666; line-height:24px; text-align:left;}
+.compTitMage h2 em{ padding-right:20px}
+.subMagel{ overflow:hidden; margin:0 20px; background:#f7f9f9;}
+.subMagel li{ overflow:hidden; padding:20px 20px;}
+.subMagel li p{ padding:0px; text-align:left; line-height:24px; color:#333;}
+.subMagel li p span{ color:#ef970c;}
+.subMagel li p a.numBtnTip{ height:auto; height:auto; padding:0px; background:none; font-size:14px; font-weight:normal; text-align:left; color:#ef970c; line-height:24px; padding-left:60px;}
+.subMagel li p a.numBtnTip:hover{ text-decoration:underline; color:#dc8701;}
+.numBtn{ display:block;width:140px; height:40px; line-height:40px; text-align:center; background:#ef970c; color:#fff; border-radius:4px; margin:18px 0 12px 0;}
+.numBtn:hover{ background:#f79d0c; color:#fff;}
+.subMagel li p.num2{ color:#f36861;}
+.numInfor li span:hover{cursor: default;}
+
+.new_search{padding:20px;background-color: #fff;height: 42px;overflow: hidden}
+.new_search .text{width:432px;height: 40px;border:1px solid #4bb6e7;padding:0 10px;line-height: 40px;float:left}
+.new_search .sub_mit{width:118px;height: 42px;background: #4bb6e7 url("{/$siteurl.style/}/img/newindex/hbcompany05.png") 13px center no-repeat;border:0px; text-indent: 20px;color:#fff;font-size:16px;float:left;cursor: pointer}
+.new_search .sub_mit:hover{background: #31a2d6 url("{/$siteurl.style/}/img/newindex/hbcompany05.png") 13px center no-repeat}
+[placeholder] { font-family: 'Microsoft yahei'; }
+::-moz-placeholder {color: #ccc;}
+:-ms-input-placeholder {color: #ccc;}
+::-webkit-input-placeholder {color: #ccc;}
+.new_search .sub_mit{ font-family: "微软雅黑"}
+.crashBanner{ display:block;width:auto; height:79px;background:url("{/$siteurl.style/}/img/job/banner_hms01x.jpg") center top no-repeat}
+.borderLine{width:100%;height:22px; background:url("{/$siteurl.style/}/img/job/newjob/borderLine.png") repeat-x;margin:8px 0 3px 0;}
+.borderLine em{display:block;width:76%;height: 22px; line-height: 22px; color: #999; font-size:14px;background:#fff; margin: 0 auto; text-align: center;}
+.freshList li.lineNull{ background: #fff;}
+.freshList li .subFresh01 font{width: 130px;}
+.freshList {margin-bottom: 10px;}
+
+.firmRmendLit li span {width: 255px;}
+.alert-icon{background: url({/$siteurl.style/}/img/v2/resumeM/0626.png) no-repeat -23px 0;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+  margin-right: 5px;}
+div.not-member {text-align: left}
+
+#_dialog0 {background:none;}
+#_dialog0 .dialogCon{border:0px}
+#_dialog0 .dialogCon .dialogHead{background:#07bccd;font-size:18px;color:#fff;font-weight:bold;height:60px;line-height:60px;padding-left:30px;display: block}
+#_dialog0 .dialogCon .dialogHead a.dialogClose{display:block;width:60px;height:60px;background:url({/$siteurl.style/}/img/c/weixin/close1.jpg) no-repeat;top:0px;right:0px;#top:5px;#right:5px}
+#_dialog0 .dialogCon .dialogHead a.dialogClose:hover{background:url({/$siteurl.style/}/img/c/weixin/close1_hover.jpg) no-repeat}
+.ewmBox img{border:1px solid #cedfe1;margin:30px 20px 30px 110px;width: 158px;height: 158px;}
+.ewmBox dd{margin-top:25px}
+.ewmBox p a{border:1px solid #cedfe1;color:#333;padding:2px 15px;border-radius: 15px;display:inline-block;margin-top:5px}
+/*.ewmBox p a:hover{background:#07bccd;color:#fff}*/
+
+/***  2015-12-18 推广金改动  ***/
+.vip_box_tit{margin-top: 30px}
+.vip_box_tit .tit{font-size: 14px;color:#fa7d00;margin-right: 20px}
+.vip_box_tit .god{display: inline-block;width:16px;height:19px;background: url({/$siteurl.style/}/img/newindex/icon.png) 0 -318px no-repeat;vertical-align: middle;margin-right: 5px}
+.vip_box_tit .time{color:#999;font-family:"宋体";font-size:12px}
+.vip_box_tit .time u{text-decoration: none;color:#ff6c00}
+.vip_box_tit .right{float:right;color:#ff6c00;font-size:12px}
+.vip_box_tit .right .jian{display: inline-block;width:18px;height:16px;background: url({/$siteurl.style/}/img/newindex/icon.png) 0 -251px no-repeat;vertical-align: middle;overflow: hidden;margin-right: 5px}
+.vip_box{margin-top: 10px}
+.vip_box li{width:188px;height:66px;background: #f5f5f5;float:left;margin:1px 2px 1px 1px}
+.vip_box li.not-margin{margin:1px 0px 1px 1px;}
+.vip_box li.on1{position: relative}
+.vip_box li i{display: inline-block;width:32px;height:32px;background: url({/$siteurl.style/}/img/newindex/icon.png) 0 -125px no-repeat;float:left;margin-left: 42px;margin-top: 17px}
+.vip_box li i.i2{background-position: 0 -209px}
+.vip_box li i.i3{background-position: 0 0}
+.vip_box li i.i4{background-position: 0 -83px}
+.vip_box li i.i5{background-position: 0 -167px}
+.vip_box li i.i6{background-position: 0 -42px;width:37px;margin-left: 38px}
+.vip_box li p{float:left;color:#999;font-size:12px;margin-top:15px;margin-left: 15px;line-height: 20px; text-align: center;}
+.vip_box li p.center-vip{ text-align:left;}
+.vip_box li p strong{display: block;font-size: 16px;color:#2b6fad}
+.vip_box li p .money{display: block;color:#f59b0c;font-size:16px;font-weight:bold;text-decoration: underline}
+.vip_box li p .wenti{display: inline-block;width:15px;height:15px;background: url({/$siteurl.style/}/img/newindex/icon.png) 0 -277px no-repeat;margin-left: 5px;vertical-align: middle;#vertical-align: -4px;}                	
+.vip_box li p .wenti span{color:#604e29;border:1px solid #f6e5a6;background-color: #fffadd;display: block;position: absolute;left:92px;top:58px;width:228px;padding:5px;display: none}
+.vip_box li p .wenti span u{display: inline-block;width:6px;height:6px;background: url({/$siteurl.style/}/img/newindex/icon.png) 0 -302px no-repeat;position: absolute;top:-6px;left:40px}
+.vip_box li p .wenti:hover span{display: block}
+.vip_box li.line {width: 570px;}
+.vip_box li.line .center-vip {margin-top: 23px; font-size: 14px;}
+.vip_box li.line .center-vip a {display: inline;margin-right: 5px;}
+.vip_box li.line .center-vip span.first {margin-right: 110px;}
+
+/*===2016非会员===*/
+.openMember{ margin-top:14px; border:1px solid #e0f2f2; border-top:3px solid #91e1de;}
+.openMemberTit{ margin:10px 0 0 10px;}
+.openMemberTit span{ color:#01bab4; font-size:18px; font-weight:bold;}
+.openMemberTit em{ color:#444; padding-left:10px;}
+.openMemberTit b{ display:inline-block;width:38px; height:21px; background:#f59b0c; vertical-align:1px; margin-right:6px; color:#fff; text-align:center; line-height:21px; border-radius:2px;}
+.openMember p.member-detail {text-align: center;background-color: #e0f2f2;height: 35px;}
+.openMember p.member-detail a {text-decoration: none;color: #01bab4;font-weight: bolder;line-height: 35px;font-size: 15px;}
+.memberList{ margin-left:10px; margin-top:16px; overflow:hidden;}
+.memberList li{ float:left;width:199px; line-height:22px; margin-bottom:16px;}
+.memberList li.num{width:155px;}
+.memberList li em{width:22px; height:22px; display:inline-block; vertical-align:middle; background:url({/$siteurl.style/}/img/company/member-icon.png) no-repeat; margin-right:6px; text-align:center; line-height:22px; color:#fff;}
+.mPublish{ margin:15px 0 15px 10px;}
+.publish_lf{width:340px; float:left; line-height:26px; color:#444;}
+.publish_lf a{ color:#3d84b8; text-decoration:underline;}
+.publish_rt{ padding:12px; float:right; overflow:hidden; background:#e0f2f2; line-height:33px; color:#01bab4; border-radius:4px; margin-right:12px;}
+
+.vip_box.coupon li i {background: url({/$siteurl.style/}/img/company/member-icon.png) 0 -68px no-repeat;}
+.refresh_dialog .not-member {padding: 20px;}
+
+/*20160302 优惠券*/
+.vip_box .juan-item{width:570px}
+.vip_box .juan-item i{background: url({/$siteurl.style/}/img/company/juan-icon.jpg) left center no-repeat}
+.vip_box .juan-item p{text-align: left;width:83%;padding-top: 10px}
+.vip_box .juan-item .money,.vip_box .juan-item span,.vip_box .juan-item strong{float:left}
+.vip_box .juan-item strong{margin-left:20px}
+.vip_box .juan-item .right{float:right}
+
+.hb_ui_dialog .ui_dialog_title {text-align: left;}
+
+.ltyFairBg{width:auto;float:none}
+.ltyFairBg dl{padding-top:10px;border-top:1px solid #f1f1f1}
+.ltyFlit{width:75px;float:left}
+.ltyFlit a{width:82px}
+.ltyFlit a span{float:left;background: #66bce4;color:#fff;border:0px}
+.ltyFlit a i{background:url({/$siteurl.style/}/img/c/new_index/firmicon0418.png?t=5) no-repeat;float:left;width:7px;height:14px;margin-top: 25px}
+.ltyFlitText{float: left;width:300px;margin:10px 0 0 10px}
+.ltyFlitLink{float:right;width:150px;margin-top:14px}
+.ltyFlitLink a{margin-top: 0px;height:35px;line-height: 35px;width:100px;font-size:14px}
+
+.dataReport a {float: none;}
+</style>
+</head>
+<body>
+
+{/if count($advLst) > 0/}
+<!--<div class="banner">-->
+	<!--<a href="javascript:void(0);" class="compClose"></a>-->
+    <!--<div class="lst flexBanner">-->
+        <!--<ul class="slides" id="flexBannerList">-->
+        	<!--{/foreach $advLst as $adv/}-->
+            <!--<li>-->
+                <!--<a target="_blank" href="{/if stripos($adv['url'],'http://')===FALSE/}http://{//if/}{/$adv.url/}">-->
+                    <!--<img src="{/get_assets img="{/$advpath/}{/$adv["img"]/}"/}"  />-->
+                <!--</a>-->
+            <!--</li>-->
+            <!--{//foreach/}-->
+        <!--</ul>-->
+    <!--</div>-->
+<!--</div>-->
+{//if/}
+
+{/include file="new_header.html" par="全职招聘" cur="首页"/} 
+<div id="body_content" style="font-family:'微软雅黑'">    
+<div class="firmHomeBg" style="min-height: 530px;">
+	<div class="firmHlt">
+		{/if in_array($is_audit, [0, 3, 4]) || in_array($hrlicence, [1, 2])/}
+		<div class="msg-box">
+			<div class="newcompInfo">
+                            {/if $is_audit == 0/}
+                            <p>
+			    	<span>您的公司还没进行实名认证，赶快去进行验证吧</span>
+			        <a href="/licencevalidate/" target="_blank">公司认证&gt;&gt;</a>
+                            </p>
+				{/else if $is_audit == 3/}
+                            <p>
+			    	<span>您的公司没有通过实名认证。{/if isset($audit_reply) && !empty($audit_reply)/}<span title="{/$audit_reply/}">原因：{/base_lib_BaseUtils::cutstr($audit_reply,32,'utf-8','','…')/}</span>{//if/}</span>
+			        <a href="/licencevalidate/index/action-againUpload" target="_blank">重新认证&gt;&gt;</a>
+			    </p>
+				{/else if $is_audit == 4/}
+                            <p>
+			    	<span>您公司营业执照属于临时认证，到期时间为{/$audit_expire/}，请尽快重新上传</span>
+			        <a href="/licencevalidate/index/action-againUpload" target="_blank">重新认证&gt;&gt;</a>
+			    </p>
+                            {//if/}
+                            
+                            {/if $hrlicence == 1/}
+				<p><span>您的人力资源许可证还没有上传哦。</span><a href="/hrlicence/index" target="_blank">立即上传&gt;&gt;</a></p>
+                            {/else if $hrlicence == 2/}
+				<p>
+                                    <span>您的人力资源许可证没有通过审核。{/if !empty($hrlicence_reason)/}<span title="{/$hrlicence_reason/}">原因：{/base_lib_BaseUtils::cutstr($hrlicence_reason,32,'utf-8','','…')/}</span>{//if/}</span>
+			        <a href="/hrlicence/index" target="_blank">重新上传&gt;&gt;</a>
+                                </p>
+			    {//if/}	
+		    </div>
+		</div>
+		{//if/}
+
+		<a href="{/get_url rule="/resumesearchnew/"/}">
+	        <div class="new_search">
+	           <input type="text" name="station" id="searchStation" placeholder="从{/$ShowResumeNum/}人才简历中找找合适的人吧" class="text"/><input type="submit" id="searchResume" value="简历搜索" class="sub_mit"/>
+	        </div>
+    	</a>
+
+    	<!--{/if $memberinfo == "member"/}-->
+        <!--<a href="{/$siteurl.style/}/spread/detail" target="_blank" style="display:block;"><img src="{/$siteurl.style/}/img/company/popularize02.png" width="612" height="52" /></a>-->
+        <!--{//if/}-->
+
+		<!--需要判断是否显示吗-->
+		
+		{/*
+		{/if !empty($calling_advert_middle)/}
+		<div id="scrollTop">
+			<ul>
+				{/foreach $calling_advert_middle as $k=>$v/}
+				<li><a href="http://{/$v['url']/}" target="_blank"><img src="{/$v['img_url']/}" /></a></li>
+				<!--<li><a href="{/$siteurl.style/}/CompanyImages/a_dv_img/11695_2836187.jpg" /></a></li>-->
+				<!--<li><a href="{/$siteurl.style/}/CompanyImages/a_dv_img/11698_4775630.jpg" /></a></li>-->
+				{//foreach/}
+			</ul>
+		</div>
+		{//if/}*/}
+		{/if !empty($calling_advert_middle)/}
+		<style>
+			.slideImg{width:612px;height:52px;overflow: hidden;display: block;position: relative}
+			.slideImg .slides img,.slideImg .slides li{width:612px;height:52px;float:left;overflow: hidden}
+			.slideImg .flex-control-paging{position:absolute;right:5px;text-align:center;top:30px;top:40px\9;z-index:102;float:right;margin:0px;#width:80px}
+			.slideImg .flex-control-paging li{height:20px;overflow: hidden;display: inline-block;height:20px;#float:left}
+			.slideImg .flex-control-paging a{display:inline-block;width:8px;height:0;padding-top:8px;background:#000;overflow:hidden;border-radius:50%;filter:alpha(opacity=50);-moz-opacity:0.50;opacity:0.50;margin:0 3px;cursor: pointer}
+			.slideImg .flex-control-paging a.flex-active {background:#00f6ff;filter:alpha(opacity=100);-moz-opacity:1;opacity:1}
+		</style>
+		<div class="slideImg flexBanner">
+			<ul class="slides" id="flexBannerList">
+				{/foreach $calling_advert_middle as $k=>$v/}
+				<li><a href="http://{/$v['url']/}" target="_blank" adv_id="{/$v['adv_id']/}" area="calling_advert"><img src="{/$v['img_url']/}" /></a></li>
+				{//foreach/}
+			</ul>
+		</div>
+		{//if/}
+
+		<!--mj new-->
+        <div class="compInfor_box clearfix">
+			<div class="con clearfix">
+        		<dl class="comp_infor clearfix">
+        			<dt>
+        				<input type="hidden" id="delete_logo" value='{/$companyinfo["company_logo_path"]/}'>
+        				<a href="javascript:void(0)" class="img upLOGO">
+	        				<img id="logo_path" src="{/$logo_path/}" />
+	        				<span>上传LOGO</span>
+        				</a>
+        				<p>
+	        				<span style="position: relative;">
+	        					<i style="width:{/$companyInfoPercent/}%;background-color:{/if $companyInfoPercent <=30/}#f00{/elseif $companyInfoPercent < 100 && $companyInfoPercent > 30/}#aacceb {/else if $companyInfoPercent == 100/}#0c3{//if/};"></i>
+	        					<u style="display: block; position: absolute; top: 0px; left: 45%; text-decoration: none; color: rgb(19, 86, 147);">{/$companyInfoPercent/}%</u>
+	        				</span>
+        				</p>
+        			</dt>
+        			<dd class="infor">
+        				<h2>{/$companyinfo['company_name']/}</h2>
+        				<p>{/if !empty($companyinfo['link_tel'])/}{/$companyinfo['link_tel']/} {/$companyinfo['linkman']/}{/else/} 还未填写{//if/}</p>
+                        <p>{/if !empty($companyinfo['email'])/}{/$companyinfo['email']/}{/else/}邮箱还未填写{//if/}</p>
+                        <div>
+                        	<span>
+                        		{/if $is_audit == '0'/}<a target='_blank' href="/licencevalidate/index/action-againUpload" class="btnx1"><i></i>企业认证</a>{//if/}
+				        		{/if $companyinfo['is_audit'] == '1'/}
+				        		<a {/if $is_audit=='4'/}target='_blank' href="/licencevalidate/index/action-againUpload"{/else/}href="javascript:void(0)" style="cursor:default;"{//if/} class="btnx1 btnxcut1"><i></i>已认证{/if $companyinfo['audit_state'] == '2'/}(临时){/else if $companyinfo['audit_state'] == '3'/}(待补){//if/}</a>
+				        		{//if/}
+				        		{/if $is_audit == '2'/}<a href="javascript:void(0)" class="btnx1" style="cursor:default;"><i></i>认证中</a>{//if/}
+				        		{/if $is_audit == '3'/}<a target='_blank' href="/licencevalidate/index/action-againUpload" class="btnx1"><i></i>认证失败</a>{//if/}
+                        	</span>
+                            <em>|</em>
+
+                            {/if $bindweixin/}
+                            <a href="{/get_url rule="/account/weixin/"/}" target="_blank" class="btnx2 btnxcut2" style="cursor:pointer;"><i></i>已绑定</a>
+                            {/else/}
+                            <a href="{/get_url rule="/account/weixin/"/}" target='_blank' class="btnx2"><i></i>微信绑定</a>
+                            {//if/}
+
+                            <em>|</em>
+                            <a href="{/$siteurl.company|replace:'http:':''/}/account/weixinShow" class="btnx3" id="weiBtn" target="_blank"><i></i>微招聘</a>
+                        </div>
+        			</dd>
+        			<dd class="money">
+                    	<p class="butn2"><a href="/company/modify/"><i></i>编辑资料</a></p>
+        				<p class="num"><span>￥{/sprintf("%.1f", $companyresources['account_overage'])/}</span></p>
+        				<p class="butn"><a href="{/get_url rule='/pay/'/}" target="_blank">充值</a></p>
+        			</dd>
+        		</dl>
+        		<!--会员 -->
+        		{/if $memberinfo == 'member'/}
+                <p class="vip_box_tit">
+                	<span class="right" id="ttp" style="cursor: pointer;margin-top: 4px"><i class="jian" style="vertical-align: sub"></i>联系招聘顾问购买推广金，可享受更多优惠</span>
+                	<i class="god"></i><strong class="tit">{/$hr_member/} {/$companyresources['companyLevel']/}</strong>
+                	<span class="time">{/date("Y.m.d", strtotime($companyinfo['end_time']))/}
+                		{/if isset($overdue_day)/}
+                        {/if $overdue_day < 0/}(<i class='red'>已过期</i>){/else/}(还有<i class="red">{/$overdue_day/}</i>天){//if/}{/else/}(剩{/$last_lev_day/}天)
+                        {//if/}
+                    </span>
+                </p>
+               	<ul class="vip_box clearfix">
+               		<!-- 推广金 -->
+               		<li class="on1">
+               			<i></i>
+               			<p class="center-vip">
+               				<span style="display:block;"><a href="{/get_url rule="/spread/"/}" class="money" style="display:inline">{/$companyresources['spread_overage']/}</a>&nbsp;元</span>
+               				<span>推广金</span><a href="javascript:void(0)" class="wenti">
+               					<span class="pop"><u></u>推广金用于汇博的推广服务职位置顶、设置急聘职位、购买简历、超额刷新职位。</span>
+               				</a>
+               			</p>
+               		</li>
+               		<!-- 简历点数 -->
+               		<li>
+               			<i class="i2"></i>
+               			<p><strong title="可用点数{/$companyresources['over_resume_down_num']|default:0/}，总共{/$companyresources['ser_resume_num']|default:0/}">{/$companyresources['over_resume_down_num']|default:0/}/{/$companyresources['ser_resume_num']|default:0/}</strong><span>可用简历点数</span></p>
+               		</li>
+               		<!-- 刷新次数 -->
+               		<li class="not-margin">
+               			<i class="i3"></i>
+               			<p><strong title="当天剩余{/$companyresources['refresh_today_overplus']|default:0/}，当天总共{/$companyresources['refresh_perday']|default:0/}">{/$companyresources['refresh_today_overplus']|default:0/}/{/$companyresources['refresh_perday']|default:0/}</strong><span>可刷新次数</span>
+               			</p>
+               		</li>
+               		<!-- 可用职位数 -->
+               		<li>
+               			<i class="i4"></i>
+               			<p><strong  title="可用职位数{/intval($companyresources['default_job_num']-$companyresources['has_pub_job_num'])/}，总共{/$companyresources['default_job_num']|default:0/}">{/intval($companyresources['default_job_num']-$companyresources['has_pub_job_num'])/}/{/$companyresources['default_job_num']|default:0/}</strong><span>可用职位数</span></p>
+               		</li>
+               		<!-- 完整面试短信 -->
+               		<li>
+               			<i class="i5"></i>
+               			<p><strong>{/if $companyresources['is_enabled_messagenotice']/}已开启{/else/}未开启{//if/}</strong><span>完整面试短信</span></p>
+               		</li>
+               		<!-- 智能推广 -->
+               		<li class="not-margin">
+               			<i class="i6"></i>
+               			<p><strong>{/if $companyresources['is_enabled_intelligentrecommend']/}已开启{/else/}未开启{//if/}</strong><span>智能推广</span></p>
+               		</li>
+               	</ul>
+               	{/else if $account_type == "NotMember"/}
+               	<ul class="vip_box clearfix">
+               		<li class="line"><i></i><p class="center-vip">
+               			<a href="{/get_url rule="/spread"/}" class="money">{/$companyresources['spread_overage']/}</a><span class="first">元&nbsp;推广金</span><span>用于获取简历的联系方式</span></a>
+               			</p>
+               		</li>
+               	</ul>
+
+				{/if !empty($companyresources['coupon_count'])/}
+				<ul class="vip_box clearfix coupon" style="margin-top:0px;">
+               		<li class="line"><i></i>
+               			<p class="center-vip">
+	               			<a href="{/get_url rule="/spread"/}" class="money">{/$companyresources['coupon_count']/}</a><span>张优惠券&nbsp;&nbsp;共计</span>
+	               			<a href="{/get_url rule="/spread"/}" class="money">{/$companyresources['coupon_free']/}</a><span style="margin-right:29px;">元</span>
+	               			<span>用于购买汇博会员服务时抵扣费用</span>
+               			</p>
+               		</li>
+               	</ul>
+				{//if/}
+
+               	<div class="openMember clearfix">
+                	<p class="openMemberTit"><span>开通会员拥有招聘特权</span><em>会员享受招聘特权</em></p>
+                    <ul class="memberList">
+                    	<li><em>1</em>可同时发布100个职位</li>
+                        <li><em>2</em>免费查看求职者投递的简历</li>
+                        <li class="num"><em>3</em>会员职位优先展示</li>
+                        <li><em>4</em>职位自动刷新</li>
+                        <li><em>5</em>使用简历点下载简历</li>
+                        <li class="num"><em>6</em>免费发送面试短信</li>
+                    </ul>
+                    <p class="member-detail"><a href="{/get_url rule="/index/memberdetail/"/}" target="_blank">了解更多详情>></a></p>
+                </div>
+                <div class="openMember clearfix">
+                	<p class="openMemberTit"><b>活动</b><span>免费送招聘福利</span></p>
+                    <div class="mPublish clearfix">
+                    	<div class="publish_lf">
+                        	如果你的企业属于以下行业或者地区<br />
+							{/if !empty($company_not_update) && !in_array($is_audit, [1, 2, 4])/}
+							在<a href="{/get_url rule="/company/modify/"/}">完善公司资料</a>并<a href="{/get_url rule="/licencevalidate/"/}">上传营业执照</a>，待系统审核确认后，<br />
+							即可获得免费招聘福利！<br />
+							{/else if !in_array($is_audit, [1, 2, 4])/}
+							再<a href="{/get_url rule="/licencevalidate/"/}">上传营业执照</a>，待系统审核确认后，<br />
+							即可获得免费招聘福利！<br />
+							{/else if !empty($company_not_update)/}
+							在<a href="{/get_url rule="/company/modify/"/}">完善公司资料</a>，待系统审核确认后，<br />
+							即可获得免费招聘福利！<br />
+							{/else/}
+							待系统审核确认后，即可获得免费招聘福利！<br />
+							{//if/}
+							行业：{/foreach $not_member_callingnames as $name/}{/$name/}{//foreach/}<br />
+							地区：{/foreach $not_member_areanames as $name/}{/$name/}&nbsp;{//foreach/}
+                        </div>
+                        <div class="publish_rt">
+                        	1.可同时发布3个职位<br />
+							2.免费查看求职者投递的简历<br />
+							3.免费发送面试短信
+                        </div>
+                    </div>
+                </div>
+               	{/else/}
+               	<ul class="vip_box clearfix">
+               		<li class="on1"><i></i>
+               			<p class="center-vip"><span style="display:block;"><a href="{/get_url rule="/spread/"/}" class="money" style="display:inline">{/$companyresources['spread_overage']/}</a>&nbsp;元</span><span>推广金</span><a href="javascript:void(0)" class="wenti" style="#margin-top: -10px"><span class="pop"><u></u>推广金用于汇博的推广服务职位置顶、设置急聘职位、购买简历、超额刷新职位。</span></a>
+               			</p>
+               		</li>
+               		<li><i class="i4"></i>
+               			<p><strong  title="可用职位数{/intval($companyresources['default_job_num']-$companyresources['has_pub_job_num'])/}，总共{/$companyresources['default_job_num']|default:0/}">{/intval($companyresources['default_job_num']-$companyresources['has_pub_job_num'])/}/{/$companyresources['default_job_num']|default:0/}</strong><span>可用职位数</span>
+               			</p>
+               		</li>
+               		<li class="not-margin">
+               			<i class="i3"></i>
+               			<p><strong title="当天剩余{/$companyresources['refresh_today_overplus']|default:0/}，当天总共{/$companyresources['refresh_perday']|default:0/}">{/$companyresources['refresh_today_overplus']|default:0/}/{/$companyresources['refresh_perday']|default:0/}</strong><span>可刷新次数</span>
+               			</p>
+               		</li>
+               	</ul>
+
+               	{/if !empty($companyresources['coupon_count'])/}
+				<ul class="vip_box clearfix coupon" style="margin-top:0px;">
+               		<li class="line"><i></i>
+               			<p class="center-vip">
+	               			<a href="{/get_url rule="/spread"/}" class="money">{/$companyresources['coupon_count']/}</a><span>张优惠券&nbsp;&nbsp;共计</span>
+	               			<a href="{/get_url rule="/spread"/}" class="money">{/$companyresources['coupon_free']/}</a><span style="margin-right:29px;">元</span>
+	               			<span>用于购买汇博会员服务时抵扣费用</span>
+               			</p>
+               		</li>
+
+               		{/if $coupon!=null/}
+               		<li class="juan-item"><i class="i7"></i><p><span class="right">使用有效期：{/$coupon['coupon_end_time']|date_format:'%Y年%m月%d日'/}</span><a href="/commoncoupon/index/?state-0" class="money">{/$coupon['coupon_fee']/}</a><span>元</span><strong>购买会员服务时使用</strong></p></li>
+               		{//if/}
+               	</ul>
+				{//if/}
+
+				<div class="openMember clearfix">
+                	<p class="openMemberTit"><span>开通会员拥有招聘特权</span><em>会员享受招聘特权</em></p>
+                    <ul class="memberList">
+                    	<li><em>1</em>可同时发布100个职位</li>
+                        <li><em>2</em>免费查看求职者投递的简历</li>
+                        <li class="num"><em>3</em>会员职位优先展示</li>
+                        <li><em>4</em>职位自动刷新</li>
+                        <li><em>5</em>使用简历点下载简历</li>
+                        <li class="num"><em>6</em>免费发送面试短信</li>
+                    </ul>
+                    <p class="member-detail"><a href="{/get_url rule="/index/memberdetail/"/}" target="_blank">了解更多详情>></a></p>
+                </div>
+
+                <div class="openMember clearfix">
+                	<p class="openMemberTit"><b>活动</b><span>免费送招聘福利</span></p>
+                    <div class="mPublish clearfix">
+                    	<div class="publish_lf">
+                        	恭喜你，获得了本次免费招聘的福利<br />
+                                本次活动涉及的行业及地区如下：<br />
+							行业：{/foreach $not_member_callingnames as $name/}{/$name/}{//foreach/}<br />
+							地区：{/foreach $not_member_areanames as $name/}{/$name/}&nbsp;{//foreach/}
+                        </div>
+                        <div class="publish_rt">
+                        	1.可同时发布3个职位<br />
+							2.免费查看求职者投递的简历<br />
+							3.免费发送面试短信
+                        </div>
+                    </div>
+                </div>
+				{//if/}
+        	</div>
+        </div>
+
+        {/if $memberinfo == 'member' && count($recommend) > 0/}
+        <!-- 推荐的简历 -->
+        <div class="firmConTopBg">
+            <div class="firmRmendTit">
+                <span>推荐给我的简历</span><a href="/recommend/">更多>></a>
+            </div>
+            <ul class="firmRmendLit">
+                {/foreach $recommend as $station=>$value/}
+                {/if !empty($station)/}
+                <li>
+                    <a href="{/if $value['job_url'] !=''/}{/$value['job_url']/}{/else/}javascript:;{//if/}" target='_blank' class="subRmlit01" title="{/$station/}">{/$station/}</a>
+                    <span>客服专员{/$value['recommend_man_name']/}根据职位要求给您推荐了
+                    	<a style="display:inline-block;float:none;color:#D66564;" target='_blank' href='/recommend/index/?job_id={/$value['job_id']/}'>{/count($value['info'])/}份</a>简历
+                    </span>
+                    {/if $value['not_do'] > 0/}
+                    	<a target='_blank' href="/recommend/index/?job_id={/$value['job_id']/}&status=0" class="subRmlit03">未处理({/$value['not_do']/})</a>
+                    {//if/}
+                    {/if $value['not_read_count'] > 0/}
+                    	<a target='_blank' href="/recommend/index/?job_id={/$value['job_id']/}&status=99" class="subRmlit02">未读({/$value['not_read_count']/})</a>
+                    {//if/}   
+                </li>
+                {//if/}
+                {//foreach/}
+            </ul>
+        </div>
+        {//if/}
+        
+        {/if $memberinfo != 'member'/}
+        {/if $isEndMember/}
+         <!--疑问联系顾问 -->
+        <div class="firmConTopBg">
+            <div class="firmRmendTit">
+                <span>您的会员服务已于{/date("Y-m-d", strtotime($companyinfo['end_time']))/}到期，请联系招聘顾问续费开通会员服务</span>
+            </div>
+            {/if $hasHRManager || $hasCustomer/}
+            <ul class="fRmendConat">
+                {/if $hasHRManager/}
+                <li>
+                    <p><b>{/$hrManager['user_name']/}</b><span style="color:#ccc">招聘顾问 &nbsp;&nbsp;</span></p>
+			        <p class="mid">
+			        	{/if !empty($hrManager['tel'])/}
+			        	<span {/if empty($hrManager['qq'])/}style="vertical-align: 5px;"{//if/}>{/$tel_head/}转{/$hrManager['tel']/}</span>
+			        	{//if/}
+			        	{/if !empty($hrManager['mobile'])/}
+			        	<span style="padding:0 40px;{/if empty($hrManager['qq'])/}vertical-align: 5px;{//if/}">{/$hrManager['mobile']/}</span>
+			        	{//if/}
+			        	{/if !empty($hrManager['qq'])/}
+				        <span>QQ:{/$hrManager['qq']/}</span>
+			            <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin={/trim($hrManager["qq"])/}&site=qq&menu=yes">
+			            	<img border="0"  width="79" height="25" src="http://wpa.qq.com/pa?p=2:{/trim($hrManager["qq"])/}:51" alt="点击这里给我发消息" title="点击这里给我发消息"/>
+			            </a>
+			            {/else/}
+                    	<script charset="utf-8" type="text/javascript" src="http://wpa.b.qq.com/cgi/wpa.php?key=XzkzODA0MDQyNl8xMjgzMTBfNDAwODg3Mjg4N18"></script>
+			            {//if/}
+			        </p>
+                </li>
+                {//if/}
+
+                {/if $hasCustomer/}
+                <li>
+					<p><b>{/$customeruser['user_name']/}</b><span style="color:#ccc">客服顾问 &nbsp;&nbsp;</span></p>
+			        <p class="mid">
+			        	{/if !empty($customeruser['tel'])/}
+			        		<span {/if empty($customeruser['qq'])/}style="vertical-align: 5px;"{//if/}>{/$tel_head/}转{/$customeruser['tel']/}</span>
+			        	{//if/}
+			        	{/if !empty($customeruser['mobile'])/}
+			        		<span style="padding:0 40px;{/if empty($customeruser['qq'])/}vertical-align: 5px;{//if/}">{/$customeruser['mobile']/}</span>
+			        	{//if/}
+			        	{/if !empty($customeruser['qq'])/}
+				        	<span>QQ:{/$customeruser['qq']/}</span>
+				            <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin={/trim($customeruser["qq"])/}&site=qq&menu=yes">
+				            	<img border="0"  width="79" height="25" src="http://wpa.qq.com/pa?p=2:{/trim($customeruser["qq"])/}:51" alt="点击这里给我发消息" title="点击这里给我发消息"/>
+				            </a>
+				        {/else/}
+                        <script charset="utf-8" type="text/javascript" src="http://wpa.b.qq.com/cgi/wpa.php?key=XzkzODA0MDQyNl8xMjgzMTBfNDAwODg3Mjg4N18"></script>
+			            {//if/}
+			        </p>
+                </li>
+                {//if/}
+
+            </ul>
+            {/else/}
+            <ul class="fRmendConat">
+                <li>
+                    <p class="titWeight" style="padding-top:5px;">
+                    	<span style="vertical-align:middle;">客服热线：{/$huibo400/}</span>
+                    	<span style="padding-left:35px;">QQ : 2851501279</span>
+                    </p>
+                </li>
+                <li>
+                    <p class="titWeight">
+                    	<a  target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=2851501279&site=qq&menu=yes" style="padding-left:50px;">
+                    		<img src="{/$siteurl.style/}/img/c/new_index/firmicon06.png" width="94" height="24" />
+                    	</a>
+                    </p>
+                </li>
+            </ul>
+            {//if/}
+    	</div>
+	
+		<!-- 熟悉公司的高级会员 -->
+        <div class="firmConTopBg" style="padding:20px 20px 10px 20px;">
+            <div class="firmRmendTit">
+	            <span>这些您熟悉的公司已经是我们的高级会员了</span>
+	        </div>
+            <div class="firmRmendLbg">
+                {/foreach $famous_company as $v/}
+                <dl class="firmRmendL">
+                    <dt><a target='_blank' href="{/$v['company_url']/}"><img src="{/$v['logo_path']/}" width="44" height="44" /></a></dt>
+                    <dd>
+                        <p>
+							{/if $v.is_audit == 1 && ($v['audit_state'] == 1 || $v['audit_state'] == 4)/}
+                            <img src="{/$siteurl.style/}/img/c/new_index/firmicon18.png" width="15" height="17" />
+                            {//if/}
+                            <img src="{/$siteurl.style/}/img/c/new_index/firmicon19.png" width="17" height="17" />
+                        </p>
+                         <a target='_blank' title="{/$v['company_name']/}" href="{/$v['company_url']/}">{/$v['company_name']/}</a>
+                    </dd>
+                </dl>
+                {//foreach/}
+            </div>
+        </div>
+
+        {/else/}
+        <!-- 熟悉公司的高级会员 -->
+        <div class="firmConTopBg" style="padding:20px 20px 10px 20px;">
+            <div class="firmRmendTit">
+	            <span>这些您熟悉的公司已经是我们的高级会员了</span>
+	        </div>
+            <div class="firmRmendLbg">
+                {/foreach $famous_company as $v/}
+                <dl class="firmRmendL">
+                    <dt><a target='_blank' href="{/$v['company_url']/}"><img src="{/$v['logo_path']/}" width="44" height="44" /></a></dt>
+                    <dd>
+                        <p>
+                            {/if $v.is_audit ==1/}
+                            {/if $v['audit_state'] == 1 || $v['audit_state'] == 4/}
+                            <img src="{/$siteurl.style/}/img/c/new_index/firmicon18.png" width="15" height="17" />
+                            {//if/}
+                            {//if/}
+                            <img src="{/$siteurl.style/}/img/c/new_index/firmicon19.png" width="17" height="17" />
+                        </p>
+                         <a target='_blank' title="{/$v['company_name']/}" href="{/$v['company_url']/}">{/$v['company_name']/}</a>
+                    </dd>
+                </dl>
+                {//foreach/}
+            </div>
+        </div>
+
+        <!--疑问联系顾问 -->
+        <div class="firmConTopBg">
+            <div class="firmRmendTit">
+                <span>有疑问？请联系您的顾问</span>
+            </div>
+            {/if $hasHRManager || $hasCustomer/}
+            <ul class="fRmendConat">
+                {/if $hasHRManager/}
+                <li>
+                    <p><b>{/$hrManager['user_name']/}</b><span style="color:#ccc">招聘顾问 &nbsp;&nbsp;</span></p>
+			        <p class="mid">
+			        	{/if !empty($hrManager['tel'])/}
+			        		<span {/if empty($hrManager['qq'])/}style="vertical-align: 5px;"{//if/}>{/$tel_head/}转{/$hrManager['tel']/}</span>
+			        	{//if/}
+			        	{/if !empty($hrManager['mobile'])/}
+			        		<span style="padding:0 40px;{/if empty($hrManager['qq'])/}vertical-align: 5px;{//if/}">{/$hrManager['mobile']/}</span>
+			        	{//if/}
+			        	{/if !empty($hrManager['qq'])/}
+				        	<span>QQ:{/$hrManager['qq']/}</span>
+				            <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin={/trim($hrManager["qq"])/}&site=qq&menu=yes">
+				            	<img border="0"  width="79" height="25" src="http://wpa.qq.com/pa?p=2:{/trim($hrManager["qq"])/}:51" alt="点击这里给我发消息" title="点击这里给我发消息"/>
+				            </a>
+			            {/else/}
+                        	<script charset="utf-8" type="text/javascript" src="http://wpa.b.qq.com/cgi/wpa.php?key=XzkzODA0MDQyNl8xMjgzMTBfNDAwODg3Mjg4N18"></script>                        
+			            {//if/}
+			        </p>
+                </li>
+                {//if/}
+
+                {/if $hasCustomer/}
+                <li>
+					<p><b>{/$customeruser['user_name']/}</b><span style="color:#ccc">客服顾问 &nbsp;&nbsp;</span></p>
+			        <p class="mid">
+			        	{/if !empty($customeruser['tel'])/}
+			        		<span {/if empty($customeruser['qq'])/}style="vertical-align: 5px;"{//if/}>{/$tel_head/}转{/$customeruser['tel']/}</span>
+			        	{//if/}
+			        	{/if !empty($customeruser['mobile'])/}
+			        		<span style="padding:0 40px;{/if empty($customeruser['qq'])/}vertical-align: 5px;{//if/}">{/$customeruser['mobile']/}</span>
+			        	{//if/}
+			        	{/if !empty($customeruser['qq'])/}
+				        	<span>QQ:{/$customeruser['qq']/}</span>
+				            <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin={/trim($customeruser["qq"])/}&site=qq&menu=yes">
+				            	<img border="0"  width="79" height="25" src="http://wpa.qq.com/pa?p=2:{/trim($customeruser["qq"])/}:51" alt="点击这里给我发消息" title="点击这里给我发消息"/>
+				            </a>
+				        {/else/}
+                        <script charset="utf-8" type="text/javascript" src="http://wpa.b.qq.com/cgi/wpa.php?key=XzkzODA0MDQyNl8xMjgzMTBfNDAwODg3Mjg4N18"></script>
+			            {//if/}
+			        </p>
+                </li>
+                {//if/}
+
+            </ul>
+            {/else/}
+            <ul class="fRmendConat">
+                <li>
+                    <p class="titWeight" style="padding-top:5px;">
+                    	<span style="vertical-align:middle;">客服热线：{/$huibo400/}</span>
+                    	<span style="padding-left:30px;">QQ:2851501279</span>
+                    </p>
+                </li>
+                <li>
+                    <p class="titWeight">
+                    	<a  target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=2851501279&site=qq&menu=yes" style="padding-left:30px;">
+                    		<img src="{/$siteurl.style/}/img/c/new_index/firmicon06.png" width="94" height="24" />
+                    	</a>
+                    </p>
+                </li>
+            </ul>
+            {//if/}
+    	</div>
+    	{//if/}
+    	{/else/}
+        
+        <!--疑问联系顾问 -->
+        <div class="firmConTopBg">
+            <div class="firmRmendTit">
+                <span>有疑问？请联系您的顾问</span>
+            </div>
+            {/if $hasHRManager || $hasCustomer/}
+            <ul class="fRmendConat">
+                {/if $hasHRManager/}
+                <li>
+                    <p><b>{/$hrManager['user_name']/}</b><span style="color:#ccc">招聘顾问 &nbsp;&nbsp;</span></p>
+			        <p class="mid">
+			        	{/if !empty($hrManager['tel'])/}
+			        	<span {/if empty($hrManager['qq'])/}style="vertical-align: 5px;"{//if/}>{/$tel_head/}转{/$hrManager['tel']/}</span>
+			        	{//if/}
+			        	
+			        	{/if !empty($hrManager['mobile'])/}
+		        		<span style="padding:0 40px;{/if empty($hrManager['qq'])/}vertical-align: 5px;{//if/}">{/$hrManager['mobile']/}</span>
+			        	{//if/}
+			        
+			        	{/if !empty($hrManager['qq'])/}
+			        	<span>QQ:{/$hrManager['qq']/}</span>
+			            <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin={/trim($hrManager["qq"])/}&site=qq&menu=yes">
+			            	<img border="0"  width="79" height="25" src="http://wpa.qq.com/pa?p=2:{/trim($hrManager["qq"])/}:51" alt="点击这里给我发消息" title="点击这里给我发消息"/>
+			            </a>
+			            {/else/}
+                    	<script charset="utf-8" type="text/javascript" src="http://wpa.b.qq.com/cgi/wpa.php?key=XzkzODA0MDQyNl8xMjgzMTBfNDAwODg3Mjg4N18"></script>                        
+			            {//if/}
+			        </p>
+                </li>
+                {//if/}
+
+                {/if $hasCustomer/}
+                <li>
+					<p><b>{/$customeruser['user_name']/}</b><span style="color:#ccc">客服顾问 &nbsp;&nbsp;</span></p>
+			        <p class="mid">
+			        	{/if !empty($customeruser['tel'])/}
+			        		<span {/if empty($customeruser['qq'])/}style="vertical-align: 5px;"{//if/}>{/$tel_head/}转{/$customeruser['tel']/}</span>
+			        	{//if/}
+
+			        	{/if !empty($customeruser['mobile'])/}
+		        		<span style="padding:0 40px;{/if empty($customeruser['qq'])/}vertical-align: 5px;{//if/}">{/$customeruser['mobile']/}</span>
+			        	{//if/}
+
+			        	{/if !empty($customeruser['qq'])/}
+			        	<span>QQ:{/$customeruser['qq']/}</span>
+			            <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin={/trim($customeruser["qq"])/}&site=qq&menu=yes">
+			            	<img border="0"  width="79" height="25" src="http://wpa.qq.com/pa?p=2:{/trim($customeruser["qq"])/}:51" alt="点击这里给我发消息" title="点击这里给我发消息"/>
+			            </a>
+				        {/else/}
+                        <script charset="utf-8" type="text/javascript" src="http://wpa.b.qq.com/cgi/wpa.php?key=XzkzODA0MDQyNl8xMjgzMTBfNDAwODg3Mjg4N18"></script>
+			            {//if/}
+			        </p>
+                </li>
+                {//if/}
+
+            </ul>
+            {/else/}
+            <ul class="fRmendConat">
+                <li>
+                    <p class="titWeight" style="padding-top:5px;">
+                    	<span style="vertical-align:middle;">客服热线：{/$huibo400/}</span>
+                    	<span style="padding-left:35px;">QQ : 2851501279</span>
+                    </p>
+                </li>
+                <li>
+                    <p class="titWeight">
+                    	<a  target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=2851501279&site=qq&menu=yes" style="padding-left:50px;">
+                    		<img src="{/$siteurl.style/}/img/c/new_index/firmicon06.png" width="94" height="24" />
+                    	</a>
+                    </p>
+                </li>
+            </ul>
+            {//if/}
+    	</div>
+    	{//if/}
+
+        <!--最近招聘会 -->
+        {/if count($lastThreeFairs) >0/}
+        <div class="firmConTopBg" style="margin-bottom:0;">
+            <div class="firmRmendTit">
+                <span>最近招聘会</span>
+            </div>
+            <div class="ltyFairBgc">
+                <div class="ltyFairBg">
+                    {/foreach from=$lastThreeFairs key=index item=fair/}
+                      <dl class="clearfix" {/if $index == 0/}style="padding-top:0px;border:0px"{//if/}>
+                          <dt class="ltyFlit"><a href="javascript:;" data-scene='745' style="cursor:default"><span>周{/$weekdays[date('w',strtotime($fair["date"]))]/}<br />{/date('m-d',strtotime($fair["date"]))/}</span><i></i></a></dt>
+                          <dd class="ltyFlitText" {/if mb_strlen($fair["subject"]) <=22/}style="margin-top: 20px"{//if/}><a href="{/$siteurl.main/}/zhaopinhui/{/$fair["date"]|date_format:"%Y%m%d"/}/" target="_blank">{/$fair["subject"]/}</a></dd>
+                          <dt class="ltyFlitLink"><a href="{/$siteurl.main/}{/get_url rule='/zhaopinhui/enterprise/' data="sceneid={/$fair['scene_id']/}&fairApply=true"/}" target="_blank" id="changeFair" class="meCustom">我要订展</a></dt>
+                      </dl>
+                      {//foreach/}
+                </div> 
+              </div>
+        </div>
+        {//if/}
+    </div>
+
+    <div class="firmHrt">
+        {/if count($job_lists) > 0/}
+        <div class="firmHrTop">
+            <a href="/partjob/addjobselect/" target="_blank" class="firmRefresh" style='margin-bottom:10px;display:block;background: #66bce4'>发布职位</a>
+            <a href="javascript:;" class="firmRefresh" onclick1="return refreshAll()" id="refreshAll" data-lastTime="{/$lastrefreshtime/}">刷新职位</a>
+
+			{/if $showRefreshTip/}
+			<div class="alert-warniong mgt15" style="background-color: #fffadd;border: 1px solid #f6e5a6;color: #604e29;padding: 5px;margin-top: 2px">
+				<a class="close" href="javascript:void(0)" id="closeRefreshTip" style="color: #737370;float: right;margin-top:-8px">×</a>
+				<i class="alert-icon" style="background: url({/$siteurl.style/}/img/v2/resumeM/0429.jpg) no-repeat"></i>您的职位排名已落后了，快刷新提高排名吧！
+			</div>
+			{//if/}
+
+            <div class="freshTit">
+                <p><span id="refreshTimeSpan" {/if !isset($refresh_time)/}style="display:none"{//if/}>最近刷新时间：<i id="divRefreshTime">{/$refresh_time/}</i></span></p>
+                <p style="position:relative">
+                    <input type="hidden" id="refreshStatus" value="{/$is_auto/}">
+                    <span>自动刷新</span><em id="auto-refresh"  {/if ($is_auto == 0 && $companyinfo['isautorefresh'] == 1)/}class="cut"{//if/}></em>
+                    {/if isset($autorefreshtime)/}
+                    <span class="autorefreshtime" {/if isset($autorefreshtime) && $is_auto !=0/}style="display:none"{//if/}>{/$autorefreshtime/}</span>
+                    {//if/}
+                    <a href="/index/joblist/">职位管理</a>
+                </p>
+                <div class="alt" id="show_alt" style="display:none;">
+                    <i></i>开启后，系统会在15天内每天10:00-20:00随机挑选一个时间为您刷新1次所有在招职位。建议您在不能登录网站的情况下开启，手动刷新效果更佳。
+                </div>
+            </div>
+        </div>
+        {/else/}
+        <div class="firmHrTop">
+            <div style="padding-bottom:20px;color:#eb6f0b;font-size:18px" class="memberTit">您还没有发布职位<br><span style="font-size:14px;color:#333;display: inline-block;margin-top: 10px">发布职位，吸引320万人才给您投递简历</span></div>
+            <a class="firmRefresh" target="_blank" href="/job/add/">免费发布职位</a>
+        </div>
+        {//if/}
+        {/if count($job_lists) > 0/}
+        <div class="reversion">
+			<p><b>近2周</b>（{/$reversion_date_range/}）</p>
+            <!--20160425mijing-->
+			<style>
+				.reversionList li{text-align: left;padding-left: 30px;position: relative;z-index: 2}
+				.reversionList li .ques{position:absolute;left:10px;top:4px;display: inline-block;width:16px;height:16px;background: url({/$siteurl.style/}/img/c/new_index/ques2.jpg) no-repeat;z-index: 3}
+				.reversionList li .orang{color:#604e29;font-size:14px;border:1px solid #f6e5a6;background: #fffadd;padding:5px 10px;position: absolute;left:0px;top:31px;z-index: 2;display: none}
+				.reversionList li.hover .ques{height:26px}
+				.reversionList li.hover .orang{display: block}
+			</style>
+			<ul class="reversionList">
+                <li><a href="javascript:void(0);" class="ques"></a>简历回复率：<font style="color:#666;font-size: 16px;font-weight: bold;vertical-align: -1px">{/$reversion_rate['reply_rate']/}%</font><p class="orang">回复率提升10%，收到的简历数将提升20%</p></li>
+	            <li style="z-index: 1"><a href="javascript:void(0);" class="ques"></a>简历平均回复时长：<font class='' style="color:#666;font-size: 16px;font-weight: bold;vertical-align: -1px">{/$reversion_rate['avg_time']/}</font><p class="orang">处理越及时, 可能收到的简历就越多哦</p> </li>
+			</ul>
+			<!--20160425mijing end-->
+        </div>
+        {/if $memberinfo != "member"/}
+        <p style="text-align:center;font-size:12px;padding-top:6px">----免费职位展示在会员职位之后，<a href="{/get_url rule="/index/memberdetail/"/}" target="_blank" style="text-decoration:underline">开通会员</a>立即优先展示----</p>
+        {//if/}
+        <ul class="freshList">
+            <li class="freshGray">
+                <span class="subFresh01">职位名称</span>
+                <span class="subFresh02">收到</span>
+                <span class="subFresh02">未读</span>   
+               	<span class="subFresh03">待处理</span>
+                <span class="subFresh04">到期时间</span>  
+            </li>
+			<li>
+				<p style="padding: 5px 10px;border:1px solid #d66564;background: #fff2ef;color: #444;font-size: 12px;">
+					<a id="js_click_import" href="javascript:void(0);" style="color: #d5535d;text-decoration: underline;float: right">一键导入汇博</a>
+					系统检测您在前程无忧、智联招聘上正招聘品牌经理、市场总监等10个职位
+				</p>
+			</li>
+            {/foreach $job_lists as $k => $job/}
+				{/if $job['promiseStop'] ==1/}
+				<li {/if $k%2==1/}class ="freshGraybg"{//if/} style="font-weight: 800;">
+                    <a href='{/$job["job_link"]/}' style="color:#ff1919" title="{/$job['station']/}{/if $job['check_state'] ==4/}&#10审核中{//if/}" target="_blank" class="subFresh01">
+                    	<font>{/base_lib_BaseUtils::cutstr($job['station'],16,'utf-8','','…')/}</font>
+                    	{/if in_array($job['re_apply_type'], [2, 5])/}
+                    	<img title="{/$job['re_apply_type']/}天内回复" src="{/$siteurl.style/}/img/c/new_index/{/$job['re_apply_type']/}.png"/>
+                    	{//if/}
+                    </a>
+                    <span class="subFresh02" style="color:#ff1919">{/$job['applyCount']/}</span>
+                    <a class="subFresh02" style="color:#ff1919" target='_blank' {/if $job['applyNotReadCount']>0/}href='/apply/Index/?child_status=2&job_id={/$job.job_id/}'{//if/}>{/$job['applyNotReadCount']/}</a>
+                    <a class="subFresh03" style="color:#ff1919;text-align: left;text-decoration: none;" target='_blank'{/if $job['no_reply_num'] >0/} href='/apply/Index/?job_id={/$job.job_id/}' {//if/}>&nbsp;&nbsp;{/$job['no_reply_num']/}{/if $job['no_reply_num'] >0/}<i></i>{//if/}</a>
+                    <span class="subFresh04" style="color:#ff1919">已过期</span>  
+                </li>
+				{/else/}
+                <li {/if $k % 2 == 1/}class ="freshGraybg"{//if/}>
+                    <a href='{/$job["job_link"]/}' title="{/$job['station']/}{/if $job['check_state'] == 4/}&#10审核中{//if/}" target="_blank" class="subFresh01">
+                    	<font>{/base_lib_BaseUtils::cutstr($job['station'], 16, 'utf-8', '', '…')/}</font>
+                    	{/if $job['check_state'] == 4/}
+                    	<img title="待审核" src="{/$siteurl.style/}/img/c/new_index/shen.png" class="shen" />
+                    	{/else if in_array($job['re_apply_type'], [2, 5])/}
+	                    <img title="{/$job['re_apply_type']/}天内回复" src="{/$siteurl.style/}/img/c/new_index/{/$job['re_apply_type']/}.png"/>	
+                    	{//if/}
+                    </a>
+                    <span class="subFresh02">{/$job['applyCount']/}</span>
+                    <a class="subFresh02" target='_blank' {/if $job['applyNotReadCount']>0/}href='/apply/Index/?child_status=2&job_id={/$job.job_id/}'{//if/}>{/$job['applyNotReadCount']/}</a>
+                    <a class="subFresh03" style="text-align: left;text-decoration: none;" target='_blank'{/if $job['no_reply_num'] > 0/} href='/apply/Index/?job_id={/$job.job_id/}' {//if/}>&nbsp;&nbsp;{/$job['no_reply_num']/}
+                    {/if $job['no_reply_num'] > 0/}<i></i>{//if/}
+                    </a>
+                    <span class="subFresh04">{/$job['day']/}</span>  
+                </li> 
+
+                {//if/}
+                {/if $k == ($promiseStopSize - 1)/}
+                <!-- 分隔线 -->
+                <li class="lineNull">
+                	<span class="borderLine"><em>以上停招的承诺职位请将简历回复完</em></span>
+                </li>
+                {//if/} 
+            {//foreach/}
+        </ul>
+        {//if/}
+
+        <!--未成为会员推荐简历-->
+        <!--{/if $memberinfo != 'member' && count($resumedata_arr) > 0/}
+        <div class="firmEce">
+        	<p class="firmEcetit"><span>求职者简历</span><a target="_blank" href="/resumesearchnew/">去简历库搜索</a></p>
+            <ul>
+                {/foreach $resumedata_arr as $resumedata/}
+            	<li>
+                	<a href="{/$siteurl.company|replace:'http:':''/}/resume/resumeshow/type-network-resumeid-{/$resumedata['resume_id']/}" target="_blank">
+                    	<img src="{/$resumedata.photo/}" width="50" height="50" />
+                        <p>
+                        	<span>{/$resumedata.user_name/}</span>
+                            <span>{/$resumedata.station/}</span>
+                            <span>
+                                {/if !base_lib_BaseUtils::nullOrEmpty($resumedata['age'])/}
+                                {/$resumedata['age']/}|
+                                {//if/}
+                                {/if !base_lib_BaseUtils::nullOrEmpty($resumedata['work_year'])/}
+                                {/$resumedata['work_year']/}|
+                                {//if/}
+                                {/if !base_lib_BaseUtils::nullOrEmpty($resumedata['degree'])/}
+                                {/get_name degree=$resumedata['degree']/}
+                                {//if/}
+                            </span>
+                        </p>
+                    </a>
+                </li>
+               {//foreach/}
+            </ul>
+        </div>
+        {//if/}-->
+        <div class="firmEce">
+            <p class="firmEcetit"><span>求职者留言</span><a target="_blank" href="/guestbook/index/isreplay-0/"><font color="red">{/$guestbook_count/}</font>条未处理</a></p>
+            <ul>
+            {/if count($guestbook_list) > 0/}
+                {/foreach $guestbook_list as $value/}
+            	<li>
+                	<a href="/guestbook/index/isreplay-0/" target="_blank">
+                        {/if $value['hasHead']/}
+                        <img src="{/$value['headphoto']/}" class="newLeaveImg" width="50" height="50" />
+                        {/else/}
+                        <img src="{/$siteurl.style/}/img/company/headPortrait.jpg" class="newLeaveImg" width="50" height="50" />
+                        {//if/} 
+                        <p>
+                        	<span>{/$value['personname']/}</span>
+                            <span>{/$value['content']/}</span>
+                            <span>{/$value['time']/}</span>
+                        </p>
+                    </a>
+                </li>
+               {//foreach/}
+            {/else/}
+                <li><span style="color: #737370; font-size: 12px;">暂无未处理的求职者留言~</span></li>
+            {//if/}
+            </ul>
+            <p align="right" style="margin-bottom:10px"><a target="_blank" href="/guestbook/index/isreplay-0/" style="color:#6699cc;text-decoration: none;font-size: 12px;">查看更多留言》</a></p>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+    <style>
+    	.joinqqGroup{top:315px}
+    </style>
+    <div id="calling_advert">
+    <a target="_blank" style="position: fixed;margin-left:510px;left:50%;top:136px" adv_id="{/$v['adv_id']/}" area="calling_advert" class="calling_advert"><img src="{/$siteurl.style/}/img/company/acompany_ccountmanage_ewm.jpg?t=2" width="140" /></a>
+	{/if !empty($calling_advert)/}
+	{/foreach $calling_advert as $k=>$v/}
+    <a href="http://{/$v['url']/}" target="_blank" style="position: fixed;margin-left:510px;left:50%;top:{/($k*100 +363)/}px" adv_id="{/$v['adv_id']/}" area="calling_advert" class="calling_advert"><img src="{/$v['img_url']/}" width="140" height="90" /></a>
+    {//foreach/}
+	{//if/}
+	</div> 
+	
+	<!--<a href="{/$siteurl.style/}/img/company/company_r0311.jpg" /></a>-->
+	<!--<a href="{/$siteurl.style/}/img/company/company_r0330.jpg" /></a>-->
+</div>
+{/include file="msgpop.html"/}
+{/include file="footer.html"/}
+<section class="floatRT">
+	<a href="{/get_url rule='/about/message' domain='main'/}" target="_blank" class="serviceLink">我有问题要反馈</a><b></b>
+</section>
+<!-- 企业招聘首页 -->
+{/if count($qq_group_arr)>0/}
+<div class="joinqqGroup" style="display: none">
+    <img src="{/$siteurl.style/}/img/c/new_index/joinqq.jpg" width="140" height="141" />
+    {/foreach $qq_group_arr as $v/}
+    <p>
+        <b>{/$v['qq_group']/}</b>
+        <span>{/$v['group_name']/}</span>
+    </p>
+    {//foreach/}
+</div>
+{//if/}
+
+
+
+
+<script type="text/javascript">
+
+	try {
+		hbjs.use(factory);
+	} catch(e) {
+		factory($);
+	}
+
+	function factory($){
+		$(window).scroll(function(){
+			if ($(document).scrollTop() > 120){
+				$('#sus').find('a.backTop').css({'display':'inline-block'});
+			}else{
+				$('#sus').find('a.backTop').css({'display':'none'});
+			}
+		});
+		$('#sus').find('a.backTop').click(function(){
+			$('html,body').animate({ scrollTop: 0 });
+		});
+	}
+</script>
+
+<script>
+hbjs.use('@jobFlexSlider,@imageEditor, @confirmBox, @jobsort, @jobDialog, @orderActions', function(m) {
+	
+    var imageEditor     = m['widge.imageEditor'],
+        ConfirmBox      = m['widge.overlay.confirmBox'],
+        Dialog          = m['widge.overlay.hbDialog'],
+        util            = m['base.util'],
+        cookie          = m['tools.cookie'],
+        orderAction     = m['product.orderActions'],
+        $               = m['jquery'].extend(m['cqjob.jobsort'], m['cqjob.jobFlexSlider'], m['cqjob.jobDialog']),
+		uploadDialog = new Dialog({
+			close: 'x',
+			idName: 'ui_company_dialog',
+			title: '上传公司LOGO',
+			width: 700,
+			content: '{/$siteurl.company|replace:"http:":""/}/company/uploadCompanyLogo/',
+			isAjax: true
+		}),
+		fontSize = 18,
+		pWidth = 70,
+		imgEditor;
+	//一键导入
+	var  importDialog = new Dialog({
+		close: 'x',
+		idName: 'click_import_dialog',
+		title: '请选择要导入的职位',
+		width: 650,
+		content: '{/$siteurl.company|replace:"http:":""/}/company/importAjax/',
+		isAjax: true
+	})
+
+
+
+
+
+
+	$("#js_click_import").click(function(){
+		importDialog.show();
+	});
+
+    $(".ques").mouseover(function(){
+        $(".reversionList li").each(function(i,obj){
+            if($(obj).hasClass('hover')) $(obj).removeClass('hover');
+        });
+        $(this).parent().addClass('hover');
+    });
+    
+    $(".ques").mouseout(function(){
+        $(this).parent().removeClass('hover');
+    });
+    
+	$('.upLOGO').on('click', function(e){
+		uploadDialog.show();
+	});
+	uploadDialog.after('hide', function(){
+		this.query('#newPopQuit').off('click');
+		imgEditor.destory();
+	});
+	uploadDialog.on('loadComplete', function() {
+		var uploadPanel = this.query('#uplogo1'),
+			editPanel = this.query('#dropImageContainer'),
+			dropImage = this.query('#dropImage'),
+			uploadingDialog;
+		
+		imgEditor = new imageEditor({
+			imageCroperConfig: {
+				element: dropImage,//目标
+				handle: '#dragDiv',
+				color: '#f1f1f1',
+				width: dropImage.width(),
+				height: dropImage.height()
+			},
+			fileUploaderConfig: {
+				imageURL: '{/$logo_virt_path/}'
+			},
+			trigger: this.query('#newPopSave')
+		});
+		imgEditor.on('startUpload', function(e){
+			var msg = "正在上传...";
+			uploadingDialog = ConfirmBox.timeBomb(msg, {
+				name : "warning",
+				timeout : 100000,
+				width: fontSize * msg.length + pWidth
+			});
+		}).on('progresed', function(e){
+			this._imgFileName = e.data.name;
+			this._imgType = e.data.thumb_type;
+			this._imgRatio = e.data.thumb_ratio;
+			this.loadImage(e.url);
+				
+			uploadingDialog.hide();
+			uploadPanel.hide();
+			editPanel.show();
+
+			var preview1 = editPanel.find('#preview120'),
+				preview2 = editPanel.find('#preview160');
+				
+			this.addPreview(preview1, 120, 120);
+			this.addPreview(preview2, 160, 160);
+				
+		}).on('progressError', function(e){
+			ConfirmBox.timeBomb(e.data.errorMsg, {
+				name : "fail",
+				timeout : 1000,
+				width: fontSize * e.data.errorMsg.length + pWidth
+			});
+		}).on('save', function(e){
+			var self = this;
+			$.ajax({
+				url: '{/$siteurl.company|replace:"http:":""/}/company/saveLogo',
+				data: {
+					cropX: e.cropX,
+					cropY: e.cropY,
+					cropH: e.cropH,
+					cropW: e.cropW,
+					cropPH: e.cropPH,
+					cropPW: e.cropPW,
+					url: e.url,
+					name: this._imgFileName,
+					thumb_type: this._imgType,
+					thumb_ratio: this._imgRatio
+				},
+				success: function(e){
+					e = util.json(e);
+					if(e.state){
+                        $('#hidLogo').val(e.image_path);
+                        //上传头像
+                        var del_logo = $('#delete_logo').val();
+	                        $.post("/index/editLogoPath", {'logo_path':e.image_path,'del_logo':del_logo},
+	                            function(data){
+	                                if (data.error) {
+	                                   $.anchorMsg(data.error);return;
+	                                }
+	                                $('#logo_path').attr('src',"{/$logo_base_path/}"+e.image_path);
+	                                $('#delete_logo').val(e.image_path);
+	                                uploadDialog.hide();
+	                                delete self._imgFileName;
+	                                delete self._imgType;
+	                                delete self._imgRatio;
+	                            }, "json");
+	                    
+					}
+				}
+			});
+		});
+		
+		imgEditor.imageCroper.on('loadSuccess', function(){
+			uploadPanel.hide();
+			editPanel.show();
+		}).on('loadError', function(){
+			delete this._imgFileName;
+			delete this._imgType;
+			delete this._imgRatio;
+			uploadPanel.show();
+			editPanel.hide();
+			var msg = '加载图片失败';
+			ConfirmBox.timeBomb(msg, {
+				name : "fail",
+				timeout : 1000,
+				width: fontSize * msg.length + pWidth
+			});
+		});
+		
+		this.query('#newPopQuit').on('click', function(){
+			uploadDialog.hide();
+		});
+	});
+
+	$('#ttp').click(function(){
+		var jdialog = new Dialog({
+			close: 'x',
+			idName: 'jian_dialog',
+			title: '详情咨询',
+			width:380
+		});
+
+
+		var thtml =	['<style>.jian_dialog{text-align:left}</style>',
+					'<div class="warning_dialog" style="padding:15px;font-family:\'微软雅黑\';line-height:30px">',
+						'<p>联系招聘顾问购买推广金，最高多送<b style="color:red;">50%</b></p>',
+						{/if !empty($hrManager["user_name"])/}
+						'<p>招聘顾问：{/$hrManager["user_name"]/}</p>',
+						{//if/}
+						{/if !empty($hrManager["mobile"]) || !empty($customeruser["mobile"])/}
+						'<p>联系电话：{/$tel_head/}转{/$hrManager["tel"]/} [9：00-18：00]</p>',
+						'<p>手机号码：{/$hrManager["mobile"]|default:$customeruser["mobile"]/}</p>',
+						{/else/}
+						'<p>联系电话：{/$huibo400/}</p>',					
+						{//if/}
+						'<p style="margin-top:15px">',
+							{/if !empty($hrManager["qq"]) || !empty($customeruser["qq"])/}
+							'<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin={/trim($hrManager["qq"]|default:$customeruser["qq"])/}&site=qq&menu=yes">',
+					    		'<img src="{/$siteurl.style/}/img/newindex/qq.jpg" />',
+					    	'</a>',
+					    	{/else/}
+					    	'<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=2851501279&site=qq&menu=yes">',
+					    		'<img src="{/$siteurl.style/}/img/newindex/qq.jpg" />',
+					    	'</a>',	
+					    	{//if/}
+					    '</p>',
+					'</div>'].join('');
+		jdialog.setContent(thtml).show();
+	});
+
+
+	
+	// 刷新简历
+	$('#refreshAll').on('click',function(){
+		var _this = $(this);
+		if(_this.hasClass('locked')){
+			return false;
+		}
+		_this.addClass('locked');
+
+		var url = '{/get_url rule="/index/refreshAll/" data="v='+Math.random()+'"/}';
+		var tipDialog = new Dialog({
+			close: 'x',
+			idName: 'refresh_dialog',
+			title: '系统提示',
+			width: 442
+		});
+		
+		$.getJSON(url, null, function (json) {
+			if (!json.status) {			
+			    _this.removeClass('locked');
+			    if (json.not_member) {
+			    	var tiphtml = [
+			    		'<div class="not-member">',
+				    		'<p style="margin-bottom: 10px;">今天的免费刷新机会已用完，可以联系招聘顾问开通会员，获得更多的刷新机会，并且刷新的职位可优先展示</p>',
+				    		{/if !empty($hrManager["user_name"])/}
+				    		'<p class="lt"><b>招聘顾问：</b>{/$hrManager["user_name"]/}</p>',
+				    		{//if/}
+				    		{/if !empty($hrManager["mobile"]) || !empty($customeruser["mobile"])/}
+				    		'<p class="lt"><b>联系电话：</b>{/$tel_head/}转{/$hrManager["tel"]/} [9：00-18：00]</p>',
+				    		'<p class="lt"><b>手机号码：</b>{/$hrManager["mobile"]|default:$customeruser["mobile"]/}</p>',
+				    		{/else/}
+				    		'<p class="lt"><b>联系电话：</b>{/$huibo400/}</p>',
+				    		{//if/}
+				    		'<p style="margin-top:20px">',
+					    		{/if !empty($hrManager["qq"]) || !empty($customeruser["qq"])/}
+								'<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin={/trim($hrManager["qq"]|default:$customeruser["qq"])/}&site=qq&menu=yes">',
+							    	'<img src="{/$siteurl.style/}/img/newindex/qq.jpg" />',
+							    '</a>',
+							    {/else/}
+							    '<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=2851501279&site=qq&menu=yes">',
+							    	'<img src="{/$siteurl.style/}/img/newindex/qq.jpg" />',
+							    '</a>',
+							    {//if/}
+							'</p>',
+						'</div>'
+			    	].join('');
+			    	tipDialog.setContent({title:'友情提示', content:tiphtml}).show();
+			    } else {
+			    	$.message(json.msg, {title:'系统提示', icon:'fail'});
+			    	return;
+			    }
+			} else if (json.items.params.packageCount >= json.items.params.newCount) {
+				torefreshDo();
+				_this.removeClass('locked');
+			} else {
+				var tiphtml = ['<style>.refresh_dialog{text-align:left}.hb_ui_dialog .ui_dialog_container{padding:0px}.jian_dialog{text-align:left}.warning_dialog{padding:30px 20px 20px 20px}</style>',
+                                '<div class="warning_dialog">',
+                                  	'<dl><dt style="margin-top:5px"></dt>',
+                                  	'<dd style="line-height:25px">',
+                                  	' <p>今日的刷新次数（'+json.items.params.packageCount+'次）已用完，继续刷新将花费'+json.items.params.consume+'元。<br /><span style="color:#999">（优先使用推广金代扣）</span></p>',
+                                  	'</dd></dl>',
+                                '</div>',
+                                '<div class="actuBtn dialogFooter" style="border-top:0px;background:#f3f3f3;padding:7px;text-align:right;">',
+                                  	'<a href="javascript:void(0);" class="btn1 btnsF12" id="btnSet" style="background:#66bce4;border:0px;box-shadow:none">继续刷新</a>',
+                                  	'<a href="javascript:void(0);" id="close" class="btn3 btnsF12" style="background:#fff;border:0px;box-shadow:none">取&nbsp;消</a>',
+                                '</div>'
+                            ].join('');
+
+				tipDialog.setContent(tiphtml).show();
+				tipDialog.query('#close').on('click', function() {
+					tipDialog.hide();
+				});
+
+				tipDialog.query('#btnSet').on('click', function() {
+					tipDialog.hide();
+					orderAction.show({
+						data : json,
+						submit : function() {
+							torefreshDo();
+							this.hide();
+							
+						}
+					});
+					return;
+				});
+				_this.removeClass('locked');
+			}
+		});
+	})
+
+	function torefreshDo() {
+		$('#refreshAll').removeClass('locked');
+		$.getJSON('{/get_url rule="/index/refreshAllDo/" data="v=' + Math.random() + '"/}', null, function (json) {
+			if (json.fail) {
+				$.message(json.failitem, {title: '系统提示', icon: 'fail'});
+				return;
+			}
+			if (json.success) {
+				$("#divRefreshTime").html(json.refreshtime);
+		        $("#refreshTimeSpan").show();
+
+				$.anchorMsg('刷新全部职位成功');
+				setTimeout(function() {
+					window.location.href = window.location.href;
+				}, 500);
+			}
+			return;
+		});
+	}
+
+	/* 分享提示 */
+	var shareHTML = [
+		"<div class='shareList'>",
+		"<h2 style='color:#1abc9c; font-size:18px; margin-bottom:10px;'>分享招聘宣传到朋友圈，让同事和你一起招聘</h2>",
+		"<p style='color:#666; font-size:14px; line-height:24px;margin-bottom:20px;'>用微信扫描下方二维码，分享到朋友圈即可<br />",
+        "邀请同事去朋友圈分享，TA的朋友很可能就会是你的新同事哦~</p>",
+        "</div>",
+		"<div class='img'><img src='{/base_lib_Constant::MOBILE_URL/}/companylikes/qrcode/flag-' /></div>"
+	].join('');
+    var shareDialog = new Dialog({
+        close: 'x',
+        idName: 'ui_company_share_dialog',
+        width: 500,
+        title: '',
+        content: shareHTML,
+        isAjax: true
+    });
+    
+    $("#share").on("click", function() {
+       shareDialog.show();
+    });
+    {/if !empty($calling_advert_middle) && count($calling_advert_middle) > 1/}
+    $('.flexBanner').flexslider({
+		animation:"slide",
+		direction:"vertical",
+		itemWidth:0,
+		itemMargin:0,
+		prevText:'&#xf053;',
+		nextText:'&#xf054;',
+		pauseOnAction:false,
+		pauseOnHover:true,
+		slideshowSpeed:5000,
+		move:3
+	});
+	{//if/}
+	$('.compClose').click(function(){
+		$('.banner').slideUp('slow');							   
+	});
+        //判断有没有cookie
+         var hidShowWeixin = cookie.get('hidShowWeixin');
+         if(hidShowWeixin !="true"){
+             $('.in-tit').show();
+         }
+	$('.btnx3').click(function(){
+            $('.in-tit').hide();
+            if(hidShowWeixin !="true"){
+                cookie.set('hidShowWeixin',true,"","/");
+            }						   
+	});
+	$('.tabList2').click(function(){
+		$(this).addClass('cut');
+		$('.tabList1').removeClass('cut');
+		$('.tabList3').hide();
+		$('.tabList4').show();
+	});
+	$('.tabList1').click(function(){
+		$(this).addClass('cut');
+		$('.tabList2').removeClass('cut');						  
+		$('.tabList4').hide();
+		$('.tabList3').show();
+	})
+
+	$("#wixinAlt .close").click(function(){
+		$(this).parent().hide();
+		cookie.set('showHeadWeixinTip',1,{expires:'',path:'/',domain:"{/base_lib_Constant::COOKIE_DOMAIN/}"});
+		return false;
+	});
+	/*微信气泡提醒2015-12-10 end */
+
+    {/if isset($notMarkJobidsArr) && count($notMarkJobidsArr)>0/}
+        var jobSortDialog = new Dialog({
+            close: 'x',
+            idName: 'jobSortUpdate',
+            width: 800,
+            title: '',
+            content: '{/get_url rule="/index/updateJobSort/" data="jobids={/$notMarkJobids/}"/}',
+            isAjax: true
+        });
+
+        jobSortDialog.on('loadStart', function(){
+           this._isOverflow = true;
+        }).on('loadComplete', function(){
+            this.query(".btn-gray").on("click",function(e){
+                jobSortDialog.hide();
+            });
+            var _s = this
+            this.query(".btn-yellow").on("click",function(e){
+               //提交
+               $.ajax({
+                    url : "{/get_url rule='/index/UpdateJobSortDo/'/}",
+                    type : "GET",
+                    dataType : "JSON",
+                    data : _s.query("#formjobsort").serialize(),
+                    success : function(result) {
+                       if(result.error){
+                            ConfirmBox.timeBomb(result.error, {
+                				name : "warning",
+                				timeout : 1000,
+                                width: fontSize * result.error.length + pWidth
+                            });
+                       }else{
+                            ConfirmBox.timeBomb(result.success, {
+                				name : "success",
+                				timeout : 1000,
+                                width: fontSize * result.success.length + pWidth
+                            });
+                            jobSortDialog.hide();
+                       }
+                    }
+                   
+               });
+               //_s.query("#formjobsort").submitForm({success:jobSortSuccessCallBack,clearForm: false});
+            });
+            {/foreach $notMarkJobidsArr as $id/}
+                this.query('#dropJobsort{/$id/}').jobsort({
+                     max:2,hddName:'hidJobsort[{/$id/}]',
+                     isLimit:true,isAll:false
+                 }); 
+            {//foreach/}
+        }).show();
+    
+    {//if/}
+    
+    {/if $calling_mark/}
+	    var callingDialog = new Dialog({
+	        close: 'x',
+	        idName: 'selectCalling',
+	        width: 800,
+	        title: '',
+	        content: '{/get_url rule="/index/selectCalling/"/}',
+	        isAjax: true
+	    });
+	    callingDialog.on('loadStart', function(){
+	           this._isOverflow = true;
+	        }).on('loadComplete', function(){
+	            this.query(".btn-gray").on("click",function(e){
+	                callingDialog.hide();
+	            });
+	            var _s = this
+	            this.query(".btn-yellow").on("click",function(e){
+	               //提交
+	               $.ajax({
+	                    url : "{/get_url rule='/index/UpdateCallingDo/'/}",
+	                    type : "GET",
+	                    dataType : "JSON",
+	                    data : _s.query("#formcalling").serialize(),
+	                    success : function(result) {
+	                       if(result.error){
+	                            ConfirmBox.timeBomb(result.error, {
+					name : "warning",
+					timeout : 1000,
+	                                width: fontSize * result.error.length + pWidth
+	                            });
+	                       }else{
+	                            ConfirmBox.timeBomb(result.success, {
+					name : "success",
+					timeout : 1000,
+	                                width: fontSize * result.success.length + pWidth
+	                            });
+	                            callingDialog.hide();
+	                       }
+	                    }
+	                   
+	               });
+	               //_s.query("#formjobsort").submitForm({success:jobSortSuccessCallBack,clearForm: false});
+	            });
+	        }).show();
+    {//if/}
+	
+	var star01=$('#weiBtn'),starList=$('.in-tit');
+	starList.css("left",star01.position().left-10);
+
+    $('#auto-refresh').click(function() {				
+        var fn     = $(this),
+        autostatus = $('#refreshStatus').val();
+        
+        $.getJSON("{/get_url rule='/index/autorefesh'/}", {
+            auto_status : autostatus
+        }, function (data) {
+            if (data.status == "error") {
+                $.message(data.info, {
+                    title: '系统提示', icon: 'fail' 
+                });
+                return;
+            }
+            if (data.status == "success") {
+                if (autostatus == 1) {
+                    fn.addClass('cut');
+                    $('#refreshStatus').val(0);
+                    $('.autorefreshtime').show();
+                } else {
+                    fn.removeClass('cut');
+                    $('#refreshStatus').val(1);
+                    $('.autorefreshtime').hide();
+                }
+                $.anchorMsg(data.info);
+            }
+        });
+    });
+	
+	$("#auto-refresh").mouseover(function(){
+        $("#show_alt").show();
+    }).mouseout(function(){
+        $("#show_alt").hide();
+    });
+	
+	/*搜索*/
+    $("#searchResume").click(function(){
+        var station = $("#searchStation").val();
+        window.location.href = "{/$siteurl.company|replace:'http:':''/}/resumesearchnew/index/station-"+station;
+    });
+
+    /*刷新提示条*/
+    $("#closeRefreshTip").click(function(){
+        $(this).parent().hide();
+    });
+
+    $('#calling_advert,#flexBannerList').on('click', 'a', function(e){
+		var self = $(e.currentTarget);
+		var advert_id = self.attr('adv_id');
+		var area = self.attr('area');
+		var data = {advert_id:advert_id,area:area};
+		$.post('{/$siteurl.main/}/ad/adverVisit/',data);
+	});
+	
+	function refreshAll(){
+		$.getJSON('{/get_url rule="/index/refreshAll/" data="v='+Math.random()+'"/}', function(json) {
+			if(json.error){
+				$.message(json.error, { title: '系统提示', icon: 'fail' });
+				return;
+			}
+			if(json.fail){
+				$.message(json.failitem, { title: '系统提示', icon: 'fail' });
+				return;
+			}
+			if(json.success){
+				$("#divRefreshTime").html(json.refreshtime);
+				$("#refreshTimeSpan").show();
+				$.anchorMsg('刷新全部职位成功');
+			}
+			return;
+		});
+	}
+	
+	function startVip(){
+		var title = '开通会员';
+		$.showModal('{/get_url rule="/account/showApplyVipTipsV2/"/}',{title:title});
+	}
+	
+	
+	{/if !empty($calling_advert_middle) && count($calling_advert_middle) > 1/}
+	var srolObj = $("#scrollTop").find("ul"),timeSrol = null;
+	function getSrol(){
+		timeSrol = setInterval(function(){
+			srolObj.stop().animate({"margin-top":-52},200,function(){
+				$(srolObj.find("li").eq(0)).appendTo(srolObj.css("margin-top","0px"));
+			});
+		},7000);
+	}
+	srolObj.hover(function(){
+		timeSrol && clearInterval(timeSrol);
+	},function(){
+		getSrol();
+	});
+	getSrol();
+	{//if/}
+	
+});
+
+/*
+function jobSortSuccessCallBack(json){
+    console.log(json);
+}*/
+</script>
+
+{/include file="common/showdialog.html" dialog_box ="$dialog_box" bindweixin =$bindweixin/}
+
+</body>
+
+</html>

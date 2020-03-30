@@ -1,0 +1,288 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<meta name="Keywords" content=""/>
+	<meta name="Description" content=""/>
+	<title>汇博人才网_招聘中心</title>
+	<link rel="stylesheet" type="text/css" href="{/version file='base.css'/}"/>
+	<link rel="stylesheet" type="text/css" href="{/version file='comback.css'/}"/>
+	<link rel="stylesheet" type="text/css" href="{/version file='firmcss.css'/}"/>
+	<link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}"/>
+	<!–[if lt IE9]>
+	<script type="text/javascript" language="javascript" src="{/version file='html5.js'/}"></script>
+	<![endif]–>
+	<script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.js'/}"></script>
+	<script type="text/javascript" src="{/version file='version.js'/}"></script>
+	<script type="text/javascript">
+        window.CONFIG = {
+            HOST: '{/$siteurl.style/}',
+            COMBOPATH: '/js/v2/'
+        }
+	</script>
+	<script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+	<script type="text/javascript" src="{/version file='global.js'/}"></script>
+	<style type="text/css">
+		/*old 弹窗*/
+		.hb_ui_dialog {
+			border: 6px solid #a3a3a3;background: #fff;
+			padding: 1px;z-index: 100;
+			text-align: left;
+		}
+		.hb_ui_dialog .ui_dialog_close {
+			position: absolute;right: 15px;top: 5px;font-size: 20px;
+			color: #676767;
+		}
+		.hb_ui_dialog .ui_dialog_title {
+			height: 40px;background: #f3f3f3;
+			padding: 0 15px;line-height: 40px;font-size: 20px;
+		}
+		.hb_ui_dialog .ui_dialog_container {
+			padding: 5px;
+		}
+		.hb_ui_dialog .ui_dialog_message {
+			line-height: 20px;padding: 10px;
+		}
+		.hb_ui_dialog .ui_dialog_footer {
+			padding: 10px;text-align: center;
+		}
+		.hb_ui_dialog .ui_dialog_footer a, .hb_ui_dialog .ui_dialog_footer button {
+			margin: 0 5px;
+		}
+		.link_orange1 {display: inline-block;background-color: #ef970c;font-size: 16px;color: #fff;height: 40px;line-height: 40px;padding: 0 40px;border-radius: 5px;margin: 10px 0 0 15px}
+		.link_orange1:hover {background-color: #f79d0c;color: #fff}
+		.link_orange1:active {background-color: #ffaf30}
+
+		.comPostBg, .comPostBgcut { width: 110px; height: 50px; overflow: hidden; float: right;background: url({/$siteurl.style/}/img/newindex/weChat07.png) center bottom no-repeat;}
+
+		.compTitMage {width: 1000px; overflow: hidden; height: 350px; background: #fff; margin: 20px auto; text-align: left;}
+		.compTitMage h2 { font-size: 18px; font-family: "微软雅黑"; font-weight: bold; width: 940px; height: 45px; line-height: 45px; border-bottom: 1px solid #f0f0f0; margin: 20px auto;}
+		.compTitMage h2 em { display: inline-table; vertical-align: middle; height: 20px; border-left: 3px solid #66bce4; padding-right: 10px;}
+		.compTitMage p { display: block; text-align: center; padding-top: 80px;}
+		.compTitMage p a { font-family: "微软雅黑"; border-radius: 4px; display: inline-block;width: 220px; height: 60px; background: #18c7d2; font-size: 20px; font-weight: bold; line-height: 60px; text-align: center; color: #fff;}
+		.compTitMage p a.orange { margin-left: 60px; background: #ff8a00; color: #fff;}
+		.compTitMage p a:hover { background: #14a8b3;}
+		.compTitMage p a.orange:hover { background: #e57a00;}
+
+		.alertUI .ui_dialog_close {
+			top: 10px;right: 10px;
+		}
+		.alertUI .ui_dialog_footer {text-align: right}
+		.compTitMage p a.gray { margin-left: 60px; background: #ccc; color: #fff;}
+		.compTitMage p a.gray:hover { background: #ccc;}
+		/*微信关注公众号*/
+		.weixin-follow {padding-top: 20px; text-align: center;margin: 0 auto;}
+		.weixin-follow-img {margin-bottom: 10px; border: 1px solid #f1f1f1;display: inline-block;}
+		.weixin-follow-img img {width: 170px;height: auto;}
+		.weixin-follow p {font-size: 14px;color: #999;text-align: center;}
+		p.weixin-follow-text-left {text-align: left;}
+		.weixin-follow-list {display: inline-block;margin: 24px auto; background: #f7f7f7;width: 280px;padding: 5px 15px 17px 15px;}
+		.weixin-follow-list li {float: left;width: 50%;margin-top: 12px;}
+		.weixin-follow-list li i {display: inline-block;width: 25px;height: 25px;background: url("{/$siteurl.style/}/img/part/tepartinfor.png") no-repeat;margin-right: 5px;vertical-align: -6px;margin-right: 5px;background-position: 0 -172px;}
+		.weixin-follow-jump {color: #999;font-size: 14px;text-align: right;margin-top: 60px;display: block;}
+	</style>
+	<style>
+	</style>
+<body>
+{/include file="new_header.html" cur="发布职位"/}
+<div class="compTitMage">
+	<h2><em></em>请选择发布职位类型</h2>
+	<p>
+		{/if $is_gov!=1/}
+			<a href="javascript:;" onclick="job_add_full('{/$allotCouponPricing_data.id/}');">发布全职职位</a>
+		{/else/}
+			<a href="{/get_url rule="/job/add/"/}">发布职位</a>
+		{//if/}
+		{/if $is_gov!=1/}
+			{/if in_array(substr($base_location_area,0,2),['03','15','26'])/}
+				{/if !$has_set_agency/}
+					<a href="javascript:;" id='setCom' class="do_pub orange">发布兼职职位</a>
+					<a href="{/get_url rule='/partjob/job'/}" style='display:none' id='setCompanyAgencyLast' class="do_pub orange">发布兼职职位</a>
+				{/else/}
+					<a href="javascript:;" class="do_pub orange">发布兼职职位</a>
+				{//if/}
+			{/else/}
+				<a href="javascript:;" class="gray">发布兼职职位</a>
+			{//if/}
+		{//if/}
+	</p>
+</div>
+<input type='hidden' id='setCompanyAgency'/>
+</body>
+<script>
+    var job_add_full_url = "{/get_url rule="/job/add/"/}";
+    var modJobExpire, dialog_msg_liao;
+    hbjs.use('widge.overlay.confirmBox, widge.overlay.hbDialog, product.hbCommon', function (ConfirmBox, Dialog, $) {
+		{/if $martchCalling/}
+        ConfirmBox.alert("我们对行业做了一些调整，请在企业资料中重新选择后再操作", function () {
+            // var newwindow = window.open('about:blank');
+            window.location.href = "{/$siteurl.company|replace:'http:':''/}/company/modify";
+        }, {
+            title: '操作提示',
+            idName: 'alertUI',
+            width: 500
+        });
+		{//if/}
+
+        var setCompanyAgency = new Dialog({
+            idName: 'setCompanyAgencyDialog',
+            title: '设置招聘类型',
+            close: 'x',
+            isAjax: true,
+            width: 300
+        });
+
+
+        $('#setCompanyAgency').on('click', function (e) {
+			{/if $has_set_agency/}
+            location.href = "{/get_url rule='/partjob/job'/}";
+            return;
+			{//if/}
+            weixinDialog.hide();
+            clearInterval(setI);
+            tourl = "{/get_url rule='/part/setCompanyAgency/callBackPage-index'/}";
+            setCompanyAgency.setContent({
+                isOverflow: true,
+                content: tourl
+            }).show().on('loadComplete', function () {
+                //this.oneCloseEvent('#subButton');
+				/* 弹窗 */
+                var self = this;
+                this.query("#subButton").on('click', function () {
+                    //提交
+                    var agency = $("input[name='agency']:checked").val();
+                    var params = {agency: agency};
+                    $.post('{/get_url rule="/part/setCompanyAgencyDo/"/}', params, function (data) {
+                        if (data.error) {
+                            ConfirmBox.timeBomb(data.error, {name: 'fail', width: 400});
+                            self.hide();
+                            return;
+                        }
+                        ConfirmBox.timeBomb(data.success, {name: 'success', width: 200});//28724394
+                        SelectCallBack();
+                        self.hide();
+                        setTimeout("location.href='{/get_url rule='/partjob/job'/}'", 1000);
+                    }, "json");
+                }).after('', function () {
+                    this.query('#subButton').off();
+                })
+            });
+        });
+
+        var setI
+        var wx_html = '<div class="weixin-follow">' +
+            '    <div class="weixin-follow-img">' +
+            '        <img id="twd_url" src="https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket={/$ticket/}" alt="">' +
+            '    </div>' +
+            '    <p>微信扫码关注汇博兼职公众号</p>' +
+            '    <ul class="weixin-follow-list clearfix">' +
+            '        <li><i></i>快捷发布职位</li>' +
+            '        <li><i></i>便捷职位管理</li>' +
+            '        <li><i></i>投递微信处理</li>' +
+            '        <li><i></i>免费群发短信</li>' +
+            '    </ul>' +
+            '    <p class="weixin-follow-text-left">注：汇博兼职服务号专用于兼职投递信息处理，全职招聘请关注汇博招聘服务号。</p>' +
+            '    <a href="javascript:;" class="weixin-follow-jump">跳过</a>' +
+            '</div>';
+        var weixinDialog = new Dialog({
+            idName: 'weixinDialog',
+            title: '关注微信公众号',
+            isAjax: true,
+            width: 550
+        });
+
+        $('.do_pub').click(function () {
+            $.ajax({
+                url: "{/$siteurl.company/}/part/IsBindWx",
+                type: "post",
+                data: {},
+                dataType: 'json',
+                success: function (res) {
+                    if (res.status) {
+                        if (res.is_show) {
+                            if (res.ticket) {
+                                $('#twd_url').attr('src', "https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=" + res.ticket)
+                            }
+                            weixinDialog.show();
+                            setI = setInterval(function () {
+                                $.ajax({
+                                    url: "{/$mjianzhi_url/}/weixin/GetUserStatus",
+                                    type: "post",
+                                    data: {company_id: "{/$company_id/}"},
+                                    dataType: 'jsonp',
+                                    jsonp: "jsonpCallback",
+                                    success: function (res) {
+                                        if (res.status && res.can_go) {
+
+                                            $('#setCompanyAgency').click();
+                                        }
+                                    }
+
+                                })
+                            }, 2500);
+                        } else {
+                            $('#setCompanyAgency').click();
+                        }
+                    } else {
+                        weixinDialog.show();
+                        setI = setInterval(function () {
+                            $.ajax({
+                                url: "{/$mjianzhi_url/}/weixin/GetUserStatus",
+                                type: "post",
+                                data: {company_id: "{/$company_id/}"},
+                                dataType: 'jsonp',
+                                jsonp: "jsonpCallback",
+                                success: function (res) {
+                                    if (res.status && res.can_go) {
+                                        $('#setCompanyAgency').click();
+                                    }
+                                }
+
+                            })
+                        }, 2500);
+                    }
+                }
+            })
+
+
+            weixinDialog.setContent(wx_html);
+            weixinDialog.query('.weixin-follow-jump').on('click', function () {
+                $('#setCompanyAgency').click();
+            })
+
+
+        })
+
+        function SelectCallBack() {
+            $("#setCom").hide();
+            $("#setCompanyAgencyLast").show();
+        }
+
+
+        dialog_msg_liao = new Dialog({
+            close: '╳',
+            idName: 'liaoyiliao',
+            width: 'auto',
+            title: '提示',
+            isAjax: true,
+            isOverflow: false
+        });
+    });
+
+    function job_add_full(id) {
+        id = Number(id);
+        if (id) {
+            dialog_msg_liao.setContent("{/get_url rule='/resume/resumeinfomsghtml'/}?type=1").show();
+        } else {
+            if (job_add_full_url) {
+                window.location.href = job_add_full_url;
+            }
+        }
+    }
+
+    function dialog_msg_liao_reload(){
+        window.location.href = job_add_full_url;
+    }
+
+</script>

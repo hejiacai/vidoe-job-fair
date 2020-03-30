@@ -1,0 +1,861 @@
+<?php
+define('ERROR', 404);//请求失败代码
+define('SUCCESS', 200);//请求成功代码
+class components_cbasepage extends base_components_basepage {
+	
+	public $_userid = '';//原表ID
+	public $_netfair_userid = '';//中间表自增ID
+	public $_source = '';//来源
+	public $_username = '';
+	public $_usertype = '';//c-单位 p-求职者
+	public $_location_area = "0300";
+	private $session_server = null;
+	private $is_account_down = false;
+	public $is_gray_company = false;
+	
+	
+	public function __construct($need_login = true, $type = "") {
+		parent::__construct();
+		if($need_login) {
+			$this->checkLogin($type);
+		}
+	}
+	
+	public function checkLogin($type = "") {
+		//session or cookie
+		if($this->isLogin() && $this->_usertype == 'c') {
+		
+		}
+		elseif($this->isLogin() && $this->_usertype == 'p') {
+		
+		}
+		else {
+			$aCookie = array (
+				'userid'         => '',
+				'nickname'       => '',
+				'usertype'       => '',
+				'userkey'        => '',
+				'netfair_userid' => '',
+				'netfair_source' => '',
+				'b_userid'       => '',
+				'b_nickname'     => '',
+				'b_usertype'     => '',
+				'fromurl'        => '',
+				'b_userkey'      => '',
+			);
+			base_lib_BaseUtils::ssetcookie($aCookie, -1, '/', base_lib_Constant::COOKIE_HUIBO_DOMAIN);
+			//销毁session
+			session_start();
+			session_unset();
+			session_destroy();
+			
+			if(isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest') {
+				$result['isNeedLogin'] = 'true';
+				$result['type'] = 'c';
+				echo json_encode($result);
+				exit();
+			}
+			else {
+				$this->redirect_url('/');
+				exit();
+			}
+		}
+	}
+	
+	//初始化session服务器
+	private function getSessionServer() {
+		if($this->session_server == null) {
+			$this->session_server = new base_lib_Cache('redis3');
+			$this->session_server->redis_select(4);
+		}
+		
+		return $this->session_server;
+	}
+	
+	//设置生成周期
+	function setLifetime($key, $value, $is_boss_login = false) {
+		$redis = $this->getSessionServer();
+		#region 需要处理的单点登录 单位登录com-
+		$re_key = explode('-', $key);
+		if(!$is_boss_login && count($re_key) == 6 && $re_key[3] && $re_key[0] == 'com' &&
+			in_array($re_key[2], array ('web', 'mobile'))
+		) {
+			//com-114913882-web-1800-127.0.0.1-og0cyl2eoa
+			//com-114913882-web-1800-*
+			$login_keys = $redis->redis_keys("com-{$re_key[1]}-{$re_key[2]}-{$re_key[3]}-*");
+			
+			if($login_keys) {
+				if(in_array((string)base_lib_BaseUtils::getIp(0), $this->getLoginIp_arr($key))) {
+					//如果ip是同一个，不清reids及允许登陆
+					
+				}
+				else {
+					//如果ip不是同一个->这里会强制之前的下线（提醒逻辑其他地方做）
+					array_walk($login_keys, function ($value, $key) use ($redis) {
+						$redis->redis_del($value);
+					});
+				}
+				
+			}
+		}
+		#endregion
+		$redis->redis_setex($key, 7200, $value); //2 hour
+		//echo 'write';
+	}
+	
+	
+	/**
+	 * 获取当前子账号已登录的ip
+	 * @desc 虽然产品功能层面只能是一个，但这里反数组
+	 * @falg 企业迭代3.03 强制登陆逻辑
+	 * @param $key getSessionid 可获取
+	 * @return array
+	 */
+	public function getLoginIp_arr($key) {
+		$redis = $this->getSessionServer();
+		$re_key = explode('-', $key);
+		$login_keys = $redis->redis_keys("com-{$re_key[1]}-{$re_key[2]}-{$re_key[3]}-*");
+		
+		$ip = [];
+		foreach ($login_keys as $_lk) {
+			$_lk_arr = explode("-", $_lk);
+			//com-114913882-web-1800-127.0.0.1-og0cyl2eoa
+			if(count($_lk_arr) != 6) {
+				
+				$_lk = [$_lk];
+				array_walk($_lk, function ($value, $key) use ($redis) {
+					$redis->redis_del($value);
+				});
+				continue;
+			}
+			else {
+				$ip[] = $_lk_arr[4];
+			}
+		}
+		
+		return $ip;
+	}
+	
+	
+	//获取sessionid $sw_session是否需要判断终端
+	function getSessionid($company_id, $tick, $account_id = 0, $verdict_mobile = true) {
+		$detect = new SMobiledetect();
+		$tick_session_id[] = 'com';
+		$tick_session_id[] = $company_id;
+		$verdict_mobile and $tick_session_id[] = !$detect->isMobile() && !$detect->isTablet() ? 'web' : 'mobile';
+		$account_id and $tick_session_id[] = $account_id;
+		$tick_session_id[] = (string)base_lib_BaseUtils::getIp(0);
+		$tick_session_id[] = $tick;
+		
+		
+		return implode('-', $tick_session_id);
+	}
+	
+	/**
+	 * 单点登录上线 老数据自动切换到单点登录逻辑    zhouwenjun 2019/1/18 14:56
+	 * @param array $storage
+	 * @return array
+	 */
+	function switchover_single_login($storage = array (), $iUserId, $sTick, $sAccountid, $company_id, $tick, $skey) {
+		if($storage) {
+			return $storage;
+		}
+		if($iUserId && $sTick) {
+			$redis = $this->getSessionServer();
+			$session_id = $this->getSessionid($iUserId, $sTick, $sAccountid, false);
+			$storage = $redis->redis_get($session_id); //格式：key_time
+			if($storage && $company_id && $tick && $skey) {
+				//老数据自动切换到单点登录逻辑
+				$this->setLifetime($this->getSessionid($company_id, $tick, $sAccountid), $storage);
+				$redis->redis_del($session_id);//删除老数据
+			}
+		}
+		
+		return $storage;
+	}
+	
+	//销毁session
+	function destroySession() {
+		$iUserId = isset($_POST['upload_cookie_userid']) ? $_POST['upload_cookie_userid'] : base_lib_BaseUtils::getCookie('userid');
+		$sUserName = isset($_POST['upload_cookie_nickname']) ? $_POST['upload_cookie_nickname'] : base_lib_BaseUtils::getCookie('nickname');
+		$sUserType = isset($_POST['upload_cookie_usertype']) ? $_POST['upload_cookie_usertype'] : base_lib_BaseUtils::getCookie('usertype');
+		$sKey = isset($_POST['upload_cookie_userkey']) ? $_POST['upload_cookie_userkey'] : base_lib_BaseUtils::getCookie('userkey');
+		$sTick = isset($_POST['upload_cookie_tick']) ? $_POST['upload_cookie_tick'] : base_lib_BaseUtils::getCookie('tick');
+		$sAccountid = isset($_POST['upload_cookie_accountid']) ? $_POST['upload_cookie_accountid'] : base_lib_BaseUtils::getCookie('accountid');
+		if(!empty($sKey) && md5($iUserId . $sUserName . $sUserType . base_lib_Constant::SYSUSERKEY) == $sKey) {
+			// $redis = $this->getSessionServer();
+			// $session_id = $this->getSessionid($iUserId, $sTick, $sAccountid);
+			//
+			// $redis->redis_delete($session_id);
+		}
+	}
+	
+	//重写isLogin
+	
+	/**
+	 * 判断是否登录
+	 */
+	function isLogin() {
+		//用于上传时解决火狐FLASH丢失COOKIE导致无法验证而上传不起的BUG
+		$iUserId = isset($_POST['upload_cookie_userid']) ? $_POST['upload_cookie_userid'] : base_lib_BaseUtils::getCookie('userid');
+		$sUserName = isset($_POST['upload_cookie_nickname']) ? $_POST['upload_cookie_nickname'] : base_lib_BaseUtils::getCookie('nickname');
+		$sUserType = isset($_POST['upload_cookie_usertype']) ? $_POST['upload_cookie_usertype'] : base_lib_BaseUtils::getCookie('usertype');
+		$sKey = isset($_POST['upload_cookie_userkey']) ? $_POST['upload_cookie_userkey'] : base_lib_BaseUtils::getCookie('userkey');
+		$snetfair_userid = isset($_POST['upload_cookie_netfair_userid']) ? $_POST['upload_cookie_netfair_userid'] : base_lib_BaseUtils::getCookie('netfair_userid');
+		$snetfair_source = isset($_POST['upload_cookie_source']) ? $_POST['upload_cookie_source'] : base_lib_BaseUtils::getCookie('netfair_source');
+		$netfair_skey = isset($_POST['upload_cookie_source']) ? $_POST['upload_cookie_source'] : base_lib_BaseUtils::getCookie('netfair_skey');
+		
+		if(!empty($sKey) && md5($iUserId . $sUserName . $sUserType . base_lib_Constant::SYSUSERKEY) == $sKey) {
+			
+			//不兼容快米 暂时只兼容汇博
+			if(!$snetfair_userid || !$snetfair_source) {
+				$snetfair_userid = null;
+				$snetfair_source = $snetfair_source ?: 1;
+				//单位
+				if($sUserType == 'c') {
+					$ser_netfair_company = new base_service_netfair_company();
+					$snetfair_userid = $ser_netfair_company->getCompanyID($iUserId, $snetfair_source, '');
+				}
+				elseif($sUserType == 'p') {
+					$ser_netfair_person = new base_service_netfair_person();
+					$snetfair_userid = $ser_netfair_person->getNetFairPersonId($iUserId, $snetfair_source);
+					if(!$snetfair_userid) {
+						$snetfair_userid = $ser_netfair_person->AddNetFairBasePerson($iUserId, $snetfair_source);
+					}
+				}
+				if(!$snetfair_userid) {
+					return false;
+				}
+				$cookie = array (
+					'netfair_userid' => $snetfair_userid,
+					'netfair_source' => $snetfair_source,
+					'netfair_skey'   => md5($snetfair_userid . $snetfair_source . base_lib_Constant::SYSUSERKEY),
+				);
+				base_lib_BaseUtils::ssetcookie($cookie, 3600 * 24 * 7, '/', base_lib_Constant::COOKIE_DOMAIN);
+				$netfair_skey = $cookie['netfair_skey'];
+			}
+			
+			if(md5($snetfair_userid . $snetfair_source . base_lib_Constant::SYSUSERKEY) != $netfair_skey) {
+				return false;
+			}
+			
+			$this->_username = $sUserName;
+			$this->_userid = $iUserId;//原表ID
+			$this->_usertype = $sUserType;//类型
+			$this->_netfair_userid = $snetfair_userid;//中间表ID
+			$this->_source = $snetfair_source;//来源
+			
+			parent::ass('_userid', $iUserId);
+			parent::ass('_netfair_userid', $snetfair_userid);
+			parent::ass('_source', $snetfair_source);
+			parent::ass('_nickname', $sUserName);
+			parent::ass('_usertype', $sUserType);
+			
+			return true;
+		}
+		else {
+			//兼容快米 求职者
+			//用于上传时解决火狐FLASH丢失COOKIE导致无法验证而上传不起的BUG
+			$iUserId = isset($_POST['upload_cookie_userid']) ? $_POST['upload_cookie_userid'] : base_lib_BaseUtils::getCookie('b_userid');
+			$sUserName = isset($_POST['upload_cookie_nickname']) ? $_POST['upload_cookie_nickname'] : base_lib_BaseUtils::getCookie('b_nickname');
+			$sUserType = isset($_POST['upload_cookie_usertype']) ? $_POST['upload_cookie_usertype'] : base_lib_BaseUtils::getCookie('b_usertype');
+			$sKey = isset($_POST['upload_cookie_userkey']) ? $_POST['upload_cookie_userkey'] : base_lib_BaseUtils::getCookie('b_userkey');
+			$sTick = isset($_POST['upload_cookie_tick']) ? $_POST['upload_cookie_tick'] : base_lib_BaseUtils::getCookie('b_tick');
+			
+			if(!empty($sKey) && md5($iUserId . $sUserName . $sUserType . base_lib_Constant::SYSUSERKEY) == $sKey) {
+				
+				//不兼容快米 暂时只兼容汇博
+				if(!$snetfair_userid || !$snetfair_source) {
+					$snetfair_userid = null;
+					$snetfair_source = $snetfair_source ?: 1;
+					//单位
+					if($sUserType == 'c') {
+						$ser_netfair_company = new base_service_netfair_company();
+						$snetfair_userid = $ser_netfair_company->getCompanyID($iUserId, $snetfair_source, '');
+					}
+					elseif($sUserType == 'p') {
+						$ser_netfair_person = new base_service_netfair_person();
+						$snetfair_userid = $ser_netfair_person->getNetFairPersonId($iUserId, $snetfair_source);
+						if(!$snetfair_userid) {
+							$snetfair_userid = $ser_netfair_person->AddNetFairBasePerson($iUserId, $snetfair_source);
+						}
+					}
+					if(!$snetfair_userid) {
+						return false;
+					}
+					$cookie = array (
+						'netfair_userid' => $snetfair_userid,
+						'netfair_source' => $snetfair_source,
+						'netfair_skey'   => md5($snetfair_userid . $snetfair_source . base_lib_Constant::SYSUSERKEY),
+					);
+					base_lib_BaseUtils::ssetcookie($cookie, 3600 * 24 * 7, '/', base_lib_Constant::COOKIE_DOMAIN);
+					$netfair_skey = $cookie['netfair_skey'];
+				}
+				if(md5($snetfair_userid . $snetfair_source . base_lib_Constant::SYSUSERKEY) != $netfair_skey) {
+					return false;
+				}
+				
+				
+				$this->_username = $sUserName;
+				$this->_userid = $iUserId;//原表ID
+				$this->_usertype = $sUserType == 'k' ? 'p' : 'c';//类型
+				$this->_netfair_userid = $snetfair_userid;//中间表ID
+				$this->_source = $snetfair_source;//来源
+				
+				parent::ass('_userid', $iUserId);
+				parent::ass('_netfair_userid', $snetfair_userid);
+				parent::ass('_source', $snetfair_source);
+				parent::ass('_nickname', $sUserName);
+				parent::ass('_usertype', $this->_usertype);
+				
+				return true;
+			}
+			
+			return false;
+		}
+	}
+	
+	/**
+	 *Json格式化输出
+	 * @param bool   $status 成功状态
+	 * @param string $msg 提示消息
+	 * @return string json格式字符串
+	 **/
+	protected function jsonMsg($status, $msg = '', $json_data = array ()) {
+		return json_encode(array ('status' => $status, 'msg' => $msg, 'data' => $json_data));
+	}
+	
+	/**
+	 * 获取公司会员情况
+	 * @return array(是否为会员，离有效期还有天数)
+	 */
+	protected function getCompanyMemberInfo() {
+		if(empty($this->_userid)) {
+			return false;
+		}
+		
+		$company_service = new base_service_company_company();
+		$company = $company_service->getCompany($this->_userid, 1, "com_level,start_time,end_time");
+		$is_opened = true;
+		if(empty($company['com_level']) || intval($company['com_level']) <= 0 ||
+			base_lib_BaseUtils::nullOrEmpty($company['end_time']) ||
+			base_lib_BaseUtils::nullOrEmpty($company['start_time'])
+		) {
+			$is_opened = false;
+		}
+		
+		$diff = intval(floor((strtotime($company['end_time']) - strtotime(date("Y-m-d 00:00:00"))) / 3600 / 24));
+		$xml = SXML::load('../config/company/company.xml');
+		$bufferDay = 0;
+		if(!is_null($xml)) {
+			$bufferDay = $xml->OverdueBufferDay;
+		}
+		
+		if($diff < -$bufferDay || !$is_opened) {
+			return "notmember";
+		}
+		else {
+			if($diff < 0) {
+				return "overduemember";
+			}
+			else {
+				return "member";
+			}
+		}
+	}
+	
+	/**
+	 * @desc 判断有没有权限操作这个
+	 */
+	public function canDo($popedom_code, $boss_user_id = null) {
+		$boss_user_id = !empty($boss_user_id) ? $boss_user_id : base_lib_BaseUtils::getCookie("bossuser");
+		if(empty($boss_user_id)) {
+			return true;
+		}
+		$service_related_user = new base_service_boss_company_grouprelateduser();
+		$popedom_array = $service_related_user->getAllPopedom($boss_user_id);
+		if(empty($popedom_array)) {
+			return false;
+		}
+		$popedom_code_array = base_lib_BaseUtils::getProperty($popedom_array, "popedom_code");
+		if(in_array($popedom_code, $popedom_code_array)) {
+			return true;
+		}
+		
+		return false;
+		
+	}
+	
+	/**
+	 * 返回json数据
+	 * @param int|string $code fail   success
+	 * @param string     $msg
+	 * @param array|     $data
+	 * @author chenbin
+	 */
+	function ajax_data_json($code = ERROR, $msg = "操作失败", $data = array ()) {
+		define('IS_AJAX', ((isset($_SERVER['HTTP_X_REQUESTED_WITH']) &&
+				strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') &&
+			!$_REQUEST['hbDialog']) ? true : false);
+		$msg = $msg ? $msg : '操作失败';
+		$code = $code ? $code : ERROR;
+		if(!IS_AJAX) {
+			$render_data['msg'] = $msg;
+			$render_data["url"] = base_lib_Constant::COMPANY_URL_NO_HTTP;
+			exit($this->render('./common/tipsmsg1.html', $render_data));
+		}
+		// 返回JSON数据格式到客户端 包含状态信息
+		header('Content-Type:application/json; charset=utf-8');
+		exit(json_encode(array ('code' => $code, 'msg' => $msg, 'data' => $data)));
+	}
+	
+	/**
+	 * 设置Excel基本信息
+	 * @param $filename
+	 * @param $title
+	 */
+	function SetExcelHeader($filename, $title) {
+		header("Content-Type: application/vnd.ms-excel;");
+		header("Content-Disposition:attachment;filename=$filename.xls");
+	}
+	
+	/**
+	 * 导出Excel文本
+	 * @param      $data
+	 * @param      $fields
+	 * @param bool $is_filter_html 是否html 过滤
+	 */
+	function SetExcelBody($data, $fields, $is_filter_html = false) {
+		foreach ($fields as $v) {
+			echo iconv("utf-8", "gbk", $v) . "\t";
+		}
+		echo "\n";
+		
+		$keys = array_keys($fields);
+		foreach ($data as $value) {
+			foreach ($keys as $key) {
+				$value[ $key ] = strip_tags($value[ $key ]);
+				if(!empty($value[ $key ])) {
+					if(is_numeric(@$value[ $key ]) && strlen(@$value[ $key ]) > 15) {
+						echo iconv("utf-8", "gbk", "'" . trim(@$value[ $key ])) . "\t";
+					}
+					else {
+						echo iconv("utf-8", "gbk", (trim(@$value[ $key ])) ? trim(@$value[ $key ]) : '') . "\t";
+					}
+				}
+				else {
+					echo iconv("utf-8", "gbk", (trim(@$value[ $key ])) ? trim(@$value[ $key ]) : '') . "\t";
+				}
+			}
+			echo "\n";
+		}
+		die;
+	}
+	
+	/**
+	 * 验证企业认证是否完善
+	 * @param $company_id    企业id
+	 */
+	public function checkCompanyLetter($company_id, $source = "") {
+		if(empty($company_id)) {
+			return array ("code" => 500, 'status' => false, "msg" => "参数错误");
+		}
+		
+		$service_company = new base_service_company_company();
+		$service_company_resources_resources = base_service_company_resources_resources::getInstance($company_id);
+		$letter_info = $service_company_resources_resources->getCompanyAuditStatusV2();
+		if($company_id == 114492811) {
+			SlightPHP::log("企业认证:" . print_r($letter_info, true));
+		}
+		//		var_dump($letter_info);die;
+		$licence_audit_type = $letter_info['licence_audit_type'];
+		$letter_audit_type = $letter_info['letter_audit_type'];
+		$code = 200;
+		$msg = "";
+		
+		$end_time = '2019-01-31 23:59:59';
+		$company = $service_company->getCompany($company_id, '1', 'is_effect,is_audit,audit_state,com_level,create_time');
+		
+		//获取企业信息
+		//10.已付费会员企业未上传委托书，截止2019年3月31日后，如仍未上传自动转为仅上传营业执照的提示，且在招岗位暂时屏蔽，直至委托书认证通过解除屏蔽
+		$audit_type = $letter_info['audit_type'];
+		//用人单位在招聘时需提供招聘委托证明材料
+		//if ($audit_type == 1) {
+		if(false) {
+			if($letter_audit_type == 0 && $source != 'resume') {
+				if($company['com_level'] == 1) {
+					$code = 511;
+					$msg = "根据国务院《人力资源市场暂行条例》相关规定，用人单位在招聘时需提供招聘委托证明材料，请贵单位于2019年1月31日前补交<span>招聘委托书</span>，逾期招聘行为将暂时冻结，通过认证后恢复。";
+					
+					return array ("code" => $code, 'status' => false, "msg" => $msg);
+				}
+				if($company['com_level'] > 1) {
+					$code = 510;
+					$msg = "根据国务院《人力资源市场暂行条例》相关规定，用人单位在招聘时需提供招聘委托证明材料，请贵单位于2019年5月13日前补交<span>招聘委托书</span>，逾期招聘行为将暂时冻结，通过认证后恢复。";
+					
+					return array ("code" => $code, 'status' => false, "msg" => $msg);
+				}
+			}
+		}
+		
+		//4.营业执照与招聘委托书审核中
+		if($letter_audit_type == 2 && $licence_audit_type == 2) {
+			$code = 504;
+			$msg = "<span>营业执照</span>与<span>招聘委托书</span>正在审核中";
+			
+			return array ("code" => $code, 'status' => false, "msg" => $msg);
+		}
+		//某一个证件在审核中，另一个必须是审核通过的
+		//5.招聘委托书正在审核中
+		if($letter_audit_type == 2) {
+			$code = 505;
+			$msg = "<span>招聘委托书</span>正在审核中";
+			
+			return array ("code" => $code, 'status' => false, "msg" => $msg);
+		}
+		//6.营业执照正在审核中
+		if($licence_audit_type == 2) {
+			$code = 506;
+			$msg = "<span>营业执照</span>正在审核中";
+			
+			return array ("code" => $code, 'status' => false, "msg" => $msg);
+		}
+		
+		//委托书 暂缺待补 临时证待补和暂缺待补
+		if(($licence_audit_type == 4 || $letter_audit_type == 4) && $source != 'resume') {
+			//均是暂缺待补 //请于2019-06-07日前上传营业执照/委托书，逾期冻结职位，认证后回复。
+			if($licence_audit_type == 4 && $letter_audit_type == 4) {
+				$end_time = min($letter_info['licence_end_time'], $letter_info['letter_end_time']);
+				if(strtotime($end_time)) {
+					$end_time = date('Y年m月d日', strtotime($end_time));
+					$code = 501;
+					$msg = "请于{$end_time}前上传<span>营业执照</span>与<span>委托书</span>，逾期冻结职位，认证后恢复。";
+					
+					return array ("code" => $code, 'status' => false, "msg" => $msg);
+				}
+			}
+			//1项通过，1项暂缺待补
+			//请于2019-06-07日前上传 营业执照/委托书 ，逾期冻结职位，认证后回复。
+			if(($licence_audit_type == 4 && $letter_audit_type == 1) ||
+				((in_array($licence_audit_type, [1, 5]) && $letter_audit_type == 4))
+			) {
+				$end_time = $licence_audit_type ==
+				4 ? $letter_info['licence_end_time'] : $letter_info['letter_end_time'];
+				if(strtotime($end_time)) {
+					$code = 501;
+					$msg_content = $licence_audit_type == 4 ? "营业执照" : "委托书";
+					if(date('Y-m-d', strtotime($end_time)) >= $this->_ymd) {
+						$end_time = date('Y年m月d日', strtotime($end_time));
+						$msg = "请于{$end_time}前上传<span>{$msg_content}</span>，逾期冻结职位，认证后恢复。";
+					}
+					//暂缺待补 已失效
+					else {
+						$msg = "<span>{$msg_content}</span>已逾期,请尽快认证。";
+					}
+					
+					return array ("code" => $code, 'status' => false, "msg" => $msg);
+				}
+			}
+		}
+		
+		//审核不通过
+		//7.营业执照和委托书均未通过审核
+		if($letter_audit_type == 3 && $licence_audit_type == 3) {
+			$code = 507;
+			$msg = "您的<span>营业执照</span>与<span>招聘委托书</span>未通过审核";
+			
+			return array ("code" => $code, 'status' => false, "msg" => $msg);
+		}
+		//8.营业执照未通过审核
+		if($letter_audit_type != 3 && $licence_audit_type == 3) {
+			$code = 508;
+			$msg = "您的<span>营业执照</span>未通过审核";
+			
+			return array ("code" => $code, 'status' => false, "msg" => $msg);
+		}
+		//9.招聘委托书未通过审核
+		if($letter_audit_type == 3 && $licence_audit_type != 3) {
+			$code = 509;
+			$msg = "您的<span>招聘委托书</span>未通过审核";
+			
+			return array ("code" => $code, 'status' => false, "msg" => $msg);
+		}
+		
+		//1.营业执照和委托书均未上传
+		if($letter_audit_type == 0 && $licence_audit_type == 0) {
+			$code = 501;
+			if($source == 'resume') {
+				if($audit_type != 1) {
+					//					$msg = "您还未上传<span>营业执照</span>和<span>招聘委托书</span>，暂不能对简历进行处理";
+					$msg = "您还未上传<span>营业执照</span>，暂不能对简历进行处理";
+					
+					return array ("code" => $code, 'status' => false, "msg" => $msg);
+				}
+			}
+			else {
+				//				$msg = "您还未上传<span>营业执照</span>和<span>招聘委托书</span>，发布职位无法对外展示";
+				$msg = "您还未上传<span>营业执照</span>，发布职位无法对外展示";
+				
+				return array ("code" => $code, 'status' => false, "msg" => $msg);
+			}
+			
+			
+		}
+		//2.仅上传营业执照
+		if($letter_audit_type == 0 && $licence_audit_type != 0 && $licence_audit_type != 5) {
+			$code = 502;
+			if($source == 'resume') {
+				if($audit_type != 1) {
+					$msg = "您还有<span>招聘委托书</span>未上传，暂不能对简历进行处理";
+					
+					return array ("code" => $code, 'status' => false, "msg" => $msg);
+				}
+				
+			}
+			else {
+				$msg = "您还有<span>招聘委托书</span>未上传，发布职位无法对外展示";
+				
+				return array ("code" => $code, 'status' => false, "msg" => $msg);
+			}
+			
+		}
+		
+		//3.仅上传委托书
+		if($letter_audit_type != 0 && $licence_audit_type == 0) {
+			$code = 503;
+			if($source == 'resume') {
+				if($audit_type != 1) {
+					$msg = "您还未上传<span>营业执照</span>，暂不能对简历进行处理";
+					
+					return array ("code" => $code, 'status' => false, "msg" => $msg);
+				}
+				
+			}
+			else {
+				$msg = "您还未上传<span>营业执照</span>，发布职位无法对外展示";
+				
+				return array ("code" => $code, 'status' => false, "msg" => $msg);
+			}
+			
+		}
+		
+		//7同行认证
+		if($licence_audit_type == 5) {
+			$code = 501;
+			$msg = "请完善企业认证资料";
+			
+			return array ("code" => $code, 'status' => false, "msg" => $msg);
+		}
+		
+		
+		return array ("code" => 200, 'status' => true, "msg" => "");
+	}
+	
+	/**
+	 * 灰度测试页面新，旧页面显示
+	 * @param type $source 原地址
+	 *                  1：收到的简历菜单下链接（apply/index）
+	 * @param type $params
+	 * @return boolean
+	 */
+	public function grayJump($source, $inPath) {
+		if(!$this->is_gray_company) {
+			return false;
+		}
+		
+		$params = base_lib_BaseUtils::saddslashes($this->getUrlParams($inPath));
+		if($source == 1) {
+			if($params['status'] == 1) {//已邀请简历
+				include_once './app/controller/invitev1.page.php';
+				$invitev1 = new controller_invitev1();
+				echo $invitev1->pageList($inPath);
+				die;
+			}
+		}
+		else if($source == 2) {//面试通过，未通过，爽约，已入职列表
+			include_once './app/controller/invitev1.page.php';
+			$invitev1 = new controller_invitev1();
+			echo $invitev1->pageDealedList($inPath);
+			die;
+		}
+	}
+	
+	/**
+	 * 获取头部数据    zhouwenjun 2020/3/3 15:54
+	 * @param int $sid
+	 */
+	function GetHeadData($sid = 0) {
+		$data['school_source'] = 1;//活动平台，1汇博，2快米
+		if($sid) {
+			$ser_netfairNet = new base_service_netfair_net();
+			$netfairNet_data = $ser_netfairNet->getNetByID($sid, 'school_source');
+			$data['school_source'] = $netfairNet_data['school_source'];
+		}
+		//汇博/快米 登录 路径
+		$data['person_login_url'] = "/login/Login1?school_source={$data['school_source']}";
+		
+		if($data['school_source'] == 1) {
+			$data['company_login_url'] = base_lib_Constant::COMPANY_URL_NO_HTTP . "/login";
+			$data['down_app_url'] = "http://app2.huibo.com/index/download?apporigin=4&sid={$sid}";
+		}
+		elseif($data['school_source'] == 2) {
+			$data['company_login_url'] = base_lib_Constant::KUAI_MI_COMPANY_NO_HTTP . "/login";
+			$data['down_app_url'] = "http://appblue.huibo.com/index/download?sid={$sid}";
+		}
+		
+		$this->isLogin();
+		$isLogin = true;
+		if($this->_userid == 0 || base_lib_BaseUtils::nullOrEmpty($this->_userid)) {
+			$isLogin = false;
+		}
+		$data['user_id'] = base_lib_BaseUtils::nullOrEmpty($this->_userid) ? false : $this->_userid;
+		$data['type'] = $this->_usertype;
+		$data['_netfair_userid'] = $this->_netfair_userid;
+		$data['_source'] = $this->_source;
+		
+        //顶部菜单栏
+        if($this->_usertype == 'c')
+            parent::ass ('head_nav_data', $this->_source == 1 ? $this->render ('public/shuanxuan/hb_header.html') : $this->render ('public/shuanxuan/kuaimijob_header.html'));
+        
+        if($this->_usertype == 'c' && $this->_source == 1){
+            
+        }else if($this->_usertype == 'c' && $this->_source == 1){
+            
+        }
+		$data['isLogin'] = $isLogin;
+		$data['username'] = ($isLogin && empty($this->_username)) ? '我的' : $this->_username;
+		if(strlen($data['username']) > 9) {
+			// $data['username'] = mb_substr($data['username'], 0, 5) . '...';
+		}
+		if($this->_userid && $data['type'] == 'c') {
+		}
+		else if($this->_userid && $data['type'] == 'p') {
+		}
+		!$data['username'] and $data['username'] = "我的";
+		
+		parent::ass('head_data', $this->render('public/shuanxuan/head.html', $data));
+		parent::ass('head_info_data', $data);
+	}
+	
+	//获取sessionid $sw_session是否需要判断终端
+	function getPersonSessionid($person_id, $verdict_mobile = true) {
+		$detect = new SMobiledetect();
+		$tick_session_id[] = 'personlogin';
+		$tick_session_id[] = $person_id;
+		
+		//$verdict_mobile and $tick_session_id[] = !$detect->isMobile() && !$detect->isTablet() ? 'web' : 'mobile';
+		return implode('-', $tick_session_id);
+	}
+	
+	//设置生成周期
+	function setPersonLifetime($key, $value, $save_login = false) {
+		$redis = $this->getPersonSessionServer();
+		#region 需要处理的单点登录 单位登录com-
+		#endregion
+		$expire = 7200;
+		if($save_login) {
+			$expire = 3600 * 24 * 7; //7天
+		}
+		$redis->redis_setex($key, $expire, $value); //2 hour
+		//echo 'write';
+	}
+	
+	//初始化session服务器
+	private function getPersonSessionServer() {
+		if($this->session_server == null) {
+			$this->session_server = new base_lib_Cache('redis3');
+			$this->session_server->redis_select(3);
+		}
+		
+		return $this->session_server;
+	}
+	
+	/**
+	 * 导出excel    zhouwenjun 2016/12/29 14:58
+	 * @param array|string $table_data      数据 array|html(table格式)
+	 * @param          $rows                array('user'=>"用户",'name'=>"用户名")
+	 * @param string $title                 标题
+	 * @param bool $excel_table             直接使用excel table输出
+	 */
+	function createExcel($table_data, $rows, $title = '导出excel', $excel_table = false) {
+		$title = iconv("utf-8", "gb2312", $title);
+		if ($excel_table) {
+			$this->SetExcelHeader($title, $title);
+			die($table_data);
+		}
+		//数据太大了不建议使用 phpExcel导出数据,耗时太长
+		if (count($table_data) > 2000) {
+			$this->SetExcelHeader($title, $title);
+			$this->SetExcelBody($table_data, $rows);
+		}
+		else {
+			//			$this->load->library("PHPExcel/Classes/PHPExcel.php");
+			//			new PHPExcel();
+			//		$this->load->library("PHPExcel/Classes/PHPExcel/Writer/Excel5.php");
+			$objexcel = SPHPExcel::CreatePHPExcel();
+			$info_size = count($table_data);
+			for ($i = 0; $i < count($rows); $i++) {
+				$rows_value = array_values($rows);
+				$rows_key = array_keys($rows);
+				$pos = 0;
+				
+				//chr(65)==A Aasc码
+				$objexcel->setActiveSheetIndex(0)->setCellValue(chr(65 + $i) . '1', strip_tags($rows_value[ $i ]));
+				$objexcel->setActiveSheetIndex(0)->getColumnDimension(chr(65 + $i))->setWidth(15);
+				$objexcel->getActiveSheet()->getStyle(chr(65 + $i) . '1')
+					->applyFromArray(array (
+						'font'      => array ('bold' => true),
+						'alignment' => array (
+							'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER
+						),
+						'borders'   => array (
+							//							                 'allborders' => true,
+							'outline' => array (
+								'style' => PHPExcel_Style_Border::BORDER_THIN,   //设置border样式
+								//								                 'style' => PHPExcel_Style_Border::BORDER_THICK,  //另一种样式
+								'color' => array ('argb' => 'FF000000'),          //设置border颜色
+							),
+						),
+					));
+				if (!empty($table_data)) {
+					$table_data = array_values($table_data);
+					for ($j = 2; $j <= ($info_size + 1); $j++) {
+						//						$objexcel->getActiveSheet()->getStyle(chr(65 + $i))
+						//							->applyFromArray(array (
+						//								                 'alignment' => array (
+						//									                 'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_LEFT
+						//								                 ),
+						//							                 ));
+						$objexcel->getActiveSheet()->getStyle(chr(65 + $i) . $j)
+							->applyFromArray(array (
+								'alignment' => array (
+									'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_LEFT
+								),
+								'borders'   => array (
+									//							                 'allborders' => true,
+									'outline' => array (
+										'style' => PHPExcel_Style_Border::BORDER_THIN,   //设置border样式
+										//								                 'style' => PHPExcel_Style_Border::BORDER_THICK,  //另一种样式
+										'color' => array ('argb' => 'FF000000'),          //设置border颜色
+									),
+								),
+							));
+						$objexcel->setActiveSheetIndex(0)->setCellValue(chr(65 + $i) . $j, strip_tags($table_data[ $pos ][ $rows_key[ $i ] ]));
+						if ($pos < $info_size - 1) {
+							$pos++;
+						}
+					}
+					
+				}
+			}
+			
+			header("content-type:application/vnd.ms-excel");
+			header("Content-Transfer-Encoding: binary");
+			header("content-disposition:attachment;filename={$title}.xls");
+			header("Pragma: no-cache");
+			$objwrite = new PHPExcel_Writer_Excel5($objexcel);
+			$objwrite->save('php://output');
+			exit;
+		}
+	}
+}

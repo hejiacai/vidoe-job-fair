@@ -1,0 +1,32 @@
+<style>
+    .edit-status-box .formMod{margin:40px 0 10px 0;font-size:14px}
+    .formMod td{padding:10px 0}
+    .drop{margin-top:2px}
+    .buttons{background:#efefef;padding:15px;text-align:center}
+    .btn-gray,
+    .btn-yellow{background:#e4e4e4;color:#666;border:1px solid #cccccc;display:inline-block;padding:10px 20px;border-radius:5px;font-size:16px;margin:0 10px;font-weight:bold}
+    .btn-yellow{background:#ff9900;color:#fff;border:1px solid #ff9900}
+    .btn-gray:hover{background:#d9d8d8;color:#333}
+    .btn-yellow:hover{background:#f59504;color:#fff}
+    .btn-gray span,.btn-yellow span{font-size:12px;font-weight:normal;margin-left:5px}
+    #formjobsort a{text-decoration: underline;color:#444}
+</style>
+<div class="edit-status-box" style="padding:35px;font-family:'Arial Negreta','Arial';background:#fff">
+    <p style="font-weight:bold;font-size:18px;color:#2a5368">为了求职者更准确的找到您的职位，我们做了一些职位类别调整，请重新选择：</p>
+      <form id="formjobsort" method="post" action="{/get_url rule='/index/UpdateJobSortDo/'/}">
+                <table class="formMod checkMod formRows" style="width:100%">
+
+                {/foreach $jobs as $key=>$job/}
+                    <tr>
+                        <td valign="top" align="left" style="width:400px;padding-left:30px;padding-right:20px;padding-top:15px;">职位名称：<a href="{/$siteurl.company|replace:'http:':''/}/job/mod/job_id-{/$job.job_id/}" target="_blank" title="{/$job.station/}">{/base_lib_BaseUtils::cutstr($job.station,10,'utf-8','','…')/}</a></td>
+                        <td valign="top" style="display:none"></td>		
+                        <td valign="top" style="width:490px"><span style="float:left;margin-top:7px;margin-right:5px;">职位类别：</span><div id="dropJobsort{/$job.job_id/}" class="drop formText JobCayDrop" style="z-index:{/count($jobs)-$key/};width:280px;float:left;text-align:left"></div>
+                            <span class="prompt-msg msg" data-for="hidJobsort"></span>
+                        </td>
+                    </tr>
+                {//foreach/}
+
+                </table>
+         </form>
+</div>
+<div class="buttons"><a href="javascript:" class="btn-gray">下次再说 <span>我来打酱油的</span></a><a href="javascript:" class="btn-yellow">保存 <span>强过打酱油的</span></a></div>

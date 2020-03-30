@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="Keywords" content="" />
+        <meta name="Description" content="" />
+        <title>汇博人才网-面试结果</title>
+        <!–[if lt IE9]>
+        <script src="{/version file='html5.js'/}"></script>
+        <![endif]–>
+        <link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+        <link rel="stylesheet" type="text/css" href="{/version file='comback.css'/}" />
+        <link rel="stylesheet" type="text/css" href="{/version file='video_eng.css'/}" />
+        <link rel="stylesheet" type="text/css" href="{/version file='m_font_style.css'/}">
+        <link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}">
+		<script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.min.js'/}"></script>
+        
+        <script type="text/javascript" src="{/version file='version.js'/}"></script>
+        <script type="text/javascript">
+            window.CONFIG = {
+                HOST: '{/$siteurl.style/}',
+                COMBOPATH: '/js/v2/'
+            }
+        </script>
+        <script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+        <script type="text/javascript" src="{/version file='global.js'/}"></script>
+        <script type="text/javascript" language="javascript" src="{/version file='confirmBox.js'/}"></script>
+        <script type="text/javascript" language="javascript" src="{/version file='dialog.js'/}"></script>
+        <script type="text/javascript" language="javascript" src="{/version file='WdatePicker.js'/}"></script>
+	</head>
+	<body style="background: #f6f7f8;">
+    {/include 'schoolnet/hallheadnew.html' par='面试结果'/} 
+	<div class="videoIhalMain">
+        <form id="frmInvite" method="get" action="{/get_url rule='/videohall/InterviewList/'/}">
+            <input type='hidden' name='sid' value="{/$sid/}"/>
+            <div class="videoStateSelection">
+                <em>状态：</em>
+                <span data-id="0" {/if !$status/}class='cut'{//if/}><i></i>全部</span>
+                <span data-id="2" {/if $status == 2/}class='cut'{//if/}><i></i>初面通过</span>
+                <span data-id="3" {/if $status == 3/}class='cut'{//if/}><i></i>不合适</span>
+                <span data-id="4" {/if $status == 4/}class='cut'{//if/}><i></i>待定</span>
+                <span data-id="5" {/if $status == 5/}class='cut'{//if/}><i></i>跳过</span>
+                <span data-id="6" {/if $status == 6/}class='cut'{//if/}><i></i>录用</span>
+                <span data-id="1" {/if $status == 1/}class='cut'{//if/}><i></i>待反馈</span>
+                <input type="hidden" name="status" id="videoStateSelectionPut" value="{/$status/}" />
+            </div>
+            <div class="dataStatScreen dataJobhunter">
+                <span>求职者姓名</span>
+                <input type="text" name="user_name" value="{/$user_name/}" autocomplete="off">
+                <span>面试时间</span>
+                <input type="text" readonly="readonly" onclick="WdatePicker()" style="width:120px; margin-right: 0;" name="interview_time_min" {/if $interview_time_min/}value="{/$interview_time_min/}"{//if/} />
+                <b>~</b>
+                <input type="text" readonly="readonly" onclick="WdatePicker()" style="width:120px; margin-right: 0;" name="interview_time_max" {/if $interview_time_max/}value="{/$interview_time_max/}"{//if/} />
+                <button type="button" class="statSearchBtn">搜索</button>
+                <!--<input type="submit" value="搜索" class="statSearchBtn">-->
+                <div class="clear"></div>
+            </div>
+		<form>
+		<table class="jobhunterTab">
+			<tr>
+				<th>姓名</th>
+				<th width="15%">面试职位</th>
+				<th width="15%">学校</th>
+				<th width="15%">专业</th>
+				<th width="15%">面试时间</th>
+				<th>状态</th>
+				<th width="15%">操作</th>
+			</tr>
+            {/foreach $list as $v/}
+			<tr>
+                <td><a href="{/get_url rule='/resume/resumeshow/'/}type-network-resumeid-{/$v['resume_id']/}-src-video" target="_blank">{/$v['user_name']/}</a></td>
+				<td>{/$v['station']/}</td>
+				<td>{/$v['school']/}</td>
+				<td>{/$v['major_desc']/}</td>
+				<td>{/$v['interview_time_str']/}</td>
+				<td>{/$v['status_name']/}</td>
+				<td data-id="{/$v['id']/}" data-person-id="{/$v['person_id']/}">
+                    {/if $v['status'] == 1 || $v['status'] == 4/}
+                        <a href="javascript:;" class="passBtn">初面通过</a>
+                        <a href="javascript:;" class="notPassBtn">不合适</a>
+                        {/if $v['status'] != 4/}<a href="javascript:;" class="waitDealBtn">待定</a>{//if/}
+                        {/else if $v['status'] == 2 || $v['status'] == 6/}
+                        <a href="javascript:;" class="sendOfferBtn">发offer</a>
+                    {//if/}
+				</td>
+			</tr>
+			{//foreach/}
+		</table>
+		{/$pager/}
+		
+	</div>
+<script type="text/javascript">
+    hbjs.use('@confirmBox, @jobDialog', function (m) {
+        var ConfirmBox = m['widge.overlay.confirmBox'],
+            Dialog = m['widge.overlay.hbDialog'],
+            $ = m['jquery'].extend(m['cqjob.jobDialog']);
+
+        var close = '×';
+        var width = 455;
+        var zIndex = 9999;
+
+        
+        $('.statSearchBtn').on('click', function(){
+            $('#frmInvite').get(0).submit();
+        });
+        
+        function setStatus(id, status, person_id){
+            $.ajax({
+                type: 'post',
+                url: '{/get_url rule="/videohall/SetInterviewStatus"/}',
+                data: {id: id, status: status, person_id: person_id},
+                dataType: 'json',
+                success: function (res) {
+                    if(res.isNeedLogin){
+                        window.location.reload();
+                        return;
+                    }
+                    if(!res.status){
+                        ConfirmBox.timeBomb(res.msg,{
+                            name: 'fail',
+                            width:'auto',
+                            timeout : 2000
+                        });
+                        return;
+                    }
+                    ConfirmBox.timeBomb(res.msg,{
+                        name: 'success',
+                        width:'auto',
+                        timeout : 2000
+                    });
+                    window.location.reload();
+                }
+            });
+        }
+        $(".waitDealBtn").on("click", function(){
+            var id = $(this).parent().attr('data-id');
+            var person_id = $(this).parent().attr('data-person-id');
+            $.confirm('确定要设置为待定吗？', '提示', function () {
+                setStatus(id, 4, person_id);
+            });
+        });
+        
+        $(".notPassBtn").on("click", function(){
+            var id = $(this).parent().attr('data-id');
+            var person_id = $(this).parent().attr('data-person-id');
+            $.confirm('确定要设置为不合适吗？', '提示', function () {
+                setStatus(id, 3, person_id);
+            });
+        });
+        
+        $(".passBtn").on("click", function(){
+            var id = $(this).parent().attr('data-id');
+            var person_id = $(this).parent().attr('data-person-id');
+            $.confirm('确定要设置为通过吗？', '提示', function () {
+                setStatus(id, 2, person_id);
+            });
+        });
+        
+        $(".sendOfferBtn").on("click", function(){
+            var id = $(this).parent().attr('data-id');
+            $.confirm('确定要去发送offer吗？', '提示', function () {
+                $.ajax({
+                    type: 'post',
+                    url: '{/get_url rule="/videohall/SendOffer"/}',
+                    data: {id: id},
+                    dataType: 'json',
+                    success: function (res) {
+                        if(res.isNeedLogin){
+                            window.location.reload();
+                            return;
+                        }
+                        if(!res.status){
+                            ConfirmBox.timeBomb(res.msg,{
+                                name: 'fail',
+                                width:'auto',
+                                timeout : 2000
+                            });
+                            return;
+                        }
+                        ConfirmBox.timeBomb(res.msg,{
+                            name: 'success',
+                            width:'auto',
+                            timeout : 2000
+                        });
+                        window.open("{/get_url rule='/offertemplate/index'/}?invite_id="+res.invite_id, "_blank");
+                        return;
+                    }
+                });
+            });
+        });
+    })
+	$('.videoStateSelection span').click(function(){
+		$(this).toggleClass('cut').siblings().removeClass('cut');
+		$('#videoStateSelectionPut').val($(this).attr('data-id'));
+		if($('.videoStateSelection span.cut').length < 1){
+			$('#videoStateSelectionPut').val('0');
+		}
+        $('#frmInvite').get(0).submit();
+	});
+</script>
+	{/include file="footer_v1.html"/}
+	</body>
+</html>

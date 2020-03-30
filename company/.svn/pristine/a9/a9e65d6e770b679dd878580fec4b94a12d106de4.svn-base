@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+<title>{/$title/}</title>
+<!–[if lt IE9]> 
+<script src="{/version file='html5.js'/}"></script>
+<![endif]–>
+<link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+<style>
+.resumeThead{width:100%; overflow:hidden;}
+.resumeTop{width:100%; padding:18px 0px; background:#496279;}
+.resumeTop div{width:1000px; margin:0 auto; overflow:hidden;}
+.resumeTop div a.logo{ display:block; float:left;width:160px; height:38px; background:url({/$siteurl.style/}/img/resumetate/resumetate.png) 0 -102px no-repeat;}
+.resumeTop div span{ display:block; float:left;width:85px; height:38px; background:url({/$siteurl.style/}/img/resumetate/resumetate.png) -160px -102px no-repeat;}
+.resumeTop ul{float:right}
+.resumeTop ul li{display: inline-block;#float:left}
+.resumeTop ul a{font-size:16px;color:#fff;margin-left:18px;margin-top: 8px;display: inline-block;font-family: '微软雅黑'}
+.resumeTop ul a:hover{text-decoration: underline}
+.resumeSuc{border:1px solid #f1f1f1;background:#ffffff;width:800px;margin:50px auto}
+.resumeSuc div{width:325px;margin:80px auto;text-align: left;font-size:14px;color:#666;font-family: '微软雅黑';background: url({/$siteurl.style/}/img/resumetate/resumSuc.jpg) left 5px no-repeat;padding-left: 60px}
+.resumeSuc div a:hover{text-decoration: underline}
+</style>
+</head>
+
+<body style="background: #fafafa">
+<div class="resumeThead">
+    <div class="resumeTop">
+        <div>
+        	<ul>
+        		<li><a href="{/$siteurl.company|replace:'http:':''/}/login">企业服务</a></li>
+        		<li><a href="{/base_lib_Constant::MAIN_URL_NO_HTTP/}/zhaopinhui">重庆招聘会</a></li>
+        		<li><a href="{/base_lib_Constant::MAIN_URL_NO_HTTP/}/lietou">汇博猎头</a></li>
+        		<li><a href="{/base_lib_Constant::MAIN_URL_NO_HTTP/}/rpo">招聘外包</a></li>
+        		<li><a href="{/base_lib_Constant::MAIN_URL_NO_HTTP/}/xiaoyuan">校园招聘</a></li>
+        		<li><a href="{/base_lib_Constant::MAIN_URL_NO_HTTP/}/hrcollege">HR学院</a></li>
+        		<li><a href="{/base_lib_Constant::MAIN_URL_NO_HTTP/}/wellknown">知名企业</a></li>
+        		<li><a href="{/base_lib_Constant::JIANZHI_URL_NO_HTTP/}">汇博兼职</a></li>
+        	</ul>
+            <a href="{/base_lib_Constant::MAIN_URL_NO_HTTP/}" class="logo"></a>
+            <span></span>
+        </div>
+    </div>
+    <div class="resumeSuc">
+    	<div>
+    		<p style="font-size: 18px;color:#333;margin-bottom: 5px">恭喜你！简历处理成功</p>
+            {/if $apply_status_count[0]['not_do'] > 0/}
+    		<p>您还有<strong style="color:#eb6a64;font-size:16px">{/$apply_status_count[0]['not_do']/}</strong>份简历没有处理哦，<a href="{/$siteurl.company|replace:'http:':''/}/login" style="color:#3b73a2;font-size:16px;font-weight: bold">立即登录</a> 汇博后台进行批量处理！</p>
+            {/else/}
+            <p><a href="{/$siteurl.company|replace:'http:':''/}/login" style="color:#3b73a2;font-size:16px;font-weight: bold">立即登录</a></p>
+            {//if/}
+    		<p align="center" style="margin: 70px 0"><img src="{/$siteurl.style/}/img/resumetate/resumEwm.jpg" /></p>
+    	</div>
+    </div>
+</div>
+<div class="footer">©{/date("Y")/} 汇博网 版权所有</div>
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?fb51309e47424acd6e31c0bd2a65a5a1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<script type="text/javascript" language="javascript" src="{/version file="track.js"/}"></script>
+<!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//119.84.79.100:98/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 4]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Piwik Code --></body>
+</html>

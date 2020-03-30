@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="{/version file="base.css"/}">
+    <script type="text/javascript" src="{/version file="jquery-1.8.3.js"/}"></script>
+    <style>
+        body{ background: #e9e9e9; font-family: "微软雅黑"; text-align: left;}
+
+        .ratePosterMain-con {
+            padding-top: 30px;
+            width: 680px;
+            background: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+        .ratePosterMain-con .cover-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 2000px;
+            height: 2000px;
+            background: rgba(0,0,0,0.3);
+            z-index: 5;
+            display: none;
+        }
+        .ratePosterMain-con .cover-bg img {
+            position: absolute;
+            top: 182px;
+            left: 320px;
+        }
+
+        .ratePosterMain{box-sizing: border-box;width: 680px;overflow: hidden;background: #fff;margin: 0px auto;text-align: left;padding: 0px 25px 0px 25px;}
+        .ratePosterLeft{
+            width: 280px;
+            /*overflow: hidden;*/
+            float: left;
+        }
+        .editRatex{ display: block; float: right; margin-bottom: 20px;}
+        .editRatex i,.editRatex i.editIcon{ display: inline-block;width:14px; height: 14px; background: url({/$siteurl.style/}/img/company/ratep_icon.jpg) -7px -25px no-repeat; vertical-align: middle; margin-right: 6px;}
+        .editRatex i.editIcon{width:17px; height:17px; background: url({/$siteurl.style/}/img/company/ratep_icon.jpg) -7px -1px no-repeat; }
+        .rateImgMain{
+            width: 100%;
+            /*overflow: hidden;*/
+        }
+        .ratePosterMainLine{background: url({/$siteurl.style/}/img/company/ratep_img08.jpg) 320px top repeat-y #fff;}
+        .rateImgx{
+            overflow: hidden;
+            text-align: center;
+        }
+        .rateImgx img{
+            width: 240px;
+        }
+        .rateImgz{width:100%; /*overflow: hidden; */position: relative; margin-top: 20px;}
+        .rateImgList{
+            width: 580px;
+            overflow: hidden;
+            background: #f1f1f1;
+            /*margin-left: 50px;*/
+           	padding:16px 50px;
+            position: relative;
+    		left: -26px;
+        }
+        .rateImgLeft,.rateImgRight{ display: block;width:24px;height: 24px; position: absolute; top: 35px; display: none;}
+        .rateImgLeft{ background: url({/$siteurl.style/}/img/company/ratep_icon.jpg) -72px 0 no-repeat; left: 15px;}
+        .rateImgRight{ background: url({/$siteurl.style/}/img/company/ratep_icon.jpg) -101px 0 no-repeat; right: 15px;}
+        .rateImgList div{
+        	position:relative;
+            width: 9999px;
+            height: 94px;
+            overflow: hidden;
+        }
+        .rateImgList div span{
+            cursor: pointer;
+            display: block;
+            width: 54px;
+            height: 94px;
+            overflow: hidden;
+            float: left;
+            margin-right: 9px;
+            position: relative;
+        }
+        .rateImgList div span:hover  i{
+            display: none;
+        }
+        .rateImgList div span img{
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+        .rateImgList div span i{ display: block;width:258px; height: 118px; position: absolute; top: 0px; left: 0px; background:url({/$siteurl.style/}/img/company/ratep_img05.png);}
+        .rateImgList div span.cut i{ background: no-repeat;	}
+        .rateCodex{
+            width: 250px;
+            overflow: hidden;
+            margin: 0 auto;
+            padding-top: 30px;
+            text-align: center;
+        }
+        .rtCode01,.rtCode04{ display: block; font-size: 18px; font-weight: bold; color: #444;}
+        .rtCode01 i,.rtCode04 i{ display: inline-block;width:25px; height: 19px; background: url({/$siteurl.style/}/img/company/ratep_icon.jpg) -34px -1px no-repeat; vertical-align: middle; margin-right: 6px;}
+        .rtCode02{ padding: 12px; border: 1px solid #f1f1f1; overflow: hidden;width:156px; height: 156px; margin: 20px auto;}
+        .rtCode02 img {
+            width: 100%;
+            height: 100%;
+        }
+        .rtCode03{ line-height: 30px; font-size: 16px; color: #333; display: block;}
+        .rtCode03 b{ font-size: 16px; font-weight: bold; color: #12bc64;}
+        .rtCode04{
+            text-align: left;
+            padding: 20px 0 20px 0;
+        }
+        .rtCode04 i{width:18px; height: 18px; background: url({/$siteurl.style/}/img/company/ratep_icon.jpg) -137px -2px no-repeat;}
+        .saveComputer{display: block; height: 44px; line-height: 44px; text-align: center; color: #fff; font-size: 16px; margin-right: 20px; border-radius: 4px; background: #66bce4;width:180px; margin-left: 26px;}
+        .saveComputer:hover {
+            color: #fff;
+            background: #31a2d6;
+        }
+        .ratePosterRight{
+            width: 280px;
+            overflow: hidden;
+            float: left;
+            margin-left: 60px;
+        }
+        .rateFarex{ color: #444; overflow: hidden;}
+        .rateFarex a{ display: inline-block; color: #2b6fad; text-decoration: underline; margin-left: 10px;}
+        .rateFarez{ overflow: hidden; padding:35px 0; border-bottom: 1px dashed #f1f1f1;}
+        .rateFarez span{ display: block; float: left;width:96px; height: 34px; text-align: center; line-height: 34px; border: 1px solid #f1f1f1; border-radius: 4px; margin-right: 10px; }
+        .rateVcyx{ color: #999; padding: 30px 0 20px 0; overflow: hidden;}
+        .rateVcyx b{color: #444;}
+        .rateVcyz{width:100%; overflow: hidden;}
+        .rateVcyz span{ display: block; float: left; overflow: hidden; position: relative; padding:7px 10px 0 0;}
+        .rateVcyz span em{ display: block; padding: 0 18px; border: 1px solid #f1f1f1; border-radius: 4px; line-height: 34px; height: 34px;}
+        .rateVcyz span i{ display: block;width:14px; height: 14px; background: url({/$siteurl.style/}/img/company/ratep_icon.jpg) -164px -5px no-repeat; position: absolute; top: 0; right: 4px; cursor: pointer;}
+        .rateVcys{width:410px; overflow: hidden; height: 194px; border: 1px solid #f1f1f1; border-radius: 4px; overflow-y: auto; padding: 20px; margin: 30px 0;}
+        .rateVcys span{ display: block; float: left;width:200px; height: 18px; line-height: 18px; margin-bottom: 17px; cursor: pointer;overflow:hidden;white-space:nowrap;text-overflow:ellipsis; }
+        .rateVcys span i{ display: inline-block;width:14px; height: 14px; background: url({/$siteurl.style/}/img/company/ratep_icon.jpg) -202px -6px no-repeat; margin:0px 10px 0 0; vertical-align: middle;}
+        .rateVcys span.cut i{background: url({/$siteurl.style/}/img/company/ratep_icon.jpg) -185px -6px no-repeat;}
+        .rateArea{ overflow: hidden;}
+        .rateArea b,.rateArea a,.rateArea span{ display: inline-block;}
+        .rateArea a{ text-decoration: underline; margin-left: 10px;}
+        .rateArea span{width:100%; margin-top: 15px;}
+        .rateArea span i{ display: inline-block;width:15px; height: 18px; background: url({/$siteurl.style/}/img/company/ratep_icon.jpg) -27px -23px no-repeat; vertical-align: middle; margin-right: 10px;}
+        .rateForm{ overflow: hidden; padding-top: 45px;}
+        .rateForm a{ display: block; height: 44px; line-height: 44px; text-align: center; color: #fff; font-size: 16px; margin-right: 20px; float: left; border-radius: 4px;}
+        .rateForm a.ratePreview{width:100px; background: #00bab1;}
+        .rateForm a.rateSave{width:180px; background: #66bce4;}
+        /*添加福利待遇*/
+        .rateWelfarePop{ padding-top:20px;}
+        .ratePopTips{ color: #f00; display: block; padding-left: 20px;}
+        .setWelfare{width:550px;padding:10px 0px; overflow: hidden;padding-left: 20px;}
+        .ratePopput{ padding-left: 20px;}
+        .setWelfare a{background-color:#f2f2f2;color:#666;display: inline-block;padding:3px 10px;margin:7px 5px;font-family:"微软雅黑"}
+        .setWelfare .hbIconMoon{font-size:14px;color:#cacaca;margin-left: 5px}
+        .setWelfare a:hover{background-color: #eaffcc}
+        .setWelfare a.cur{background-color: #599403;color:#fff}
+        .setWelfare a.cur .hbIconMoon{color:#fff}
+        #rateMsg{ color: #f00;}
+        .rateAreaPop{width:500px;overflow-y: auto;}
+        .rateAreaData{ padding: 20px; height: 150px; overflow-y: auto;}
+        .rateAreaPop span{ cursor: pointer; display: block;width:100%; overflow: hidden; height: 18px; line-height: 18px; color: #444; margin-bottom: 15px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+        .rateAreaPop span i{ display: inline-block;width:16px; height: 16px; background: url({/$siteurl.style/}/img/company/chat_icon11.png) 0 -18px no-repeat; display: inline-block; vertical-align: -2px; margin-right: 8px;}
+        .rateAreaPop span.cut i{ background-position: 0 0;}
+
+
+
+
+    </style>
+</head>
+<body>
+
+</div>
+<div class="ratePosterMain-con">
+    <div class="cover-bg">
+        <img src="http://assets.hb.com/img/common/loadBox.gif" />
+    </div>
+    <div class="ratePosterMain ratePosterMainLine">
+        <div class="ratePosterLeft">
+            <div class="clear"></div>
+            <div class="rateImgMain">
+                <div class="rateImgx">
+                    <a href='{/get_url rule="/poster/JobPoster" data="job_id={/$job_id/}&poster_type={/$poster_type/}"/}' target="_blank" title="点击放大" style="overflow: hidden;display: block;">
+                        <img src='{/get_url rule="/poster/JobPoster" data="job_id={/$job_id/}&poster_type={/$poster_type/}"/}' />
+                    </a>
+
+                </div>
+                <div class="rateImgz">
+                    <div class="rateImgList">
+                        <div>
+
+                            <span  data-type="1">
+                                    <i></i>
+									<img src="{/$job_img1/}" />
+                            </span>
+                            <span class="cut" data-type="2">
+                                <i></i>
+									<img src="{/$job_img2/}" />
+                            </span>
+                            <span data-type="3">
+                                <i></i>
+									<img src="{/$job_img3/}" />
+							</span>
+                            <span data-type="4">
+                                <i></i>
+									<img src="{/$job_img4/}" />
+							</span><span data-type="5">
+                                <i></i>
+									<img src="{/$job_img5/}" />
+							</span><span data-type="6">
+                                <i></i>
+									<img src="{/$job_img6/}" />
+							</span>
+                        </div>
+                    </div>
+                    {/if $num > 3/}
+                    <a href="javascript:void(0);" class="rateImgLeft"></a>
+                    <a href="javascript:void(0);" class="rateImgRight"></a>
+                    {//if/}
+                </div>
+            </div>
+        </div>
+        <div class="ratePosterRight">
+            <div class="rateCodex">
+                <span class="rtCode01"><i></i>微信扫一扫分享招聘海报</span>
+                <div class="rtCode02">
+                    <img src='{/get_url rule="/poster/PostCode/" data="job_id={/$job_id/}&poster_type={/$poster_type/}"/}' />
+                </div>
+                <span class="rtCode04"><i></i>下载图片</span>
+                <a href='{/get_url rule="/poster/JobPoster/" data="job_id={/$job_id/}&poster_type={/$poster_type/}&is_download=download"/}' class="saveComputer" id="download_btn">保存到电脑</a>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script  type="text/javascript">
+    var action_url = '{/$siteurl.style/}';
+    if(typeof action_dom == 'object'){
+        action_dom.push( ['#download_btn', 44]);
+    }else{
+        action_dom = [
+            ['#download_btn', 44]
+        ];
+    }
+</script>
+<script type="text/javascript" language="javascript" src="{/version file='action.js'/}"></script>
+<script>
+    var job_flag = '{/$job_id/}';
+    var poster_type = 1;
+    var is_download = 'download';
+    var sliderParam = {
+        cur:1
+    }
+
+    $('.rateImgList div span').on('click',function () {
+        $('.ratePosterMain-con .cover-bg').show();
+        // setTimeout(function () {
+        //     $('.ratePosterMain-con .cover-bg').hide();
+        // },1500)
+
+        $(this).parent().find('span').removeClass('cut');
+        $(this).addClass('cut');
+        var poster_type = $(this).attr("data-type");
+        sliderParam.cur=$(this).index();
+        var src = '{/get_url rule="/poster/JobPoster" data="job_id={/$job_id/}&poster_type='+poster_type+'"/}';
+        var src2 = '{/get_url rule="/poster/JobPoster/" data="job_id={/$job_id/}&poster_type='+poster_type+'&is_download=download"/}';
+        var src3 = '{/get_url rule="/poster/PostCode" data="job_id={/$job_id/}&poster_type='+poster_type+'"/}';
+        $('.rateImgx a').attr('href',src);
+        $('.rateImgx img').attr('src',src);
+        $('.saveComputer').attr('href',src2);
+        $('.rtCode02 img').attr('src',src3);
+
+//此版本不需要，以后海报样式多起来了需要计算宽度改变数字
+//      if($('.rateImgList div span').length<=3){
+//          return
+//      }else {
+//          if(sliderParam.cur<2){
+//              $('.rateImgList div').animate({'left':0+'px'})
+//              return;
+//          }
+//          if(sliderParam.cur<=$('.rateImgList div span').length-1 && sliderParam.cur>$('.rateImgList div span').length-3) {
+//              $('.rateImgList div').animate({'left':-(($(this).outerWidth(true))*($('.rateImgList div span').length-3))+'px'});
+//              return;
+//          }
+//      }
+//        $('.rateImgList div').animate({'left':-((sliderParam.cur-1)*($(this).outerWidth(true)))+'px'})
+    })
+
+    $('.rateImgLeft').on('click',function () {
+        if(sliderParam.cur<=0) {
+            sliderParam.cur=$('.rateImgList div span').length-1
+        }else {
+            sliderParam.cur--;
+        }
+
+        $('.rateImgList div span').eq(sliderParam.cur)[0].click()
+    })
+    $('.rateImgRight').on('click',function () {
+        if(sliderParam.cur>=$('.rateImgList div span').length-1){
+            sliderParam.cur=0;
+        }else {
+            sliderParam.cur++;
+        }
+
+        $('.rateImgList div span').eq(sliderParam.cur)[0].click()
+    })
+
+    $('.ratePosterMain-con .rtCode02 img').load(function () {
+        $('.ratePosterMain-con .cover-bg').hide();
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="{/version file='m_base.css'/}">
+    <link rel="stylesheet" type="text/css" href="{/version file='m_tScreen.css'/}">
+    <link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}"/>
+    <script type="text/javascript" src="{/version file='jquery-1.8.3.min.js'/}"></script>
+
+    <script type="text/javascript" src="{/version file='version.js'/}"></script>
+    <script type="text/javascript">
+        window.CONFIG = {
+            HOST: '{/$siteurl.style/}',
+            COMBOPATH: '/js/v2/'
+        }
+    </script>
+    <script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+    <script type="text/javascript" src="{/version file='global.js'/}"></script>
+    <style type="text/css">
+        body{
+            padding-top: 0px;
+        }
+        .appealPop{ display: block; width:100%; background: #fff; border-radius: 4px; overflow: hidden;  top: 20%; left: 5%; z-index: 11; padding: 20px; box-sizing: border-box;}
+        .appealPop h2{ font-size: 16px; color: #333; padding-bottom: 20px;}
+        .appealSet{ display: block;width:100%; height: 40px; border: 1px solid #f1f1f1; text-indent: 8px; color: #333; margin-bottom: 10px; font-size: 14px;}
+        .appealReason{ display: block;width:100%; height:120px; border: 1px solid #f1f1f1; padding: 8px; box-sizing: border-box;font-size: 14px;}
+        .appealBd{width:100%; padding-top: 15px;}
+        .appealBd a{ display: block; float: left; width: 47%; height: 44px; line-height: 44px; text-align: center; color: #fff; font-size: 16px; border-radius: 4px; box-sizing: border-box;}
+        .appealBd a.appealSure{ background: #4e74d9; }
+        .appealBd a.appealCancel{ background: #f1f1f1; color: #333; float: right;}
+        .appealError{ display: none; padding-bottom: 10px; color: #f00; text-align: left; font-size: 14px;}
+    </style>
+</head>
+<body>
+<!--<a href="#" class="appealx">申诉</a>-->
+<div class="appealPop">
+    <span class="appealError"></span>
+    <select name="appealSet" class="appealSet">
+        <option value="0">请选择申诉类型</option>
+        <option value="不认同审核结果">不认同审核结果</option>
+        <option value="不清楚审核规则">不清楚审核规则</option>
+    </select>
+    <div class="appealReasonx">
+        <textarea name="appealReason" class="appealReason" placeholder="请详细描述申诉的具体理由，最多200字"></textarea>
+    </div>
+    <div class="appealBd">
+        <a href="javascript:void(0);" class="appealSure">提交</a>
+        <a href="javascript:void(0);" class="appealCancel">取消</a>
+    </div>
+</div>
+<script type="text/javascript">
+    var confirmBox, Dialog;
+    hbjs.use('@dialog,@confirmBox', function (m) {
+        var $ = m['jquery'];
+        confirmBox = m['widge.overlay.confirmBox'];
+        Dialog = m['widge.overlay.hbDialog'];
+        $('.appealSure').on('click', function(){
+            var appealSet = $('.appealSet').val();
+            var appealReason = $('.appealReason').val();
+            var job_id = '{/$job_id/}';
+            if(appealSet == '0'){
+                $('.appealError').text('请选择申诉类型').css('display','block');
+                return false;
+            }else if(appealReason == ''){
+                $('.appealError').text('请填写申诉理由').css('display','block');
+                return false;
+            }else if(appealReason.length > 200){
+                $('.appealError').text('申诉理由最多200字').css('display','block');
+                return false;
+            }else{
+                $('.appealError').text('').css('display','none');
+                $.ajax({
+                    url:"{/get_url rule='/message/AddJobAuditRecord'/}",
+                    type:"post",
+                    dataType: "json",
+                    data: {'title':appealSet,'content':appealReason,'job_id':job_id},
+                    success:function(json){
+                        if(json.status){
+                            confirmBox.timeBomb(json.msg, {
+                                name : "success",
+                                timeout : 2000,
+                                width: 400
+                            });
+                        }else{
+                            confirmBox.timeBomb(json.msg, {
+                                name : "fail",
+                                timeout : 2000,
+                                width: 200
+                            });
+                        }
+                        setTimeout("window.parent.location.reload()",2000);
+                    }
+                });
+            }
+
+        });
+        $('.appealCancel').click(function(){
+            window.parent.job_all.hide();
+        });
+    });
+</script>
+</body>
+</html>

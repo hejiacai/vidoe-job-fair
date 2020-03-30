@@ -1,0 +1,214 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+<title>汇博网_招聘中心_我的账户</title>
+<!–[if lt IE9]> 
+<script src="{/version file='html5.js'/}"></script>  
+<![endif]–>
+<link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='comback.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='icons.css'/}" />
+
+<script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.min.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='common.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='jquery.form.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='dialog.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='ui_validate.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='ui_inputFocus.js'/}"></script><!--输入框获取焦点-->
+<script type="text/javascript" language="javascript" src="{/version file='ui_hovchange.js'/}"></script><!--指向改变class-->
+
+
+<link rel="stylesheet" type="text/css" href="{/version file='m_font_style.css'/}">		
+<link rel="stylesheet" type="text/css" href="{/version file='css/base.css'/}">
+<link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}">
+
+<style type="text/css">
+table {width: 100%;border: 1px solid #f1f1f1;margin-bottom: 215px;}
+table tr th {text-align: center;font-size: 14px;color: #444444;font-weight: bold;}
+table tr td {text-align: center;font-size: 14px;border-bottom: 1px solid #f1f1f1;}
+table .fstTr {height: 40px;background-color: #f6f7f8;}
+table .contentTr {height: 50px;}
+table tr td:first-child {color: #2b6fad;}
+table tr td a {color: #2b6fad;}
+table tr td a:hover {color: #2b6fad;}
+table tr td span.sign {width: 70px;height: 30px;background-color: #2b6fad;display: inline-block;color: #fff;line-height: 30px;text-align: center;border-radius: 4px;}
+/* 弹框样式 */
+.ui_dialog_title {text-align: left;}
+.ktContent {padding: 25px 40px;}
+.ktContent p {font-size: 16px;text-align: left;}
+.ktContent input {width: 100%;height: 40px;margin-top: 20px;font-size: 14px;}
+.ktContent span {margin-left: 17px; width: 200px;height: 30px;display: block;background-color: #2b6fad;color: #fff;font-size: 14px;line-height: 30px;border-radius: 4px;margin-top: 25px;}
+input::-webkit-input-placeholder{color:#c5c5c5;}
+input::-moz-placeholder{color:#c5c5c5;}
+input:-moz-placeholder{color:#c5c5c5;}
+input:-ms-input-placeholder{color:#c5c5c5;}
+</style>
+</head>
+<body id="body">
+{/include file="new_header.html" par="企业管理" cur="合同管理"/}
+<div class="content" id="content">
+    <section class="section" style="overflow:hidden;">
+        <hgroup>
+			<table>
+				<tr class="fstTr">
+					<th>合同</th>
+					<th>签署状态</th>
+					<th>发起人</th>
+					<th>发起时间</th>
+					<th>签署时间</th>
+					<th>签署账号</th>
+					{/if $is_main==1/}<th>操作</th>{//if/}
+				</tr>
+				{/if !empty($info)/}
+					{/foreach $info as $key=>$val/}
+						<tr class="contentTr">
+							<td>
+								<a href="{/get_url rule="/account/ViewContractFile/"/}?id={/$val.id/}" target="_blank" style="cursor: pointer">
+									{/$val.contract_code/}
+								</a>
+							</td>
+							<td>{/if $val.econtract_state==3/}已签署{/else/}待签署{//if/}</td>
+							<td>{/get_user user_id=$val.signer/}</td>
+							<td>{/$val.sponsor_time/}</td>
+							<td>{/$val.signature_time/}</td>
+							<td>{/$val.user_name/}</td>
+							{/if $is_main==1/}
+								{/if $val.econtract_state==3/}
+									<td><a  style="cursor: pointer" onclick="download_contract('{/$val.fileDir/}{/$val.signature_file/}')">下载</a></td>
+								{/else/}
+									<td><span class="sign" phone_num="{/$val.acceptor_phone/}" econtract_id="{/$val.id/}" style="cursor: pointer">签署</span></td>
+								{//if/}
+							{//if/}
+						</tr>
+					{//foreach/}
+				{/else/}
+				<tr class="contentTr">
+					<td colspan="6">
+					暂无电子合同<td></tr>
+				{//if/}
+			</table>
+        </hgroup>
+    </section>
+</div>
+{/include file="./footer.html"/}
+<section class="floatRT"><a href="{/get_url rule='/about/message' domain='main'/}" target="_blank" class="serviceLink">我有问题要反馈</a><b></b></section>
+<!--<script language="javascript" type="text/javascript" src="http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js&ip={/$ip/}"></script>
+-->
+<script type="text/javascript">
+	//查看
+	function view_contract(file) {
+		var url = '{/get_url rule="/account/ViewContractFile/"/}?file=' + file
+		window.open(url);
+	}
+	function download_contract(file) {
+		var url = '{/get_url rule="/account/DownloadContractFile/"/}?file=' + file
+		window.open(url);
+	}
+	hbjs.use('@areaDrop, @form, @jobDialog, @jobDropList', function(m){
+		var $ = m['cqjob.jobValidate'].extend(m['cqjob.jobForm'], m['cqjob.jobDialog'], m['cqjob.jobDropList']);
+	})
+	hbjs.use('@confirmBox', function(m) {
+		var	ConfirmBox      = m['widge.overlay.confirmBox'],
+			Dialog          = m['widge.overlay.hbDialog'],
+			cookie          = m['tools.cookie'],
+			fontSize = 18,
+			pWidth = 70;
+				
+		var informTraining2 = new Dialog({
+			close : 'X',
+			idName : 'informTraining_dialog',
+			title : '手机验证',
+			width : 340,
+			height: 235,
+			isOverflow : false,
+			isAjax : true
+		});
+
+
+		$('.sign').click(function(){
+			var acceptor_phone =  $(this).attr('phone_num');
+			var econtract_id = $(this).attr('econtract_id');
+			var loadingDialog1 = loadingDialog('正在发送手机验证码，请稍后');
+			$.ajax({
+				type: 'post',
+				url: '{/get_url rule="/account/SendRdcode/"/}',
+				data: {econtract_id:econtract_id},//只要将表单序列化就可以了
+				async: false,//false-同步请求
+				dataType: 'json',
+				success: function (data) {
+					loadingDialog1.hide();
+					if (data.status ) {
+						var vmx = '<div class="ktContent"><p>验证码已发送到'+acceptor_phone+'上</p><input placeholder="请输入验证码完成签署" name="code" id="code"><span id="sure" style="cursor: pointer">确定</span></div>';
+						informTraining2.setContent(vmx).show();
+
+						$('#sure').click(function(){
+							var code = $('#code').val();
+							if (code==''){
+								$.anchorMsg('请输入手机验证码', {icon: 'fail'}); return false;
+							}
+							/*informTraining2.hide();*/
+							var loadingDialog1 = loadingDialog('正在签署，请稍后');
+							$.ajax({
+								type: 'post',
+								url: '{/get_url rule="/account/SignContract/"/}',
+								data: {econtract_id:econtract_id,code:code},//只要将表单序列化就可以了
+								async: false,//false-同步请求
+								dataType: 'json',
+								success: function (data) {
+									loadingDialog1.hide();
+									if (data.code==200) {
+										$.anchorMsg(data.msg, {icon: 'success'});
+										setTimeout("window.location.reload()" ,2500);
+									}else{
+										$.anchorMsg(data.msg, {icon: 'fail'});
+									}
+								}
+							})
+
+						});
+					} else {
+						$.anchorMsg(data.msg, {icon: 'fail'});
+					}
+
+				},
+
+			});
+
+		});
+	});
+	//等待
+	var loadingDialog_1;
+	function loadingDialog(msg) {
+		msg = msg ? msg : '正在加载...';
+		var loading = '<div class="ui_dialog_loading">' + msg + '</div>';
+		if (!loadingDialog_1) {
+			loadingDialog_1 = new Dialog({
+				close: null,
+				idName: 'loadingDialog_1',
+				title: null,
+				content: loading,
+				isAjax: true
+			});
+			loadingDialog_1.hide_old = loadingDialog_1.hide;
+			loadingDialog_1.hide = function () {
+				loadingDialog_1.hide_old();
+				if ($('.hb_ui_dialog:not(:hidden)').length) {
+					$('.hb_ui_ui-mask').show();
+				}
+			};
+		}else{
+			loadingDialog_1.setContent({
+				content: loading,
+			});
+		}
+		loadingDialog_1.show();
+		$('.loadingDialog_1').css({border: '1px solid #a3a3a3', 'z-index': 100000});
+		return loadingDialog_1;
+	}
+</script>
+</body>
+</html>

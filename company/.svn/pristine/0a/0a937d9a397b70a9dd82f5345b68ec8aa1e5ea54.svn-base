@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="{/version file="base.css"/}"/>
+		<link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}"/>
+		<script type="text/javascript" language="javascript" src="{/version file="jquery-1.8.3.min.js"/}"></script>
+		<script type="text/javascript" language="javascript" src="{/version file="dialog.js"/}"></script>
+		<script type="text/javascript" language="javascript" src="{/version file="common.js"/}"></script>
+		 <script type="text/javascript" language="javascript" src="{/version file="ui_jobsort.js"/}"></script><!--职位类别-->
+		 <style type="text/css">
+		 	.JobCayDrop .dropLst{width:730px; text-align: left; max-height: 400px!important; height: auto!important}
+		 	.JobCayDrop .dropLstCon .lst{width:220px;height:308px; overflow-x: hidden;}
+		 	.JobCayDrop .dropLstCon .lst ul li,.JobCayDrop .dropLstCon .lst2 ul li:hover{width:202px; background: url({/$siteurl.style/}/img/common/checkModArr.gif) no-repeat right center;}
+		 	.JobCayDrop .dropLstCon .lst2 ul li.cu:hover{background: url({/$siteurl.style/}/img/common/checkModArrcu.gif) no-repeat right center #eff8ff;}
+		 	.JobCayDrop .dropLstCon .lst ul li label{width:175px;}
+		 	.JobCayDrop .dropLstCon .lst2 ul li label{width:155px; padding-left: 10px;}
+		 	.JobCayDrop .dropLstCon .lst2 ul li.ths label{width:172px;padding-left:3px;}
+		 	.JobCayDrop .dropLstCon .lst2 ul li.ths{background:none;}
+		 	.JobCayDrop .dropLstCon .lst3 ul li{background-image:none;}
+		 	.JobCayDrop .dropLstCon .lst3 ul li label{width:171px;padding-left:3px;}
+		 	.JobCayDrop .dropLstCon .lst3 ul li.hov{background-image:none;}
+			#requirt_load_1{width:100%; overflow: hidden; padding: 20px 0; border-top: 1px solid #f2f1f0; text-align: center;}
+			#requirt_load_1 a{ margin-right: 10px;}
+			.JobIndDrop02 .l{width:100px}
+			.JobIndDrop02 .l i{
+				display: inline-block;
+				color: #f00;
+				padding-left: 6px;
+				width:0;
+			}
+			.JobCayDrop02{ margin-left: 5px;}
+			.JobIndDrop02 .drop{ border: 1px solid #e5e5e5; border-radius:0;}
+			.JobIndDrop02 .dropGray{ background: #d7d7d7; border: 1px solid #d7d7d7; }
+			.JobIndDrop02 .dropGray input.text{ width:0; padding: 0;}
+		 </style>
+    </head>
+    <body>
+        <!-- //职位类别缺失 -->
+        	<div class="jobTopDeleHtml">
+        		<div class="jobTopDeleLt">
+        			<span>新增类别名称<i>*</i></span>
+        			<input type="text" name="jobCategoryName" id="jobCategoryName" placeholder="输入名称，2～8个字" value="" />
+        		</div>
+        		<!-- <div class="jobTopDeleLt02">
+        			<span class="addjobCategory">新增类别名称<i>*</i></span>
+        			<span class="electJobCategory">请选择</span>
+        			<span class="newjobCategory"><i></i>新职位类别</span>
+        			<div class="clear"></div>
+        		</div> -->
+				<div class="formMod JobIndDrop checkMod JobIndDrop02">
+					<div class="l">所属职位类别<i>*</i></div>
+					<div class="r">
+						<span class="drop formText JobCayDrop zindex JobCayDrop02" id="txtJobsort" style="width:380px"></span>
+					</div>
+					<span class="newjobCategory"><i></i>新职位类别</span>
+					<input type="hidden" name="newjobCategoryPut" id="newjobCategoryPut" value="" />
+					<div class="clear"></div>
+				</div>
+        		<div class="jobTopDeleLt">
+        			<span>新增原因<i>&nbsp;</i></span>
+        			<textarea id="addCause" name="addCause" placeholder="请详细描述添加理由"></textarea>
+        		</div>
+				
+				<div class="clear"></div>
+        	</div>
+			<div id="requirt_load_1">
+				<a class="btn1 btnsF14" href="javascript:void(0);" id="btnStopJobSave">确定</a>					   <a id="btnStopJobCancel" class="btn3 btnsF14" href="javascript:void(0);">取消</a>
+			</div>
+<script type="text/javascript">
+	var fontSize = 18,
+		pWidth = 70;
+	$('#txtJobsort').jobsort({max:1,type:'multiple',isLimit:true,hddName:'jobsort'});
+	$('.newjobCategory').click(function(){
+		$(this).toggleClass('newjobCategoryCur');
+		if($(this).hasClass('newjobCategoryCur')){
+			$('#newjobCategoryPut').val('1');
+            $('#txtJobsort').resetJobsortValue('');
+			$('.JobCayDrop02').addClass('dropGray').attr('id','');
+		}else{
+			$('#newjobCategoryPut').val('');
+			$('.JobCayDrop02').removeClass('dropGray').attr('id','txtJobsort');
+		}
+	});
+	
+	$('#btnStopJobSave').click(function(){
+		var jobCategoryName = $('#jobCategoryName').val();
+		var jobsort = $('input[name="jobsort"]').val();
+		var newjobCategoryPut = $('#newjobCategoryPut').val();
+		var addCause = $('#addCause').val();
+		var msg = '';
+		if(jobCategoryName == ''){
+			msg = '请输入名称';
+			$.anchorMsg(msg, { icon: 'fail' });
+			return false;
+		}
+		if(jobCategoryName.length < 2 || jobCategoryName.length > 8){
+			msg = '名称仅限2~8个字';
+			$.anchorMsg(msg, { icon: 'fail' });
+			return false;
+		}
+		if(jobsort == '' && newjobCategoryPut == ''){
+			msg = '请选择职位类别';
+			$.anchorMsg(msg, { icon: 'fail' });
+			return false;
+		}
+		if(addCause.length > 100){
+			msg = '添加理由字数不超过100字'
+			$.anchorMsg(msg, { icon: 'fail' });
+			return false;
+		}
+        
+        if(newjobCategoryPut == 1)
+            jobsort = '';
+        
+        $.ajax({
+            url: "{/get_url rule='/job/JobsortFeedbackDo'/}",
+            data: {new_jobsort_name: jobCategoryName, parent_jobsort: jobsort, remark: addCause},
+            dataType: 'json',
+            type: 'POST',
+            success: function (data) {
+                $.anchorMsg(data.msg, { icon: data.status ? 'success' : 'fail' });
+            }
+        });
+		setTimeout(function(){
+			parent.jobCategoryDialog.hide();
+		},2000)
+		
+	});
+	
+	$('#btnStopJobCancel').click(function(){
+		parent.jobCategoryDialog.hide();
+	});
+</script>
+    </body>
+</html>

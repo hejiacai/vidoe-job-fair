@@ -1,0 +1,98 @@
+<div>
+    {/$project_img_html.html/}
+</div>
+<div>
+    {/$manager_img_html.html/}
+</div>
+
+<script>
+
+
+
+    hbjs.use('@hbCommon, @jobDialog, @validator, @areaDrop, @confirmBox, @areaDrop', function(m) {
+        //var $ = m['product.hbCommon'].extend(m['cqjob.jobDialog']);
+        var Dialog = m['widge.overlay.hbDialog'];
+        var AreaDrop = m['product.areaDrop'];
+        var validatorForm = m['widge.validator.form'];
+        var ConfirmBox = m['widge.overlay.confirmBox'];
+
+        {/if $type==1/}
+            //产品
+
+                var up_options_{/$project_img_html.id/} = {
+                    up_id: '.{/$project_img_html.id/}',
+                    auto: {/$project_img_html.config.auto/},
+                BASE_URL: "{/$project_img_html.config.BASE_URL/}",
+                    fileNumLimit: {/$project_img_html.config.fileNumLimit/},//文件数量 默认5个 每张1M fileSingleSizeLimit: 1024 * 1024,
+                fileSingleSizeLimit: {/$project_img_html.config.fileSingleSizeLimit/},//每个文件大小
+                file_name: '{/$project_img_html.config.file_name/}',//返回接收上传的文件名称隐藏域
+                    fileVal: '{/$project_img_html.config.fileVal/}',//上传接收name
+                    defaults_files: {/$project_img_html.config.defaults_files/},//默认文件
+                accept: {/$project_img_html.config.accept/},//允许文件类型
+                formData: {/$project_img_html.config.form_data/},//上传删除携带参数
+                server: '{/get_url rule="/introduceProject/Picture/"/}',
+                    deleteServer: '{/get_url rule="/introduceManage/DelTempFile/"/}',
+                    error_hint_fun: function (msg) {
+                    ConfirmBox.timeBomb(msg, {
+                        name: 'fail',
+                        timeout: 2000,
+                        width: 18 * msg.length + 70
+                    });
+                },
+                confirm_hint_fun: function (confirm_msg, deleteServerAjax) {
+                    //询问框
+                    ConfirmBox.confirm(confirm_msg,'删除图片', function(obj){
+                        deleteServerAjax();
+                        this.hide();
+                    },{
+                        width :300,
+                        close : 'x'
+                    });
+                },
+            };
+                {/$pic_name/} = $('.{/$project_img_html.id/}').powerWebUpload(up_options_{/$project_img_html.id/});
+
+
+
+        {/else/}
+
+            //高管
+                var up_options_{/$manager_img_html.id/} = {
+                    up_id: '.{/$manager_img_html.id/}',
+                    auto: {/$manager_img_html.config.auto/},
+                BASE_URL: "{/$manager_img_html.config.BASE_URL/}",
+                    fileNumLimit: {/$manager_img_html.config.fileNumLimit/},//文件数量 默认5个 每张1M fileSingleSizeLimit: 1024 * 1024,
+                fileSingleSizeLimit: {/$manager_img_html.config.fileSingleSizeLimit/},//每个文件大小
+                file_name: '{/$manager_img_html.config.file_name/}',//返回接收上传的文件名称隐藏域
+                    fileVal: '{/$manager_img_html.config.fileVal/}',//上传接收name
+                    defaults_files: {/$manager_img_html.config.defaults_files/},//默认文件
+                accept: {/$manager_img_html.config.accept/},//允许文件类型
+                formData: {/$manager_img_html.config.form_data/},//上传删除携带参数
+                server: '{/get_url rule="/introduceManage/Picture/"/}',
+                    deleteServer: '{/get_url rule="/introduceManage/DelTempFile/"/}',
+                    error_hint_fun: function (msg) {
+                    ConfirmBox.timeBomb(msg, {
+                        name: 'fail',
+                        timeout: 2000,
+                        width: 18 * msg.length + 70
+                    });
+                },
+                confirm_hint_fun: function (confirm_msg, deleteServerAjax) {
+                    //询问框
+                    ConfirmBox.confirm(confirm_msg,'删除图片', function(obj){
+                        deleteServerAjax();
+                        this.hide();
+                    },{
+                        width :300,
+                        close : 'x'
+                    });
+                },
+            };
+                {/$pic_name/} = $('.{/$manager_img_html.id/}').powerWebUpload(up_options_{/$manager_img_html.id/});
+
+
+
+        {//if/}
+    });
+
+</script>

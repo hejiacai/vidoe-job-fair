@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>.jian_dialog{text-align:left}</style>
+</head>
+<body>
+<div class="warning_dialog" style="padding:15px;font-family:\'微软雅黑\';line-height:30px">
+    <p class="firstline">联系招聘顾问购买兼职币，<span>优惠低至6折起</span></p>
+    {/if !empty($hrManager["user_name"])/}
+    <p>招聘顾问：{/$hrManager["user_name"]/}</p>
+    {//if/}
+    {/if !empty($hrManager["mobile"])/}
+    <p>联系电话：{/$HuiboPhone400/}转{/$hrManager["tel"]/} [9：00-18：00]</p>
+    <p>手机号码：{/$hrManager["mobile"]/}</p>
+    {/else/}
+    <p>联系电话：{/$HuiboPhone400/}</p>
+    {//if/}
+    	<p style="margin-top:15px">
+        {/if !empty($hrManager["qq"])/}
+        		<a target="_blank" href="//wpa.qq.com/msgrd?v=3&uin={/trim($hrManager['qq'])/}&site=qq&menu=yes">
+               	<img src="{/$siteurl.style/}/img/newindex/qq.jpg" />
+              </a>
+        {/else/}
+        		<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin={/$default_qq/}&site=qq&menu=yes">
+                    	<img src="{/$siteurl.style/}/img/newindex/qq.jpg" />
+                    </a>
+        {//if/}
+            </p>
+    </div>
+</body>
+</html>

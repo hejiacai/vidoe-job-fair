@@ -1,0 +1,22 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+ <form method="post" action="{/get_url rule="/test/"/} " id="frmsearch">
+<input type="text" id="txtKeyword" name="txtKeyword">
+<input type="submit" value="搜索">
+
+</form>
+共 {/$total/}个单位 最多显示20条
+<br/>
+{/foreach $companys as $key=>$value/}
+{/$key/}-{/$value/}<br/>
+{//foreach/}
+
+<img src="{/$twodimensioncodeurl/}" height="275" width="271" />
+</body>
+</html>

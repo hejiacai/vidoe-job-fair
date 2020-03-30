@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>{/$title/}</title>
+<style type="text/css">
+html {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	color: #333;
+	padding: 10px;
+	font-size: 14px;
+	background: #fff;
+	font-family: '微软雅黑', Verdana, Arial, Helvetica, sans-serif
+}
+
+ul {
+	list-style: none;
+}
+
+button,input,select {
+	vertical-align: middle
+}
+
+input[type='text'] {
+	padding: 4px 2px;
+}
+
+button,input[type='button'] {
+	margin-right: 5px;
+	cursor: pointer;
+}
+
+input[type='file'] {
+	line-height: 30px;
+	color: #333;
+	cursor: pointer;
+}
+
+button,input[type='button'] {
+	height: 30px;
+	width: 50px;
+	line-height:30px;
+	color: #333;
+	cursor: pointer;
+}
+</style>
+</head>
+<body>
+{/if $auditstate==='null'/}
+<form method="post" action="UploadLicence" enctype="multipart/form-data">
+<ul>
+	<li>公司全称:<input type="text" value="{/$companyname/}" name="txtCompanyName" /></li>
+	<li>注册号:<input type="text" name="txtLicenceId"></li>
+	<li>法人代表: <input type="text" name="txtlegalperson"  /></li>
+	<li>上传营业执照: <input type="file" name="fileBusinesslicense"/></li>
+	<li><input type="submit" name="subSave" class="submit" value="保存"></li>
+</ul>
+</form>
+{//if/}
+
+{/if $auditstate===1/}
+<h4>您已通过企业认证</h4>
+<ul>
+	<li>认证日期:{/$auditdate/}</li>
+	<li>公司全称:{/$companyname/}</li>
+	<li>注册号:{/$license/}</li>
+	<li>法人代表:{/$legalperson/} </li>
+</ul>
+{//if/}
+
+{/if $auditstate===0/}
+<dl>
+	<dt>审核未通过</dt>
+	<dd>{/$auditreplay/}</dd>
+</dl>
+{//if/}
+
+{/if $auditstate===2/}
+<dl>
+	<dt>认证资料已提交，等待审核！</dt>
+	<dd>我们会在1个工作日内审核您的资料！</dd>
+</dl>
+{//if/}
+</body>
+</html>

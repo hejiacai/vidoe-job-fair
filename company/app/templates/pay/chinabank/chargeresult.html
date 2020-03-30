@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+<title>{/$title/}</title>
+<!–[if lt IE9]> 
+<script src="{/version file='html5.js'/}"></script>  
+<![endif]–>
+<link rel="stylesheet" type="text/css" href="{/version file="base.css"/}" />
+<link rel="stylesheet" type="text/css" href="{/version file="comback.css"/}" />
+<link rel="stylesheet" type="text/css" href="{/version file="combacklst.css"/}" />
+
+<script type="text/javascript" language="javascript" src="{/version file="jquery-1.8.3.min.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="common.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="dialog.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="ui_menudisplay.js"/}"></script><!--下拉菜单-->
+<script type="text/javascript" language="javascript" src="{/version file="ui_inputFocus.js"/}"></script><!--输入框获取焦点-->
+<script type="text/javascript" language="javascript" src="{/version file="ui_hovchange.js"/}"></script><!--指向改变class-->
+
+</head>
+<body id="body">
+<style type="text/css">
+.part{}
+.part .hd{border-bottom:1px solid #dadada;height:40px;}
+.part .hd  a{height:38px;line-height:38px;font-size:14px;margin:0 10px;padding:0 10px;display:inline-block;float:left;display:inline;border:1px solid #dadada;border-top:2px solid #dadada;border-bottom:0;color:#666;}
+.part .hd  a:hover{background:#f8f8f8;}
+.part .hd  a.cu{font-weight:bold;border-top:2px solid #2b90d8;border-bottom:1px solid #fff;}
+.part .hd  a.cu:hover{background:#fff;}
+
+
+.payTip{margin:40px 0;}
+.payTip dl dt{float:left;display:inline;width:370px; text-align:right;}
+.payTip dl dt i.hbFntWes{font-size:45px;}
+.payTip dl dd{float:left;display:inline;width:400px;margin:0 0 0 10px;font-size:12px;line-height:26px;}
+.payTip dl dd p.tit{font-size:18px;font-family:"微软雅黑","SimHei";}
+</style>
+{/include 'new_header.html' cur='企业管理'/}
+<div class="content" id="content">
+	<section class="section">
+		<hgroup>
+        	<div class="part">
+            	<div class="hd">
+                	<a href='{/get_url rule="/pay/"/}' class="cu">账户充值</a><a href="{/get_url rule="/pay/list"/}">充值记录</a><div class="clear"></div>
+                </div>
+                <div class="bd">
+                {/if $issuccess==true/}
+                    <div class="payTip">
+                    	<dl class="suc">
+                        <dt><i class="hbFntWes green">&#xf058;</i></dt>
+                        <dd>
+                        	<p class="tit">您已成功充值<span class="orange strong">{/$amount/}</span>元</p>
+                            <p><a href="{/get_url rule="/account/"/}">返回到我的账户</a></p>
+                        </dd>
+                        </dl>
+                        <div class="clear"></div>
+                    </div>
+                  {/else/}  
+                    <div class="payTip">
+                    	<dl class="err">
+                        <dt><i class="hbFntWes orange">&#xf058;</i></dt>
+                        <dd>
+                        	<p class="tit">充值失败</p>
+                            <p>原因：{/$reason/}</p>
+                            <p><a href='{/get_url rule="/account/"/}'>返回到我的账户</a></p>
+                        </dd>
+                        </dl>
+                        <div class="clear"></div>
+                    </div>
+                   {//if/}
+                </div>
+            </div>
+            
+        </hgroup>
+    </section>
+</div>
+{/include file="footer.html"/}
+<section class="floatRT"><a href="{/get_url rule='/about/message' domain='main'/}" target="_blank" class="serviceLink">我有问题要反馈</a><b></b></section>
+<script>
+menuDis('#hdR','li','.box','hov');
+hovChange('.dropLstCon','li','hov');
+var $tSch = $('#tSch');
+
+
+$(document).ready(function(e) {
+    $.focusblur("#tSchText");
+	$.focusblur('#addInfo');
+	$.focusColor('input.text');
+	$.focusColor('textarea.textarea');
+
+	$('#tSchText').bind('focus',function(){
+		$(this).animate({'width':200});
+		$tSch.css({'background':'#fffdef','border':'1px solid #e8dd9e'})
+	}).bind('blur',function(){
+		$(this).animate({'width':150});
+		$tSch.css({'background':'#fff','border':'1px solid #dadada'})
+	});
+	
+});
+
+</script>
+</body>
+</html>

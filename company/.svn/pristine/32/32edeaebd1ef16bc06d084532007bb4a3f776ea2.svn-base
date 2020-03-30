@@ -1,0 +1,948 @@
+<!doctype html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+<title>{/$title/}</title>
+<!–[if lt IE9]> 
+<script src="{/version file='html5.js'/}"></script>
+<![endif]–>
+<link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='comback.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='resument2015.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}" />
+<link rel="stylesheet" type="text/css" href='{/version file="prSearch.css"/}' />
+<link rel="stylesheet" type="text/css" href="{/version file='m_font_style.css'/}" />
+<script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.min.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='common.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='dialog.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='ui_inputFocus.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='ui_validate.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='jquery.form.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='ui_dropdownlist.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='ui_tooltip.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='ui_autocomplete.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='jquery.email.tip.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='jquery.metadata.js'/}"></script><!--指向改变class-->
+
+<script type="text/javascript" src="{/version file='version.js'/}"></script>
+<script type="text/javascript">
+        window.CONFIG = {
+                HOST: '{/$siteurl.style/}',
+                COMBOPATH: '/js/v2/'
+        }
+</script>
+<script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='global.js'/}"></script>
+
+<style>
+	/*20190612自动推荐简历*/
+	
+	/*.rMentWrap{
+		display: none;
+	}
+	.rMentWrap.cur{
+		display: block;
+	}*/
+	/*头部tab*/
+	.rMentTab{
+		border-bottom: 1px solid #e4e4e4;
+		font-size: 0px;
+		margin-bottom: 20px;
+	}
+	.rMentTab a{
+		display: inline-block;
+		position: relative;
+		top:1px;
+		width:130px;
+		height:40px;
+		font-size: 14px;
+		text-align: center;
+		line-height: 40px;
+		color:#444;
+		background: #f1f1f1;
+		margin-right:10px ;
+		border: 1px solid #e4e4e4;
+		-webkit-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		cursor: pointer;
+	}
+	.rMentTab a.cur{
+		font-weight: bold;
+		background: #fcfcfc;
+		border-bottom: 1px solid #fcfcfc;
+	}
+	.rMentTab .icon-082{
+		position:absolute;
+		display: block;
+		font-size: 10px;
+		color:red;
+		top:-5px;
+		right:-5px;
+	}
+
+
+	/*列表头部*/
+	.prSchTx{
+		position: relative;
+	}
+	.prSchTx a:hover{
+		text-decoration: none;
+	}
+	.prSchTx .forbidBtn{
+		position: absolute;
+		right:20px;
+		color:#2b6fad;
+		z-index: 2;
+	}
+	.prSchTx .forbidBtn:hover{
+		color:#0af;
+	}
+	.prSchTx .forbidBtn img{
+		vertical-align: -1px;
+    	margin-right: 4px;
+	}
+	.prSchTab.visited span,.prSchTab.visited .W80{
+		color:#999
+	}
+	.prSchTMask{
+		/* position: absolute; */
+		top:0;
+		left:0;
+		width:100%;
+		height:100%;
+		z-index: 1;
+	}
+	/*列表公用*/
+	.prSchTab{
+		min-height: 200px;
+		cursor: pointer;
+	}
+	.prSchTab .W80{
+		width:80px;
+	}
+	.prSchTab .maxW90{
+		max-width: 90px;
+	}
+	.prSchTab .maxW150{
+		max-width: 150px;
+	}
+	.prSchTab .maxW200{
+		max-width: 200px;
+	}
+	.prSchTab .fz14{
+		font-size: 14px;
+	}
+	.prSchTab .divided{
+		margin:0 5px;
+	}
+	.prSchTab .chatBottomAndSend{
+		z-index: 2;
+	}
+	/*列表左边*/
+	.prSchTabx{
+		padding-right: 10px;
+	}
+	.prSchTabx dl{
+		width:450px;
+	}
+	.prSchTabx dl dd{
+		width:300px;
+		font-size: 12px;
+		color:#999;
+	}
+	.prSchTabx dl dd p{
+		margin-bottom: 5px;
+	}
+	.prSchTabx dl dd p b,.prSchTabx dl dd p .station{
+		color:#444;
+	}
+
+	/*列表右边*/
+	.prSchTabx .pBoxT{
+		width:260px;
+		font-size: 12px;
+	}
+	.prSchTabx .pBoxT p span{
+		display:inline;
+		color:#444;
+	}
+	.prSchTabx .pBoxT p .prTitle{
+		color:#999;
+	}
+
+	/*搜索栏*/
+	.prSearchBox{
+		position: relative;
+		height:30px;
+		line-height: 30px;
+		margin-bottom: 20px;
+	}
+	.prSearchBox .freshBtn{
+		position: absolute;
+		right:0;
+	}
+	
+	.prSearchBox span{
+		display: inline-block;
+		vertical-align: top;
+	}
+	.zSelectBox{
+		position: relative;
+		display: inline-block;
+		box-sizing: border-box;
+		border:1px solid #d8d8d8;
+		color:#444;
+		text-indent: 5px;
+		width:180px;
+		height:30px;
+		background: -webkit-linear-gradient(#fff, #efefef); /* Safari 5.1 - 6.0 */
+		background: -o-linear-gradient(#fff, #efefef); /* Opera 11.1 - 12.0 */
+		background: -moz-linear-gradient(#fff, #efefef); /* Firefox 3.6 - 15 */
+		background: linear-gradient(#fff, #efefef); /* 标准的语法 */
+		/*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fff', endColorstr='#efefef',GradientType=1 );*//*ie8*/
+	}
+
+	.zSelectBox .dropIcon{
+		position: absolute;
+		right:5px;
+		top:11px;
+	}
+	.zSelectBox .zSelectTop{
+		width: 158px;
+		margin-right: 20px;
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+	}
+	.zSelectBox .zSelectDrop{
+		position: absolute;
+		top:28px;
+		left:-1px;
+		z-index: 3;
+		background: #fff;
+		width:178px;
+		line-height: 20px;
+		display: none;
+		max-height: 140px;
+		overflow-y: auto;
+		overflow-x: hidden;
+		border:1px solid #ccc;
+	}
+
+	.zSelectBox .zSelectDrop a{
+		display:block;
+		color:#444;
+		width:100%;
+		height:20px;
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+	}
+	.zSelectBox .zSelectDrop a:first-child:last-child{
+		margin-bottom: 20px;
+	}
+	.zSelectBox .zSelectDrop a:hover{
+		background: #f1f1f1;
+	}
+	.prSchBottom{
+		text-align: center;
+		font-size: 16px;
+	}
+	.prSchBottom a{
+		display: inline-block;
+		border: 1px solid #3D84B8;
+		padding: 5px 30px;
+		border-radius: 4px;
+		margin-bottom: 20px;
+	}
+	.resumeChoose{ padding: 20px 10px; overflow: hidden;}
+	.resumeChoose span{ cursor: pointer; display: block; float: left; margin: 0 15px 10px 0;}
+	.resumeChoose span i{ display: inline-block; vertical-align: -2px; width:14px; height: 14px; background: url({/$siteurl.style/}/img/company/radioimg.png) no-repeat; margin-right: 5px;}
+	.resumeChoose span.cur i{background: url({/$siteurl.style/}/img/company/radioimghover.png) no-repeat;}
+</style>
+</head>
+<style>
+.subMetz span,.subMetz p{ display:block; float:left;}
+.subMetz p{width:650px;}
+</style>
+<body id="body">
+{/include 'new_header.html' par="全职招聘" cur='简历管理'/}
+
+<div class="resumentNbg" style="overflow: inherit;">
+
+
+<!---20151208 微信二维码 start -->
+<style>
+    .content{position: relative}
+    .ewmBox{display: none;position: absolute;right:-180px;top:0px;width:160px;background: #fff;border:1px solid #dedede;text-align: center;padding:30px 0;font-size:16px;color:#333;font-family:"微软雅黑"}
+    .ewmBox img{border:1px solid #e9e9e9;margin-bottom: 5px;width: 118px;height: 118px;}
+    .ewmBox a{display: inline-block;width:24px;height:24px;background: url({/$siteurl.style/}/img/c/weixin/close2.jpg) no-repeat;position: absolute;top:0px;right:0px}
+    .ewmBox a:hover{background: url({/$siteurl.style/}/img/c/weixin/close2_hover.jpg) no-repeat}
+    .sendTo_img{ display:none;position:absolute; top:10px; left:110px;width:150px; background:#fff; overflow:hidden; border:1px solid #ddd; text-align:center; color:#333;}
+     .sendTo_img span, .sendTo_img img, .sendTo_img b{ display:block; margin:0 auto; line-height:20px;font-size:12px; font-weight:normal;}
+     .sendTo_img span{padding-top:10px; color:#f35a00;}
+    .chatHuoyue{ display:inline-block; padding:0 6px; border-radius:2px; background:#00c0c7; color:#fff; margin-left:5px;font-size:12px; vertical-align: middle;}
+</style>
+<div class="ewmBox" id="ewmBox">
+    <a href="" class="close"></a>
+    <img src="" />
+    <p>关注汇博招聘<br />随时随地筛选简历</p>
+</div>
+<!---20151208 微信二维码 end -->
+
+{/include 'resume/apply/nav.html' par="推荐的简历"/}
+<div class="rMentRt">
+	<div class="rMentTab">
+		<a href='{/get_url rule="/recommend/index" data="type=1"/}' {/if $type == 1/}class="cur"{//if/}>自动推荐</a>
+		{/if $memberinfo == 'member'/}
+		<a href='{/get_url rule="/recommend/index" data="type=2"/}' {/if $type == 2/}class="cur"{//if/}>猎头推荐 {/if $recommend_resume_num > 0 && $type == 1/}<i class="icon-082"></i>{//if/}</a>
+		{//if/}
+	</div>
+
+	{/if $type == 1/}
+	<div class="rMentWrap">
+		<div class="prSearchBox">
+			<span>招聘职位：</span>
+			<div class="zSelectBox">
+				<div class="zSelectTop">{/if empty($job_info)/}全部职位{/else/}{/$job_info['station']/}{//if/}</div>
+				<img class="dropIcon" src="{/$siteurl.style/}/img/company/triangle.png" alt="" />
+				<div class="zSelectDrop">
+					<!--<a href='{/get_url rule="/recommend/index" data="type=1&search=1"/}'>全部职位</a>-->
+					{/foreach $job_list as $key=>$val/}
+					<a href='{/get_url rule="/recommend/index" data="type=1&search=1&job_id={/$val['job_id']/}"/}'>{/$val['station']/}</a>
+					{//foreach/}
+				</div>
+			</div>
+			{/if $next_page/}
+			<a href="JavaScript:void(0)" class="freshBtn freshBtn1">换一批</a>
+			{//if/}
+			<input type="hidden" name="auto_recommend_resumeids" id="auto_recommend_resumeids" value="{/$auto_recommend_resumeids/}">
+			<input type="hidden" name="auto_job_id" id="auto_job_id" value="{/$auto_job_id/}">
+		</div>
+		<!--看过了就增加vidited类名-->
+		{/if count($resume_list) > 0/}
+			{/foreach $resume_list as $key => $val/}
+				<div class="prSchTab autorecommend_resume {/if $val['is_see']/}visited{//if/}" data-url='{/get_url rule="/resume/resumeshow/" data="type=network&src=autorecommend&resumeid={/$val['resume_id']/}"/}'>
+					<div class="prSchTMask resumeBtn autorecommend_resume">
+						<div class="prSchTx clearfix">
+							<a class="W80 resumeBtn" href='{/get_url rule="/resume/resumeshow/" data="type=network&src=autorecommend&resumeid={/$val['resume_id']/}"/}'>{/$val['user_name']/}</a>
+							<span>{/$val['sex']/}</span><span class="divided">/</span>
+							<span>{/$val['age']/}</span><span class="divided">/</span>
+							{/if $val['cur_area']/}
+							<span class="maxW150">{/$val['cur_area']/}</span><span class="divided">/</span>
+							{//if/}
+							{/if $val['degree']/}
+							<span title="博士">{/$val['degree']/}</span><span class="divided">/</span>
+							{//if/}
+							{/if $val['school']/}
+							<span class="maxW200" title="{/$val['school']/}">{/$val['school']/}</span><span class="divided">/</span>
+							{//if/}
+							{/if $val['major_desc']/}
+							<span class="maxW90" title="{/$val['major_desc']/}">{/$val['major_desc']/}</span>
+							{//if/}
+							<a href="javascript:void(0);" data-resumeid="{/$val['resume_id']/}" class="forbidBtn" title="忽略的简历，一周内不再推荐" ><img src="{/$siteurl.style/}/img/company/forbid.png"/>不感兴趣</a>
+						</div>
+						<div class="prSchTabx">
+							<dl>
+								<dt>
+									<img src="{/if $val['small_photo']/}{/$val['small_photo']/}{/else/}{/$siteurl.style/}/img/c/new_resume/headportrait.png{//if/}" width="88" height="88"></dt>
+								<dd>
+									{/if !empty($val['start_work'])/}
+									<p class="fz14"><span>工作年限：</span>{/$val['start_work']/}</p>
+									{//if/}
+									{/if $val['work_list']/}
+										{/foreach $val['work_list'] as  $k => $v/}
+											<p><span class="station">{/$v['station']/}</span><span class="divided">|</span><em>{/$v['company_name']/}</em><span class="divided">|</span><em>{/$v['start_time']/}-{/$v['end_time']/}</em></p>
+										{//foreach/}
+									{//if/}
+								</dd>
+							</dl>
+							<div class="chatBottomAndSend">
+								<!--<a href="javascript:;" class="sendToWorkmate" data-resume-id="{/$val['resume_id']/}" data-src-id="">转发</a>
+								<span>|</span>-->
+								<a href="javascript:;" class="chatOneChat {/if $val['chat_status']==1 || $val['chat_status']==2/}notOffenUse{//if/}" data-notice-status="{/$chat_status/}" data-from="search" data-resume-id="{/$val['resume_id']/}" data-need-download="{/if $val['has_download']/}0{/else/}1{//if/}" data-arealimit-id="{/if $val['not_area_limit']/}1{/else/}0{//if/}">和Ta聊聊</a>
+													{/if $val["is_active"]/}
+													<em title="该求职者聊天活跃" class="chatHuoyue">活跃</em>
+													{//if/}
+											</div>
+							<div class="sendTo_img">
+								<span>把简历转发给职位负责人</span>
+								<img src="" data-source-img="/apply/SendToWorkMatePng/?src=recommend&amp;resume_id=7030411">
+								<b>用汇博企业APP<br>扫码转发简历</b>
+							</div>
+							<div class="pBoxT">
+								{/if $val['station']/}<p class="prTabx1"><span class="prTitle">求职意向：</span><span class="prText" style="font-weight: bold;">{/$val['station']/}</span></p>{//if/}
+								<p class="prTabx1">
+									<span class="prTitle">意向职位类别：</span>
+									{/foreach $val['jobsort_arr'] as $__jobsort/}
+										<span class="{/if $__jobsort['jobsort']==$job_info['jobsort']/}prText{//if/}" style="font-weight: bold;">{/$__jobsort['name']/}</span>
+									{//foreach/}
+								</p>
+								{/if !empty($val['job_state_id'])/}<p class="prTabx1"><span class="prTitle">求职状态：</span><span class="prText">{/get_name apply_status=$val['job_state_id']/}{/if $val['accession_time']/}<i>|</i>{/get_name accession_time=$val['accession_time']/}{//if/}</span></p>{//if/}
+								{/if $val['appraise']/}<p class="prTabx3"><span class="prTitle">自我评价：</span><span class="prText">{/base_lib_BaseUtils::cutstr($val['appraise'], 100,'utf-8','','...')/}</span></p>{//if/}
+							</div>
+							<div class="clear"></div>
+						</div>
+					</div>
+				</div>
+			{//foreach/}
+			{/if $next_page/}
+				<div class="prSchBottom"><a href="JavaScript:void(0)" class="freshBtn freshBtn2">换一批</a></div>
+			{//if/}
+		{/else/}
+	    <div class="noData">
+	    	<p>暂无推荐简历</p>
+	    </div>
+	    {//if/}
+	</div>
+	{//if/}
+	{/if $type == 2/}
+	<div class="rMentWrap cur">
+	    <div class="rMenTit"><span>共<b>{/$totalSize/}</b>份简历</span></div>
+	    <div class="rMetSelt" style="padding-bottom:9px;#padding-bottom:0px;">
+	    	<div class="subMetx">
+	            <span style="padding-top:5px;">招聘职位：</span>
+	            <div class="job"><span id="tstDropJob" class="drop zindex tstDropJob2"></span></div>
+	            <div class="clear"></div>
+	        </div>
+	        <div class="subMetz">
+	        	<span>简历状态：</span>
+	            	<p>
+	                 <a href="javascript:;" data-status='{/$s.id/}' class="recommend_status{/if $status===null/} cut{//if/} recommend_status_all">不限</a>
+	                {/foreach $status_array as $s/}
+	                    <a href="javascript:;" data-status='{/$s.id/}' class="recommend_status{/if $s['id']==$status/} cut{//if/} recommend_status_{/$s.id/}">{/$s['name']/}</a>
+	                {//foreach/}
+	                </p>
+	        </div>
+	        <div class="clear"></div>
+	    </div>
+	    <div class="rMentBtn">
+	        
+	    </div>
+	    <div class="rMentLitBg" style="margin-top:0px;">
+	        {/if $totalSize>0/}
+	        {/foreach $recommendlist as $recommend/}
+	        <div class="rMentLit" >
+	            <div class="rMentLx {/if $recommend['status'] == 5 || $recommend['status'] == 6/}rMentLxgray{//if/}">
+	                <label>
+	                    {/if !empty($recommend['recommendstation'])/}<b title="{/$recommend['recommendstation']/}">推荐职位：{/$recommend['recommendstation']/}</b>{//if/}
+	                    <span>{/date("Y-m-d H:i",strtotime($recommend['recommendtime']))/}</span>
+	                </label>
+	                <em class="{/if $recommend['resume_status']['status_id'] == 99/}hue1{/elseif $recommend['resume_status']['status_id'] == 0/}hue2{/elseif $recommend['resume_status']['status_id'] == 1 || $recommend['resume_status']['status_id'] == 3 || $recommend['resume_status']['status_id'] == 7 || $recommend['resume_status']['status_id'] == 9/}hue3{/else/}hue4{//if/}">
+	                {/if !base_lib_BaseUtils::nullOrEmpty($recommend['resume_status'])/}{/$recommend['resume_status']['status_name']/}{//if/}
+	                </em>
+	            </div>
+	            <div class="rMentLv" data-recommendid ="{/$recommend['recommend_id']/}" data-resumeid ="{/$recommend['resume_id']/}" data-personid="{/$recommend['person_id']/}">
+	                <a href="{/get_url rule="/recommend/recommendResumeInfo/"/}type-network-resumeid-{/$recommend['resume_id']/}-src-recommend-recommendid-{/$recommend['recommend_id']/}" target="_blank" class="rMentLink">
+	                    <div class="mImgBg"><p> <img class="mImg" src="{/if $recommend['small_photo']/}{/$recommend['small_photo']/}{/else/}{/$siteurl.style/}/img/c/new_resume/headportrait.png{//if/}"  />
+	                        </p></div>
+	                    <div>
+	                    <p class="mTit1"><b>{/$recommend['user_name']/}</b>
+	                        {/if !empty($recommend['sex'])/}{/$recommend['sex']/}/{//if/}
+	                        {/if !empty($recommend['start_work'])/}{/$recommend['start_work']/}/{//if/}
+	                        {/if !empty($recommend['age'])/}{/$recommend['age']/}/{//if/}
+	                        {/if !empty($recommend['cur_area'])/}{/$recommend['cur_area']/}{//if/}
+
+	                    {/if $recommend['remark']/}    
+	                    <i class='remark_contr'></i><span class='remark_show'>{/$recommend['remark']/}<img src="{/$siteurl.style/}/img/c/new_resume/hbtip2.png" width="5" height="22"></span>
+	                    {//if/}
+	                    </p>
+	                    {/if !empty({/$recommend['school']/})/}<p class="mTit3">
+	                        {/$recommend['school']/}<span>|</span>
+	                        {/if !empty($recommend['major_desc'])/} {/$recommend['major_desc']/}<span>|</span>{//if/}
+	                        {/if !empty($recommend['school_degree'])/}{/$recommend['school_degree']/}{//if/}</p>
+	                    {//if/}
+	                    {/if !empty($recommend['worklist'])/}
+	                    <p class="mTit2"><b>{/$recommend['worklist'][0]['station']/}</b><span>|</span>{/$recommend['worklist'][0]['company_name']/}<span>|</span>{/$recommend['worklist'][0]['start_time']/}-{/$recommend['worklist'][0]['end_time']/}</p>
+	                    {//if/}
+	                    </div>
+	                </a>
+	                <div class="clear"></div>
+	                <div class="chatBottomAndSend">
+	                    <!--<a href="javascript:;" class="sendToWorkmate" data-resume-id="{/$recommend['resume_id']/}">转发</a>
+	                    <span>|</span>-->
+	                    <a href="javascript:;" class="chatOneChat {/if $chat_status==1 || $chat_status==2/}notOffenUse{//if/}" data-notice-status="{/$chat_status/}" data-resume-id="{/$recommend['resume_id']/}" data-need-download="{/if $recommend['has_download']/}0{/else/}1{//if/}" data-arealimit-id="{/if $recommend['not_area_limit']/}1{/else/}0{//if/}">和Ta聊聊</a>
+                            {/if $recommend["is_active"]/}
+                            <em title="该求职者聊天活跃" class="chatHuoyue">活跃</em>
+                            {//if/}
+                            
+                        </div>
+	                <div class="sendTo_img"><span>把简历转发给职位负责人</span><img src="" data-source-img="{/get_url rule='/apply/SendToWorkMatePng/'/}?src=recommend&resume_id={/$recommend['resume_id']/}"/><b>用汇博企业APP<br />扫码转发简历</b></div>
+	            </div>
+	            <div class="clear"></div>
+	        </div>
+	        {//foreach/}
+	        {/else/}
+	        <div class="noData">
+	        	<p>未找到相关简历，请更换筛选条件、关键词再试！</p>
+	        </div>
+	        {//if/}
+		   
+	        <div class="clear"></div>
+	    </div>
+        {/$pager/}
+    </div>
+    {//if/}
+</div>
+<div class="clear"></div>
+</div>
+
+<div class="no_intratest" style="display: none;" data-explain="please not delete it!!!"></div>
+<div class="zSelectBox22" style="display: none"></div>
+<!--弹窗职位不匹配提示结束-->
+<!--2019.6.3更新简历完善度浮动图标-->
+{/if $is_question == 1/}
+<style>
+	.resume_complete{
+		position: fixed;
+	    margin-left: 516px;
+	    left: 50%;
+	    bottom: 210px;
+	}
+</style>
+<a href="javascript:void(0);" class="resume_complete"><img src="{/$siteurl.style/}/img/company/resume_complete.png"/></a>
+{//if/}
+{/include file="msgpop.html"/}
+{/include file="footer.html"/}
+<script>
+$(".sendToWorkmate").on("click",function(){
+    if($(this).parent().next('.sendTo_img').is(':visible')){
+        $('.sendTo_img').hide();
+    }else{
+        $('.sendTo_img').hide();
+        var img = $(this).parent().next('.sendTo_img').find("img");
+        if(img.attr("src") == '')
+            img.attr("src", img.attr("data-source-img"));
+        $(this).parent().next('.sendTo_img').show();
+    }
+    
+});
+ $.setIndex("zindex");//为需要赋层级设置的元素设置class为zindex
+ var tree = "";
+{/if $jobs/}{//if/}
+$('#tstDropJob').droplist({
+    defaultTitle:'全部职位',
+    style:'width:178px;',
+    noSelectClass:'gray',
+    inputWidth:170,
+    width:128,
+    hddName:'job_id',
+    items:{/$jobs/},
+    selectValue:'{/$job_id/}',
+    maxScroll:10,
+    onSelect:function(i,name) {
+	   	//选中后的事件
+            var job_id = $("#job_id").val();
+            var status = $(".subMetz .cut").attr("data-status");
+            var son_account_id   = $("#son_account_id").val();
+            
+	    recommend.submit(job_id,status,son_account_id);
+}});
+
+
+// $('#tstDropJobPeople').droplist({
+//   defaultTitle : '全部',
+//   style : 'width:100px;',
+//   noSelectClass : 'gray',
+//   inputWidth : 100,
+//   width : 128,
+//   hddName : 'son_account_id',
+//   items : "{/$job_people/}",
+// selectValue : '{/$son_account_id/}',
+//       maxScroll : 10,
+//       onSelect : function(i, name) {
+//   //选中后的事件
+//   var status = $(".subMetz .cut").attr("data-status");
+//   var job_id       = '';
+//   var son_account_id   = $("#son_account_id").val();
+//
+//
+//   recommend.submit(job_id,status,son_account_id);
+// }
+// });
+
+$(".freshBtn").on('click',function(){
+	var resume_ids = $("#auto_recommend_resumeids").val();
+	var auto_job_id = $("#auto_job_id").val();
+
+	var data =[];
+	if(auto_job_id !=''){
+		data.push("job_id="+auto_job_id);
+	}
+	if(resume_ids !=''){
+		data.push("auto_recommend_resumeids="+resume_ids);
+	}
+	var page = '{/$page/}';
+	data.push("type=1");
+	data.push("fresh=1");
+	data.push("page="+page);
+	if(data.length >0){
+		window.location.href = '{/get_url rule="/recommend/index/"/}'+"?"+data.join("&");
+	}else{
+		window.location.href = '{/get_url rule="/recommend/index/"/}'
+	}
+});
+
+var recommend ={
+    init:function() {
+        $(".recommendYes").click(function(e){
+            tree = $(this);
+            e.preventDefault();
+            var recommendid = $(this).parents(".rMentLv").attr("data-recommendid");
+            var resume_id = $(this).parents(".rMentLv").attr("data-resumeid");
+            recommend.recommendYes(resume_id,recommendid);
+        });
+        
+        //显示备注
+        $(".remark_contr").mouseover(function(e){
+            e.preventDefault();
+          $(this).next(".remark_show").addClass("mTitcut2");
+        }).mouseout(function(e){
+            e.preventDefault();
+          $(this).next(".remark_show").removeClass("mTitcut2");
+        });
+        $(".recommend_status").click(function(){
+            var status = $(this).attr("data-status");
+            //搜索条件
+            var job_id = $("#job_id").val();
+            var son_account_id   = $("#son_account_id").val();
+            recommend.submit(job_id,status,son_account_id);
+        });
+        //设为不合适
+        $(".recommendRefuse").click(function(){
+            tree = $(this);
+             var recommendid = $(this).parents(".rMentLv").attr("data-recommendid");
+            $.confirm("确定将该简历设置成不合适么？",'确认不合适',function(){
+                recommend.refuseResume(recommendid);
+            });
+        });
+
+
+        
+    },
+ 
+    //设置为合适
+    recommendYes:function(resume_id,recommendid){
+        $.getJSON('{/get_url rule="/download/checkbalance"/}', {
+            resume_id : resume_id
+        }, function (json) {
+            if (json && !json.status && json.msg) {
+                $.anchorMsg(json.msg, {icon:'success'});
+            } else if (!json.status) { 
+                $.showModal('{/get_url rule="/resume/BalanceNotEnough/"/}?account='+json.account_overage+'&consume='+json.price, {title:'获取联系方式'})
+            } else {
+                var cookieValue = readCookie('downresumeprompt');
+                if (cookieValue && cookieValue.length > 0) {
+                    $.getJSON('{/get_url rule="/download/getlinkway"/}', {
+                        resumeID : resume_id
+                    }, function (json) {
+                        recommend.resuleLinkWay(json,recommend_id);
+                    });
+                } else {
+                    $.showModal('{/get_url rule="/apply/deductcountprompt"/}-resumeid-'+resume_id+'-recommendid-'+recommendid+'-v-'+Math.random(),{title:'同意面试',onclose:function(){}});
+                }
+            }
+        });
+    },
+    resumeDown:function(resume_id,recommend_id){
+        var company_id = {/$company_id/};
+		$.getJSON('{/get_url rule="/download/getlinkway"/}',{
+                    resumeID: resume_id, 
+                    companyID: company_id
+                } ,function(json){
+                    recommend.resuleLinkWay(json,recommend_id);
+            });
+    },
+    resuleLinkWay:function(json,recommendid){
+        if(json && json.error){
+            showModel('fail', json.error);
+            //$.message(json.error,{title:"获取联系方式",icon:'fail'});
+            return;
+        }
+        //修改状态
+        //成功后改变推荐简历状态 并且刷新页面
+        // 更新推荐简历的下载状态	
+        $.getJSON('{/get_url rule="/recommend/setstatus/"/}',{recommendid:recommendid},function(result) {
+            //刷新页面 
+            if(!result.status){
+                $.anchorMsg("设置简历合适失败",{ icon: 'fail' });
+                return;
+            }
+            $.anchorMsg("设置简历合适成功",{ icon: 'success' });
+            recommend.setRefuseResumeStatus(1);
+        });
+    },
+    //设置为不合适
+    refuseResume:function(recommendid){
+        $.getJSON('{/get_url rule="/recommend/setstatus/"/}',{recommendid:recommendid,status:2},function(result) {
+            if(!result.status){
+                $.anchorMsg("设置简历不合适失败",{ icon: 'fail' });
+                return;
+            }
+           // $.showModal('{/get_url rule="/recommend/SetStatus/" data="status=2&is_render=1&recommendid=' + recommendid + '"/}',{title:'拒绝简历成功'});
+            $.anchorMsg("我们将继续努力为您搜索更适合的简历",{ icon: 'success' });
+            recommend.setRefuseResumeStatus(2);
+	});
+      //  $.showModal('{/get_url rule="/recommend/SetStatus/" data="status=2&is_render=1&recommendid=' + recommendid + '"/}',{title:'拒绝简历'});//修改简历标记
+    },
+    setRefuseResumeStatus:function(status){
+        var parent_tree = tree.parents(".rMentLv").siblings(".rMentLx").find("em");
+        var delete_tree = tree.parents(".rMentLinkv");
+        //window.location.reload();
+        if(status ==1){
+            //设置合适
+            parent_tree.removeClass("hue1").removeClass("hue2").addClass("hue3").html("合适");
+        }else{
+            //设置不合适
+            parent_tree.removeClass("hue1").removeClass("hue2").addClass("hue4").html("不合适");
+        }
+        delete_tree.remove();
+        tree = "";
+    },
+    submit:function(job_id,status,son_account_id){
+        var data =[];
+        if(job_id !=''){
+            data.push("job_id="+job_id);
+        }
+        if(status !=''){
+            data.push("status="+status);
+        }
+
+        if(son_account_id){
+            data.push("son_account_id="+son_account_id);
+        }
+		data.push("type=2");
+        if(data.length >0){
+            window.location.href = '{/get_url rule="/recommend/index/"/}'+"?"+data.join("&");
+        }else{
+            window.location.href = '{/get_url rule="/recommend/index/"/}'
+        }  
+    },
+
+	submit1:function(job_id,resume_ids){
+		var data =[];
+		if(job_id !=''){
+			data.push("job_id="+job_id);
+		}
+		if(resume_ids !=''){
+			data.push("auto_recommend_resumeids="+resume_ids);
+		}
+
+		data.push("type=1");
+		if(data.length >0){
+			window.location.href = '{/get_url rule="/recommend/index/"/}'+"?"+data.join("&");
+		}else{
+			window.location.href = '{/get_url rule="/recommend/index/"/}'
+		}
+	}
+    
+    
+}
+    
+recommend.init();
+$.getJSON('{/get_url rule="/account/twodimensioncode/"/}',function(result){
+    if(result&&result.status) {
+        var src = result.data.codeurl;
+        $('#ewmBox img').attr('src',src);
+        $('#ewmBox').show();
+    }
+});
+
+$("#ewmBox").find("a").click(function(){$(this).parents("#ewmBox").hide();return false;});
+</script>
+<!--2019.6.3更新-->
+<script>
+	var resumeCompleteDialog;
+    hbjs.use('@hbCommon, @jobDialog, @validator, @confirmBox', function(m) {
+
+        var $ = m['product.hbCommon'].extend(m['cqjob.jobDialog']);
+        var Dialog = m['widge.overlay.hbDialog'];
+        var confirmBox = m['widge.overlay.confirmBox'];
+		var pWidth = 70, fontWidth = 18;
+        function showModel(icon, msg) {
+            
+            confirmBox.timeBomb(msg, {
+                name: icon,
+                width: pWidth + msg.length * fontWidth
+            });
+        }
+
+		//2019.6.3更新
+		//简历完善度
+		resumeCompleteDialog = new Dialog({
+			close: 'x',
+			idName: 'resume_complete_dialog',
+			title: '简历完善度调研',
+			content: "{/get_url rule='/answer/index/'/}",
+			width:'auto',
+			isAjax: true
+		});
+		$('.resume_complete').on('click',function(){
+			resumeCompleteDialog.show()
+		});
+		//不感兴趣
+		resumeNotDialog = new Dialog({
+			close: 'x',
+			idName: 'resume_not_dialog',
+			title: '简历完善度调研',
+			width:'500',
+			isAjax: true
+		});
+		var resumeNotHtml = '<div class="resumeChoose"><span data-id="1"><i></i>与职位不匹配</span><span data-id="2"><i></i>不感兴趣</span><span data-id="3"><i></i>反复推荐</span><span data-id="4"><i></i>近期已沟通</span><span data-id="5"><i></i>信息不完善</span><span data-id="6"><i></i>薪资不符</span><input type="hidden" id="resumeChoosePut" value="" /></div><div class="saveBtnbd"><a class="btn1 btnsF14" href="javascript:void(0);" id="btnresumeNotSave">提交</a></div>';
+		//不感兴趣显示弹窗
+		$('.rMentWrap').on('click','.forbidBtn',function(ev){
+            var resume_id = $(this).attr("data-resumeid");
+			resumeNotDialog.setContent(resumeNotHtml).show();
+            $('#btnresumeNotSave').attr('data-resumeid', resume_id);
+            $('#btnresumeNotSave').attr('data-index', $(this).index('.forbidBtn'));
+		});
+		//提交
+		var resumeChooseAry = [];
+		$('body').on('click','#btnresumeNotSave', function(){
+            var resume_id = $(this).attr("data-resumeid");
+			resumeChooseAry = [];
+			if(!$('.resumeChoose span').hasClass('cur')){
+				var msg = '请选择反馈原因';
+				confirmBox.timeBomb(msg, {
+					name: 'fail',
+					width: pWidth + msg.length * fontWidth
+				});
+			}else{
+				var job_id = $('#auto_job_id').val();
+				$('.resumeChoose span.cur').each(function(i,n){
+					resumeChooseAry.push($(n).attr('data-id'));
+				});
+				var types = resumeChooseAry.join(',');
+
+
+                $('.no_intratest').click();
+
+                $.getJSON('{/get_url rule="/recommend/AddIngore/" data="resume_id='+resume_id+'&feedback_type='+ types +'&job_id='+job_id+'"/}',function(result){
+					console.log(result);
+                });
+                var index = $(this).attr('data-index');
+                $('.prSchTab').eq(index).slideUp();
+				resumeNotDialog.hide();
+			}
+		})
+		
+		$('body').on('click','.resumeChoose span', function(){
+			$(this).toggleClass('cur');
+		});
+		
+	})
+</script>
+<!--2019.6.3更新 完-->
+<!--2019.6.13更新-->
+<script>
+//	$('.rMentTab div').on('click',function(){
+//		$('.rMentTab div').removeClass('cur')
+//		$(this).addClass('cur')
+//		$('.rMentWrap').removeClass('cur').eq($(this).index()).addClass('cur')
+//	})
+	$('.rMentWrap').on('click','.resumeBtn',function(){
+		$(this).parents('.prSchTab').addClass('visited')
+	})
+	// $('.rMentWrap').on('click','.forbidBtn',function(ev){
+	// 	var resume_id = $(this).attr("data-resumeid");
+	// 	$('.no_intratest').click();
+	// 	$.getJSON('{/get_url rule="/recommend/AddIngore/" data="resume_id='+resume_id+'"/}',function(result){
+	// 	});
+	// 	$(this).parents('.prSchTab').slideUp()
+	// 	ev.cancelBubble = true;
+ //        ev.stopPropagation();
+	// });
+	$('.rMentWrap').on('click','.zSelectBox',function(ev){
+		$(this).find('.zSelectDrop').toggle()
+		$(".zSelectBox22").click();
+		if($(this).find('.zSelectDrop').is(':visible')){
+			$(document).on('click',function(){
+				$('.zSelectDrop').hide()
+				$(document).off('click')
+			})
+		}
+		ev.cancelBubble = true;
+        ev.stopPropagation();
+	})
+	$('.rMentWrap').on('click','.zSelectBox a',function(){
+		$(this).parents('.zSelectBox').find('.zSelectTop').html($(this).html())
+	})
+	$('.prSchTab').on('click',function(ev){
+		if(!$(ev.target).is('a')){
+			window.open($(this).attr('data-url'))
+		}
+			
+	})
+	// $('.prSchTab').on('click','a',function(ev){
+	// 	ev.cancelBubble = true;
+	// 	ev.stopPropagation();
+	// })
+	// $('.chatBottomAndSend').on('click',function(ev){
+	// 	ev.cancelBubble = true;
+	// 	ev.stopPropagation();
+	// })
+</script>
+
+<!--2019.6.13更新 完-->
+<script type="text/javascript">
+	var action_url = '{/$siteurl.style/}';
+	if(typeof action_dom == 'object'){
+		action_dom.push( ['.autorecommend_resume', 5]);
+		action_dom.push( ['.no_intratest', 93]);
+		action_dom.push( ['.zSelectBox22', 330]);
+		action_dom.push( ['.freshBtn1', 331]);
+		action_dom.push( ['.freshBtn2', 332]);
+		action_dom.push( ['.autorecommend_resume', 333]);
+		action_dom.push( ['.forbidBtn', 334]);
+		action_dom.push( ['.sendToWorkmate', 335]);
+		action_dom.push( ['.chatOneChat', 336]);
+		action_dom.push( ['#tstDropJob', 337]);
+		action_dom.push( ['.recommend_status_all', 338]);
+		action_dom.push( ['.recommend_status_99', 339]);
+		action_dom.push( ['.recommend_status_0', 340]);
+		action_dom.push( ['.recommend_status_1', 341]);
+		action_dom.push( ['.recommend_status_2', 342]);
+		action_dom.push( ['.recommend_status_3', 343]);
+		action_dom.push( ['.recommend_status_5', 344]);
+		action_dom.push( ['.recommend_status_6', 345]);
+		action_dom.push( ['.recommend_status_7', 346]);
+
+
+	}else{
+		action_dom = [
+			['.autorecommend_resume', 5],
+			['.no_intratest', 93],
+			['.zSelectBox22', 330],
+			['.freshBtn1', 331],
+			['.freshBtn2', 332],
+			['.autorecommend_resume', 333],
+			['.forbidBtn', 334],
+//			['.sendToWorkmate', 335],
+			['.chatOneChat', 336],
+			['#tstDropJob', 337],
+			['.recommend_status_all', 338],
+			['.recommend_status_99', 339],
+			['.recommend_status_0', 340],
+			['.recommend_status_1', 341],
+			['.recommend_status_2', 342],
+			['.recommend_status_3', 343],
+			['.recommend_status_5', 344],
+			['.recommend_status_6', 345],
+			['.recommend_status_7', 346]
+
+		];
+	}
+</script>
+<script type="text/javascript" language="javascript" src="{/version file='action.js'/}"></script>
+
+
+{/if $pricing_resource_data['isCqNewService']/}
+{/include file="chat/chatV2.html"/}
+{/else/}
+{/include file="chat/chat.html"/}
+{//if/}
+</body>
+</html>

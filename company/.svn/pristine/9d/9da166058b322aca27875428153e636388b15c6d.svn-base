@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+<title>{/$title/}</title>
+<!–[if lt IE9]> 
+<script src="{/version file='html5.js'/}"></script>  
+<![endif]–>
+<link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='comback.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='icons.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}" />
+
+<script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.min.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='common.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='dialog.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='mediaquery.js'/}"></script><!--响应式兼容-->
+<script type="text/javascript" language="javascript" src="{/version file='ui_menudisplay.js'/}"></script><!--下拉菜单-->
+<script type="text/javascript" language="javascript" src="{/version file='ui_inputFocus.js'/}"></script><!--输入框获取焦点-->
+<script type="text/javascript" language="javascript" src="{/version file='ui_hovchange.js'/}"></script><!--指向改变class-->
+<script type="text/javascript" language="javascript" src="{/version file='ui_drop.js'/}"></script><!--下拉模拟-->
+<script type="text/javascript" language="javascript" src="{/version file='ui_validate.js'/}"></script>
+<style type="text/css">
+.part{}
+.part .bd{}
+
+.licPass{padding:50px 0 50px 185px;zoom:1;}
+.licPass p{line-height:30px;padding-left:53px;height:30px;}
+.licPass p.tit{font-size:20px;padding-left:0;}
+.licPass p.tit i.hbFntWes{margin:0 10px 0 0;font-size:32px;}
+
+
+.licPass .com{height:30px;line-height:30px;padding-left:53px;}
+.licPass .com a{margin:0 0 0 10px;}
+.licPass .com span.txt{float:left;display:inline;height:30px;}
+.licPass .com b,.licPass .com a{float:left;display:inline;height:30px;font-weight:normal;}
+
+
+.licPass .com .tipPos{ z-index:2;}
+.licPass .com .tipLay{top:31px;left:-85px;}
+.licPass .com .tipLay .tipArr{top:-4px;left:36px;width:8px;height:5px;background:url({/$siteurl.style/}/img/common/contrl.gif) no-repeat 0 0; z-index:2}
+.licPass .com .tipLay .tipLayTxt{background:#fffce3;border:1px solid #fad5a8;width:390px;padding:0 5px 5px; position:relative; z-index:1;line-height:22px;}
+.licPass .com .tipLay .tipLayTxt .closeThis{ position:absolute;font-size:12px;right:7px;top:4px;}
+.licPass .com .tipLay .tipLayTxt p{padding:0;height:auto;line-height:22px;}
+.licPass .com .tipLay .tipLayTxt p img{ vertical-align:middle;}
+</style>
+<script type="text/javascript" src="{/version file='version.js'/}"></script>
+<script type="text/javascript">
+window.CONFIG = {
+    HOST: '{/$siteurl.style/}',
+    COMBOPATH: '/js/v2/'
+}
+</script>
+<script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+<script type="text/javascript" src="{/version file='global.js'/}"></script>
+</head>
+<body id="body">
+{/*include 'new_header.html' cur='企业管理'*/}
+{/*{/include file="new_header.html" par="企业管理" cur="企业认证"/}*/}
+<div class="content" id="content">
+    <section class="section" style="overflow:hidden;">
+        <!-- <div class="postSchListBg">
+            <div class="postSchList">
+                <div class="zList">
+                    <a href="{/get_url rule='/account/'/}"><span>我的账户</span></a>
+                    <a href="{/get_url rule='/company/modify'/}" ><span>企业资料</span></a>
+                    <a href="{/get_url rule='/environment'/}" ><span>企业环境</span></a>
+                    <a href="{/get_url rule='/licencevalidateforfair'/}"  class="cut"><span>企业认证</span></a>
+                    <a class="last" href="{/get_url rule='/pay'/}"><span>账户充值</span></a>
+                </div>
+            </div>
+        </div> -->
+    	<hgroup>
+        	<div class="part">
+                <div class="bd">
+                    <div class="licPass">
+                    	<p class="tit green"><img style="float:left;margin-right: 10px" src="{/$siteurl.style/}/img/newindex/suc.jpg">您已通过企业认证</p>
+                        <p>认证通过日期：{/$audittime/}</p>
+                        <div class="com">
+                        	<b>企业全称：</b>
+                            <span class="txt">{/$companyname/}</span>
+                           {/* <a href="javascript:void(0);" id="comNLnk">修改公司名称</a>*/}
+                        	<span class="tipPos">
+                                <span class="tipLay" style="display:none;">
+                                    <span class="tipArr"></span>
+                                    <span class="tipLayTxt">
+                                    	<a id="closeThis" class="closeThis hbFntWes" href="javascript:void(0);"></a>
+                                    	<p>修改公司名称，需要出示含有贵公司公章的有效文件。详情咨询客服。</p>
+                                        <p>服务热线：{/if $hasHRManager && !empty($hrManager['tel'])/}
+                                                {/$tel_head/} 转 {/$hrManager['tel']/}
+                                            {/else/}
+                                                {/$customerService['phone']|default:$customerService['phone400']/}
+                                            {//if/}
+                                        </p>
+                                        <p>QQ：
+                                        {/if !empty($hrManager["qq"])/}
+                                        <a target="_blank" href="//wpa.qq.com/msgrd?v=3&uin={/trim($hrManager["qq"])/}&site=qq&menu=yes" style="float:none">
+                                            <img border="0"  width="79" height="25" src="//wpa.qq.com/pa?p=2:{/trim($hrManager["qq"])/}:51" alt="点击这里给我发消息" title="点击这里给我发消息"/>
+                                        </a>
+                                        {/else/}
+                                                    <!-- WPA Button Begin -->
+            <script charset="utf-8" type="text/javascript" src="//wpa.b.qq.com/cgi/wpa.php?key=XzkzODA0MDQyNl8xMjgzMTBfNDAwODg3Mjg4N18"></script>
+            <!-- WPA Button End -->
+                                        {//if/}
+                                        </p>
+                                    </span>
+                                </span>
+                            </span>
+                        </div>
+                        {/*<p>注册号：{/$licenceid/}</p>
+                        <p>法人代表：{/$legalperson/}</p>*/}
+                    </div>
+                </div>
+            </div>
+        </hgroup>
+    </section>
+</div>
+{/*{/include file="footer.html"/}*/}
+<script>
+menuDis('#hdR','li','.box','hov');
+hovChange('.dropLstCon','li','hov');
+var $tSch = $('#tSch');
+
+$('#upLicLnk').click(function() {
+	$.showModal('/company/ui/upLic.html?v=aaaa',{title:'认证资料确认'});
+}); 
+
+$(document).ready(function(e) {
+    $.focusblur("#tSchText");
+	$.focusColor('input.text');
+	$.focusblur('#comN');
+
+
+
+	$('#tSchText').bind('focus',function(){
+		$(this).animate({'width':200});
+		$tSch.css({'background':'#fffdef','border':'1px solid #e8dd9e'})
+	}).bind('blur',function(){
+		$(this).animate({'width':150});
+		$tSch.css({'background':'#fff','border':'1px solid #dadada'})
+	});
+	
+	$('#comNLnk').click(function(){
+		$(this).siblings('.tipPos').find('.tipLay').css({'display':'block'});
+	});
+	$('#closeThis').click(function(){
+		$(this).parents('.tipLay').css({'display':'none'});
+	});
+	
+});
+
+</script>
+{/*{/include file="chat/chat.html"/}*/}
+</body>
+</html>

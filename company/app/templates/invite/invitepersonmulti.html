@@ -1,0 +1,309 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+</head>
+<body>
+<style>
+.batInv{width:850px;font-size:12px;}
+.batInvL{width:480px;float:left;display:inline;}
+.batInvR{width:360px;float:left;display:inline;margin-left:10px;}
+.batInvL .formMod .l{width:73px;}
+.batInvL .formMod .r{width:380px;}
+.batInvL .formMod{border-bottom:1px dashed #dadada;padding-bottom:15px;}
+.batInvL .invRemLst{overflow-y:scroll;height:358px; position:relative; z-index:1;}
+
+.batInvR .invBoxHd{border-bottom:1px solid #dadada;margin-bottom:10px;}
+.batInvR .invForm .formMod .l{width:85px;}
+.batInvR .invForm .formMod .r{width:260px;}
+.batInvR .invForm .formMod .r .formTextarea textarea.textarea{width:250px;height:80px;padding:0 0 0 5px;line-height:22px;font-size:12px;}
+.invForm .invFormTxt{margin:0 0 0 96px;color:#999;}
+.invForm .formBtn{margin:20px 0 0 90px;}
+.autTemp{max-height:290px;_height:expression((document.documentElement.clientHeight||document.body.clientHeight)<290?"290px":"");overflow-y:scroll;}
+</style>
+<form id="formMultiInvite" method="post" action="{/get_url rule='/invite/sendInviteMulti'/}">
+<input type="hidden" name="hddInviteType" value="{/$invitetype/}" />
+<div class="dgBox batInv">
+	<div class="batInvL">
+    	<div class="invRemLst">
+    		{/section name=resume loop=$resume_arr/}
+    			<div class="formMod">
+	            	<div class="l">{/$resume_arr[resume].user_name/}<input type="hidden" name="hddapplyid[]" value="{/$resume_arr[resume].apply_id/}"/><input type="hidden" name="hddusername[]" value="{/$resume_arr[resume].user_name/}" /><input type="hidden" name="hddresumeid[]" value="{/$resume_arr[resume].resume_id/}"/></div>
+	                <div class="r">
+	                	<span class="formText"><input theinputtype="stations" id="txtStation{/$smarty.section.resume.index+1/}" name="txtStation{/$smarty.section.resume.index+1/}" value="{/$resume_arr[resume].station/}" type="text" class="text { required: true, validateJobStation: true, messages:{required:'请输入职位名称&#60;span class=&#34;tipArr&#34; &#62;&#60;/span&#62;',validateJobStation:'名称不能少于2个字符&#60;span class=&#34;tipArr&#34; &#62;&#60;/span&#62;'}}" style="width:120px;" /><input value="{/$resume_arr[resume].job_id/}" type="hidden" name="hddJobID[]" /></span>
+                    	<span class="tipPos" style="z-index:1001;">
+		            		<span class="tipLay">
+		         			</span>
+		          		</span>
+                    	<span class="tipTxt">&nbsp;</span>
+	                	<span id="dateDrop{/$smarty.section.resume.index+1/}" class="drop zindex"></span>
+	                    <span class="tipTxt">&nbsp;</span>
+	                    <span id="timeDrop{/$smarty.section.resume.index+1/}" class="drop zindex"></span>
+	                </div>
+	                <div class="clear"></div>
+	            </div>
+    		{/sectionelse/}
+    		{//section/}
+        </div>
+    </div>
+    <div class="batInvR">
+        <div class="invBoxHd">
+            <div class="formMod">
+            	<span id="templateDrop" class="drop zindex"></span>
+					<span class="tipPos">
+	        			<span class="tipLay">
+	             		</span>
+	           		</span>
+                <span class="tipTxt"><a href="javascript:void(0);" id="invLst">管理模板</a></span>
+                <div class="clear"></div>
+            </div>
+        </div>
+        <div class="invForm">
+            <div class="formMod">
+                <div class="l">面试地点<i>*</i></div>
+                <div class="r">
+                    <span class="formText">
+                        <input id="txtAddress" name="txtAddress" type="text" class="text" value="{/$address/}" style="width:230px;">
+                    </span>
+                    <span class="tipPos">
+          				<span class="tipLay">
+               			</span>
+          			</span>
+                </div>
+                <div class="clear"></div>
+            </div>
+            
+            <div class="formMod">
+                <div class="l">联系人<i>*</i></div>
+                <div class="r">
+                    <span class="formText">
+                        <input id="txtLinkman" name="txtLinkman" type="text" class="text" value="{/$link_man/}" style="width:150px;">
+                    </span>
+                    <span class="tipPos">
+	          			<span class="tipLay">
+	               		</span>
+	          		</span>
+                </div>
+                <div class="clear"></div>
+            </div>
+            
+            <div class="formMod">
+                <div class="l">联系电话<i>*</i></div>
+                <div class="r">
+                    <span class="formText">
+                        <input id="txtLinktel" name="txtLinktel" type="text" class="text" value="{/$link_tel/}" style="width:150px;">
+                    </span>
+                    <span class="tipPos">
+	          			<span class="tipLay">
+	               		</span>
+	          		</span>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="formMod">
+                <div class="l">其他<i>&nbsp;</i></div>
+                <div class="r">
+                    <span class="formTextarea">
+                        <textarea id="txtRemark" name="txtRemark" class="textarea" style="width:235px;">{/$remark/}</textarea>
+                    </span>
+                    <span class="tipPos">
+	          			<span class="tipLay">
+	               		</span>
+	          		</span>
+                </div>
+                <div class="clear"></div>
+            </div>
+            
+            <div class="invFormTxt">我们将用短信通知TA们</div>
+            
+            <div class="formBtn"><a href="javascript:void(0);" onclick="inviteMulti.invite(this);" id="btnSendInvite" class="btn1 btnsF14">发送邀请</a><a href="javascript:void(0);" onclick="javascript:$(this).closeDialog();" class="btn3 btnsF14">取消</a></div>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>
+</form>
+<script>
+var inviteMulti={
+		initialize:function(){
+			//初始化控件
+			this._initControl();
+		},
+		_initControl:function(){
+			//初始化模板下拉控件
+			$('#templateDrop').droplist({selectValue:'0',noSelectClass:'gray',inputWidth:155,style:'width:163px;*width:167px;',hddName:'hddTemplate',items:{/$company_templates_json/},onSelect:function(i,name) {
+				inviteMulti.setTemplate(i);
+			}});
+			var itemcount = $('div.invRemLst').find('div.formMod').length;
+			for(var i = 0; i < itemcount; i++){
+				//初始化面试日期下拉控件
+				$('#dateDrop' + (i + 1)).droplist({selectValue:'{/$select_date/}',noSelectClass:'gray',inputWidth:135,style:'width:143px;*width:147px;',hddName:'hddDate[]',items:{/$date_json/},onSelect:function(n,name) {
+				}});
+				//初始化面试时间下拉控件
+				$('#timeDrop' + (i + 1)).droplist({maxScroll:10,selectValue:'9:30',noSelectClass:'gray',inputWidth:60,style:'width:68px;*width:75px;',hddName:'hddtime[]',items:[{id:"8:00",name:"8:00"},{id:"8:30",name:"8:30"},{id:"9:00",name:"9:00"},{id:"9:30",name:"9:30"},{id:"10:00",name:"10:00"},{id:"10:30",name:"10:30"},{id:"11:00",name:"11:00"},{id:"11:30",name:"11:30"},{id:"12:00",name:"12:00"},{id:"12:30",name:"12:30"},{id:"13:00",name:"13:00"},{id:"13:30",name:"13:30"},{id:"14:00",name:"14:00"},{id:"14:30",name:"14:30"},{id:"15:00",name:"15:00"},{id:"15:30",name:"15:30"},{id:"16:00",name:"16:00"},{id:"16:30",name:"16:30"},{id:"17:00",name:"17:00"},{id:"17:30",name:"17:30"},{id:"18:00",name:"18:00"},{id:"18:30",name:"18:30"},{id:"19:00",name:"19:00"},{id:"19:30",name:"19:30"},{id:"20:00",name:"20:00"}],onSelect:function(n,name) {
+				}});
+				
+				$('#txtStation' + (i + 1)).autocomplete('{/get_url rule="/invite/getSuggestJobs"/}', 
+				{
+					max: 12,    //列表里的条目数
+					minChars: 0,    //自动完成激活之前填入的最小字符
+ 					width: 130,     //提示的宽度，溢出隐藏
+ 					scrollHeight: 290,   //提示的高度，溢出显示滚动条
+ 					matchContains: true,    //包含匹配，就是data参数里的数据，是否只要包含文本框里的数据就显示
+ 					autoFill: false,    //自动填充
+ 					dataType: 'json',
+					formatItem: function(row, j, max)
+					{
+						return '<span class="autTempL"><b>'+row.jobname+'</b></span><span class="autTempR"></span>';
+ 					},
+ 					formatMatch: function(row, j, max)
+ 					{
+ 						return row.jobname;
+ 					},
+ 					formatResult: function(row)
+ 					{
+ 						return row.jobname;
+ 					}
+ 				}).result(function(event, row, formatted) {
+     				$(event.target).closest('span.formText').find(':input[type="hidden"]').val(row.id);
+ 				});
+			    
+		     }  
+			//自定义验证方法-不超过30个字符，一个汉字为2个字符
+			$.validator.addMethod("validateJobStation", function(value, element) {
+	            var inputLehgth = value.caseLength();
+	            return inputLehgth <= 30 && inputLehgth >= 2;
+			}, '名称不能少于2个字符<span class="tipArr"></span>');
+			//自定义验证方法必须包含中文且大于两个字符
+			//$.validator.addMethod("validateJobStationChinese", function(value, element) {
+				//return /.*[\u4e00-\u9fa5]+.*$/.test(value) && value.caseLength()>2;
+			//}, '太过简单了吧<span class="tipArr"></span>');
+			//客户端验证表单数据
+			inviteValid = $("#formMultiInvite").validate({
+			    rules: {
+			        txtAddress:{required: true, minlength:1, maxlength: 60 },
+			        txtLinkman:{required: true, minlength:1, maxlength: 15 },
+			        txtLinktel:{ required: true, tel: true },
+			        txtRemark:{maxlength: 200 }
+			    },
+			    messages: {
+			        txtAddress: { required: '请输入面试地点<span class="tipArr"></span>',minlength:'面试地点请输入1-60个字符<span class="tipArr"></span>',maxlength:'面试地点请输入1-60个字符<span class="tipArr"></span>'},
+			        txtLinkman: {required:'请输入联系人<span class="tipArr"></span>',minlength:'联系人请输入1-15个字符<span class="tipArr"></span>',maxlength:'联系人请输入1-15个字符<span class="tipArr"></span>'},
+			        txtLinktel: {required:'请输入联系电话<span class="tipArr"></span>',tel:'联系电话不正确<span class="tipArr"></span>'},
+			        txtRemark:{maxlength:'其他信息不能超过200个字<span class="tipArr"></span>'}
+			    },
+			    errorElement: 'span',
+			    errorClasses: {
+			    	txtStation1: { required: 'tipLayErr tipw180', validateJobStation:'tipLayErr tipw180'},
+			    	txtStation2: { required: 'tipLayErr tipw180', validateJobStation:'tipLayErr tipw180'},
+			    	txtStation3: { required: 'tipLayErr tipw180', validateJobStation:'tipLayErr tipw180'},
+			    	txtStation4: { required: 'tipLayErr tipw180', validateJobStation:'tipLayErr tipw180'},
+			    	txtStation5: { required: 'tipLayErr tipw180', validateJobStation:'tipLayErr tipw180'},
+			    	txtStation6: { required: 'tipLayErr tipw180', validateJobStation:'tipLayErr tipw180'},
+			    	txtStation7: { required: 'tipLayErr tipw180', validateJobStation:'tipLayErr tipw180'},
+			    	txtStation8: { required: 'tipLayErr tipw180', validateJobStation:'tipLayErr tipw180'},
+			    	txtStation9: { required: 'tipLayErr tipw180', validateJobStation:'tipLayErr tipw180'},
+			    	txtStation10: { required: 'tipLayErr tipw180', validateJobStation:'tipLayErr tipw180'},
+			    	txtStation11: { required: 'tipLayErr tipw180', validateJobStation:'tipLayErr tipw180'},
+			    	txtStation12: { required: 'tipLayErr tipw180', validateJobStation:'tipLayErr tipw180'},
+			    	txtStation13: { required: 'tipLayErr tipw180', validateJobStation:'tipLayErr tipw180'},
+			    	txtStation14: { required: 'tipLayErr tipw180', validateJobStation:'tipLayErr tipw180'},
+			    	txtStation15: { required: 'tipLayErr tipw180', validateJobStation:'tipLayErr tipw180'},
+			    	txtStation16: { required: 'tipLayErr tipw180', validateJobStation:'tipLayErr tipw180'},
+			    	txtStation17: { required: 'tipLayErr tipw180', validateJobStation:'tipLayErr tipw180'},
+			    	txtStation18: { required: 'tipLayErr tipw180', validateJobStation:'tipLayErr tipw180'},
+			    	txtStation19: { required: 'tipLayErr tipw180', validateJobStation:'tipLayErr tipw180'},
+			    	txtStation20: { required: 'tipLayErr tipw180', validateJobStation:'tipLayErr tipw180'},
+			    	txtAddress: { required: 'tipLayErr tipw180',minlength:'tipLayErr tipw180',maxlength:'tipLayErr tipw180'},
+			        txtLinkman: {required:'tipLayErr tipw180',minlength:'tipLayErr tipw180',maxlength:'tipLayErr tipw180'},
+			        txtLinktel: {required:'tipLayErr tipw180',tel:'tipLayErr tipw180'},
+			        txtRemark:{maxlength:'tipLayErr tipw180'}
+			    },
+			    errorPlacement: function(error, element) {
+				    if (element.attr('theinputtype') == 'stations'){
+				    	element.parent().next().find('.tipLay').append(error);
+				    }else{
+						element.parent().nextAll().find('.tipLay').append(error);
+					}
+			    },
+			    success: function(label) {
+			    	label.text(" ");
+			    }
+			});
+			$.setIndex('zindex');
+			$('#invLst').click(function() {
+				$.showModal('{/get_url rule="/interview/manageTemplate" data="obj=inviteMulti&callback=resetTemplates"/}'+'-v-'+Math.random(),{title:'邀请模板管理'});
+			});
+		},
+		resetTemplates: function(type,template_id,template_name){
+			switch(type)
+			{
+				case 'add':
+					$('#templateDrop').addItem(template_id,template_name);
+					$('#templateDrop').setDropListValue(template_id);
+					break;
+				case 'del':
+					$('#templateDrop').delItem(template_id);
+					$('#templateDrop').setDropListValue(0);
+			  		break;
+		  		case 'mod':
+		  			$('#templateDrop').delItem(template_id);
+		  			$('#templateDrop').addItem(template_id,template_name);
+		  			$('#templateDrop').setDropListValue(template_id);
+			  		break;
+				default:
+					break;
+			}
+		},
+		setTemplate: function(templateId) {
+			$.getJSON('{/get_url rule="/invite/getTemplate" data="templateId=' + templateId + '"/}', function(data) {
+	            if (data && data.error) {
+	                $.message(data.error, { icon: 'fail' });
+	                return;
+	            }
+	            if (typeof data.address != "undefined") {
+	                $("#txtAddress").val("").val(data.address);
+	            }
+	            if (typeof data.link_man != "undefined") {
+	                $("#txtLinkman").val("").val(data.link_man);
+	            }
+	            if (typeof data.link_tel != "undefined") {
+	                $("#txtLinktel").val("").val(data.link_tel);
+	            }
+	            if (typeof data.remark != "undefined") {
+	                $("#txtRemark").val("").val(data.remark);
+	            }
+	        });
+		},
+		invite:function(object) 
+		{
+			var data = { operate: "invite"};
+	        $(object).submitForm({ beforeSubmit: $.proxy(inviteValid.form, inviteValid), data: data, success: inviteMulti.successCallBack, clearForm: false})
+	        return false;
+		},
+		successCallBack:function(json) {
+			// 提交form后，回调函数
+			if (json && json.error){
+				$.message(json.error, { title: "系统提示", icon: "fail" });
+				return;
+			}
+		    if (json && json.status) {
+		        if (json.status == "succeed") {
+		          	//成功
+		       		$.anchorMsg("面试邀请发送成功", { onclose: function() {
+		       			$('#btnSendInvite').closeDialog();
+		         	}
+		    		});
+		        }
+		        else if (json.status == "fail") {
+		            //失败
+		        	//$.anchorMsg("发送失败，请重试");
+		        	$.message(json.successitem + json.failitem, { title: "系统提示", icon: "fail" });
+		        }
+		    }
+		}
+	};
+	inviteMulti.initialize();
+</script>
+</body>
+</html>

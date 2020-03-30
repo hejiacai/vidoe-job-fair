@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>共享员工_汇博网</title>
+    <!–[if lt IE9]>
+    <script src="//hm.baidu.com/hm.js?fb51309e47424acd6e31c0bd2a65a5a1"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='html5.js'/}"></script>
+    <![endif]–>
+    <link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+	<link rel="stylesheet" type="text/css" href="{/version file='m_font_style.css'/}">
+    <link rel="stylesheet" type="text/css" href="{/version file='comback.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='resument2015.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='layer.css'/}" />
+	<link rel="stylesheet" type="text/css" href="{/version file='share.css'/}" />
+    <link rel="stylesheet" href="{/version file='invite_v1.css'/}">
+    <script type="text/javascript">
+        window.CONFIG = {
+            HOST: '{/$isteurl.style/}',
+            COMBOPATH: '/js/v2/'
+        }
+    </script>
+    <script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.min.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='layer.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='common.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='dialog.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='ui_inputFocus.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='ui_tooltip.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='ui_validate.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='jquery.form.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='ui_dropdownlist.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='ui_autocomplete.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='jquery.email.tip.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='jquery.metadata.js'/}"></script>
+    <script type="text/javascript" src="{/version file='WdatePicker.js'/}"></script>
+    <link rel="stylesheet" type="text/css" href="{/version file='offer.css'/}" />
+    <script type="text/javascript">
+        hbjs.loadJS('{/$siteurl.style/}/js/v2/cqjob/common.js');
+    </script>
+	<style type="text/css">
+		.float_temp {float: left;}
+		.new_height {height: auto;}
+		.new_pad {padding-bottom: 20px;}
+		.shenheshibai {cursor: pointer;}
+		.leftContent ul li:hover {background-color: #eef1f6;}
+		.leftTop_btn:hover {background-color: #2683eb;}
+	</style>
+</head>
+
+<body id="body" style="position: relative;">
+{/include file="new_header.html" cur="人才共享"/}
+<div class="resumentNbg resumentNbg-new">
+	{/include file="workershar/header.html" cur='管理中心'/}
+
+	<div class="botContent clearfix">
+		<div class="leftContent">
+			<ul>
+				<li  class="{/if $type==1/}checked{//if/}"><a href="/worksharmanage/index/type-1" style="font-size: 16px;"><span class="icon-employee-sharing ishare" style="font-size: 20px;"></span>共享员工</a></li>
+				<li  class="{/if $type==2/}checked{//if/}"><a href="/worksharmanage/index/type-2" style="font-size: 16px;"><span class="icon-seeking-sharing ishare" style="font-size: 22px;"></span>求共享</a></li>
+			</ul>
+		</div>
+		<div class="rightContent">
+			<div class="leftTop">
+				<p>公司有闲置员工？赶快共享出来产生更多价值！</p>
+				<span>让一个员工产生多份价值</span>
+				<a href="/worksharmanage/worksharEdit?type=1" class="leftTop_btn"><span class="icon-employee-sharing ishare" style="color: #fff;font-size: 16px;vertical-align: -1.5px;"></span>共享员工</a>
+			</div>
+			<div class="leftBot">
+				<div class="point">
+					<span class="titlePoint"></span>
+					<span class="lbTitle">我的共享</span>
+				</div>
+				{/if !empty($list)/}
+				<ul>
+					{/foreach $list as $v/}
+					<li class="my_share">
+						<div class="share_title">
+							<span class="share_exp">{/$v['title']/}</span>
+							{/if $v['check_state']==0/}
+							<span class="daishenhe">【待审核】</span>
+							{/elseif $v['check_state']==1/}
+							<span class="shenhechenggong">【审核成功】</span>
+							{/elseif $v['check_state']==2/}
+							<span class="shenheshibai" title="【审核失败】原因：{/$v['check_reason']/}">【审核失败】原因：{/$v['check_reason']/}</span>
+							{//if/}
+						</div>
+						<div class="share_content">
+							<span class="unused">可共享员工：</span>
+							<span class="unused_temp">{/$v['worker_require']/}</span>
+							<span class="ask"><span class="ask_num"><span class="icon-27" style="font-size: 20px;vertical-align: -2px;color: #999999;margin-right: 5px;"></span>{/$v['apply_num']/}</span>人咨询</span>
+							<div class="lianjie">
+								<a href="/worksharmanage/worksharEdit?id={/$v['id']/}" class="w_edit" data-wid="{/$v['id']/}">重新编辑</a>
+								<a href="javascript:;" class="w_delete" data-wid="{/$v['id']/}">删除</a>
+								<a href="/worksharmanage/Details?id={/$v['id']/}">查看详情</a>
+							</div>
+						</div>
+					</li>
+					{//foreach/}
+				</ul>
+				{/$pager/}
+				{/else/}
+				<div style="text-align: center;color: #999999;margin-top: 70px;font-size: 16px;">还没有员工共享，去添加吧</div>
+				{//if/}
+			</div>
+		</div>
+	</div>
+</div>
+{/include file="msgpop.html"/}
+{/include file="footer.html"/}
+{/include file="chat/chat.html"/}
+<script type="text/javascript">
+	// $('.topContent ul li').click(function(){
+	// 	$(this).css('color','#2b79d9').siblings().css('color','#474747')
+	// })
+	// $('.leftContent ul li').click(function(){
+	// 	$(this).addClass('checked').siblings().removeClass('checked')
+	// })
+
+    // $(".w_delete").click(function () {
+    //     $.post('/worksharmanage/worksharDelete?id='+$(this).attr('data-wid'),{},function (e) {
+    //         alert(e.msg);
+    //         window.location.reload();
+    //     },'json')
+    // })
+	hbjs.use('@confirmBox', function(m) {
+		var	ConfirmBox      = m['widge.overlay.confirmBox'],
+			Dialog          = m['widge.overlay.hbDialog'],
+			cookie          = m['tools.cookie'],
+			fontSize = 18,
+			pWidth = 70;
+		var informTraining2 = new Dialog({
+			close : 'X',
+			idName : 'informTraining_dialog',
+			title : '提示',
+			width : 250,
+			height:150,
+			isOverflow : false,
+			isAjax : true
+		});
+		var vmx = '<div class="saveBtnxbg">'+
+					'<div class="saveBtnbd">'+
+						'<p class="save_temp">是否确认删除</p>'+
+						'<span id="resumename_submit">确定</span>'+
+						'<span id="resumename_cancell">取消</span>'+
+					'</div>'+
+				'</div>'
+		$('.w_delete').click(function(){
+			informTraining2.setContent(vmx).show();
+			$('#resumename_submit').click(function(){
+				var msg = '删除成功';
+				$.post('/worksharmanage/worksharDelete?id='+$('.w_delete').attr('data-wid'),{},function (e) {
+				    window.location.reload();
+				},'json')
+				ConfirmBox.timeBomb(msg,{
+					name: 'success',
+					width:fontSize * msg.length + pWidth,
+					timeout : 1000
+				});
+				informTraining2.hide();
+			});
+			$('#resumename_cancell').click(function(){
+				informTraining2.hide();
+			});
+		});
+	})
+	
+	$(function(){
+		var sbwidth = $('.shenheshibai').parent().children("span").eq(0).width()
+		var sbr = 873 - sbwidth
+		$('.shenheshibai').css('width',sbr+'px')
+	// 	$('.shenheshibai').mouseover(function(){
+	// 		$(this).parent().children("span").eq(0).addClass('float_temp')
+	// 		var width = $(this).parent().children("span").eq(0).width()
+	// 		var r = 873 - width
+	// 		$(this).css({'float':'left','white-space':'normal','width':r+'px','margin-left':'28px'})
+	// 		$(this).parent().addClass('new_height')
+	// 		$(this).parent().addClass('clearfix')
+	// 		$(this).parent().parent().addClass('new_height')
+	// 		$(this).parent().parent().addClass('new_pad')
+	// 	})
+	// 	$('.shenheshibai').mouseout(function(){
+	// 		$(this).parent().children("span").eq(0).removeClass('float_temp')
+	// 		$(this).css({'float':'','white-space':'nowrap','width':sbr+'px','margin-left':'24px'})
+	// 		$(this).parent().removeClass('new_height')
+	// 		$(this).parent().removeClass('clearfix')
+	// 		$(this).parent().parent().removeClass('new_height')
+	// 		$(this).parent().parent().removeClass('new_pad')
+	// 	})
+	})
+</script>
+</body>
+</html>

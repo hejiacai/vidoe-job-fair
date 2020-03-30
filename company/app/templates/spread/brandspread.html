@@ -1,0 +1,201 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>品牌推广</title>
+<link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='comback.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='resument2015.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='market.css'/}" />
+<style>
+    .hb_ui_dialog .ui_dialog_container{ padding: 20px;}
+    .ui_dialog_container p{ text-align: left; line-height: 24px; padding-bottom: 6px;}
+    .ui_dialog_container p b{ color: #666; font-weight: normal;}
+    .ui_dialog_container p span{ color:#999; display: inline-block;}
+</style>
+<script type="text/javascript" src="{/version file='version.js'/}"></script>
+<script type="text/javascript">
+    window.CONFIG = {
+        HOST: '{/$siteurl.style/}',
+        COMBOPATH: '/js/v2/'
+    }
+</script>
+<script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+<script type="text/javascript" src="{/version file='global.js'/}"></script>
+</head>
+
+<body>
+{/include file="new_header.html" par="全职招聘" cur="精准推广"/}
+<div class="resumentNbg">
+	<div class="rMentLt">
+    	<ul class="rMentUl rMentPinp">
+        	<li><a href="{/get_url rule='/spreadstatistics/index'/}">效果统计</a></li>
+            {/if $this_company_id == $super_company_id/}
+            <li><a href="{/get_url rule='/companybrandspread/index'/}">品牌推广</a></li>
+            {//if/}
+            <li><a href="{/get_url rule='/spreadjob/index'/}">职位推广</a></li>
+        </ul>
+    </div>
+    <div class="rMentRt">
+        <form id="fromData">
+            <h2 class="promoteAmount">推广金额：<b>{/$spreadtotal/}元</b></h2>
+            <div class="subMetx clearfix" style="padding:30px 0 26px 0;">
+
+                <span style="padding-top:5px;">状态：</span>
+                <div id="auditStatus" name="auditStatus" class="xkTabSelect"><b class="hbFntWes dropIco"></b>
+                    <label></label>
+                </div>
+                <a href="{/get_url rule='/companybrandspread/adddata'/}" target="_blank" class="maketNew" style="height:32px; line-height:32px;">新建广告</a>
+                <a id="submit" style="cursor:pointer;height:32px; line-height:32px;" class="maketSecrch" style="height:32px; line-height:32px;">搜索</a>
+            </div>
+        </form>
+
+        
+        <table width="100%" border="1" class="maktTab">
+            <tr>
+                <th width="140" height="40" align="left" valign="middle" class="marktTabpd20">名称</th>
+                <th width="150" height="40" align="center" valign="middle">目标链接</th>
+                <th width="60" height="40" align="center" valign="middle">出价</th>
+                <th width="100" height="40" align="center" valign="middle">预算（元/天）</th>
+                <th height="40" align="center" valign="middle">推广受众</th>
+                <th height="40" align="center" valign="middle">推广状态</th>
+                <th height="40" align="center" valign="middle">关闭</th>
+                <th height="40" align="center" valign="middle">操作</th>
+                <th height="40" align="center" valign="middle">开关</th>
+            </tr>
+            {/foreach $List as $k=>$val/}
+            <tr>
+                <td width="140" align="left" valign="middle" class="marktTabpd20">
+                    <b class="orange">{/if $val['audit_status']==2/}（审核失败）{/elseif $val['audit_status']==0/}（待审核）{//if/}</b>
+                    {/if $val['audit_status']==2&&!empty($val['fail_text'])/}<i class="makTips">（审核失败：{/$val['fail_text']/}）</i>{//if/}
+                    <span style="color:#666;" class="gray">{/$val['title']/}</span>
+                </td>
+                <td width="120" align="center" valign="middle"><a style=" display:block;width:120px; font-size:12px" href="{/$val['targetUrl']/}" target="_blank">{/$val['url']/}</a></td>
+                <td width="60" align="center" valign="middle" class="gray" style="color:#666;">{/$val['bid']/}</td>
+                <td width="100" align="center" valign="middle" class="gray" style="color:#666;">{/$val['budget']/}
+                    <span style="display: block; color:#a6a6a6; font-size:10px;">剩余预算：{/$val['last_budget']/}</span>
+                </td>
+                <td align="center" valign="middle">
+                    <a style="cursor:pointer" class="showinfo" data-id="{/$val['spread_id']/}">查看</a>
+                </td>
+                <td align="center" valign="middle" class="orange">
+                    {/if $val['is_effect']==1&&in_array($val['audit_status'],array(0,2))/}<span style="color:#999;">已下线</span>
+                    {/elseif $val['is_effect']==1&&$val['audit_status']==1&&$val['status']==0/}<span style="color:#999;">已下线</span>
+                    {/elseif $val['is_effect']==1&&$val['audit_status']==1&&$val['status']==1/}正在推广
+                    {/elseif $val['is_effect']==1&&$val['audit_status']==1&&$val['status']==2/}<span style="color:#999;">已下线</span>
+                    {//if/}
+                </td>
+                <td align="center" valign="middle" class="orange">
+                    {/if $val['is_effect']==1&&$val['status']==2/}关闭
+                    {/elseif $val['is_effect']==1&&in_array($val['status'],array(0,1))/}开启
+                    {//if/}
+                </td>
+                <td align="center" valign="middle">
+                    <a href="{/get_url rule='/companybrandspread/update'/}spread_id-{/$val['spread_id']/}" >编辑</a>
+                    <a style="cursor: pointer;" class="removeSpread" data-ID="{/$val['spread_id']/}" >删除</a>
+                </td>
+
+
+                <td align="center" valign="middle">
+                    <a style="cursor:pointer;" data-ID="{/$val['spread_id']/}" class="marktOppen ChangeStatus {/if $val['status']==1/}marktOppencut{//if/}"></a>
+                </td>
+
+            </tr>
+        {//foreach/}
+        </table>
+    </div>
+</div>
+
+</body>
+
+<script>
+    var dataTypeList = [
+        {'value':'default','label':'全部'},
+        {'value':'1','label':'正在推广'},
+        {'value':'0','label':'已下线'}
+    ];
+    hbjs.use('widge.select, widge.calendar.calendar,widge.overlay.hbDialog, widge.checkBoxer,highcharts.highstock,widge.overlay.confirmBox', function(Select, Calendar,Dialog, checkBoxer,  highstock ,confirmBox,$){
+
+        var selDateType = new Select({
+                    trigger : $('#auditStatus'),
+                    selectName : 'auditStatus',
+                    className : 'boss_select',
+                    align : {baseXY: [0, '100%-1']},
+                    dataSource : dataTypeList,
+                    selectedValue : "{/$status/}",
+                });
+        $('#submit').click(function(){
+            $('#fromData').submit();
+        });
+        jobDialog = new Dialog({
+            idName: 'jobDialog',
+            isAjax: true,
+            width: 480,
+            close: '×',
+            content: '<div class="marketPop" id="showSpread"><p><b>地区：</b><span id="show_area"></span></p><p><b>学历：</b><span id="show_degree"></span></p><p><b>年龄：</b><span id="show_age"></span></p><p><b>经验：</b><span id="show_workyear"></span></p><p><b>性别：</b><span id="show_sex"></span></p></div>'
+        });
+
+        $('.removeSpread').click(function(){
+
+            var spread_id = $(this).attr('data-ID');
+            confirmBox.confirm("确定删除吗？","删除品牌推广",function(obj){
+                $.post('{/get_url rule="/companybrandspread/setEffect"/}', {spread_id:spread_id}, function (result) {
+                    if(result.status==false) {
+                        confirmBox.timeBomb(result.msg, {"name":"fail",width:'auto'});
+                    }else{
+                        confirmBox.timeBomb(result.msg, {"name":"success",width:'auto'});
+                        setTimeout("window.location.reload()",'2000');
+                    }
+                },'json');
+            },null,{width:300});
+        });
+
+        $(".maktTab tr td b.orange").hover(function(){
+            $(this).next(".makTips").toggle();
+
+        })
+
+        $('.showinfo').click(function(){
+            var spread_id = $(this).attr('data-id');
+            $.ajax({
+                type:"post",
+                url:"{/get_url rule='/companybrandspread/getbrandinfo'/}",
+                data:{spread_id:spread_id},
+                dataType:'json',
+                success:function(jsonData){
+                    if(jsonData['status'] == true){
+
+                        $('#show_area').html(jsonData['data']['area_ids_arr']);
+                        $('#show_degree').html(jsonData['data']['degree_ids_arr']);
+                        $('#show_workyear').html(jsonData['data']['work_year_ids_arr']);
+                        $('#show_sex').html(jsonData['data']['sexstring']);
+                        $('#show_age').html(jsonData['data']['age']);
+                        jobDialog.show();
+                    }
+                }
+            });
+
+
+        });
+        $('.ChangeStatus').click(function(){
+            var id = $(this).attr('data-ID');
+//            confirmBox.timeBomb('此品牌推广已删除！', {"name":"success",width:'auto'});
+            $.ajax({
+                type:"post",
+                url:"{/get_url rule='/companybrandspread/setStatus'/}",
+                data:{spread_id:id},
+                dataType:'json',
+                success:function(jsonData){
+                    if(jsonData['status'] == true){
+                        confirmBox.timeBomb(jsonData.msg, {"name":"success",width:'auto'});
+                    }else{
+                        confirmBox.timeBomb(jsonData.msg, {"name":"fail",width:'auto'});
+                    }
+                    setTimeout("window.location.reload()",'2000');
+                }
+            });
+        });
+    });
+</script>
+</html>

@@ -1,0 +1,94 @@
+<?php
+
+/**
+ *
+ * @ClassName controller_commoncoupon
+ * @Desc      我的优惠券
+ * @author    chenwei@huibo.com
+ * @date      2016-3-3 13:07:00
+ */
+class controller_commoncoupon extends components_cbasepage {
+	/**
+	 * 构造函数
+	 */
+	function __construct() {
+		parent::__construct();
+	}
+	
+	
+	function pageIndex($inPath) {
+	    $pathdata = base_lib_BaseUtils::saddslashes($this->getUrlParams($inPath));
+		$cur_page = base_lib_BaseUtils::getStr($pathdata['page'], 'int', 1);
+		$page_size = base_lib_Constant::PAGE_SIZE;
+		$page_size = 3;
+		$state = base_lib_BaseUtils::getStr($pathdata['state'], 'int', '1');
+		$this->_aParams['state'] = $state;
+		/*$service_commoncoupon = new base_service_company_commoncoupon();
+		$coupons = $service_commoncoupon->getCompanyCouponList($page_size, $cur_page, $this->_userid, $state,
+			'coupon_fee,coupon_end_time,coupon_code');*/
+		$base_allotCoupon = new base_service_company_coupon_allotCoupon();
+		if ($state==3){
+            $in_data['state'] = -1;
+        }else{
+            $in_data['state'] = $state;
+        }
+
+		$coupons = $base_allotCoupon->GetAllotListByCompanyId($this->_userid, $in_data);
+		
+		if (!empty($coupons)) {
+			for ($i = 0; $i < count($coupons); $i++) {
+				switch ($state) {
+					case '3':
+						$coupons[ $i ]['state_name'] = '已过期';
+						break;
+					case '1':
+						$coupons[ $i ]['state_name'] = '已使用';
+						break;
+					default:
+						$coupons[ $i ]['state_name'] = '';
+						break;
+				}
+				
+				$coupons[ $i ]['allot_name'] = $base_allotCoupon->GetCouponNameById($coupons[ $i ]['allot_id']);
+			}
+			$this->_aParams['title'] = '优惠券';
+			//分页
+			$pager = $this->pageBar(count($coupons), $page_size, $cur_page, $inPath);
+			$this->_aParams['pager'] = $pager;
+			$coupons = array_slice($coupons, ($cur_page - 1) * $page_size, $page_size, true);
+			$this->_aParams['coupons'] = $coupons;
+			
+		}
+		
+		return $this->render('commoncouponlist.html', $this->_aParams);
+	}
+	
+	//使用优惠券
+	function pageUseCoupon($inPath) {
+		$pathdata = base_lib_BaseUtils::saddslashes($this->getUrlParams($inPath));
+		$id = base_lib_BaseUtils::getStr($pathdata['id'], 'int', '');
+		$account_id = base_lib_BaseUtils::getCookie('accountid');
+		$company_resources = base_service_company_resources_resources::getInstance($this->_userid, true, $account_id);
+		$audit_info = $this->checkCompanyLetter($this->_userid, 'resume');
+		//企业是否认证
+		// $audit_result = $company_resources->getCompanyAuditStatusV2();
+		// if ($audit_result['is_audit'] != 1) {
+		// 	return json_encode(array ('code' => 501));
+		// }
+		$audit_code = $audit_info['code'];
+		if (in_array($audit_code, array (507, 508, 509))) {
+			return json_encode(array ('code' => 502));
+		}
+		elseif (in_array($audit_code, array (504, 505, 506))) {
+			return json_encode(array ('code' => 503));
+		}
+		elseif (in_array($audit_code, array (501, 502, 503))) {
+			return json_encode(array ('code' => 501));
+		}
+		
+		$base_allotCouponPricing = new base_service_company_coupon_allotCouponPricing();
+		$res = $base_allotCouponPricing->openAllotCouponPricing($id, 0);
+		
+		return json_encode($res);
+	}
+}

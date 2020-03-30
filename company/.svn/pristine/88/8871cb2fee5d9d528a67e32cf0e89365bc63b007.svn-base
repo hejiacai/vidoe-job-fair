@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="{/version file="base.css"/}">
+		<style type="text/css">
+			.resStatus{width:600px; overflow: hidden; padding: 10px;}
+			.resStatus table{width:100%;}
+			.resStatus table tr th{ border: 1px solid #ccc; padding: 5px 0; background: #66bce4; color: #fff;font-size: 14px;}
+			.resStatus table tr td{ border: 1px solid #ccc; padding: 5px 10px; color: #333; font-size: 12px;}
+			.resStatus table tr td i.resGrade{ display: inline-block;width:10px; height: 13px; background: url({/$siteurl.style/}/img/c/new_index/go_down.png) 0 0 no-repeat; vertical-align: middle; margin-left: 5px;}
+		</style>
+	</head>
+	<body>
+		<div class="resStatus">
+            {/if $not_main/}
+            <p>{/$not_main/}</p>
+            {/else/}
+			<table border="" cellspacing="" cellpadding="">
+				<tr>
+					<th width="200">账号名称</th>
+					<th>简历回复率</th>
+					<th>简历回复时长</th>
+					<th>薪资福利相符度</th>
+					<th>岗位职责相符度</th>
+				</tr>
+                <tr>
+                    <td>公司数据</td>
+                    <td>{/$company['reply_rate']/}%</td>
+                    <td>{/$company['avg_time']/}{/$company['day_hour']/}</td>
+                    <td>{/if !empty($company['avg_welfare_salary_level'])/}{/$company['avg_welfare_salary_level']/}{/else/}暂无{//if/}</td>
+                    <td>{/if !empty($company['avg_match_level'])/}{/$company['avg_match_level']/}{/else/}暂无{//if/}</td>
+                    </td>
+                </tr>
+                {/foreach $list as $k=>$v/}
+				<tr>
+					<td>{/$v['user_name']/}{/if !empty($v['station'])/}/{/$v['station']/}{//if/}</td>
+					<td>{/$v['data']['reply_rate']/}%
+                        {/if $v['data']['lower_reply_rate']==1/}
+                        <i class="resGrade" title="低于公司平均数据"></i>
+                        {//if/}</td>
+					<td>{/$v['data']['avg_time']/}{/$v['data']['day_hour']/}
+                        {/if $v['data']['lower_avg_time'] == 1/}
+                        <i class="resGrade" title="低于公司平均数据"></i>
+                        {//if/}</td>
+                    <td>{/if !empty($v['data']['avg_welfare_salary_level'])/}{/$v['data']['avg_welfare_salary_level']/}{/else/}暂无{//if/}
+                        {/if $v['data']['lower_avg_welfare_salary_level'] == 1/}
+                        <i class="resGrade" title="低于公司平均数据"></i>
+                        {//if/}</td>
+                    </td>
+					<td>{/if !empty($v['data']['avg_match_level'])/}{/$v['data']['avg_match_level']/}{/else/}暂无{//if/}
+                        {/if $v['data']['lower_avg_match_level'] == 1/}
+                        <i class="resGrade" title="低于公司平均数据"></i>
+                        {//if/}</td>
+                    </td>
+				</tr>
+                {//foreach/}
+			</table>
+            {//if/}
+		</div>
+	</body>
+</html>

@@ -1,0 +1,759 @@
+<!doctype html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+<title>{/$title/}</title>
+<!–[if lt IE9]> 
+<script src="{/version file='html5.js'/}"></script>
+<![endif]–>
+<link rel="stylesheet" type="text/css" href="{/version file="base.css"/}" />
+<link rel="stylesheet" type="text/css" href="{/version file="comback.css"/}" />
+
+<script type="text/javascript" language="javascript" src="{/version file="jquery-1.8.3.min.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="common.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="dialog.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="ui_inputFocus.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="ui_tooltip.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="ui_validate.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="jquery.form.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="ui_dropdownlist.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="ui_autocomplete.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="jquery.email.tip.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="jquery.metadata.js"/}"></script>
+
+</head>
+<body id="body">
+<style type="text/css">
+hgroup{padding:0;}
+.part{padding:10px 20px;zoom:1;}
+.part2{padding:0 20px 20px 20px;zoom:1;}
+.part .tipTxt{font-size:16px; height:40px; line-height:40px;}
+.part .tipTxt em{color:#ff9900; margin:0 5px;}
+.part .tipTxt i.hbFntWes{font-size:14px; margin-right:5px;}
+.part .tipTxt .del{font-size:12px; margin-left:15px;}
+
+.recHd{background:#f9f9f9; border:1px solid #e6e6e6; padding:17px 15px 0 15px; zoom:1; height:45px; font-size:12px;}
+.recHd .tipTxt{float:left; display:inline; line-height:26px; color:#999; font-size:12px;margin-left: 20px;}
+.recHd .recHdL{float:left; display:inline; width:570px;}
+.recHd .recHdL .conBox{float:left; display:inline;}
+.recHd .recHdL .conBox .job{float:left; display:inline; margin-right:10px;}
+.recHd .recHdL .conBox .time{float:left; display:inline; margin-right:10px;}
+.recHd .recHdL .conBox .sta{float:left; display:inline;}
+.recHd .recHdL .conBox .tipTxt i.hbFntWes{font-size:14px; margin-left:5px; position:absolute; right:10px; top:5px; cursor:pointer;}
+
+.recHd .recHdM{float:left; display:inline; width:275px;}
+.recHd .recHdM .formMod .l{width:50px; font-size:12px; margin-right:2px; color:#999;}
+.recHd .recHdM .formMod .r{width:215px;}
+.recHd .recHdM .checkMod .drop{width:378px;}
+
+.recHd .recHdR{float:right; display:inline; width:140px;}
+.recHd .recHdR .btns{float:left; display:inline; line-height:26px;}
+.recHd .recHdR .btns a{display:inline-block;padding:0 6px;height:22px;line-height:22px;font-size:12px; border-radius:3px;}
+.recHd .recHdR .btns a.cu{color:#333;font-weight:bold;background:#d1d1d1; cursor:text;}
+
+.recBd .lstBox{padding:20px 0 0 0; zoom:1;}
+.recBd .lst .table{}
+.recBd .lst .table tr th{border-bottom:1px solid #dadada;font-weight:normal; color:#999; padding:8px 5px; zoom:1;}
+.recBd .lst .formChb input.chb{margin:2px 0 0 0;}
+.table tr th,.table tr td{text-align:left;font-size:12px;}
+.table .lstBox tr td{border-bottom:1px solid #f1f1f1; padding:8px 5px; zoom:1; color:#666;}
+.table .lstBox tr td.gray{color:#bbb;}
+.table .lstBox .wid220{width:220px;}
+.table .lstBox .wid185{width:185px;}
+.table .lstBox .wid150{width:150px;}
+.table .lstBox .wid120{width:120px;}
+.table .lstBox .wid110{width:110px;}
+.table .lstBox .wid100{width:100px;}
+.table .lstBox .wid80{width:80px;}
+.table .lstBox .wid50{width:50px;}
+.table .lstBox .wid40{width:40px;}
+.table .lstBox .wid20{width:10px;}
+.table .lstBox .time{color:#999;}
+.table .lstBox b.name{line-height:44px; margin-left:10px;}
+.table .lstBox a.name{line-height:44px; margin-left:5px; font-weight:bold; margin-left:10px; height:44px; width:45px; overflow:hidden; display:block;}
+.table .lstBox span.name{float:left; display:block; height:44px;}
+.table .lstBox a.name:link{color:#3d84b8;}
+.table .lstBox a.name:visited{color:#800080;}
+.table .lstBox a.name:hover,.table .lstBox a.name:active{color:#0af;}
+.table .lstBox .Un{color:#999; font-weight:bold;margin-left:5px;}
+.table .lstBox p.job{color:#444; font-weight:bold; width:110px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis; height:34px; line-height:34px;}
+.table .lstBox .photo{background:url({/$siteurl.style/}/img/common/user35_44.jpg) no-repeat; width:35px; height:44px; border:0; display:block; float:left;}
+.table .lstBox .photo a{width:35px; height:44px; display:block;}
+.table .lstBox .photo img{width:35px; height:44px; border:0;}
+.table .lstBox .mark a.hbFntWes{font-size:14px; color:#999; margin-left:10px;}
+.table .lstBox .markIn a.hbFntWes{font-size:14px; color:#ed3136; margin-left:10px;}
+.table .lstBox  p.lateJob{width:110px; line-height:44px; height:44px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+.table .lstBox .tips{position:relative; display:block;}
+.table .lstBox .tips i.hbFntWes{font-size:16px; margin-left:5px;}
+.table .lstBox .tipBox{position:absolute;left:-32px;*left:40px; top:21px;*top:4px; color:#444;background:#fff; border:1px solid #dadada; padding:5px 0;zoom:1; line-height:22px;}
+.table .lstBox .tipBox ul li a{color:#444; width:85px; display:block; padding:0 10px;}
+.table .lstBox .tipBox ul li a:hover{color:#00aaff; background:#f5f5f5;}
+.table .lstBox .tipBox ul li.rLnk{position:relative; z-index:1;}
+.table .lstBox .tipBox ul li.rLnk .downCmt{position:absolute; left:-28px; top:23px; background:#fff; border:1px solid #dadada; width:160px; font-size:12px;padding:10px; zoom:1;}
+.table .lstBox .tipBox ul li.rLnk .downCmt i.hbIconMoon{font-size:14px; margin-right:5px;}
+.table .lstBox .tipBox ul li.rLnk a.Un{cursor:text; color:#999;}
+.table .lstBox .tipBox ul li.rLnk a.Un:hover{color:#999;}
+.table .lstBox tr.hov{background:#fffdf3;}
+
+.recBd .lst2 ul li{border:1px solid #dadada; font-size:12px; margin-bottom:13px;}
+.recBd .lst2 ul li .sumBd{padding:10px 5px; zoom:1;}
+.recBd .lst2 ul li .sumBd .photoB{width:80px; height:100px; display:inline; float:left; margin-left:10px;background:url({/$siteurl.style/}/img/common/user80_100.jpg) no-repeat;}
+.recBd .lst2 ul li .sumBd .photoB a{width:80px; height:100px; display:block;}
+.recBd .lst2 ul li .sumBd .photoB img{width:80px; height:100px; border:0;}
+.recBd .lst2 ul li .sumBd .sumCon{float:left; display:inline; margin-left:15px; width:810px;}
+.recBd .lst2 ul li .sumBd .sumCon .basInfo{color:#999; display:block; height:24px;}
+.recBd .lst2 ul li .sumBd .sumCon .basInfo .basL{float:left; display:inline;}
+.recBd .lst2 ul li .sumBd .sumCon .basInfo .basL a{}
+.recBd .lst2 ul li .sumBd .sumCon .basInfo .basL a:link{color:#3d84b8;}
+.recBd .lst2 ul li .sumBd .sumCon .basInfo .basL a:visited{color:#800080;}
+.recBd .lst2 ul li .sumBd .sumCon .basInfo .basL a:hover,.recBd .lst2 ul li .sumBd .sumCon .basInfo .basL a:active{color:#0af;}
+.recBd .lst2 ul li .sumBd .sumCon .basInfo .basL b{font-size:14px; margin-right:10px;}
+.recBd .lst2 ul li .sumBd .sumCon .basInfo .basR i.unRead{background:#ff6600; color:#fff; padding:0 6px; margin:0 12px 0 10px;}
+.recBd .lst2 ul li .sumBd .sumCon .basInfo .basR i.inRead{background:#009900; color:#fff; padding:0 6px; margin:0 12px 0 10px;}
+.recBd .lst2 ul li .sumBd .sumCon .basInfo .basR i.inv{background:#009900; color:#fff; padding:0 6px; margin:0 12px 0 10px;}
+.recBd .lst2 ul li .sumBd .sumCon .basInfo .basR i.other{background:#999; color:#fff; padding:0 6px; margin:0 12px 0 10px;}
+.recBd .lst2 ul li .sumBd .sumCon .basInfo .basR{float:right; display:inline;}
+.recBd .lst2 ul li .sumBd .sumCon .basInfo .basL .mark a.hbFntWes{font-size:14px; width:26px; line-height:20px; color:#999; margin-left:10px;}
+.recBd .lst2 ul li .sumBd .sumCon .basInfo .basL .mark a.hbFntWes:hover{color:#00aaff;}
+.recBd .lst2 ul li .sumBd .sumCon .basInfo .basL .markIn a.hbFntWes{font-size:14px; color:#ed3136; margin-left:10px;}
+
+.recBd .lst2 ul li .sumBd .sumCon .basInfo .basL a.red{color:#d66564;}
+.recBd .lst2 ul li .sumBd .sumCon .infoCon{margin-top:3px;color:#666; display:block;}
+.recBd .lst2 ul li .sumBd .sumCon .infoCon dl{padding:3px 0;zoom:1; overflow:hidden;}
+.recBd .lst2 ul li .sumBd .sumCon .infoCon dl dt{float:left; display:inline; color:#999;}
+.recBd .lst2 ul li .sumBd .sumCon .infoCon dl dd{float:left; display:inline;}
+.recBd .lst2 ul li .sumBd .sumCon .infoCon dl dd em{padding:0 8px; zoom:1; color:#999;}
+.recBd .lst2 ul li .sumBd .sumCon .infoCon dl dd p{width:740px;}
+.recBd .lst2 ul li .sumFt{background:#f9f9f9; height:30px; position:relative; z-index:1;}
+.recBd .lst2 ul li .sumFt .btns{position:absolute; left:128px; top:04px;}
+.recBd .lst2 ul li .sumFt .btns a.btnsF12{height:20px; line-height:20px;}
+.recBd .lst2 ul li .sumFt .btns a.btn3Unclick:link,.recBd .lst2 ul li .sumFt .btns a.btn3Unclick:visited,.recBd .lst2 ul li .sumFt .btns a.btn3Unclick:hover{border:1px solid #dadada;}
+.recBd .lst2 ul li .sumFt .btns .btn{margin:0 7px;}
+.recBd .lst2 ul li .sumFt .btns a.btn3{}
+.recBd .lst ul li.hov{border:1px solid #ffe0bb; background:#fffdf3;}
+.recBd .lst ul li.hov .sumFt{background:#ffe0bb;}
+
+.recBd .recBtn{padding:10px 5px; zoom:1; height:50px; line-height:50px; font-size:12px;}
+.recBd .recBtn .formChb label{margin-top:9px;*margin-top:10px;}
+.recBd .recBtn .formChb input.chb{margin-top:19px; _margin-top:0;#margin-top:14px;}
+.recBd .recBtn .btns{display:block; float:left; _margin-top:8px;}
+.recBd .recBtn .rec{margin:0 10px;}
+.recBd .recBtn .ref{margin:0 10px;}
+
+.noData a.btn1{ margin-top:30px;}
+.noData a.btn{font-size:14px;}
+.noData i.hbFntWes{font-size:14px; margin-right:5px;}
+.resume_status1{color:#9eaeb2}
+.resume_status2{color:#1ecdab}
+.recHd .recHdM .formMod .r {width: 168px;}
+.recHd .recHdM {width: 225px;}
+
+b.gen-binding {font-weight: normal;background: #ff9b00;color: #feffff;padding: 2px 4px;margin: 2px 10px 0 0; line-height: 12px;border-radius: 2px}
+</style>
+{/include 'new_header.html' par="全职招聘" cur='面试管理'/}
+<div class="content" id="content">
+	<section class="section">
+		<hgroup>
+			{/if $hasInvite==false/}
+			<div class="noData"><p>您还未邀请任何求职者！</p></div>
+			{/else/}
+        	<div class="part part1">
+                 <ul class="newMsgList" style="width:auto">
+                    <li><a href="{/get_url rule="/invite/"/}?search_type=1" {/if $search_type == 1/}class="cut"{//if/}>未面试</a></li>
+                    <li><a href="{/get_url rule="/invite/"/}?search_type=2" {/if $search_type == 2/}class="cut"{//if/}>已过期</a></li>
+                </ul>
+                <div class="tipTxt">
+                        <span class="num">共邀请 <em>{/$totalSize/}</em>人参加面试</span>
+                {/if $showfilter/}<span class="del"><a href="#" id="btnClearFilter"><i class="hbFntWes">&#xf014;</i>清空筛选/搜索条件</a></span>{//if/}
+                </div>
+                <div class="recHd" style="background:none;padding:20px 0 0 0;border:0;height:auto">
+                <form id="frmInvite" method="get" action="{/get_url rule="/invite/"/}" >
+                	<input type="hidden" name="search_model" value="{/$search_model/}"  id="hddSeachModel"/>
+                    <input type="hidden" name="search_type" value="{/$search_type/}" />
+                    <div class="com" style="width:130px;float:left{/if !$is_hr/}display:none{//if/}"><span id="tstDropCom" class="drop zindex" style="{/if !$is_hr/}display:none{//if/}"></span></div>
+                    <div class="recHdL">
+                        <div class="tipTxt">筛选：</div>
+                        <div class="conBox">
+                            <div class="job"><span id="tstDropPeople" class="drop zindex"></span></div>
+                        	<div class="job"><span id="tstDropJob" class="drop zindex"></span></div>
+                            <div class="time"><span id="tstDropTime" class="drop zindex"></span></div>
+                            <div class="sta"><span id="tstDropSta" class="drop zindex"></span></div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="recHdM">
+                        <div class="formMod">
+                            <div class="l">搜索：</div>
+                            <div class="r">
+                                 <span class="formText"><input type="text" style="width:100px; font-size:12px;" class="text textGray" value="{/$keyword/}" name="keyword" id="txtKeyWord"></span>
+                                 <span class="seaBtn"><a href="#" class="{/if $keyword==''/}btn3{/else/}btn1{//if/} btnsF12" id="btnResumeSearch">搜索</a></span>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                </div>
+                </form>
+            </div>
+            <div class="part part2">
+            	{/if $hasFilterInvite==false/}
+            	<div class="noData"><p>未找到相关简历，请更换筛选条件、关键词再试！</p>{/if $showfilter/}<p><a class="btn" href="#" id="btnClearFilterSearch"><i class="hbFntWes">&#xf014;</i>清空筛选/搜索条件</a></p>{//if/}</div>
+                {/else/}
+                <div class="recBd">
+                    <div class="lstC">
+                    	<div class="lstCon">
+                            <div class="lst lst1" id="lst1">
+                                <table class="table" cellpadding="0" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                        	<th class="wid20"><span class="formChb"><input type="checkbox"  id="reverseallSelect" class="chb"></span></th>
+                                            <th class="wid120">照片/姓名</th>
+                                            <th class="wid40">备注</th>
+                                            <th >邀请面试职位</th>
+                                            <th class="wid100">联系电话</th>
+                                            <!-- <th class="wid50">性别</th>
+                                            <th class="wid50">年龄</th>
+                                            <th class="wid50">学历</th> -->
+                                            <th class="wid100">发送邀请时间</th>
+                                            <th class="wid150">面试时间</th>
+                                            <th class="wid110">当前状态</th>
+                                            <th class="wid80">操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="lstBox" id="lstContent">
+                                        {/foreach $invitelist as $invite/} 
+                                        <tr invite="{/$invite['invite_id']/}" resume="{/$invite['resume_id']/}">
+                                        	<td class="wid20"><span class="formChb"><input type="checkbox" name="chkinvite" value="{/$invite['invite_id']/}" class="chb" {/if $invite['re_status']==9/}disabled="disabled"{//if/}></span></td>
+                                            <td class="wid110">
+                                                {/if $invite['re_status'] == 9/}
+                                                <span class="photo">{/if $invite['small_photo']/}<img src="{/$invite['small_photo']/}"/>{//if/}</span>
+                                                <span class="name"><b class="name user_name" name="{/$invite['full_user_name']/}">{/$invite['user_name']/}</b></span>
+                                                {/else/}
+                                                <span class="photo"><a href="{/get_url rule="/resume/resumeshow/"/}type-network-resumeid-{/$invite['resume_id']/}" target="_blank" class="uname">{/if $invite['small_photo']/}<img src="{/$invite['small_photo']/}"/>{//if/}</a></span>
+                                                <span class="name"><a href="{/get_url rule="/resume/resumeshow/"/}type-network-resumeid-{/$invite['resume_id']/}" target="_blank" class="name user_name uname" name="{/$invite['full_user_name']/}">{/$invite['user_name']/}</a></span>                                            
+                                                {//if/}
+                                            </td>
+                                            <td class="wid40">{/if $invite['re_status']!=9/}<span class="hbTip mark {/if $invite['remark']/}markIn{//if/}"><a href="#" class="hbFntWes" {/if $invite['remark']/} data-toggle="tooltip" data-placement="right" title="{/$invite['remark']/}" {/else/} data-placement="right"{//if/}>&#xf024;</a></span>{//if/}</td>
+                                            <td style="width:230px">
+                                                <p class="job">{/$invite['station']/}</p>
+                                                {/if $invite['generation_bidding']/}
+                                                {/$accounts[$invite['company_id']]['company_name_display']/}
+                                                <p style="white-space:nowrap;white-space: nowrap;width: 230px;overflow: hidden;height:20px">
+                                                <b class="gen-binding">代招</b>
+                                                </p>
+                                                {//if/}
+                                            </td>
+                                            <td class="wid100">{/$invite['phone']/}</td>
+                                            <!-- <td class="wid50 gray">{/$invite['sex']/}</td>
+                                            <td class="wid50 gray">{/$invite['age']/}</td>
+                                            <td class="wid50 gray">{/$invite['degree']/}</td> -->
+                                            <td class="wid100 gray">{/$invite['invite_time']/}</td>
+                                            <td class="wid150">{/$invite['audition_time']/}</td>
+                                            <td class="wid110">
+                                                {/if $invite['re_status']==9 || $invite['re_status']==3/}
+                                            	<em class="status sta orange">对方已放弃</em>
+                                                {/else/}
+                                            	<em class="status sta {/if $invite['audition_result']==1 ||$invite['audition_result']==3 ||$invite['audition_result']==4/}resume_status1{/elseif $invite['audition_result']==2 || $invite['audition_result']==5/}resume_status2{//if/}">{/$invite['audition_result_name']/}</em>
+                                                {//if/}
+                                            </td>
+                                            <td class="wid80">
+                                              <span class="tips">
+                                                    {/if $invite['re_status']==9/}
+                                               	 	<a href="#" class="oprecycle">删除</a>
+                                                    {/else/}
+                                                    <a href="#" class="btnOperate">操作<i class="hbFntWes">&#xf0dd;</i></a>
+                                                    <span class="tipBox zindex" style="display:none">
+                                                        <ul>
+                                                            <li><a href="#" class="opsetresult">设置面试结果</a></li>
+                                                            <li><a href="#" class="opdown">保存到电脑</a></li>
+                                                            <li><a href="#" class="opsendmail">转发到邮箱</a></li>
+                                                            <li><a href="#" class="oprecycle">放入回收站</a></li>
+                                                        </ul>
+                                                    </span>
+                                                    {//if/}   
+                                                </span>
+                                            </td>
+                                        </tr>
+                                        {//foreach/}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="recBtn">
+                            <span class="formChb"><input type="checkbox" name="deg" id="allSelect" class="chb"><label for="allSelect">全选</label></span>
+                            <span class="btns">
+                                <a href="#" class="btn3 btnsF12" id="btnOpsetResult">设置面试结果</a>
+                                <a href="#" class="btn3 btnsF12" id="btnSaveComputer">保存到电脑</a>
+                                <a href="#" class="btn3 btnsF12" id="btnSendEmail">转发到邮箱</a>
+                                <a href="#" class="rec" id="btnOprecycle">放入回收站</a>
+                            </span>
+                        </div>
+                     {/$pager/}   
+                     </div>
+                </div> 
+           		{//if/}
+            </div>
+            {//if/}
+        </hgroup>
+    </section>
+</div>
+{/include file="msgpop.html"/}
+{/include file="footer.html"/}
+<div class="dgBox downCmtBox" id="downContainer" style="display:none">
+	<div class="downCmtTxt">
+    	<p><a href="#"><i class="hbIconMoon">&#xe1b4;</i>Word文件</a></p>
+        <p><a href="#"><i class="hbIconMoon">&#xe1b6;</i>Html文件</a></p>
+        <p><a href="#"><i class="hbIconMoon">&#xe1b5;</i>Excel文件</a></p>
+    </div>
+</div>
+
+<script>
+$.setIndex("zindex");//为需要赋层级设置的元素设置class为zindex
+    $('#tstDropPeople').droplist({
+    defaultTitle : '按发布人查看',
+    style : 'width:100px;',
+    noSelectClass : 'gray',
+    inputWidth : 100,
+    width : 128,
+    hddName : 'son_account_id',
+    items : {/$job_people/},
+    selectValue : '{/$son_account_id/}',
+    maxScroll : 10,
+    onSelect : function(i, name) {
+    //选中后的事件
+    $("#station").val("");
+    $("#invite_time").val("");
+    $("#result").val("");
+    invite.submit(0);
+}
+});
+
+$('#tstDropJob').droplist({
+	defaultTitle : '按面试职位查看',
+	style : 'width:100px;',
+    noSelectClass : 'gray',
+    inputWidth : 100,
+    width : 128,
+    hddName : 'station',
+    items : {/$jobs/},
+    selectValue : '{/$station/}',
+    maxScroll : 10,
+    onSelect : function(i, name) {
+	   	//选中后的事件
+        invite.submit(0);
+    }
+});
+
+$('#tstDropCom').droplist({
+    defaultTitle : '所有公司',
+    style : 'width:128px;',
+    noSelectClass : 'gray',
+    inputWidth : 120,
+    width : 128,
+    hddName : 'account_id',
+    items : {/$accounts_json/},
+    selectValue : '{/$account_id/}',
+    maxScroll : 10,
+    onSelect : function(i, name) {
+        //选中后的事件
+        invite.submit(0);
+    }
+});
+
+$('#tstDropTime').droplist({
+	defaultTitle : '按面试时间查看',
+	style : 'width:110px;',
+    noSelectClass : 'gray',
+    inputWidth : 110,
+    width : 128,
+    hddName : 'invite_time',
+    selectValue : '{/$invite_time/}',
+    items : [
+        {id:'', name:'按面试时间查看'},
+        {/if $search_type == 1/}
+        {id:'+0', name:'今天'},
+        {/else/}
+        {id:'1', name:'昨天'},
+        {//if/}
+        {id:'7', name:'近7天'},
+        {id:'30', name:'近30天'},
+        {id:'90', name:'近90天'}
+    ],
+    onSelect : function(i, name) {
+	   	//选中后的事件
+    	invite.submit(0);
+    }
+});
+
+
+$('#tstDropSta').droplist({
+	defaultTitle : '按状态查看',
+	style : 'width:90px;',
+    noSelectClass : 'gray',
+    inputWidth : 90,
+    width : 128,
+    hddName : 'result',
+    selectValue : '{/$result/}',
+    items : [
+        {id:'', name:'按状态查看'},
+        {id:'1', name:'未参加面试'},
+        {id:'2', name:'已发offer'},
+        {id:'3', name:'面试未过'},
+        {id:'4', name:'拒绝offer'},
+        {id:'5', name:'已入职'},
+        {id:'7', name:'对方已放弃'}
+    ],
+    onSelect : function(i,name) {
+	   	//选中后的事件
+    	invite.submit(0);
+    }
+});
+
+
+/**
+ *  面试邀请
+ */
+var invite = {
+	init : function() {
+		this._initEvent();
+	},
+	_initEvent : function() {
+		// 列表操作菜单
+		$('#lstContent .btnOperate').click(function(e){
+			$(this).closest('[invite]').siblings().find('.tipBox').hide();
+
+            if ($(this).next('.tipBox').is(':visible')) {
+				$(this).next('.tipBox').hide();	
+			} else {
+				$(this).next('.tipBox').show();
+			}
+
+			e.stopPropagation();
+			e.preventDefault();
+		});
+
+		// 列表样式
+		$('#lst1').find('tr').hover(function() {
+			$(this).addClass('hov');
+		}, function() {
+			$(this).removeClass('hov');
+		});
+
+		$('body').click(function(){
+			$('#lstContent .tipBox').hide();
+		});
+
+		// 全选/反选
+		$('#allSelect').bindCheckBox('chkinvite', '#lstContent');
+		$('#reverseallSelect').bindCheckBox('chkinvite', '#lstContent');
+		$('#allSelect').click(function() {
+			if ($(this).is(':checked')) {
+				$('#reverseallSelect').attr('checked','checked');	
+			} else {
+				$('#reverseallSelect').removeAttr('checked');
+			}
+		});
+
+		$('#reverseallSelect').click(function(){
+			if ($(this).is(':checked')) {
+				$('#allSelect').attr('checked','checked');	
+			} else {
+				$('#allSelect').removeAttr('checked');
+			}
+		});	
+
+		// 水印 
+		$('#txtKeyWord').watermark('输入姓名或简历编号');
+
+		var a = function() {
+			var v = $('#txtKeyWord').val();
+			if (v == '' || v == "输入姓名或简历编号") {
+				$('#btnResumeSearch').removeClass('btn1').addClass('btn3');
+			} else {
+				$('#btnResumeSearch').removeClass('btn3').addClass('btn1');
+			}
+			setTimeout(a, 499);
+		};
+
+		setTimeout(a, 500);		
+		
+        // 清空筛选条件
+		$('#btnClearFilter, #btnClearFilterSearch').click(function(e){
+			$('#tstDropJob').initContent();
+			$('#tstDropTime').initContent();
+			$('#tstDropSta').initContent();
+            $("#tstDropCom").initContent();
+
+			$('#txtKeyWord').val('').watermark('输入姓名或简历编号');
+
+			invite.submit(0);				
+			e.preventDefault();
+		});
+
+		$('#lstContent').tooltip({
+			 selector: "a[data-toggle=tooltip]",html:true
+	    });  	
+
+		$('#lstContent .mark a').click(function(e){
+			var resume_id = $(this).closest('[resume]').attr('resume');
+			invite._updateRemark(resume_id);
+			e.preventDefault();
+		});	
+
+		// 单个设置面试结果
+		$('#lstContent .opsetresult').click(function(e){
+			var invite_id = $(this).closest('[invite]').attr('invite');
+			invite._setResultWin(invite_id);
+			e.preventDefault();
+		});
+
+		// 单个备注
+		$('#lstContent .opremark').click(function(e){
+			 var resume_id = $(this).closest('[resume]').attr('resume');
+			 invite._updateRemark(resume_id);
+			 e.preventDefault();
+		});
+		
+		// 保存到电脑
+		$('#lstContent .opdown').click(function(e){
+			 var element = $(this).closest('[resume]'),
+			 	 resume_id = element.attr('resume');
+			 invite._downresume(resume_id);
+			 e.preventDefault();
+		});
+
+		// 转发到邮箱
+		$('#lstContent .opsendmail').click(function(e){
+			 var element = $(this).closest('[resume]'),
+			 	 resume_id = element.attr('resume');
+			 invite._sendEmail(resume_id);
+			 e.preventDefault();
+		});	
+			
+		// 删除
+		$('#lstContent .oprecycle').click(function(e){
+            var element   = $(this).closest('[resume]'),
+                invite_id = element.attr('invite'),
+                name      = element.find('.user_name').attr('name'),
+                val       = cookieutility.get('deleteinvite');
+            
+            if (val == 'true') {
+                invite._deleteinvite(invite_id);
+            } else {
+                $.showModal(encodeURI('{/get_url rule="/invite/DelInvite/" data="names='+name+'&ids='+invite_id+'&v='+Math.random()+'"/}'),{title:'放入回收站'});
+            }
+
+            e.preventDefault();
+		});	
+		
+		// 批量设置面试结果 
+		$('#btnOpsetResult').click(function(e){
+			e.preventDefault();
+			var invites = invite.selectInvite();
+			if(invites.length<=0) {
+				$.anchor('请选择面试邀请',{icon:'info'});
+				return;
+			}
+			invite._setResultWin(invites.join(','));
+		});	
+
+		// 批量保存到电脑
+		$('#btnSaveComputer').click(function(e){
+			e.preventDefault();
+			var invites = invite.selectInvite();
+			if(invites.length<=0) {
+				$.anchor('请选择面试邀请',{icon:'info'});
+				return;
+			}
+			var resumeids =[];
+			for(var i = 0,len = invites.length;i < len; i+=1 ) {
+				resumeids.push($('#lstContent').find('[invite="'+invites[i]+'"]').attr('resume'));
+			}
+			invite._downresume(resumeids.join(','));
+		});	
+		
+		// 批量转发到邮箱
+		$('#btnSendEmail').click(function(e){
+			e.preventDefault();
+			var invites = invite.selectInvite();
+			if(invites.length<=0) {
+				$.anchor('请选择面试邀请',{icon:'info'});
+				return;
+			}
+			var resumeids =[];
+			for(var i = 0,len = invites.length;i < len; i+=1 ) {
+				resumeids.push($('#lstContent').find('[invite="'+invites[i]+'"]').attr('resume'));
+			}
+			invite._sendEmail(resumeids.join(','));			
+		});	
+
+		// 批量删除  
+		$('#btnOprecycle').click(function(e){
+			e.preventDefault();
+			var invites = invite.selectInvite();
+			if (invites.length <= 0) {
+				$.anchor('请选择面试邀请',{icon:'info'});
+				return;
+			}
+
+			var names = [],
+				val   = cookieutility.get('deleteinvite');
+
+			for (var i = 0, len = invites.length; i < len; i += 1) {
+				names.push($('#lstContent').find('[invite="' + invites[i] + '"]').find('.user_name').attr('name'));
+			} 
+            
+            if (val == 'true') {
+                invite._deleteinvite(invites.join(','));
+            } else {
+                $.showModal(encodeURI('{/get_url rule="/invite/DelInvite/" data="names='+names.join(',')+'&ids='+invites.join(',')+'&v='+Math.random()+'"/}'), {title:'放入回收站 '});
+            }
+        });	
+
+
+		// 按姓名/简历编号搜索
+		$('#btnResumeSearch').click(function(){
+			invite.submit(1);
+		});
+
+		$("#txtKeyWord").keydown(function(e){
+	    	if(e.keyCode == 13){
+	            $("#btnResumeSearch").click();
+	        }
+	    });
+	},
+	_deleteinvite:function(ids) {
+	   // 删除求职申请	
+	   $.getJSON('{/get_url rule="/invite/DelInvite/"/}'+'op-del-ids-'+ids+'-v-'+Math.random(),function(result){
+			if(result.success) {
+				var arr = ids.split(',');
+				$.each(arr,function(i,n){
+					//更新页面
+					var element = $('#lstContent').find('[invite="'+n+'"]');
+					element.remove();
+				});
+				$.anchorMsg('删除成功');
+			}else {
+				$.anchorMsg(result.error, { icon: 'fail' }); 
+			}
+	    });
+    },
+	_updateRemark:function(resumeid) {
+		// 更新备注
+		$.showModal('{/get_url rule="/resumeremark/index/"/}resume_id-'+resumeid+'-v-'+Math.random(),{title:'备注',onclose:function(){
+			// 更新备注
+			$.getJSON("{/get_url rule="/resumeremark/ResumeRemark/"/}"+'-resumeid-'+resumeid+'-v-'+Math.random(),function(result){
+			    var element = $('#lstContent').find('[resume="'+resumeid+'"]');
+				element.find('span.mark a').unTooltip();
+				if(result.remark ==''||result.remark == null) {
+					element.find('span.mark').removeClass('markIn').find('a').removeAttr('data-toggle').removeAttr('title');				
+				}else {
+					element.find('span.mark').addClass('markIn').find('a').attr('data-toggle','tooltip').attr('title',result.remark+'&nbsp;'+result.updatetime);
+				}			    
+			});
+		}});
+    },
+    _serResult : function(invite_id, result) {
+        $.ajax({
+            url : "{/get_url rule='/invite/state'/}",
+            type : "post",
+            dataType : "json",
+            data : {
+                result : result,
+                id : invite_id
+            },
+            success : function(json) {
+                if (!json.success) {
+                    $.message(json.error, {
+                        title : '设置面试邀请', icon : 'fail'
+                    });
+
+                    return false;
+                }
+
+                $.anchorMsg('设置成功', {icon : 'success'});
+
+				var arr = invite_id.split(',');
+				$.each(arr, function (i, n) {
+                    //更新页面
+					var element     = $('#lstContent').find('[invite="' + n + '"]'),
+						resultClass = '',
+						resultName  = '';
+
+					if (result == 3) {
+						resultClass = 'resume_status1';
+						resultName  = '面试未过'; 
+					} else if (result == 2) {
+						resultClass = 'resume_status2';
+						resultName  = '已发offer'; 
+					} else if (result == 1) {
+                        resultClass ='resume_status1';
+                        resultName  = '未参加面试'; 
+					} else if (result == 4) {
+                        resultClass = 'resume_status1';
+                        resultName  = '拒绝offer'; 
+                    } else if (result == 5) {
+                        resultClass = 'resume_status2';
+                        resultName  = '已入职'; 
+                    }
+
+					element.find('.status').removeClass().addClass('status sta ' + resultClass).html(resultName);
+				});
+            }
+        });
+    },
+    _setResultWin : function(inviteid) {
+		// 设置面试结果
+    	$.showModal('{/get_url rule="/invite/SetResult/" data="ids='+inviteid+'&v='+Math.random()+'"/}', {title:'设置面试结果'});    	
+    },
+    _printresume:function(resumeid) {
+		var url = '{/get_url rule="/resume/htmlprint" data="resumeid='+resumeId+'"/}';
+		$('#printIframe').attr("src", url);
+    },
+    _downresume:function(resumeid) {
+        var url = '{/get_url rule="/invite/DownLoad" data="resumeid='+resumeid+'"/}';
+    	$.showModal(url, {title:'请选择保存的文件格式'});
+    },
+    _downresumeword:function(ids){
+    	var url = '{/get_url rule="/resume/worddown" data="resumeid='+ids+'&src=apply"/}';
+		$(this).attr('href', url).attr('target', '_blank');
+    },
+    _downresumehtml:function(ids) {
+    	var url = '{/get_url rule="/resume/htmldown" data="resumeid='+ids+'&src=apply"/}';
+		$(this).attr('href', url).attr('target', '_blank');
+    },
+    _downresumeExcel:function(ids) {
+        // excel下载
+    	var url = '{/get_url rule="/excel/index/" data="resumeid='+ids+'"/}';
+    	$(this).attr('href', url).attr('target', '_blank');
+    },
+    _downresumePdf:function(ids) {
+    	var url = '{/get_url rule="/resume/pdfdown/" data="resumeid='+ids+'"/}';
+    	$(this).attr('href', url).attr('target', '_blank');
+    },
+    _sendEmail:function(resumeid) {
+    	$.showModal('{/get_url rule="/resume/wordsend" data="resumeid='+resumeid+'"/}', {title:'转发到邮箱'});
+    },
+    selectInvite:function(){
+       var checkboxs = $('#lstContent').find('input[name="chkinvite"]:checked'),
+       	   invites = [];
+   	   for(var i=0,len=checkboxs.length;i<len;i+=1) {
+   		   invites.push($(checkboxs[i]).val());
+   	   } 	
+       return invites;
+    },
+    submit : function(searchmodel) {
+		if (searchmodel != null) {
+			$('#hddSeachModel').val(searchmodel);
+		}
+
+		//清空水印 
+		$('#frmInvite').clearWatermark();	
+		$('#frmInvite').get(0).submit();	
+    }    
+};
+invite.init();
+</script>
+</body>
+</html>

@@ -1,0 +1,234 @@
+<!--<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>关于我们</title>
+    <link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='comback.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}" />-->
+
+    <!--[if lt IE9] -->
+    <!--<script type="text/javascript" language="javascript" src="{/version file='html5.js'/}"></script>-->
+    <!-- [endif] -->
+
+    <!--公共-->
+    <!--<script type="text/javascript" src="{/version file='version.js'/}"></script>
+    <script type="text/javascript">
+        window.CONFIG = {
+            HOST: '{/$siteurl.style/}',
+            COMBOPATH: '/js/v2/'
+        }
+    </script>
+    <script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.min.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='common.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='dialog.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='jquery.form.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='ui_validate.js'/}"></script>
+
+    <script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+    <script type="text/javascript" src="{/version file='global.js'/}"></script>
+    <script type="text/javascript">
+        hbjs.loadJS('{/$siteurl.style/}/js/v2/cqjob/common.js');
+        
+    </script>-->
+    
+    <!--{/$up_img_html.hand_html/}-->
+<!--</head>
+<body>-->
+<form method="post" id="aboutPost">
+
+    <div class="formMod">
+
+        <div class="l">主营业务及行业地位<i>*</i></div>
+        <div class="r">
+                            <span class="formTextarea">
+                                <input class="textarea" id="hidRightSpot" placeholder="请输入主营业务及行业地位" name="hidRightSpot" value="{/$hidRightSpot/}"></input>
+                            </span>
+                    <span class="spot-err input-err" style="display: none;">
+                      	请输入主营业务及行业地位
+                    </span>
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <div class="formMod">
+
+        <div class="l">企业简介<i>*</i></div>
+        <div class="r">
+                            <span class="formTextarea">
+                                <textarea class="textarea" id="info" placeholder="请输入企业简介" name="info">{/$info/}</textarea>
+                                <p class="num"><em>0</em>/250</p>
+                            </span>
+                    <span class="info-err input-err" style="display: none;">
+                      	请输入产品/项目简介
+                    </span>
+        </div>
+        <div class="clear"></div>
+    </div>
+
+
+    <!--<p class="tit" style="margin-top: 50px"><u style="width:85%"></u><i></i>工作环境（选填）</p>-->
+    <div class="formMod">
+        <input type="hidden" id="hddLicenceurl" name="hddLicenceurl" value=""/>
+        <div class="formMod">
+            <div class="l l3">工作环境（选填）</div>
+            <div class="r">
+                {/$up_img_html.html/}
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div class="clear"></div>
+    </div>
+
+    <div class="formBtn"><a href="javascript:void(0);" id="about_ok" class="btnsF16 btn1">提交</a><a href="javascript:void(0);" id="about_cancel" class="btnsF16 btn3">取消</a></div>
+
+</form>
+<script>
+
+    var uploader_img;
+    hbjs.use('@hbCommon, @jobDialog, @validator, @areaDrop, @confirmBox, @areaDrop', function(m) {
+        //var $ = m['product.hbCommon'].extend(m['cqjob.jobDialog']);
+        var Dialog = m['widge.overlay.hbDialog'];
+        var AreaDrop = m['product.areaDrop'];
+        var validatorForm = m['widge.validator.form'];
+        var ConfirmBox = m['widge.overlay.confirmBox'];
+
+		//上传图片控件
+        $(function () {
+            var up_options_{/$up_img_html.id/} = {
+                up_id: '.{/$up_img_html.id/}',
+                auto: {/$up_img_html.config.auto/},
+                BASE_URL: "{/$up_img_html.config.BASE_URL/}",
+                fileNumLimit: {/$up_img_html.config.fileNumLimit/},//文件数量 默认5个 每张1M fileSingleSizeLimit: 1024 * 1024,
+                fileSingleSizeLimit: {/$up_img_html.config.fileSingleSizeLimit/},//每个文件大小
+                file_name: '{/$up_img_html.config.file_name/}',//返回接收上传的文件名称隐藏域
+                fileVal: '{/$up_img_html.config.fileVal/}',//上传接收name
+                defaults_files: {/$up_img_html.config.defaults_files/},//默认文件
+                accept: {/$up_img_html.config.accept/},//允许文件类型
+                formData: {/$up_img_html.config.form_data/},//上传删除携带参数
+                server: '{/get_url rule="/mrecruit/UploadEnvalop/"/}',
+                deleteServer: '{/get_url rule="/mrecruit/DelTempFile/"/}',
+                error_hint_fun: function (msg) {
+                ConfirmBox.timeBomb(msg, {
+                    name: 'fail',
+                    timeout: 2000,
+                    width: 18 * msg.length + 70
+                });
+            },
+            confirm_hint_fun: function (confirm_msg, deleteServerAjax) {
+                //询问框
+                ConfirmBox.confirm(confirm_msg,'删除图片', function(obj){
+                    deleteServerAjax();
+//                $("#hddLicenceurl").val('');
+                    this.hide();
+                },{
+                    width :300,
+                    close : 'x'
+                });
+            },
+        };
+            uploader_img = $('.{/$up_img_html.id/}').powerWebUpload(up_options_{/$up_img_html.id/});
+
+
+        });
+        
+        
+        $(".num em").html($('#info').val().length)
+        $('#info').on('input propertychange', function () {
+	        //获取输入内容
+	        var userDesc = $(this).val();
+	
+	        //判断字数
+	        var len;
+	        if (userDesc) {
+	          len = checkNum(userDesc, 250);
+	        } else {
+	          len = 0
+	        }
+	        this.value=userDesc.substring(0,250);
+	        //显示字数
+	        $(".num em").html(len);
+	    });
+	
+	
+		//控制输入字数
+		function checkNum(str,maxLength) {
+			var maxLength = maxLength;
+			var result;
+			if(str && str.length > maxLength){
+				result = maxLength
+			}else{
+			  result = str.length;
+			}
+			return result
+	    }
+        
+//      失焦时验证是否为空
+        $('#info').on('blur',function(){
+        	if($(this).val()==""){
+        		$('.info-err').show();
+        	}
+        })
+        $('#hidRightSpot').on('blur',function(){
+        	if($(this).val()==""){
+        		$('.spot-err').show();
+        	}
+        })
+        $('#info').on('focus',function(){
+        	$('.info-err').hide();
+        })
+        $('#hidRightSpot').on('focus',function(){
+        	$('.spot-err').hide();
+        })
+        
+        
+        
+        $('#about_ok').click(function () {
+            var info = $('#info').val();
+            var hidRightSpot = $('#hidRightSpot').val();
+            var flag = true;
+            
+//          提交时如果为空,显示错误提示并返回
+            if(hidRightSpot==""){
+				$('.spot-err').show();
+				flag = false;
+			}
+            
+			if(info==""){
+				$('.info-err').show();
+				flag = false;
+			}
+			
+			if(flag){
+				$.post("{/get_url rule='/mrecruit/EditAboutUsdO/'/}",{info:info,hidRightSpot:hidRightSpot},function(e){
+	                 if(e.status){
+	
+	                     ConfirmBox.timeBomb(e.msg, {
+	                         name: 'success',
+	                         timeout: 2000,
+	                         width: 18 * e.msg.length + 70
+	                     });
+	                     aboutUs.hide();
+	                 }else{
+	                     ConfirmBox.timeBomb(e.msg, {
+	                         name: 'fail',
+	                         timeout: 2000,
+	                         width: 18 * e.msg.length + 70
+	                     });
+	                 }
+	            },'json')
+			}
+            
+
+        })
+
+        $('#about_cancel').click(function () {
+            aboutUs.hide();
+        });
+        
+    });
+
+</script>
+<!--</body>
+</html>-->

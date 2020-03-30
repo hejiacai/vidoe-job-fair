@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>置顶</title>
+    <link rel="stylesheet" type="text/css" href="{/version file="m_font_style.css"/}">
+    <link rel="stylesheet" type="text/css" href="{/version file="m_font_style.css"/}"/>
+    <link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='resumePartTime.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}" />
+    <script type="text/javascript" language="javascript" src='{/version file="jquery-1.8.3.min.js"/}'></script>
+    <script type="text/javascript" src="{/version file='base_script.js'/}"></script>
+    <script type="text/javascript" src="{/version file='version.js'/}"></script>
+    <script type="text/javascript">
+        window.CONFIG = {
+            HOST: '{/$siteurl.style/}',
+            COMBOPATH: '/js/v2/'
+        }
+    </script>
+    <script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+    <script type="text/javascript" src="{/version file='global.js'/}"></script>
+    <style>
+        .hb_ui_dialog .ui_dialog_container,.ui_dialog_content{height: 95%}
+        .hb_ui_dialog .ui_dialog_close{background: none !important;  line-height: inherit!important;}
+        .ordinary{float: right;}
+    </style>
+</head>
+<body>
+<div class="top-all">
+    <!--<h4>账户余额：<em class="allMonay">{/if $account_overage > 0/}{/sprintf("%.2f", $account_overage)/}{/else/}{/$account_overage/}{//if/}</em><span>元</span></h4>-->
+    <h3>职位置顶</h3>
+    <ul class="top-item">
+        {/foreach $top_type as $key=>$val/}
+        {/if $key == 1 && ($check_type == 'all' || $check_type == 'index')/}
+        <li class="clearfix" style="position: relative;">
+            <span class="top-item-name">{/$val['name']/}</span>
+            <span class="separator">|</span>
+            <em class="top-item-day"><i>{/$val['price']/$PartMoneyToRmb/}</i>兼职币/天</em>
+            <span class="separator">|</span>
+            <dl class="add-num clearfix">
+                <dt>置顶天数</dt>
+                <dd>
+                    <a href="javascript:void(0);" class="num-left num-left-gray">-</a>
+                    <input type="text" class="mynum" value="1" id="num{/$key/}">
+                    <a href="javascript:void(0);" class="num-right">+</a>
+                </dd>
+            </dl>
+            <div class="ordinary" style="float: right;" data-key="{/$key/}">
+                <a href="javascript:void(0);" class="ordinary-buy buy_click" data-key="{/$key/}" data-price="{/$val['price']/}" style="float: right;">使用</a>
+                <div class="pay-type showPay_{/$key/}" style="right: -28px;top: -80px;">
+                    <!--<a href="javascript:;" class="balance" onclick="order_pay({/$job_id/},1,{/$key/})" title="微信支付">-->
+                        <!--<i></i>余额-->
+                    <!--</a>-->
+                    <a href="javascript:;" class="weichart" onclick="order_pay({/$job_id/},2,{/$key/})" title="微信支付">
+                        <i></i>微信
+                    </a>
+                    <a href="javascript:;" class="zhifubao" onclick="order_pay({/$job_id/},3,{/$key/})" title="支付宝">
+                        <i></i>支付宝
+                    </a>
+                </div>
+            </div>
+        </li>
+        {//if/}
+        {/if $key == 2 && ($check_type == 'all' || $check_type == 'jobsort')/}
+        <li class="clearfix" style="position: relative;">
+            <span class="top-item-name">{/$val['name']/}</span>
+            <span class="separator">|</span>
+            <em class="top-item-day"><i>{/$val['price']/$PartMoneyToRmb/}</i>兼职币/天</em>
+            <span class="separator">|</span>
+            <dl class="add-num clearfix">
+                <dt>置顶天数</dt>
+                <dd>
+                    <a href="javascript:void(0);" class="num-left num-left-gray">-</a>
+                    <input type="text" class="mynum" value="1" id="num{/$key/}">
+                    <a href="javascript:void(0);" class="num-right">+</a>
+                </dd>
+            </dl>
+            <div class="ordinary" style="float: right;" data-key="{/$key/}">
+                <a href="javascript:void(0);" class="ordinary-buy buy_click"  data-key="{/$key/}" data-price="{/$val['price']/}" style="float: right;">使用</a>
+                <div class="pay-type showPay_{/$key/}" style="right: -28px;top: -80px;">
+                    <!--<a href="javascript:;" class="balance" onclick="order_pay({/$job_id/},1,{/$key/})" title="微信支付">-->
+                        <!--<i></i>余额-->
+                    <!--</a>-->
+                    <a href="javascript:;" class="weichart" onclick="order_pay({/$job_id/},2,{/$key/})" title="微信支付">
+                        <i></i>微信
+                    </a>
+                    <a href="javascript:;" class="zhifubao" onclick="order_pay({/$job_id/},3,{/$key/})" title="支付宝">
+                        <i></i>支付宝
+                    </a>
+
+                </div>
+            </div>
+
+        </li>
+        <p>置顶子分类：{/$jobsort_name/}</p>
+        {//if/}
+        {//foreach/}
+
+
+    </ul>
+</div>
+<script>
+	var num=[];
+	var maxday=99;
+    var order_pay,agreementDialog,click_type=false,clickTimer;
+    var is_refresh = '{/$is_refresh/}';
+    hbjs.use(' @confirmBox', function(m){
+        var confirmBox = m['widge.overlay.confirmBox'],
+                Dialog = m['widge.overlay.hbDialog'],
+                fontSize = 18,
+                pWidth = 70,
+                $ = m['jquery'];
+
+
+		$('.mynum').each(function(i,e){
+			num[i]=$(e).val()
+			
+			function mb_price() {
+        	var ipt=$(e).val()
+        	
+			if(ipt===""||(ipt>=0&&ipt<=maxday&&ipt.indexOf(".")===-1)){
+				num[i] = $(e).val();
+			}else{
+				$(e).val(num[i])
+			}
+			
+            if(num[i]>1){
+            	$(e).siblings('.num-left').removeClass('num-left-gray')
+            }else{
+            	$(e).siblings('.num-left').addClass('num-left-gray')
+            }
+            if(num[i]<maxday){
+            	$(e).siblings('.num-right').removeClass('num-left-gray')
+            }else{
+            	$(e).siblings('.num-right').addClass('num-left-gray')
+            }
+//          var one_price = $('#mb_price').attr('data-price');
+//          $('#mb_price').text(num*one_price);
+        }
+			$(e).siblings('.num-right').on('click',function () {
+            num[i] = $(this).prev().val();
+	            if(num>=maxday){
+	            	return;
+	            }
+	        	num[i]++;
+	            $(this).prev().val(num[i]);
+	            mb_price()
+	
+	        })
+	        $(e).siblings('.num-left').on('click',function () {
+	            num[i] = $(this).next().val();
+	            if(num[i] <= 1 ){
+	                return;
+	            }
+	            num[i]--;
+	            $(this).next().val(num[i]);
+	            mb_price()
+	        })
+        
+        
+        
+        $(e).on("input propertychange",mb_price)
+		})
+        
+
+        $('.ordinary').mouseleave(function () {
+            $('.pay-type').hide();
+        })
+
+
+
+        var can_click = true;
+        $('.buy_click').click(function () {
+            if(can_click){
+                can_click = false
+            }else{
+                return false;
+            }
+            var top_type = $(this).attr('data-key');
+            var job_id = parseInt('{/$job_id/}');
+            var top_day = $("#num"+top_type).val();
+            //认按兼职币自动扣款，如兼职币不足，则自动余额扣款，如余额不足，弹出现金支付弹框
+            $.post('/partorder/ResumePointJobTopBuy',{job_id:job_id,top_day:top_day,top_type:top_type},function (e) {
+               
+                setTimeout(function () {
+                can_click = true;
+                },2000);
+                if(e.status){
+                    //支付成功
+                    confirmBox.timeBomb(e.msg, {
+                        name : 'success',
+                        timeout :2000,
+                        width: 70 + e.msg.length*18
+                    });
+                    setTimeout(function () {
+                        window.location.reload();
+                    },2000);
+                }else{
+                    if(e.code == 1){
+                        //使用余额支付
+                        order_pay(job_id,1,top_type)
+                    }else{
+                        //兼职币支付错误
+                        confirmBox.timeBomb(e.msg, {
+                            name : 'fail',
+                            timeout : 2000,
+                            width: 300
+                        });
+                        return false;
+                    }
+                }
+
+            },'json')
+        })
+
+
+        /**
+         *
+         * @param job_id  职位id
+         * @param pay_type 支付方式
+         * @param top_type 置顶类型 1首页，2分类
+         */
+        order_pay = function(job_id,pay_type,top_type){
+            if(click_type==true){
+            return;
+          }
+          if(click_type==false){
+            click_type=true;
+          }
+          clearTimeout(clickTimer);
+          clickTimer = setTimeout(function () {
+            click_type = false;
+          },2000)
+
+            if(!pay_type || !job_id){
+                confirmBox.timeBomb(data.msg, {
+                    name : 'fail',
+                    timeout : 3000,
+                    width: fontSize * data.msg.length + pWidth
+                })
+            }
+            var top_day = $("#num"+top_type).val();
+            var url = "{/get_url rule="/partorder/createOrder"/}";
+            var data = {
+                pay_type : pay_type,
+                job_id  : job_id,
+                top_day : top_day,
+                top_type :top_type,
+                order_src: 1
+            };
+
+            $.post(url, data, function(data){
+                if(pay_type !=1){
+                    if(!data.status){
+                        confirmBox.timeBomb(data.msg, {
+                            name : 'fail',
+                            timeout : 3000,
+                            width: 300
+                        });
+                        return false;
+                    }
+                }
+
+
+                //余额支付，刷新界面
+                if(pay_type == 1){
+                    if(data.status){
+                        confirmBox.timeBomb(data.msg, {
+                            name : 'success',
+                            timeout :3000,
+                            width: 70 + data.msg.length*18
+                        });
+                        if(is_refresh == ''){
+                            setTimeout(function () {
+                                window.parent.document.location.reload();
+                            },3000);
+                        }
+                        parent.pay_dialog.close() ;
+                        return false;
+                    }else{
+                        //弹出微信/支付宝支付选择
+                        click_type = false;
+                        $('.showPay_'+top_type).show();
+                        return false;
+                    }
+                }else{
+                    //支付宝或者微信，跳转到订单支付界面
+                    var url = '{/get_url rule="/partorder/pay"/}?code_url=' + data.data.code_url + '&order_no=' + data.data.order_data.order_no + '&is_refresh=' + is_refresh;
+                    agreementDialog = new Dialog({
+                        idName: 'agreement-dialog',
+                        title: '支付',
+                        content: url,
+                        close: 'X',
+                        width:410,
+                        height:550,
+                        isAjax:false
+                    });
+                    agreementDialog.show();
+                    //window.location.href = '{/get_url rule="/partOrder/pay"/}?code_url=' + data.data.code_url + 'order_no' + data.data.order_data.order_no;
+                }
+
+
+            });
+        }
+
+
+    });
+
+
+
+</script>
+</body>
+</html>

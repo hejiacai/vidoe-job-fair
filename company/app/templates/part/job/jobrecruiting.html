@@ -1,0 +1,242 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+<title>{/$title/}</title>
+<!–[if lt IE9]> 
+<script type="text/javascript" language="javascript" src="{/version file='html5.js'/}"></script>
+<![endif]–>
+<link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='comback.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='tJob_style.css'/}" />
+
+<script type="text/javascript" src="{/version file='version.js'/}"></script>
+<script type="text/javascript">
+window.CONFIG = {
+	HOST: '{/$siteurl.style/}',
+	COMBOPATH: '/js/v2/'
+}
+</script>
+<script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+<script type="text/javascript" src="{/version file="global.js"/}"></script>
+<script type="text/javascript">
+hbjs.loadJS('{/$siteurl.style/}/js/v2/cqjob/common.js');
+</script>
+<style type="text/css">
+.tjob_manager a.tpartReBtnx {margin:10px 0 0 14px; background-color:#15d07f; text-decoration: none;}
+.tjob_manager a.tpartReBtnx:hover {background-color: #12bc72; }
+.tjob_ing .link a{display: inline-block;}
+</style>
+</head>
+<body class="tjob_main">
+	<!---延用以前-->
+	{/include file="new_header.html" par="兼职招聘" cur="职位管理"/}
+	<!---延用以前 end-->
+    <!--new-->
+
+    <div class="tjob_manager clearfix">
+    	<div class="tjob_left">
+    	<!--职位列表导航-->
+    		<ul>
+    		{/foreach $status as $k => $v/}
+    			<li {/if $curr == $k/}class="cur"{//if/}>
+    				<a href="{/get_url rule='/partjob/index/'/}status-{/$k/}">{/if $curr == $k/}<i class="hbFntWes">&#xf0da;</i>{//if/}{/$v/}</a>
+    			</li>
+    		{//foreach/}
+    		</ul>
+    		<a href="javascript:;" id="refreshJob" class="tpartReBtnx"><i></i>刷新职位</a>
+    	</div>
+    	<div class="tjob_right">
+    		{/if !empty($joblist)/}
+    		<table class="tjob_ing">
+    		{/foreach $joblist as $job/}
+    			<tr class="{/cycle values='bgfa,'/}">
+    				<td style="width:280px">
+    					<p>
+    						<a href="{/$job.job_link/}" target='_blank' class="name">{/base_lib_BaseUtils::cutstr($job.station, 10, 'utf-8', '', '…')/}</a>
+    						<span class="gray9">[{/$salarytypes[$job.salary_type]/}]</span>
+    						{/if $job.expire_tips/}<span class="exptime">即将过期</span>{//if/}
+    					</p>
+    					<span class="gray9_12 mgt5">到期时间：{/$job.effect_time/}</span>
+    				</td>
+    				<td>
+    					<p><label>
+    						<span class="orange">{/$job.salary/}</span>
+    						<span class="gray9">{/$units[$job.salary_unit]/}</span>
+    					</label>{/if !empty($job['address']) && $job['is_need_workaddress'] != 2/}<span class="gray6">{/base_lib_BaseUtils::cutstr($job.address,10,'utf-8','','…')/}</span>{/else/}<span class="gray6">不限固定工作地点，全国可做</span>{//if/}</p>
+    					<p class="soud mgt5">已收到<span class="orange">{/$job.apply_nums/}</span>份报名</p>
+    				</td>
+    				<td class="link" data-jobid='{/$job.job_id/}'>
+                        <span class="status_tab">{/if $job['status']==4/}已暂停{/else/}招聘中{//if/}</span>
+    					<a href="javascript:;" data-act='setExpire'>停止招聘</a>
+    					<a href="javascript:;" data-act='setPause'>{/if $job['status']==4/}开启招聘{/else/}暂停招聘{//if/}</a>
+    					{/if {/$job.apply_nums/} > 0/}
+    					<!--<a href="javascript:;" data-act='modJobExpire' class="mgt5">延长招聘时间</a>-->
+    					{/else/}
+    					<a href="javascript:;" data-act='modJob'>修改职位</a>
+    					{//if/}
+    				</td>
+    			</tr>
+    		{//foreach/}
+    		</table>
+    		{/$pager/}
+	    	{/else/}
+			<div class="noData">没有正在招聘的职位信息</div>
+	    	{//if/}    		
+	    </div>
+    </div>
+    <!--new end-->
+	{/include file="footer.html"/}
+</body>
+<script>
+var modJobExpire;
+hbjs.use('tools.cookie, widge.overlay.confirmBox, widge.overlay.hbDialog, product.hbCommon', function(cookie, ConfirmBox, Dialog, $){
+	
+	var setCompanyAgency = new Dialog({
+ 		idName : 'setCompanyAgencyDialog',
+        title : '设置招聘类型',
+        close : 'x',
+        isAjax : true,
+        width :300
+	});
+	
+	$('#setCompanyAgency').on('click', function(e){
+		tourl = "{/get_url rule='/part/setCompanyAgency/callBackPage-index'/}";
+		setCompanyAgency.setContent({
+			isOverflow: true,
+			content: tourl
+		}).show().on('loadComplete', function(){
+            //this.oneCloseEvent('#subButton');
+			/* 弹窗 */
+			var self = this;
+	        this.query("#subButton").on('click', function() {
+	           //提交
+	           var agency = $("input[name='agency']:checked").val();
+	           var params = {agency:agency};
+            
+	            $.post('{/get_url rule="/part/setCompanyAgencyDo/"/}', params, function(data) {
+	               	if (data.error) {
+						ConfirmBox.timeBomb(data.error, {name : 'fail', width: 400});
+						self.hide();
+						return;
+					}
+	               	ConfirmBox.timeBomb(data.success, {name : 'success', width: 200});
+	               	SelectCallBack();
+	               	self.hide();
+	               	setTimeout("location.href='{/get_url rule='/partjob/jobV2'/}'", 1000);
+	            }, "json");
+	        }).after('', function() {
+	        	this.query('#subButton').off();
+	        })
+		});
+	}); 
+
+	modJobExpire = new Dialog({
+		idName : 'classiscDialog',
+		title : '职位延期',
+		close : 'x',
+		isAjax : true,
+		width : 400
+	});
+	
+	$('a[data-act=modJobExpire]').on('click', function(e){
+		job_id = $(this).parent().attr('data-jobid');
+		tourl = '{/get_url rule="/partjob/ModJobExpire/"/}'+"job_id-"+job_id;
+		modJobExpire.setContent({
+			isOverflow: true,
+			content: tourl
+		}).show();
+	});
+	
+	var pWidth = 70,fontWidth = 18,job_id,tourl,title;
+
+	var submitHTML = [
+		'<p style="margin-bottom:30px">是否要设置为已过期？</p>',
+		//'<div><label class="checkbox_a"><input id="isCheckShow" type="checkbox" value="1" />下次不再提示</label></div>'
+	].join('');
+
+	$('a[data-act=setExpire]').on('click', function(e){
+		job_id = $(this).parent().attr('data-jobid');
+		tourl = "/partjob/SetJobExpire/";
+		title = '设置为已过期';
+		ConfirmBox.confirm(submitHTML, title, function(){
+			this.hide();
+			submitResult();	
+		}, null, {width:300});
+	});
+	
+	$('a[data-act=modJob]').on('click', function(e){
+		job_id = $(this).parent().attr('data-jobid');
+		location.href='{/get_url rule="/partjob/jobV2/"/}'+"job_id-"+job_id;
+	});
+    $("a[data-act=setPause]").click(function(){
+        var _that = $(this);
+        var jobId = _that.parent().attr('data-jobid');
+        $.post("{/get_url rule='/partjob/setJobPause'/}",{job_id:jobId},function(res){
+            if (!res.status) {
+                ConfirmBox.timeBomb(res.msg, {name : 'fail', width: 400});
+                return;
+            }
+            _that.text(res.str);
+            _that.parent().find('span').text(res.statusstr);
+            ConfirmBox.timeBomb(res.msg, {name : 'success', width: 200});
+        },'json');
+    });
+
+	//刷新职位
+    $("#refreshJob").click(function(){
+    	var hasJob = $(".tjob_ing tr").length;
+    	if(!hasJob){
+    		ConfirmBox.timeBomb('您当前还没有发布职位，不能刷新哦', {name : 'fail', width: 400});
+    		return;
+    	}
+        var params = {};
+        $.post('{/get_url rule="/part/refureshAllJobs/"/}', params, function(data) {
+            if (data.error) {
+                ConfirmBox.timeBomb(data.error, {name : 'fail', width: 400});
+                return;
+            }
+
+            ConfirmBox.timeBomb(data.success, {name : 'success', width: 200});
+        }, "json");
+    });
+	
+	function submitResult(){
+			$.ajax({
+	            url:tourl,
+	            type:"post",
+	            dataType: "json",
+	            contentType: "application/x-www-form-urlencoded; charset=utf-8",
+	            data: {"job_id":job_id},
+	            success:function(json){
+	                if(json.status||false){
+						ConfirmBox.confirm(json.error, '系统提示', true);
+	                    return false;
+	                }
+	                if(!(json.success||false)){
+						ConfirmBox.alert(json.error, null, { title: title });
+	                    return false;
+	                }
+					var msg = json.success;
+					ConfirmBox.timeBomb(msg, {
+						name: 'success',
+						width: pWidth + msg.length * fontWidth,
+						timeout: 1000
+					});
+					setTimeout('location.reload()', 1000);
+	                return false;
+	            }
+	        });
+	        return false;
+	}
+	function SelectCallBack(){
+	    $("#setCompanyAgency").hide();
+	    $("#setCompanyAgencyLast").show();
+	}
+});
+</script>
+</html>

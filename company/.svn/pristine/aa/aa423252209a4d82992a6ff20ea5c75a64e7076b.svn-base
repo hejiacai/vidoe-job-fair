@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+<title>汇博人才网_招聘中心_职位列表</title>
+<!–[if lt IE9]> 
+<script src="/js/html5.js"></script>  
+<![endif]–>
+<link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='comback.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='icons.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='demo.css'/}" />
+
+<script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.min.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='ui_uploadify.js'/}"></script>
+<style type="text/css">
+.part{}
+.part .hd{border-bottom:1px solid #dadada;height:40px;}
+.part .hd a{height:38px;line-height:38px;font-size:14px;margin:0 10px;padding:0 10px;display:inline-block;float:left;display:inline;border:1px solid #dadada;border-top:2px solid #dadada;border-bottom:0;color:#666;}
+.part .hd a:hover{background:#f8f8f8;}
+.part .hd a.cu{font-weight:bold;border-top:2px solid #54728C;border-bottom:1px solid #fff;}
+.part .hd a.cu:hover{background:#fff;}
+
+
+.part .bd{padding:20px;zoom:1;}
+
+/*引导*/
+.bd .guid{margin:0 92px 45px;}
+.bd .guid ul li{float:left;display:inline; text-align:center;background:#f3f3f3;width:360px;height:28px;border-top:1px solid #e0e0e0;border-left:1px solid #e0e0e0; position:relative; z-index:1;font-size:12px;line-height:28px;}
+.bd .guid ul li i{position:absolute;right:-14px;top:0;width:14px;height:28px;background:url({/$siteurl.style/}/img/c/c.gif) no-repeat -414px 0;}
+.bd .guid ul li.fst{ z-index:2;}
+.bd .guid ul li.cu{background:#54728C;border-left:1px solid #33536f;border-top:1px solid #33536f;color:#fff;}
+.bd .guid ul li.cu i{background-position:-400px 0;}
+
+.form{margin:0 0 20px;}
+.formMod .l{width:275px;}
+.formMod .r{width:565px;}
+.form .formBtn{margin:20px 0 0 280px;}
+.formMod .r .picLoad{clear:both;width:450px;float:left;display:inline;margin:10px 0 0;}
+.formMod .r .picLoad .loadBox{width:300px;height:200px;border:1px solid #dadada;background:url({/$siteurl.style/}/img/common/loadBox.gif) no-repeat center center;}
+.formMod .r .picLoad .loadBox img{width:300px;height:200px;}
+</style>
+</head>
+<body id="body">
+<a style="margin:0;" class="btn3 btnsF12" id="btnSelect" href="javascript:void(0);">选择图片</a>
+
+<script type="text/javascript">
+
+$('#btnSelect').uploadify({
+	swf:'http://company.abc.com/swf/uploadify.swf',
+	uploader : '/test/UploadfileDo',
+	
+	queueID:'showAchi',
+	fileObjName:'Filedata',
+	fileTypeExts:'*.jpg;*.bmp;*.gif;*.jpeg;*.png;*.doc;*.docx;*.txt;*.ppt;*.pptx;*.xls;*.xlsx',
+	itemTemplate:'<li id="${fileID}" attID="" class="liAtt">'+
+		'<i class="hbIconMoon workIco">&#xe00d;</i>'+
+		'<p class="workInp">'+
+		'	<input name="attName[]" class="workTxt attName" type="text" value="${fileName}" />'+
+		'   <input name="attOrigName" type="hidden" value="${fileName}"  /> '+
+		'</p>'+
+		'<a href="javascript:$(\'#${instanceID}\').uploadify(\'cancel\', \'${fileID}\')" class="hbFntWes del">&#xf014;</a>'+
+		'</li>',
+	auto:true,
+	buttonImage:'http://style.abc.com/uploadify/submit.png',
+	fileSizeLimit:1024 * 1024 * 2,
+	fileTypeDesc:'All Files',
+	removeCompleted:false,
+	queueSizeLimit:5,
+	method:'post',
+	cancelImage: 'http://style.abc.com/uploadify/cancel.png',
+	width:85,
+	height:27,
+	multi:true,
+	onSelect:function(file){
+		achievement.bindAttEvent();
+	},
+	onUploadSuccess:function(file,data,response){
+		
+	
+	}
+});
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>职位刷新</title>
+    <!--<script type="text/javascript" src="http://assets.huibo.com/js/jquery-1.8.3.min.js?v=20150226"></script>-->
+    <link rel="stylesheet" type="text/css" href="{/version file="m_font_style.css"/}">
+    <style>
+        .single_refresh_dialog {
+
+        }
+        .single_refresh_dialog .out-con {
+            padding: 15px 25px;
+            text-align: left;
+        }
+        .single_refresh_dialog .out-con .txt {font-size: 14px;line-height: 22px;margin-bottom: 20px;}
+        .single_refresh_dialog .out-con .radio {margin-bottom: 20px;color: #666;cursor: pointer;}
+        .single_refresh_dialog .out-con .radio i {
+            color: #ccc;
+            font-size: 16px;
+            position: relative;
+            top: 2px;
+            margin-right: 4px;
+        }
+        .single_refresh_dialog .out-con .radio i.active {
+            color: #1bb867;
+        }
+        .single_refresh_dialog .out-con .btns {overflow: hidden;text-align: center;}
+        .single_refresh_dialog .out-con .btns div{
+            display: inline-block;
+            font-size: 16px;
+            line-height: 20px;
+            padding: 5px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .single_refresh_dialog .out-con .btns .ok {
+            background: #66bce4;
+            color: #fff;
+            margin-right: 20px;
+        }
+        .single_refresh_dialog .out-con .btns .ok:hover {
+            background: #31a2d6;
+        }
+        .single_refresh_dialog .out-con .btns .cancel {
+            background: #eee;
+            color: #999;
+        }
+        .single_refresh_dialog .out-con .btns .cancel:hover {
+            background: #dfdfdf;
+        }
+    </style>
+</head>
+<body >
+<input type="hidden" name="job_id" id="job_id" value="{/$job_id/}"/>
+<div class="single_refresh_dialog">
+    <div class="out-con">
+        <div class="txt">{/$msg/}</div>
+        {/if !$can_refresh/}<div class="radio"><i class="icon-AI-_-19"></i>下次不再提示</div>{//if/}
+        <div class="btns"><div class="ok refreshDo">确定</div><div class="cancel refreshCancel">取消</div></div>
+    </div>
+
+</div>
+
+
+<script>
+    /*
+    var refreshContent='<div class="out-con">' +
+        '<div class="txt">今日免费刷新的次数已用完，继续刷新需要消耗1个刷新点，确定要刷新吗？</div>' +
+        '<div class="radio"><i class="icon-AI-_-19 icon-default active"></i>下次不再提示</div>'+
+        '<div class="btns"><div class="ok">确定</div><div class="cancel">取消</div></div>'+
+        '</div>';
+    var singleRefreshDialog  = new Dialog({
+        close:'x',
+        idName:'single_refresh_dialog',
+        title:'职位刷新',
+        content:refreshContent,
+        width:442
+    })
+    */
+    hbjs.use('@imageEditor, @confirmBox, @jobsort, @orderActions', function(m) {
+
+        var $ = m['cqjob.jobsort'];
+        var Dialog = m['widge.overlay.hbDialog'],
+                ConfirmBox = m['widge.overlay.confirmBox'],
+                cookie = m['tools.cookie'],
+                orderActions = m['product.orderActions'];
+
+//        dialog = new Dialog({
+//            close : 'X',
+//            idName : 'refresh_dialog',
+//            width : 520,
+//            isOverflow : false,
+//            isAjax : true
+//        });
+
+        $('.refreshDo').click(function(){
+            var job_id = $('#job_id').val();
+            var class_name = $(".radio").find("i").hasClass("active");
+            var is_not_show = false;
+            if(class_name){
+                is_not_show = true;
+            }
+            //设置不在提示
+            if(is_not_show){
+                cookieutility.set('cd_show_refresh', 'not_show', "", "/");
+            }
+            //dialog.hide();
+            $.post("{/get_url rule='/index/refreshDo'/}",{job_id:job_id},function (data){
+                if(!data.status){
+                    if(data.code == 502){
+                        dialog_msg.setContent({
+                            'title' : '提示',
+                            'content' : '{/get_url rule="/index/GetHRManager/"/}from-refresh'
+                        }).show();
+                    }else{
+                        ConfirmBox.timeBomb(data.msg, {
+                            name: 'fail',
+                            timeout: 3000,
+                            width: data.msg*18 + 20,
+                            zIndex: 999999
+                        });
+                    }
+                    return false;
+                }
+                //dialog.hide();
+                ConfirmBox.timeBomb(data.msg, {
+                    name: 'success',
+                    timeout: 2000,
+                    width: data.msg*18 + 20,
+                    zIndex: 999999,
+                    callback:function(){
+                        window.location.reload();
+                    }
+                });
+            },'json')
+        })
+
+    })
+    
+	$('.single_refresh_dialog').on('click','.btns div',function () {
+        dialog.hide();
+    })
+    $('.single_refresh_dialog').on('click','.radio',function () {
+        if($(this).find('i').hasClass('active')){
+            $(this).find('i').removeClass('icon-default active')
+        }else {
+            $(this).find('i').addClass('icon-default active')
+        }
+    })
+</script>
+</body>
+</html>

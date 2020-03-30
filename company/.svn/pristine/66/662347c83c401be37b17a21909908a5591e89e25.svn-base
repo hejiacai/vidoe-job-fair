@@ -1,0 +1,257 @@
+<style>
+	/*.setWelfare a{background-color:#f2f2f2;color:#666;display: inline-block;padding:3px 10px;margin:7px 5px;font-family:"微软雅黑"}*/
+	/*.setWelfare .hbIconMoon{font-size:14px;color:#cacaca;margin-left: 5px}*/
+	/*.setWelfare a:hover{background-color: #eaffcc}*/
+    .right_section .rewardList .cur{background-color: #66BCE4;color:#fff;}
+	/*.setWelfare a.cur .hbIconMoon{color:#fff}*/
+     #msg{color:red;text-decoration: 2em;font-size:12px;}
+
+    .setWelfare {overflow: auto}
+    .left_section {width: 100px;text-align: center;height: 300px;color: #444444;font-size: 14px;font-weight: 400;float: left;border-right: 1px dashed #eee;border-bottom: 1px dashed #eee;}
+    .left_section a {margin-top: 20px; cursor: default;display: block;color: #444;}
+    .left_section .leftCur { color: #66BCE4; }
+    .right_section {float: left;padding-left: 20px;height: 300px;width: 552px;border-bottom: 1px dashed #eee;overflow-y: scroll;font-size: 14px; }
+    .right_section .title {width: 56px;height: 12px;font-size: 14px;font-family: Microsoft YaHei;font-weight: bold;color: rgba(68,68,68,1);line-height: 44px;}
+    .right_section .rewardList a {padding: 0 10px;height: 30px;margin: 0 10px 10px 0;background:rgba(243,243,243,1);border-radius: 2px;display: inline-block;font-size: 14px;font-family: Microsoft YaHei;font-weight: 400;color: #444444;line-height: 30px;text-align: center;cursor: default;}
+    #rewardFooter {border-top: none;padding: 15px 10px;}
+    #btnReardSave {width: 110px;height:36px; background:rgba(102,188,228,1);border-radius:4px;line-height: 36px;text-align: center;font-size: 16px;}
+    #btnRwardCancel {width:110px;height:36px;background:rgba(243,243,243,1);border-radius:4px;line-height: 36px;text-align: center;font-size: 16px;}
+    #addOtherReward {width:66px;height:30px;background:rgba(102,188,228,1);border-radius:4px;font-size:14px;font-family:Microsoft YaHei;font-weight:400;color:#fff;line-height:30px;text-align: center;}
+</style>
+<form action="/reward/rewardDo/" method="post" id="formreward" onsubmit='return false'>
+    <!--<p style="color:red;font-size:12px;margin-left: 5px;padding:15px 15px 0 15px">最多可选择12项</p>-->
+	<div style="width:673px;" id='reward' class="dialogCont setWelfare">
+<!--		{/if count($all_reward_data > 0)/}-->
+<!--                    {/foreach $all_reward_data as $reward/}-->
+<!--                        <a href="javascript:;" {/if in_array($reward['reward_id'],$company_default_rewards)/}class="cur"{//if/}date-rewardid={/$reward['reward_id']/} data-type='default'>{/$reward['reward_name']/}<i class="hbIconMoon">&#xe0fb;</i></a>-->
+<!--                    {//foreach/}-->
+<!--                {//if/}-->
+
+<!--                {/if count(company_other_rewards)>0/}-->
+<!--                    {/foreach $company_other_rewards as $reward/}-->
+<!--                        <a href='javascript:;'  data-type='other' date-rewardid=0 class='cur'>{/$reward/}<i class="hbIconMoon">&#xe0fb;</i></a>-->
+<!--                    {//foreach/}-->
+<!--                {//if/}-->
+        <div class="left_section">
+            <ul>
+                {/foreach $all_reward_data as $key => $val/}
+                <a href="#{/$val['flag']/}">{/$val['category_name']/}</a>
+                {//foreach/}
+            </ul>
+        </div>
+        <div class="right_section">
+            <ul>
+                {/foreach $all_reward_data as $key => $val/}
+                <li id="{/$val['flag']/}">
+                    <span class="title">{/$val['category_name']/}</span>
+                    <div class="rewardList">
+                        {/foreach $val['reward_data'] as $k => $v/}
+                        <a href="javascript:void(0);" {/if in_array($v['reward_id'],$company_default_rewards)/}class="cur"{//if/}date-rewardid={/$v['reward_id']/} data-type='default'>{/$v['reward_name']/}</a>
+                        {//foreach/}
+                        {/if $val['flag'] == 'common'/}
+                            {/foreach $company_other_rewards as $k => $v/}
+                            <a href="javascript:void(0);" data-type='other' date-rewardid=0 class='cur'>{/$v['reward_name']/}</a>
+                            {//foreach/}
+                        {//if/}
+                    </div>
+                </li>
+                {//foreach/}
+            </ul>
+            <input name='other_reward' type="text" placeholder="自定义，每个词最多6个字" style="padding: 5px;margin: 0 15px 10px 0px;height: 36px;width: 334px;border: 1px solid rgba(241,241,241,1);border-radius: 4px;" />
+            <a href="javascript:void(0);" class="btn1 btnsF12" id='addOtherReward'>添加</a>
+        </div>
+	</div>
+    <div class="dialogFooter" id="rewardFooter">
+        <a id="btnRwardCancel" href="javascript:void(0);" class="btn3 btnsF12">取消</a><a id="btnReardSave" href="javascript:void(0);" class="btn1 btnsF12">确定</a>
+    </div>
+</form>
+<script>
+    var cacheDefaultReward = '';
+    var cacheDefaultName = '';
+    var cacheOtherReward = '';
+    var count =parseInt({/$count/});
+    var liList = $('.right_section').find('li');
+    var commonHeight = 0;
+    var lifeHeight = $(liList[0]).height();
+    var salaryHeight = $(liList[0]).height() + $(liList[1]).height();
+    var workHeight = $(liList[0]).height() + $(liList[1]).height() + $(liList[2]).height();
+    var insuranceHeight = $(liList[0]).height() + $(liList[1]).height() + $(liList[2]).height() + $(liList[3]).height();
+    var leftTitle = $('.left_section').find('a');
+    $(leftTitle[0]).addClass('leftCur');
+    var reward = {
+        initialize:function(){
+                        //情况缓存数据
+                         cacheDefaultReward ='';
+                         cacheOtherReward = '';
+                         cacheDefaultName = '';
+                     $("#addOtherReward").click(function(){
+                         if(parseInt(count)>=12){
+                            $.anchorMsg("最多只能选择12项福利",{icon:'fail'});
+                             return false;
+                         }
+                         var v = $("input[name='other_reward']").val();
+                         if(v==''){
+                             $("#msg").html('添加福利不能为空');
+                             return false;
+                         }
+                         if(v.length>6){
+                             $("#msg").html('添加福利不能超过6个字符');
+                             return false;
+                         }
+                         var other_reward_html = "<a href='javascript:;' date-rewardid=0  data-type='other' class='cur'>"+v+"</a>";
+                         $(liList[0]).find('.rewardList').append(other_reward_html);
+                         count=parseInt(count)+1
+                         console.log(count);
+                     });
+                        $(".right_section").on("click", "a", function(){
+                            var c = $(this).attr('class');
+                            if(c == 'cur'){
+                                count = parseInt(count)-1;
+                                if(count <=0){count =0;}
+                                $(this).removeClass('cur');
+                            }else{
+                                if(parseInt(count)>=12){
+                                     $.anchorMsg("最多只能选择12项福利",{icon:'fail'});
+                                     return false;
+                                }
+                                count = parseInt(count)+1;
+                                $(this).addClass('cur');
+                            }
+                        });
+
+                        function scrollTarget(index) {
+                            for (var i = 0;i<leftTitle.length;i++) {
+                                if(i == index) {
+                                    $(leftTitle[i]).addClass('leftCur');
+                                }else {
+                                    $(leftTitle[i]).removeClass('leftCur');
+                                }
+                            }
+                        }
+
+                        $(".left_section").find('a').on('click',function (e) {
+                            e = e || window.e;
+                            e.preventDefault();
+                            var target = $(this).index();
+                            scrollTarget(target);
+                            switch (target) {
+                                case 0:
+                                    $('.right_section').scrollTop(commonHeight);
+                                break;
+                                case 1:
+                                    $('.right_section').scrollTop(lifeHeight);
+                                break;
+                                case 2:
+                                    $('.right_section').scrollTop(salaryHeight);
+                                break;
+                                case 3:
+                                    $('.right_section').scrollTop(workHeight);
+                                break;
+                                case 4:
+                                    $('.right_section').scrollTop(insuranceHeight);
+                                break;
+                            }
+                            //将页面滚动到对应的位置
+                        });
+                        $('.right_section').on('scroll',function () {
+                            var rightHeight = $(this).height();
+                            var ulHeight = $(this).find('ul').height();
+                            var rightScroll = $(this).scrollTop();
+                            if(rightScroll>commonHeight && rightScroll<lifeHeight) {
+                                scrollTarget(0);
+                            }else if(rightScroll>lifeHeight && rightScroll<salaryHeight) {
+                                scrollTarget(1);
+                            }else if(rightScroll>salaryHeight && rightScroll<workHeight) {
+                                scrollTarget(2);
+                            }else if(rightScroll>workHeight && rightScroll<insuranceHeight) {
+                                scrollTarget(3);
+                            }
+                        });
+                     $("input[name='other_reward']").focus(function(){
+                          $("input[name='other_reward']").attr({'placeholder':''});
+                     }).blur(function(){
+                         var v = $("input[name='other_reward']").val();
+                         if(v ==''){
+                              $("input[name='other_reward']").attr({'placeholder':'添加自定义，最多6个字'});
+                         }
+                     });
+                     $("#btnRwardCancel").click(function(){
+                         //取消并清空缓存
+                         cacheDefaultReward ='';
+                         cacheOtherReward = '';
+                         cacheDefaultName = '';
+                          $(this).closeDialog();
+                          parent.is_reward_close = true;
+                     });
+                     $("#btnReardSave").click(function(){
+                         reward.getCacheData();
+                         var _this = $(this);
+                         {/if $src == 'mrecruit'/}
+                            //save
+                            $.post("/company/UpdateRewards",{hidDefaultReward:cacheDefaultReward,hidOtherReward:cacheOtherReward},function (e) {
+                                   if(e.status){
+                                        parent.is_reward_close = true;
+                                       _this.closeDialog();
+                                   }else{
+
+                                   }
+                            },'json');
+                         {/else/}
+                         refreshReward(cacheDefaultReward,cacheDefaultName,cacheOtherReward);
+                         _this.closeDialog();
+                         {//if/}
+                    $()
+
+                     });
+        },
+        successCallBack:function(result){
+                    
+                },
+                getCacheData:function(){
+                     $("#reward a").each(function(){
+                        var c = $(this).attr('class');//是否选择
+                        var type = $(this).attr('data-type');
+                        
+                        if(c == 'cur'){
+                            if(type =='default'){
+                                var reward_id = $(this).attr('date-rewardid');
+                                var reward_name = $(this).html();
+                                 reward_name = reward_name.toLocaleLowerCase();
+                                reward_name = reward_name.substring(0,reward_name.indexOf("<i"));
+                                if(cacheDefaultName == ''){
+                                     cacheDefaultName = reward_name;
+                                }else{
+                                    cacheDefaultName = cacheDefaultName + ','+reward_name;
+                                }
+                                if(cacheDefaultReward == ''){
+                                    cacheDefaultReward = reward_id;
+                                }else{
+                                    cacheDefaultReward = cacheDefaultReward + ','+reward_id;
+                                }
+                            }else{
+                                var reward = $(this).html();
+                                 reward = reward.toLocaleLowerCase();
+                                reward = reward.substring(0,reward.indexOf("<i"));
+                                if(cacheOtherReward == ''){
+                                    cacheOtherReward = reward;
+                                }else{
+                                    cacheOtherReward = cacheOtherReward + ','+$.trim(reward);
+                                }
+                            }
+                        }
+                    }); 
+                }
+                
+        }   
+reward.initialize();    
+    
+//       $.post('{/get_url rule="/department/deletedept/"/}',{'dept_id':deptid},function(result){
+//             if(result.success){
+//                var del = $(v).parents('.s');
+//                del.empty().remove();
+//                return;
+//             }else{
+//                  $.anchorMsg(result.error,{icon:'fail'});
+//             }
+//         })
+</script>

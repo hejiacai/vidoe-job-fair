@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>群发短信</title>
+    <link rel="stylesheet" type="text/css" href="{/version file='m_font_style.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='resumePartTime.css'/}" />
+    <script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.min.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='common.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='dialog.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='version.js'/}"></script>
+    <script type="text/javascript">
+        window.CONFIG = {
+            HOST: '//assets.huibo.com',
+            COMBOPATH: '/js/v2/'
+        }
+    </script>
+    <script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='global.js'/}"></script>
+    <style>
+        .msg-all{width: 100%;}
+        .msg-all-list{height: 350px;overflow-y: auto;}
+        .msg-all .detail-all-top{margin-top: 0px;border: none;border-bottom: 1px solid #f1f1f1;box-shadow: none;padding: 10px 15px;}
+        .msg-all .top-head{align-items: center;}
+        .top-head-check i.checked{color: #ffb20e;}
+        .top-head-check{position: relative;width: 30px;height: 37px;}
+        .top-head-check i{font-size: 15px;color: #ccc;position: absolute;left: 0;  top:13px;}
+        .check.checked-hover .top-head-check .checked{display: flex;}
+        .check.checked-hover .top-head-check .noCheck{display: none;}
+        .check .top-head-check .checked{display: none;}
+        .checkNum{text-align: left;padding:10px 15px;font-size: 12px;color: #666;}
+        .checkNum span,.checkNum em{color: #ffb20e;}
+        .top-head-check,.top-head-img,.top-head-info{float: left;}
+        .top-head-img img{width: 60px;height: 60px;overflow: hidden;}
+        .top-head-info{margin-left: 20px;}
+        .top-head-info h6{font-size: 14px;color: #444;text-align: left;}
+        .top-head-info p{font-size: 12px;color: #444;text-align: left;}
+        .send-text{padding: 15px;}
+        .top-head-right{float: right;}
+        /*.send_sms{height:450px;overflow-y:auto;position: relative;}*/
+        /*#inviteFormBtn{position: fixed;bottom: 0;right: 30px;}*/
+    </style>
+</head>
+<body style="background: #fff;">
+<div class="msg-all">
+    {/if empty($job)/}
+    <p>今日发送次数已达到上限，明日可继续发送</p>
+    {/else/}
+    <p class="checkNum">您已选中<span>0</span>条，还剩余 <em>20</em>条，当前岗位今日剩余<strong>{/$job_sms_count/}</strong>条</p>
+    {//if/}
+    <div class="msg-all-list">
+    {/foreach $job as $k=>$v/}
+    <a href="javascript:void(0);" class="check" data-id="{/$v['person_id']/}">
+        <div class="detail-all-top">
+            <div class="top-head clearfix">
+                <div class="top-head-check">
+                    <i class="icon-particulars-require checked"></i>
+                    <i class="icon-uniE6002 noCheck"></i>
+                </div>
+                <div class="top-head-img">
+                    <img src="{/if !empty($v['photo_url'])/}{/$v['photo_url']/}{/else/}{/$siteurl.style/}/img/v2/resumeM/name.png{//if/}" width="60" height="60">
+                    <!--<img src="{/$siteurl.style/}/img/job/newjob/default_logo.png" alt="">-->
+                </div>
+                <div class="top-head-info">
+                    <!--<h6 class="color-1">{/$v['user_name']/}</h6>
+                    <p class="color-1">{/if $v['sex']==1/}男{/else/}女{//if/}{/if !empty($v['birthday2'])/}/{/$v['age']/}{//if/}{/if !empty($v['in_school'])/}/{/$v['in_school']/}{//if/}</p>-->
+                    <h6>{/$v['user_name']/}</h6>
+                    <p>{/if $v['sex']==1/}男{/else/}女{//if/}{/if !empty($v['birthday2'])/}/{/$v['age']/}{//if/}{/if !empty($v['in_school'])/}/{/$v['in_school']/}{//if/}{/if $v['degree']/}/{/get_name degree=$v['degree']/}{//if/}</p>
+                    {/if $v['jobsortexp']/}<p>求职意向：{/implode(' | ',$v['jobsortexp'])/}</p>{//if/}
+                </div>
+                <div class="top-head-right">
+                    <em class="extra-tit tit-blue">{/if !empty($v['offer_id'])/}已录用{/else/}待面试{//if/}</em>
+                </div>
+            </div>
+        </div>
+    </a>
+    {//foreach/}
+    </div>
+    <input type="hidden" id="person_ids" value=""/>
+    <input type="hidden" id="job_flag" value="{/$job_flag/}"/>
+</div>
+<div id="inviteFormBtn" class="formBtn" style="margin-top: 20px;text-align: right;">
+    {/if !empty($job)/}
+    <a href="javascript:void(0);" id="toContent" class="btn1 btnsF14">发送短信</a>
+    {//if/}
+</div>
+<div class="sendsms" style="display: none;">
+    <div class="send-text">
+        <textarea id="content" style="margin-top: 10px;border: 1px solid #f1f1f1;width: 100%;min-height: 120px;font-size: 14px;" placeholder="请输入短信内容（限70字）" maxlength="70"></textarea>
+    </div>
+    <div class="formBtn" style="margin-top: 20px;text-align: right;">
+        <a href="javascript:void(0);" id="sendSms" class="btn1 btnsF14">发送</a>
+    </div>
+</div>
+
+<script>
+    var sendMsgDialog='';
+  hbjs.use('@css3, @jobFlexSlider,@confirmBox', function(m) {
+    var ConfirmBox  = m['widge.overlay.confirmBox'],
+      Dialog        = m['widge.overlay.hbDialog'],
+      $             = m['jquery'],
+      sendMsgDialog = new Dialog({
+        close: 'x',
+        idName: 'sendMsg_dialog',
+        title: '短信内容',
+        width: 500,
+        content: '.sendsms',
+        isAjax: true
+      }),
+      fontSize = 18,
+      pWidth = 70;
+    $('#toContent').on('click',function () {
+        sendMsgDialog.hide();
+        if($('#person_ids').val()==''){
+            var msg="请选择求职者";
+            ConfirmBox.timeBomb(msg, {
+                name : "fail",
+                timeout : 2000,
+                width: fontSize * msg.length + pWidth
+            });
+
+            return;
+        }
+
+
+        $('.sendsms').show();
+     // sendMsgDialog.setContent({content: '.sendsms'});
+      sendMsgDialog.show();
+    });
+
+    $('#sendSms').on("click",function(){
+      var content = $('#content').val();
+      if(content==''){
+        var msg="请输入短信内容";
+        ConfirmBox.timeBomb(msg, {
+          name : "fail",
+          timeout : 2000,
+          width: fontSize * msg.length + pWidth
+        });
+        return;
+      }
+      if(content.length>70){
+        var msg="短信内容不能超过70个字";
+        ConfirmBox.timeBomb(msg, {
+          name : "fail",
+          timeout : 2000,
+          width: fontSize * msg.length + pWidth
+        });
+        return;
+      }
+        $.post("{/get_url rule='/part/SendSmsDo'/}",{content:content,person_ids:$('#person_ids').val(),job_flag:"{/$job_flag/}"},function(res){
+            if(res.status){
+                ConfirmBox.timeBomb(res.msg, {
+                    name : "success",
+                    timeout : 2000,
+                    width: fontSize * res.msg.length + pWidth
+                });
+                setTimeout("parent.location.reload();",2000);
+                return;
+            }
+            ConfirmBox.timeBomb(res.msg, {
+                name : "fail",
+                timeout : 1000,
+                width: fontSize * res.msg.length + pWidth
+            });
+        },'json');
+    });
+
+  });
+
+
+
+  var totalLimit = "{/$job_sms_count/}";//同一岗位当天最多100
+  var curLimit = 20;
+  var strId = [];
+  $('.checkNum em').text(curLimit);
+  $(".msg-all .check").on('click',function () {
+    var id = $(this).attr('data-id');
+    if(strId.length < curLimit && strId.length < totalLimit || $(this).hasClass('checked-hover')){
+      if($(this).hasClass('checked-hover')){
+        $(this).removeClass('checked-hover');
+        strId.splice($.inArray(id,strId),1);
+      }else{
+        $(this).addClass('checked-hover');
+        strId.push(id);
+      }
+    }else if(strId.length >= totalLimit){
+      showMsg("该岗位今日还剩余"+totalLimit+"条");
+    }else{
+      showMsg("一次最多发送"+curLimit+"条");
+    }
+    $('.checkNum span').text(strId.length);
+    $('.checkNum em').text(curLimit-strId.length);
+    $('.checkNum strong').text(totalLimit-strId.length);
+    $('#person_ids').val(strId.join(','));
+  });
+
+
+  function showDiolog() {
+    $('.body-bg-cover').show();
+    $('.alert').show();
+  }
+  function hideDiolog() {
+    $('.body-bg-cover').hide();
+    $('.dialog').hide();
+  }
+  $('.confirm').on('click',function () {
+    hideDiolog();
+  });
+  $('.body-bg-cover').on('click',function () {
+    hideDiolog();
+  })
+  function showMsg(str){
+    showDiolog();
+    $('#msg').text(str);
+  };
+//  $('#toContent').on('click',function () {
+//    var person_ids = $('#person_ids').val();
+//    if(person_ids == ''){
+//      showMsg('请选择需发送人员');
+//      return false;
+//    }
+//    $('.body-bg-cover').show();
+//    $('.sendsms').show();
+//    $('#content').val('');
+//
+//  });
+  $('#sendSms').on("click",function(){
+    var content = $('#content').val();
+    if(content==''){
+      showMsg('请输入短信内容');
+      return;
+    }
+    if(content.length>70){
+      showMsg('短信内容不能超过70字');
+      return;
+    }
+
+  });
+
+
+</script>
+</body>
+</html>

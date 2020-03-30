@@ -1,0 +1,239 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+<title>{/$title/}</title>
+<!–-[if lt IE9]> 
+<script src="{/version file='html5.js'/}"></script>   
+<![endif]-–>
+<link rel="stylesheet" type="text/css" href="{/version file="base.css"/}" />
+<link rel="stylesheet" type="text/css" href="{/version file="comback.css"/}" />
+<link rel="stylesheet" type="text/css" href="{/version file="v2-reset.css"/}" />
+<link rel="stylesheet" type="text/css" href="{/version file="job-manage.css"/}" />
+<script type="text/javascript" language="javascript" src="{/version file="jquery-1.8.3.min.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="common.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="dialog.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="mediaquery.js"/}"></script><!--响应式兼容-->
+<script type="text/javascript" language="javascript" src="{/version file="ui_menudisplay.js"/}"></script><!--下拉菜单-->
+<script type="text/javascript" language="javascript" src="{/version file="ui_inputFocus.js"/}"></script><!--输入框获取焦点-->
+<script type="text/javascript" language="javascript" src="{/version file="ui_hovchange.js"/}"></script><!--指向改变class-->
+<script type="text/javascript" language="javascript" src="{/version file="ui_drop.js"/}"></script><!--下拉模拟-->
+<script type="text/javascript" language="javascript" src="{/version file="ui_dragsort.js"/}"></script><!--拖动插件-->
+<script type="text/javascript" language="javascript" src="{/version file="jquery.form.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='ui_validate.js'/}"></script>
+</head>
+<body id="body">
+<style type="text/css">
+.part{}
+.part .hd{border-bottom:1px solid #dadada;height:40px;}
+.part .hd .l{float:left;display:inline; }
+.part .hd .l a{height:38px;line-height:38px; font-size:14px;margin:0 10px;padding:0 10px;display:inline-block;float:left;display:inline;border:1px solid #dadada;border-top:2px solid #dadada;border-bottom:0;color:#666;}
+.part .hd .l a:hover{background:#f8f8f8;}
+.part .hd .l a.cu{font-weight:bold;border-top:2px solid #54728c;border-bottom:1px solid #fff;}
+.part .hd .l a.cu:hover{background:#fff;}
+.part .hd .l .tipLay{top:6px;left:-14px;}
+.part .hd .l .tipLayTxt{line-height:23px;background:#fffce3;border:1px solid #fad5a8;color:#d78727}
+.part .hd .l .tipLay .tipArr{top:9px;background:url({/$siteurl.style/}/img/common/contrl.gif) no-repeat 0 -5px;}
+
+
+.part .hd .r{float:right;display:inline;margin:5px 0 0;}
+.part .hd .r a i.hbIconMoon{font-size:12px;margin:0 5px 0 0;}
+
+.bd .lst{padding:10px 0;zoom:1; position:relative; z-index:1;}
+.bd .lst ul li{vertical-align:bottom;border:1px solid #fff;border-bottom:1px solid #ebebeb; position:relative; z-index:1;overflow:hidden;padding:10px 0;float:left;width:960px;}
+.bd .lst ul li.hov{background:#f7f7f7; z-index:2;}
+.bd .lst ul li .dragElem{background:url({/$siteurl.style/}/img/common/contrl.gif) no-repeat -789px 0;width:13px;height:23px; position:absolute;left:5px;top:50%; cursor:move;display:none;margin:-12px 0 0;}
+.bd .lst ul li a.hbFntWes{font-size:14px; font-weight:bold; float:left; display:inline; margin:5px 0 0 10px; color:#999;}
+.bd .lst ul li a.hbFntWes:hover{color:#00aaff;}
+.bd .lst ul li.hov .dragElem{display:block;}
+.bd .lst ul li .l{float:left;display:inline;width:555px;margin:0 0 0 30px;}
+.bd .lst ul li .r{float:right;display:inline;width:325px;text-align:right;font-size:12px;padding:0 15px 0 0;}
+.bd .lst ul li.lstSdw{background:#fffae7;border:1px dashed #f8e7ad;}
+.bd .lst ul li .l .jobN{}
+.bd .lst ul li .l .jobN a{font-size:14px;font-weight:bold;color:#404040;}
+.bd .lst ul li .l .jobN a:hover{color:#16a6f2;}
+.bd .lst ul li .l .jobN em{font-size:12px;margin-left:10px; cursor:text;}
+
+.bd .lst ul li .r i{color:#999;margin:0 10px;}
+.bd .lst ul li .r em{margin:0 0 0 10px;color:#999; cursor:text;}
+
+
+
+.bd .lst .tooltip{position:absolute;top:-14px;left:-15px;display:none;}
+.bd .lst .tooltip-inner{width:130px;max-width:130px;}
+.bd .lst .hbTip .top .tooltip-arrow{left:24px;}
+
+.section .noData{background:none;}
+.section .noData p{margin-bottom:10px;}
+.bd .lst ul li.hov .tooltip{display:block;}
+</style>
+{/include file="nav.html" parent="网络招聘" cur="职位管理"/}
+<div class="content" id="content">
+	<section class="section">
+		<hgroup>
+        	<div class="part">
+            	<div class="hd">
+                	<div class="l"><a href="{/get_url rule="/job/index/" data="status=$use_job_status"/}" class="cu">招聘中（<em id="jobListUseCount">{/$use_job_count/}</em>）</a><a href="{/get_url rule="/job/index/" data="status=$stop_job_status"/}">已结束招聘（<em id="jobListStopCount">{/$stop_job_count/}</em>）</a>{/if $job_over_time_count>0/}<div class="tipPos"><div class="tipLay"><div class="tipLayTxt tipw100"><div class="tipArr"></div>{/$job_over_time_count/}个职位刚刚过期</div></div></div>{//if/}</div>
+                    <div class="r"><span class="btn"><a href="javascript:void(0)" onclick="joblist.refreshAllJob()" class="btn3 btnsF12"><i class="hbIconMoon">&#xe11b;</i>刷新全部</a><a target="_blank" href="{/get_url rule="/job/add/"/}" class="btn1 btnsF12"><i class="hbIconMoon">&#xe102;</i>发布职位</a></span></div>
+                    <div class="clear"></div>
+                </div>
+                <div class="bd">
+                    <div class="lst" id="lst">
+<!--                        <ul class="dragsort-ver">-->
+                        <ul>
+                        	{/section name=job loop=$job_list/}
+                            <li id="li{/$job_list[job].job_id/}">
+<!--                            	<div class="dragElem"></div>-->
+                            	<a class="hbFntWes" href="#" style="display:none;">&#xf175;</a>
+                                <a class="hbFntWes" href="#" style="display:none;">&#xf176;</a>
+                                <div class="l">
+                                	<div class="jobN"><a href="{/get_url rule="/job/mod/" data="job_id={/$job_list[job].job_id/}"/}">{/$job_list[job].station/}</a>
+                                    {/if $job_list[job].day>=0 && $job_list[job].day<=5/}
+                                    <em class="red" title="{/if $job_list[job].day == 0/}今天{/else/}{/$job_list[job].day/}天后{//if/}结束招聘">{/if $job_list[job].day == 0/}今天{/else/}{/$job_list[job].day/}天后{//if/}</em>
+                                    {/else/} 
+                                    <em class="gray" title="{/date('Y-m-d', strtotime($job_list[job].end_time))/}结束招聘">{/date('Y-m-d', strtotime($job_list[job].end_time))/}</em>
+                                    {//if/}
+                                    </div>
+                                </div>
+                                <div class="r"><a href="javascript:void(0);" onclick="joblist.refreshJob({/$job_list[job].job_id/})" class="lnk rfLnk">刷新</a><em id="refreshSpan{/$job_list[job].job_id/}">{/$job_list[job].issue_time_name/}</em><i>|</i><a href="{/get_url rule="/job/mod/" data="job_id={/$job_list[job].job_id/}"/}">编辑</a><i>|</i><a href="javascript:void(0);" onclick="joblist.stopJob({/$job_list[job].job_id/})" class="lnk">停止招聘</a><i>|</i><a href="{/$job_list[job].job_link/}" target="_blank" class="lnk">预览</a></div>
+<!--                               <div class="r">
+                                	<span class="rem remView"><p class="num">{/$job_list[job].job_visit_num/}</p><p>浏览量</p>
+									<div class="remTip" style="display:none;">
+										<div class="remTipBd">
+									    	<div class="remTipArr"></div>
+									        <div class="remTipTxt"><p>今日：{/$job_list[job].today_job_visit_num/}</p><p>昨日：{/$job_list[job].tomorrow_job_visit_num/}</p><p>近7天：{/$job_list[job].week_job_visit_num/}</p><p>近1个月：{/$job_list[job].month_job_visit_num/}</p></div>
+									    </div>
+									</div>
+                                    </span>
+                                    <span class="line">&nbsp;</span>
+                                    <span class="rem remGet"><p class="num">{/$job_list[job].job_apply_num/}</p><p>收到简历</p>
+									<div class="remTip" style="display:none;">
+										<div class="remTipBd">
+									    	<div class="remTipArr"></div>
+									        <div class="remTipTxt"><p>今日：{/$job_list[job].today_job_apply_num/}</p><p>昨日：{/$job_list[job].tomorrow_job_apply_num/}</p><p>近7天：{/$job_list[job].week_job_apply_num/}</p><p>近1个月：{/$job_list[job].month_job_apply_num/}</p></div>
+									    </div>
+									</div>
+                                    </span>
+                                    <span class="line">&nbsp;</span>
+                                    <span class="rem"><p class="num"><a href='{/get_url rule="/apply/index" data="status=0&jobid={/$job_list[job].job_id/}"/}' class="new">{/$job_list[job].job_apply_not_reply_num/}</a></p><p><a href='{/get_url rule="/apply/index" data="status=0&jobid={/$job_list[job].job_id/}"/}' class="new">未处理简历</a></p></span>
+                                    <span class="line">&nbsp;</span>
+                                    <span class="rem"><p class="num"><a href='{/get_url rule="/apply/index" data="status=2&jobid={/$job_list[job].job_id/}"/}'>{/$job_list[job].job_apply_not_read_num/}</a></p><p><a href='{/get_url rule="/apply/index" data="status=2&jobid={/$job_list[job].job_id/}"/}'>未读简历</a></p></span>
+                                </div>
+ -->  
+                            </li>
+                            {/sectionelse/}
+								<div class="noData"><p>没有招聘中的职位</p></div>
+							{//section/}
+                        </ul>
+                        <div class="clear"></div>
+                    </div>
+<!--                    <script type="text/javascript">-->
+<!--                        $("ul.dragsort-ver:first").dragsort({dragSelectExclude:'.dragElem', dragEnd: function(){ }});-->
+<!--                    </script>-->
+                </div>
+            </div>
+        </hgroup>
+    </section>
+</div>
+{/include file="footer.html"/}
+<section class="floatRT"><a href="{/get_url rule='/about/message' domain='main'/}" target="_blank" class="serviceLink">我有问题要反馈</a><b></b></section>
+<script>
+$(document).ready(function(e) {
+	var $tSch = $('#tSch');
+	var $lst = $('.lst');
+
+<!--	$lst.find('li').find('.edTime').find('a.lnk').click(function(){-->
+<!--		$(this).parents('ul').find('.edTime').css({'z-index':'1'});-->
+<!--		$(this).siblings('.edTip').css({'display':'block'});-->
+<!--		$(this).parents('li').find('.edTime').css({'z-index':'2'});-->
+<!--	});-->
+	$lst.find('li').hover(function(){
+		$(this).addClass('hov');
+	},function(){
+		$(this).removeClass('hov');
+		$(this).find('.edTip').css({'display':'none'});
+	})
+	$lst.find('a.btn3').click(function(){
+		$(this).parents('.edTip').css({'display':'none'});
+		$(this).parents('.edTime').css({'z-index':'1'});
+	});
+	
+	$lst.find('.rem').hover(function(){
+		var $remTip = $(this).find('.remTip')
+		$(this).css({'z-index':'2'});
+		if($remTip){
+			$remTip.css({'display':'block'});
+		}else{return false};
+	},function(){
+		var $remTip = $(this).find('.remTip')
+		$(this).css({'z-index':'1'});
+		if($remTip){
+			$remTip.css({'display':'none'});
+		}else{return false};
+	});
+});
+
+var joblist = {
+		stopJob:function(job_id){
+			$.confirm('停止招聘后，职位将不再被求职者看到，确定停止吗？', '操作提示', function() {
+				$.getJSON('{/get_url rule="/job/stopjob/"/}',{job_id:job_id}, function(json) {
+		            if(json.error){
+		                $.message(json.error, { title: '系统提示', icon: 'fail' });
+		                return;
+		            }
+		            if(json.success){
+		                var jobListUseCount = parseInt($("#jobListUseCount").html());
+		                var jobListStopCount = parseInt($("#jobListStopCount").html());
+		                $("#jobListUseCount").html(jobListUseCount-1);
+		                $("#jobListStopCount").html(jobListStopCount+1);
+		                $("#li"+job_id).remove();
+		                $.anchorMsg('停止招聘成功');
+		                if($('#lst').find('li').length <=0){
+			        		$('#lst').find('ul').html('<div class="noData"><p>没有招聘中的职位</p></div>');
+			        	}
+		            }
+		        });
+			});
+		},
+		refreshJob:function(job_id){
+			$.getJSON('{/get_url rule="/job/refreshjob/"/}',{job_id:job_id}, function(json) {
+	            if(json.error){
+	            	if(json.time){
+	            		$.message("离上次刷新不足30分钟，请"+json.time+"后重试！", { title: '系统提示', icon: 'fail' });
+	                    return;
+	            	}
+	                $.message(json.error, { title: '系统提示', icon: 'fail' });
+	                return;
+	            }
+	            if(json.success){
+	            	$("#refreshSpan"+job_id).html('刚刚');
+	            	$.anchorMsg('刷新职位成功');
+	            }
+	        });
+		},
+		refreshAllJob:function(){
+			$.getJSON('{/get_url rule="/job/refreshalljob/"/}&v='+Math.random(), function(json) {
+	            if(json.error){
+	                $.message(json.error, { title: '系统提示', icon: 'fail' });
+	                return;
+	            }
+	            if(json.fail){
+	            	$.message(json.failitem, { title: '系统提示', icon: 'fail' });
+	            }else if(json.success){
+	            	$.anchorMsg('刷新全部职位成功');
+	            }
+	            if(json.job_ids){
+	            	$.each(json.job_ids, function(i, item){
+            			$("#refreshSpan"+item).html('刚刚');
+            		});
+	            }
+	            return;
+	        });
+		}
+}
+</script>
+</body>
+</html>

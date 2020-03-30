@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<style>
+.schSeekerBox{width:420px;padding-bottom:10px;font-size:12px; text-align:left;}
+.schSeekerBox .lstHd{height:30px;line-height:30px;background:#e6e6e6;font-weight:bold;color:#424242;}
+.schSeekerBox .lstHd .lstHdL{float:left;display:inline;width:320px;padding:0 5px;}
+.schSeekerBox .lstHd .lstHdR{float:right;display:inline;width:40px; text-align:center;padding:0;margin:0 27px 0 0;}
+
+.schSeekerBox .lst ul li{height:30px;line-height:30px;border-bottom:1px dashed #ddd;margin:0 10px 0 0;}
+.schSeekerBox .lst ul li .lstL{float:left;display:inline;width:330px;padding:0 5px;}
+.schSeekerBox .lst ul li .lstR{float:right;display:inline;width:40px; text-align:center;}
+.schSeekerBox .lst ul li .lstR a{color:#424242;}
+.schSeekerBox .lst ul li .lstR a:hover{color:#0af;}
+.schSeekerBox .lst ul li.noData{font-size:20px;border:0;}
+</style>
+</head>
+<body>
+<div class="dgBox schSeekerBox">
+	<div class="lst">
+		{/if count($data)>0/}
+    	<div class="lstHd" ><div class="lstHdL">搜索器名称（点击开始搜索）</div><div class="lstHdR">操作</div></div>
+    	{//if/}
+    	<ul id="dataContent" {/if count($data)>6/} style="height:200px;overflow-y:scroll;"{//if/}>
+        {/section name=i loop=$data/}
+        <li id="lst{/$data[i].seeker_id/}"><div class="lstL"><a href="/resumesearch/index-seekerid-{/$data[i].seeker_id/}">{/$data[i].seeker_name/}</a></div><div class="lstR"><a href="javascript:void(0);" onClick="delSeeker({/$data[i].seeker_id/},this)">×</a></div></li>
+        {/sectionelse/}
+              <li class="noData">未创建简历搜索器</li>
+        {//section/}
+        </ul>
+<!--
+    	<table class="table">
+        	<thead>
+            	<tr>
+                	<th class="wid380" align="left">搜索器名称（点击开始搜索）</th>
+                    <th class="wid40" align="center">操作</th>
+                </tr>
+            </thead>
+            <tbody id="dataContent">
+            {/section name=i loop=$data/}
+            	<tr id="tr{/$data[i].seeker_id/}">
+                	<td class="wid380" align="left"><a href="/resumesearch/index-seekerid-{/$data[i].seeker_id/}">{/$data[i].seeker_name/}</a></td>
+                    <td class="wid40 del" align="center">
+                    	<a href="javascript:void(0);" onClick="delSeeker({/$data[i].seeker_id/},this)">×</a>
+                    </td>
+                </tr>
+             {/sectionelse/}
+              <tr><td colspan="2" class="noData">您还未创建搜索器</td></tr>
+             {//section/}
+            
+            </tbody>
+        </table>
+        
+-->
+    </div>
+</div>
+<script type="text/javascript">
+
+	function delSeeker(seekerid,fn){
+		$(fn).confirm('您确定删除该简历搜索器吗?',function(){
+			$.getJSON('{/get_url rule="/resumesearch/seekerdel/"/}',{seekerid:seekerid},function(result){
+				if(result&&result.error){
+					$.message(result.error, { title: '系统提示', icon: 'fail' });
+					return;
+				}
+				$.anchorMsg('删除简历搜索器成功');
+				$('#lst'+result.seeker_id).remove();
+
+				if($('#dataContent').find('li').length<=0){
+					$('#dataContent').append("<li class=\"noData\">未创建简历搜索器</li>");
+				}
+			});
+		});
+	}
+
+</script>
+</body>
+</html>

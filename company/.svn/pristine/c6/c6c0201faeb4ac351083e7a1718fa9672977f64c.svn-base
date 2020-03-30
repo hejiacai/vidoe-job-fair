@@ -1,0 +1,234 @@
+<!doctype html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<meta name="Keywords" content=""/>
+	<meta name="Description" content=""/>
+	<title>{/$title/}</title>
+	<!–[if lt IE9]>
+	<script src="{/version file="html5.js"/}"></script>
+	<![endif]–>
+	<link rel="stylesheet" type="text/css" href="{/version file="v2-reset.css"/}"/>
+	<link rel="stylesheet" type="text/css" href="{/version file="comback.css"/}"/>
+	<link rel="stylesheet" type="text/css" href="{/version file="icons.css"/}"/>
+	<link rel="stylesheet" type="text/css" href="{/version file="v2-widge.css"/}"/>
+	<link rel="stylesheet" type="text/css" href="{/version file="v2-pay.css"/}"/>
+	<link rel="stylesheet" type="text/css" href="{/version file="v2-pay.css"/}"/>
+	<script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.min.js'/}"></script>
+	<script type="text/javascript" src="{/version file='version.js'/}"></script>
+	<script type="text/javascript">
+        window.CONFIG = {
+            HOST: '{/$siteurl.style/}',
+            COMBOPATH: '/js/v2/'
+        }
+	</script>
+	<script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+	<script type="text/javascript" src="{/version file='global.js'/}"></script>
+	<script type="text/javascript" language="javascript" src="{/version file='confirmBox.js'/}"></script>
+	<script type="text/javascript" language="javascript" src="{/version file='dialog.js'/}"></script>
+	<style>
+		/*20160302*/
+		/* 2019.8.20优惠券改版 */
+		.pay-tab a {padding: 0 20px}
+		.youhui-box {margin: 30px 35px 30px 31px;font-family: "微软雅黑";background: url({/$siteurl.style/}/img/company/couponborder.png) 0 0/100% 100% no-repeat}
+		.youhui-box dl {
+			position: relative;
+			height: 70px;
+			overflow: hidden
+		}
+		.youhui-box dt {
+			padding: 10px 30px;
+			float: left;
+			width: 420px
+		}
+		.youhui-box .yellow {color: #ff5215;font-size: 34px;font-weight: bold;float: left}
+		.youhui-box .yellow em{
+			vertical-align: 2px;
+			font-size: 16px;
+			padding-left: 4px;
+		}
+		.youhui-box .dianwei {float: left;color: #444;font-size: 16px;margin-top: 18px; margin-left: 20px;}
+		.youhui-box .tiaoma {float: left;width: 390px;color: #666;font-size: 24px;padding-top: 30px}
+		.youhui-box .red {color: #f36861;font-size: 28px;float: left;font-weight: bold;padding-top: 25px}
+		.youhui-box .time {height: 55px;text-align: left;color: #999;font-size: 14px;line-height: 50px;margin: 0 30px;border-top:1px dashed #dadada;}
+		.youhui-box .time span {float: right;}
+		.youhui-box dl a { display: block; position: absolute; top: 16px; right: 15px; background: #ff5215; color: #fff; font-size: 14px; padding: 0 15px; border-radius: 25px; height: 35px; line-height: 35px;}
+		.youhui-box .time i { display: inline-block; padding-right: 10px;}
+		._dialog.dialog.dialogSel{background: #a3a3a3;}
+	</style>
+</head>
+<body id="body">
+{/include file="new_header.html" par="企业管理" cur="资金管理"/}
+<div class="resumentNbg">
+	{/include 'economicnav.html' par="优惠券"/}
+	<div id="pay-main" class="rMentRt" style="background:#fff; overflow:hidden;">
+		<div class="pay-container">
+			<div class="pay-tab">
+				<a {/if $state=='1'/}class="cur"{//if/} href="/commoncoupon/index/?state=1">可用</a>
+				<a {/if $state=='2'/}class="cur"{//if/} href="/commoncoupon/index/?state=2">已用</a>
+				<a {/if $state=='3'/}class="cur"{//if/} href="/commoncoupon/index/?state=3">已过期</a>
+			</div>
+			{/if !empty($coupons)/}
+				{/foreach $coupons as $key => $value/}
+					<!--<div class="youhui-box">
+                <dl class="clearfix">
+                    <dt>
+                        <strong class="yellow">{/$value['coupon_fee']/}</strong>
+                        <span class="dianwei">元<br />会员服务优惠券</span> 
+                    </dt>  
+                    <dd class="tiaoma">{/$value['coupon_code']/}</dd>
+                    <dd class="red">{/$value['state_name']/}</dd>            
+                </dl>
+                <p class="time"><span>有效期至{/$value['coupon_end_time']|date_format:'%Y-%m-%d'/}</span>购买会员服务可用于抵扣费用</p>
+            </div>-->
+					{/if $value.cash_id/}
+						<div class="youhui-box">
+							<dl class="clearfix">
+								<dt>
+									<strong class="yellow">{/round($value.money)/}<em>元</em></strong>
+									<span class="dianwei">现金抵扣券</span>
+								</dt>
+								{/if $state==1/}
+									<a href="javascript:void(0);" onclick="javascript:useCase('{/$value.validity_date_s/}')">立即使用</a>
+								{/elseif $state==2/}
+									<a href="javascript:void(0);" style="cursor: default; background: #ccc;">已使用</a>
+								{/else/}
+									<a href="javascript:void(0);" style="cursor: default;background: #ccc;">已过期</a>
+								{//if/}
+							</dl>
+							<p class="time"><span>有效期{/$value.validity_date_s/}至{/$value.validity_date_e/}</span>购买会员服务单次消费大于{/round($value.consume)/}元可直接进行抵扣</p>
+						</div>
+					{/elseif $value.pricing_id/}
+						<div class="youhui-box">
+							<dl class="clearfix">
+								<dt>
+									<strong class="yellow">{/$value.pricing_name/}</strong>
+								</dt>
+								{/if $state==1/}<a href="javascript:void(0);" onclick="useCoupon('{/$value.id/}')" >立即使用</a>{/elseif $state==2/}
+									<a href="javascript:void(0);" style="cursor: default;background: #ccc;">已使用</a>
+								{/else/}
+									<a href="javascript:void(0);" style="cursor: default;background: #ccc;">已过期</a>
+								{//if/}
+							</dl>
+							<p class="time"><span>有效期{/$value.validity_date_s/}至{/$value.validity_date_e/}</span>发布职位&nbsp;{/$value.job_free/}
+								<i></i>简历点&nbsp;{/$value.point_dow_resume/}<i></i>刷新点&nbsp;{/$value.point_job_refresh/}<i></i>推广金&nbsp;{/$value.point_re_spread/}</p>
+						</div>
+					{//if/}
+				{//foreach/}
+				<div class="page">{/$pager/}</div>
+			{/else/}
+				<div class="noData">暂无优惠券</div>
+			{//if/}
+		</div>
+	</div>
+</div>
+
+<div id="sus" class="sus"><a class="backTop hbFntWes" title="返回顶部" href="javascript:void(0);" style="display: none;">&#xf0d8;</a></div>
+{/include file="footer.html"/}
+<section class="floatRT"><a href="//www.huibo.com/about/message" target="_blank" class="serviceLink">我有问题要反馈</a><b></b></section>
+<script type="text/javascript">
+    var infoDialog, ConfirmBox;
+    hbjs.use('@confirmBox, @jobDialog', function (m) {
+        ConfirmBox = m['widge.overlay.confirmBox'],
+            Dialog = m['widge.overlay.hbDialog'],
+            cookie = m['tools.cookie'];
+        var $ = m['jquery'].extend(m['cqjob.jobDialog']);
+
+        var close = '×';
+        var width = 455;
+        var zIndex = 9999;
+        var title = '提示';
+
+        infoDialog = new Dialog({
+            close: close,
+            idName: 'informTraining_dialog',
+            title: title,
+            width: width,
+            zIndex: zIndex
+        });
+    })
+
+    //错误提示 success-成功 fail-错误 warning-警告 question-疑问  info-信息 normal-正常
+    function msg_error_box(msg) {
+        ConfirmBox.timeBomb(msg ? msg : "参数错误!", {
+            name: 'fail',
+            timeout: 2000,
+            width: 70 + msg.length * 18
+        });
+        return false;
+    }
+
+    //成功提示 success-成功 fail-错误 warning-警告 question-疑问  info-信息 normal-正常
+    function msg_success_box(msg) {
+        ConfirmBox.timeBomb(msg ? msg : "成功!", {
+            name: 'success',
+            timeout: 1000,
+            width: 70 + msg.length * 18
+        });
+        return true;
+    }
+
+    function useCase(validity_date_s) {
+        var now = '{/date("Y-m-d",time())/}';
+        if (validity_date_s <= now) {
+            window.location = '{/get_url rule="/pay/index/"/}?allot=1';
+        } else {
+            msg_error_box('该现金券不在有效期内，请在有效期内使用');
+        }
+
+    }
+
+    function useCoupon(id) {
+        $.confirm('确定要使用此优惠券吗？', '提示', function () {
+            $.ajax({
+                type: 'post',
+                url: '{/get_url rule="/commoncoupon/UseCoupon"/}',
+                data: {id: id},
+                dataType: 'json',
+                success: function (data) {
+                    if (data.code == '200') {
+                        msg_success_box(data.msg);
+                        setTimeout(function () {
+                            window.parent.location.reload();
+                        }, 800);
+                    } else {
+                        if (data.code == '501') {
+                            var thtml = ['<div class="warning_dialog" style="padding:25px 11px 15px;">',
+                                '<dl><dt></dt>',
+                                '<dd><p style="padding-top:11px">您的企业信息<b style="color:red;">尚未审核</b>，请上传企业资质</p>',
+                                '<span><input style="display:inline-block; vertical-align:-2px; margin-right:5px;" class="infoDialogCheck" type="checkbox"/>不再提示</span>',
+                                '<a href="/licencevalidate/?step=4" style="margin:30px 0 0 69px;" class="cpromisetip">上传资质</a>',
+                                '</dd></dl>',
+                                '</div>'].join('');
+                            infoDialog.setContent(thtml).show();
+                        } else if (data.code == '502') {
+                            var thtml = ['<div class="warning_dialog" style="padding:25px 11px 15px;">',
+                                '<dl><dt></dt>',
+                                '<dd><p style="padding-top:11px">您的企业信息<b style="color:red;">审核失败</b>，请重新上传企业资质</p>',
+                                '<span><input style="display:inline-block; vertical-align:-2px; margin-right:5px;"class="infoDialogCheck" type="checkbox"/>不再提示</span>',
+                                '<a href="/licencevalidate/" style="margin:30px 0 0 95px;" class="cpromisetip">重新上传</a>',
+                                '</dd></dl>',
+                                '</div>'].join('');
+                            infoDialog.setContent(thtml).show();
+                        } else if (data.code == '503') {
+                            var thtml = ['<div class="warning_dialog" style="padding:25px 11px 15px;">',
+                                '<dl><dt></dt>',
+                                '<dd><p style="padding-top:11px">您的企业信息<b style="color:red;">正在审核中</b></p>',
+                                '</dd></dl>',
+                                '<div style="height: 45px" ></div>',
+                                '</div>'].join('');
+                            infoDialog.setContent(thtml).show();
+                        } else {
+                            msg_error_box(data.msg);
+                        }
+                    }
+                }
+            });
+        });
+    }
+</script>
+{/include file="chat/chat.html"/}
+</body>
+</html>
+

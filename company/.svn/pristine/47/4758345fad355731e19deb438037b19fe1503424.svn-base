@@ -1,0 +1,183 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+</head>
+<body>
+<style>
+.invBox{width:460px;font-size:12px;}
+.invBox .invFormHd{ padding-bottom:10px;}
+.invBox .formMod{margin-bottom:0px; margin-left:0px;}
+.invForm .formMod .l{width:70px; font-size:12px;}
+.invForm .formMod .l i{font-size:14px;}
+.invForm .formMod .r{}
+.invForm .formMod .r .formTextarea textarea.textarea{width:360px;height:50px;padding:0 0 0 5px;line-height:22px;font-size:12px;}
+.invForm .invFormTxt{margin:0 0 0 120px;color:#999;}
+.invDrop1{width:100%; overflow:hidden; border-bottom:1px dashed #ccc; line-height:40px; color:#e0ad00; font-family:"微软雅黑"; font-size:18px; text-align:center; margin-bottom:20px;}
+.invDrop2{ overflow:hidden; border:3px solid #f1f1f1; border-radius:2px;}
+.invDrop2 div{ padding:2px 5px;}
+.invDrop2 div p{ padding-bottom:10px;color:#000; line-height:24px;}
+.invDrop3{width:100%; text-align:left; padding:12px 0 22px 5px; color:#999;}
+.formBtn{ text-align:center;}
+.invDrop2 div textarea{ display:block;width:100%; height:104px; border:none; color:#000; line-height:20px; background:none; outline:none;}
+.invDrop1 em{ display:inline-block; vertical-align:-1px; color:#e0ad00; padding-right:5px; font-size:18px;}
+.dgBox { padding:30px 40px 40px 40px;}
+
+</style>
+<form id="formSingleInvite" method="post">
+<div class="dgBox invBox">
+    <div class="invForm">
+    	<div class="invDrop1"><em class="hbIconMoon">&#xe0fc;</em>
+            {/if $src == 'refuse_last_apply'/}已挑选完简历，一键回绝掉所有剩余简历？<em style="color:rgb(180, 177, 174)">（不会回绝已面试邀请、已通知、待定的简历）</em>
+            {/elseif $src == "refuse_stop_job"/}
+                {/if $job_id == ''/}
+            一键回绝掉所有停招职位的未回复简历？
+                {/else/}
+            一键回绝掉该职位所有未回复简历？
+                {//if/}
+            {/else/}确认这份简历不合适吗？{//if/}</div>
+    	<div class="formMod invFormHd">
+            <div class="l">选择模板<i>&nbsp;</i></div>
+            <div class="r">
+                <span id="templateDrop" class="drop zindex"></span>
+				<span class="tipPos">
+        			<span class="tipLay"></span>
+           		</span>
+                <span class="tipTxt"><a href="javascript:void(0);" id="invLst">管理模板</a></span>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="invDrop2">
+            <div style="color:#999; padding:20px 15px 10px 15px;">
+                {/if $src ==''/}XX，您好！<br/>{//if/}
+                感谢您通过huibo.com应聘XX公司【XXX职位】一职。<br/>
+            </div>
+            <div style="padding:0 15px 14px 15px;">
+                <textarea name="" id="refuse_content" cols="" rows="">{/$content/}</textarea>
+            </div>
+        </div>
+        <input type="hidden" name="applyids" id="apply_id" value="{/$ids/}"/>
+        <div id="errormsg" style="color:red;font-size:14px;display: none"></div>
+        <div class="invDrop3">编辑内容仅针对本次发送，不会影响模板</div>
+        <div class="formMod">
+            <div class="clear"></div>
+        </div>
+        <div id="inviteFormBtn" class="formBtn" style="margin-top: 0px;"><a href="javascript:void(0);" id="btnSendInvite" class="btn1 btnsF14">确认不合适</a><a id="btnCancelInvite" href="javascript:void(0);" class="btn3 btnsF14">取消</a></div>
+    </div>
+</div>
+</form>
+<script>
+
+var refule = {
+	initialize : function() {
+		//初始化控件		
+		this._initControl();
+	},
+	_initControl : function() {
+		//初始化模板下拉控件
+		$('#templateDrop').droplist({
+            selectValue : '0',
+            noSelectClass : 'gray',
+            inputWidth : 155,
+            style : 'width:163px;*width:167px;',
+            hddName : 'hddTemplate',
+            items : {/$company_templates_json/},
+            onSelect : function(i, name) {
+                refule.chaneData(i);
+            }
+        });
+                
+        $("#invLst").click(function() {
+            $.showModal('{/get_url rule="/apply/manageRefuseTemplate" data="callback=resetTemplates"/}'+'-v-'+Math.random(), {title : '拒绝面试模板管理'});
+        });
+        
+        $("#btnSendInvite").click(function() {
+            var ids = $("#apply_id").val();
+            refule.sendRefuse(ids);
+        });
+        
+        $("#btnCancelInvite").click(function() {
+             $(this).closeDialog();
+        });
+    },
+    sendRefuse : function(ids) {
+        var content = $("#refuse_content").val();
+        if (content == "") {
+            $("#errormsg").html("模板内容不能为空").show();
+            return;
+        }
+
+        if (content.length > 250) {
+            $("#errormsg").html("内容字数不能超过250字").show();
+            return;
+        }
+        if($("#btnSendInvite").hasClass("_lock")){
+            return;
+        }
+        
+        $("#btnSendInvite").addClass("_lock");
+        {/if $src == ''/}
+        $.post("{/get_url rule='/apply/refuse/'/}", {"ids":ids, "txtContent":content, 'op':'refuse'}, function (data) {
+            if (data.error) {
+                $.anchorMsg(data.error, {icon : 'fail'});
+                $("#btnSendInvite").removeClass("_lock");
+                return;
+            }
+
+            $.anchorMsg(data.success, {icon : 'success'});
+            window.location.reload();
+        }, "json");
+
+        {/else/}
+            {/if $src == 'refuse_last_apply'/}
+                $.post('{/$siteurl.company|replace:"http:":""/}/apply/RefuseLastResume',{job_id:'{/$job_id/}',account_id:'{/$account_id/}',child_status:'{/$child_status/}',"txtContent":content},function(e){
+            {/else/}
+                    $.post('{/$siteurl.company|replace:"http:":""/}/apply/RefuseNoUseJob',{job_id:'{/$job_id/}',"txtContent":content},function(e){
+            {//if/}
+
+            if(e.status){
+                $.anchorMsg(e.msg, {icon : 'success'});
+                window.location.reload();
+            }else{
+                $.anchorMsg(e.msg, {icon : 'fail'});
+                $("#btnSendInvite").removeClass("_lock");
+                return false;
+            }
+        },'json');
+        {//if/}
+
+        
+    },
+    chaneData : function(i) {
+        $.getJSON('{/get_url rule="/apply/ajaxGetTemplate"/}', {template_id : i}, function (data) {
+            if (data.success) {
+               $("#refuse_content").val(data.content);
+            }
+        });
+    },
+    resetTemplate : function() {
+        $.getJSON('{/get_url rule="/apply/ajaxGetTemplate"/}', function (data) {
+            if (data.success) {
+                var template_json = data.template_data;
+                $("#templateDrop").empty();
+                $('#templateDrop').droplist({
+                    defaultTitle : '请选择',
+                    noSelectClass : 'gray',
+                    inputWidth : 125,
+                    style : 'width:133px;',
+                    hddName : 'hddTemplate',
+                    unbind : true,
+                    items : template_json,
+                    onSelect : function(i, name) {
+                        refule.chaneData(i);
+                    }
+                });
+            }
+        });   
+    }
+}
+refule.initialize();
+</script>
+</body>
+</html>

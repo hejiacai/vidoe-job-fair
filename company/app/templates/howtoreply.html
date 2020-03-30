@@ -1,0 +1,333 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="Keywords" content="" />
+	<meta name="Description" content="" />
+	<title>面试评价管理</title>
+<link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='comback.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='wechat.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='appeal.css'/}" />
+
+	<!–[if lt IE9]>
+	<script src="{/version file='html5.js'/}"></script>  
+	<![endif]–>
+	<style>
+		body{ background:#e9e9e9;font-family: "微软雅黑";}
+		.appeal-lit{ padding:15px; border:1px dashed #dbdbdb; background:#fafafa; font-size:14px; font-family:"微软雅黑"; line-height:24px; color:#999; margin-top:20px;}
+		.appeal-title .appeal-title-item1, .appeal-title .appeal-title-item2{ height:50px;}
+		.appeal-switch .appeal-switch-alert{ background:none; border:none; padding:0px; margin-top:0px;}
+		.appeal-mgent-title .appeal-switch{ margin-top:33px;}
+		.subcompNav li.tabList3{ margin-left:10px;_margin-left:4px;}
+	</style>
+	<script type="text/javascript" src="{/version file='version.js'/}"></script>
+<script type="text/javascript">
+window.CONFIG = {
+    HOST: '{/$siteurl.style/}',
+    COMBOPATH: '/js/v2/'
+}
+</script>
+<script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+<script type="text/javascript" src="{/version file='global.js'/}"></script>
+</head>
+<body>
+
+
+<style type="text/css">
+	.banner{width:100%; height:79px; overflow:hidden; position:relative; z-index:1;}
+	header,.hdCon{ background:#f0f0f0;}
+	.hdCon{ height:30px;}
+	.hdL .logo{ height:30px; line-height:30px; color:#8e8e8e; font-family:"宋体"; font-size:12px;}
+	.hdR ul li,.hdR ul li a.lnk,.hdR ul .navLst a{ height:30px; line-height:30px;}
+	.hdR ul .navLst i{ margin:10px 5px 0 0;}
+	.hdR ul li.wemChatlist{width:100px;}
+	.hdR ul li.wemChatlist a,.hdR ul li.wemChatlist a:hover{ height:30px; line-height:32px; color:#888;background:url(/img/newindex/weChat06.png) 0 center no-repeat}
+	.hdR ul li.navLst a:hover,.hdR ul li.wemChatlist a:hover,.hdR ul li.tcomInfo a:hover,.hdR ul li.thelpInfo a:hover{ color: #666;}
+	.compNavbg{width:100%; overflow:hidden; background:#fff; margin-bottom:20px;}
+	.compNav{width:1000px; height:50px; overflow:hidden; margin:0 auto; text-align:left;}
+	.compLogo{ display:block; float:left;width:144px; height:30px; background:url(/img/newindex/compLogo.png) no-repeat; margin:10px 0;}
+	.compList{ float:left; padding-left:60px;}
+	.compList li{ float:left;}
+	.compList li a{ display:block; width:105px; text-align:center;height:50px; line-height:50px; font-size:16px; font-family:"微软雅黑"; color:#2a2623;position: relative;}
+	.compList li a:hover{text-decoration: none;color:#4c4b49;}
+	.compList li.cut a{ font-weight:bold; color:#004d92; background:url(/img/newindex/hbcompany02.png) center bottom no-repeat;}
+	.compList li.cut2 a{ font-weight:bold; color:#004d92; background:url(/img/newindex/weChat07.png) center bottom no-repeat;}
+	.comPost{ display:block; float:right;width:110px; height:30px; line-height:30px; font-family:"微软雅黑"; background:url(/img/newindex/hbcompany03.png) 15px center no-repeat #66bce4; text-indent:40px; margin-top:10px; color:#fff; border-radius:4px;font-size:14px;}
+	.comPost:hover{background:url(/img/newindex/hbcompany03.png) 15px center no-repeat #5ca8cc; color:#fff;text-decoration: none;}
+	.comPost:focus,.comPost:active{background-color: #4aa2f2 }
+	.subcompNavbg{width:100%; overflow:hidden; background:#2b6fad; height:36px; text-align:left;}
+	.subcompMage{width:1000px; margin:0 auto;}
+	.subcompNav{ float:left; overflow:hidden;}
+	.subcompNav li{ float:left; display:none;}
+	.subcompNav li a{ display:block; float:left; color:#fff; color:#d2e5f6; font-family:"微软雅黑"; height:16px; line-height:16px; padding:0 20px; border-right:1px solid #23598c;border-left:1px solid #368ad9; margin-top:11px; font-size: 14px;}
+	.subcompNav li a.first{ border-left:none;}
+	.subcompNav li a.last{ border-right:none;}
+	.subcompNav li a{position: relative}
+	.subcompNav li a .msg{font-size: 12px;color:#f9f9f9;background: #ff0000;border-radius: 10px;font-weight: normal;padding:0px 4px;height:12px;line-height: 12px;position: absolute;top:-5px;right:0;font-family: '宋体'}
+	.subcompNav li a.cut{ font-weight:bold; color:#fff;}
+	.subcompNav li a:hover{color:#fff;text-decoration: none;}
+	.subcompNav li.tabList3{ margin-left:13px;_margin-left:7px;}
+	.subcompNav li.tabList4{ margin-left:217px; _margin-left:108px;}
+	.subcompRt{ float:right;}
+	.subcompRt a{ display:block; height:36px; padding-left:20px; line-height:36px; color:#d2e5f6; float:left; font-family:"微软雅黑"; font-size: 14px; }
+	.subcompRt a.compHome{ background:url(/img/newindex/hbcompany04.png) left center no-repeat; margin-right:20px;}
+	.subcompRt a.compHome:hover{background:url(/img/newindex/hbcompany04cut.png) left center no-repeat;color:#fff;}
+	.subcompRt a.compSch{ background:url(/img/newindex/hbcompany05.png) left center no-repeat;}
+	.subcompRt a.compSch:hover{background:url(/img/newindex/hbcompany05cut.png) left center no-repeat;color:#fff;}
+	.hdR ul li a em.num{left:25px; top:2px;}
+	.comPostBg,.comPostBgcut{ width:110px; height:50px; overflow:hidden; float:right;background:url(/img/newindex/weChat07.png) center bottom no-repeat;}
+
+	.notice_icon {background:url(/img/newindex/bubble.png);width:23px; height:21px; font-size: 12px; font-family: "宋体"; line-height: 18px; color:#fff; position: absolute;top:5px; right:4px; text-align: center;}
+</style>
+{/include file="new_header.html" par="全职招聘" cur="面试评价管理"/}
+<!--微信气泡提醒2015-12-10 start -->
+<style>
+	.alt_top{position: absolute;top:20px;font-size:12px;left:500px;display: none;width:209px;height:131px;background: url(/img/c/weixin/weixin.png) no-repeat;z-index: 99}
+	.alt_top i{display: inline-block;width:14px;height:8px;background: url(/img/c/weixin/weChat09.png) no-repeat;position: absolute;top:-8px;left:70px}
+	.alt_top .close{position: absolute;right:7px;bottom:52px;text-decoration: none;cursor: pointer;display: block;width:20px;height: 20px;background: url(/img/c/weixin/close.png) no-repeat}
+	.alt_top .close:hover{background: url(/img/c/weixin/close_hover.png) no-repeat}
+</style>
+<span class="alt_top" id="wixinAlt" title="微信关注汇博招聘，随时随地招人才！">
+    <a class="close" title="关闭"></a>
+</span>
+
+<script>
+	function auditDialogShow(){
+		alert("营业执照尚未通过审核，暂无法预览主页");
+	}
+</script>
+<!--<script type="text/javascript">
+hbjs.use('@confirmBox', function(m) {
+    var $ = m['jquery'];
+
+    $('.compClose').click(function(){
+        $('.banner').slideUp('slow');
+    });
+
+    $('.tabList2').click(function(){
+        $(this).addClass('cut');
+        $('.tabList1').removeClass('cut');
+        $('.tabList3').hide();
+        $('.tabList4').show();
+    });
+
+    $('.tabList1').click(function(){
+        $(this).addClass('cut');
+        $('.tabList2').removeClass('cut');
+        $('.tabList4').hide();
+        $('.tabList3').show();
+    })
+});
+</script>-->
+<style>
+	.evaluation-manage-reply{background: #fff;width:940px;margin:0 auto;padding:30px;text-align: left}
+	.evaluation-manage-reply .reply-title{font-size:16px;color: #2b6fad;margin-top:20px}
+	.evaluation-manage-reply .reply-box{border:1px solid #f6f6f6;background: #fcfcfc;font-size:14px;color: #444;padding:10px 15px;line-height: 30px;margin-top: 22px;margin-bottom: 40px}
+</style>
+<div class="evaluation-manage-reply">
+	<p class="reply-title">“整个公司只有30平米左右，布置简单，大概能坐下10个员工左右”</p>
+	<div class="reply-box">
+		企业回复：<br />
+		你好，我们公司确实处于创业阶段，但是团队和谐，积极向上，希望有拼劲的同事加入
+	</div>
+	<p class="reply-title">“HR一来就绷着脸，语气冰冷，说我不符合要求”</p>
+	<div class="reply-box">
+		企业回复：<br />
+		谢谢你提出的意见，我们会在以后的面试中改进，祝您早日找到满意的工作~
+	</div>
+	<p class="reply-title">“投递时职位任职资格并没有说需要硕士学历，去了看了我的简历说他们只要硕士学历的人”</p>
+	<div class="reply-box">
+		企业回复：<br />
+		你好，这是我们工作人员的疏忽，我们会尽快调整，最近公司大量进人，工作繁忙，敬请见谅，谢谢~
+	</div>
+	<p class="reply-title">“去了之后叫我填表，然后叫我等了30分钟，说面试官在开会。好不容易面试官来了，面了几分钟后又出去接电话，我继续等了10分
+		钟，然后等他回来问了几个问题就叫我回去了。而且面试环境很嘈杂”</p>
+	<div class="reply-box">
+		企业回复：<br />
+		你好，当天确实是因为面试官在开一个重要的会议，所以让你久等了，敬请原谅~而且当天我们市场在准备活动，环境也相对有点糙，我们以后会改
+		进面试流程，感谢您的反馈~
+	</div>
+</div>
+	<script>
+		hbjs.use('@confirmBox, @jobDialog', function(m) {
+			var ConfirmBox      = m['widge.overlay.confirmBox'],
+					Dialog          = m['widge.overlay.hbDialog'],
+					cookie          = m['tools.cookie'];
+			var $ = m['jquery'].extend(m['cqjob.jobDialog']);
+			var pWidth = 70,
+					fontWidth = 18;
+
+			function showModel(icon, msg) {
+				ConfirmBox.timeBomb(msg, {
+					name: icon,
+					width: pWidth + msg.length * fontWidth
+				});
+			}
+			var appealMgent = $("#appealMgent");
+			var appeal = appealMgent.find(".JS-appeal");//申诉点击对象
+			var reply = appealMgent.find(".JS-reply");//回复点击对象
+			var defText = "请您详细描述申诉的具体理由";//申诉输入框默认文字
+			/*申诉*/
+			var tipDialog = new Dialog({
+				close: '╳',
+				idName: 'appeal_dialog',
+				title: '系统提示',
+				width: 390
+			});
+			var appealHtml = ['<span class="title">请选择您申诉的理由：</span><div class="box">',
+				'<label><input type="radio" name="radio" value="1" checked="checked" />言论不实</label>',
+				'<label><input type="radio" name="radio" value="2"  />言论中含有谩骂</label>',
+				'<label><input type="radio" name="radio" value="3"  />言论中含有诋毁</label>',
+				'<label><input type="radio" name="radio" value="4"  />其他</label>',
+				'<textarea name="textarea" placeholder="'+defText+'"></textarea>','<p><span class="number">0/500</span><span class="error-msg">同一个职位评价只能申诉一次</span></p>','<p class="buttom-box"><a href="javascript:;" class="btn-submit">提 交</a><a href="javascript:;" class="btn-reset">取消</a></p></div>'].join("");
+
+			appeal.click(function(){
+				var _this = $(this);
+				tipDialog.setContent({title:'申诉', content:'<form action="" id="appealDialog">'+appealHtml+'<input type="hidden" name="appraise_id" value="'+_this.attr("data-id")+'" /></form>'}).show();
+				return false;
+			});
+			$("body").on("click",".appeal_dialog .btn-submit,.appeal_dialog .btn-reset",function(){
+				var _this = $(this)
+				if(_this.hasClass("btn-submit")){ //提交按钮
+					var _tForm = _this.parents("form");
+					var submid_str = _tForm.serialize();//表单值
+					//这里写ajax提交
+					$.post('/appraise/complanAppraise/',submid_str,function(result){
+						if (result.success) {
+							showModel('success', '申诉成功，工作人员会在一个工作日内处理');
+							tipDialog.hide();
+						} else {
+							showModel('fail', result.error);
+						}
+					},"json");
+				}else{
+					//取消按钮
+					tipDialog.hide();
+				}
+				return false;
+			});
+			//回复
+			var appealReply = $(".appeal-reply-box");
+			reply.click(function(){
+				$(this).parents(".appeal-jobseeker-box").find(".appeal-reply-box").show();
+				$(this).parents(".appeal-jobseeker-box").find(".appeal-replytext-box").hide();
+				return false;
+			});
+			appealReply.find("textarea").keyup(function(){
+				var _this = $(this),
+						_tVal = _this.val();
+				_Number = _this.parents(".appeal-reply-box").find(".number");
+				if(_tVal.length < 500){
+					_Number.html(_tVal.length+"/500");
+				}else if(_tVal.length >= 500){
+					_Number.html("500/500");
+					_this.val(_tVal.substring(0,500));
+				}
+			});
+
+			//申诉输入框事件
+			$("body").on({
+				keyup:function(){
+					var _this = $(this),_number = _this.parents(".appeal_dialog").find(".number");
+					if(_this.val().length < 500){
+						_number.html(_this.val().length+"/500");
+					}else if(_this.val().length > 500){
+						_number.html("500/500");
+						_this.val(_this.val().substring(0,500));
+					}
+				}
+			},".appeal_dialog textarea");
+			//关闭开启评论
+			$("#appealSwitch").click(function(){
+				ConfirmBox.confirm("确定要开启面试评价吗？","开启面试评价",function(obj){
+					var self = this;
+					self.hide();
+					$.post('/appraise/changeAppeal/',{"value":1},function(result){
+						if(result.error){
+							showModel('fail', result.error);
+
+						}else{
+							showModel('success', '操作成功');
+							$("#appealSwitch").parents("#appealSwitch_set").remove();
+						}
+					},"json");
+				})
+				return false;
+			});
+//        $("#appealSwitch_set a").click(function(){
+//            $("#appealSwitch_box").show();
+//            $("#appealSwitch_set").hide();
+//            return false;
+//        });
+//        $("#hideAppeal").click(function(){
+//            $('#appealSwitch_box').hide();
+//            $('#appealSwitch_set').show();
+//        });
+			//处理展开收起
+			$(".appeal-item-title").click(function(){
+				$(this).toggleClass("appeal-item-hide");
+			});
+			//收起展开
+			$(".companyp-switch").click(function(){
+				var self = $(this),sHeight = "112px",sHtml = '<a href="">展开<i class="icon-arr-down"></i></a>';
+				if(self[0].switchstatus != "show"){
+					sHeight = "none";
+					sHtml = '<a href="">收起<i class="icon-arr-down" style="background-position:-22px -48px"></i></a>';
+					self[0].switchstatus = "show";
+				}else{
+					self[0].switchstatus = "hide";
+				}
+				self.prev().css({"max-height":sHeight});
+				self.html(sHtml);
+				return false;
+			});
+			//取消提交回复
+			$(".appeal-reply-box .btn-reset").click(function(){
+				$(this).parents(".appeal-jobseeker-box").find(".appeal-reply-box").hide();
+				var test = $(this).parents(".appeal-reply").find(".show-reply-content").html();
+				if(test !=""){
+					$(this).parents(".appeal-jobseeker-box").find(".appeal-replytext-box").show();
+				}
+				return false;
+			});
+			//提交回复
+			$(".appeal-reply-box .btn-submit").click(function(){
+
+				var appraise_id = $(this).attr("data-id");
+				var content = $(this).parent().siblings("textarea").val();
+				if(content ==""){
+					showModel("warning","请输入回复内容");return;
+				}
+				if(content.length >500){
+					showModel("warning","回复内容太长");return;
+				}
+				var _this = $(this);
+				$.post('/appraise/replyAppraise/',{"appraise_id":appraise_id,"reply":content},function(result){
+					if (result.success) {
+						showModel('success', '回复成功');
+						var replyBox = _this.parents(".appeal-reply").find(".appeal-reply-box").hide();
+						var text = replyBox.find("textarea").val();
+						if(text !=""){
+							_this.parents(".appeal-reply").find(".appeal-replytext-box").show().find(".text").html(text);
+							var myDate = new Date();
+							var year = myDate.getFullYear();
+							var month = myDate.getMonth()+1;
+							var day = myDate.getDate();
+							var date = year+'-'+month+'-'+day;
+							_this.parents(".appeal-reply").find(".appeal-replytext-box").show().find(".time").html(date);
+
+							_this.parents(".appeal-jobseeker-box").find(".reply-appeal .JS-reply").html("修改");
+						}
+					} else {
+						showModel('fail', result.error);
+					}
+
+				},"json");
+			});
+		});
+	</script>
+</body>
+</html>

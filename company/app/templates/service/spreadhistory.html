@@ -1,0 +1,87 @@
+<!doctype html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+<title>{/$title/}</title>
+<!–[if lt IE9]> 
+<script src="{/version file='html5.js'/}"></script> 
+<![endif]–>
+<link rel="stylesheet" type="text/css" href="{/version file="v2-reset.css"/}" />
+<link rel="stylesheet" type="text/css" href="{/version file="comback.css"/}" />
+<link rel="stylesheet" type="text/css" href="{/version file="icons.css"/}" />
+<link rel="stylesheet" type="text/css" href="{/version file="v2-widge.css"/}" />
+<link rel="stylesheet" type="text/css" href="{/version file="v2-pay.css"/}" />
+<link rel="stylesheet" type="text/css" href="{/version file="v2-pay.css"/}" />
+    <script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.min.js'/}"></script>
+<script type="text/javascript" src="{/version file='version.js'/}"></script>
+<script type="text/javascript">
+window.CONFIG = {
+    HOST: '{/$siteurl.style/}',
+    COMBOPATH: '/js/v2/'
+}
+</script>
+<script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+<script type="text/javascript" src="{/version file='global.js'/}"></script>
+<style>
+.tgj_table{width:100%;margin:20px 0 10px 0}
+.tgj_table th{padding:11px 12px 12px}
+.tgj_table td{padding:12px 5px 11px}
+.tgj_table th,.tgj_table td{border-bottom:1px solid #f2f2f2;text-align: center;color:#444}
+.tgj_table th{border-bottom:1px solid #ccc;}
+</style>
+</head>
+<body id="body">
+{/include file="new_header.html" par="企业管理" cur="资金管理"/}
+<div class="resumentNbg clearfix">
+{/include 'economicnav.html' par="消费记录"/}
+<div id="pay-main" class="rMentRt" style="background:#fff; overflow:hidden;">        
+    <div class="pay-container">
+        <div class="pay-tab">
+            <a href="/pay/paylist">余额消费记录</a>
+            <a href="/spread/history" class="cur">推广金消费记录</a>
+            <a href="/part/partlist">兼职消费记录</a>
+            <a href="/consumelog/history">其他消费记录</a>
+        </div>
+        {/if !empty($historys)/}
+        <div style="padding:0px">
+
+            <table class="tgj_table" width="100%">
+                <tr>
+                    <th style="text-align:center;width:250px;">时间</th>
+                    <th style="text-align:center;width:479px;">操作</th>
+                    <th style="text-align:center;width:479px;">操作人</th>
+                    <th style="text-align:center;width:100px">花费</th>
+                </tr>
+                {/foreach $historys as $k => $history/}
+                <tr>
+                    <td>{/$history.create_time/}</td>
+                    <td>{/$history.consume_type/}</td>
+                    <td>{/$history.user_name/}</td>
+                    <td>￥{/$history.consume/}</td>
+                </tr>
+                {//foreach/}
+            </table> 
+            <dl class="clearfix" style="line-height: 25px;margin:0 55px;">
+                <dd style="float:right; text-align:right;">当页小计：￥{/$cur_count/}<br /><strong>总共累计消费：￥{/$consume_count/}</strong></dd>
+            </dl>               
+            <div class="page">{/$pager/}</div>
+        </div>
+        {/else/}
+        <div class="noData">暂无推广金消费记录</div>
+        {//if/}
+    </div>    
+</div>
+</div>
+<div id="sus" class="sus"><a class="backTop hbFntWes" title="返回顶部" href="javascript:void(0);" style="display: none;">&#xf0d8;</a></div>
+{/include file="footer.html"/}
+<section class="floatRT"><a href="{/get_url rule='/about/message' domain='main'/}" target="_blank" class="serviceLink">我有问题要反馈</a><b></b></section>
+<script type="text/javascript">
+hbjs.use('@tabs,@confirmBox,@verifier,@actions',function(m){
+
+});
+</script>
+{/include file="chat/chat.html"/}
+</body>
+</html>

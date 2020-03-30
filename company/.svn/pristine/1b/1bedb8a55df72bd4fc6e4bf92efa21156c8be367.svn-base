@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{/$title/}</title>
+    <!–[if lt IE9]>
+    <script src="{/version file='html5.js'/}"></script>
+    <![endif]–>
+    <link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='comback.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='resument2015.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='showdata.css'/}" />
+    <script type="text/javascript">
+        window.CONFIG = {
+            HOST: '{/$siteurl.style/}',
+            COMBOPATH: '/js/v2/'
+        }
+    </script>
+    <script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.min.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='ui_dropdownlist.js'/}"></script>
+
+</head>
+<body>
+{/include 'new_header.html' par="全职招聘" cur='首页'/}
+{/if empty($execl)/}
+<div class="alldata">
+
+    <form id="form_data">
+    <div class="searchCondition clearfix">
+        <span class="conName">时间：</span>
+        <div class="job">
+            <span id="dataTime" class="drop zindex" style="z-index: 999;"></span>
+        </div>
+        <span class="conName">公司：</span>
+        <div class="job">
+            <span id="dataCompay" class="drop zindex" style="z-index: 999;"></span>
+        </div>
+        <span class="conName">职位：</span>
+        <div class="job">
+            <span id="dataJob" class="drop zindex" style="z-index: 999;"></span>
+        </div>
+        {/*<label style="padding-top:6px;display: block;float: left;margin-right: 30px;">*/}
+            {/*<input id="showStopJob" style="display:inline-block; vertical-align:-1px;" type="checkbox">&nbsp;包含停招*/}
+        {/*</label>*/}
+        <input type="hidden" id="execl" name="execl" value="">
+        <input type="submit"  style="cursor: pointer; border: none;" class="searchConfirmBtn float-left" value="确定" />
+        <div class="tit float-left">
+            <i class="que"></i>
+            <div class="titCon" style="width: 265px;left: -172px;">
+                <p>曝光展示量：职位在列表中的展示次数；</p>
+                <p>点击浏览量：职位详情被求职者点击查看的次数；</p>
+                <p>邀请面试量：发送面试邀请和查看联系方式的次数</p>
+                <p>展示-点击率：点击浏览量/曝光展示量</p>
+                <p>浏览-投递率：接收简历量/点击浏览量</p>
+                <p>浏览-投递率：邀请面试量/接收简历量</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="level clearfix" >
+        <div class="level-item clearfix {/if $Total_visit_data['click_rate_contrast']==1/}level-item-high{//if/}">
+            <div class="level-item-left">
+                <div class="level-icon"></div>
+                <h6>{/$this_visit_data['click_rate']/}%</h6>
+                <p>点击率</p>
+            </div>
+            <div class="level-item-text">
+                <p>曝光展示量：<strong>{/$this_visit_data['exposes_count']/}</strong> </p>
+                <p>点击浏览量：<strong>{/$this_visit_data['visit_count']/} </strong></p>
+                <p class="other">{/if  $Total_visit_data['click_rate_contrast']==1/}高于{/else/}低于{//if/}{/$Total_visit_data['visit_rate_type']/}水平</p>
+            </div>
+        </div>
+        <div class="level-item clearfix {/if  $Total_visit_data['delivery_rate_contrast']==1/}level-item-high{//if/}">
+            <div class="level-item-left">
+                <div class="level-icon"></div>
+                <h6>{/$this_visit_data['delivery_rate']/}%</h6>
+                <p>投递率</p>
+            </div>
+            <div class="level-item-text">
+                <p>点击浏览量：<strong>{/$this_visit_data['visit_count']/}</strong> </p>
+                <p>接收简历量：<strong>{/$this_visit_data['apply_count']/} </strong></p>
+                <p class="other">{/if  $Total_visit_data['delivery_rate_contrast']==1/}高于{/else/}低于{//if/}{/$Total_visit_data['visit_rate_type']/}水平</p>
+            </div>
+        </div>
+        <div class="level-item clearfix {/if  $Total_visit_data['invitation_rate_contrast']==1/}level-item-high{//if/}">
+            <div class="level-item-left">
+                <div class="level-icon"></div>
+                <h6>{/$this_visit_data['invitation_rate']/}%</h6>
+                <p>邀请率</p>
+            </div>
+            <div class="level-item-text">
+                <p>接收简历量：<strong>{/$this_visit_data['apply_count']/}</strong> </p>
+                <p>邀请面试量：<strong>{/$this_visit_data['invite_count']/} </strong></p>
+                <p class="other">{/if  $Total_visit_data['invitation_rate_contrast']==1/}高于{/else/}低于{//if/}{/$Total_visit_data['visit_rate_type']/}水平</p>
+            </div>
+        </div>
+    </div>
+    <div class="marketTipAll">
+        <div class="marketTip" style="">
+            <i></i>
+            <a href="{/get_url rule='/spreadjob/index/'/}" target="_blank"><span>精准推广，增加曝光，提升效果！</span></a>
+        </div>
+        <div class="marketPopx marketPopx1" style="display: none;">
+            <i class="markeIcon"></i>
+            <div class="marketPop">
+                <span>正在推广职位：{/count($EffectSpreadJob_ids)/} </span>
+                <span>今日展示量：<i id="spreadJobSeeCount">正在统计...</i></span>
+                <span class="last">今日点击量：<i id="spreadClickCount">正在统计...</i></span>
+            </div>
+        </div>
+    </div>
+    <div class="dataShow">
+        <div class="clearfix excelBtn">
+            <input type="submit" name="execl" value="导出Excel" class="searchConfirmBtn float-right" style="border: none; cursor: pointer;" />
+        </div>
+        <div class="dataShowTable">
+            <ul class="clearfix">
+
+                <li class="show-title clearfix">
+                    <span class="show-name" style=" width: 220px">职位</span>
+                    <span>曝光展示量</span>
+                    <span>点击浏览量</span>
+                    <span>接收简历</span>
+                    <span>邀请面试</span>
+                    <span>展示-点击率</span>
+                    <span>查看-投递率</span>
+                    <span>投递-邀请率</span>
+                </li>
+                {/if !empty($list)/}
+                {/foreach $list as $visit/}
+                <li class="clearfix">
+                    <a target="_blank" href="{/get_url rule="/readjob/jobVisit/"/}?company_id={/$visit['company_id']/}&job_id={/$visit['job_id']/}" class="show-name">{/$visit['station']/}</a>
+                    <span>{/$visit['exposes_count']/}</span>
+                    <span>{/$visit['visit_count']/}</span>
+                    <span>{/$visit['apply_count']/}</span>
+                    <span>{/$visit['invite_count']/}</span>
+                    <span>{/$visit['click_rate']/}%</span>
+                    <span>{/$visit['delivery_rate']/}%</span>
+                    <span>{/$visit['invitation_rate']/}%</span>
+                </li>
+                {//foreach/}
+
+                {/else/}
+                    <li class="clearfix">
+                        <p style="padding:40px 0px; text-align: center;">暂无数据</p>
+                    </li>
+                {//if/}
+
+            </ul>
+        </div>
+        {/$pager/}
+    </div>
+    </form>
+</div>
+{//if/}
+<script>
+//    $('#Execl_buttom').click(function(){
+//        $('#execl').val('execl');
+//        $('#form_data').submit();
+//    });
+//    $('#submit').click(function(){
+//        $('#execl').val('');
+//        $('#form_data').submit();
+//    });
+    var is_ajaxspread_query = false;
+    $('.marketTip span').hover(function(){
+        var spreadJobSeeCount = $('#spreadJobSeeCount').html();
+        var spreadClickCount = $('#spreadClickCount').html();
+        if((spreadJobSeeCount == "正在统计..." || spreadClickCount == "正在统计...") && is_ajaxspread_query == false){
+            is_ajaxspread_query = true;
+            $.ajax({
+                url: '/index/AjaxSpreadJobStatistics/',
+                dataType : 'json',
+                success: function(e){
+                    $('#spreadJobSeeCount').html(e.spreadJobSeeCount == -1 ? 0 : e.spreadJobSeeCount);
+                    $('#spreadClickCount').html(e.spreadClickCount == -1 ? 0 : e.spreadClickCount);
+                    is_ajaxspread_query = false;
+                }
+            });
+        }
+        $('.marketPopx1').toggle();
+    });
+    $('.que').hover(function () {
+        if(!$('.tit').hasClass('hover')){
+            $('.tit').addClass('hover');
+        }else{
+            $('.tit').removeClass('hover');
+        }
+    })
+    $('#dataTime').droplist({
+        defaultTitle : '近7天',
+        style : 'width:80px;',
+        noSelectClass : 'gray',
+        inputWidth : 80,
+        width : 50,
+        hddName : 'date_id',
+        items : [{"id":"1","name":"近7天"},{"id":2,"name":"近14天"},{"id":3,"name":"近30天"}],
+        selectValue :{/$dateID/},
+        maxScroll : 15,
+        onSelect : function(i, name) {
+            var marriage_id   = $("#marriage_id").val();
+        }
+    });
+    $('#dataCompay').droplist({
+        defaultTitle : '{/$first_account['name']/}',
+        style : 'width:200px;',
+        noSelectClass : 'gray',
+        inputWidth : 200,
+        width : 100,
+        hddName : 'company_id',
+        items : {/$accounts/},
+        selectValue :{/$first_account['id']/},
+        maxScroll : 15,
+        onSelect : function(i, name) {
+            var marriage_id   = $("#marriage_id").val();
+        }
+    });
+    $('#dataJob').droplist({
+        defaultTitle : '{/$jobFirst['name']/}',
+        style : 'width:200px;',
+        noSelectClass : 'gray',
+        inputWidth : 200,
+        width : 50,
+        hddName : 'job_id',
+        items : {/$jobListJson/},
+        selectValue : '{/$jobFirst['id']/}',
+        maxScroll : 15,
+        onSelect : function(i, name) {
+            var marriage_id   = $("#marriage_id").val();
+        }
+    });
+</script>
+
+<!--弹窗职位不匹配提示开始-->
+<div class="popReN" style='display:none'>
+    <span>职位不匹配的简历现在都在这里了哦</span>
+    <a href="javascript:;" id='notComplain'></a>
+</div>
+
+<!--弹窗职位不匹配提示结束-->
+{/include file="msgpop.html"/}
+{/include file="footer.html"/}
+<!-- End Piwik Code --><script>
+    $(".sendToWorkmate").on("click",function(){
+        if($(this).next('.sendTo_img').is(':visible')){
+            $('.sendTo_img').hide();
+        }else{
+            $('.sendTo_img').hide();
+            var img = $(this).next('.sendTo_img').find("img");
+            if(img.attr("src") == '')
+                img.attr("src", img.attr("data-source-img"));
+            $(this).next('.sendTo_img').show();
+        }
+
+    });
+    $.setIndex("zindex");//为需要赋层级设置的元素设置class为zindex
+    $('#tstDropJob').droplist({
+        defaultTitle:'全部适合职位',
+        style:'width:178px;',
+        noSelectClass:'gray',
+        inputWidth:170,
+        width:128,
+        hddName:'tag_id',
+        items:[{"id":"","name":"\u6309\u5168\u90e8\u67e5\u770b"},{"id":"79079","name":"\u85aa\u8d44\u663e\u793a"},{"id":"79416","name":"\u63a8\u8350\u7684"},{"id":"79801","name":"IOS\u5de5\u7a0b\u5e08"},{"id":"83912","name":"\u5c3a\u5bf8\u7ebf"},{"id":"83913","name":"vv"},{"id":"84594","name":"\u6d4b\u8bd5\u8f6f\u4ef6"},{"id":"88320","name":"sem"},{"id":"92911","name":"\u53d1\u53d1\u53d1\u53e4\u53e4\u602a\u602a\u80a1\u6d77\u62a4\u822a\u54c8\u54c8\u54c8\u5475\u5475\u5475"},{"id":"92912","name":"\u5730\u65b9\u98ce\u683c\u8fd8\u597d\u8fd8\u597d\u5c06\u5c31\u5c06\u5c31\u597d"},{"id":"92913","name":"9"},{"id":"92914","name":"10"},{"id":"94502","name":"\u7f51\u7edc\u63a8\u5e7f"},{"id":"94779","name":"????"},{"id":"94879","name":"\u4e94\u661f\u7b80\u5386"},{"id":"95560","name":"\u626b\u63cf\u5417"},{"id":"108443","name":"\u4ea7\u54c1\u7ecf\u7406"},{"id":"116449","name":"\u9500\u552e\u4ee3\u8868"},{"id":"117038","name":"\u4f53\u80b2\u6559\u7ec3"},{"id":"119940","name":"\u56fe\u7247"},{"id":"120490","name":"\u9500\u552e\u4ee3\u8868\u4e30\u5bcc"}],
+        selectValue:'',
+        maxScroll:10,
+        onSelect:function(i,name) {
+            //选中后的事件
+            //搜索条件
+            var job_id = $("#tag_id").val();
+            var keyword = "";
+            download.submit(job_id,keyword);
+        }});
+    var download ={
+        init:function() {
+            //回车事件
+            $("#keyword").keydown(function(e){
+                if(e.keyCode == 13){
+                    $("#onSubmit").click();
+                }
+            });
+            // 水印
+            $('#keyword').watermark('输入姓名或简历编号');
+            //选中的操作
+            $(".btnOperate").click(function(e){
+                if($(this).next('.tipBox').is(':visible')) {
+                    $(this).next('.tipBox').hide();
+                }else{
+                    $(this).next('.tipBox').show();
+                }
+                e.stopPropagation();
+            });
+            $('body').click(function(){
+                $('.tips .tipBox').hide();
+            });
+            //显示备注
+//        $(".remark_contr").mouseover(function(e){
+//            e.preventDefault();
+//
+//        }).mouseout(function(e){
+//            e.preventDefault();
+//            $(this).next(".remark_show").hide();
+//        });
+            $(".remark_contr").live("mouseover",function(){
+                $(this).next(".remark_show").addClass("mTitcut2");
+            }).live("mouseout",function(){
+                $(this).next(".remark_show").removeClass("mTitcut2");
+            })
+            //批量保存到电脑
+            $('.savePc').click(function(e){
+                e.preventDefault();
+                var resumes = download.selectResume();
+                if(resumes.length<=0) {
+                    $.anchor('请选择下载的简历',{icon:'info'});
+                    return;
+                }
+                download._downresume(resumes.join(','));
+            });
+            //全选 反选
+            $(".resuemSelectAll").click(function(){
+                if($(this).is(':checked')) {
+                    $('.rMentLit label input[name="chkdown"]').attr('checked','checked');
+                }else {
+                    $('.rMentLit label input[name="chkdown"]:checked').removeAttr('checked');
+                }
+            });
+            //批量转发到邮箱
+            $('.sendEmail').click(function(e){
+                e.preventDefault();
+                var resumes = download.selectResume();
+                if(resumes.length<=0) {
+                    $.anchor('请选择下载的简历',{icon:'info'});
+                    return;
+                }
+                download._sendEmail(resumes.join(','));
+            });
+            //批量放入回收站
+            $(".goRecycle").click(function(e){
+                e.preventDefault();
+                var downloads = download.selectDownids();
+                if(downloads.length<=0) {
+                    $.anchor('请选择下载的简历',{icon:'info'});
+                    return;
+                }
+                var names =download.selectUserName(),
+                        val = cookieutility.get('deletedownload');
+                if(val == 'true'){
+                    download._deletedownload(downloads.join(','));
+                }else {
+                    $.showModal(encodeURI('/download/Deletedownload/names-'+names.join(',')+'-ids-'+downloads.join(',')+'-v-'+Math.random()+''),{title:'放入回收站'});
+                }
+            });
+            //删除简历
+            $(".oprecycle").click(function(e){
+                var download_id = $(this).parents(".rMentLv").attr("data-downid");
+                var name = $(this).parents(".rMentLv").attr("data-name");
+                val = cookieutility.get('deletedownload');
+                if(val == 'true'){
+                    download._deletedownload(download_id);
+                }else {
+                    $.showModal(encodeURI('/download/Deletedownload/names-'+name+'-ids-'+download_id+'-v-'+Math.random()+''),{title:'删除'});
+                }
+            });
+            $(".deleteresume").click(function(e){
+                var download_id = $(this).parents(".rMentLv").attr("data-downid");
+                var name = $(this).parents(".rMentLv").attr("data-name");
+                val = cookieutility.get('deletedownload');
+                if(val == 'true'){
+                    download._deletedownload(download_id);
+                }else {
+                    $.showModal(encodeURI('/download/Deletedownload/names-'+name+'-ids-'+download_id+'-v-'+Math.random()+''),{title:'删除'});
+                }
+            });
+            // 单个邀请
+            $('.opinvite').click(function(e){
+                var resume_id = $(this).parents(".rMentLv").attr("data-resumeid");
+                download._invitesingle(resume_id);
+                e.preventDefault();
+            });
+            // 单个备注
+            $('.opremark').click(function(e){
+                var resume_id = $(this).parents(".rMentLv").attr("data-resumeid");
+                var tree = $(this).parents(".rMentLv").find(".mTit1");
+                download._updateRemark(resume_id);
+                e.preventDefault();
+            });
+            //单个保存到电脑
+            $(".opdown").click(function(e){
+                e.preventDefault();
+                var resume_id = $(this).parents(".rMentLv").attr("data-resumeid");
+                var download_id = $(this).parents(".rMentLv").attr("data-downid");
+                download._downresume(resume_id,download_id);
+            });
+            //单个转发到邮箱
+            $(".opsendmail").click(function(e){
+                e.preventDefault();
+                var resume_id = $(this).parents(".rMentLv").attr("data-resumeid");
+                download._sendEmail(resume_id);
+            });
+            //搜索
+            $("#onSubmit").click(function(e){
+                e.preventDefault();
+                //搜索条件
+                var job_id = "";
+                var keyword = $("#keyword").val();
+                download.submit(job_id,keyword);
+            });
+        },
+        _invitCallback:function(){
+            window.location.reload();
+        },
+        _printresume:function(resumeid) {
+            var url = '/resume/htmlprint/resumeid-'+resumeId+'';
+            $('#printIframe').attr("src", url);
+        },
+        _downresume:function(resumeid,downloadid) {
+            var url = '/download/DownLoad/resumeid-'+resumeid+'-downloadid-'+downloadid+'';
+            $.showModal(url,{title:'请选择保存的文件格式'});
+        },
+        _downresume:function(resumeid,downloadid) {
+            var url = '/download/DownLoad/resumeid-'+resumeid+'-downloadid-'+downloadid+'';
+            $.showModal(url,{title:'请选择保存的文件格式'});
+        },
+        _downresumeword:function(ids,downloadids){
+            var url = '/resume/worddown/resumeid-'+ids+'';
+            $(this).attr('href',url).attr('target','_blank');
+        },
+        _downresumehtml:function(ids) {
+            var url = '/resume/htmldown/resumeid-'+ids+'';
+            $(this).attr('href',url).attr('target','_blank');
+        },
+        _downresumeExcel:function(ids) {
+            var url = '/excel/index/resumeid-'+ids+'';
+            $(this).attr('href',url).attr('target','_blank');
+        },
+        _downresumePdf:function(ids) {
+            var url = '/resume/pdfdown/resumeid-'+ids+'';
+            $(this).attr('href',url).attr('target','_blank');
+        },
+        _sendEmail:function(resumeid){
+            $.showModal('/resume/wordsend/resumeid-'+resumeid+'',{title:'转发到邮箱'});
+        },
+        _deletedownload:function(ids) {
+            // 删除下载的简历
+            $.getJSON('/download/Deletedownload/'+'op-del-ids-'+ids+'-v-'+Math.random(),function(result){
+                if(result.success) {
+                    $.anchorMsg('已放入回收站');
+                    download.refresh();
+                }else {
+                    $.anchorMsg(result.error, { icon: 'fail' });
+                }
+            });
+        },
+        _updateRemark:function(resumeid) {
+            // 更新备注
+            $.showModal('/resumeremark/index/resume_id-'+resumeid+'-v-'+Math.random(),{title:'备注',onclose:function(){
+                // 更新备注
+                $.getJSON("/resumeremark/ResumeRemark/"+'-resumeid-'+resumeid+'-v-'+Math.random(),function(result){
+                    if(result.remark !='' && result.updatetime !=''){
+                        var c = result.remark+"&nbsp;"+result.updatetime;
+                        var html ='<span  class="remark_show">'+c+'<img src="//assets.huibo.com/img/c/new_resume/hbtip2.png" width="5" height="22"></span>';
+                        var m = $("#mark"+resumeid+" .mTit1").find(".remark_contr");
+                        var html_top = "<i class='remark_contr'></i>";
+                        if(m.length>0){
+                            $("#mark"+resumeid+" .mTit1").find(".remark_show").remove();
+                            $("#mark"+resumeid+" .mTit1").append(html);
+                        }else{
+                            $("#mark"+resumeid+" .mTit1").append(html_top+html);
+                        }
+                    }else{
+                        $("#mark"+resumeid+" .mTit1").find(".remark_show").remove();
+                        $("#mark"+resumeid+" .mTit1").find(".remark_contr").remove();
+                    }
+                });
+            }});
+        },
+        //单个邀请
+        _invitesingle:function(resumeid) {
+            $.showModal('/invite/invitesingleshow/resumeID-'+resumeid+'-v-'+Math.random(),{title:'邀请面试 ',onclose:function(){
+                download._invitCallback(resumeid);
+            }});
+        },
+        selectUserName:function(){
+            var checkboxs = $('.rMentLitBg').find('input[name="chkdown"]:checked'),
+                    usernames = [];
+            for(var i=0,len=checkboxs.length;i<len;i+=1) {
+                usernames.push($(checkboxs[i]).attr('data-name'));
+            }
+            return usernames;
+        },
+        selectDownids:function(){
+            var checkboxs = $('.rMentLitBg').find('input[name="chkdown"]:checked'),
+                    downids = [];
+            for(var i=0,len=checkboxs.length;i<len;i+=1) {
+                downids.push($(checkboxs[i]).val());
+            }
+            return downids;
+        },
+//    //转发到邮箱
+//    _sendEmail:function(resumeid,applyid){
+//    	$.showModal('/resume/wordsend/resumeid-'+resumeid+'-applyid-'+applyid+'-src-apply',{title:'转发到邮箱'});
+//    },
+        selectResume:function(){
+            var checkboxs = $('.rMentLitBg').find('input[name="chkdown"]:checked'),
+                    resumeids = [];
+            for(var i=0,len=checkboxs.length;i<len;i+=1) {
+                resumeids.push($(checkboxs[i]).attr('data-resumeid'));
+            }
+            return resumeids;
+        },
+
+        submit:function(tag_id,keyword){
+            if(keyword =='输入姓名或简历编号'){
+                keyword ="";
+            }
+            var data =[];
+            if(tag_id !=''){
+                data.push("tag_id="+tag_id);
+            }
+
+            if(keyword !=''){
+                data.push("keyword="+keyword);
+                data.push("search_model=1");
+            }
+            if(data.length >0){
+                window.location.href = '/download/index/'+"?"+data.join("&");
+            }else{
+                window.location.href = '/download/index/'
+            }
+        },
+        refresh:function(){
+            window.location.reload();
+        }
+
+    }
+
+    download.init();
+    $.getJSON('/account/twodimensioncode/',function(result){
+        if(result&&result.status) {
+            var src = result.data.codeurl;
+            $('#ewmBox img').attr('src',src);
+            $('#ewmBox').show();
+        }
+    });
+
+    $("#ewmBox").find("a").click(function(){$(this).parents("#ewmBox").hide();return false;});
+</body>
+
+</html>

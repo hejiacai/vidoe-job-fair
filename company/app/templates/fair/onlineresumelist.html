@@ -1,0 +1,341 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+<title>{/$title/}</title>
+<!–[if lt IE9]> 
+<script src="{/version file='html5.js'/}"></script>  
+<![endif]–>
+<link rel="stylesheet" type="text/css" href="{/version file="base.css"/}" />
+<link rel="stylesheet" type="text/css" href="{/version file="comback.css"/}" />
+<link rel="stylesheet" type="text/css" href="{/version file="icons.css"/}" />
+
+<script type="text/javascript" language="javascript" src="{/version file="jquery-1.8.3.min.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="dialog.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="ui_inputFocus.js"/}"></script><!--输入框获取焦点-->
+<script type="text/javascript" language="javascript" src="{/version file="ui_hovchange.js"/}"></script><!--指向改变class-->
+<script type="text/javascript" language="javascript" src="{/version file="common.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="ui_dropdownlist.js"/}"></script><!--下拉模拟-->
+<script type="text/javascript" language="javascript" src="{/version file="ui_calling.js"/}"></script><!--行业类别-->
+<script type="text/javascript" language="javascript" src="{/version file="ui_jobsort.js"/}"></script><!--职位类别-->
+<script type="text/javascript" language="javascript" src="{/version file="ui_validate.js"/}"></script><!--验证-->
+<script type="text/javascript" language="javascript" src="{/version file="jquery.form.js"/}"></script><!--表单提交-->
+<script type="text/javascript" language="javascript" src="{/version file="ui_tooltip.js"/}"></script><!--气泡插件-->
+<script type="text/javascript" language="javascript" src="{/version file="ui_autocomplete.js"/}"></script><!--自动补全-->
+
+</head>
+<body id="body">
+<style type="text/css">
+section.section{}
+.section hgroup{padding:0;zoom:1;background:url({/$siteurl.style/}/img/c/recBj.jpg) repeat-y #fafafa;}
+.left{float:left; display:inline; width:391px; min-height:430px;}
+.left .lTit{height:53px; line-height:53px; border-bottom:1px solid #e1e1e1; padding-left:17px; color:#666;}
+.left .lCon{padding:20px 18px; zoom:1;}
+.lCon .bd{}
+.lCon .bd .formMod .l{width:60px;}
+.lCon .bd .formMod .r{width:285px;}
+.lCon .bd .formMod .r .formChb{margin:0;}
+.lCon .bd .formMod .r .formChb label{margin-right:21px;_margin-right:17px;#margin-right:17px;}
+.lCon .bd .xbMod .r .formChb label{font-size:14px;}
+.lCon .bd .formBtn{margin:25px 0 0 65px;}
+
+.right{float:left; display:inline; width:609px; min-height:430px}
+.right .noData{padding:150px 0;zoom:1; background:none;}
+.right .noData .noDataTit{font-size:20px;}
+.right .noData .noDataTit i.hbFntWes{font-size:45px; color:#f9ae0c; margin-right:10px; vertical-align:middle;}
+.right .rCon{padding:0 0 30px 0; zoom:1;}
+.rCon .perTit{height:53px; border-bottom:1px solid #e1e1e1; padding:0 20px;zoom:1; line-height:53px; color:#999;}
+.rCon .perTit b{color:#444; margin:0 7px;}
+
+.rCon .perCon{padding:10px 20px 0 10px; zoom:1;}
+.rCon .perCon .perLst{}
+.perLst ul li{height:auto; border-bottom:1px solid #efefef; padding:10px;zoom:1; font-size:12px;overflow: hidden;}
+.perLst ul li .formChb{margin:5px 12px 0 0;}
+.perLst ul li .perPhoto{width:35px; height:44px; border:0; background:url({/$siteurl.style/}/img/common/user35_44.jpg) no-repeat; float:left; display:inline;}
+.perLst ul li .perPhoto img{width:35px; height:44px; border:0;}
+.perLst ul li .perInfo{float:left; display:inline; padding-left:12px; width: 450px;}
+.perLst ul li .perInfo p{color:#999; line-height:22px;}
+.perLst ul li .perInfo a:link,.perLst ul li .perInfo a:active{color:#444; font-size:14px;}
+.perLst ul li .perInfo a:hover{color:#00aaff;}
+.perLst ul li .perInfo em{margin-left:10px;}
+.perLst ul li .sta{float:right; display:inline; text-align:right; line-height:44px;}
+.perLst ul li .sta p.staIn{}
+.perLst ul li .sta p.staInTo{color:#5ba333;}
+.perLst ul li.hov{background:#fff;}
+.rCon .perCon .allBtn{margin-top:30px; height:30px;}
+.rCon .perCon .allBtn .formChb{margin:0 0 0 10px;}
+.page{text-align:left; _margin-left:15px;#margin-left:10px;}
+.page a{width:25px; height:25px; margin:0 4px;}
+.page a:first-child{margin-left:10px;}
+</style>
+{/include 'nav.html' parent="现场招聘" cur='现场招聘'/}
+<div class="content" id="content">
+	<section class="section" style="">
+            <div class="postSchListBg">
+                    <div class="postSchList">
+                        <div class="zList">
+                            <a href="{/get_url rule='/fair'/}"  ><span>我的招聘会</span></a>
+                            <a href="{/get_url rule='/fairjob'/}" ><span>现场职位管理</span></a>
+                            <a href="{/get_url rule='/fairsceneinvite'/}" ><span>发出的邀请</span></a>
+                            <a class="last cut" href="{/get_url rule='/faironline'/}"><span>邀请网站求职者</span></a>
+                        </div>
+                    </div>
+            </div>
+		<hgroup style="overflow:inherit">
+        	<div class="left">
+            	<p class="lTit">邀请网站求职者</p>
+            	<div class="lCon">
+            		<form id="formOnlineResumeList" method="get" action="{/get_url rule='/faironline/index/'/}">
+                    <div class="bd">
+                    	<div class="form">
+                            <div class="formMod JobIndDrop checkMod">
+                                <div class="l">行业类别</div>
+                                <div class="r">
+                                    <span class="drop formText JobIndDrop zindex" style="width:283px;" id=txtCalling></span>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="formMod JobCayMod checkMod">
+                                <div class="l">职位类别</div>
+                                <div class="r">
+                                    <span style="width:283px;" class="drop formText JobCayDrop zindex" id="txtJobsort"></span>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="formMod">
+                                <div class="l">关键字</div>
+                                <div class="r">
+                                    <span class="formText">
+                                        <input value="{/$keyword/}" id="txtKeyword" name="txtKeyword" type="text" style="width:273px;" class="text">
+                                    </span>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="formMod degMod">
+                                <div class="l">学历</div>
+                                <div class="r">
+                                    <span class="formChb">
+                                    	{/foreach $degree_arr as $item=>$value/}
+                                    		{/$is_checked=0/}
+                                    		{/foreach $degree_ids as $k=>$v/}
+                                				{/if $item == $v/}
+                                    			<input checked="checked" value="{/$item/}" type="checkbox" name="chkDegree[]" id="deg{/$item/}" class="chb"><label for="deg{/$item/}">{/$value/}</label>
+                                    			{/$is_checked=1/}
+                                				{/break/}
+                                				{//if/}
+                               				{//foreach/}
+                               				{/if $is_checked == 0/}
+                               				<input value="{/$item/}" type="checkbox" name="chkDegree[]" id="deg{/$item/}" class="chb"><label for="deg{/$item/}">{/$value/}</label>
+                                    		{//if/}
+                            			{//foreach/}
+<!--                                    	<input type="checkbox" name="deg" id="deg1" class="chb"><label for="deg1">初中</label>-->
+<!--                                        <input type="checkbox" name="deg" id="deg2" class="chb"><label for="deg2">高中</label>-->
+<!--                                        <input type="checkbox" name="deg" id="deg3" class="chb"><label for="deg3">中技</label>-->
+<!--                                        <input type="checkbox" name="deg" id="deg4" class="chb"><label for="deg4">中专</label>-->
+<!--                                        <input type="checkbox" name="deg" id="deg5" class="chb"><label for="deg5">大专</label>-->
+<!--                                        <input type="checkbox" name="deg" id="deg6" class="chb"><label for="deg6">本科</label>-->
+<!--                                        <input type="checkbox" name="deg" id="deg7" class="chb"><label for="deg7">硕士</label>-->
+<!--                                        <input type="checkbox" name="deg" id="deg8" class="chb"><label for="deg8">博士</label>-->
+                                    </span>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="formMod">
+                                <div class="l">工作年限</div>
+                                <div class="r">
+                                    <span id="tstDropYear1" class="drop zindex"></span>
+                                    <span class="tipTxt font12" style="margin:0 10px;">至</span>
+                                    <span id="tstDropYear2" class="drop zindex"></span>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="formMod">
+                                <div class="l">年龄</div>
+                                <div class="r">
+                                     <span class="formText"><input value="{/$age_lower/}" name="txtAge1" type="text" style="width:102px;" class="text"></span>
+                                    <span class="tipTxt font12" style="margin:0 10px;">至</span>
+                                     <span class="formText"><input value="{/$age_upper/}" name="txtAge2" type="text" style="width:102px;" class="text"></span>
+                                    <span class="tipTxt font12">岁</span>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="formMod xbMod">
+                                <div class="l">性别</div>
+                                <div class="r">
+                                    <span class="formChb">
+                                    	{/foreach $sex_arr as $item=>$value/}
+                                    		{/$is_checked=0/}
+                                    		{/foreach $select_sex as $k=>$v/}
+                                				{/if $item == $v/}
+                                   				<input checked="checked" value="{/$item/}" type="checkbox" name="chkSex[]" id="xb{/$item/}" class="chb"><label for="xb{/$item/}">{/$value/}</label>
+                                    			{/$is_checked=1/}
+                                				{/break/}
+                                				{//if/}
+                               				{//foreach/}
+                               				{/if $is_checked == 0/}
+                               				<input value="{/$item/}" type="checkbox" name="chkSex[]" id="xb{/$item/}" class="chb"><label for="xb{/$item/}">{/$value/}</label>
+                                    		{//if/}
+                                    	{//foreach/}
+<!--                                    	<input type="checkbox" name="xb" id="xb1" class="chb"><label for="xb1">男</label>-->
+<!--                                        <input type="checkbox" name="xb" id="xb2" class="chb"><label for="xb2">女</label>-->
+                                    </span>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                        <div class="formBtn"><a id="btnSearch" href="javascript:void(0);" class="btn1 btnsF14">搜索</a></div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+            <div class="right">
+                <div class="noData" style="display:none;"><p class="noDataTit"><i class="hbFntWes">&#xf06a;</i>还没有求职者入场</p></div>
+                <div class="rCon">
+                    <div class="perTit">共有<b>26651</b>人愿意参加招聘会</div>
+                    <div class="perCon">
+                        <div class="perLst"  id="lst">
+                            <ul>
+                            	{/if !empty($the_list) && count($the_list)>0/}
+                               	{/foreach $the_list as $item=>$value/}
+                                <li>
+                                    <span class="formChb"><input {/if $value.can_invite != true/}disabled="disabled"{//if/} value="{/$value.resume_id/}" type="checkbox" name="chkPer" id="per{/$value.resume_id/}" class="chb"></span>
+                                    <span class="perPhoto">{/$value.photo/}</span>
+                                    <span class="perInfo">
+                                        <p><a href="{/get_url rule="/resume/resumeshow/" data="type=fair&resumeid={/$value.resume_id/}"/}" target="_blank"><b>{/$value.username/}</b></a><em>{/$value.birthday/}/{/$value.curarea/}/{/$value.degree/}</em></p>
+                                        <p>最近工作：<i>{/$value.work/}</i></p>
+                                    </span>
+                                    <span class="sta">
+                                    {/if $value.can_invite == true/}
+                                    	<p class="staIn"><a name="btnInviteResume" href="javascript:void(0);" id="oneInv{/$value.resume_id/}">邀请</a></p>
+                                    {/else/}
+										<p class="staInTo">已邀请</p>
+                                    {//if/}
+                                    </span>
+                                </li>
+                                {//foreach/}
+               					{//if/}
+                            </ul>
+                        </div>
+                        <div class="allBtn">
+                            <span class="formChb"><input type="checkbox" name="per" id="chkMenu" class="chb"><label for="chkMenu">全选</label></span>
+                            <a href="javascript:void(0);" class="btn1 btnsF12" id="batInvMulti">批量邀请</a>
+                        </div>
+                        {/$pager/}
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </hgroup>
+    </section>
+</div>
+{/include file="footer.html"/}
+<section class="floatRT"><a href="{/get_url rule='/about/message' domain='main'/}" target="_blank" class="serviceLink">我有问题要反馈</a><b></b></section>
+<script>
+var onlineresumeList={
+	initialize:function(){
+		//初始化控件
+		this._initControl();
+	},
+	_initControl:function(){
+		$('#chkMenu').bindCheckBox('chkPer');
+		$('#txtCalling').calling({max:5,type:'multiple',hddName:'calling',selectItems:[{/$calling/}]});
+		$('#txtJobsort').jobsort({max:5,type:'multiple',hddName:'jobsort',selectItems:[{/$jobsort/}]});
+		//初始化工作年限下拉控件1
+		$('#tstDropYear1').droplist({selectValue:'{/if !base_lib_BaseUtils::nullOrEmpty($workyear_min)/}{/$workyear_min/}{/else/}0{//if/}',noSelectClass:'gray',inputWidth:105,style:'width:113px;',hddName:'hddWorkyear1',items:{/$workyear_json1/},onSelect:function(i,name) {
+		}});
+		$('#tstDropYear2').droplist({selectValue:'{/if !base_lib_BaseUtils::nullOrEmpty($workyear_max)/}{/$workyear_max/}{/else/}10{//if/}',noSelectClass:'gray',inputWidth:105,style:'width:113px;',hddName:'hddWorkyear2',items:{/$workyear_json2/},onSelect:function(i,name) {
+		}});
+		$.setIndex("zindex");
+		$('#btnSearch').click(function(){
+			$('#formOnlineResumeList').submit();
+		});
+		$('a[name="btnInviteResume"]').click(function(){
+			var resumeid = $(this).closest('li').find('span.formChb').find(':input.chb').val();
+			var resumename = $(this).closest('li').find('span.perInfo p:first-child b:first-child').html();
+			$.showModal('{/get_url rule="/fairinvite/fairinvite" data="resumeid='+resumeid+'&obj=onlineresumeList&callback=singleinviteCallback&v='+Math.random()+'"/}',{title:'邀请' + resumename + '到现场招聘会'});
+		});
+		$('#batInvMulti').click(function(){
+			var checkboxs = $('div#lst').find(':input[name="chkPer"][checked]');
+            if(checkboxs.length == 0){
+            	$.anchorMsg('请选择需要邀请的求职者', { icon: 'warning' }); return;
+            }
+            var resumeids = new Array();
+            var resumenames = new Array();
+       		checkboxs.each(function(i,o){
+           		if(i < 3){
+           			resumenames.push($(o).closest('li').find('span.perInfo p:first-child b:first-child').html());
+            	}
+       			resumeids.push($(this).val());
+           	});
+           	var theTitle = '';
+           	if(checkboxs.length <=3){
+           		theTitle = '邀请' + resumenames.join('、') + '到现场招聘会';
+           	}else{
+           		theTitle = '邀请' + resumenames.join('、') + '...等' + checkboxs.length + '人到现场招聘会';
+           	}
+           	$.showModal('{/get_url rule="/fairinvite/fairinvite" data="resumeids='+resumeids.join(',')+'&obj=onlineresumeList&callback=multiinviteCallback&v='+Math.random()+'"/}',{title:'邀请' + theTitle + '到现场招聘会'});
+		});
+	},
+	singleinviteCallback:function(obj){
+		$('div#lst').find(':input[value='+obj+']').attr('checked', false).attr('disabled', 'disabled').closest('li').find('span.sta').empty().html('<p class="staInTo">已邀请</p>');
+	},
+	multiinviteCallback:function(arr){
+		$(arr).each(function(i,o){
+			$('div#lst').find(':input[value='+o+']').attr('checked', false).attr('disabled', 'disabled').closest('li').find('span.sta').empty().html('<p class="staInTo">已邀请</p>');
+       	});
+	}
+};
+onlineresumeList.initialize();
+</script>
+
+
+
+<script>
+<!--$.setIndex("zindex");//为需要赋层级设置的元素设置class为zindex-->
+<!--$('#jobsort').jobsort({unLimitedLevel:3,type:'single'});-->
+<!--$('#callingContainer').calling({type:'single'});-->
+<!--$('#tstDropYear1').droplist({-->
+<!--	defaultTitle:'请选择',-->
+<!--	style:'width:110px;',-->
+<!--    noSelectClass:'gray',-->
+<!--    inputWidth:102,-->
+<!--    width:128,-->
+<!--    name:'hddSex',-->
+<!--    items:[{id:'1',name:'应届毕业生'},{id:'2',name:'1年'}],-->
+<!--    onSelect:function(i,name) {-->
+<!--	   	选中后的事件-->
+<!--}});-->
+<!--$('#tstDropYear2').droplist({-->
+<!--	defaultTitle:'请选择',-->
+<!--	style:'width:110px;',-->
+<!--    noSelectClass:'gray',-->
+<!--    inputWidth:102,-->
+<!--    width:128,-->
+<!--    name:'hddSex',-->
+<!--    items:[{id:'1',name:'1年'},{id:'2',name:'10年以上'}],-->
+<!--    onSelect:function(i,name) {-->
+<!--	   	选中后的事件-->
+<!--}});-->
+<!--$('#noAtt').click(function() {-->
+<!--	$.showModal('/company/ui/noAtt.html?v=aaaa',{title:'邀请罗布拉多到现场招聘会'});-->
+<!--});-->
+<!--$('#oneInv').click(function() {-->
+<!--	$.showModal('/company/ui/oneInv.html?v=aaaa',{title:'邀请罗布拉多到现场招聘会'});-->
+<!--});-->
+<!--$('#batInv').click(function() {-->
+<!--	$.showModal('/company/ui/batInv.html?v=aaaa',{title:'邀请罗布拉多、刘凯、小伟...等6人到现场招聘会'});-->
+<!--});-->
+$(document).ready(function() {
+	$('#lst').find('li').hover(function(){
+		$(this).addClass('hov');
+	},function(){
+		$(this).removeClass('hov');
+	});
+});
+
+</script>
+</body>
+</html>

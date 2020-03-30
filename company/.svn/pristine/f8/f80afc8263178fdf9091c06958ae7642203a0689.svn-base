@@ -1,0 +1,49 @@
+<style>
+.firmDiv{overflow: hidden; padding:20px 30px;}
+.firmDiv img{ display: inline-block;vertical-align: middle;}
+</style>
+<div id='render' class='self' style='display:none'>
+     <div class='firmDiv' style="height:50px;width:280px;">
+        <span style="font-size:12px;color:#999;text-indent: 2em;display:inline-block;line-height:24px;">您确定要拒绝该简历吗？如果设置为不合适的简历将不能获取联系方式和邀请面试！</span>
+    </div>
+    <div class="dialogFooter">
+            <a href="javascript:void(0);" style="padding:0 30px; float: right;margin-right: 0px; margin-bottom: 10px;" class="btn3 btnsF12 btnReardCanse">取消</a><a id="dorender" href="javascript:void(0);" style="padding:0 30px; float:right;margin-right: 4px; margin-bottom: 10px;"  class="btn1 btnsF12">确 定</a>
+    </div>
+</div>
+<div id='notrender'  class='self'>
+    <div class='firmDiv'>
+        <img src='{/$siteurl.style/}/img/c/new_index/firmicon21.jpg'/><span style="padding-left:4px;font-size:14px;color:#999">设置简历不合适成功。我们将继续努力为您搜索更适合的简历</span>
+    </div>
+    <div class="dialogFooter">
+            <a href="javascript:void(0);" style="padding:0 30px; float: right;margin-right: 30px; margin-bottom: 10px;"  class="btn1 btnsF12 btnReardCanse">我知道了</a>
+    </div>
+</div>
+    <script>
+var recommendid = {/$recommend_id/};
+var resumeremark = {
+    init:function(){
+        $(".btnReardCanse").click(function(){
+           resumeremark.cancelRemark();
+        });
+        $("#dorender").click(function(){
+            resumeremark.setStatus();
+        });
+    },
+    cancelRemark:function(){
+         $(".self").closeDialog();
+    },
+    setStatus:function(){
+        $.getJSON('{/get_url rule="/recommend/setstatus/"/}',{recommendid:recommendid,status:2},function(result) {
+            if(!result.status){
+                $.anchorMsg("设置简历不合适失败",{ icon: 'warning' });
+                $(".self").closeDialog();
+                return;
+            }
+            $("#render").hide();
+            $("#notrender").show();
+            recommend.setRefuseResumeStatus();
+	});
+    }
+}
+resumeremark.init();
+</script>

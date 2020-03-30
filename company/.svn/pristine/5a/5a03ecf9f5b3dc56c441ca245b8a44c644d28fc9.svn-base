@@ -1,0 +1,238 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+<title>{/$title/}</title>
+<!–[if lt IE9]> 
+<script src="{/version file='html5.js'/}"></script> 
+<![endif]–>
+<link rel="stylesheet" type="text/css" href="{/version file="base.css"/}" />
+<link rel="stylesheet" type="text/css" href="{/version file="comback.css"/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}" />
+
+<script type="text/javascript" language="javascript" src="{/version file="jquery-1.8.3.min.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="common.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="dialog.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="jquery.form.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="ui_validate.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="ui_inputFocus.js"/}"></script><!--输入框获取焦点-->
+<script type="text/javascript" language="javascript" src="{/version file="ui_hovchange.js"/}"></script><!--指向改变class-->
+<script type="text/javascript" language="javascript" src="{/version file="ui_drop.js"/}"></script><!--下拉模拟-->
+<script type="text/javascript" language="javascript" src="{/version file="ui_tooltip.js"/}"></script><!--气泡插件-->
+<script>
+
+$(document).ready(function() {
+	$(document).bind("click",function(e){
+		var target = $(e.target);
+		if (target.closest(".newLeavey").length == 0) {
+			$('.newLeaveT textarea').each(function() {
+				$(this).parent().addClass("newLeaveTx");
+				if ($(this).val().replace(/^\s*$/g,'') == '') {
+					$(".newLeaveB").hide();
+					$(this).val("请输入你要回复的内容");
+					$(this).parent().next().find("span").html("0");	
+				}
+			});
+		}
+	}) 
+
+	$('.newLeaveT textarea').on("focus",function(){
+		$(this).parent().removeClass("newLeaveTx");
+		$(this).parents(".newLeavey").find(".newLeaveB").show();
+		
+		if ($(this).val().replace(/^\s*$/g, '')  == '' || $(this).val() == "请输入你要回复的内容") {
+			$(this).val('');
+		}
+		$('.newLeaveT textarea').not(this).parent().addClass("newLeaveTx");
+		$('.newLeaveT textarea').not(this).each(function(index, element) {
+			$(this).parents(".newLeavey").find(".newLeaveB").hide();
+            if($(this).val().replace(/^\s*$/g,'')  == ''){
+				$(this).val("请输入你要回复的内容");
+				$(this).parent().next().find("span").html("0");	
+			}
+        });									   
+	})
+	
+	$("textarea").keyup(function(){ 
+		var max = 200;
+		var len = $(this).val().length;
+		if (max >= len) {
+			$(this).parents(".newLeavey").find("span").text(len);
+		} else {
+			$.anchorMsg("回复内容请保持在200字以内", {icon: 'warning'});
+			$(this).parents(".newLeavey").find("span").text(200);
+			$(this).val($(this).val().substr(0,max));
+		}
+	});
+});
+
+</script>
+<style>
+section.section{ background:#fff; overflow:hidden;}
+.newLeavex a.btnDel {float:right; font-size:12px; padding-right:5px; visibility:hidden; _visibility:visible;}
+.newLeaveBg:hover .newLeavex a {visibility:visible;}
+</style>
+<script type="text/javascript" src="{/version file='version.js'/}"></script>
+<script type="text/javascript">
+        window.CONFIG = {
+                HOST: '{/$siteurl.style/}',
+                COMBOPATH: '/js/v2/'
+        }
+</script>
+<script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='global.js'/}"></script>
+
+</head>
+<body id="body">
+{/include 'new_header.html' par="全职招聘" cur='留言'/}
+<div class="content" id="content">
+	<div class="newMsgBg">
+    <div class="newMsgLf">
+        <ul class="newMsgList">
+            <li><a href="{/get_url rule="/guestbook/index"/}" {/if $isreply === ''/} class="cut" {//if/}>全部</a></li>
+            <li><a href="{/get_url rule="/guestbook/index/" data="isreplay=0"/}" {/if $isreply === '0'/} class="cut" {//if/}>未回复</a></li>
+            <li><a href="{/get_url rule="/guestbook/index/" data="isreplay=1"/}" {/if $isreply === '1'/} class="cut" {//if/}>已回复</a></li>
+        </ul>
+        {/foreach $item as $key => $value/}
+        <div class="newLeaveBg">
+        	{/if $value['hasHead']/}
+    		<img src="{/$value['headphoto']/}" class="newLeaveImg" width="88" height="88" />
+	    	{/else/}
+    		<img src="{/$siteurl.style/}/img/company/headPortrait.jpg" class="newLeaveImg" width="88" height="88" />
+        	{//if/}        	       	
+
+            <div class="newLeave">
+            	<p class="newLeavex">
+                	<b>{/$value['personname']/}</b>
+                    {/if $value['job_url']/}
+                    <span>咨询职位：<a href="{/$value['job_url']/}" target="_blank" />{/$value['job_name']/}</a></span>
+                    {/else/}
+                    <span>咨询企业：<a href="{/$value['com_url']/}" target="_blank" />{/$value['com_name']/}</a></span>
+                    {//if/}
+                    <em>{/$value['time']/}</em>
+                    <a href="javascript:;" class="btnDel delete" data-msgid="{/$value['guestbook_id']/}">删除</a>
+                </p>
+                <p class="newLeavez">{/$value['content']/}</p>
+                
+                {/if !$value['isreplay']/}
+                <div class="newLeavey">
+                	<img src="{/$siteurl.style/}/img/company/leave01.jpg" width="14" height="8" />
+                    <div class="newLeaveT newLeaveTx">
+                    	<textarea name="" cols="" rows="">请输入你要回复的内容</textarea>
+                    </div>
+                    <div class="newLeaveB">
+                    	<span class="leftWord">0</span>
+                    	<em>/200</em>
+                        <a href="javascript:void(0);" data-msgid="{/$value['guestbook_id']/}" data-ctime="{/$value['create_time']/}" class="doReply">回复</a>
+                    </div>
+                </div>
+
+                {/else/}
+                <p class="newLeaveE">
+                	<b>已回复：</b>
+                    <span>{/$value['reply_content']/}</span>
+                </p>
+                {//if/}
+            </div>
+        </div>
+       	{//foreach/} 
+        <div id="page">{/$pager/}</div> 
+    	<div class="noData" style="display:{/if $hasdata/}none{//if/}">暂无留言/咨询</div>
+    </div>
+    <div class="newMsgRf">
+    	<p class="newMrt01">{/$company_start_time/}至今</p>
+        <p class="newMrt02">求职者咨询条数：<span>{/$allMsgCount/}条</span></p>
+        <p class="newMrt02">回复求职者咨询：<span>{/$allReplyedMsgCount/}条</span></p>
+        <p class="newMrt02">当前回复率：<span>{/if $allMsgCount==0/}0%{/else/}{/sprintf("%.2f",($allReplyedMsgCount/$allMsgCount),0,2)*100/}%{//if/}</span></p>
+    </div>
+</div>
+</div>
+{/include file="footer.html"/}
+<section class="floatRT"><a href="{/get_url rule='/about/message' domain='main'/}" target="_blank" class="serviceLink">我有问题要反馈</a><b></b></section>
+<script>
+
+$(document).ready(function() {
+	$(document).on('click', '.doReply', function() { 
+		var value  = $(this).parents('.newLeaveBg').find('textarea').val();
+		var c_time = $(this).attr('data-ctime');
+		var id     = $(this).attr('data-msgid');
+		if (value.replace(/^\s*$/g,'')  == '' || value == "请输入你要回复的内容") {
+			$.anchorMsg("回复内容不能为空", {icon: 'warning'});
+			return false;
+		}
+		
+		$.post('{/get_url rule="/guestbook/reply/"/}', {'operate':'reply', 'guestid':id, 'txtReplyContent':value}, function (result) {
+			if (result.success) {
+				$.anchorMsg(result.success, {icon: 'success'});
+				replySuccess(result,c_time);
+			} else {
+				$.anchorMsg(result.error, {icon: 'fail'}); 
+			}
+		}, 'json');
+	});
+	
+	$(document).on('click', '.btnDel', function(){ 
+		var id = $(this).attr('data-msgid');
+		$.getJSON('{/get_url rule="/guestbook/Delete"/}',{guestid:id},function(result){
+			if(typeof result.success !='undefined') {
+				$.anchorMsg(result.success,{ icon: 'success' });
+				setTimeout("window.location.href = window.location.href;",1500);
+			}else {
+				 $.anchorMsg(result.error, { icon: 'fail' }); 
+			}
+	 	});	
+	});
+	
+	
+});
+
+function replySuccess(result,c_time){
+	var id = result.id;
+	var target = $(".doReply[data-msgid="+id+"]").parents(".newLeavey");
+	target.before("<p class='newLeaveE'><b>已回复：</b><span>"+result.content+"</span></p>");
+	target.remove();
+	if(dateCompare(c_time, $(".newMrt01").html().replace(/[^0-9]/ig,""))){
+		var total = $(".newMrt02").eq(0).find('span').text(); total =  parseInt(total.substr(0,total.length-1));
+		var areply = $(".newMrt02").eq(1).find('span').text(); areply = parseInt(areply.substr(0,areply.length-1));
+		var res = Math.round((areply+1)/total*100);
+		$(".newMrt02").eq(2).find('span').html(res+"%"); 
+		$(".newMrt02").eq(1).find('span').html((areply+1)+"条");
+	}
+}
+
+function dateCompare(startdate, enddate) {
+	var starttime = new Date(startdate.substr(0,4), startdate.substr(5,2), startdate.substr(8,2));
+	var starttimes = starttime.getTime();
+	var lktime = new Date(enddate.substr(0,4), enddate.substr(4,2), enddate.substr(6,2));
+	var lktimes = lktime.getTime();
+	
+	if (starttimes >= lktimes) {
+		return true;
+	} else
+		return false;
+}
+
+	var $lst = $('#lst');
+	$('.hbTip').tooltip({
+		selector : "span[data-toggle=tooltip],p[data-toggle=tooltip]",
+		html : true
+	});
+	$(document).ready(function(e) {
+		$.focusColor('input.text');
+		$.focusColor('textarea.textarea');
+
+		$lst.find('li').hover(function() {
+			$(this).addClass('hov');
+		}, function() {
+			$(this).removeClass('hov');
+		});
+
+	});
+</script>
+
+ {/include file="chat/chat.html"/}
+</body>
+</html>

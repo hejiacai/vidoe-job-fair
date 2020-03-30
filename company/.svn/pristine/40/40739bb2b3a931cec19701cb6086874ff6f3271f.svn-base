@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>{/$title/}</title>
+<style>
+body {
+text-align: inherit;
+font-family: "微软雅黑";
+line-height: 200%;
+font-size: 16px;
+}
+.tableTd {
+border-right: 1px solid #aaaaaa;
+border-bottom: 1px solid #aaaaaa;
+}
+</style>
+</head>
+<body id="body" class="minBody" bgcolor=#f0F0F0>
+
+<table width=800 border="0" align="center" cellpadding="28" cellspacing="0" bgcolor="#FFFFFF">
+<tr><td>
+<table width=100% border="0" align="center" cellpadding="2" cellspacing="0" >
+<tr>
+<td colspan=2>
+{/$company_name/}：<br>
+　　您好！感谢您一直以来对汇博的支持！<br>
+　　我们对简历下载部分做了一个调整，按照期望薪酬分成了5个星级，不同的星级需要不同的下载点。<br>
+	<table width=80% border="0" align="center" cellpadding="4" cellspacing="0" style="border-top:1px solid #AAAAAA;border-left:1px solid #AAAAAA;">
+	<tr><td class=tableTd width=50%>期望薪酬＜5K</td><td  class=tableTd width=20%>1星</td><td  class=tableTd width=30%>1个下载点</td></tr>
+	<tr><td  class=tableTd >5K≤期望薪酬＜10K</td><td  class=tableTd >2星</td><td  class=tableTd >3个下载点</td></tr>
+	<tr><td  class=tableTd >10K≤期望薪酬＜15K</td><td  class=tableTd >3星</td><td  class=tableTd >6个下载点</td></tr>
+	<tr><td  class=tableTd >15K≤期望薪酬＜20K</td><td  class=tableTd >4星</td><td  class=tableTd >10个下载点</td></tr>
+	<tr><td  class=tableTd >20K≤期望薪酬</td><td  class=tableTd >5星</td><td  class=tableTd >15个下载点</td></tr>
+	</table>
+　　我们以期望薪酬为分级标准，是因为期望薪酬与企业录用人才的薪酬接近，相对客观可衡量，毕竟乱填期望薪酬会影响到求职效果。我们没有找到其他更合适的标准，因为简历不是标准化产品，过于复杂的标准很难做到客观统一。(期望薪酬面议的简历其实也填写了期望值，只是没有公开)<br>
+	<span style="font-weight:bold;">
+　　对于已经成交的客户，这次调整不会影响到您的使用，我们会按照补偿措施，保证您享受到合同规定的内容。如果您下载点用完，请与我们工作人员联系，我们会第一时间核算您的简历扣点情况并予以补偿。您也可以与我们工作人员联系，我们可以提供书面的承诺。<br>
+	</span>
+	<span style="font-weight:normal;color:RED">
+	{/if !empty($curComservice)/}	
+　　您本次服务，可下载简历{/$curComservice['resume_num']/}份，目前已下载简历{/$curComservice['resumedownnum']/}份，如果全部按新的规则计算，则简历下载扣点{/$curComservice['resumedownpoint']/}；<br>
+	{//if/}
+	{/if !empty($preComService)/}
+　　您上一次服务（{/$preComService['start_time']|date_format:'%Y-%m-%d'/}～{/$preComService['end_time']|date_format:'%Y-%m-%d'/}），可下载简历{/$preComService['resume_num']/}条，实际下载简历{/$preComService['resumedownnum']/}，如果全部按新的规则计算，则扣点为{/$preComService['resumedownpoint']/}，
+		{/if $preComService['surpluspoint'] >= 0/}
+		 未超出{/$preComService['surpluspoint']/}点.
+		{/else/}
+		 超出简历点{/$preComService['surpluspoint']*-1/}点。
+		{//if/}
+		<br />
+		　　按照新的规则核算，我们超过91%的用户下载点不会超过合同规定值。	
+	{//if/}
+	<br />
+	</span>
+　　我们对简历分级，是因为我们要加大推广，让客户有更多中高端人才可选，这是汇博下一步要重点运营的方向。而越是中高端人才，我们越要付出更高的成本，从长远看，不做简历分级，不能支撑我们做好这件事情。<br>
+　　从2014年12月1日，我们将团队分成了10个不同的行业团队，每个团队只服务本行业的客户，同时在各行业增加了大量的客服人员（只专注企业的服务），目的就是让我们的服务更专业、更有效，更贴近客户需求、帮助客户招到人，改变目前招聘网站只重销售的现状。相信我们的客户，一定会体会到汇博越来越好的服务效果。<br>
+	<span style="font-weight:bold;">
+　　这次调整自2015年1月16日20：00上线，我们虽然设定了补偿措施，但操作仓促，没有提前说明，忽视了客户感受，造成了客户误解，在此我们深深致歉！这与我们用户第一的准则违背，一定谨记教训。我们也听取客户反馈的意见，于2015年1月23日对原上线的分级标准进行了微调。<br>
+	</span>
+　　感谢您的理解与支持。<br>
+</td>
+</tr>
+<tr>
+<td width=75%></td>
+<td align=left>
+　　汇博网运营团队<br>
+　　2015年1月23日<br>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</body>
+</html>

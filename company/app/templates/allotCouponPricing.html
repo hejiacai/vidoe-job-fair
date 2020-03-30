@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>待使用优惠劵</title>
+	<link rel="stylesheet" type="text/css" href="{/version file="m_font_style.css"/}">
+	<script type="text/javascript" src="{/version file='version.js'/}"></script>
+	<script type="text/javascript">
+        window.CONFIG = {
+            HOST: '{/$siteurl.style/}',
+            COMBOPATH: '/js/v2/'
+        }
+	</script>
+	<script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+	<script type="text/javascript" src="{/version file='global.js'/}"></script>
+	<script type="text/javascript" language="javascript" src="{/version file='confirmBox.js'/}"></script>
+	<script type="text/javascript" language="javascript" src="{/version file='dialog.js'/}"></script>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		.need-money {
+			width: 470px;
+			box-sizing: border-box;
+			padding: 20px;
+			text-align: center;
+		}
+		.need-money .title {margin-bottom: 20px;}
+		.need-money .title i {font-size: 54px;color: #ccc;}
+		.need-money .txt1 {font-size: 18px;font-weight: bold;margin-bottom: 40px;}
+		.need-money .txt2 {font-size: 14px;margin-bottom: 20px;}
+		.need-money .recharge {display: inline-block;width: 184px;height: 40px;line-height: 40px;background: #ff5400;color: #fff;border-radius: 4px;margin-bottom: 7px;}
+		.need-money .contact {color: #ff5400;}
+	</style>
+</head>
+<body>
+<div class="need-money">
+	{/*<div class="title">*/}
+	{/*    <i class="icon-120"></i>*/}
+	{/*</div>*/}
+	<p>您当前有一张体验券，激活后可立即启用该招聘体验服务</p>
+	<p>有效期：
+		{/$allotCouponPricing_data.validity_date_s/}～{/$allotCouponPricing_data.validity_date_e/}
+	</p>
+	<a class="recharge"  href="javascript:;" style="margin-top:15px;background:#4e74d9; width:100px" onclick="dialog_msg_liao_reload();">
+		暂不激活
+	</a>
+	<a class="recharge"   href="javascript:;" style="margin-top: 15px;width:100px; margin-left: 20px;" onclick="useCoupon('{/$allotCouponPricing_data.id/}');">
+		立即激活
+	</a>
+</div>
+
+<script type="text/javascript">
+    var infoDialog, ConfirmBox;
+    hbjs.use('@confirmBox, @jobDialog', function (m) {
+        ConfirmBox = m['widge.overlay.confirmBox'],
+            Dialog = m['widge.overlay.hbDialog'],
+            cookie = m['tools.cookie'];
+        var $ = m['jquery'].extend(m['cqjob.jobDialog']);
+
+        var close = '×';
+        var width = 455;
+        var zIndex = 9999;
+        var title = '提示';
+
+        infoDialog = new Dialog({
+            close: close,
+            idName: 'informTraining_dialog',
+            title: title,
+            width: width,
+            zIndex: zIndex
+        });
+    })
+
+    //错误提示 success-成功 fail-错误 warning-警告 question-疑问  info-信息 normal-正常
+    function msg_error_box(msg) {
+        ConfirmBox.timeBomb(msg ? msg : "参数错误!", {
+            name: 'fail',
+            timeout: 2000,
+            width: 70 + msg.length * 18
+        });
+        return false;
+    }
+
+    //成功提示 success-成功 fail-错误 warning-警告 question-疑问  info-信息 normal-正常
+    function msg_success_box(msg) {
+        ConfirmBox.timeBomb(msg ? msg : "成功!", {
+            name: 'success',
+            timeout: 1000,
+            width: 70 + msg.length * 18
+        });
+        return true;
+    }
+
+    function useCase(validity_date_s) {
+        var now = '{/date("Y-m-d",time())/}';
+        if (validity_date_s <= now) {
+            window.location = '{/get_url rule="/pay/index/"/}?allot=1';
+        } else {
+            msg_error_box('该现金券不在有效期内，请在有效期内使用');
+        }
+
+    }
+
+    function useCoupon(id) {
+        $.confirm('确定要使用此优惠券吗？', '提示', function () {
+            $.ajax({
+                type: 'post',
+                url: '{/get_url rule="/commoncoupon/UseCoupon"/}',
+                data: {id: id},
+                dataType: 'json',
+                success: function (data) {
+                    if (data.code == '200') {
+                        msg_success_box(data.msg);
+                        setTimeout(function () {
+                            window.parent.location.reload();
+                        }, 800);
+                    } else {
+                        if (data.code == '501') {
+                            var thtml = ['<div class="warning_dialog" style="padding:25px 11px 15px;">',
+                                '<dl><dt></dt>',
+                                '<dd><p style="padding-top:11px">您的企业信息<b style="color:red;">尚未审核</b>，请上传企业资质</p>',
+                                '<span><input style="display:inline-block; vertical-align:-2px; margin-right:5px;" class="infoDialogCheck" type="checkbox"/>不再提示</span>',
+                                '<a href="/licencevalidate/?step=4" style="margin:30px 0 0 69px;" class="cpromisetip">上传资质</a>',
+                                '</dd></dl>',
+                                '</div>'].join('');
+                            infoDialog.setContent(thtml).show();
+                        } else if (data.code == '502') {
+                            var thtml = ['<div class="warning_dialog" style="padding:25px 11px 15px;">',
+                                '<dl><dt></dt>',
+                                '<dd><p style="padding-top:11px">您的企业信息<b style="color:red;">审核失败</b>，请重新上传企业资质</p>',
+                                '<span><input style="display:inline-block; vertical-align:-2px; margin-right:5px;"class="infoDialogCheck" type="checkbox"/>不再提示</span>',
+                                '<a href="/licencevalidate/" style="margin:30px 0 0 95px;" class="cpromisetip">重新上传</a>',
+                                '</dd></dl>',
+                                '</div>'].join('');
+                            infoDialog.setContent(thtml).show();
+                        } else if (data.code == '503') {
+                            var thtml = ['<div class="warning_dialog" style="padding:25px 11px 15px;">',
+                                '<dl><dt></dt>',
+                                '<dd><p style="padding-top:11px">您的企业信息<b style="color:red;">正在审核中</b></p>',
+                                '</dd></dl>',
+                                '<div style="height: 45px" ></div>',
+                                '</div>'].join('');
+                            infoDialog.setContent(thtml).show();
+                        } else {
+                            msg_error_box(data.msg);
+                        }
+                    }
+                }
+            });
+        });
+    }
+</script>
+</body>
+</html>

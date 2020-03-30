@@ -1,0 +1,304 @@
+<?php
+
+/**
+ * @Desc  :    hr会员人力资源资格证认证
+ * @Author: zhangfangjun@huibo.com
+ * @Date  :   2015-11-23 13:23:32
+ * @Last  Modified by:   zhangfangjun - Administrator
+ * @Last  Modified time: 2015-12-09 15:48:59
+ * @Copyright (c) http://www.huibo.com All rights reserved.:
+ */
+class controller_hrlicence extends components_cbasepage {
+	
+	function __construct() {
+		parent::__construct();
+	}
+	
+	public function pageIndex($inPath) {
+		$memberinfo = base_service_company_resources_resources::getInstance($this->_userid, false);;
+		if ($memberinfo->account_type != 'hr_main' && false) {
+			$companyStateService = new base_service_company_comstate();
+			$companyState = $companyStateService->getCompanyState($this->_userid, "net_heap_id");
+			$hrManager = $this->GetHRManager($companyState["net_heap_id"]);
+			if (empty($hrManager)) {
+				//$userInfor = $this->GetCustomerService($this->_userid);
+				//$this->_aParams['hrManager'] 		= $userInfor;
+			} else {
+				$this->_aParams['hrManager'] = $hrManager;
+			}
+			$xml = SXML::load('../config/config.xml');
+			$tel_head = "023-61627888";
+			if (!is_null($xml)) {
+				$tel_head = $xml->TechniquePhone;
+			}
+			$easy_tel_head = str_replace("-", "", $tel_head);
+			$this->_aParams['tel_head'] = $tel_head;
+			$this->_aParams['easy_tel_head'] = $easy_tel_head;
+			
+		} else {
+			$hrlicence_service = new base_service_company_hrlicence();
+			$this->_aParams['list'] = $hrlicence_service->GetCompanyHrLicenceListByCompanyId($this->_userid)->items;
+			$agency_agreement = array ();
+			if ($this->_aParams['list']) {
+				foreach ($this->_aParams['list'] as $key => $li) {
+					if ($li['licence_type'] == 3) {
+						unset($this->_aParams['list'][ $key ]);
+						$agency_agreement[] = $li;
+					}
+				}
+				$this->_aParams['list'] = base_lib_BaseUtils::array_key_assoc($this->_aParams['list'], 'licence_type');
+			}
+			$this->_aParams['agency_agreement'] = $agency_agreement;
+		}
+		
+		//审核状态
+		$status_service = new base_service_common_hrlicencestatus();
+		$this->_aParams['allstatus'] = $status_service->arrStatus();
+		$this->_aParams['account_type'] = $memberinfo->account_type;
+		$this->_aParams['upload_cookie_userid'] = $this->_userid;
+		$this->_aParams['upload_cookie_nickname'] = $this->_username;
+		$this->_aParams['upload_cookie_usertype'] = $this->_usertype;
+		$this->_aParams['upload_cookie_userkey'] = base_lib_BaseUtils::getCookie('userkey');
+		$this->_aParams['upload_cookie_tick'] = base_lib_BaseUtils::getCookie('tick');
+		$this->_aParams["upload_cookie_accountid"] = base_lib_BaseUtils::getCookie('accountid');
+		
+		return $this->render('./hrmember/licence/licence_index.html', $this->_aParams);
+	}
+	
+	/**
+	 * 新增/编辑 证书信息    zhouwenjun 2018/9/7 14:02
+	 * @param $inPath
+	 */
+	function pageAddHrLicenceInfo($inPath) {
+		$path = base_lib_BaseUtils::saddslashes($this->getUrlParams($inPath));
+		$in_data['licence_type'] = base_lib_BaseUtils::getStr($path['licence_type'], 'int');
+		$in_data['licence_id'] = base_lib_BaseUtils::getStr($path['licence_id'], 'int');
+		
+		$ser_hrlicence = new base_service_company_hrlicence();
+		if (!$ser_hrlicence->GetLicenceType($in_data['licence_type'])) {
+			$this->ajax_data_json(ERROR, '企业资质类型错误');
+		}
+		$defaults_files = array ();
+		if ($in_data['licence_id']) {
+			$in_data['licence_data'] = $ser_hrlicence->GetHrLicenceInfoById($in_data['licence_id']);
+			if (!$in_data['licence_data']) {
+				$this->ajax_data_json(ERROR, '企业资质证书信息错误');
+			}
+			if ($in_data['licence_data']['path'])
+				$defaults_files = explode(',', $in_data['licence_data']['path']);
+		}
+		
+		$ser_upload = new base_service_upload_upload();
+		$up_options = array ('file_name' => 'picurl_end[]', 'fileVal' => 'Filedata', 'auto' => true, 'defaults_files' => $defaults_files);
+		$in_data['up_img_html'] = $ser_upload->GetUploadHtmlDom($up_options, $this->_userid, 'up_style2', 'img', 'hrlicence', '/company/company.xml');
+		$ser_upload->GetUpConfig($path, $file_max_size, $ext, $photo_max_count, 'img', 'hrlicence', '/company/company.xml');
+		$in_data['img_path'] = base_lib_Constant::YUN_ASSETS_URL_NO_HTTP . '/' . $path;
+		
+		$in_data['licence_type_name'] = $ser_hrlicence->GetLicenceType($in_data['licence_type']);
+		
+		return $this->render('./hrmember/licence/AddHrLicenceInfo.html', $in_data);
+	}
+	
+	/**
+	 * 新增/编辑 证书信息    zhouwenjun 2018/9/7 14:02
+	 * @param $inPath
+	 */
+	function pageAddHrLicenceInfoPost($inPath) {
+		$path = base_lib_BaseUtils::saddslashes($this->getUrlParams($inPath));
+		$in_data['licence_id'] = base_lib_BaseUtils::getStr($path['licence_id'], 'int');
+		$in_data['licence_type'] = base_lib_BaseUtils::getStr($path['licence_type'], 'int');
+		$in_data['certificate_code'] = base_lib_BaseUtils::getStr($path['certificate_code'], 'string');
+		$in_data['maturity_time'] = base_lib_BaseUtils::getStr($path['maturity_time'], 'string');
+		$in_data['picurl_end'] = base_lib_BaseUtils::getStr($path['picurl_end'], 'array');
+		
+		$ser_hrlicence = new base_service_company_hrlicence();
+		if (!$ser_hrlicence->GetLicenceType($in_data['licence_type'])) {
+			$this->ajax_data_json(ERROR, '企业资质类型错误');
+		}
+		
+		if (!$in_data['certificate_code'] && $in_data['licence_type'] != 4) {
+			$this->ajax_data_json(ERROR, '请输入' . ($in_data['licence_type'] == 3 ? '协议名称' : '证书编号'));
+		}
+		if (!preg_match("/^[0-9a-z]{0,30}$/i", $in_data['certificate_code']) && $in_data['licence_type'] != 3 && $in_data['licence_type'] != 4) {
+			$this->ajax_data_json(ERROR, "证书编号只能包含数字和字母");
+		}
+		
+		if (mb_strlen($in_data['certificate_code']) > 30 && $in_data['licence_type'] != 4) {
+			$this->ajax_data_json(ERROR, ($in_data['licence_type'] == 3 ? '协议名称' : '证书编号') . "30字内");
+		}
+		
+		if (!$in_data['maturity_time'] && $in_data['licence_type'] != 4) {
+			$this->ajax_data_json(ERROR, '请选择证书到期时间');
+		}
+		if ($in_data['maturity_time'] < date("Y-m-d") && $in_data['licence_type'] != 4) {
+			$this->ajax_data_json(ERROR, '证书已过期,请重新上传最新的证书!');
+		}
+		if (!$in_data['picurl_end']) {
+			$this->ajax_data_json(ERROR, '请选择资质图片');
+		}
+		
+		if ($in_data['licence_id']) {
+			$in_data['licence_data'] = $ser_hrlicence->GetHrLicenceInfoById($in_data['licence_id']);
+			if (!$in_data['licence_data']) {
+				$this->ajax_data_json(ERROR, '企业资质证书信息错误');
+			}
+		}
+		
+		$file_img = array ();
+		//移动图片
+		$ser_upload = new base_service_upload_upload();
+		foreach ($in_data['picurl_end'] as $picurl) {
+			$re_move = $ser_upload->MoveFileUploadFileSuccess($picurl, 'img', 'hrlicence', '/company/company.xml');
+			if (!$re_move['status']) {
+				$this->ajax_data_json(ERROR, '图片上传失败!');
+			}
+			$file_img[] = $re_move;
+		}
+		$file_img = base_lib_BaseUtils::getProperty($file_img, 'newname_path');
+		if (!$file_img) {
+			$this->ajax_data_json(ERROR, '图片上传失败.');
+		}
+		$item_data = array (
+			'check_status'     => 1,//修改/新增需要重置状态
+			'update_time'      => $this->now(),
+			'licence_type'     => $in_data['licence_type'],
+			'maturity_time'    => $in_data['licence_type'] == 4 ? null : $in_data['maturity_time'],
+			'certificate_code' => $in_data['certificate_code'],
+			'path'             => implode(',', $file_img),
+		);
+		if ($in_data['licence_id']) {
+			$item_data['check_user_id'] = null;
+			$item_data['check_time'] = null;
+			$item_data['reason'] = null;
+			$re = $ser_hrlicence->UpdateHrLicenceInfo($in_data['licence_id'], $item_data);
+		} else {
+			//新增
+			$item_data['company_id'] = $this->_userid;
+			$item_data['create_time'] = $this->now();
+			$re = $ser_hrlicence->AddHrLicenceInfo($item_data);
+		}
+		if ($re) {
+			$this->ajax_data_json(SUCCESS, '资质证书信息上传成功，等待审核。');
+		}
+		$this->ajax_data_json(ERROR, '资质证书信息上传失败。');
+	}
+	
+	/**
+	 * 添加文件    zhouwenjun 2018/9/7 15:32
+	 */
+	public function pagePicture($inPath) {
+		$pathdata = base_lib_BaseUtils::sstripslashes($this->getUrlParams($inPath));
+		$up_type = base_lib_BaseUtils::getStr($pathdata['up_type'], 'string');
+		$file = $_FILES['Filedata'];
+		
+		$verify_data = base_lib_BaseUtils::getStr($pathdata['verify_data'], 'array');
+		$serv_askforleave = new base_service_upload_upload();
+		$in_data['is_temp'] = true;
+		$arr = $serv_askforleave->UploadFile($file, $verify_data, $up_type, 'hrlicence', '/company/company.xml', $in_data);
+		
+		if ($arr['status'] == false) {
+			$this->ajax_data_json(ERROR, $arr['msg'], $arr);
+		}
+		
+		$this->ajax_data_json(SUCCESS, "上传成功", $arr);
+	}
+
+	
+	/**
+	 * 删除临时照片    zhouwenjun 2018/9/7 15:32
+	 */
+	public function pageDelTempFile($inPath) {
+		$pathdata = base_lib_BaseUtils::sstripslashes($this->getUrlParams($inPath));
+		$up_type = base_lib_BaseUtils::getStr($pathdata['up_type'], 'string');
+		$verify_data = base_lib_BaseUtils::getStr($pathdata['verify_data'], 'array');
+		$file = $_REQUEST['file_path'];
+		$serv_askforleave = new base_service_upload_upload();
+		$arr = $serv_askforleave->DelFile($file, $verify_data, $up_type, 'report', ' / cp / config . xml');
+		if (@$arr['status'] == false) {
+			$this->ajax_data_json(ERROR, $arr['msg'], $arr);
+		}
+		
+		$this->ajax_data_json(SUCCESS, "删除成功", $arr);
+	}
+	
+	public function pageSavehrlicence($inPath) {
+		$service_licence = new base_service_company_hrlicence();
+		$pathdata = base_lib_BaseUtils::saddslashes($this->getUrlParams($inPath));
+		$val = new base_lib_Validator();
+		$licencevalidate['create_time'] = date("Y-m-d H:i:s");
+		$licenceurl = base_lib_BaseUtils::getStr($pathdata['hddLicenceurl'], 'string', '');
+		$licencevalidate['company_id'] = $this->_userid;
+		$val->has_err = $service_licence->saveHrLicence($licencevalidate, $licenceurl);
+		if (!$val->has_err) {
+			$val->addErr("修改数据失败");
+			
+			return $val->toJsonWithHtml();
+		}
+		$this->send_boss_qq_tip();
+		echo json_encode(array ("success" => true));
+		
+		return;
+	}
+	
+	/**
+	 *
+	 * 营业执照的临时保存
+	 * @param object $inPath
+	 */
+	public function pageSaveTempLicence($inPath) {
+		$service_licencevalidate = new base_service_company_licencevalidate();
+		// 保存营业执照文件
+		$file = $_FILES['Filedata'];
+		$arr = $service_licencevalidate->saveTempLicenceValidate($file);
+		if ($arr !== false) {
+			echo json_encode($arr);
+		}
+	}
+	
+	private function GetHRManager($heap_id) {
+		$companyHeapService = new base_service_company_netheap();
+		$companyHeap = $companyHeapService->GetNetHeapByID($heap_id, "own_man");
+		$userInfor = null;
+		if (is_null($companyHeap) || !isset($companyHeap["own_man"])) {
+			return $userInfor;
+		}
+		$userService = new base_service_crm_user();
+		$userInfor = $userService->GetUsers($companyHeap['own_man'], "user_name,head_photo_url,tel,mobile,qq");
+		
+		return $userInfor;
+	}
+	
+	// 获取客服人员
+	// private function GetCustomerService($companyid) {
+	// 	$customerbelongService = new base_service_crm_netcompanycustomerbelong();
+	// 	$customerbelong =  $customerbelongService->getCustomerbelongById($companyid, 'net_heap_id');
+	// 	if(empty($customerbelong)) {
+	// 		return null;		
+	// 	}
+	// 	$customerheapservice = new base_service_crm_netcustomerheap();
+	// 	$customerheap = $customerheapservice->getCustomerheapById($customerbelong['net_heap_id'], 'own_man');
+	// 	if(empty($customerheap)) {
+	// 		return null;
+	// 	}
+	// 	$userService=new base_service_crm_user();
+	// 	$userInfor = $userService->GetUsers($customerheap['own_man'], "user_name,head_photo_url,tel,mobile,qq");
+	// 	return $userInfor;
+	// }
+	
+	//关联到企业QQ通知我们后台人员审核
+	private function send_boss_qq_tip() {
+		$content = "有hr会员新上传人力资源资格证，请尽快处理";
+		$userids = array ();
+		$xml = SXML::load(' ../config/company/company.xml');
+		if (!is_null($xml)) {
+			$users = $xml->HrAuditBossUsers;
+			$userids = @explode(',', $users);
+		}
+		if (empty($userids)) {
+			return false;
+		}
+		$userservice = new base_service_boss_user();
+		$sendResult = $userservice->sendMsg('newcompany_reg_audit', $userids, $content, $content, null);
+	}
+	
+}

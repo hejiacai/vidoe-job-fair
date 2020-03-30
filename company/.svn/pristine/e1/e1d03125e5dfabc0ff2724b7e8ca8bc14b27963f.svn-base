@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{/version file="m_font_style.css"/}">
+    <title>批量刷新</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .refresh-many {box-sizing: border-box;padding: 20px;min-height: 175px;}
+        .refresh-many .num {font-size: 14px;margin-bottom: 20px;text-align: left;}
+        .refresh-many .need {
+            box-sizing: border-box;
+            padding-left: 0px;
+            padding-right: 220px;
+            margin-bottom: 42px;
+            position: relative;
+        }
+        .refresh-many .need .item {overflow: hidden;margin-bottom: 3px;}
+        .refresh-many .need .item div {
+            float: left;
+            font-size: 14px;
+        }
+        .refresh-many .need .item h4 {
+            float: right;
+            font-size: 14px;
+            font-weight: normal;
+            line-height: 1;
+        }
+        .refresh-many .need .item h4 span {font-size: 18px;font-weight: bold;color: #ff5400}
+        .refresh-many .need .tip {position: absolute;right: 197px;top: 5px;color: #cccccc;}
+        .refresh-many .need .tip:hover .desc {
+            display: block;
+        }
+        .refresh-many .need .tip .desc {display:none;position: absolute;left: -6px;top: 25px;color: #333;width: 230px;font-size: 12px;box-sizing: border-box;padding: 10px 0 10px 15px;line-height:16px;background: #fffadd;border: 1px solid #f6e5a6;text-align: left;}
+        .refresh-many .need .tip .desc span {
+            color: #ff5400;
+        }
+        .refresh-many .need .tip .desc .triangle {width: 6px;height: 6px;background: #fffadd;border-top: 1px solid  #f6e5a6;border-left: 1px solid  #f6e5a6;transform: rotate(45deg);position: absolute;top: -5px;left: 9px;}
+        .refresh-many .btns  {text-align: center;}
+        .refresh-many .btns  div{display: inline-block;height: 30px;line-height: 30px;text-align: center;width: 100px;font-size: 16px;border-radius: 4px;cursor: pointer}
+        .refresh-many .btns .ok {background: #66bce4;color: #fff;margin-right: 10px;}
+        .refresh-many .btns .ok:hover {
+            background: #31a2d6;
+        }
+        .refresh-many .btns .cancel {background: #eeeeee;color: #999;}
+        .refresh-many .btns .cancel:hover {
+            background: #dfdfdf;
+        }
+        .refresh-many .only-one-con .check-box {text-align:left;margin-bottom: 20px;}
+        .refresh-many .only-one-con .check-box input {
+            margin-right: 4px;
+            position: relative;
+            top: 2px;
+        }
+        .btncancel{    background: #66bce4;  color: #fff;  margin-top: 20px;display: inline-block;height: 30px;line-height: 30px;text-align: center;width: 100px;font-size: 16px;border-radius: 4px;cursor: pointer}
+        .btncancel:hover{background: #31a2d6;}
+        .refresh-many-all {box-sizing: border-box;padding: 20px;font-size: 14px;}
+    </style>
+</head>
+<body>
+
+{/if $day_refresh/}
+<div class="refresh-many-all">
+    今天已经刷新{/$day_refresh_times/}次了，明天再来吧
+    <div class="btns">
+        <div class="btncancel ">确定</div>
+    </div>
+</div>
+{/else/}
+<div class="refresh-many">
+    {/if $is_batch/}
+    <div class="many-con">
+        <div class="num">已选{/$count/}个职位，刷新职位需消耗：</div>
+        <div class="need">
+            <div class="icon-01 tip">
+                <div class="desc">
+                    刷新职位需要消耗：<br/>
+                    <span>1</span>刷新点/职位/次&nbsp;&nbsp;或<br/>
+                    <span>{/$selling/}</span>元推广金（余额）/职位/次<br/>
+                    扣款顺序：刷新点>推广金>余额
+                    <div class="triangle"></div>
+                </div>
+            </div>
+            {/if $point>0/}
+            <div class="item">
+                <div>刷新点</div>
+                <h4><span>{/$point/}</span>个</h4>
+            </div>
+            {//if/}
+            {/if $spread>0/}
+            <div class="item">
+                <div>推广金</div>
+                <h4><span>{/$spread/}</span>元</h4>
+            </div>
+            {//if/}
+            {/if $yue>0/}
+            <div class="item">
+                <div>余&nbsp;&nbsp;&nbsp;额</div>
+                <h4><span>{/$yue/}</span>元</h4>
+            </div>
+            {//if/}
+        </div>
+        <div class="btns">
+            <div class="ok btnRefresh">确认刷新</div>
+            <div class="cancel">取消</div>
+        </div>
+    </div>
+{/else/}
+    <div class="only-one-con">
+        <div class="num">刷新职位需消耗：</div>
+        <div class="need">
+            <div class="icon-01 tip">
+                <div class="desc">
+                    刷新职位需要消耗：<br/>
+                    <span>1</span>刷新点/职位/次&nbsp;&nbsp;或<br/>
+                    <span>{/$selling/}</span>元推广金（余额）/职位/次<br/>
+                    扣款顺序：刷新点>推广金>余额
+                    <div class="triangle"></div>
+                </div>
+            </div>
+            {/if $point>0/}
+            <div class="item">
+                <div>刷新点</div>
+                <h4><span>{/$point/}</span>个</h4>
+            </div>
+            {//if/}
+            {/if $spread>0/}
+            <div class="item">
+                <div>推广金</div>
+                <h4><span>{/$spread/}</span>元</h4>
+            </div>
+            {//if/}
+            {/if $yue>0/}
+            <div class="item">
+                <div>余&nbsp;&nbsp;&nbsp;额</div>
+                <h4><span>{/$yue/}</span>元</h4>
+            </div>
+            {//if/}
+        </div>
+        <div class="check-box">
+            <input type="checkbox">下次不再显示
+        </div>
+        <div class="btns">
+            <div class="ok btnRefreshSingle">确认刷新</div>
+            <div class="cancel">取消</div>
+        </div>
+    </div>
+    {//if/}
+</div>
+{//if/}
+</body>
+</html>

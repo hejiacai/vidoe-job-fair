@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>购买发布条数</title>
+    <link rel="stylesheet" type="text/css" href="{/version file="m_font_style.css"/}">
+    <link rel="stylesheet" type="text/css" href="{/version file="m_font_style.css"/}"/>
+    <link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='resumePartTime.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}" />
+    <script type="text/javascript" language="javascript" src='{/version file="jquery-1.8.3.min.js"/}'></script>
+    <script type="text/javascript" src="{/version file='base_script.js'/}"></script>
+    <script type="text/javascript" src="{/version file='version.js'/}"></script>
+    <script type="text/javascript">
+        window.CONFIG = {
+            HOST: '{/$siteurl.style/}',
+            COMBOPATH: '/js/v2/'
+        }
+    </script>
+    <script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+    <script type="text/javascript" src="{/version file='global.js'/}"></script>
+    <style>
+        .hb_ui_dialog .ui_dialog_container,.ui_dialog_content{height: 95%}
+        .hb_ui_dialog .ui_dialog_close{background: none !important;  line-height: inherit!important;}
+        .ordinary{float: right;}
+    </style>
+</head>
+<body>
+<div class="top-all">
+    <!--<h4>账户余额：<em class="allMonay">{/if $account_overage > 0/}{/sprintf("%.2f", $account_overage)/}{/else/}{/$account_overage/}{//if/}</em><span>元</span></h4>
+    <h3></h3>-->
+    <ul class="top-item">
+        <li class="clearfix buypartnum" style="position: relative;">
+        	<span class="top-item-name">
+	           	发布兼职<br />
+	            <em class="ordinary-extra">1年有效</em>
+            </span>
+            <em class="top-item-day"><i id="mb_price" data-price="{/$PartJobPrice/}">{/$PartJobPrice/}</i>兼职币</em>
+            <dl class="add-num clearfix">
+                <dt>购买条数</dt>
+                <dd>
+                    <a href="javascript:void(0);" class="num-left num-left-gray">-</a>
+                    <input type="text" value="1" id="num">
+                    <a href="javascript:void(0);" class="num-right">+</a>
+                </dd>
+            </dl>
+            <div class="ordinary" style="float: right;" >
+                <a href="javascript:void(0);" class="ordinary-buy buy_click"  data-price="{/$val['price']/}" style="float: right;">购买</a>
+                <div class="pay-type showPay" style="right: -28px;top: -80px;">
+                    <a href="javascript:;" class="weichart" onclick="order_pay(2)" title="微信支付">
+                        <i></i>微信
+                    </a>
+                    <a href="javascript:;" class="zhifubao" onclick="order_pay(3)" title="支付宝">
+                        <i></i>支付宝
+                    </a>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+<script>
+	var num=$("#num").val();
+    var order_pay,agreementDialog,click_type=false,clickTimer;
+    var is_refresh = '{/$is_refresh/}';
+    hbjs.use(' @confirmBox', function(m){
+        var confirmBox = m['widge.overlay.confirmBox'],
+                Dialog = m['widge.overlay.hbDialog'],
+                fontSize = 18,
+                pWidth = 70,
+                $ = m['jquery'];
+
+        $('.num-right').on('click',function () {
+            num = $(this).prev().val();
+            if(num>=99){
+            	return;
+            }
+        	num++;
+            $(this).prev().val(num);
+            mb_price()
+
+        })
+        $('.num-left').on('click',function () {
+            num = $(this).next().val();
+            if(num <= 1 ){
+                return;
+            }
+            num--;
+            $(this).next().val(num);
+            mb_price()
+        })
+        
+        $('#num').on("input propertychange",mb_price)
+
+         $('.ordinary').mouseleave(function () {
+            $('.pay-type').hide();
+        })
+
+        function mb_price() {
+        	var ipt=$("#num").val()
+//      	if(isNaN(ipt)){
+//      		$("#num").val(num)
+//      	}else if(ipt.indexOf(".")===-1){
+//      		$("#num").val(num)
+//      	}else if(ipt>99){
+//      		$("#num").val(num)
+//      	}else if(ipt<0){
+//      		$("#num").val(num)
+//      	}else{
+//      		num = $("#num").val();
+//      	}
+//			if(/\<\(\d\d\=\)\|100\>/.test(ipt)){
+			if(ipt===""||(ipt>0&&ipt<100&&ipt.indexOf(".")===-1)){
+				num = $("#num").val();
+			}else{
+				$("#num").val(num)
+			}
+            if(num>1){
+            	$('.num-left').removeClass('num-left-gray')
+            }else{
+            	$('.num-left').addClass('num-left-gray')
+            }
+            if(num>98){
+            	$('.num-right').addClass('num-left-gray')
+            }else{
+            	$('.num-right').removeClass('num-left-gray')
+            }
+            var one_price = $('#mb_price').attr('data-price');
+            $('#mb_price').text(num*one_price);
+        }
+
+        var can_click = true;
+        $('.buy_click').on('click',function () {
+            if(can_click){
+                can_click = false
+            }else{
+                return false;
+            }
+            //console.log(can_click)
+            var job_num = $("#num").val();
+            //认按兼职币自动扣款，如兼职币不足，则自动余额扣款，如余额不足，弹出现金支付弹框
+            $.post('/partorder/ResumePointJobNumBuy',{job_num:job_num},function (e) {
+
+                setTimeout(function () {
+                    can_click = true;
+                },2000);
+
+                if(e.status){
+                    //支付成功
+                    confirmBox.timeBomb(e.msg, {
+                        name : 'success',
+                        timeout :2000,
+                        width: 70 + e.msg.length*18
+                    });
+                    setTimeout(function () {
+                        window.location.reload();
+                    },2000);
+                }else{
+                    if(e.code == 1){
+                        //使用余额支付
+                        order_pay(1)
+                    }else{
+                        //兼职币支付错误
+                        confirmBox.timeBomb(e.msg, {
+                            name : 'fail',
+                            timeout : 2000,
+                            width: 300
+                        });
+                        return false;
+                    }
+                }
+
+            },'json')
+        })
+
+
+        /**
+         * @param pay_type 支付方式
+         */
+        order_pay = function(pay_type){
+          if(click_type==true){
+            return;
+          }
+          if(click_type==false){
+            click_type=true;
+          }
+          clearTimeout(clickTimer);
+          clickTimer = setTimeout(function () {
+            click_type = false;
+          },2000)
+
+            if(!pay_type){
+              var error = '无支付类型';
+                confirmBox.timeBomb(error, {
+                    name : 'fail',
+                    timeout : 3000,
+                    width: fontSize * error.length + pWidth
+                })
+            }
+            var job_num = $("#num").val();
+            var url = "{/get_url rule="/partorder/createOrder"/}";
+            var data = {
+                pay_type : pay_type,
+                job_num  : job_num,
+                order_src: 8
+            };
+
+            $.post(url, data, function(data){
+                if(pay_type !=1){
+                    if(!data.status){
+                        confirmBox.timeBomb(data.msg, {
+                            name : 'fail',
+                            timeout : 3000,
+                            width: 300
+                        });
+                        return false;
+                    }
+                }
+
+
+                //余额支付，刷新界面
+                if(pay_type == 1){
+                    if(data.status){
+                        confirmBox.timeBomb(data.msg, {
+                            name : 'success',
+                            timeout :3000,
+                            width: 70 + data.msg.length*18
+                        });
+                        if(is_refresh == ''){
+                            setTimeout(function () {
+                                window.parent.document.location.reload();
+                            },3000);
+                        }
+                        parent.pay_dialog.close() ;
+                        return false;
+                    }else{
+                        //弹出微信/支付宝支付选择
+                        click_type = false;
+                        $('.showPay').show();
+                        return false;
+                    }
+                }else{
+                    //支付宝或者微信，跳转到订单支付界面
+                    var url = '{/get_url rule="/partorder/pay"/}?code_url=' + data.data.code_url + '&order_no=' + data.data.order_data.order_no + '&is_refresh=' + is_refresh;
+                    agreementDialog = new Dialog({
+                        idName: 'agreement-dialog',
+                        title: '支付',
+                        content: url,
+                        close: 'X',
+                        width:410,
+                        height:550,
+                        isAjax:false
+                    });
+                    agreementDialog.show();
+                    //window.location.href = '{/get_url rule="/partOrder/pay"/}?code_url=' + data.data.code_url + 'order_no' + data.data.order_data.order_no;
+                }
+
+
+            });
+        }
+
+
+    });
+
+
+
+</script>
+</body>
+</html>

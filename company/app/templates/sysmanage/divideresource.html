@@ -1,0 +1,168 @@
+      <form id="divideForm" class="adduser-dialog" autocomplete="off">
+          <input type="hidden" name="account_id" value="{/$account_id/}"/>
+		   <table class="updata-pwd-alert">
+			<tbody>
+			 <tr class="resource-mode">
+				
+				<td>
+					<div class="radiobox radio1 {/if $resource_type == 1/}checked{//if/}">
+						共享模式<span class="smallgray">主账号与子账号共用简历点、推广金等资源</span>
+					</div>
+					<div class="radiobox radio2 {/if $resource_type == 2/}checked{//if/}">
+						分配模式<span class="smallgray">可按需为主账号分配简历点等资源</span>
+					</div>
+					<input id="resource-mode" type="hidden" value="{/$resource_type/}" name='resource_type'/>
+					<!--隐藏input，true为共享，false为分配-->
+					<div class="resource-box" {/if $resource_type == 2/}style="display:block;"{//if/}>
+			     	<div class="resource-tip">注：主账号不能代分配模式子账号发布/编辑职位与设置精准推广</div>
+						<div class="allocate-resource">
+							<table>
+								<tr><th>资源类别</th><th>可分配</th><th>可使用</th></tr>
+								<!--传入data-total为最大可分配数值-->
+								{/if $isCqNewService/}
+                                <tr class="input-integer" data-total="{/$ser_data_total['job_num'] + $ser_data_divide['job_num']/}">
+                                    <td>职位数</td>
+                                    <td class="remain">{/$ser_data_total['job_num']/}</td>
+                                    <td><input type="text" value="{/$ser_data_divide['job_num']/}"  name='job_num'/></td>
+                                </tr>
+                                <tr class="input-integer" data-total="{/$ser_data_total['resume_num'] + $ser_data_divide['resume_num']/}">
+                                    <td>简历点</td>
+                                    <td class="remain">{/$ser_data_total['resume_num']/}</td>
+                                    <td><input type="text" value="{/$ser_data_divide['resume_num']/}" name='resume_num'/></td>
+                                </tr>
+                                <tr class="input-integer" data-total="{/$ser_data_total['spread'] + $ser_data_divide['spread']/}">
+                                    <td>推广金</td>
+                                    <td class="remain">{/$ser_data_total['spread']/}</td>
+                                    <td><input class="input-digital" type="text" value="{/$ser_data_divide['spread']/}" name='spread'/></td>
+                                </tr>
+                                <tr class="input-integer" data-total="{/$ser_data_total['point_job_refresh'] + $ser_data_divide['point_job_refresh']/}">
+                                    <td>刷新点</td>
+                                    <td class="remain">{/$ser_data_total['point_job_refresh']/}</td>
+                                    <td><input type="text" value="{/$ser_data_divide['point_job_refresh']/}" name='point_job_refresh'/></td>
+                                </tr>
+                                <tr class="input-integer" data-total="{/$ser_data_total['point_chat'] + $ser_data_divide['point_chat']/}">
+                                    <td>聊一聊次数</td>
+                                    <td class="remain">{/$ser_data_total['point_chat']/}</td>
+                                    <td><input type="text" value="{/$ser_data_divide['point_chat']/}" name='point_chat'/></td>
+                                </tr>
+                                <tr class="input-integer" data-total="{/$ser_data_total['point_message'] + $ser_data_divide['point_message']/}">
+                                    <td>短信数</td>
+                                    <td class="remain">{/$ser_data_total['point_message']/}</td>
+                                    <td><input type="text" value="{/$ser_data_divide['point_message']/}" name='point_message'/></td>
+                                </tr>
+                            {/else if $isNewService/}
+                                <tr class="input-integer" data-total="{/$ser_data_total['job_num'] + $ser_data_divide['job_num']/}">
+                                    <td>免费职位数</td>
+                                    <td class="remain">{/$ser_data_total['job_num']/}</td>
+                                    <td><input type="text" value="{/$ser_data_divide['job_num']/}" name='job_num'/></td>
+                                </tr>
+                                <tr class="input-integer" data-total="{/$ser_data_total['job_boutique'] + $ser_data_divide['job_boutique']/}">
+                                    <td>精品职位数</td>
+                                    <td class="remain">{/$ser_data_total['job_boutique']/}</td>
+                                    <td><input type="text" value="{/$ser_data_divide['job_boutique']/}" name='job_boutique'/></td>
+                                </tr>
+                                <tr class="input-integer" data-total="{/$ser_data_total['resume_num'] + $ser_data_divide['resume_num']/}">
+                                    <td>简历点</td>
+                                    <td class="remain">{/$ser_data_total['resume_num']/}</td>
+                                    <td><input type="text" value="{/$ser_data_divide['resume_num']/}" name='resume_num'/></td>
+                                </tr>
+                                <tr class="input-integer" data-total="{/$ser_data_total['spread'] + $ser_data_divide['spread']/}">
+                                    <td>推广金</td>
+                                    <td class="remain">{/$ser_data_total['spread']/}</td>
+                                    <td><input class="input-digital" type="text" value="{/$ser_data_divide['spread']/}" name='spread'/></td>
+                                </tr>
+                                <tr class="input-integer" data-total="{/$ser_data_total['point_job_refresh'] + $ser_data_divide['point_job_refresh']/}">
+                                    <td>刷新点</td>
+                                    <td class="remain">{/$ser_data_total['point_job_refresh']/}</td>
+                                    <td><input type="text" value="{/$ser_data_divide['point_job_refresh']/}" name='point_job_refresh'/></td>
+                                </tr>
+                                <tr class="input-integer" data-total="{/$ser_data_total['point_job_boutique']  + $ser_data_divide['point_job_boutique']/}">
+                                    <td>精品点</td>
+                                    <td class="remain">{/$ser_data_total['point_job_boutique']/}</td>
+                                    <td><input type="text" value="{/$ser_data_divide['point_job_boutique']/}" name='point_job_boutique'/></td>
+                                </tr>
+                            {//if/}
+							</table>
+						</div>
+					</div>
+				</td>
+			 </tr>
+			 <tr>
+				
+					<td>
+						<div class="button">
+							<a href="javascript:void(0);" class="blue-butn">保存</a>
+							<a href="javascript:void(0);" class="gray-btn">取消</a>
+						</div>
+					</td>
+				</tr>
+				</tbody>
+			</table>
+		  </form>
+ <script type="text/javascript">
+hbjs.use('@confirmBox, @hbCommon', function(m){
+    var ConfirmBox = m['widge.overlay.confirmBox'];
+    var $ = m['product.hbCommon'];
+ 	//选择分配模式
+ 	$(".radiobox").on('click',function(){
+ 		$(this).addClass("checked");
+ 		$(this).siblings(".radiobox").removeClass("checked");
+ 		if($(this).hasClass("radio1")){
+ 			$("input[name=resource_type]").val(1);
+ 			$(".resource-box").slideUp(300)
+ 		}else{
+ 			$("input[name=resource_type]").val(2);
+ 			$(".resource-box").slideDown(300)
+ 		}
+ 	});
+ 	$('.input-integer input').on('focus',function(){
+ 		if(this.value==0)this.value="";
+ 	})
+ 	
+ 	//限制分配资源的输入值并且自动计算余额
+ 	$('.input-integer input').on('keyup blur',function(e){
+		var p=$(this).parents(".input-integer");
+		var total=parseInt(p.attr('data-total'));
+		this.value=Math.floor(this.value)
+		//if($(this).hasClass("input-digital")){
+			//限制两位小数
+			//this.value = this.value.replace(".","$#$").replace(/\./g,"").replace("$#$","."); 
+			//this.value=this.value.replace(/^(\d+)\.(\d\d).*$/,'$1.$2')
+		//}else{
+			this.value=this.value.replace(/[^\d]+/g,'')
+			//if(this.value>=1&&this.value.indexOf('0')==0)this.value=this.value.substring(1)
+		//}
+		
+		if(this.value>total){
+			this.value=total
+		}else if(this.value<0){
+			this.value=0
+		}
+		$(this).attr('data-input',this.value)
+		var result=p.attr('data-total')-this.value;
+		p.children(".remain").html(/\./.test(result)?result.toFixed(2):result)
+		//if($(this).hasClass("input-digital"))p.children(".remain").html(parseFloat((p.attr('data-total')-this.value).toFixed(2)))
+		if(e.type=="blur"&&this.value=="") this.value=0
+	});
+    
+    $(".blue-butn").on('click', function(){
+        $.post('{/get_url rule="/account/divideSerDo/"/}',
+        $("#divideForm").serialize(),
+        function(json){
+            if(json.status){
+              ConfirmBox.timeBomb(json.msg,{
+                    name: 'success',
+                    timeout : 1000
+                  });
+                  setTimeout(function () {
+                    window.location.reload();
+                  },1200)
+                return;
+            }
+            $.message(json.msg, {title: '系统提示', icon: 'fail'});
+            return;
+        },"json");
+		});
+		
+});
+ </script>

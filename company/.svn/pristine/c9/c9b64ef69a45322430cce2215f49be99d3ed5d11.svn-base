@@ -1,0 +1,238 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+<title>{/$title/}</title>
+<!–[if lt IE9]> 
+<script type="text/javascript" language="javascript" src="{/version file='html5.js'/}"></script>
+<![endif]–>
+<link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='comback.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='tJob_style.css'/}" />
+
+<script type="text/javascript" src="{/version file='version.js'/}"></script>
+<script type="text/javascript">
+window.CONFIG = {
+	HOST: '{/$siteurl.style/}',
+	COMBOPATH: '/js/v2/'
+}
+</script>
+<script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+<script type="text/javascript" src="{/version file='global.js'/}"></script>
+<script type="text/javascript">
+hbjs.loadJS('{/$siteurl.style/}/js/v2/cqjob/common.js');
+</script>
+<style type="text/css">
+.tjob_ing .link a, .alink, .redlink, .tjob_jlmas .tel{ padding-top:8px;}
+.tjob_jlmas .tel2{ padding-top:5px;}
+.tjob_ing .link a, .alink, .redlink, .tjob_jlmas .tel .oBtn{width: 110px; display: inline-block;
+  color: #fff;background-color: #33a7d7;text-align: center;padding:0px; line-height: 27px;border-radius: 5px;text-decoration: none;margin-right: 10px; font-size:14px;}
+.tjob_ing .link a, .alink, .redlink, .tjob_jlmas .tel .orange{background-color: #f8f8f8; border:1px solid #ccc; color:#333; line-height:24px;} 
+.tjob_jlmas .tel .oBtn:hover{ background: #2b9dcc}
+.tjob_jlmas .tel .orange:hover{ background: #f5f5f5}
+.alert_msg .hbFntWes{ color:#a5634c !important; padding:0 20px 0 6px; vertical-align:-2px;#vertical-align:0px;}
+.age-line{ font-family:"宋体"; color:#d9d5bd; text-decoration:none; padding:0 5px;}
+.tjob_jlmas tr.graybg{ background:#fff;}
+.tjob_jlmas tr.graybg td{ background:#fff;}
+.tjob_jlmas tr td{ border-bottom:1px dashed #e3e6e6;}
+.tjob_jlmas .name{ vertical-align:-4px;#vertical-align:0px; font-size:14px;} 
+.alert_msg{ background: #fffadd; border:1px solid #f0ebcd; color:#604e29; line-height:24px;}
+.alert_msg a{ color:#663314;}
+.alert_msg a:hover{ color:#0af}
+.tjob_jlmas .name{ margin-right:14px;}
+.tjob_jlmas u{ margin:0 7px;}
+.tjob_jlmas .tel .oBtn{width:94px;}
+.tjob_jlmas .tel2{ padding-top:4px; color:#333;}
+.tjob_jlmas td{ color:#666;}
+.orange{ color:#ff6c00;}
+.tjob_jlmas .tel2 i.hbIconMoon{ font-size:14px; color:#3d84b8;}
+
+#Dtip{cursor: pointer;}
+.warning_dialog dl dd{margin-left:0px;}
+.warning_dialog dl dd h4{ font-size: 18px; color:#00bab1;}
+.warning_dialog dl dd p{ font-size: 14px; color: #666; line-height: 24px; padding-bottom:10px;}
+</style>
+</head>
+<body class="tjob_main">
+	<!---延用以前-->
+	{/include file="new_header.html" par="兼职招聘" cur="报名管理"/}
+	<!---延用以前 end-->  
+    <!--new-->
+    <div class="tjob_manager clearfix">
+    	<div class="tjob_left">
+    		<ul>
+    			<li class="cur"><a href="{/get_url rule='/partjobapply/'/}"><i class="hbFntWes">&#xf0da;</i>待处理的报名</a></li>
+    			<li><a href="{/get_url rule='/partjobapply/applyoffered'/}">录用的报名者</a></li>
+    			<li><a href="{/get_url rule='/partjobapply/applyinvited'/}">需要面试的报名者</a></li>
+    			<li><a href="{/get_url rule='/partjobapply/applyrefused'/}">不合适的报名者</a></li>
+    		</ul>
+    	</div>
+    	<div class="tjob_right">
+    		{/if !empty($applylist)/}
+    		<div class="alert_msg">
+    			<!--请尽快处理，超过三个工作日没有处理，将会自动转为不合适，<br />
+    			最近十天报名处理率：<span class="orange"></span><i class="hbFntWes" title="计算方法为最近十天人工处理的报名/收到的总报名数">&#xf059;</i>，该数据会展示给求职者，请及时处理简历-->
+    			近十天共收到简历：<span class="orange" data-not="{/$notapplycount/}">{/$allapplycount/}份</span><u class="age-line">|</u>人工处理：<span class="orange">{/$manapplycount/}份</span><u class="age-line">|</u>自动回绝：<span class="orange">{/$autoapplycount/}份</span><br />
+                        当前报名处理率为：<span class="orange" style="font-weight:bold;">{/$replay_rate/}%</span><i class="hbFntWes" title="计算方法为最近十天人工处理的报名/收到的总报名数">&#xf059;</i><a href="#" id="Dtip">报名处理率会影响招聘效果吗？</a><br />
+    			请尽快处理，超过五个工作日没有处理，将会自动回绝求职者
+    		</div>
+    		<table class="tjob_jlmas">
+    		{/foreach $applylist as $k=>$apply/}
+    			<tr {/if $apply@iteration is odd/}class="graybg"{//if/}>
+    				<td class="img">
+    					<a href="{/get_url rule='/partresume/resumedetail/'/}resumeid-{/$apply['resume_id']/}-applyid-{/$apply['apply_id']/}">{/$apply['photo']/}</a>
+    				</td>
+    				<td>
+    					<p><a class="name" href="{/get_url rule='/partresume/resumedetail/'/}resumeid-{/$apply['resume_id']/}-applyid-{/$apply['apply_id']/}" target='_blank'>{/$apply['user_name']/}</a><!-- </p>
+    					<p class="mgt5 mgb5"> -->{/$apply['sex']/}
+	    					{/if $apply['age']/}<u>|</u>{/$apply['age']/}{//if/}
+	    					{/if $apply['stature']/}<u>|</u>{/$apply['stature']/}{//if/}
+	    					{/if $apply['address']/}<u>|</u>{/$apply['address']/}{//if/}
+	    					{/if $apply['station']/}{//if/}
+	    					{/if $apply['create_time']/}<u>|</u>报名时间：{/$apply['create_time']/}{//if/}
+	    					
+    					</p>
+    					<p class="tel2" data-applyid='{/$apply['apply_id']/}'>投递职位：{/$apply['station']/}<u>|</u><i class="hbFntWes hbIconMoon">&#xe03c;</i>
+    						{/if empty($apply['mobile_watch_time'])/}<a href="javascript:void(0)" class="mobile-watch" data-mobile={/$apply['mobile_phone']/}>查看电话</a>{/else/}{/$apply['mobile_phone']/}{//if/}
+    					</p>
+    					<p class="tel" data-applyid='{/$apply['apply_id']/}'>
+							<a href="javascript:;" data-act='sendOffer' class="oBtn" data-in="{/$apply['need_invite']/}">{/if $apply['need_invite']/}发面试邀请{/else/}发录用通知{//if/}</a>
+    						<a href="javascript:;" data-act='refuse' class="oBtn orange">不合适</a>
+    					</p>
+    				</td>
+    			</tr>
+    		{//foreach/}
+    		</table>
+    		{/$pager/}
+    		{/else/}
+    		<div class="noData">
+                 没有待处理的报名信息
+            </div>
+    		{//if/}
+    	</div>
+    </div>
+    <!--new end-->
+	{/include file="footer.html"/}
+</body>
+<script>
+var jobDialog;
+hbjs.use('tools.cookie,widge.overlay.hbDialog,widge.overlay.confirmBox, product.hbCommon', function(cookie, Dialog, ConfirmBox, $) {	
+	var pWidth = 70,
+		fontWidth = 18,
+		apply_id, tourl, title;
+	
+	var submitHTML = [
+		'<p style="margin-bottom:30px">是否要设置为不合适？</p>',
+		'<div><label class="checkbox_a"><input id="isCheckShow" type="checkbox" value="1" />下次不再提示</label></div>'
+	].join('');
+	
+	$('a[data-act=refuse]').on('click', function (e) {
+		apply_id = $(this).parent().attr('data-applyid');
+		tourl = "/partjobapply/RefuseApply/";
+		title = '设置为不合适';
+		var isCheckShow = true,
+			ifshow = cookie.get('confirm_refuseapply_partjob');
+
+		if (ifshow == 'show_none') {
+			isCheckShow = false;
+		}
+		if (isCheckShow) {
+			ConfirmBox.confirm(submitHTML, title, function(){
+				isCheckShow = !this.query('#isCheckShow').prop('checked');
+				if (isCheckShow) {
+					var exp = new Date();
+					exp.setTime(exp.getTime() + 365 * 24 * 3600000);
+					cookie.set('confirm_refuseapply_partjob', 'show_none', {expires:exp});
+				}
+
+				this.hide();
+				submitResult();	
+			}, null, {width:300});
+		} else {
+			submitResult();
+		}
+	});
+
+	var tipDialog = new Dialog({
+            idName : 'tipDialog',
+            title : '温馨提示',
+            close : 'x',
+            isAjax : true,
+            width : 520
+        });
+
+	$('#Dtip').click(function() {
+            var tipHTML = ['<div class="warning_dialog">',
+                            '   <dl>',
+                            '      <dd>',
+                            '          <h4>职位推送人数更多</h4>',
+                            '          <p>当企业发布职位后，会将职位通过消息推送给符合要求的求职者，根据处理率的高低，推送的求职者人数会有1-5倍的差距，处理率为0的将不进行推送</p>',                                
+                            '          <h4>处理率强化展示</h4>',
+                            '          <p>企业的报名处理率将会展示在职位页面的顶部，供求职者报名的时候作为参考</p>',                                
+                            '          <h4>首页入口</h4>',
+                            '          <p>在APP首页有处理率高的入口，求职者进入后会根据处理率进行排序</p>',
+                            '      </dd>',
+                            '   </dl>',
+                            '</div>'].join('');
+            tipDialog.setContent(tipHTML).show();
+            tipDialog.query('.graybutn').on('click',function(){
+                    tipDialog.hide();
+                })
+        })
+
+	$(".mobile-watch").on('click', function (e) {
+		var apply_id = $(this).parent().attr('data-applyid');
+		$(this).text($(this).attr("data-mobile"));
+		/* 查看电话统计 */
+		$.post('{/get_url rule="/partjobapply/mobilewatched"/}', {apply_id: apply_id});
+	});
+	
+	jobDialog = new Dialog({
+		idName: 'jobDialog',
+		isAjax: true,
+		width: 610,
+		close: 'x'
+	});
+
+	$('a[data-act=sendOffer]').on('click', function(e){
+		apply_id = $(this).parent().attr('data-applyid');
+		tourl = "/partjobapply/SendOffer/applyid-"+apply_id;
+		title = $(this).html();//'发送兼职邀请';
+		jobDialog.setContent({
+			isOverflow: true,
+			title: title,
+			content: tourl
+		}).show();
+	});
+	
+	function submitResult() {
+		$.ajax({
+	        url:tourl,
+	        type:"post",
+	        dataType: "json",
+	        contentType: "application/x-www-form-urlencoded; charset=utf-8",
+	        data: {"applyid":apply_id},
+	        success:function(json){
+	            if(!(json.success||false)){
+					ConfirmBox.alert(json.error, null, { title: title });
+	                return false;
+	            }
+				var msg = json.success;
+				ConfirmBox.timeBomb(msg, {
+					name: 'success',
+					width: pWidth + msg.length * fontWidth,
+					timeout: 1000
+				});
+				setTimeout("location.reload()", 1000);
+	            return false;
+	        }
+	    });
+	    return false;
+	}
+});
+</script>
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<style>
+.reportBox{width:405px;font-size:14px;}
+.reportBox .formMod .formRad{width:125px;}
+.reportBox .formMod{float:left;}
+.reportBox .formMod .formTextarea textarea.textarea{height:60px;}
+.reportBox .formBtn{float:left; overflow: hidden;}
+.reportBox .formBtn a{margin:0;}
+.reportBox p.txt{line-height:30px;margin-bottom:5px; font-family:"微软雅黑";font-size:14px;clear: both;}
+.reportBox p.error{clear:both;height:20px;line-height:20px;color:#de0000;font-size:12px;margin-bottom:10px;}
+textarea.focus{background:#f2fcfe;border:1px solid #9fcdd6;box-shadow:0 0 5px #9fcdd6;}
+.formRad {float: left;display: inline;}
+.formRad input.radio {float: left;display: inline;margin: 9px 0 0;margin: 7px 0 0 \9;cursor: pointer;}
+.formRad label {
+	float: left;display: inline;height: 30px;line-height: 30px;margin: 0 15px 0 3px;cursor: pointer;
+}
+.formRad .rp9-tip {
+    line-height: 30px;color: #999;display: none;font-size: 12px;
+}
+.tipPos{position:absolute;top:0;left:auto;right:-20px;}
+.weChatList{width:400px; overflow:hidden;text-align:left; padding-bottom:10px;overflow: hidden;}
+.weChatList li{width:180px; float:left; color:#333; background:url({/$siteurl.style/}/img/c/weIcon.png) left center no-repeat; padding-left:20px; line-height:24px;}
+
+input.error {height: 13px !important;;line-height: 13px !important;}
+.report_error{width: 100%; height: 30px; overflow: hidden; color: red;}
+.color-999{
+	color:#999;
+}
+</style>
+</head>
+<body>
+<form id="formReport" action="{/get_url rule="/partreport/reportdo/"/}" method="post">
+<div class="dgBox reportBox">
+	<input type="hidden" name="resume_id" id="resume_id" value="{/$resume_id/}"/>
+	<input type="hidden" name="person_id" id="person_id" value="{/$person_id/}"/>
+	<input type="hidden" name="complaint_tel" id="complaint_tel" value="{/$phone/}"/>
+	<div class="reportBoxForm">
+    	<p class="txt">举报原因</p>
+        <div id="divReportType" class="formMod" style="margin-bottom:0; overflow:hidden;">
+            {/foreach $type as $k=>$v/}
+            <span class="formRad">
+                <input type="radio" style="height:auto;" class="radio" id="rp{/$k/}" value="{/$k/}" name="report_type"/>
+                <label for="rp{/$k/}">{/$v/}</label>
+            </span>
+          {//foreach/}
+            <div style="clear: both;height: 0;"></div>
+            <p class="color-999">（"已找到兼职"在获取联系方式48小时内举报有效，逾期举报将不会返回兼职币）</p>
+            <p class="txt" style="border-top: 1px solid #f1f1f1;margin-top: 8px;">一经核实，我们会</p>
+            <ul class="weChatList">
+                <li>返还兼职币</li>
+                <li>简历屏蔽</li>
+                <li>消息通知</li>
+            </ul>
+        </div>
+        <div class="formBtn">
+            <a href="javascript:void(0)" id="btnReportSubmit" class="btnsF14 btn1">提交</a>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+</form>
+<script type="text/javascript">
+
+try {
+	hbjs.use('cqjob.jobValidate, cqjob.jobForm, cqjob.jobDialog, cqjob.actions, widge.overlay.confirmBox', function($, form, jobDialog, actions, confirmBox){
+		factory($.extend(form, jobDialog, actions), confirmBox);
+	});
+} catch (ex) {
+	factory($);
+}
+
+function factory($, confirmBox){
+	var report={
+		init:function(){
+			$.focusColor('input.text');
+			var formReport = $('#formReport').validate({
+				rules:{
+					report_type:{required:false}
+				},
+				messages:{
+					report_type:{required:'请选择举报类型'},
+					rpDesc:{maxlength:'最长填写256个字<span class="tipArr"></span>'}
+				},
+
+				errorClasses:{
+				    report_type:{required:'report_error'},
+					rpDesc:{maxlength: 'tipLayErr tipw100'}
+				},
+				tipClasses:{
+					rpDesc:'tipLayTxt tipw100'
+				},
+				errorElement:'p',
+				errorPlacement: function(error, element)
+				{
+					if(element.attr('name')=='report_type'){
+						error.insertAfter($('#divReportType'));
+					}else{
+						element.parent().nextAll().find('.tipLay').append(error);
+					}
+				},
+				success: function(label)
+				{ 
+					$('#divReportType').next('p.error').remove();
+					label.text(" ");
+				}
+			});
+//			$('#btnReportSubmit').click(function(){
+//				$(this).submitForm({beforeSubmit: $.proxy(formReport.form, formReport), success: report.successCallBack, clearForm: false });
+//				return false;
+//			});
+		},
+		successCallBack:function(json){
+			var target = $('#btnReportSubmit');
+			if(target[0].trigger){
+				target[0].trigger('close');
+			} else {
+				target.closeDialog();
+			}
+			if (json && json.error){ 
+				showModel('info', json.error);
+				return;
+			}
+			showModel('success',json.msg);
+		}
+	}
+	var pWidth = 70,
+		fontWidth = 18;
+	
+	function showModel(icon, msg){
+		confirmBox && confirmBox.timeBomb(msg, {
+			name: icon,
+			width: pWidth + msg.length * fontWidth
+		});
+	}
+	
+	report.init();
+    $('#btnReportSubmit').click(function(){
+        var report_type =  $('[name=report_type]:checked').val();
+        if(!report_type){
+            showModel('fail', "请选择举报原因");
+            return;
+        }
+        $.post("{/get_url rule='/partreport/reportDo'/}",
+                {person_id:"{/$person_id/}",
+                    resume_id:"{/$resume_id/}",
+                    report_type:report_type,
+                    complaint_tel:"{/$phone/}"
+                },function(r){
+                    if(!r.status){
+                        showModel('fail', r.error);
+                        return;
+                    }
+                    reportDialog.hide();
+                    showModel('success', r.msg);
+                },'json');
+    })
+}
+
+$(function () {
+    $('.formRad input.radio').on('change',function () {
+        if($('#rp9').is(':checked')) {
+            $('#rp9').siblings('span').show()
+        } else {
+            $('#rp9').siblings('span').hide()
+        }
+    })
+})
+
+</script>
+</body>
+</html>

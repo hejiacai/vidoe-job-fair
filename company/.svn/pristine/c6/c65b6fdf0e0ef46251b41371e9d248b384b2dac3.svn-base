@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>评价</title>
+    <!–[if lt IE9]>
+    <script src="{/version file='html5.js'/}"></script>
+    <![endif]–>
+    <link rel="stylesheet" type="text/css" href="{/version file="base.css"/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file="tJob_style.css"/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file="v2-widge.css"/}" />
+    <script type="text/javascript" src="{/version file='version.js'/}"></script>
+    <script type="text/javascript">
+        window.CONFIG = {
+            HOST: '{/$siteurl.style/}',
+            COMBOPATH: '/js/v2/'
+        }
+    </script>
+    <script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+    <script type="text/javascript" src="{/version file="global.js"/}"></script>
+    <style>
+    /*弹窗*/
+    .formMod .l{width:135px;font-size:14px;color:#666}
+    .formMod .r{width:380px}
+    .assicon label{display: inline-block;width:77px;height: 35px;background-color: #e6e6dc;color:#979691;float:left;margin-right: 2px;line-height: 35px;text-align: center;cursor: pointer}
+    .assicon label i{vertical-align: -2px;margin-right: 5px;font-size:18px}
+    .assicon label.first{border-radius: 5px 0 0 5px}
+    .assicon label.last{border-radius: 0 5px 5px 0}
+    .assicon label.cur1{background-color: #19bdb4;color:#fff}
+    .assicon label.cur2{background-color: #f29e16;color:#fff}
+    .assicon label.cur3{background-color: #fc7958;color:#fff}
+    </style>
+</head>
+<body>
+<div class='showComment'></div>
+<div style="height: auto; overflow: auto; display:none;" class="ui_dialog_container" id="comment_dialog">
+    <div style="margin-bottom: 0px" class="formMod mgt10">
+        <div class="l">被评人：</div>
+        <div class="r"><p class="mgt5" id="user_name_comment"></p></div>
+        <div class="clear"></div>
+    </div>
+    <div class="formMod mgt10">
+        <div class="l">总体评价：</div>
+        <div class="r assicon">
+            <label class="first cur1"><i class="hbFntWes hbIconMoon"></i>好评</label>
+            <label class="cur2"><i class="hbFntWes hbIconMoon"></i>中评</label>
+            <label class="last cur3"><i class="hbFntWes hbIconMoon"></i>差评</label>
+            <span class="tipPos" style="display:none" id="levelTip">
+                <span class="tipLay">
+                    <span for="linkman" generated="true" class="tipLayErr tipw100"></span>
+                </span>
+            </span>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <form action="/partcomment/addcommentDo" method="post" id="commentForm">
+        <input name="person_id" value="" type="hidden" id="pid"/>
+        <input name="offer_id" value="" type="hidden" id="offer_id"/>
+        <input name="level" value="0" type="hidden" id="level"/>
+        <div class="formMod mgt10">
+            <div class="l">详细评价：</div>
+            <div class="r">
+        	<span class="formTextarea">
+                <textarea style="width: 300px;height: 120px" class="textarea" name="content"></textarea>
+            </span>
+                <span class="tipPos" style="display:none" id="contentTip">
+                <span class="tipLay">
+                    <span for="linkman" generated="true" class="tipLayErr tipw180"></span>
+                </span>
+            </span>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </form>
+    <div style="margin-left: 140px;margin-bottom: 30px" class="formBtn">
+        <a style="padding:0 40px;text-decoration: none" href="javascript:;" id="btnSave" class="btnsF16 btn1">提交</a>
+        <p style='color: #999;font-size: 12px;margin-top: 5px;'>温馨提醒：已评价用户重复评价无效</p>
+    </div>
+</div>
+
+    <script>
+    hbjs.use('widge.overlay.hbDialog,widge.overlay.confirmBox,module.verifier',function(Dialog,confirmBox,verifier,$){
+        var myDialog = new Dialog({
+            idName: 'myDialog',
+            isAjax: true,
+            width: 610,
+            close: ' '
+        });
+
+        $(document).on('click','.showComment',function(e){
+            var _self = $(this),
+                HTML = $("#comment_dialog");
+            HTML.find('#user_name').html(_self.attr('data-name'));
+            HTML.find('#pid').val(_self.attr('data-pid'));
+            HTML.find('#offer_id').val(_self.attr('data-fid'));
+
+            myDialog.setContent({
+                isOverflow: true,
+                title: comment_title,
+                content: HTML.html()
+            }).show();
+
+            myDialog.query('.assicon label').on('click', function(e){
+                var _self = $(this);
+                var val = _self.index()+1;
+                myDialog.query('#level').val(val);
+                _self.addClass('cur'+val).siblings().each(function(){
+                    $(this).removeClass('cur'+($(this).index()+1));
+                });
+            });
+
+            myDialog.query('textarea').on('focus', function(e){
+                $(this).removeClass('error');
+                myDialog.query("#contentTip").hide();
+            });
+
+            myDialog.query('#btnSave').on('click', function(e){
+            	e.stopPropagation()
+
+                var level = myDialog.query('#level'),
+                    content = myDialog.query('textarea'),
+                    _self = $(this);
+                if(!verifier.rangeNum(level, [1, 3])){
+                    if(myDialog.query("#levelTip").is(":hidden")){
+                        myDialog.query("#levelTip").show()
+                            .find(".tipLayErr")
+                            .html("<span class='tipArr'></span>请选择好中差评!");
+                        setTimeout(function(){myDialog.query("#levelTip").hide()},1500);
+                    }
+
+                }else if((level.val()==3) && ((verifier.getLength(content)<10)||(verifier.getLength(content)>500))){
+                    content.addClass('error');
+                    myDialog.query("#contentTip").show()
+                        .find(".tipLayErr")
+                        .html("<span class='tipArr'></span>差评请填写详细评价(10-500字)!");
+                }else if((level.val()!=3) && (verifier.getLength(content)>500)){
+                    content.addClass('error');
+                    myDialog.query("#contentTip").show()
+                        .find(".tipLayErr")
+                        .html("<span class='tipArr'></span>详细评价不能大于500字!");
+                }else{
+                    if(!_self.hasClass('locked')){
+                        _self.addClass('locked');
+                        var data1 = {level:level.val(),content:content.val(),offer_id:offer_ids,person_id:pids}
+                        showLoading()
+                        $.post("/partcomment/addcommentDo",data1,
+                            function(data){
+                                closeLoading();
+                                if((data.status) != 0){
+                                    confirmBox.timeBomb(data.success, {name: 'success',width: 240});
+                                    setTimeout(function(){myDialog.hide();
+                                        window.location.href = window.location.href;},2000);
+                                }else{
+                                    confirmBox.timeBomb(data.error, {name: 'fail',width: 240});
+                                    setTimeout(function(){_self.removeClass('locked');},2000);
+                                }
+                            },'json');
+                    }
+                }
+            });
+
+        });
+
+
+    });
+    </script>
+</body>
+</html>

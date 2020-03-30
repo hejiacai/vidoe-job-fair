@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+        <link rel="stylesheet" type="text/css" href="{/version file='m_font_style.css'/}">
+
+        <!--<script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.min.js'/}"></script>
+        <script type="text/javascript" language="javascript" src="{/version file='dialog.js'/}"></script>-->
+	<style>
+		.survey{
+			font-size: 14px;
+			color:#999;
+			margin:10px 0;
+		}
+		
+		.wrap{
+			width:600px;
+			text-align: left;
+		}
+		.surveyList li{
+			margin-top: 10px;
+		}
+		.surveyList p{
+			font-size: 0px;
+			margin-top:10px;
+		}
+		.surveyList em{
+			padding-left: 10px;
+			display:inline-block;
+			font-size: 14px;
+			width:110px;
+			margin-bottom: 10px;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			cursor: pointer;
+		}
+		.surveyList i{
+			margin-right: 10px;
+		    display: inline-block;
+		    vertical-align: -2px;
+		}
+		   
+		
+		.surRadio p em .icon-uniE6002{
+			color:#ccc;
+		}
+		.surRadio p em .icon-uniE6012{
+			display: none;
+		}
+		.surRadio p em.cur .icon-uniE6002{
+			display:none;
+		}
+		.surRadio p em.cur .icon-uniE6012{
+			display: inline;
+			color:#2b6fad;
+		}
+		
+		.surChecked em i{
+			height: 13px;
+		    width: 13px;
+		    border: 1px solid #ccc;
+		    border-radius: 2px;
+		    text-align: center;
+		    text-indent: -100px;
+		    color:#2b6fad;
+		    overflow: hidden;
+		}
+		.surChecked em.cur i{
+			text-indent: 0;
+			border: 1px solid #2b6fad;
+		} 
+		
+		#surverModule{
+			margin-left:33px;
+			width:540px;
+			line-height: 2em;
+			height:2em;
+			border:none;
+			outline: none;
+			border-bottom: 1px solid #f1f1f1;
+		}
+		#surverLack{
+			margin-top: 10px;
+			margin-left: 23px;
+			padding:10px;
+			width:530px;
+			height:80px;
+			outline: none;
+			border:1px solid #f1f1f1
+		}
+		.surveyList ::-webkit-input-placeholder{color:#ccc}    /* 使用webkit内核的浏览器 */
+		.surveyList :-moz-placeholder{color:#ccc}                  /* Firefox版本4-18 */
+		.surveyList ::-moz-placeholder{color:#ccc}                  /* Firefox版本19+ */
+		.surveyList :-ms-input-placeholder{color:#ccc}
+		
+		.subBtn{
+			width:160px;
+			height:40px;
+			font-size: 16px;
+			line-height: 40px;
+			color:#fff;
+			text-align: center;
+			background: #66bce4;
+			margin: 10px auto;
+			border-radius: 5px;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			cursor: pointer;
+		}
+		.subBtn:hover{
+			background: #31a2d6;
+		}
+		
+		.surErr{
+			display:none;
+			color:red;
+		}
+		.surErr.ml33{
+			margin-left: 33px;
+		}
+	</style>
+	</head>
+	<body>
+		<form class="wrap" action="">
+			<div class="survey">
+				为了给您提供更好的服务，现对汇博简历的完整度向您进行调研
+			</div>
+			<ul class="surveyList">
+				<li class="surRadio">
+					<span class="surverTit">1、您觉得汇博上的简历是否足够完善？</span><span class="surErr surErr01">请选择！</span>
+					<p class="subSurver01">
+                        {/foreach $answer_one as $k=>$v/}
+						<em data-id="{/$k/}"><i class="icon-uniE6002"></i><i class="icon-uniE6012"></i>{/$v/}</em>
+                        {//foreach/}
+						<input type="hidden" name="subSurver01" id="subSurver01" value="" />
+					</p>
+				</li>
+				<li class="surRadio">
+					<span class="surverTit">2、您多久会发现一个不完善的简历？</span><span class="surErr surErr02">请选择！</span>
+					<p class="subSurver02">
+                        {/foreach $answer_two as $k=>$v/}
+						<em data-id="{/$k/}"><i class="icon-uniE6002"></i><i class="icon-uniE6012"></i>{/$v/}</em>
+                        {//foreach/}
+						<input type="hidden" name="subSurver02" id="subSurver02" value="" />
+					</p>
+				</li>
+				<li class="surChecked">
+					<span class="surverTit">3、您觉得简历中哪些版块信息不够完善？</span><span class="surErr surErr03">请选择！</span>
+					<p>
+                        {/foreach $answer_three as $k=>$v/}
+						<em data-id="{/$k/}"><i class="icon-0523"></i>{/$v/}</em>
+                        {//foreach/}
+						<input type="hidden" name="subSurver03" id="subSurver03" value="" />
+					</p>
+					<input type="text" style="display: none;" name="surverModule" id="surverModule" placeholder="限50字">
+					<!--<div class="surErr surErr04">请输入其他版块信息</div>-->
+					<div class="surErr ml33 surErr05">版块信息最多输入50个字</div>
+				</li>
+				<li>
+					<span class="surverTit">4、您觉得简历还缺少哪些信息？</span>
+					<textarea name="surverLack" id="surverLack" placeholder="限300字"></textarea>
+					<!--<div class="surErr surErr06">请输入简历缺少信息</div>-->
+					<div class="surErr ml33 surErr07">简历缺少信息最多输入300个字</div>
+				</li>
+			</ul>
+			<div class="subBtn">确定</div>
+		</form>
+		<script type="text/javascript">
+			$('.subSurver01').on('click','em',function(){
+				$('.surErr01').hide()
+				$('.subSurver01 em').removeClass('cur');
+				$(this).addClass('cur');
+				$('#subSurver01').val($(this).attr('data-id'))
+			})
+			$('.subSurver02').on('click','em',function(){
+				$('.surErr02').hide()
+				$('.subSurver02 em').removeClass('cur');
+				$(this).addClass('cur');
+				$('#subSurver02').val($(this).attr('data-id'))
+			})
+			$('.surChecked').on('click','em',function(){
+				$('.surErr03').hide()
+				$(this).toggleClass('cur');
+				var v=[]
+                $('.surChecked em.cur').each(function(i,e){
+                    v.push($(e).attr('data-id'));
+                })
+                $('#subSurver03').val(v.join(','))
+                if($('.surChecked em[data-id=06]').is('.cur')){
+                    $('#surverModule').show();
+                }else{
+                    $('#surverModule').hide().val('');
+                    $('.surErr05').hide()
+                }
+			})
+			$('#surverModule').on('focus',function(){
+				$('.surErr05').hide()
+			})
+			$('#surverLack').on('focus',function(){
+				$('.surErr07').hide()
+			})
+			$('.subBtn').on('click', function(){
+				var flag=true;
+				var surverModule = $('#surverModule').val();
+				var surverLack = $('#surverLack').val();
+				if(surverModule.length > 50){
+//					alert('版块信息只能输入50个字');
+					$('.surErr05').show()
+					flag=false;
+				}
+				if(surverLack.length > 300){
+//					alert('简历缺少信息只能输入300个字');
+					$('.surErr07').show()
+					flag=false;
+				}
+				if($('#subSurver01').val()=="")$('.surErr01').show()
+				if($('#subSurver02').val()=="")$('.surErr02').show()
+				if($('#subSurver03').val()=="")$('.surErr03').show()
+				
+
+				if(flag){
+					$.post("{/get_url rule='/answer/AddAnswer/'/}",{
+                        answer_one:$('#subSurver01').val(),
+                        answer_two:$('#subSurver02').val(),
+                        answer_three:$('#subSurver03').val(),
+                        answer_four:$('#surverLack').val(),
+                        answer_other:$('#surverModule').val()
+                   },function(r){
+                        if(!r.status){
+                        	$.message(r.msg)
+                            return;
+                        }else{
+                            $.message(r.msg);
+                        	resumeCompleteDialog.hide();
+                        	$('.resume_complete').hide();
+                        }
+                        
+
+                    },'json')
+				}
+			});
+		</script>
+	</body>
+</html>

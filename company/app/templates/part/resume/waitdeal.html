@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="Keywords" content=""/>
+    <meta name="Description" content=""/>
+    <title>待处理简历</title>
+    <!–[if lt IE9]>
+    <script src="{/version file='html5.js'/}"></script>
+    <![endif]–>
+    <link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='comback.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='resument2015.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='resumePartTime.css'/}" />
+    <script type="text/javascript">
+        window.CONFIG = {
+            HOST: '{/$siteurl.style/}',
+            COMBOPATH: '/js/v2/'
+        }
+    </script>
+    <script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.min.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='common.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='dialog.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='ui_inputFocus.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='ui_validate.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='jquery.form.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='ui_dropdownlist.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='ui_tooltip.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='ui_autocomplete.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='jquery.email.tip.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='jquery.metadata.js'/}"></script><!--指向改变class-->
+    <script type="text/javascript" src="{/version file='hbjs.js'/}"></script>
+    <script type="text/javascript" src="{/version file='jquery.min.js'/}"></script>
+    <script type="text/javascript" src="{/version file='util.js'/}"></script>
+    <script type="text/javascript" src="{/version file='class.js'/}"></script>
+    <script type="text/javascript" src="{/version file='shape.js'/}"></script>
+    <script type="text/javascript" src="{/version file='event.js'/}"></script>
+    <script type="text/javascript" src="{/version file='aspect.js'/}"></script>
+    <script type="text/javascript" src="{/version file='attribute.js'/}"></script>
+    <script type="text/javascript" src="{/version file='cookie.js'/}"></script>
+    <script type="text/javascript" src="{/version file='global.js'/}"></script>
+    <script type="text/javascript">
+        hbjs.loadJS('{/$siteurl.style/}/js/v2/cqjob/common.js');
+    </script>
+    <style>
+        /*.report{display: inline-block;background: #ff8500; padding: 3px 17px;  font-size: 14px;  color: #fff;  border-radius: 2px;margin-top: 5px;}
+        .report:hover{background: #ff7507;  color: #fff;}*/
+
+    </style>
+
+</head>
+<body id="body">
+{/include file="new_header.html" par="兼职招聘" cur='简历管理'/}
+<div class="resumentNbg">
+    <div class="rMentLt">
+        <ul class="rMentUl">
+            <li>
+                <a href="/partresume" class="{/if $status==1/}cut{//if/}">
+                    <em class="mentIcon04"></em>待处理简历
+                </a>
+            </li>
+            <li>
+                <a href="/partresume/index/status-3" class="{/if $status==3/}cut{//if/}">
+                    <em class="mentIcon01"></em>待面试简历
+                </a>
+            </li>
+            <li>
+                <a href="/partresume/index/status-2" class="{/if $status==2/}cut{//if/}">
+                    <em class="mentIcon02"></em>已录用简历
+                </a>
+            </li>
+            <li>
+                <a href="/partresume/index/status-4" class="{/if $status==4/}cut{//if/}">
+                    <em class="mentIcon03"></em>不合适简历
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="rMentRt">
+        <div style=" position:relative" class="clearfix">
+            <div class="rMentBtn clearfix">
+                <label>
+                    <input name="c" class="resuemSelectAll" type="checkbox" value=""/><span>全选</span>
+                </label>
+                <p>
+                    {/if $status == 1/}
+                    <a href="javascript:;" class="btnOpInvite">面试邀请</a>
+                    <a href="javascript:;" class="sendoffers">直接录用</a>
+                    <a href="javascript:;" class='refuseMore'>不合适</a>
+                    {/elseif $status == 2/}
+                    <a href="javascript:;" class="AddComments">用户评价</a>
+                    <a href="javascript:;" class='cancelOffers'>取消录用</a>
+                    {/elseif $status == 3/}
+                    <a href="javascript:;" class="sendoffers">直接录用</a>
+                    <a href="javascript:;" class='refuseMore'>不合适</a>
+                    {/elseif $status == 4/}
+                    <a href="javascript:;" class='sendofferagainMore'>重新录用</a>
+                    {//if/}
+                </p>
+                <div class="subMetx clearfix" style="float: right;margin-right: 10px;">
+                    <div class="job" style="width: 123px">
+                        <span id="tstDropJobPeople" class="drop zindex"></span>
+                    </div>
+                    <div class="job" style="width: 145px">
+                        <span id="tstDropJob" class="drop zindex"></span>
+                    </div>
+
+                    <input type="hidden" name="job_id" value="{/$job_id/}">
+                    <input type="hidden" name="pub_user_name" value="{/$pub_user_name/}">
+                    <input type="hidden" name="status" value="{/$status/}">
+                </div>
+            </div>
+
+            {/if !empty($data)/}
+            <div class="rMentLitBg">
+                {/foreach $data as $k=>$apply/}
+                <div class="rMentLit" id="row{/$apply['apply_id']/}">
+                    {/if $apply['person_effect'] == 0/}
+                    <div class="rMentLxMaster"></div>
+                    {//if/}
+                    <div class="rMentLx ">
+                        <label>
+                            <input name="chkapply" id="chkapply{/$apply['apply_id']/}" type="checkbox" value="{/$apply['apply_id']/}" data-person_id="{/$apply['person_id']/}" data-offerid="{/$apply['offer_id']/}" data-name="{/$apply['user_name']/}"
+                                   data-resumeid="{/$apply['resume_id']/}"  {/if $apply['person_effect'] == 0/}disabled="disabled"{//if/}/>
+                            <b title="{/$apply['station']/}">应聘职位：{/base_lib_BaseUtils::cutstr($apply['station'], 18, 'utf-8', '', '…')/} </b>
+                        </label>
+                        <em class="hue3">
+                            {/if $status==1/}
+                                投递时间 ：{/$apply['create_time']/}
+                            {/elseif $status==3/}
+                                面试时间：{/$apply['attention_time']/}
+                            {/elseif $status==2/}
+                                录用时间：{/$apply['create_time']/}
+                            {/elseif $status==4/}
+                                处理时间：{/$apply['update_time']/}
+                            {//if/}
+                        </em>
+                    </div>
+                    <div class="rMentLv " data-applyid="{/$apply['apply_id']/}" data-name="{/$apply['user_name']/}" data-resumeid="{/$apply['resume_id']/}"
+                         data-personid="{/$apply['person_id']/}" data-offerid="{/$apply['offer_id']/}" data-jobid="{/$apply['job_id']/}">
+                         
+                         
+                        <a href="javascript:;" class="rMentLink ">
+
+                        
+	                        <div class="mImgBg" style="float: left;margin-right: 20px;">
+	                            <p>
+	                                <img onclick='window.open("/partresume/Resumedetail/resumeid-{/$apply['resume_id']/}-applyid-{/$apply['apply_id']/}")' class="mImg" src="{/$apply['photo_url']/}"/>
+	                            </p>
+	                            <!--<p>
+	                                <a href="javascript:void(0);" class="report" data-personid="{/$apply['person_id']/}" data-id="{/$apply['resume_id']/}">申诉</a>
+	                            </p>-->
+	                        </div>
+						</a>
+                        <a href="/partresume/Resumedetail/resumeid-{/$apply['resume_id']/}-applyid-{/$apply['apply_id']/}"
+                           target="_blank" class="rMentLink ">
+                            <div>
+                                <p class="mTit1"><b>{/$apply['user_name']/}</b>
+                                    <!--{/$apply['sex_name']/}/ {/if $apply['in_school']/} {/$apply['in_school']/}/{//if/}  {/$apply['age']/}/ {/$apply['address']/} </p>-->
+                                <p class="mTit3">
+                                    {/$apply['some_info']/}
+                                </p>
+                                {/if !empty($apply['jobsortexp'])/}
+                                <p class="mTit3">
+                                  求职意向：  {/implode(' | ',$apply['jobsortexp'])/}
+                                </p>
+                                {//if/}
+                            </div>
+                        </a>
+                        <div class="rMentLinkv">
+                            {/if $status==1/}
+                            <a href="javascript:;" class="mTit4 inviteResume">发面试邀请</a>
+                            <a href="javascript:;" class="mTit4 sendoffer">直接录用</a>
+                            <a href="javascript:;" class="mTit4 refuseSingle">不合适</a>
+                            {/elseif $status==3/}
+                            <a href="javascript:;" class="mTit4 sendoffer">直接录用</a>
+                            <a href="javascript:;" class="mTit4 refuseSingle">不合适</a>
+                            {/elseif $status==2/}
+                            {/if $apply['is_company_assess'] == 0/}
+                            <a  href="javascript:;" class="mTit4 AddComment">用户评价</a>
+                            {//if/}
+                            <a  href="javascript:;" class="mTit4 cancelOffer">取消录用</a>
+                            {/elseif $status==4/}
+                            <a  href="javascript:;" class="mTit4 sendofferagain">重新录用</a>
+                            {//if/}
+                        </div>
+						{/if !$apply['need_get_way']/}
+						<div class="appeal_text"><a href="javascript:void(0);" class="appeal_btn report" data-personid="{/$apply['person_id']/}" data-id="{/$apply['resume_id']/}" id="{/if $need_get_way/}noLinkway{/else/}report{//if/}">申诉</a>停机/空号/不是本人等原因申诉后可返兼职币</div>
+						{//if/}
+                        <div class="clear"></div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                {//foreach/}
+                {/$pager/}
+                <div class="clear"></div>
+            </div>
+            {/else/}
+            <div class="noData">
+                <p>暂无简历</p>
+            </div>
+            {//if/}
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>
+
+<div id="sus" class="sus">
+    <a class="backTop hbFntWes" title="返回顶部" href="javascript:void(0);" style="display: none;">&#xf0d8;</a>
+</div>
+{/include file='./part/resume/commentalert.html'/}
+{/include file='./common/showloading.html'/}
+<script type="text/javascript">
+
+  try {
+    hbjs.use(factory);
+  } catch (e) {
+    factory($);
+  }
+
+  function factory($) {
+    $(window).scroll(function () {
+      if ($(document).scrollTop() > 120) {
+        $('#sus').find('a.backTop').css({'display': 'inline-block'});
+      } else {
+        $('#sus').find('a.backTop').css({'display': 'none'});
+      }
+    });
+    $('#sus').find('a.backTop').click(function () {
+      $('html,body').animate({scrollTop: 0});
+    });
+  }
+</script>
+<script>
+  var _hmt = _hmt || [];
+  (function () {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?fb51309e47424acd6e31c0bd2a65a5a1";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+<script type="text/javascript" language="javascript" src="//assets.huibo.com/js/track.js?v=20180620"></script>
+<script>
+    comment_title = '用户评论';
+    pids = '';
+    offer_ids = ''
+  $.setIndex("zindex");//为需要赋层级设置的元素设置class为zindex
+    //全部招聘岗位
+  $('#tstDropJob').droplist({
+    defaultTitle: '全部招聘岗位',
+    style: 'width:250px;',
+    noSelectClass: 'gray',
+    inputWidth: 120,
+    width: 128,
+    hddName: 'job_id',
+    items : {/$jobs/},
+    selectValue: '{/$job_id/}',
+    maxScroll: 10,
+    onSelect: function (i, name) {
+      //选中后的事件
+      $('input[name=job_id]').val(i);
+
+      var job_id = $('input[name=job_id]').val();
+      var pub_user_name = $('input[name=pub_user_name]').val();
+      apply.submit(job_id,pub_user_name);
+    }
+  });
+//  全部招聘岗位为空的时候
+  if(!$('#tstDropJob .dropLst .dropLstCon ul').find('li').length){
+    $('#tstDropJob .dropLst').hide();
+  };
+    //职位发布人
+  $('#tstDropJobPeople').droplist({
+    defaultTitle: '职位发布人',
+    style: 'width:100px;',
+    noSelectClass: 'gray',
+    inputWidth: 100,
+    width: 128,
+    hddName: 'pub_user_name',
+    items: {/$pubpersons/},
+    selectValue: '{/$pub_user_name/}',
+    maxScroll: 10,
+    onSelect: function (i, name) {
+      //选中后的事件
+      $('input[name=pub_user_name]').val(i);
+
+      var job_id = $('input[name=job_id]').val();
+      var pub_user_name = $('input[name=pub_user_name]').val();
+      apply.submit(job_id,pub_user_name);
+    }
+  });
+
+  var apply = {
+    init: function () {
+      //单个邀请面试
+      $(".rMentLitBg .inviteResume").click(function (e) {
+        var apply_id = $(this).parents(".rMentLv").attr("data-applyid");
+        apply._invitesingle(apply_id);
+        e.preventDefault();
+      });
+
+      //批量发送面试邀请
+      $('.btnOpInvite').click(function (e) {
+        e.preventDefault();
+        var applys = apply.selectApply();
+        if (applys.length <= 0) {
+          $.anchor('请选择要处理的简历', {icon: 'fail'});
+          return;
+        }
+
+        if (applys.length == 1) {
+          apply._invitesingle(applys[0]);
+        } else {
+          apply._invitemulti(applys);
+        }
+      });
+
+      $('.sendoffers').click(function (e) {
+          e.preventDefault();
+          var applys = apply.selectApply();
+          if (applys.length <= 0) {
+              $.anchor('请选择要处理的简历', {icon: 'fail'});
+              return;
+          }
+
+          if (applys.length == 1) {
+              apply.sendoffer(applys[0]);
+          } else {
+              apply.sendoffers(applys);
+          }
+      });
+
+
+        $('.AddComments').click(function (e) {
+            e.preventDefault();
+            var applys = apply.selectApply();
+            if (applys.length <= 0) {
+                $.anchor('请选择要处理的简历', {icon: 'fail'});
+                return;
+            }
+            var user_names  = apply.selectApplyName();
+            if(applys.length>1)
+                comment_title = '批量评论'
+            $('#user_name_comment').text(user_names.join('、'))
+
+             pids = apply.selectPersonid().join(',');
+             offer_ids = apply.selectOfferid().join(',');
+            $('.showComment').click()
+        });
+        $('.AddComment').click(function (e) {
+            var apply_id = $(this).parents(".rMentLv").attr("data-applyid");
+            var user_name = $(this).parents(".rMentLv").attr("data-name");
+            e.preventDefault();
+            var person_ids = $(this).parents(".rMentLv").attr("data-personid");
+            var offer_id = $(this).parents(".rMentLv").attr("data-offerid");
+            pids = person_ids;
+            offer_ids = offer_id;
+            $('#user_name_comment').text(user_name)
+
+            $('.showComment').click()
+        });
+
+
+      //删除投递的简历
+      $(".deleteApply").click(function (e) {
+        e.preventDefault();
+        var apply_id = $(this).parents(".rMentLv").attr("data-applyid");
+        val = cookieutility.get('deleteapply');
+        var name = $(this).parents(".rMentLv").attr("data-name");
+        if (val == 'true') {
+          apply._deleteapply(apply_id);
+        } else {
+          $.showModal(encodeURI('/apply/DeleteApply/names-' + name + '-ids-' + apply_id + '-v-' + Math.random() + ''), {title: '删除'});
+        }
+      });
+
+      //全选 反选
+      $(".resuemSelectAll").click(function () {
+        if ($(this).is(':checked')) {
+          $('.rMentLit label input:not(:disabled)[name="chkapply"]').attr('checked', 'checked');
+        } else {
+          $('.rMentLit label input:not(:disabled)[name="chkapply"]:checked').removeAttr('checked');
+        }
+      });
+      //单选 全选
+      $('.rMentLx label').click(function(){
+        var checkLen = $('.rMentLx label input[name="chkapply"]:checked').length;
+        var allLen = $('.rMentLx label input[name="chkapply"]').length;
+        if(checkLen===allLen){
+          $('.rMentBtn label input[name="c"]').attr('checked', 'checked');
+        }else {
+          $('.rMentBtn label input[name="c"]:checked').removeAttr('checked');
+        }
+      })
+
+
+      //批量转发到邮箱
+      $('.sendEmail').click(function (e) {
+        e.preventDefault();
+        var applys = apply.selectApply();
+        if (applys.length <= 0) {
+          $.anchor('请选择要处理的简历', {icon: 'fail'});
+          return;
+        }
+
+        var resumeids = apply.selectResume();
+        apply._sendEmail(resumeids.join(','), applys.join(','));
+      });
+
+      //设为待处理
+      $(".setRead").click(function (e) {
+        e.preventDefault();
+        var applys = apply.selectApply();
+        if (applys.length <= 0) {
+          $.anchor('请选择要处理的简历', {icon: 'fail'});
+          return;
+        }
+        apply._setRead(applys.join(','));
+      });
+
+      //设为已邀请面试
+      $(".sendoffer").click(function (e) {
+        e.preventDefault();
+        var apply_id = $(this).parents(".rMentLv").attr("data-applyid");
+        apply.sendoffer(apply_id);
+      });
+
+      $(".remark_contr").mouseover(function (e) {
+        e.preventDefault();
+        $(this).next(".remark_show").addClass("mTitcut2");
+      }).mouseout(function (e) {
+        e.preventDefault();
+        $(this).next(".remark_show").removeClass("mTitcut2");
+      });
+
+
+
+
+      //停止招聘的职位一键拒绝
+      $('.resuse_stop_job').click(function (e) {
+        e.preventDefault();
+        var job_id = $(this).attr('data-jobid');
+        var url = '/apply/Refuse/src-refuse_stop_job-job_id-' + job_id + '/';
+        $.showModal(encodeURI(url), {title: '确定不合适'});
+      });
+
+
+      //一键拒绝剩余简历
+      $('#refuse_last_apply').click(function (e) {
+        e.preventDefault();
+        var url = "?src=refuse_last_apply&job_id=&account_id=&child_status=&xx=1";
+        $.showModal(encodeURI('/apply/Refuse/' + url + '/'), {title: '确定不合适'});
+      });
+
+
+
+
+      $(".changeStatus").click(function (e) {
+        //改变状态
+        var ban = $(this).parent().siblings(".rMentLx ").find("em.hue1");
+        var applyid = $(this).parent().attr("data-applyid");
+        apply._setReadSing1(applyid, ban);
+      })
+    },
+
+    _invitesingle: function (applyid) { //单个邀请
+      $.showModal('/partresume/Invite/apply_id-' + applyid + '-v-' + Math.random(), {title: '面试邀请',defind_index:10002,noclick:true});
+    },
+    _invitemulti: function (applyids) {
+
+      $.showModal('/partresume/Invite?apply_id=' + applyids.join(','), {
+        title: '批量邀请面试',defind_index:10002,noclick:true, onclose: function () {
+        }
+      });
+    },
+      sendoffers: function (applyids) {
+
+          $.showModal('/partresume/Invite?type=2&apply_id=' + applyids.join(','), {
+              title: '批量录用',defind_index:10002,noclick:true, onclose: function () {
+              }
+          });
+      },
+    _invitCallback: function (applyids) {
+      window.location.reload();
+    },
+    _downresume: function (resumeid, applyid) {
+      var url = '/apply/DownLoad/resumeid-' + resumeid + '-applyid-' + applyid + '';
+      $.showModal(url, {title: '请选择保存的文件格式'});
+    },
+    selectApply: function () {
+      var checkboxs = $('.rMentLitBg').find('input[name="chkapply"]:checked'),
+        applyids = [];
+      for (var i = 0, len = checkboxs.length; i < len; i += 1) {
+        applyids.push($(checkboxs[i]).val());
+      }
+      return applyids;
+    },
+      selectApplyName: function () {
+          var checkboxs = $('.rMentLitBg').find('input[name="chkapply"]:checked'),
+              applyids = [];
+          for (var i = 0, len = checkboxs.length; i < len; i += 1) {
+              applyids.push($(checkboxs[i]).attr('data-name'));
+          }
+          return applyids;
+      },
+      selectPersonid: function () {
+          var checkboxs = $('.rMentLitBg').find('input[name="chkapply"]:checked'),
+              applyids = [];
+          for (var i = 0, len = checkboxs.length; i < len; i += 1) {
+              applyids.push($(checkboxs[i]).attr('data-person_id'));
+          }
+          return applyids;
+      },
+      selectOfferid: function () {
+          var checkboxs = $('.rMentLitBg').find('input[name="chkapply"]:checked'),
+              applyids = [];
+          for (var i = 0, len = checkboxs.length; i < len; i += 1) {
+              applyids.push($(checkboxs[i]).attr('data-offerid'));
+          }
+          return applyids;
+      },
+
+    selectResume: function () {
+      var checkboxs = $('.rMentLitBg').find('input[name="chkapply"]:checked'),
+        resumeids = [];
+      for (var i = 0, len = checkboxs.length; i < len; i += 1) {
+        resumeids.push($(checkboxs[i]).attr('data-resumeid'));
+      }
+      return resumeids;
+    },
+    selectUserName: function () {
+      var checkboxs = $('.rMentLitBg').find('input[name="chkapply"]:checked'),
+        usernames = [];
+      for (var i = 0, len = checkboxs.length; i < len; i += 1) {
+        usernames.push($(checkboxs[i]).attr('data-name'));
+      }
+      return usernames;
+    },
+    //设置为待定，以前是标记为已读逻辑
+    _setRead: function (applyids) {
+      // 设置已读
+      $.getJSON('/apply/MarkWaitDeal/' + 'applyid-' + applyids + '-v-' + Math.random(), function (result) {
+        if (result.status) {
+          $(".rMentLitBg input[name='chkapply']:checked").each(function () {
+            $.anchorMsg("标记待定成功", {icon: 'success'});
+            var ban = $(this).parent().next("em");
+            ban.html("待定").removeClass("hue1").addClass("hue2");
+            window.location.reload();
+          });
+        } else {
+          // 设置失败
+          $.anchorMsg(result.msg, {icon: 'fail'});
+        }
+      });
+    },
+    //单个设置已读
+    _setReadSing: function (applyid, ban) {
+      // 设置已读
+      $.getJSON('/apply/SetRead/' + 'applyid-' + applyid + '-v-' + Math.random(), function (result) {
+        if (result.success) {
+          $.anchorMsg("标记待定成功", {icon: 'success'});
+          ban.removeClass("hue1").addClass("hue3").html("已读（未回复）");
+        } else {
+          // 设置失败
+          $.anchorMsg(result.error, {icon: 'fail'});
+        }
+      });
+    },
+    _setReadSing1: function (applyid, ban) {
+      // 设置已读
+      $.getJSON('/apply/SetRead/' + 'applyid-' + applyid + '-v-' + Math.random(), function (result) {
+        if (result.success) {
+          //$.anchorMsg("标记待定成功", {icon : 'success'});
+          ban.removeClass("hue1").addClass("hue3").html("已读（未回复）");
+        } else {
+          // 设置失败
+          $.anchorMsg(result.error, {icon: 'fail'});
+        }
+      });
+    },
+    submit: function (job_id,pub_user_name) {
+      var data = [];
+      if (job_id != '')
+        data.push("job_id=" + job_id);
+        if(pub_user_name != '')
+            data.push("pub_user_name=" + pub_user_name);
+        data.push("status=" + $('input[name=status]').val())
+      if (data.length > 0) {
+        window.location.href = '/partresume/index/' + "?" + data.join("&");
+      } else {
+        window.location.href = '/partresume/index/';
+      }
+    },
+    changeStatus: function () {
+      $(".rMentLitBg input[name='chkapply']:checked").each(function () {
+        var ban = $(this).parent().next("em");
+        ban.html("待定").removeClass("hue1").addClass("hue2");
+      });
+    },
+    refresh: function () {
+      window.location.reload();
+    },
+    //直接录用
+      sendoffer: function (applyid) {
+      var url = '/partresume/invite/type-2/apply_id-' + applyid + '';
+      $.showModal(url, {title: '录用通知',defind_index:10002,noclick:true});
+    },
+
+    _deleteapply: function (applyid) {
+      // 删除求职申请
+      $.getJSON('/apply/DeleteApply/' + 'op-del-ids-' + applyid + '-v-' + Math.random(), function (result) {
+        if (result.success) {
+          $.anchorMsg('已成功删除');
+          window.location.reload();
+        } else {
+          $.anchorMsg(result.error, {icon: 'fail'});
+        }
+      });
+    },
+    _setSelectMultiAppId: function (appids) {
+      if (appids.length > 0) {
+        for (var i = 0; i < appids.length; i++) {
+          $("#row" + appids[i]).remove();
+        }
+      }
+    }
+    //获得当前选中的状态
+  }
+
+  apply.init();
+
+  $.getJSON('/account/twodimensioncode/', function (result) {
+    if (result && result.status) {
+      var src = result.data.codeurl;
+      $('#ewmBox #jewm').attr('src', src);
+      $('#ewmBox').show();
+    }
+  });
+</script>
+<script>
+    var report;
+  hbjs.use('@hbCommon, @jobDialog, @validator, @confirmBox', function (m) {
+    var $ = m['product.hbCommon'].extend(m['cqjob.jobDialog']);
+    var Dialog = m['widge.overlay.hbDialog'];
+    var confirmBox = m['widge.overlay.confirmBox'];
+
+    function showModel(icon, msg) {
+      var pWidth = 70, fontWidth = 18;
+      confirmBox.timeBomb(msg, {
+        name: icon,
+        width: pWidth + msg.length * fontWidth
+      });
+    }
+
+      reportDialog = new Dialog({
+          idName: 'reportDia',
+          isAjax: true,
+          width: 460,
+          close: ' '
+      });
+      $('.report').click(function(){
+          var resume_id = $(this).attr('data-id');
+          var person_id = $(this).attr('data-personid');
+          console.log(resume_id);
+          console.log(person_id);
+
+          $.post("{/get_url rule='/partreport/CheckReported'/}",{person_id:person_id,resume_id:resume_id},function(r){
+              if(!r.status){
+                  showModel('fail', r.error);
+                  return;
+              }
+              reportDialog.setContent({
+                  isOverflow: true,
+                  title: '申诉',
+                  content: "{/get_url rule='/partreport/index'/}/resume_id-"+resume_id
+              }).show();
+          },'json');
+
+      });
+
+      //拒绝单个
+      $(".refuseSingle").click(function (e) {
+          e.preventDefault();
+          var apply_id = $(this).parents(".rMentLv").attr("data-applyid");
+          var name = $(this).parents(".rMentLv").attr("data-name");
+          $.confirm("确认处理为不合适？","不适合",function () {
+              showLoading()
+              $.post('/partresume/NOfitDo',{apply_id:apply_id},function (e) {
+                  closeLoading()
+                  if (e.status) {
+                      showModel('success', '已设置为不合适');
+                      window.location.reload();
+                  } else {
+                      showModel('fail', e.msg);
+                  }
+              },'json')
+          })
+      });
+
+      $(".cancelOffer").click(function (e) {
+          e.preventDefault();
+          var apply_id = $(this).parents(".rMentLv").attr("data-applyid");
+          var name = $(this).parents(".rMentLv").attr("data-name");
+          $.confirm("是否取消录用，取消录用后可在不合适简历中重新录用？","取消录用",function () {
+              showLoading()
+              $.post('/partresume/NOfitDo',{apply_id:apply_id,from:2},function (e) {
+                  closeLoading()
+                  if (e.status) {
+                      showModel('success', '已取消录用');
+                      window.location.reload();
+                  } else {
+                      showModel('fail', e.msg);
+                  }
+              },'json')
+          })
+      });
+
+      //再次录用
+      $(".sendofferagain").click(function (e) {
+          e.preventDefault();
+          var apply_id = $(this).parents(".rMentLv").attr("data-applyid");
+          var name = $(this).parents(".rMentLv").attr("data-name");
+          $.confirm("确认重新录用吗？","录用",function () {
+              showLoading()
+              $.post('/partresume/OfferAgainDo',{apply_id:apply_id},function (e) {
+                  closeLoading()
+                  if (e.status) {
+                      showModel('success', e.msg);
+                      window.location.reload();
+                  } else {
+                      showModel('fail', e.msg);
+                  }
+              },'json')
+          })
+      });
+      //拒绝多个
+      $(".refuseMore").click(function (e) {
+          var applys = apply.selectApply();
+          if (applys.length <= 0) {
+              $.anchor('请选择要处理的简历', {icon: 'fail'});
+              return;
+          }
+          $.confirm("确认批量处理为不合适？","不合适",function () {
+              $.ajax({
+                  url: "/partresume/NOfitDo",
+                  type: "post",
+                  traditional:true,
+                  data: {'apply_id':applys.join(',')},
+                  dataType: 'json',
+
+                  success: function (e) {
+                      if (e.status) {
+                          showModel('success', '已设置为不合适');
+                          window.location.reload();
+                      } else {
+                          showModel('fail', e.msg);
+                      }
+                  }
+
+              })
+          })
+
+      })
+      //取消录用多个
+      $(".cancelOffers").click(function (e) {
+          var applys = apply.selectApply();
+          if (applys.length <= 0) {
+              $.anchor('请选择要处理的简历', {icon: 'fail'});
+              return;
+          }
+          $.confirm("确认批量取消录用吗？","取消录用",function () {
+             showLoading()
+              $.ajax({
+                  url: "/partresume/NOfitDo",
+                  type: "post",
+                  traditional:true,
+                  data: {'apply_id':applys.join(','),from:2},
+                  dataType: 'json',
+
+                  success: function (e) {
+                      closeLoading()
+                      if (e.status) {
+                          showModel('success', '已批量取消录用');
+                          window.location.reload();
+                      } else {
+                          showModel('fail', e.msg);
+                      }
+                  }
+
+              })
+          })
+
+      })
+
+
+      //再次录用 多个
+      $(".sendofferagainMore").click(function (e) {
+          var applys = apply.selectApply();
+          if (applys.length <= 0) {
+              $.anchor('请选择要处理的简历', {icon: 'fail'});
+              return;
+          }
+          $.confirm("确认批量重新录用吗？","录用",function () {
+              showLoading()
+              $.ajax({
+                  url: "/partresume/OfferAgainDo",
+                  type: "post",
+                  traditional:true,
+                  data: {'apply_id':applys.join(',')},
+                  dataType: 'json',
+
+                  success: function (e) {
+                     closeLoading()
+                      if (e.status) {
+                          showModel('success',e.msg);
+                          window.location.reload();
+                      } else {
+                          showModel('fail', e.msg);
+                      }
+                  }
+
+              })
+          })
+
+      })
+  });
+</script>
+</body>
+</html>

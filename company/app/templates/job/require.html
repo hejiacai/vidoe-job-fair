@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+<title>{/$title/}</title>
+<!–[if lt IE9]> 
+<script src="{/version file='html5.js'/}"></script>
+<![endif]–>
+<link rel="stylesheet" type="text/css" href="{/version file="base.css"/}" />
+<link rel="stylesheet" type="text/css" href="{/version file="comback.css"/}" />
+<link rel="stylesheet" type="text/css" href="{/version file="icons.css"/}" />
+
+<script type="text/javascript" language="javascript" src="{/version file="jquery-1.8.3.min.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="dialog.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="common.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="ui_inputFocus.js"/}"></script><!--输入框获取焦点-->
+<script type="text/javascript" language="javascript" src="{/version file="ui_dropdownlist.js"/}"></script><!--下拉模拟-->
+<script type="text/javascript" language="javascript" src="{/version file="ui_jobsort.js"/}"></script><!--职位类别-->
+<script type="text/javascript" language="javascript" src="{/version file="ui_area.js"/}"></script><!--职位类别-->
+<script type="text/javascript" language="javascript" src="{/version file="ui_validate.js"/}"></script><!--验证-->
+<script type="text/javascript" language="javascript" src="{/version file="jquery.metadata.js"/}"></script><!--验证-->
+<script type="text/javascript" language="javascript" src="{/version file="jquery.email.tip.js"/}"></script><!--email提示-->
+<script type="text/javascript" language="javascript" src="{/version file="jquery.form.js"/}"></script><!--表单提交-->
+<style type="text/css">
+.jobErr .bd{padding:75px 0 75px;margin-bottom:30px; zoom:1;}
+.jobErr .bd .l{float:left;display:inline; text-align:right;width:250px;}
+.jobErr .bd .r{float:left;display:inline;width:480px;margin-left:15px;}
+.jobErr .bd .l i.hbFntWes{font-size:36px;color:#f9ae0c}
+.jobErr .bd .r p{margin-bottom:5px;font-size:14px;color:#666;}
+.jobErr .bd .r p.tit{font-size:20px;color:#f9ae0c;}
+.jobErr .bd .r p.txt a{padding-right:10px;}
+ dl{margin-top:10px;}
+ dl dt{font-weight:bold; height:26px; line-height:26px;}
+ dl dd .photoImg{width:61px; height:76px; float:left; display:inline; background:url({/$siteurl.style/}/img/common/user61_76.jpg) no-repeat;}
+ dl dd .photoImg img{width:61px; height:76px;}
+ dl dd .txt{float:left; display:inline; margin-left:10px;}
+ .r .txt1{margin-left:70px;}
+</style>
+</head>
+<body id="body">
+{/include file="nav.html" parent="网络招聘" cur="职位管理"/}
+<div class="content" id="content">
+	<section class="section">
+    	<hgroup>
+            <div class="jobErr">
+            	<div class="bd">
+                	<div class="l"><i class="hbFntWes">&#xf06a;</i></div>
+                        {/if isset($is_opened) && $is_opened ==0/}
+                        <div class="r">
+                            <p class="tit yahei">尊敬的用户，您尚未开通会员服务，为了不影响您的招聘效果，请及时联系客服开通会员服务</p>
+                            <dl>
+                                <dt>客服顾问：</dt>
+                                <dd>
+                                    <div class="photoImg"><img src="{/$hrManager['head_photo_url']/}"/></div>
+                                    <div class="txt">
+                                        <p>热线：400-1010-970</p>
+                                        <p style="font-size: 12px; line-height: 24px;">客服：88394111转1（9：00－18：00）</p>
+                                        <p style="margin-top: 5px;"><a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=4008872887&site=qq&menu=yes"><img border="0"  width="92" height="22" src="{/$siteurl.style/}/img/c/new_index/firmicon06.png" alt="点击这里给我发消息" title="点击这里给我发消息"/></p>
+                                    </div>
+                                    <div class="clear"></div>
+                                </dd>
+                            </dl>
+                        </div>
+                        {/else/}
+                        <div class="r">
+                            <p class="tit yahei">您的企业基本资料不完整，暂时不能发布职位！</p>
+                            <p class="txt">企业基本资料能让求职者更了解您的企业，这会直接影响招聘效果，您需要先完善企业基本资料后，才能发布职位！</p>
+                            {/if $audit_item/}
+                            <p class="txt">待完善项：① 公司实名验证：<a target="_blank" href="{/get_url rule="/licencevalidate/"/}">营业执照验证</a></p>
+                            {/if $require_item/}
+                            <p class="txt1">② 企业资料完善：
+                                {/section name=require loop=$require_item/}                         
+                                <a href='{/get_url rule="/company/Modify/"/}#{/$require_item[require]["val"]/}'>{/$require_item[require]['name']/}</a>
+                                {//section/}
+                            </p>
+                            {//if/}
+                            {/elseif $require_item/}
+                            <p class="txt">待完善项：
+                                {/section name=require loop=$require_item/}	                        
+                                <a href='{/get_url rule="/company/Modify/"/}#{/$require_item[require]["val"]/}'>{/$require_item[require]['name']/}</a>
+                                {//section/}
+                            </p>
+                            {//if/}
+                        </div>
+                        {//if/}
+                    <div class="clear"></div>
+                </div>
+            </div>
+    	</hgroup>
+    </section>
+</div>
+{/include file="footer.html"/}
+</body>
+</html>

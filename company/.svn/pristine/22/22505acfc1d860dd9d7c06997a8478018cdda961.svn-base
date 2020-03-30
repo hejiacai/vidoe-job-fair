@@ -1,0 +1,241 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+<title>{/$title/}</title>
+<!–[if lt IE9]>
+<script src="{/version file='html5.js'/}"></script>
+<![endif]–>
+<link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='comback.css'/}" />
+
+<script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.min.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='common.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='dialog.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='ui_inputFocus.js'/}"></script><!--输入框获取焦点-->
+<script type="text/javascript" language="javascript" src="{/version file='ui_hovchange.js'/}"></script><!--指向改变class-->
+<style type="text/css">
+div.content{background:url({/$siteurl.style/}/img/c/index_secr.jpg) repeat-y right 0 #fff;}
+section.secL{float:left;display:inline;width:662px;}
+section.secR{float:right;display:inline;width:336px;}
+
+
+/*基本信息*/
+.comInfo{padding:15px 35px 18px 25px;zoom:1; background:#fafafa;}
+.comInfo i.ico{ vertical-align:middle;margin:0 0 0 10px;}
+.comInfo .txt{margin:10px 0;}
+.comInfo .txt b{float:left;display:inline;font-size:12px;font-weight:normal;}
+.comInfo .barLnk{float:left;display:inline;font-size:12px;margin:0 0 0 15px;}
+.comInfo p.oth{font-size:12px;}
+.comInfo p.oth b{font-weight:normal;}
+.comInfo p.oth span{margin:0 20px 0 0;}
+.comInfo p.oth i{font-style:normal;color:#999;}
+
+.comInfo p em.comName{font-weight:bold;}
+
+/*数据展示*/
+.comRec{margin-top:20px;}
+.comRec ul li{height:270px;width:310px;border:1px dashed #dadada;float:left;display:inline;margin:0 0 0 0; text-align:center;}
+.comRec ul li.lst1{border-top:0;border-left:0;background:#fafafa;}
+.comRec ul li.lst2{border-top:0;border-left:0;border-right:0;background:#fafafa;}
+.comRec ul li.lst3{border-top:0;border-left:0;border-bottom:0;background:#fafafa;}
+.comRec ul li.lst4{border:0;background:#fafafa;}
+
+
+.comRec ul li .con{}
+.comRec ul li .con p.tit{height:50px;line-height:50px;}
+.comRec ul li .con p.num{color:#999;height:155px;line-height:155px;}
+.comRec ul li .con p.num em{font-size:100px; font-family:Arial, Helvetica, sans-serif;color:#666;}
+.comRec ul li .con .btn{}
+.comRec ul li .con .btn a{margin:0;}
+
+
+.comRec ul li.lst1 .con .btn a.btn4{ border-radius:3px 0 0 3px}
+.comRec ul li.lst1 .con .btn a.btn3{ border-radius:0 3px 3px 0;}
+.comRec ul li.lst4 .con p.num em{font-size:65px;}
+
+/*右侧*/
+.secR h3{font-weight:bold;}
+.hg1{border-bottom:1px solid #dedede;}
+.hg1 h3{margin-bottom:10px;}
+.hg1 dl{height:140px;}
+.hg1 dl dt{width:100px;height:125px;background:url({/$siteurl.style/}/img/common/user100_125.jpg) no-repeat;float:left;margin:5px 0 0;}
+.hg1 dl dt img{width:100px;height:125px;}
+.hg1 dl dd{float:left;display:inline;line-height:30px;margin:5px 0 0 20px;}
+.hg1 dl dd p.name{font-weight:bold;}
+.hg1 dl dd p b{font-weight:normal;margin:0 0 0 5px;}
+
+/*招聘会*/
+.hg2{border-top:1px solid #fff;}
+.hg2 h3{margin-bottom:15px;}
+.hg2Tab{}
+.hg2TabT{margin-bottom:15px;}
+.hg2TabT ul li{float:left;display:inline;width:55px;height:50px;border:1px solid #dadada; text-align:center;margin:0 15px 0 0; cursor:pointer; position:relative; z-index:1;}
+.hg2TabT ul li p.week{background:#e6eefb;color:#55738b;height:30px;line-height:30px;}
+.hg2TabT ul li p.date{background:#fff;color:#666;font-size:12px;height:20px;line-height:20px;}
+.hg2TabT ul li b{ position:absolute;top:50px;left:50%;margin-left:-6px;background:url({/$siteurl.style/}/img/c/c.gif) no-repeat -430px 0;width:12px;height:6px;display:none;}
+.hg2TabT ul li.cu b{display:block;}
+.hg2TabT ul li.cu p.week{background:#54728c;color:#fff;}
+.hg2TabCon{font-size:12px;}
+.hg2TabCon dl dt{font-size:14px;margin-bottom:5px;}
+.hg2TabCon dl dd p{color:#999;margin-bottom:10px;}
+.hg2TabCon dl dd p a.btn3{margin:0;}
+
+.RefreshTip{width:530px;}
+.RefreshTip p{test-align:left;line-height:26px;}
+.RefreshTip p.tit{padding-bottom:5px;line-height:28px; font-weight:bold;}
+.RefreshTip div{margin:20px 0 0 190px;}
+
+</style>
+</head>
+<body id="body">
+{/include file="nav.html" parent="网络招聘" cur="首页"/}
+<div class="content" id="content">
+	<section class="secL">
+    	<hgroup>
+        	<div class="comInfo">
+            	<p>您好，<em class="comName"><a target="_blank" href="{/$company_url/}">{/$companyInfor["company_name"]/}</a></em><a {/if $companyInfor['is_audit']=='1'/}href="{/get_url rule="/licencevalidate/"/}" title="已通过企业认证"{/else/}href="{/get_url rule="/licencevalidate/"/}" title="未通过企业认证"{//if/}><i class="ico {/if $companyInfor['is_audit']=='1'/}icoPro{/else/}icounPro{//if/}"></i></a></p>
+                <div class="txt"><b>企业资料：</b><span class="bar"><span class="barBd"><i style="width:{/$companyPercent/}%"></i></span><em><i></i>{/$companyPercent/}%</em></span><span class="barLnk"><a href="{/get_url rule='/company/modify'/}">{/if $companyPercent==100/}修改资料{/else/}立即完善{//if/}</a></span><div class="clear"></div></div>
+                <p class="oth"><b>会员级别：</b>
+                	{/if $companyInfor['is_opened']=='0'/}
+                		<span><em class="orange">未开通会员&nbsp;&nbsp;<a href="{/get_url rule='/vipapply'/}">立即开通</a></em></span>
+                	{/else/}
+                        <span>
+                            <em class="orange">{/$companyLevel/}</em>
+                            <i class="time">{/if strtotime($companyInfor["end_time"])<strtotime(date('Y-m-d'))/}（已过期,<a href="{/get_url rule="/vipapply/"/}">立即续费</a>）{/else/}（有效期至{/date('Y-m-d',strtotime($companyInfor["end_time"]))/}）{//if/}</i>
+                        </span>
+                        <span>
+                            <b>剩余可下载简历数：</b><em class="orange">{/if $companyInfor["over_resume_down_num"]!=''/}{/$companyInfor["over_resume_down_num"]/}{/else/}0{//if/}份</em>
+                        </span>
+                    {//if/}    
+                 </p>
+            </div>
+            <div class="comRec">
+            	<ul>
+                <li class="lst1">
+                	<div class="con">
+                    	<p class="tit">正在招聘的职位<span class="gray">(个)</span></p>
+                        <p class="num"><em>{/$recruitingJobCount/}</em></p>
+                        <div class="btn"><a href="{/get_url rule='/job/add'/}" class="btn4 btnsF14">发布职位</a><a href="{/get_url rule='/job'/}" class="btn3 btnsF14">管理</a></div>
+                    </div>
+                </li>
+                <li class="lst2">
+                	<div class="con">
+                    	<p class="tit">今日收到的新简历<span class="gray">(份)</span></p>
+                        <p class="num"><em>{/$appliesCount/}</em></p>
+                        <div class="btn"><a href='{/get_url rule="/apply/index/" data="status=0"/}' class="btn4 btnsF14">立即查看</a></div>
+                    </div>
+                </li>
+                <li class="lst3">
+                	<div class="con">
+                    	<p class="tit">未读的简历数<span class="gray">(份)</span></p>
+                        <p class="num"><em>{/$undealApplies/}</em></p>
+                        <div class="btn"><a href='{/get_url rule="/apply/index/" data="status=2"/}' class="btn4 btnsF14">立即处理</a></div>
+                    </div>
+                </li>
+                <li class="lst4">
+                	<div class="con">
+                    	<p class="tit">汇博简历库<span class="gray">(份)</span></p>
+                        <p class="num">超过<em>{/$resumeNums/}</em>份简历</p>
+                        <div class="btn"><a href="{/get_url rule='/resumesearch'/}" class="btn4 btnsF14">搜索人才</a></div>
+                    </div>
+                </li>
+                <div class="clear"></div>
+                </ul>
+            </div>
+        </hgroup>
+    </section>
+    <section class="secR">
+    	{/if $hasHRManager/}
+    	<hgroup class="hg1">
+        	<h3>有问题？找招聘顾问</h3>
+            <dl>
+                <dt><img src="{/$hrManager['head_photo_url']/}" /></dt>
+                <dd>
+                    <p class="name">{/$hrManager["user_name"]/}</p>
+                    <p>{/$customerService["phone400"]/}</p>
+                    {/if $hrManager["tel"]!=''/}<p style="font-size: 12px; line-height: 24px;">电话：转{/$hrManager["tel"]/}</p>{//if/}
+                    {/if $hrManager["mobile"]!=''/}<p style="font-size: 12px; line-height: 24px;">手机：{/$hrManager["mobile"]/}</p>{//if/}
+                    {/if $hrManager["qq"]!=''/}
+                    <p style="margin-top: 5px;"><a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin={/$hrManager["qq"]/}&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:{/$hrManager["qq"]/}:51" alt="点击这里给我发消息" title="点击这里给我发消息"/></a></p>
+                    {/else/}
+                    <p style="margin-top: 5px;"><!-- WPA Button Begin -->
+<script charset="utf-8" type="text/javascript" src="http://wpa.b.qq.com/cgi/wpa.php?key=XzkzODA0MDQyNl8xMjgzMTBfNDAwODg3Mjg4N18"></script>
+<!-- WPA Button End --></p>
+                    {//if/}
+                </dd>
+            </dl>
+        </hgroup>
+        {//if/}
+        <hgroup class="hg2">
+        	<h3>最近招聘会</h3>
+            <div class="hg2Tab" id="hg2Tab">
+            	<div class="hg2TabT" id="hg2TabT">
+                	<ul>
+                        {/foreach from=$lastThreeFairs key=index item=fair/}
+                        <li {/if $index == 0/} class="cu"{//if/}><b></b><p class="week">周{/$weekdays[date('w',strtotime($fair["date"]))]/}</p><p class="date">{/date('m-d',strtotime($fair["date"]))/}</p></li>
+                        {//foreach/}
+                    </ul>
+                    <div class="clear"></div>
+                </div>
+            	<div class="hg2TabC" id="hg2TabC">
+                    {/foreach from=$lastThreeFairs key=index item=fair/}
+                    <div class="hg2TabCon" {/if $index != 0/}  style="display:none;"{//if/}>
+                        <dl>
+                        <dt><a target="_blank" href="{/$siteurl.main/}/zhaopinhui/{/$fair["date"]|date_format:"%Y%m%d"/}/">{/$fair["subject"]/}</a></dt>
+                        <dd>
+                            <p>预计规模:<em>{/$fair["predict_extent"]/}家企业</em>&nbsp;&nbsp;<em>{/$fair["predict_jobcount"]/}个岗位</em></p>
+                            <p><a target="_blank"  href="{/$siteurl.main/}{/get_url rule='/zhaopinhui/enterprise/' data="sceneid={/$fair['scene_id']/}&fairApply=true"/}" class="btn3 btnsF14">立即定展</a></p>
+                        </dd>
+                        </dl>
+                    </div>
+                    {//foreach/}
+                </div>
+            </div>
+        </hgroup>
+    </section>
+    <div class="clear"></div>
+</div>
+{/include file="footer.html"/}
+<div class="dgBox RefreshTip" id="companyrefreshContainer" style="display:none;">
+  <p class="tit">您好！您的职位今天刷新了吗？<br />“职位自动刷新”功能已取消，您需要手动刷新您的职位，为了不影响您的招聘效果，我们建议您：</p>
+  <p>1、每天登录汇博人才网，在“职位管理”中刷新需要招聘的职位！</p>
+  <p>2、及时停止不需要招聘的职位!</p>
+  <p>在此，祝您在汇博人才网找到优秀的人才!</p>
+  <div>
+     <a href="{/get_url rule='/job/'/}" class="btnsF16 btn1">立即去刷新职位</a>
+  </div>
+</div>
+<section class="floatRT"><a href="{/get_url rule='/about/message' domain='main'/}" target="_blank" class="serviceLink">我有问题要反馈</a><b></b></section>
+<script>
+//menuDis('#hdR','li','.box','hov');
+hovChange('.dropLstCon','li','hov');
+var val = cookieutility.get('companyrefreshtipexpire{/$companyid/}');
+if(val != 'true'){
+	   cookieutility.set('companyrefreshtipexpire{/$companyid/}','true',1);
+	   $.showModal('#companyrefreshContainer',{title:'温馨提示',contentType:'selector'});
+}
+
+
+$(document).ready(function(e) {
+	$.focusColor('input.text');
+	$.focusColor('textarea.textarea');
+
+    $('#hg2TabT').find('li').click(function(){
+		if($(this).hasClass('cu')){
+			return false;
+		}else{
+			var thisIndex = $(this).index();
+			$(this).addClass('cu').siblings('li').removeClass('cu');
+			$(this).parents('#hg2Tab').find('#hg2TabC').find('.hg2TabCon').eq(thisIndex).css({'display':'block'}).siblings('.hg2TabCon').css({'display':'none'})
+		}
+	});
+
+
+});
+</script>
+</body>
+</html>

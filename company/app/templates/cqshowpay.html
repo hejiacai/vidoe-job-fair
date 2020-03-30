@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>余额不足</title>
+    <link rel="stylesheet" type="text/css" href="{/version file="m_font_style.css"/}">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .need-money {
+            width: 394px;
+            box-sizing: border-box;
+            padding: 50px 20px 20px;
+            text-align: center;
+        }
+        .need-money .title {margin-bottom: 20px;}
+        .need-money .title i {font-size: 54px;color: #e5e5e5;}
+        .need-money .txt1 {font-size: 18px;font-weight: bold;margin-bottom: 40px;}
+        .need-money .txt2 {font-size: 14px;margin-bottom: 20px;}
+        .need-money .recharge {display: inline-block;width: 184px;height: 40px;line-height: 40px;background: #ff5400;color: #fff;border-radius: 4px;margin-bottom: 7px;}
+        .need-money .recharge:hover {
+            background: #f05400;
+        }
+        .need-money .contact {color: #ff5400;}
+    </style>
+</head>
+<body>
+<div class="need-money">
+
+    {/if $resource_type != 2/}
+    <div class="title">
+        <i class="icon-120"></i>
+    </div>
+    <div class="txt1">
+        余额不足
+    </div>
+    <p class="txt2">刷新职位需要消耗刷新点/推广金，您的余额不足。</p>
+    <a class="recharge" target="_blank" href="{/get_url rule='/pay/index/'/}">
+        在线充值
+    </a>
+    <p class="contact">联系招聘顾问购买更优惠</p>
+    {/else/}
+    <p class="txt2">您的推广金/刷新点不足，请联系主账号为您分配更多资源</p>
+    <div class="formBtn" style="margin: 20px 0 0 0;text-align: center;">
+        <a href="javascript:void(0);"  id="btnSendInvite11" class="ok btn1 btnsF14">确定</a>
+    </div>
+    {//if/}
+</div>
+</body>
+<script>
+    $(function(){
+        $('#btnSendInvite11').click(function () {
+            refreshSomeDialog.hide();
+            //parent.dialog_msg.destory();
+            //quality_dialog.hide();
+        });
+    })
+</script>
+</html>

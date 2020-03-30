@@ -1,0 +1,181 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+<title>登录提醒</title>
+<!–[if lt IE9]>
+<script src="{/version file='html5.js'/}"></script>
+<![endif]–>
+<link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='comback.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='icons.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='force.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}"/>
+
+<script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.min.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='common.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='dialog.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='mediaquery.js'/}"></script><!--响应式兼容-->
+<script type="text/javascript" language="javascript" src="{/version file='ui_menudisplay.js'/}"></script><!--下拉菜单-->
+<script type="text/javascript" language="javascript" src="{/version file='ui_inputFocus.js'/}"></script><!--输入框获取焦点-->
+<script type="text/javascript" language="javascript" src="{/version file='ui_hovchange.js'/}"></script><!--指向改变class-->
+<script type="text/javascript" language="javascript" src="{/version file='ui_drop.js'/}"></script><!--下拉模拟-->
+<script type="text/javascript" language="javascript" src="{/version file='ui_validate.js'/}"></script>
+
+<script type="text/javascript">
+	window.CONFIG = {
+		HOST: '{/$siteurl.style/}',
+		COMBOPATH: '/js/v2/'
+	}
+</script>
+<script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+<script type="text/javascript" src="{/version file='global.js'/}"></script>
+<script type="text/javascript">
+hbjs.loadJS('{/$siteurl.style/}/js/v2/cqjob/common.js');
+</script>
+</head>
+<body id="body">
+
+
+<div class="content" id="content">
+    <h2 class="tixing">提醒</h2>
+    <p class="wenzi">您已通过其他系统登录，或您上次登录后未正常退出，点击“<a href="javascript:;" class="force">强制下线</a>”</p>
+    <table>
+    	<tr class="fstTr">
+    		<th>账号</th>
+    		<th>登录时间</th>
+    		<th>IP</th>
+    		<th>操作</th>
+    	</tr>
+    	<tr class="contentTr">
+    		<td>{/$account['user_id']/}</td>
+    		<td>{/$account['last_login_time']/}</td>
+    		<td>{/$account['ip']/}</td>
+    		<td><a href="javascript:;" class="forcedown">强制下线</a></td>
+    	</tr>
+    </table>
+	<a href="javascript:history.back(-1);" class="gotoback">返回</a>
+</div>
+
+
+
+<script>
+	hbjs.use('@jobDialog, @hbCommon, @form, @dialog', function(m){
+	
+		var $ = m['product.hbCommon'].extend(m['cqjob.jobDialog'], m['cqjob.jobForm']),
+				cookie = m['tools.cookie'],
+				confirmBox = m['widge.overlay.confirmBox'],
+				Dialog = m['widge.overlay.hbDialog'];
+
+				var can_click = true;
+				$('.forcedown').click(function () {
+					if(can_click){
+                        can_click = false;
+                	}else{
+                        $.anchorMsg('正在处理中，请稍后再试',{icon: "fail"});
+					    return ;
+                    }
+				    $.post('/login/ForceLoginDo',{},function (json) {
+
+				        setTimeout(function () {
+                            can_click = true;
+                        },5000)
+
+				        if(json.error){
+							$.anchorMsg(json.error,{icon: "fail"});
+							// $.message(json.error, {title: '操作失败！'});
+							return ;
+						 }
+
+						if (json.success) {
+							$.anchorMsg(json.success,{title: "登录成功", icon: "success"});
+							{/if $ishistoryback/}
+							var st = setInterval(function(){
+								history.back(-1);
+								clearInterval(st)
+							},300)
+							{/else/}
+
+								if(json.bindweixin){
+
+									{/if $is_part/}
+									window.location.href = "/part";
+									{/else if (!empty($redirect))/}
+									window.location.href = "{/get_url rule="{/$redirect/}"/}";
+									{/else/}
+									window.location.href = "/";
+									{//if/}
+
+								}else{
+									//跳转绑定微信页面
+									window.location.href = '{/get_url rule="/account/BindCompanyWx/"/}?part={/$is_part/}&backurl={/$redirect/}';
+								}
+
+							{//if/}
+
+						}
+
+
+					},'json')
+				})
+				$('.force').click(function () {
+					if(can_click){
+				        can_click = false;
+					}else{
+				        $.anchorMsg('正在处理中，请稍后再试',{icon: "fail"});
+					    return ;
+				    }
+				    $.post('/login/ForceLoginDo',{},function (json) {
+				
+				        setTimeout(function () {
+				            can_click = true;
+				        },5000)
+				
+				        if(json.error){
+							$.anchorMsg(json.error,{icon: "fail"});
+							// $.message(json.error, {title: '操作失败！'});
+							return ;
+						 }
+				
+						if (json.success) {
+							$.anchorMsg(json.success,{title: "登录成功", icon: "success"});
+							{/if $ishistoryback/}
+							var st = setInterval(function(){
+								history.back(-1);
+								clearInterval(st)
+							},300)
+							{/else/}
+				
+								if(json.bindweixin){
+				
+									{/if $is_part/}
+									window.location.href = "/part";
+									{/else if (!empty($redirect))/}
+									window.location.href = "{/get_url rule="{/$redirect/}"/}";
+									{/else/}
+									window.location.href = "/";
+									{//if/}
+				
+								}else{
+									//跳转绑定微信页面
+									window.location.href = '{/get_url rule="/account/BindCompanyWx/"/}?part={/$is_part/}&backurl={/$redirect/}';
+								}
+				
+							{//if/}
+				
+						}
+				
+				
+					},'json')
+				})
+		})
+		$(function(){
+			var minHeight = $(window).height() - 40
+			$('.content').css('min-height',minHeight)
+		})
+</script>
+</body>
+</html>

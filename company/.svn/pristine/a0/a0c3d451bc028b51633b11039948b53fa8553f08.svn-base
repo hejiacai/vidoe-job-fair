@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+</head>
+<body>
+<style>
+.dgBox {text-align: left; padding: 10px 0px 0px 0px;}
+.dgBox .jp-spread {padding: 10px 28px;}
+.dgBox img {display: block; margin: 0 auto;}
+.ui_dialog_title {text-align: left;}
+.hb_ui_dialog .ui_dialog_container {padding: 0px;}
+.dialogFooter {padding: 10px 0;background-color: #f3f3f3;text-align: right;}
+.jp-spread span.clearfix {margin-left: 0px;}
+.jp-spread p.tit {font-weight: bold;}
+.jp-spread span.clearfix.orange {color:#f08200;margin-top:10px;line-height: 20px;}
+i.alert-icon {background: #fff url({/$siteurl.style/}/img/v2/resumeM/0626.png) no-repeat -23px 0;display: inline-block;width: 20px;height: 20px;vertical-align: middle;margin-right: 5px}
+</style>
+<form id="formjob" method="post">
+	<div class="dgBox actuBox ">
+    	<img src="{/$siteurl.style/}/img/p/jptg.jpg">
+    	<div class="jp-spread clearfix">
+	    	{/if $is_urgentjob_already === true/}
+			<p style="margin-bottom:10px;"><strong style="color:#4382ae;">{/$job['station']/}</strong>当前已是“<font color="#e72200">急聘</font>”，有效期至{/date('Y-m-d', $job['urgent_end_time'])/}，是否需要延期？</p>
+			{/else/}
+			<p style="margin-bottom:10px;">将<strong  style="color:#4382ae;">{/$job['station']/}</strong>设为“<font color="#e72200">急聘</font>”，会有特有标识，并在“<font color="#e72200">急聘</font>”专区中展示，有助于提升招聘效果！</p>
+	    	<p class="tit">请选择急聘天数:</p>
+		    {//if/}
+
+	    	{/foreach from=array(7, 14, 21) key=index item=day/}
+	    	<span class="clearfix">
+	    		<input type="radio" value="{/$index+1/}" name="radUrgentDay" id="ac{/$index/}" class="radio" {/if $index == 0/}checked="checked"{//if/} style="display: inline-block;vertical-align: middle;">
+	    		<label for="ac{/$index/}">
+		    		{/if $is_urgentjob_already === true/}延长{//if/}{/$day/}天（
+		    		花费<b>{/($index + 1) * $params['price']/}</b>元，至
+		    		{/if $is_urgentjob_already === true/}
+		    		{/date('Y-m-d', strtotime("+{/$day/} day", $job['urgent_end_time']))/}
+		    		{/else/}
+		    		{/date('Y-m-d', strtotime("+{/$day/} day"))/}
+		    		{//if/}
+		    		）
+				</label>
+			</span>
+	    	{//foreach/}
+	    	<span class="clearfix orange"><i class="alert-icon"></i>优先使用推广金进行抵扣</span>
+	    </div>
+	    <input type="hidden" name="hiddenjob" value="{/$job['job_id']/}" />
+	</div>
+	<div class="actuBtn dialogFooter">
+		<a class="btn1 btnsF12 urg-submit" href="javascript:void(0);">确&nbsp;定</a>
+		<a class="btn3 btnsF12 cancel" href="javascript:void(0);">取&nbsp;消</a>
+	</div>   
+</form>
+</body>
+</html>

@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        *{ margin: 0px; padding: 0px; list-style: none; font-style: normal;}       			table{border-collapse:0;border-spacing:0;border-collapse:collapse;width:1000px; margin: 20px auto; overflow: hidden;}
+        table tr td{ border: 1px solid #ccc; padding: 10px;}
+        table tr th{ border: 1px solid #ccc; padding:20px 10px; text-indent: -3.5em;}
+        
+    </style>
+</head>
+<body>
+<table border="0" cellspacing="0" cellpadding="0">
+    <tr>
+        <th colspan="3" align="center" valign="middle">内容违规说明</th>
+    </tr>
+    <tr>
+        <td align="center" valign="middle">违规类型</td>
+        <td align="center" valign="middle">违规内容</td>
+        <td align="center" valign="middle">处理<br />方式</td>
+    </tr>
+    <tr>
+        <td rowspan="26" align="center" valign="middle">业务类</td>
+        <td>标题、公司简介等内容，不能有QQ，MSN，电话、微信、邮箱、公共网址等一切联系方式。</td>
+        <td rowspan="26" align="center" valign="middle">审核<br />拒绝</td>
+    </tr>
+    <tr>
+        <td>标题、公司简介等内容，不能是纯拼音、纯数字、特殊符号（包含但不局限于：★ ◆ ❀、#、*、竖线、撇捺等）或者是乱写。</td>
+    </tr>
+    <tr>
+        <td>物流运输、电子科技、酒店、娱乐场所，招聘信息标题、内容中出现公司主体不一致，且未说明隶属关系。</td>
+    </tr>
+    <tr>
+        <td>职介招聘中标题不能是纯公司名。</td>
+    </tr>
+    <tr>
+        <td>标题中不能含有键盘上无法打出的符号（如：★ ◆ ❀、撇捺等；30元/天，这样的可以通过）</td>
+    </tr>
+    <tr>
+        <td>禁止使用发帖机。标题及信息中不能含有无意义字母、乱码字符。</td>
+    </tr>
+    <tr>
+        <td>未提供营业性演出许可证发布剧组类跟组人员；</td>
+    </tr>
+    <tr>
+        <td>信息内容中不能含有微信、电话、QQ、邮箱等联系方式，提到手机号同微信号、微信号即手机号、同步手机号等任何发布微信号的形式都不可以。</td>
+    </tr>
+    <tr>
+        <td>招聘信息中（标题、描述、图片、地址、公司信息）不能出现联系电话，400、热线或与电话栏一致的（招10086客服，95511客服 这样的可以过）。</td>
+    </tr>
+    <tr>
+        <td>内容中没有具体招聘职位，且标题也无招聘职位。</td>
+    </tr>
+    <tr>
+        <td>岗位职责不能为空或者乱写。</td>
+    </tr>
+    <tr>
+        <td>曝光帖，投诉某一条帖子是职介信息或是是骗子信息等。</td>
+    </tr>
+    <tr>
+        <td>招聘中出现使用国家领导人或者家属作为宣传语的。</td>
+    </tr>
+    <tr>
+        <td>电话栏电话为010-80000000、15800000000类似电话不合格的。</td>
+    </tr>
+    <tr>
+        <td>职介性质公司，描述中出现为企业“直招”性质；直招企业同一条信息中为多家企业招聘职位；</td>
+    </tr>
+    <tr>
+        <td>不能出现汇博/推荐/认证/官方发布/汇博优质商家”等描述内容。</td>
+    </tr>
+    <tr>
+        <td>信息中引导注册、报名、加盟信息进行推广的。</td>
+    </tr>
+    <tr>
+        <td>公司名称不允许留任何联系方式、联系人姓名或招聘职位。</td>
+    </tr>
+    <tr>
+        <td>不允许公司名称为独立经纪人。</td>
+    </tr>
+    <tr>
+        <td>禁止代理公司发布以汇博公司名称发布招聘信息（汇博公司直招除外）；</td>
+    </tr>
+    <tr>
+        <td>餐饮企业（小餐馆、饭店、餐饮管理等）可直招外卖骑手、外卖送餐员，无需说明隶属或合作关系。其他性质企业招聘外卖骑手、外卖送餐员需简介中说明隶属或合作关系。</td>
+    </tr>
+    <tr>
+        <td>公司简介可以为空。</td>
+    </tr>
+    <tr>
+        <td>除了汇博公司直招，其他公司均不允许用汇博官网的图片，图片中也不能出现“汇博优质商家”字样的内容（比如牌匾中）。</td>
+    </tr>
+    <tr>
+        <td>招聘信息中出现民族、地域等歧视限制类字眼。</td>
+    </tr>
+    <tr>
+        <td>招聘信息中出现民族、地域等歧视限制类字眼。</td>
+    </tr>
+    <tr>
+        <td>不得以招聘形式变相发布广告，例如信息中不得以介绍公司的形式变相发布医疗、药品、医疗器械、保健食品广告。</td>
+    </tr>
+    <tr>
+        <th colspan="3" align="center" valign="middle">图片违规说明</th>
+    </tr>
+    <tr>
+        <td align="center" valign="middle">违规类型</td>
+        <td align="center" valign="middle">违规内容</td>
+        <td align="center" valign="middle">处理<br />方式</td>
+    </tr>
+    <tr>
+        <td rowspan="3">业务类</td>
+        <td>非实拍图片中不能含有联系方式（电话、qq、微信、邮箱），实拍照片不能以留联系方式为主要目的。</td>
+        <td rowspan="3" align="center" valign="middle">审核<br />拒绝</td>
+    </tr>
+    <tr>
+        <td>图片中出现我国及他国领导人头像的。</td>
+    </tr>
+    <tr>
+        <td>图片中不能出现完整的二维码（除营业执照、证书类中二维码可通过）。</td>
+    </tr>
+    <tr>
+        <th colspan="3" align="center" valign="middle">分类不当说明</th>
+    </tr>
+    <tr>
+        <td align="center" valign="middle">违规类型</td>
+        <td align="center" valign="middle">违规内容</td>
+        <td align="center" valign="middle">处理<br />方式</td>
+    </tr>
+    <tr>
+        <td rowspan="4" align="center" valign="middle">业务类</td>
+        <td>职位若含有兼职属性，请发到兼职类目。</td>
+        <td rowspan="4" align="center" valign="middle">审核<br />拒绝</td>
+    </tr>
+    <tr>
+        <td>职位若含有全职属性，请发到全职类目。</td>
+    </tr>
+    <tr>
+        <td>发布时选择的职位类型，需要和实际招聘的岗位描述相符。</td>
+    </tr>
+    <tr>
+        <td>标题为“寒假工”“暑假工”“临时工”“短期工”等兼职职位，应发布到到兼职招聘类别；</td>
+    </tr>
+    <tr>
+        <th colspan="3" align="center" valign="middle">违禁信息说明</th>
+    </tr>
+    <tr>
+        <td align="center" valign="middle">违规类型</td>
+        <td align="center" valign="middle">违规内容</td>
+        <td align="center" valign="middle">处理<br />方式</td>
+    </tr>
+    <tr>
+        <td rowspan="6" align="center" valign="middle">欺诈类</td>
+        <td>酒店类信息中招聘陪同、伴游司机。</td>
+        <td rowspan="34" align="center" valign="middle">永久性冻结发布兼职岗位</td>
+    </tr>
+    <tr>
+        <td>驾照销分、代办违章。</td>
+    </tr>
+    <tr>
+        <td>网站不允许发布游戏代练类职位，信息中相关词汇包含但不局限于【游戏代刷】、【代刷】、【daishua】以及与之相关的变形、异形字体或表述。</td>
+    </tr>
+    <tr>
+        <td>手工制作：电子类手工外发信息，比如发布打火机、圆珠笔组装、串珠等手工制作信息。</td>
+    </tr>
+    <tr>
+        <td>发布挂证、挂靠、挂章、资质升级、初始转注册等职位。</td>
+    </tr>
+    <tr>
+        <td>微商收取平台搭建费，运营服务费等任何理由收费，禁止发布。</td>
+    </tr>
+    <tr>
+        <td rowspan="28" align="center" valign="middle">违法类</td>
+        <td>所有博彩，彩票类岗位，禁止发布</td>
+    </tr>
+    <tr>
+        <td>为电商平台上的商家刷单，禁止发布</td>
+    </tr>
+    <tr>
+        <td>公安机关编制内警察及其群防群治队伍，不允许发布，包括但不限于巡警、协警、辅警、特勤、特警、协勤、协管员、城管、消防员、雇佣兵等。</td>
+    </tr>
+    <tr>
+        <td>公立医院招聘医生、护士类职位的不允许，民办除外。</td>
+    </tr>
+    <tr>
+        <td>公立高校招聘教师、教务、助教的不允许，某后勤部某食堂可招聘，民办高校除外。</td>
+    </tr>
+    <tr>
+        <td>KTV、夜场、洗浴中心服务员，按摩/足疗师，礼仪/迎宾/模特、游戏代练职位性质需与公司行业性质一致。</td>
+    </tr>
+    <tr>
+        <td>房地产、保险行业只能招聘所属行业下的职位，如保险公司不能招聘搬运工。</td>
+    </tr>
+    <tr>
+        <td>大型建筑公司（如中铁几局、中建几局、中国建筑、中国铁建、中国中铁、北京城建、某省市几建等），招募施工人员、技术人员、预算造价员、安全员、资料员、工程管理人员等相关职位。</td>
+    </tr>
+    <tr>
+        <td>针对酒店、夜总会性质的公司招聘服务员、礼仪迎宾、商务司机、保安的信息，薪资月薪超过市场价格区间。酒吧夜总会性质（包含但不局限于：夜总会、夜店、夜场、娱乐会所、娱乐厅、酒吧、KTV、迪厅）。</td>
+    </tr>
+    <tr>
+        <td>涉政的招聘信息。</td>
+    </tr>
+    <tr>
+        <td>涉及驻外雇佣兵的相关职位。</td>
+    </tr>
+    <tr>
+        <td>出卖客户资料的招聘信息。</td>
+    </tr>
+    <tr>
+        <td>招聘排队挂号信息；招聘药物测试的使用信息；招代孕或捐献血小板或献血的信息。</td>
+    </tr>
+    <tr>
+        <td>全能神邪教类相关词汇、图片、音频/视频截图等内容。</td>
+    </tr>
+    <tr>
+        <td>所有违禁信息禁止发布；刀枪炮黄赌毒色情。</td>
+    </tr>
+    <tr>
+        <td>信息或图片含“传销”及其变形文字，传播坐等收成、涉及非法传销、金字塔系统、多层市场推广以及“快速致富计划”等通过发展上下线的传销方式的招聘信息。</td>
+    </tr>
+    <tr>
+        <td>含有反动、破坏国家统一、破坏主权及领土完整、破坏社会稳定，涉及国家机密、扰乱社会秩序，宣扬邪教迷信，宣扬宗教、种族歧视等信息，或法律法规禁止出版发行的书籍、音像制品、视频、文件资料。</td>
+    </tr>
+    <tr>
+        <td>信息中不得“使用国家级、最高级、最佳等用语”，例如“最、一、级/极、首/家/国”等前缀或者后缀的绝对化用语。</td>
+    </tr>
+    <tr>
+        <td>公司简介里面，虚假宣称获得“国家重点高新技术企业”“**省高新技术企业”“**省环保产业协会团体会员单位”“**省工商企业信用AA级守合同重信用单位”等荣誉称号。</td>
+    </tr>
+    <tr>
+        <td>公司简介中发布虚构“实用新型专利证书”“外观专利证书”“拥有国家实验室标准的检测实验室”等内容的图片资料进行虚假宣传。</td>
+    </tr>
+    <tr>
+        <td>图片不得使用或者变相使用中华人民共和国的国旗、国歌、国徽，军旗、军歌、军徽；不得违反安全使用规程的文字、语言或者画面。</td>
+    </tr>
+    <tr>
+        <td>信息中不得使用或者变相使用国家机关、国家机关工作人员的名义或者形象。</td>
+    </tr>
+    <tr>
+        <td>信息中不得损害国家的尊严或者利益，泄露国家秘密；不得危害人身、财产安全，泄露个人隐私。</td>
+    </tr>
+    <tr>
+        <td>招聘职位不得妨碍社会安定，损害社会公共利益；不得妨碍社会公共秩序或者违背社会良好风尚。</td>
+    </tr>
+    <tr>
+        <td>招聘职位不得含有淫秽、色情、赌博、迷信、恐怖、暴力的内容。</td>
+    </tr>
+    <tr>
+        <td>教育培训类职位不得对升学、通过考试、获得学位学历或者合格证书，或者对教育、培训的效果作出明示或者暗示的保证性承诺；不得利用科研单位、学术机构、教育机构、行业协会、专业人士、受益者的名义或者形象作推荐、证明。</td>
+    </tr>
+    <tr>
+        <td>信息中不得使用虚构、伪造或者无法验证的科研成果、统计资料、调查结果、文摘、引用语等信息作证明材料。</td>
+    </tr>
+    <tr>
+        <td>不得出现以虚假或者引人误解的内容欺骗、误导求职者的其他情形；信息中不得贬低其他生产经营者的商品或者服务。</td>
+    </tr>
+    <tr>
+        <th colspan="3" align="center" valign="middle">职业虚假说明</th>
+    </tr>
+    <tr>
+        <td align="center" valign="middle">违规类型</td>
+        <td align="center" valign="middle">违规内容</td>
+        <td align="center" valign="middle">处理<br />方式</td>
+    </tr>
+    <tr>
+        <td rowspan="9" align="center" valign="middle">欺诈类</td>
+        <td>通篇介绍均为推广、广告性质的信息。</td>
+        <td rowspan="8" align="center" valign="middle">审核<br />拒绝</td>
+    </tr>
+    <tr>
+        <td>操盘手、期货居间人需看营业执照有相关经营范围（包含但不局限于银行、券商、基金、理财、期货、投资管理、投资咨询、金融等经营范围）；金融证券行业的股票交易员、期货交易员等职位需验证营业执照。</td>
+    </tr>
+    <tr>
+        <td>出国劳务（包含港澳台），需查看营业执照是否有经营范围。</td>
+    </tr>
+    <tr>
+        <td>高尔夫球童：需查看营业执照，其中经营范围中应当含有“高尔夫球场”，例如：建设、经营高尔夫球场（特别说明：仅含“高尔夫球、高尔夫球机动车”的不属于可经营高尔夫球场的合法主体）</td>
+    </tr>
+    <tr>
+        <td>以银行为公司名称发布招聘柜员、保安等。</td>
+    </tr>
+    <tr>
+        <td>公共交通类：地铁、高铁、航空、火车等，不允许招募车上工作人员，以及车站安检类职位。以上所有公共车站招聘保洁、售卖员，需验证营业执照，如外派给保洁类公司招聘保洁，其经营范围中应当保洁、清洁、清洗、家政、保养等；如是人力资源公司代招，需验证《营业执照》、《人力资源服务许可证》。</td>
+    </tr>
+    <tr>
+        <td>文化、传播、传媒、广告公司招聘模特，未验证营业执照的。</td>
+    </tr>
+    <tr>
+        <td>信息内容、标题中不能含有变形的虚假联系方式（包括QQ、微信及手机号码）。</td>
+    </tr>
+    <tr>
+        <td>图书馆、咖啡厅、影院、游乐场等招聘职位，需要公司性质一致</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <th colspan="3" align="center" valign="middle">薪资虚假说明</th>
+    </tr>
+    <tr>
+        <td align="center" valign="middle">违规类型</td>
+        <td align="center" valign="middle">违规内容</td>
+        <td align="center" valign="middle">处理<br />方式</td>
+    </tr>
+    <tr>
+        <td align="center" valign="middle">欺诈类</td>
+        <td align="left" valign="middle">行业月薪超过当地市场价格区间。</td>
+        <td align="center" valign="middle">审核<br />拒绝</td>
+    </tr>
+    <tr>
+        <th colspan="3" align="center" valign="middle">涉黄信息说明</th>
+    </tr>
+    <tr>
+        <td align="center" valign="middle">违规类型</td>
+        <td align="center" valign="middle">违规内容</td>
+        <td align="center" valign="middle">处理<br />方式</td>
+    </tr>
+    <tr>
+        <td rowspan="2" align="center" valign="middle">欺诈类</td>
+        <td>网站不允许发布涉黄信息，信息内容中不允许出现的词汇包括但不限于【外围女】、【外围模特】、【丝足按摩】、【大项技师】。</td>
+        <td rowspan="2" align="center" valign="middle">账号<br />冻结</td>
+    </tr>
+    <tr>
+        <td>酒店招聘按摩师、沐足技师、推拿技师类职位，需验证营业执照，并且营业范围含有保健按摩、足疗、养生等相关范围。</td>
+    </tr>
+    <tr>
+        <th colspan="3" align="center" valign="middle">用户举报说明</th>
+    </tr>
+    <tr>
+        <td align="center" valign="middle">违规类型</td>
+        <td align="center" valign="middle">违规内容</td>
+        <td align="center" valign="middle">处理<br />方式</td>
+    </tr>
+    <tr>
+        <td rowspan="2" align="center" valign="middle">欺诈类</td>
+        <td>通过审核后，在实际招聘过程中向求职者以任何形式收取费用，被求职者举报属实</td>
+        <td>永久禁止发布兼职类岗位</td>
+    </tr>
+    <tr>
+        <td>通过审核后，在实际招聘过程中故意克扣求职者薪资，被求职者举报后查证属实</td>
+        <td>关闭发布职位</td>
+    </tr>
+</table>
+
+</body>
+</html>

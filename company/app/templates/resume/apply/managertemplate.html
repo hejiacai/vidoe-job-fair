@@ -1,0 +1,267 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+</head>
+<body>
+<style>
+.invLst{width:500px;font-size:12px;}
+
+.invForm{}
+.invForm .formMod .l{width:110px;}
+.invForm .formMod .r{width:380px;}
+.invForm .formMod .r .formTextarea textarea.textarea{width:325px;height:80px;padding:0 0 0 5px;line-height:22px;font-size:12px;}
+.invForm .formBtn{margin:20px 0 0 120px;}
+.invLst .lst{padding-bottom:10px;margin-bottom:10px;}
+.invLst .lst .lstCon{}
+.invLst .lst .lstCon ul li{height:30px;line-height:30px;border-bottom:1px dashed #dadada;padding:0 10px; vertical-align:bottom;}
+.invLst .lst .lstCon ul li.hov{background:#f1f1f1;}
+.invLst .lst .lstCon ul li .lstL{float:left;display:inline;width:360px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;-o-text-overflow:ellipsis;}
+.invLst .lst .lstCon ul li .lstR{float:right;display:inline;width:75px;}
+.invLst .lst .lstCon ul li .lstR a{margin:0 0 0 10px;}
+.newInv{margin:0 0 20px 20px;}
+.newInv a i.hbFntWes{font-size:16px;margin:0 10px 0 0;}
+.invLst .noData{padding:25px 20px; background:none;}
+.formTextx{ display:block;width:250px; height:120px; border:1px solid #ccc; line-height:24px; color:#444;}
+</style>
+
+<div class="dgBox invLst">
+	<div id="divShowTemplate">
+		<div class="lst" id="invLst">
+	    	<div class="lstCon" {/if count($template_list)==0/}style="display:none"{//if/} style="overflow-y:scroll;height:93px;">
+	            <ul id="ulTemplateList">
+					{/foreach $template_list as $template/}
+						<li id="li{/$template.template_id/}">
+							<span id="tname{/$template.template_id/}" class="lstL">{/$template.title/}</span>
+							<span  class="lstR">
+								<a href="javascript:void(0);" class="edt" data-id="{/$template.template_id/}">编辑</a><a class="del" href="javascript:void(0);" data-id="{/$template.template_id/}">删除</a>
+							</span>
+						</li>
+					{//foreach/}
+                    </ul>
+	        </div>
+	        <div id="tipNoData" class="noData" {/if count($template_list)>0/}style="display:none"{//if/}>暂无模板</div>
+	    </div>
+	    <div class="newInv"><a href="javascript:void(0)" id="btnAddTemplate"><i class="hbFntWes">&#xf055;</i>添加新模板</a></div>
+    </div>
+    <div class="invForm" id="divTemplate" style="display:none;">
+    	<form id="frmTemplate" action="" method="post" onsubmit="return false;">
+		<input type="hidden" id="hidTemplateID" name="hidTemplateID" value="0" />
+    	<div class="formMod">
+            <div class="l">模板名称<i>*</i></div>
+            <div class="r">
+                <span class="formText">
+                    <input id="txtTitle" name="txtTitle" type="text" class="text" value="" style="width:150px;"/>
+                </span>
+                <span class="tipPos">
+                	<span class="tipLay">
+                            <span for="datetime" generated="true" class="tipLayErr tipw120" style="display:none" id="errorMsgTitle"><span class="tipArr"></span>请填写标题</span>
+                    </span>
+                </span>
+            </div>
+            <div class="clear"></div>
+        </div>         
+        <div class="formMod">
+            <div class="l">内容<i>*</i></div>
+            <div class="r">
+                <span class="formText">
+                    <textarea name="txtContent" id="txtContent" class="formTextx" cols="" rows=""></textarea>
+                </span>
+                <span class="tipPos">
+                    <span class="tipLay">
+                        <span for="datetime" generated="true" class="tipLayErr tipw120" style="display:none" id="errorMsgContent"><span class="tipArr"></span>请填写内容</span>
+                    </span>
+                </span>
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        </form>
+                
+        <div class="formBtn">
+            <a href="javascript:void(0);" id="btnSaveTemplate" class="btn1 btnsF14">保存模板</a>
+            <a href="javascript:void(0);" id="btnCancel" class="btn3 btnsF14">取消</a>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+var manage={
+	initialize:function(){
+		//初始化控件		
+		this._initControl();
+	},
+	_initControl:function(){
+            //初始化模板下拉控件
+                $("#btnAddTemplate").click(function(){
+                    $("#divShowTemplate").hide();
+                    $("#divTemplate").show();
+                });
+                $("#btnSaveTemplate").click(function(){
+                    var template_id = $("#hidTemplateID").val();
+                    if(!template_id || template_id =="" || template_id==0){
+                        manage.addTemplate();
+                    }else{
+                        manage.editTemplateDo(template_id);
+                    }
+                    
+                });
+                $("#btnCancel").click(function(){
+                    $("#divShowTemplate").show();
+                    $("#divTemplate").hide();
+                });
+                //删除
+//                $(".del").click(function(){
+//                    var template_id = $(this).attr("data-id");
+//                    alert(template_id);
+//                    manage.deleteTemplate(template_id);
+//                })
+                $('#ulTemplateList').on('click', 'a', function(e){
+                    var target = $(e.currentTarget),
+                    template_id = target.attr('data-id');
+                    if(target.hasClass('edt')){
+                            manage.editTemplate(template_id);
+                    } else {
+                            manage.deleteTemplate(template_id);
+                    }
+                });
+                
+                //错误提示
+                $("#txtTitle").focus(function(){
+                    $("#errorMsgTitle").hide();
+                });
+                $("#txtContent").focus(function(){
+                    $("#errorMsgContent").hide();
+                });
+        },
+        deleteTemplate:function(template_id){
+            $.confirm('确定要删除此模板吗？', '操作提示', function() {
+                $.getJSON('{/get_url rule="/apply/deletetemplate/"/}',{template_id:template_id},function(json){
+                        if(json.error){
+                                $.message(json.error, { title: '系统提示', icon: 'fail' });
+                                return;
+                        }else{
+                              manage.changeData("delete","delete",template_id);
+                        }
+                });
+            });
+        },
+        editTemplate:function(template_id){
+            if(template_id ==""){
+                return false;
+            }
+            $.getJSON('{/get_url rule="/apply/getTemplate/"/}',{template_id:template_id},function(json){
+                if(json.error){
+                    $.message(json.error, { title: '系统提示', icon: 'fail' });
+                    return;
+                }
+                var title = json.title;
+                var content = json.content;
+                $("#txtTitle").val(title);
+                $("#txtContent").val(content);
+                $("#hidTemplateID").val(template_id);
+                $("#divShowTemplate").hide();
+                $("#divTemplate").show();
+            });
+           
+        },
+        editTemplateDo:function(template_id){
+            var template_id =$("#hidTemplateID").val();
+            var title =$("#txtTitle").val();
+            var content = $("#txtContent").val();
+            if(title ==""){
+                //验证
+                $("#errorMsgTitle").html('<span class="tipArr"></span>'+"请填写标题").show();return;
+            }
+            if(title.length >20){
+                 $("#errorMsgTitle").html('<span class="tipArr"></span>'+"标题不能超过20字").show();return;
+            }
+            if(content ==""){
+                $("#errorMsgContent").html('<span class="tipArr"></span>'+"请填写内容").show();return;
+            }
+            if(content.length>200){
+                $("#errorMsgContent").html('<span class="tipArr"></span>'+"内容不能超过200字").show();return;
+            }
+            $.post("{/get_url rule='/apply/editTemplate/'/}", { 'template_id':template_id,"txtTitle":title,"txtContent":content},
+                function(data){
+                    if(data.error){
+                          $.anchorMsg(data.error, { icon: 'fail' });return;
+                    }
+                    $.anchorMsg("修改模板成功", { icon: 'success' });
+                    //更新数据
+                    manage.changeData("edit",title,template_id);
+            }, "json");
+        },
+        addTemplate:function(){
+            var title =$("#txtTitle").val();
+            var content = $("#txtContent").val();
+            if(title ==""){
+                //验证
+                $("#errorMsgTitle").html('<span class="tipArr"></span>'+"请填写标题").show();return;
+            }
+            if(title.length >20){
+                 $("#errorMsgTitle").html('<span class="tipArr"></span>'+"标题不能超过20字").show();return;
+            }
+            if(content ==""){
+                $("#errorMsgContent").html('<span class="tipArr"></span>'+"请填写内容").show();return;
+            }
+            if(content.length>200){
+                $("#errorMsgContent").html('<span class="tipArr"></span>'+"内容不能超过200字").show();return;
+            }
+            $.post("{/get_url rule='/apply/addTemplate/'/}", { "txtTitle":title,"txtContent":content},
+                function(data){
+                    if(data.error){
+                          $.anchorMsg(data.error, { icon: 'fail' });return;
+                    }
+                    $.anchorMsg("添加模板成功", { icon: 'success' });
+                    //更新数据
+                    manage.changeData("add",title,data.template_id)
+            }, "json");
+        },
+        clearTemplate:function(){
+            $("#hidTemplateID").val("");
+            $("#txtTitle").val("");
+            $("#txtContent").val("");
+        },
+        changeData:function(type,title,template_id){
+            if(type=="" || title=="" || template_id ==''){return;}
+            switch(type){
+                case "add":
+                        var html = '<li id="li'+template_id+'">'
+                                +'<span id="tname'+template_id+'" class="lstL">'+title+'</span>'
+                                +'<span  class="lstR">'
+                                +'<a href="javascript:void(0);" class="edt" data-id="'+template_id+'">编辑</a>'
+                                +' <a class="del" href="javascript:void(0);" data-id="'+template_id+'">删除</a>'
+                                +'</span>'
+                                +'</li>';
+                        $("#ulTemplateList").append(html);
+                        $("#tipNoData").hide();
+                        $("#divTemplate").hide();
+                        manage.clearTemplate();
+                        $(".lstCon").show();
+                        $("#divShowTemplate").show();
+                    break;
+                case "edit":
+                    $("#tname"+template_id).html(title);
+                    $("#divTemplate").hide();
+                    $("#divShowTemplate").show();
+                    manage.clearTemplate();
+                   
+                    break;
+                case "delete":
+                    $("#li"+template_id).remove();
+                    if($('#ulTemplateList').find('li').length==0){
+                        $('#ulTemplateList').parent().hide();
+                        $('#tipNoData').show();
+                    }
+                    break;
+            }
+            refule.resetTemplate();
+        },
+        refreshData:function(){
+            
+        }
+}
+manage.initialize();
+</script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+{/include_php file='app/controller/head.php'/}
+<style>
+<!--
+.hdR ul .navLst i{
+    background: url("{/$siteurl.style/}/img/message.png") no-repeat;
+	width:18px;height:16px;
+    display:block;
+	float:left;
+	margin:15px 5px 0 0;
+}
+-->
+
+
+</style>
+<header id="header" class="header_nav">
+    <div class="hdCon">
+        <div class="hdL">
+            <span class="logo"><a href="{/$siteurl.main/}"></a></span>
+            <nav>
+                <div class="clear"></div>
+            </nav>
+        </div>
+        <div class="hdR" id="hdR">
+            <ul>
+            <li class="thelpInfo" id="helpBox">
+            	<a href="{/get_url rule='/login/dologout'/}" class="lnk">退出登录</a>
+            </li>
+            <li class="line">&nbsp;</li>
+            <li class="tcomInfo" id="boxCompanyInfo">
+            	<a href="{/$companyInfo['company_url']/}" target="_blank" class="lnk" title='{/$companyInfo["company_name"]/}' >{/base_lib_BaseUtils::cutstr($companyInfo['company_name'],17, 'utf-8','','...')/}</a>
+            </li>
+            <li class="wemChatlist wemChatlistx  {/if $cur=='微信助手'/}wemChatlistcut{//if/}"><a href="{/get_url rule='/account/weixin/'/}">微信招聘助手</a></li>
+            <li class="line">&nbsp;</li>
+                <li class="navLst" id="msgBox">
+                	<a style=" display:inline-block;padding:0 24px 0 24px;{/if $parent=="消息"/}background:url({/$siteurl.style/}/img/c/curNav.gif) center bottom no-repeat;{//if/}" href="{/get_url rule="/message/"/}" class="{/if $parent=="消息"/} cut {//if/} navLnk" id="btnMsg">消息{/if $companyInfo['messgecount']>0/} <em class="num">{/$companyInfo['messgecount']/}</em>{//if/}</a>
+             	</li>
+             	<li class="navLst" id="guestbookBox">
+             		<i></i>
+                	<a style="backgroud:url('{/$siteurl.style/}/img/message.png') no-repeat scroll left center rgba(0, 0, 0, 0);display:inline-block;padding:0 14px 0 0px;{/if $parent=="留言"/}background:url({/$siteurl.style/}/img/c/curNav.gif) center bottom no-repeat;{//if/}" href="{/get_url rule="/guestbook/"/}" class="{/if $parent=="留言"/} cut {//if/} navLnk" id="btnMsg">求职者留言{/if $companyInfo['guestbookcount']>0/} <em class="num">{/$companyInfo['guestbookcount']/}</em>{//if/}</a>
+             	</li>
+            </ul>
+        </div>
+    </div>
+</header>
+
+    <div class="firmNavbg">
+            <div class="firmNav">
+            <ul>
+                    <li><a {/if $cur=="首页"/} class="cut" {//if/} style="padding:0 34px;" href="{/get_url rule='/index/'/}">首页</a></li>
+                <li><a {/if $cur=="职位管理"/} class="cut" {//if/} href="{/get_url rule='/index/joblist'/}">职位管理</a></li>
+                <li><a {/if $cur=="简历管理"/} class="cut" {//if/} href="{/get_url rule='/apply'/}">简历管理</a></li>
+                <li><a {/if $cur=="面试管理"/} class="cut" {//if/} href="{/get_url rule='/invite'/}">面试管理</a></li>
+                <li><a {/if $cur=="现场招聘"/} class="cut" {//if/} href="{/get_url rule='/fair'/}">现场招聘</a></li>
+                <li><a {/if $cur=="账户管理"/} class="cut" {//if/} href="{/get_url rule='/account/'/}">账户管理</a></li>
+            </ul>
+            <dl>
+                <dd class="{/if $cur=="简历搜索"/}cut{//if/}"><a href="{/get_url rule='/resumesearchnew'/}"  class="subNavr01" >搜索简历</a></dd>
+                <dd class="{/if $cur=="发布职位"/}cut{//if/}"><a href="{/get_url rule='/job/add/'/}" class="subNavr02">发布职位</a></dd>
+                <dd><a href="{/$companyInfo['company_url']/}" target="_blank" class="subNavr03">主页预览</a></dd>
+            </dl>
+        </div>
+    </div>
+
+
+{/if $cur=="首页"/}
+<link rel="stylesheet" type="text/css" href="{/version file='wechat.css'/}" />
+<div class="weChatip" id="weixinhelpcontainer" style="display:none">
+    <div class="subWtip01">
+        <div class="subWtip02">微信招聘助手上线了！用微信就能玩转招聘，
+就是这么任性！<a href="{/get_url rule='/account/weixin/'/}">点击了解</a></div>
+        <a href="javascript:void(0);" class="wChatBtn" id="btnWeixin"></a>
+    </div>
+</div>
+{//if/}
+<script type="text/javascript">
+//    $('#btnWeixin').click(function() {
+//        cookieutility .set('showweixinhelp', true);  
+//        $('#weixinhelpcontainer').hide(); 
+//		$('#hdR ul li').removeClass('wemChatlistx');
+//    });
+//    var isShow = cookieutility .get('showweixinhelp');
+//    if(!isShow) {
+//        $('#weixinhelpcontainer').show();
+//		$('#hdR ul li').addClass('wemChatlistx');
+//    }
+//    $("#msgBox a").mouseover(function(){
+//        $(this).css({"color":"#fff"})
+//    }).mouseout(function(){
+//        $(this).css({"color":"#999"})
+//    });
+
+</script>

@@ -1,0 +1,392 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN""http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+</head>
+<body>
+
+<style>
+	.ajaxlogin {}
+	.formMod { margin-bottom : 12px;}
+	.ajaxlogin .formMod .l {width : 25px;}
+	.ajaxlogin .formMod .r {width : 250px;}
+	.ajaxlogin .formMod .r .formChb {margin : 0;}
+	.ajaxlogin .formMod .r .formText input.text {width : 197px;height : 34px;line-height : 34px;}
+	.ajaxlogin .formBtn {margin : 20px 0 0px 0px;}
+	.ajaxlogin .formBtn a.btn1 {width : 160px; text-align : center;}
+	.ajaxlogin .txt {font-size : 12px;margin : 0 0 0 0px;color : #666;width : 130px; float : left; margin-left : 20px;}
+	.ajaxlogin .txt p {line-height : 24px;}
+	.ajaxlogin .txt p span { display : block; color : #adadad; font-size : 14px; font-family : "微软雅黑";}
+	.ajaxlogin .txt p a { display : block; font-size : 16px; font-family : "微软雅黑"; color : #2d82c1; padding-left : 24px; margin : 10px 0 32px 0;#margin : 15px 0 32px; background : url({/$siteurl.style/}/img/p/login/menbersge1.png) left center no-repeat;}
+	.link span { padding : 0px; display : block; color : #373737; font-size : 14px; padding-bottom : 10px;}
+	.ajaxlogin .txt p i {margin : 0 10px;}
+	.formMod .tipTxt {#padding-left : 72px; padding-left : 78px;}
+	.link, .nolink.link, .nolink { border : none; background : none; padding-left : 0;}
+	.formMod .formChb { float : left; line-height : 30px; height : 30px;}
+	.formMod .formChb label input { display : inline-block; vertical-align : middle;}
+	#frmUserLogin .link {height : auto}
+	.dgBox { padding : 30px 20px 30px 55px;}
+	.form {width : 230px; border-right : 1px dashed #cbcbcb; float : left;}
+	/*.hb_ui_dialog .ui_dialog_title{ background:#477b99; color:#b5d9f3; font-size:16px;}*/
+	/*.hb_ui_dialog .ui_dialog_close{ display:block;width:14px; top:14px; text-indent:-9999em; height:14px;background:url(
+
+	{/$siteurl.style/}  /img/p/login/loginclose.png) 0 0 no-repeat;}*/
+	/*.hb_ui_dialog .ui_dialog_close:hover{background:url(
+
+	{/$siteurl.style/}  /img/p/login/loginclose.png) -14px 0 no-repeat;}*/
+	/*.hb_ui_dialog{ padding:0px;}*/
+	.ajaxlogin .txt p a:hover { color : #477b99; text-decoration : underline;}
+	#frmUserLogin .link:hover { text-decoration : none;}
+	/*2019-12-20 短信登录*/
+	.dgBox {padding : 10px 20px 20px 20px;}
+	.loginType {width : 262px;text-align : center;}
+	.loginType li {display : inline-block;width : 50%;height : 56px;line-height : 56px; float : left;position : relative;}
+	.loginType li a {border-bottom : 1px solid #f1f1f1;display : block;height : 55px;width : 100%;line-height : 55px; float : left;text-align : center;position : relative;color : #999;}
+	.loginType li.active a {color : #e60012;font-weight : bold;}
+	.loginType li.active:after {content : '';position : absolute;width : 100%;top : 48px;height : 8px; left : 0; background : url({/$siteurl.style/}/img/p/login/loginType.jpg) center no-repeat;}
+	.form {width : 280px;margin-top : 20px;border-right : none; }
+	.ajaxlogin .formMod .r .formText input.text {width : 250px;}
+	.formCon .form {display : none;}
+	.formCon .form.formShow {display : block;}
+	.formCon .form.formShow form {display : block;}
+	.getMsg {float : left;color : #fff;text-align : center; font-size : 14px;background : #66bce4;width : 110px;height : 36px;line-height : 36px;margin-left : 10px;border-radius : 2px;}
+	.getMsg:hover {color : #fff;background : #68C9E4;}
+	.ajaxlogin .formBtn a.btn1 {width : 220px;background : #e60012; border : 1px solid #e60012;box-shadow : none;}
+	.ajaxlogin .formBtn a.btn1:hover {background : #e93e3c;}
+	.formMod .yzImg { float : left; width : 70px; height : 36px; display : inline-block; overflow : hidden; margin : 0 0 0 5px; }
+	#verifycode.formMod .tipTxt { float : left; height : 30px;line-height : 36px;font-size : 14px;display : inline;margin-left : 5px;padding-left : 0px;}
+	.ajaxlogin .formMod .r {width : 261px;}
+	.formMod .tipTxt {padding-left : 0;float : right;}
+	.ajaxlogin .txt {margin-top : 36px;}
+	.formMod {margin-left : 0px;}
+	.lngBox-border {width : 264px;
+		/*border-right: 1px dashed #e8e8e8;*/
+		float             : left;padding-right : 20px;}
+	.loginTypeTit2{ font-size: 16px; color: #444; font-weight:bold; text-align: left; padding-top: 10px;}
+	.lngBox-border{ padding-left: 10px;}
+	#userEnterBox .reg_new .jobWanted{ cursor: pointer;}
+</style>
+<div class="dgBox ajaxlogin">
+	<div class="lngBox-border clearfix">
+		<ul class="loginType clearfix" style="display: none;">
+			<li class="active"><a href="javascript:void(0);">免密码登录</a></li>
+            {/if $school_source == 1/}
+				<li><a href="javascript:void(0);">账号密码登录</a></li>
+            {//if/}
+		</ul>
+		<div class="loginTypeTit2">免密码登录</div>
+		<div class="formCon clearfix">
+			<div class="form formShow" style="margin-top: 10px;">
+				<form id="frmUserLoginPhone" action='{/get_url rule="/login/BlueLoginDo/"/}' method="post">
+					<input type="hidden" id="loginTimeCount" name="loginTimeCount" value="0"/>
+					<input type="hidden" name="school_source" value="{/$school_source/}"/>
+					<input type="hidden" name="request_url" value="{/$request_url/}"/>
+					<div class="formMod">
+						<div class="r">
+                        <span class="formText">
+                            <input type="text" class="text " id="txtMobilePhone" name="txtMobilePhone"
+								   placeHolder="请输入手机号码"/>
+                        </span>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="formMod" id="verifycode" style="">
+						<input type="hidden" value="{/$seed/}" name="seed" id='login_seed'>
+						<span class="formText">
+                            <input type="text" id="txtCode" name="catcha" class="text" placeholder="请输入图片验证码"
+								   style="width: 136px;"/>
+                        </span>
+						<span class="yzImg">
+                             <img id="imgCode2" src='/login/verify/seed-{/$seed/}'/>
+                        </span>
+						<span class="tipTxt">
+                            <a id="btnCode2" href="javascript:void(0);">换一张</a>
+                        </span>
+						<div class="clear"></div>
+					</div>
+					<div class="formMod">
+						<div class="r" style="width: 146px;">
+                            <span class="formText">
+                                <input type="text" style="width: 136px;" class="text " id="txtMobilPhoneCode"
+									   name="txtMobilPhoneCode" placeHolder="请输入短信验证码"/>
+                            </span>
+						</div>
+						<a href="javascript:void(0)" id="btnSendValidate" class="getMsg">获取短信验证码</a>
+						<div class="clear"></div>
+					</div>
+
+					<!--<div class="formMod">-->
+					<!--<div class="r">-->
+					<!--<span class="formChb"><label for="dl"><input type="checkbox" class="chb chkSaveMobile" id="dl" name="chkSave"  value="true"/><span>自动登录</span></label></span>-->
+					<!--<span class="tipTxt"><a href='{/get_url domain="person" rule="/login/findpassword/"/}'>忘记密码</a></span></div>-->
+					<!--<div class="clear"></div>-->
+					<!--</div>-->
+					<div class="formBtn"><a href="javascript:void(0);" class="btn1 btnsF16" id="btnSubMobile">登录</a>
+					</div>
+				</form>
+			</div>
+			<div class="form">
+				<form id="frmUserLogin" action='{/get_url rule="/login/AjaxLogin/"/}' method="post">
+					<input type="hidden" name="actiontype" value="{/$actiontype/}"/>
+					<input type="hidden" name="jobflag" value="{/$jobflag/}"/>
+					<div class="formMod">
+						<div class="r"><span class="formText"><input type="text" class="text " id="id"
+																	 name="txtUserName" placeHolder="手机号/邮箱"/></span>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="formMod">
+						<div class="r"><span class="formText"><input type="password" class="text " id="pass"
+																	 name="txtPassword" placeHolder="密码"/></span></div>
+						<div class="clear"></div>
+					</div>
+					<div class="formMod">
+						<div class="r">
+							<span class="formChb"><label for="dl"><input type="checkbox" class="chb chkSaveMobile"
+																		 id="chkSave" name="chkSave"
+																		 value="true"/><span>自动登录</span></label></span>
+							<span class="tipTxt"><a
+										href='{/get_url domain="person" rule="/login/findpassword/"/}'>忘记密码</a></span>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="formBtn"><a href="javascript:void(0);" class="btn1 btnsF16" id="btnLogin">登录</a></div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="clear"></div>
+</div>
+
+<script type="text/javascript">
+    var sendMsgUrl = "/login/BlueSendAuthCode";
+    try {
+        hbjs.use('@jobDialog, @hbCommon, @form, @dialog', function (m) {
+
+            var dialog = m['cqjob.jobDialog'],
+                hbCommon = m['product.hbCommon'],
+                validate = m['cqjob.jobValidate'],
+                form = m['cqjob.jobForm'],
+                Dialog = m['widge.overlay.hbDialog'];
+
+            factory(dialog.extend(hbCommon, validate, form), Dialog);
+        });
+    } catch (e) {
+        factory($);
+    }
+
+    function factory($, Dialog) {
+        $('input.text').placeHolder();
+        var frmUserLogin = $("#frmUserLogin").validate({
+            rules: {
+                txtUserName: {
+                    required: true,
+                },
+                txtPassword: {
+                    required: true,
+                },
+            },
+            messages: {
+                txtUserName: {
+                    required: '请输入用户名 <span class="tipArr"></span>',
+                },
+                txtPassword: {
+                    required: '请输入密码<span class="tipArr"></span>',
+                },
+            },
+            errorClasses: {
+                txtUserName: {
+                    required: 'tipLayErr tipw120',
+                },
+                txtPassword: {
+                    required: 'tipLayErr tipw120',
+                },
+            },
+            tipClasses: {
+                txtUserName: 'tipLayTxt tipw120',
+                txtPassword: 'tipLayTxt tipw120',
+            },
+            errorElement: 'span',
+            errorPlacement: function (error, element) {
+                element.closest('div.formMod').find('.tipPos .tipLay').empty().append(error);
+            },
+            success: function (label) {
+                label.text(" ");
+            },
+        });
+        var frmUserLoginPhone = $("#frmUserLoginPhone").validate({
+            rules: {
+                txtMobilePhone: {
+                    required: false,
+                },
+            },
+            messages: {
+                txtMobilePhone: {
+                    required: '请输入手机号码 <span class="tipArr"></span>',
+                },
+            },
+            errorClasses: {
+                txtUserName: {
+                    required: 'tipLayErr tipw120',
+                },
+            },
+            tipClasses: {
+                txtMobilePhone: 'tipLayTxt tipw120',
+            },
+            errorElement: 'span',
+            errorPlacement: function (error, element) {
+                element.closest('div.formMod').find('.tipPos .tipLay').empty().append(error);
+            },
+            success: function (label) {
+                label.text(" ");
+            },
+        });
+        /**
+         * 登录
+         */
+        var login = {
+            init: function () {
+                $("#id,#pass").keydown(function (e) {
+                    if (e.keyCode == 13) {
+                        $("#btnSubMobile").click();
+                    }
+                });
+                //手机验证码登录
+                $('#btnSubMobile').on("click", function () {
+                    var phone = $('#txtMobilePhone').val();
+                    var txtCode = $('#txtCode').val();
+                    var loginTimeCount = $("#loginTimeCount").val();
+                    var txtMobilPhoneCode = $("#txtMobilPhoneCode").val();
+                    var chkSave = $(".chkSaveMobile").is(':checked') ? 'true' : 'false';
+                    if ($.trim(phone) == '') {
+                        $.anchorMsg('请输入手机号码', {title: '操作失败', icon: "fail"});
+                        return;
+                    }
+                    if ($.trim(txtCode) == '') {
+                        $.anchorMsg('请输入图片验证码', {title: '操作失败', icon: "fail"});
+                        return;
+                    }
+                    if ($.trim(txtMobilPhoneCode) == '') {
+                        $.anchorMsg('请输入短信验证码', {title: '操作失败', icon: "fail"});
+                        return;
+                    }
+                    // $("#btnSubMobile").running('正在提交数据');
+                    $(this).submitForm({
+                        beforeSubmit: $.proxy(frmUserLoginPhone.form, frmUserLoginPhone), success: function (result) {
+                            console.log(result + '1--------');
+                            if (!result.status) {
+                                $.anchorMsg(result.msg, {title: '操作失败', icon: "fail"});
+                                $('#imgCode').click();
+                                return false;
+                            }
+                            $.anchorMsg(result.msg, {title: "操作成功", icon: "success"});
+                            if ('{/$request_url/}') {
+                                window.parent.document.location.href = '{/$request_url/}';
+                                return;
+                            }
+                            window.location.reload();
+                        }, clearForm: false,
+                    });
+
+                });
+
+                $('#imgCode2,#btnCode2').click(function () {
+                    $('#imgCode2').attr('src', '/login/verify/seed-{/$seed/}' + '-v-' + Math.random());
+                    return false;
+                });
+
+                //发送验证码
+                $('#btnSendValidate').click(function () {
+                    sendMsg();
+                });
+
+                //发送手机验证码
+                function sendMsg() {
+                    var phone = $('#txtMobilePhone').val();
+                    //验证码 和seed
+                    var catcha = $("#txtCode").val();
+                    var seed = $("#login_seed").val();
+                    if (phone == '') {
+                        $.anchorMsg('请输入手机号码', {title: '操作失败', icon: "fail"});
+                        return;
+                    }
+                    if (!catcha) {
+                        $.anchorMsg('请输入图片验证码', {title: '操作失败', icon: "fail"});
+                        return;
+                    }
+                    var pattern = /^[1]\d{10}$/;
+                    if (!pattern.exec(phone)) {
+                        $.anchorMsg('手机号码格式不正确', {title: '操作失败', icon: "fail"});
+                        return;
+                    }
+                    $('#btnSendValidate').unbind('click');
+
+                    var vali_code_count = $('#vali_code_count').val();
+                    var data = {
+                        mobile_phone: $('#txtMobilePhone').val(),
+                        hidSeed: seed,
+                        imgcode: catcha,
+                    };
+                    $.getJSON(sendMsgUrl, data, function (result) {
+                        console.log(result);
+                        if (!result.status) {
+                            $('#btnSendValidate').bind("click", function () {
+                                sendMsg();
+                            });
+                            $('#imgCode2').click();
+                            $.anchorMsg(result.msg, {title: "操作失败", icon: "fail"});
+                            return;
+                        }
+                        $('#btnSendValidate').addClass('nameBtnavt').html('<i>60</i>秒后重新获取');
+                        $.anchorMsg('已发送验证码短信到您的手机', {title: "操作成功", icon: "success"});
+                        $('#txtValidateCode').focus();
+                        $('#vali_code_count').val(parseInt($('#vali_code_count').val()) + 1);
+                        interval = window.setInterval(countdown, 1000);
+                    });
+                }
+
+                //发送手机验证码
+                function countdown() {
+                    var seconds = $('#btnSendValidate').find('i').html();
+                    seconds = parseInt(seconds);
+                    if (seconds > 0) {
+                        seconds--;
+                        $('#btnSendValidate').find('i').html(seconds);
+                    } else {
+                        window.clearInterval(interval);
+                        $('#btnSendValidate').removeClass('nameBtnavt').html('免费获取验证码').bind("click", function () {
+                            sendMsg();
+                        });
+                    }
+                }
+            },
+        };
+        login.init();
+    };
+
+    function sleep(numberMillis) {
+        var now = new Date();
+        var exitTime = now.getTime() + numberMillis;
+        while (true) {
+            now = new Date();
+            if (now.getTime() > exitTime)
+                return;
+        }
+    }
+
+    function exeCallBack() {
+        var callback = {/if !empty($callback)/} {/$callback/}{/else/}null{//if/};
+        if (typeof callback != '' && typeof callback != 'undefined' && typeof callback == 'function') {
+            callback($);
+        }
+    }
+
+    $('.loginType').on('click', 'li', function () {
+        $(this).addClass('active').siblings().removeClass('active');
+        var index = $(this).index();
+        $("#opt").val(index);
+        $('.formCon .form').eq(index).addClass('formShow').siblings().removeClass('formShow');
+    });
+
+</script>
+</body>
+</html>

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>{/$title/}</title>
+		<link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+		<link rel="stylesheet" type="text/css" href="{/version file='comback.css'/}" />
+		<link rel="stylesheet" type="text/css" href="{/version file='job-manage.css'/}" />
+		<link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}" />
+		<link rel="stylesheet" type="text/css" href="{/version file='m_font_style.css'/}" />
+		 <link rel="stylesheet" type="text/css" href="{/version file='wangeditor.css'/}"/>
+		<link rel="stylesheet" type="text/css" href="{/version file='talentSharing.css'/}">
+		
+		<script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.min.js'/}"></script>
+		<script type="text/javascript" language="javascript" src="{/version file='common.js'/}"></script>
+		<script type="text/javascript">
+		window.CONFIG = {
+			HOST: '{/$siteurl.style/}',
+			COMBOPATH: '/js/v2/'
+		}
+		</script>
+		<script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+		<script type="text/javascript" language="javascript" src="{/version file='global.js'/}"></script>
+		<!--<script type="text/javascript">-->
+		<!--hbjs.loadJS('http://assets.huibo.com/js/v2/cqjob/common.js');-->
+		<!--</script>-->
+	</head>
+	<body style="background: #eff0f5;">
+	{/include file="new_header.html" cur="人才共享"/}
+		<div class="employeesShareMain">
+			<div class="employeesShareList employeesShareList02">
+				{/if $info['type'] == 1/}
+				<img src="{/$company_info['logo_path']/}" >
+				{//if/}
+				<div class="employeesShareCenter" style="{/if $info['type'] == 1/}width:970px;margin: 0 0px 0 30px;{/else/}margin: 0 0px 0 10px;width:1140px{//if/}">
+					<span class="employShare01"><em>{/$info['title']/}</em></span>
+					<span class="employShare02">{/if $info['type'] == 1/}可共享员工{/else/}急需人才{//if/}：<em>{/$info['worker_require']/}<em></span>
+					<span class="employShare03">{/if $info['type'] == 1/}可雇用时长{/else/}需要时长{//if/}：<em>{/$info['worker_day']/}天<em></span>
+					<span class="employShare04">{/if $info['type'] == 1/}共享企业{/else/}需求企业{//if/}：<em id="company_url">{/$company_info['company_name']/}</em></span>
+					{/if $info['type'] == 1/}
+					<a href="#" class="employShare06 {/if $info['is_apply'] == 0/}advisoryBtn{//if/} {/if $info['is_apply'] == 1/}employShareGray{//if/}">
+						{/if $info['is_apply'] == 1/}已{//if/}咨询
+					</a>
+					{/else/}
+					<a href="#" class="employShare07 {/if $info['is_apply'] == 0/}advisoryBtn{//if/} {/if $info['is_apply'] == 1/}employShareGray{//if/}">
+						{/if $info['is_apply'] == 1/}已{//if/}投标
+					</a>
+					{//if/}
+				</div>
+				<input type="hidden" class="shar_company_id" value="{/$info['company_id']/}">
+				<input type="hidden" class="shar_is_audit" value="{/$company_info['is_audit']/}">
+			</div>
+			
+			<div class="employeesShareDetail">
+				<div class="employeesShareDetailTit">
+					<i></i>详情介绍
+				</div>
+				<div class="detailContent">
+					{/$info['worker_introdece']/}
+				</div>
+			</div>
+		</div>
+	{/include file="footer.html"/}
+<script type="text/javascript">
+hbjs.use('@confirmBox', function(m) {
+	
+	var	ConfirmBox      = m['widge.overlay.confirmBox'],
+		Dialog          = m['widge.overlay.hbDialog'],
+		cookie          = m['tools.cookie'],
+		fontSize = 18,
+		pWidth = 70;
+
+	var shar_id = "{/$info['id']/}";
+	var shar_type = "{/$info['type']/}";
+	var title = shar_type == 1 ? '咨询' : '投标';
+	var company_id = "{/$company_id/}";
+
+	// 咨询
+	var talentPopx = new Dialog({
+		close : 'X',
+		idName : 'talentPopx_dialog',
+		title : title,
+		content:$('.talentPopHtml').html(),
+		width : 450
+	});
+	
+	var talentPopHtml2 = '<div class="talentPop">'+
+			'<div class="talentPut">'+
+				'<span>联系电话：</span>'+
+				'<input type="text" name="talentPut02" id="talentPut02" placeholder="请输入你的联系电话" value="">'+
+			'</div>'+
+			'<div class="talentPut">'+
+				'<span>说明：</span>'+
+				'<textarea name="talentPut03" id="talentPut03" placeholder="您想对需求方说的话（限300字）"></textarea>'+
+			'</div>'+
+			'<div class="talentPx">'+
+				'<a href="#" class="btn3 btnsF12" id="talentCancelBtn">取消</a>'+
+				'<a href="#" class="btn1 btnsF12" id="talentSureBtn">确定</a>'+
+			'</div>'+
+		'</div>';
+
+	var talentPopHtml1 = '<div class="talentPop">'+
+			'<div class="talentPut">'+
+			'<span>需要员工：</span>'+
+			'<input type="text" name="talentPut01" id="talentPut01" placeholder="例：1个客服经理+2个客服专员" value="">'+
+			'</div>'+
+			'<div class="talentPut">'+
+			'<span>联系电话：</span>'+
+			'<input type="text" name="talentPut02" id="talentPut02" placeholder="请输入你的联系电话" value="">'+
+			'</div>'+
+			'<div class="talentPut">'+
+			'<span>说明：</span>'+
+			'<textarea name="talentPut03" id="talentPut03" placeholder="您想对该企业说的具体内容（限300字）"></textarea>'+
+			'</div>'+
+			'<div class="talentPx">'+
+			'<a href="#" class="btn3 btnsF12" id="talentCancelBtn">取消</a>'+
+			'<a href="#" class="btn1 btnsF12" id="talentSureBtn">确定</a>'+
+			'</div>'+
+			'</div>';
+	
+	$('.advisoryBtn').click(function(){
+		var shar_company_id = $(".shar_company_id").val();
+		if(company_id == shar_company_id){
+			var msg = "不能" + title + "本公司";
+			ConfirmBox.timeBomb(msg,{
+				name: 'fail',
+				width:fontSize * msg.length + pWidth
+			});
+			return false
+		}
+		if(shar_type == 1){
+			talentPopx.title = "咨询";
+			talentPopx.setContent(talentPopHtml1).show();
+		}else{
+			talentPopx.title = "投标";
+			talentPopx.setContent(talentPopHtml2).show();
+		}
+
+	});
+
+	$("#company_url").click(function(){
+		var shar_audit = $(".shar_is_audit").val();
+		if(shar_audit != 1 && shar_audit != 4){
+			var msg = "该企业尚未认证通过，暂时无法预览主页";
+			ConfirmBox.timeBomb(msg,{
+				name: 'fail',
+				width:fontSize * msg.length + pWidth
+			});
+			return false
+		}
+		window.open('{/$company_url/}');
+	});
+
+	$('body').on('click','#talentCancelBtn', function(){
+		talentPopx.hide();
+	});
+	$('body').on('click','#talentSureBtn', function(){
+		var talentPut01 = $('#talentPut01').val();
+		var talentPut02 = $('#talentPut02').val();
+		var talentPut03 = $('#talentPut03').val();
+
+		var msg='';
+		if(shar_type == 1){
+			if(talentPut01 == ''){
+				msg = '请输入需要员工';
+				ConfirmBox.timeBomb(msg,{
+					name: 'fail',
+					width:fontSize * msg.length + pWidth
+				});
+				return false;
+			}
+
+		}
+
+		if(talentPut02 == ''){
+			msg = '请输入联系电话'
+			ConfirmBox.timeBomb(msg,{
+				name: 'fail',
+				width:fontSize * msg.length + pWidth
+			});
+			return false;
+		}else if(!(/^1\d{10}$/.test(talentPut02))){
+			msg = '请输入正确手机号';
+			ConfirmBox.timeBomb(msg,{
+				name: 'fail',
+				width:fontSize * msg.length + pWidth
+			});
+			return false;
+		}else if(talentPut03 == ''){
+			msg = '请输入您想对需求方说的话';
+			ConfirmBox.timeBomb(msg,{
+				name: 'fail',
+				width:fontSize * msg.length + pWidth
+			});
+			return false;
+		}else if(talentPut03.length > 300){
+			msg = '具体内容限300字'
+			ConfirmBox.timeBomb(msg,{
+				name: 'fail',
+				width:fontSize * msg.length + pWidth
+			});
+			return false;
+		}else{
+			$.ajax({
+				url : "{/get_url rule='/workershar/AdvisoryDo'/}",
+				type : "post",
+				dataType : "json",
+				data : {
+					id : shar_id,
+					worker_require : talentPut01,
+					phone : talentPut02,
+					worker_introdece : talentPut03
+				},
+				success : function(json) {
+					if (!json.status) {
+						ConfirmBox.timeBomb(json.msg,{
+							name: 'fail',
+							width:fontSize * json.msg.length + pWidth
+						});
+						return false;
+					}
+					ConfirmBox.timeBomb(json.msg,{
+						name: 'success',
+						width:fontSize * json.msg.length + pWidth
+					});
+					talentPopx.hide();
+					setTimeout(function() {
+						window.location.reload();
+					}, 2000);
+				}
+			});
+
+		}
+
+	});
+	
+})
+</script>	
+	</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+</head>
+<body>
+<style>
+.intBox{width:360px;font-size:12px;}
+.intBox .intType{font-size:14px;font-weight:bold;height:35px;border-bottom:1px dashed #dadada;margin-bottom:5px;}
+.intBox .intType .hbFntWes{font-size:23px; vertical-align:middle;margin:0 8px 0 0;font-weight:normal;}
+.intBox .intTit{font-size:14px;line-height:25px;margin-bottom:5px;}
+.intBox .intTxt{color:#999;line-height:20px;margin-bottom:10px;}
+.intBox .intForm{height:35px;}
+.intBox .intLst{}
+.intBox .intLst a{margin:0 10px 0 0;display:inline-block;width:64px;height:22px;line-height:22px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;-o-text-overflow:ellipsis;}
+.intBox .intBtn{padding:15px 0 0 0; text-align:right;}
+.intBox .intBtn a.btnsF14{margin:0 0 0 10px;}
+.intBox .intLst span{display: inline-block;border-radius: 3px;margin: 2px;padding: 3px 10px;width:86px;height:22px}
+.intBox .intLst i{float: right;color: #f00;font-size: 16px;display:none}
+.intBox .intLst span:hover{background: #f3f3f3;}
+.intBox .intLst span:hover i{display: inline-block;cursor: pointer;}
+.intBox .intLst span:hover a{color:#f00}
+</style>
+<div class="dgBox intBox">
+	<div class="intType green"><i class="hbFntWes">&#xf058;</i>已标记为感兴趣</div>
+	<div class="intTit"><b>{/$user_name/}</b>适合您公司的什么岗位？</div>	
+    <div class="intForm"><span class="formText">
+    <input type="hidden" id="hidResumeID" value="{/$resume_id/}">
+    <input type="hidden" id="hidTagId">
+    <input id="txtTagName" type="text" style="width:275px;" class="text" value="{/$tag_name/}"></span></div>
+    <div class="intTxt">当您下次查看时，能清楚知道为什么对TA感兴趣，请认真填写！</div>
+    <div class="intLst" {/if $is_scroll/}style="height:80px;overflow-y:scroll;"{//if/}>
+         {/foreach $tag_items as $key=>$value/}
+            <span>
+                <i class="closeTag" data-value="{/$value.tag_id/}">×</i>
+                <a href="javascript:void(0);" theValue="{/$value['tag_id']/}">{/$value['tag_name']/}</a>    
+            </span>
+        {//foreach/}    
+    </div>
+    <div class="intBtn"><a href="javascript:void(0);" id="btnFavSava" class="btn1 btnsF14">确定</a></div>
+</div>
+<script>
+
+try {
+	hbjs.use('cqjob.jobDialog', function($){
+		factory($);
+	});
+} catch (ex) {
+	factory($);
+}
+
+function factory($){
+	$('div.intLst').find("a").click(function(){
+		$("#hidTagId").val($(this).attr("theValue")).next().val($(this).html());
+	});
+
+	$('#txtTagName').change(function(){
+		$("#hidTagId").val('');
+	});
+
+	$('#btnFavSava').click(function(){
+		var tagID = $("#hidTagId").val();
+		var tagName = $("#txtTagName").val();
+		var resumeID = $('#hidResumeID').val();
+		var target = this;
+		if(tagName == ''){
+			if(this.trigger){
+				this.trigger('close');
+			} else {
+				$(target).closeDialog();
+			}
+			return; 
+		}
+		
+
+                
+		$.getJSON("{/get_url rule='/mark/markdo/'/}",{tagID:tagID,tagName:tagName,resumeID:resumeID},function(json){
+			if(json && json.isempty){
+				if(target.trigger){
+					target.trigger('close');
+				} else {
+					$(target).closeDialog();
+				}
+			}
+			if(json && json.error){
+				$.anchorMsg(json.error, { icon: 'fail' }); 
+				return;
+			}
+			if(json && json.success){
+				if(target.trigger){
+					target.trigger('close');
+				} else {
+					$(target).closeDialog();
+				}
+				$.anchorMsg(json.success,{timeout:1});
+			}
+		});               
+	});
+        $(".closeTag").on('click',function(){
+            var tag_id = $(this).attr("data-value");
+            var _this = $(this);
+            //alert(tag_id)
+            //
+           // alert();
+                $.confirm('删除该标签同时也会删除已收藏简历的标签', '提示', function(){
+                    $.getJSON("{/get_url rule='/mark/deleteTag/'/}",{tag_id:tag_id},function(json){
+                        if(json.error){
+                            $.anchorMsg(json.error, { icon: 'fail' }); 
+                            return;
+                        }
+                        _this.parent("span").remove();
+                        $.anchorMsg(json.success,{timeout:1});
+
+                    });
+                });
+
+        });
+}
+
+</script>
+</body>
+</html>

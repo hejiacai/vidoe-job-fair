@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title></title>
+<link type="text/css" href="{/version file="baseback_hb.css"/}" />
+<script type="text/javascript" src="{/version file="dragonVerSummary.js"/}"></script>
+<script language="javascript" type="text/javascript" src="{/version file="jquery.validate.js"/}"></script>
+<script language="javascript" type="text/javascript" src="{/version file="dragonVerJquery.email.tip.js"/}"></script>
+</head>
+<body>
+<form id="frmInterview" action="{/get_url rule="/interview/sendinterviewmany/"/}" method="post">
+<table>
+<tr>
+<td>
+<ul>
+	{/section name=apply loop=$apply_list/}
+	<li>{/$apply_list[apply].user_name/} 
+		<input type="hidden" name="hidUserName{/$apply_list[apply].apply_id/}" value="{/$apply_list[apply].user_name/}"/>
+		<input type="hidden" name="hidApplyID[]" value="{/$apply_list[apply].apply_id/}"/> 
+		<input type="hidden" id="hidJobID{/$apply_list[apply].apply_id/}" name="hidJobID{/$apply_list[apply].apply_id/}" value="{/$apply_list[apply].job_id/}"/> 
+		<input type="text" id="txtStation{/$apply_list[apply].apply_id/}" name="txtStation{/$apply_list[apply].apply_id/}" value="{/$apply_list[apply].station/}"/> 
+		<select id="selDate{/$apply_list[apply].apply_id/}" name="selDate{/$apply_list[apply].apply_id/}">
+			<option value="">选择日期</option>
+			{/$option_date/}
+		</select>
+		<select id="selTime{/$apply_list[apply].apply_id/}" name="selTime{/$apply_list[apply].apply_id/}">
+			<option value="">选择时间</option>
+			<option>8:00</option>
+			<option>8:30</option>
+			<option>9:00</option>
+			<option>9:30</option>
+			<option>10:00</option>
+			<option>10:30</option>
+		</select>
+	</li>
+	{/sectionelse/}
+	<li>请选择你要邀请的简历</li>
+	{//section/}
+</ul>
+</td>
+<td>
+	<div>
+		<select id="selTemplate">
+		{/section name=template loop=$template_list/}
+			<option value="{/$template_list[template].template_id/}">{/$template_list[template].name/}</option>
+		{//section/}
+		</select> 
+		<a href="javascript:void(0);" id="btnManageTemplate">管理模板</a>
+	</div>
+	<div>
+		面试地点：<input type="text" id="txtAddress" name="txtAddress"/><br/>
+		联系人：<input type="text" id="txtLinkMan" name="txtLinkMan"/><br/>
+		联系电话：<input type="text" id="txtLinkTel" name="txtLinkTel"/><br/>
+		其他：<TEXTAREA rows="6" cols="30" id="txtRemark" name="txtRemark"></TEXTAREA>
+		我们将用手机短信通知TA们
+	</div>
+</td>
+</tr>
+<tr>
+	<td></td>
+	<td>
+		<a href="javascript:void(0);">取消</a>
+		<a href="javascript:void(0);" id="btnSendInvite">发送邀请</a>
+	</td>
+</tr>
+</table>
+</form>
+<SCRIPT type="text/javascript">
+var interviewMany = {
+	initControls: function() {
+        $("#selTemplate").change(function(){
+        	$.getJSON('{/get_url rule="/interview/gettemplate/"/}',{template_id:$(this).val()},function(json){
+        		if(json.error){
+	                $.message(json.error, { title: '系统提示', icon: 'fail' });
+	                return;
+	            }else{
+	            	$('#txtAddress').val(json.address);
+	            	$('#txtLinkMan').val(json.link_man);
+	            	$('#txtLinkTel').val(json.link_tel);
+	            	$('#txtRemark').val(json.remark);
+	            }
+        	});
+        })
+        {/if count($template_list)>0/}
+        	$("#selTemplate").change();
+        {//if/}
+        
+        $("#btnSendInvite").click(function(){
+        	$('#btnSendInvite').submitForm({success: interviewMany.sendInviteSuccess, clearForm: false });
+        });
+        
+        $("#btnManageTemplate").click(function(){
+        	$.showModal('{/get_url rule="/interview/managetemplate/"/}', { title: '管理模板' });
+        });
+    },
+    sendInviteSuccess:function(json){
+    	if(json&&json.error){
+            $.message(json.error, { title: '系统提示', icon: 'fail' });
+            return; 
+        }else{
+        	$.anchorMsg("发送邀请成功");
+        }
+    }
+}
+interviewMany.initControls();
+</SCRIPT>
+</body>
+</html>

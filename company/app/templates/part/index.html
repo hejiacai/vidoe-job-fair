@@ -1,0 +1,595 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+<title>{/$title/}</title>
+<!–[if lt IE9]>
+<script src="{/version file='html5.js'/}"></script>  
+<![endif]–>
+<link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='comback.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='firmcss.css'/}" />
+
+<link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='tJob_style.css'/}" />
+
+<script type="text/javascript" language="javascript" src="{/version file="jquery-1.8.3.min.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="common.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="dialog.js"/}"></script>
+<script type="text/javascript" src="{/version file='version.js'/}"></script>
+<script type="text/javascript">
+window.CONFIG = {
+	HOST: '{/$siteurl.style/}',
+	COMBOPATH: '/js/v2/'
+}
+</script>
+<script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+<script type="text/javascript" src="{/version file="global.js"/}"></script>
+<script>
+</script>	
+
+<style>
+.newcompInfo, .newcompInfo2 {
+    background: #fdf7d5;
+    overflow: hidden;
+    padding: 8px 0 0;
+    margin:0 20px 10px 20px;
+}
+.newcompInfo p {
+    background: url("{/$siteurl.style/}/img/c/new_index/new_iconcomp01.png") no-repeat 20px 1px;
+    display: block;
+    font-family: "宋体";
+    margin-bottom: 8px;
+    overflow: hidden;
+    padding: 0 20px 0 48px;
+}
+.newcompInfo p span {
+    color: #ed6802;
+    display: block;
+    float: left;
+}
+
+.newcompInfo2 p {
+    background: url("{/$siteurl.style/}/img/c/new_index/new_iconcomp01.png") no-repeat 20px center;
+    font-family: "微软雅黑";
+    margin-bottom: 8px;
+    overflow: hidden;
+    padding: 0 20px 0 48px;
+    display: block;
+    float: left;
+    width: 476px;
+    color: #f86f00;
+}
+.warning_dialog dl dd{margin-left:0px;}
+.warning_dialog dl dd h4{ font-size: 18px; color:#00bab1;}
+.warning_dialog dl dd p{ font-size: 14px; color: #666; line-height: 24px; padding-bottom:10px;}
+/*微信关注公众号*/
+.weixin-follow{padding-top:20px; text-align: center;margin: 0 auto;}
+.weixin-follow-img{margin-bottom: 10px; border: 1px solid #f1f1f1;display: inline-block;}
+.weixin-follow-img img{width: 170px;height: auto;}
+.weixin-follow p{font-size: 14px;color: #999;text-align: center;}
+p.weixin-follow-text-left{text-align: left;}
+.weixin-follow-list{display: inline-block;margin: 24px auto; background: #f7f7f7;width:280px;padding:5px 10px 17px 10px;}
+.weixin-follow-list li{float: left;width: 50%;margin-top: 12px;text-align: center;}
+.weixin-follow-list li i{display: inline-block;width:15px;height: 15px;background: url("{/$siteurl.style/}/img/part/tpartyes.png") no-repeat;margin-right:8px;vertical-align: -2px;margin-right: 5px;}
+.weixin-follow-jump{color: #999;font-size: 14px;text-align: right;margin-top: 60px;display: block;}
+.weixin-follow-jump:hover{color: #3d84b8;}
+    .tpartTop{margin:20px;background: #f8f8f4;padding: 20px;color: #666;font-size: 14px;line-height: 24px;}
+.tpartTop h1{color: #e38531;font-weight: bold;font-size: 26px;text-align: center;margin-bottom: 20px;}
+.tpartTop ul{margin-top: 20px;}
+.tpartTop ul li{list-style-type: disc;margin-left: 14px;color: #e38531;font-size: 12px;}
+.tpartTop ul li p{color: #666;font-size: 14px;}
+    .gencenShow {
+        color: #3d84b8;
+        display: block;
+        text-align: center;
+        margin-top: 10px;
+    }
+    .gencenShow i {
+        display: inline-block;
+        vertical-align: -3px;
+        width: 16px;
+        height: 16px;
+        background: url("{/$siteurl.style/}/img/show_all.png") -19px 0 no-repeat;
+        margin-right: 8px;
+    }
+    .gencenShowAll .gencenShow i {
+        background: url("{/$siteurl.style/}/img/show_all.png") 0px 0 no-repeat;
+    }
+    .gencenShow em{display: none;}
+    .gencenShowAll .tpartTop-hide{display: none;}
+    .gencenShowAll .gencenShow span{display: none;}
+    .gencenShowAll .gencenShow em{display: inline-block;}
+</style>
+</head>
+<body class="tpartDgray">
+{/include file="new_header.html" par="兼职招聘" cur="首页"/} 
+   <!--new-->
+<div class="tpartcontMal">
+	<div class="tpartcontLf">
+    	<div class="tpartTop">
+            <h1>升级预告</h1>
+            <p>尊敬的企业客户，感谢您使用汇博网！</p>
+            <p>目前发现部分企业有违规行为，导致部分求职者、汇博平台以及正常招聘企业的权益与声誉受到影响。</p>
+            <div class="tpartTop-text">
+                <div class="tpartTop-hide">
+                    <p> 因此汇博兼职频道将于11月底进行系统无缝升级（升级期间可正常使用兼职相关服务）。</p>
+                    <ul>
+                        <p>升级服务如下：</p>
+                        <li><p>优化职位审核规则；</p></li>
+                        <li><p>上线职位付费置顶服务，极大提升招聘效果；</p></li>
+                        <li><p>上线兼职简历点付费服务，可通过兼职简历点获取求职者联系方式，系统每月免费赠送10个兼职简历点，1个兼职简历点可兑换一份简历联系方式，超出需另行付费；</p></li>
+                        <li><p>全新交互与视觉，提升招聘流程与体验；</p></li>
+                        <li><p>调整职位刷新方式，统一刷新调整为各岗位单独刷新；</p></li>
+                        <li><p>调整职位刷新次数，由1次/日上升至3次/日；</p></li>
+                    </ul>
+                </div>
+                <a href="javascript:void(0);" class="gencenShow"><i></i><span>收起</span><em>展开全部</em></a>
+            </div>
+        </div>
+        <script>
+            $('.gencenShow').on('click',function () {
+              $('.tpartTop-text').toggleClass('gencenShowAll');
+            })
+        </script>
+        <div class="tpartRate clearfix">
+        	<div class="tpartrateLf">
+            	<h2>{/$replay_rate/}<em>%</em></h2>
+                <span>最近10天报名处理率 <i class="hbFntWes" style="color:#ed6802;cursor:pointer;font-size:20px;margin-left:5px;vertical-align:-1px" title="计算方法为最近十天人工处理的报名/收到的总报名数">&#xf059;</i></span>
+                <p><a href="javascript:;" id="Dtip">报名处理率对招聘效果有什么影响？</a></p>
+            </div>
+            <div class="tpartrateRt">
+            	<div>
+                    <p>总计获得好评率：<span>{/$good_assessed_rate/}%	</span></p>
+                    <p>当前信用等级：<span>{/$score_level['level']/}级</span></p>
+                    <p>当前信用积分：<span>{/$partCompanyScore/}分</span></p>
+                </div>
+            </div>
+        </div>
+        {/if $partCompanyScore < 50/}
+        <div class="newcompInfo clearfix">
+            <p><span>你当前的信用积分低于50分，请注意招聘过程中和求职者的关系处理，当低于0分将不能再发布职位</span></p>
+        </div>
+        {//if/}
+        {/if (!empty($tmp_stop_jobs))/}
+        <div class="newcompInfo2 clearfix">
+            <p><span style="line-height:20px;">你的“{/$tmp_stop_station/}”职位待处理报名超过10份，将会暂时关闭，处理完毕后系统将自动恢复该职位报名功能</span></p>
+            <a href="{/get_url rule="/partjobapply/"/}" target="_blank" style="margin-left: 19px;line-height:40px;">去处理报名>></a>
+        </div>
+        {//if/}
+        <div class="tpartrateList clearfix">
+            {/if isset($companyNotUpdate) && count($companyNotUpdate)>0/}
+            <dl>
+            	<dt><i class="tpartRIcon01"></i></dt>
+                <dd>
+                	<p class="tpartR01"><span>完善企业资料</span><a  href="{/$siteurl.company|replace:'http:':''/}/partcompany/modify">完善</a></p>
+                    <p class="tpartR02">你当前还没有完善企业资料，请先完善资料</p>
+                </dd>
+            </dl>
+            {//if/}
+            {/if $is_agency==0 || is_null($is_agency)/}
+            <dl>
+            	<dt><i class="tpartRIcon02"></i></dt>
+                <dd>
+                	<p class="tpartR01"><span>招聘类型</span><a href="javascript:;" id="setCompanyAgencyByTop">选择招聘类型</a></p>
+                    <p class="tpartR02">请选择你的招聘类型是直招还是中介</p>
+                </dd>
+            </dl>
+            {//if/}
+            {/if $no_job/}
+            <dl>
+            	<dt><i class="tpartRIcon02"></i></dt>
+                <dd>
+                    {/if $is_agency==0 || is_null($is_agency)/}
+                    <p class="tpartR01"><span>发布职位</span><a href="javascript:;" class="setCompanyAgency">发布</a></p>
+                    {/else/}
+                    <p class="tpartR01"><span>发布职位</span><a href="{/$siteurl.company|replace:'http:':''/}/partjob/jobV2/" id="">发布</a></p>
+                    {//if/}
+                    <p class="tpartR02">你还没有发布职位，快去发布一个吧</p>
+                </dd>
+            </dl>
+            
+            {//if/}
+            {/if $is_audit==3 || $is_audit==0/}
+                <dl>
+                    <dt><i class="tpartRIcon03"></i></dt>
+                    <dd>
+                        <p class="tpartR01"><span>提交营业执照</span><a  href="{/$siteurl.company|replace:'http:':''/}/licencevalidate">提交</a></p>
+                        <p class="tpartR02">
+                            {/if $is_audit==0/}你还没有提交营业执照，需要提交营业执照审核后才能进行招聘{/elseif $is_audit==3/}你的营业执照审核没有通过，请重新提交。失败原因：{/$audit_reply/}{//if/}
+                        </p>
+                    </dd>
+                </dl>
+            {//if/}
+            {/if $is_insure_fee != 1/}
+            {//if/}
+            {/if $new_apply_count !=0 || $notreply_count !=0/}
+            <dl>
+            	<dt><i class="tpartRIcon05"></i></dt>
+                <dd>
+                        {/if $new_apply_count!=0/}
+                	<p class="tpartR01"><span>有新的简历</span><em>（{/$new_apply_count/}份）</em><a  href="{/$siteurl.company|replace:'http:':''/}/partjobapply">处理简历</a></p>
+                        {/else/}
+                            <p class="tpartR01"><span>待处理简历</span><em>（{/$notreply_count/}份）</em><a  href="{/$siteurl.company|replace:'http:':''/}/partjobapply">处理简历</a></p>
+                        {//if/}
+                    <p class="tpartR02">{/if $new_apply_count>0/}当前共收到{/$new_apply_count/}份新简历{//if/}{/if $new_apply_count>0 && $notreply_count>0/}，{//if/}{/if $notreply_count>0/}有{/$notreply_count/}份简历等待你的处理，请尽快处理{//if/}</p>
+                </dd>
+            </dl>
+            {//if/}
+            {/if count($three_day_end_job)>0 || (isset($job_check_count) && $job_check_count['auditfail_num']>0) || (isset($job_check_count) && $job_check_count['recruiting_num']>0)/}
+            <dl>
+            	<dt><i class="tpartRIcon06"></i></dt>
+                <dd>
+                	<p class="tpartR01"><span>职位消息</span></p>
+                    {/if isset($job_check_count) && $job_check_count['auditfail_num']>0/}<p class="tpartR03"><span>有{/$job_check_count['auditfail_num']/}个职位审核不通过</span><a  href="{/$siteurl.company|replace:'http:':''/}/partjob/index/status-3/">查看</a></p>{//if/}
+                    {/if count($three_day_end_job)>0/}<p class="tpartR03"><span>有{/count($three_day_end_job)/}个正在招聘的职位即将过期</span><a  href="{/$siteurl.company|replace:'http:':''/}/partjob/index/">查看</a></p>{//if/}
+                    {/if isset($job_check_count) && $job_check_count['recruiting_num']>0/}<p class="tpartR03"><span>有{/$job_check_count['recruiting_num']/}个职位审核通过</span><a  href="{/$siteurl.company|replace:'http:':''/}/partjob/index/">查看</a></p>{//if/}
+                </dd>
+            </dl>
+            {//if/}
+            {/if $new_assessment_num>0 || $offer_count['not_assessment_num']>0/}
+            <dl>
+            	<dt><i class="tpartRIcon07"></i></dt>
+                <dd>
+                	<p class="tpartR01"><span>评价管理</span></p>
+                   {/if $new_assessment_num >0/} <p class="tpartR03"><span>你获得{/$new_assessment_num/}个新的评价</span><a  href="{/$siteurl.company|replace:'http:':''/}/partcomment/index">查看</a></p>{//if/}
+                   {/if $offer_count['not_assessment_num']>0/} <p class="tpartR03"><span>有{/$offer_count['not_assessment_num']/}个求职者需要你进行评价</span><a  href="{/$siteurl.company|replace:'http:':''/}/partcomment/mycomment">处理</a></p>{//if/}
+                </dd>
+            </dl>
+            {//if/}
+            {/if $offer_count['agree_offer_num']>0 || $offer_count['refuse_offer_num']>0 || $see_invite_count['agree_invite_num']>0 || $see_invite_count['refuse_invite_num']>0/}
+            <dl style="overflow:hidden">
+            	<dt><i class="tpartRIcon08"></i></dt>
+                <dd>
+                   <p class="tpartR01"><span>录用管理</span></p>
+                   {/if $offer_count['agree_offer_num']>0/} <p class="tpartR03" style="padding-top:7px;"><span>有{/$offer_count['agree_offer_num']/}个求职者确认了录用通知</span><a  href="{/$siteurl.company|replace:'http:':''/}/partjobapply/applyoffered/">查看</a></p>{//if/}
+                   {/if $offer_count['refuse_offer_num']>0/}<p class="tpartR03" style="padding-top:7px;"><span>有{/$offer_count['refuse_offer_num']/}个求职者拒绝了录用通知</span><a  href="{/$siteurl.company|replace:'http:':''/}/partjobapply/applyoffered/">查看</a></p>{//if/}
+                   {/if $see_invite_count['agree_invite_num']>0/}<p class="tpartR03" style="padding-top:7px;"><span>有{/$see_invite_count['agree_invite_num']/}个求职者同意了面试邀请</span><a  href="{/$siteurl.company|replace:'http:':''/}/partjobapply/applyinvited/">查看</a></p>{//if/}
+                   {/if $see_invite_count['refuse_invite_num']>0/}<p class="tpartR03" style="padding-top:7px;"><span>有{/$see_invite_count['refuse_invite_num']/}个求职者拒绝了面试邀请</span><a  href="{/$siteurl.company|replace:'http:':''/}/partjobapply/applyinvited/">查看</a></p>{//if/}
+                </dd>
+            </dl>
+            {//if/}
+        </div>
+            
+        <div id="no_data_show" class="no_data" style="background-color: rgb(255, 255, 255);display:none">
+                <img src="{/$siteurl.style/}/img/part/error_icon.png">
+                <p>当前没有需要处理的事项</p>
+        </div>  
+    </div>
+    <div class="tpartcontRt">
+    	<div class="tpartRefreshBg">
+                {/if $is_agency==0 || is_null($is_agency)/}
+        	        <a href="javascript:;" class="tpartPeBtn {/if $show_app_bing_weixin/}showWx{/else/}setCompanyAgency{//if/} "><i></i>发布职位</a>
+                {/else/}
+                    <a href="{/if $show_app_bing_weixin/}javascript:;{/else/}{/$siteurl.company|replace:'http:':''/}/partjob/jobV2/{//if/}" class="tpartPeBtn {/if $show_app_bing_weixin/}showWx{//if/}"><i></i>发布职位</a>
+                {//if/}
+            <p>可以同时发布10个兼职职位</p>
+            <a href="javascript:;" id="refreshJob" class="tpartReBtnx" style="margin-top:0px;"><i></i>刷新职位</a>
+            <p>刷新后排名靠前，每天都能刷新一次</p>
+        </div>
+        <div class="tpartProcess">
+            <img src="{/$siteurl.style/}/img/part/rmentprocess.jpg" />
+        </div>
+        <div class="tpartCash">
+            <img src="{/$siteurl.style/}/img/part/tpartbanner02.png" width="228" height="141" style="display:none" />
+            {/if $is_insure_fee != 1/}
+            <div class="tpartCashTit" style="display:none">
+                <h2>你还没有缴纳保证金</h2>
+                <p>缴纳1000元保证金可以获得放
+                    心企业的认证，职位将会显示
+                    放心企业认证图标，并会优先
+                    排序，当你招聘结束后，可以
+                    退还保证金.</p>
+                <a href="{/$siteurl.company|replace:'http:':''/}/partinsurefee"  class="link_orange1">缴纳保证金</a>
+            </div>
+            {/else/}
+            <div class="tpartCashTit" style="display:none">
+                <h2 class="green">你已经缴纳了保证金</h2>
+                <p class="green_t">当前保证金余额：<span class="org">{/$insure_fee/}元</span><br />获得放心企业标识：<span class="bg_gr">放心企业</span></p>
+                <a href="{/$siteurl.company|replace:'http:':''/}/part/backInsure" class="link_orange1">申请退回</a>
+            </div>
+             {//if/}
+            <div class="tpartService" >
+                <img src="{/$siteurl.style/}/img/part/tpartbanner03.png" width="60" height="73" />
+                <span>客服热线：{/$default_mobile/}</span>
+                <p><em>QQ:{/$default_qq/}</em><a target=blank href=//wpa.qq.com/msgrd?V=3&uin={/$default_qq/}&Site=QQ客服&Menu=yes><img border="0" SRC="{/$siteurl.style/}/img/part/tpartbanner04.png" alt="点击这里给我发消息"></a></p>
+            </div>
+        </div>
+    </div>  
+</div>
+
+   {/include file="footer.html"/}
+   <section class="floatRT"><a href="//www.huibo.com/about/message" target="_blank" class="serviceLink">我有问题要反馈</a><b></b></section>
+   
+<script>
+hbjs.use('@select, @confirmBox, @areaMulitiple, @calling, @jobsort, @jobTooltip, @actions, @hbCommon, @dialog', function(m) {
+    var $ = m['jquery'],
+        select = m['widge.select'],
+        ConfirmBox = m['widge.overlay.confirmBox'],
+        cookie = m['tools.cookie'],
+        Dialog = m['widge.overlay.hbDialog'];
+    
+       /* 弹窗 */
+        var setCompanyAgency = new Dialog({
+            idName : 'setCompanyAgencyDialog',
+            title : '设置招聘类型',
+            close : 'x',
+            isAjax : true,
+            width :300
+        });
+        
+        var reBackInsureDialog = new Dialog({
+            idName : 'reBackInsureDialog',
+            title : '退回保证金',
+            close : 'x',
+            isAjax : true,
+            width :300
+        });
+
+        var tipDialog = new Dialog({
+            idName : 'tipDialog',
+            title : '温馨提示',
+            close : 'x',
+            isAjax : true,
+            width :520
+        });
+        //  关注汇博兼职公众号
+      var weixinDialog = new Dialog({
+        idName : 'weixinDialog',
+        title : '关注微信公众号',
+        isAjax : true,
+        width :550
+      });
+
+        
+    var indexObj = {
+        init:function(){
+            if($(".tpartrateList dl").length==0){
+                $("#no_data_show").show();
+            }
+
+            $(".setCompanyAgency").click(function(){
+                var tourl = "{/get_url rule='/part/setCompanyAgency/callBackPage-index'/}";
+                setCompanyAgency.setContent({
+                    isOverflow: true,
+                    content: tourl
+                }).show().on('loadComplete', function(){
+                    //this.oneCloseEvent('#subButton');
+                    /* 弹窗 */
+                    var self = this;
+                    this.query("#subButton").on('click', function(){
+                        //提交
+                        var agency = $("input[name='agency']:checked").val();
+                        var params = {agency:agency};
+                        $.post('{/get_url rule="/part/setCompanyAgencyDo/"/}', params, function(data) {
+                            if(data.error){
+                                ConfirmBox.timeBomb(data.error, {name : 'fail', width: 400});
+                                self.hide();
+                                return;
+                            }
+                            ConfirmBox.timeBomb(data.success, {name : 'success', width: 200});
+                            indexObj.SelectCallBack();
+                            self.hide();
+                            window.location.href = "{/$siteurl.company|replace:'http:':''/}/partjob/jobV2/";
+                        },"json");
+                    }).after('', function(){
+                        this.query('#subButton').off();
+
+                    })
+                });
+            });
+
+
+            $('#Dtip').click(function() {
+                // var tipHTML = [
+                // '<div class="warning_dialog">',
+                //     '<dl><dt></dt>',
+                //     '<dd><p>有 <b style="color:red;">1</b> 份简历快到回复限期，请尽快回复，</p>',
+                //     '<p>过期未回复将会被禁止使用简历承诺功能。</p>',
+                //     '<a href="/partjobapply/" class="cpromisetip">马上去处理报名</a>',
+                //     '<a href="javascript:void(0);" class="cpromisetip graybutn">我知道了</a>',
+                //     '</dd></dl>',
+                // '</div>'].join('');
+
+                var tipHTML = ['<div class="warning_dialog">',
+                                '   <dl>',
+                                '      <dd>',
+                                '          <h4>职位推送人数更多</h4>',
+                                '          <p>当企业发布职位后，会将职位通过消息推送给符合要求的求职者，根据处理率的高低，推送的求职者人数会有1-5倍的差距，处理率为0的将不进行推送</p>',                                
+                                '          <h4>处理率强化展示</h4>',
+                                '          <p>企业的报名处理率将会展示在职位页面的顶部，供求职者报名的时候作为参考</p>',                                
+                                '          <h4>首页入口</h4>',
+                                '          <p>在APP首页有处理率高的入口，求职者进入后会根据处理率进行排序</p>',
+                                '          <div style=" text-align:center;">',
+                                '          <a href="/partjobapply/" class="cpromisetip">马上去处理报名</a>',
+                                '          <a href="javascript:void(0);" class="cpromisetip graybutn">我知道了</a>',
+                                '               </div>',
+                                '      </dd>',
+                                '   </dl>',
+                                '</div>'].join('');
+                tipDialog.setContent(tipHTML).show();
+                tipDialog.query('.graybutn').on('click',function(){
+                        tipDialog.hide();
+                    })
+            })
+
+            $("#setCompanyAgencyByTop").click(function(){
+                    var tourl = "{/get_url rule='/part/setCompanyAgency/callBackPage-index'/}";
+		setCompanyAgency.setContent({
+			isOverflow: true,
+			content: tourl
+		}).show().on('loadComplete', function(){
+            //this.oneCloseEvent('#subButton');
+			/* 弹窗 */
+			var self = this;
+	        this.query("#subButton").on('click', function(){
+	           //提交
+	           var agency = $("input[name='agency']:checked").val();
+	           var params = {agency:agency};
+	                $.post('{/get_url rule="/part/setCompanyAgencyDo/"/}', params, function(data) {
+	                   if(data.error){
+	                       ConfirmBox.timeBomb(data.error, {name : 'fail', width: 400});
+	                       self.hide();
+	                       return;
+	                   }
+	                   ConfirmBox.timeBomb(data.success, {name : 'success', width: 200});
+	                   indexObj.SelectCallBack();
+	                   self.hide();
+	                },"json");
+	        }).after('', function(){
+	        	this.query('#subButton').off();
+                    })
+		});
+            });
+            //退回保证金
+             $("#reBackInsure").click(function(){
+                 var html = '<div>'
+                            +'<div style="padding:10px">'
+                            +'请联系你的招聘顾问进行申请：<br/>电话：{/$default_mobile/}'
+                            +'</div>'
+                            +'</div>';
+                reBackInsureDialog.setContent(html).show();
+             });
+            //刷新职位
+            $("#refreshJob").click(function(){
+                indexObj.refreshJob();
+            });
+            //关注微信公众号弹窗
+            $('.showWx').click(function () {
+                var html = '<div class="weixin-follow">' +
+                  '    <div class="weixin-follow-img">' +
+                  '        <img id="twd_url" src="https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket={/$ticket/}" alt="">' +
+                  '    </div>' +
+                  '    <p>微信扫码关注汇博兼职公众号</p>' +
+                  '    <ul class="weixin-follow-list clearfix">' +
+                  '        <li><i></i>快捷发布职位</li>' +
+                  '        <li><i></i>便捷职位管理</li>' +
+                  '        <li><i></i>投递微信处理</li>' +
+                  '        <li><i></i>免费群发短信</li>' +
+                  '    </ul>' +
+                  '    <p class="weixin-follow-text-left">注：汇博兼职服务号专用于兼职投递信息处理，全职招聘请关注汇博招聘服务号。</p>' +
+                  '    <a href="javascript:;" class="weixin-follow-jump">跳过</a>' +
+                  '</div>';
+
+                //could show
+                $.ajax({
+                    url: "{/$siteurl.company/}/part/IsBindWx",
+                    type: "post",
+                    data: {},
+                    dataType: 'json',
+                    success: function (res) {
+                        if (res.status) {
+                            if (res.is_show) {
+                                if(res.ticket){$('#twd_url').attr('src',"https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket="+res.ticket)}
+                                weixinDialog.show();
+                                setInterval(function () {
+                                    $.ajax({
+                                        url: "{/$mjianzhi_url/}/weixin/GetUserStatus",
+                                        type: "post",
+                                        data: {company_id:"{/$company_id/}"},
+                                        dataType: 'jsonp',
+                                        jsonp: "jsonpCallback",
+                                        success: function (res) {
+                                            if(res.status && res.can_go){
+
+                                                $('.weixin-follow-jump').click();
+                                            }
+                                        }
+
+                                    })
+                                },2500);
+                            }else{
+                                $('.weixin-follow-jump').click();
+                        }
+                        } else {
+                            weixinDialog.show();
+                            setInterval(function () {
+                                $.ajax({
+                                    url: "{/$mjianzhi_url/}/weixin/GetUserStatus",
+                                    type: "post",
+                                    data: {company_id:"{/$company_id/}"},
+                                    dataType: 'jsonp',
+                                    jsonp: "jsonpCallback",
+                                    success: function (res) {
+                                        if(res.status && res.can_go){
+                                            $('.weixin-follow-jump').click();
+                                        }
+                                    }
+
+                                })
+                            },2500);
+                        }
+                    }
+                })
+
+                weixinDialog.setContent(html);
+                weixinDialog.query('.weixin-follow-jump').on('click',function(){
+                        {/if $is_agency==0 || is_null($is_agency)/}
+                        weixinDialog.hide();
+                        var tourl = "{/get_url rule='/part/setCompanyAgency/callBackPage-index'/}";
+                        setCompanyAgency.setContent({
+                            isOverflow: true,
+                            content: tourl
+                        }).show().on('loadComplete', function(){
+                            //this.oneCloseEvent('#subButton');
+                            /* 弹窗 */
+                            var self = this;
+                            this.query("#subButton").on('click', function(){
+                                //提交
+                                var agency = $("input[name='agency']:checked").val();
+                                var params = {agency:agency};
+                                $.post('{/get_url rule="/part/setCompanyAgencyDo/"/}', params, function(data) {
+                                    if(data.error){
+                                        ConfirmBox.timeBomb(data.error, {name : 'fail', width: 400});
+                                        self.hide();
+                                        return;
+                                    }
+                                    ConfirmBox.timeBomb(data.success, {name : 'success', width: 200});
+                                    indexObj.SelectCallBack();
+                                    self.hide();
+                                    window.location.href = "{/$siteurl.company|replace:'http:':''/}/partjob/jobV2/";
+                                },"json");
+                            }).after('', function(){
+                                this.query('#subButton').off();
+
+                            })
+                        });
+                        {/else/}
+                        window.location.href="{/$siteurl.company|replace:'http:':''/}/partjob/jobV2/";
+                        {//if/}
+                        })
+
+
+            });
+
+        },
+        refreshJob:function(){
+            var params = {};
+             $.post('{/get_url rule="/part/refureshAllJobs/"/}', params, function(data) {
+                   if(data.error){
+                       ConfirmBox.timeBomb(data.error, {name : 'fail', width: 400});
+                       return;
+                   }
+                   ConfirmBox.timeBomb(data.success, {name : 'success', width: 200});
+                },"json");
+        },
+        reBackInsure:function(){
+            
+        },
+        SelectCallBack:function(){
+            $("#setCompanyAgencyByTop").parent("dl").hide();
+            $("#setCompanyAgency").hide();
+            $("#setCompanyAgencyLast").show();
+        }
+        
+    }
+    indexObj.init();
+})       
+
+</script>
+</body>
+
+</html>

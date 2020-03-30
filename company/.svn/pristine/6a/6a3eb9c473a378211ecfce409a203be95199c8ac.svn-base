@@ -1,0 +1,296 @@
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="Keywords" content="">
+    <meta name="Description" content="">
+    <title>offer管理_汇博网</title>
+    <!--–[if lt IE9]-->
+    <script src="//hm.baidu.com/hm.js?fb51309e47424acd6e31c0bd2a65a5a1"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='html5.js'/}"></script>
+    <!--[endif]–-->
+    <link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='comback.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='resument2015.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='layer.css'/}" />
+    <script type="text/javascript">
+        window.CONFIG = {
+            HOST: '{/$isteurl.style/}',
+            COMBOPATH: '/js/v2/'
+        }
+    </script>
+    <script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.min.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='layer.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='common.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='dialog.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='ui_inputFocus.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='ui_tooltip.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='ui_validate.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='jquery.form.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='ui_dropdownlist.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='ui_autocomplete.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='jquery.email.tip.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='jquery.metadata.js'/}"></script>
+
+    <script type="text/javascript" src="{/version file='WdatePicker.js'/}"></script>
+    <!-- <link rel="stylesheet" type="text/css" href="{/version file='WdatePicker.css'/}" /> -->
+    <link rel="stylesheet" type="text/css" href="{/version file='offer.css'/}" />
+    <script type="text/javascript">
+        hbjs.loadJS('{/$siteurl.style/}/js/v2/cqjob/common.js');
+    </script>
+    <style type="text/css">
+        .offerDatas .offerTable{ text-align: center;}
+        .drop .dropSeld{ background: #fff;}
+    </style>
+</head>
+
+<body id="body">
+{/if $left_type==1/}
+{/include 'new_header.html' par="全职招聘" cur='面试管理'/}
+{/else/}
+{/include 'new_header.html' par="全职招聘" cur='简历管理'/}
+{//if/}
+
+
+<div class="resumentNbg">
+    {/if $left_type==2/}
+    {/include 'resume/apply/nav.html' cur="offer管理"/}
+    {/else/}
+    <div class="rMentLt">
+        <dl class="rMentDl">
+            <dd>
+                <a href="{/get_url rule='/invitev1/'/}" >
+                    <em></em><span>职位诊断</span>
+                </a>
+            </dd>
+            <dd class="cut">
+                <a href="javascript:;">
+                    <em></em><span>招聘效果报表</span>
+                </a>
+            </dd>
+        </dl>
+    </div>
+    {//if/}
+
+    <!-- 右侧内容 -->
+    <div class="rMentRt" style="background: #fff;">
+        <div class="content">
+            <hgroup>
+                <div class="part part1">
+                    <form id="frmInvite" method="get" action="{/get_url rule='/offermanager/index/'/}" class="offerSearch">
+                        <input type="hidden" name="left_type" value="{/$left_type/}">
+                        <!-- 筛选条件 -->
+                        <div class="filterOptions">
+
+                            <span>时间：</span>
+                            <div class="xkTabSelect inB"><span id="timeYear" class="drop zindex" style="z-index: 5;width: 230px;"></span></div>
+                            <span>职位：</span>
+                            <div class="xkTabSelect inB"><span id="tstDropJob" class="drop zindex" style="width: 230px;"></span></div>
+
+                            <label style="padding-top:6px; margin-right: 15px;">
+                                <input class="md_stopjob" type="checkbox" checked="checked" id="showStopJob" style="display:inline-block; vertical-align:-1px;">&nbsp;包含停招职位
+                            </label>
+                            <div class="clearfix" style="padding-top: 18px;">
+
+                                <span>公司：</span>
+                                <div class="xkTabSelect inB"><span id="jobCompany" class="drop zindex" style="width: 230px;"></span></div>
+
+                                <!-- 搜索按钮 -->
+                                <input type="button" value="确定" class="mianshiSearchBtn">
+
+                            </div>
+                        </div>
+                    </form>
+                    <div class="offerDatas">
+                        <table class="offerTable">
+                            <thead class="offerTbHead">
+                            <tr>
+                                <th width="200" class="name">职位</th>
+                                <th width="150">曝光率</th>
+                                <th width="158">点击率</th>
+                                <th width="162">投递率</th>
+                                <th width="163">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td class="name overtext">产品经理</td>
+                                <td class="overtext pos">偏低</td>
+                                <td class="overtext">严重偏低</td>
+                                <td class="overtext">正常</td>
+                                <td class="overtext">详细数据</td>
+                            </tr>
+                            <tr>
+                                <td class="name overtext">产品经理</td>
+                                <td class="overtext pos">偏低</td>
+                                <td class="overtext">严重偏低</td>
+                                <td class="overtext">正常</td>
+                                <td class="overtext">详细数据</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div class="noData">
+                            <p>未找到数据，请更换筛选条件、关键词再试！</p>
+                            <!-- <a class="btn" href="javascript:void(0);" id="btnClearFilterSearch"><i class="hbFntWes">&#xf014;</i>清空筛选/搜索条件</a></p> -->
+                        </div>
+                    </div>
+                    <div class="">
+                        <span>更多详细数据</span>
+                        <input type="button" value="导出Excel" class="mianshiSearchBtn" style="background: #00bab1; margin-left: 5px;width:80px">
+                    </div>
+                    <div class="offerDatas">
+                        <table class="offerTable">
+                            <thead class="offerTbHead">
+                            <tr>
+                                <th width="200" class="name">职位</th>
+                                <th width="150">曝光率</th>
+                                <th width="158">点击量</th>
+                                <th width="162">点击率</th>
+                                <th width="163">接受简历</th>
+                                <th width="150">邀请面试</th>
+                                <th width="163">投递率</th>
+                                <th width="150">邀请率</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td class="name overtext">市场专员</td>
+                                <td class="overtext pos">230</td>
+                                <td class="overtext">453</td>
+                                <td class="overtext">0.1%</td>
+                                <td class="overtext">34</td>
+                                <td class="overtext">4</td>
+                                <td class="overtext">0.1%</td>
+                                <td class="overtext">0.2%</td>
+                            </tr>
+                            <tr>
+                                <td class="name overtext">销售经理</td>
+                                <td class="overtext pos">230</td>
+                                <td class="overtext">453</td>
+                                <td class="overtext">0.1%</td>
+                                <td class="overtext">34</td>
+                                <td class="overtext">4</td>
+                                <td class="overtext">0.1%</td>
+                                <td class="overtext">0.2%</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div class="noData">
+                            <p>未找到数据，请更换筛选条件、关键词再试！</p>
+                            <!-- <a class="btn" href="javascript:void(0);" id="btnClearFilterSearch"><i class="hbFntWes">&#xf014;</i>清空筛选/搜索条件</a></p> -->
+                        </div>
+                    </div>
+                </div>
+            </hgroup>
+            {/$pager/}
+        </div>
+    </div>
+    <div class="j_time_search_btn" data-explain="do not delete!" style="display: none"></div>
+    <div class="j_username_search_btn" data-explain="do not delete!" style="display: none"></div>
+    <script  type="text/javascript">
+        var action_url = '{/$siteurl.style/}';
+        action_dom = [
+            ['#tstDropJob', 393],
+            ['.j_time_search_btn', 394],
+            ['.j_username_search_btn', 395],
+            ['.j_resume_detail_btn', 396],
+            ['.j_send_offer_btn', 397],
+            ['.j_see_btn', 398],
+        ];
+    </script>
+    <script type="text/javascript" language="javascript" src="{/version file='action.js'/}"></script>
+
+    <script type="text/javascript">
+        //时间
+        $('#timeYear').droplist({
+            defaultTitle : '2019年',
+            style : 'width:105px;',
+            noSelectClass : '#444',
+            inputWidth : 230,
+            width : 128,
+            hddName : 'station',
+            items : [{"id":"01","name":"2019"}],
+            selectValue : '{/$re_con["station"]/}',
+            maxScroll : 10,
+            onSelect : function(i, name) {
+                //选中后的事件
+                $('#frmInvite').submit()
+            }
+        });
+
+        $('#timeMonth').droplist({
+            defaultTitle : '10月',
+            style : 'width:105px;',
+            noSelectClass : '#444',
+            inputWidth : 230,
+            width : 128,
+            hddName : 'station',
+            items : [{"id":"01","name":"10月"}],
+            selectValue : '{/$re_con["station"]/}',
+            maxScroll : 10,
+            onSelect : function(i, name) {
+                //选中后的事件
+                $('#frmInvite').submit()
+            }
+        });
+        //招聘负责人recruitmentManager
+        $('#recruitmentManager').droplist({
+            defaultTitle : '',
+            style : 'width:105px;',
+            noSelectClass : '#444',
+            inputWidth : 230,
+            width : 128,
+            hddName : 'station',
+            items : [{"id":"01","name":"10月"}],
+            selectValue : '{/$re_con["station"]/}',
+            maxScroll : 10,
+            onSelect : function(i, name) {
+                //选中后的事件
+                $('#frmInvite').submit()
+            }
+        });
+
+        //职位
+        $('#tstDropJob').droplist({
+            defaultTitle : '全部职位',
+            style : 'width:150px;',
+            noSelectClass : '#444',
+            inputWidth : 230,
+            width : 173,
+            hddName : 'station',
+            items : [{"id":"01","name":"这还好"}],
+            selectValue : '{/$re_con["station"]/}',
+            maxScroll : 10,
+            onSelect : function(i, name) {
+                //选中后的事件
+                $('#frmInvite').submit()
+            }
+        });
+        //公司
+        $('#jobCompany').droplist({
+            defaultTitle : '',
+            style : 'width:105px;',
+            noSelectClass : '#444',
+            inputWidth : 230,
+            width : 128,
+            hddName : 'station',
+            items : [{"id":"01","name":"重庆聚焦人才"}],
+            selectValue : '{/$re_con["station"]/}',
+            maxScroll : 10,
+            onSelect : function(i, name) {
+                //选中后的事件
+                $('#frmInvite').submit()
+            }
+        });
+
+
+
+    </script>
+</div>
+
+{/include file="msgpop.html"/}
+{/include file="footer.html"/}
+{/include file="chat/chat.html"/}
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!--看过了就增加vidited类名-->
+{/if count($resume_list) > 0/}
+    {/foreach $resume_list as $key => $val/}
+<div class="prSchTab autorecommend_resume {/if $val['is_see']/}visited{//if/}" data-url='{/get_url rule="/resume/resumeshow/" data="type=network&src=autorecommend&resumeid={/$val['resume_id']/}"/}'>
+<div class="prSchTMask resumeBtn autorecommend_resume">
+    <div class="prSchTx clearfix">
+        <a class="resumeBtn" href='{/get_url rule="/resume/resumeshow/" data="type=network&src=autorecommend&resumeid={/$val['resume_id']/}"/}' target="_blank">{/$val['user_name']/}</a>
+        <span>{/$val['sex']/}</span><span class="divided">/</span>
+        <span>{/$val['age']/}</span><span class="divided">/</span>
+        {/if $val['cur_area']/}
+        <span class="maxW150">{/$val['cur_area']/}</span><span class="divided">/</span>
+        {//if/}
+        {/if $val['degree']/}
+        <span title="博士">{/$val['degree']/}</span><span class="divided">/</span>
+        {//if/}
+        {/if $val['school']/}
+        <span class="maxW200" title="{/$val['school']/}">{/$val['school']/}</span><span class="divided">/</span>
+        {//if/}
+        {/if $val['major_desc']/}
+        <span class="maxW90" title="{/$val['major_desc']/}">{/$val['major_desc']/}</span>
+        {//if/}
+        <a href="javascript:void(0);" data-resumeid="{/$val['resume_id']/}" class="forbidBtn" title="忽略的简历，一周内不再推荐" ><i class="icon-resume_mismatch"></i>不匹配</a>
+    </div>
+    <div class="prSchTabx">
+        <dl>
+            <dt>
+                <img src="{/if $val['small_photo']/}{/$val['small_photo']/}{/else/}{/$siteurl.style/}/img/company/video/{/if $val['sex'] == '男'/}defaultMan.png{/else/}defaultWoman.png{//if/}{//if/}" width="88" height="88">
+                {/if $val['sex'] == '男'/}
+                <i class="icon-navigation_male"></i>
+                {/else/}
+                <i class="icon-navigation_female"></i>
+                {//if/}
+            </dt>
+            <dd>
+                {/if !empty($val['start_work'])/}
+                <p class="fz14">
+                    <span class="startWork">{/$val['start_work']/}</span>
+                    <label class="chatOneChat md_chat {/if !$val['chat_status']/}notOffenUse{//if/}" data-job-effect="{/if $val['is_job_effect']/}1{/else/}0{//if/}" data-resume-id="{/$val['resume_id']/}" data-job-id="{/$val['job_id']/}"  data-need-download="0" data-notice-status="{/$val['chat_status']/}" data-apply-id="{/$val['apply_id']/}">立即沟通</label>
+                    {/if $apply["is_active"]/}
+                    <em title="该求职者聊天活跃"  class="chatHuoyue">活跃</em>
+                    {//if/}
+                </p>
+                {//if/}
+                {/if $val['work_list']/}
+                {/foreach $val['work_list'] as  $k => $v/}
+                <p><span class="station">{/$v['station']/}</span><span class="divided">|</span><em>{/$v['company_name']/}</em><span class="divided">|</span><em>{/$v['start_time']/}-{/$v['end_time']/}</em></p>
+                {//foreach/}
+                {//if/}
+            </dd>
+        </dl>
+        <div class="sendTo_img">
+            <span>把简历转发给职位负责人</span>
+            <img src="" data-source-img="/apply/SendToWorkMatePng/?src=recommend&amp;resume_id=7030411">
+            <b>用汇博企业APP<br>扫码转发简历</b>
+        </div>
+        <div class="pBoxT">
+            {/if $val['station']/}<p class="prTabx1"><span class="prTitle">求职意向：</span><span class="prText">{/$val['station']/}</span></p>{//if/}
+            <p class="prTabx1">
+                <span class="prTitle">意向职位类别：</span>
+                {/foreach $val['jobsort_arr'] as $__jobsort/}
+                <span class="{/if $__jobsort['jobsort']==$job_info['jobsort']/}prText{//if/}">{/$__jobsort['name']/}</span>
+                {//foreach/}
+            </p>
+            {/if !empty($val['job_state_id'])/}<p class="prTabx1"><span class="prTitle">求职状态：</span><span class="prText">{/get_name apply_status=$val['job_state_id']/}{/if $val['accession_time']/}<i>|</i>{/get_name accession_time=$val['accession_time']/}{//if/}</span></p>{//if/}
+            {/if $val['appraise']/}<p class="prTabx3"><span class="prTitle">自我评价：</span><span class="prText">{/base_lib_BaseUtils::cutstr($val['appraise'], 100,'utf-8','','...')/}</span></p>{//if/}
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+</div>
+    {//foreach/}
+{/else/}
+<div class="noData">
+    <p>暂无推荐简历</p>
+</div>
+{//if/}

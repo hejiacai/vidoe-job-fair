@@ -1,0 +1,710 @@
+<!doctype html>
+<div>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+<title>汇博网_招聘中心_企业认证</title>
+<!–[if lt IE9]>
+<script src="{/version file='html5.js'/}"></script>
+<![endif]–>
+<link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='comback.css'/}" />
+
+<script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.min.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='common.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='dialog.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='ui_inputFocus.js'/}"></script><!--输入框获取焦点-->
+<script type="text/javascript" language="javascript" src="{/version file='ui_hovchange.js'/}"></script><!--指向改变class-->
+<script type="text/javascript" language="javascript" src="{/version file='ui_drop.js'/}"></script><!--下拉模拟-->
+<script type="text/javascript" language="javascript" src="{/version file='jquery.form.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='ui_validate.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='ui_uploadify.js'/}"></script>
+
+<script type="text/javascript" src="{/version file='layer.js'/}"></script>
+<script type="text/javascript" src="{/version file='WdatePicker.js'/}"></script>
+<script type="text/javascript" src="{/version file='base_script.js'/}"></script>
+    
+
+    <script type="text/javascript">
+        window.CONFIG = {
+           HOST: '{/$siteurl.style/}',
+            COMBOPATH: '/js/v2/'
+        }
+    </script>
+    <script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+	<script type="text/javascript" src="{/version file='global.js'/}"></script>
+	
+	{/$up_img_html.hand_html/}
+	<style>
+.part{}
+.part .hd{border-bottom:1px solid #dadada;height:40px;}
+.part .hd a{height:38px;line-height:38px;font-size:14px;margin:0 10px;padding:0 10px;display:inline-block;float:left;display:inline;border:1px solid #dadada;border-top:2px solid #dadada;border-bottom:0;color:#666;}
+.part .hd a:hover{background:#f8f8f8;}
+.part .hd a.cu{font-weight:bold;border-top:2px solid #2b90d8;border-bottom:1px solid #fff;}
+.part .hd a.cu:hover{background:#fff;}
+
+
+.part .bd{padding:0 0 20px 0;zoom:1;}
+
+.bd .txt{margin:20px 20px 40px 20px}
+.bd .txt p.tit{font-weight:bold;}
+
+.bd .ser{width:750px;margin:0 auto;height:170px;}
+.bd .ser dl{float:left;display:inline;width:360px;}
+.bd .ser dl dt{float:left;display:inline;width:110px;padding-top: 10px}
+.bd .ser dl dd{float:left;display:inline;width:220px;margin:6px 0 0;}
+.bd .ser dl dd p{margin-bottom:5px;}
+.bd .ser dl dd p.serType{font-weight:bold;}
+
+/*引导*/
+.bd .guid{margin:0 92px 45px;}
+.bd .guid ul li{float:left;display:inline; text-align:center;background:#f3f3f3;width:360px;height:28px;border-top:1px solid #e0e0e0;border-left:1px solid #e0e0e0; position:relative; z-index:1;font-size:12px;line-height:28px;}
+.bd .guid ul li i{position:absolute;right:-14px;top:0;width:14px;height:28px;background:url({/$siteurl.style/}/img/c/c.gif) no-repeat -414px 0;}
+.bd .guid ul li.fst{ z-index:2;}
+.bd .guid ul li.cu{background:#55728d;border-left:1px solid #55728d;border-top:1px solid #55728d;color:#fff;}
+.bd .guid ul li.cu i{background-position:-400px 0;}
+
+.form{margin:0 0 20px;}
+.formMod .l{width:184px;}
+.formMod .r{width:565px;}
+
+.formMod .r .picLoad{clear:both;width:450px;float:left;display:inline;margin:10px 0 0;}
+.formMod .r .picLoad .loadBox{width:300px;height:200px;border:1px solid #dadada;background:url({/$siteurl.style/}/img/common/loadBox.gif) no-repeat center center;}
+.formMod .r .picLoad .loadBox img{width:300px;height:200px;}
+.formMod .r .formFile{ position:relative; z-index:1;}
+.formMod .r .formFile .swfUploadBtn{ position:absolute;left:0;top:0;}
+
+
+.upLicBox{width:465px;}
+.upLicBox p{line-height:30px;}
+.upLicBox p i{color:#999}
+.upLicBox p.tit{font-weight:bold;}
+.upLicBox .upLicBtn{ text-align:right;margin:20px 0 0;}
+#infowirte .formMod .l{width:184px!important; padding-top: 0px!important; color: #666!important;}
+/*提示信息*/
+.new-alert-pop{background: #fffadd;color:#604e29;font-size:14px;padding:8px 20px}
+.new-alert-pop .warning-icon{display: block;float:left;width:17px;height:17px;background: url({/$siteurl.style/}/img/company/company_part_tit.png) 0 0 no-repeat;float:left;margin-right:10px;margin-top:2px}
+.new-alert-pop span em{ color: #ff7920;}
+.new-alert-pop a{ color: #2b6fad; text-decoration: underline;}
+/*20181219企业认证修改*/
+hgroup{ padding:0 0 20px 0;}
+.guidTitx{color: #444;font-weight: bold;width:100%; overflow: hidden; padding: 18px 0; font-size: 16px; border-bottom: 1px solid #f1f1f1; margin-bottom: 20px; text-indent: 34px;}
+.guidTitx a{ display: block; float: right; margin-right: 30px;}
+.formMod{ margin-left: 34px;}
+.guidPowerx{width:580px; overflow: hidden; padding-left: 34px;}
+.guidPowerx span{ display: block; font-size: 14px; color: #444; line-height: 24px;}
+.guidPowerx span b{ display: block; padding-bottom: 5px; font-weight: normal;}
+.guidPowerx span em{ color: #fe7920; font-weight: bold;}
+.guidPowerx a{ display: block;width:150px; text-align: center; margin: 20px 0;}
+.entrustedSample{width:274px; overflow: hidden; padding: 20px 0 15px 0; position: absolute; right: 20px; top: 350px; background: #fafafa; border-radius: 4px;}
+.entrustedSample span{ display: block; padding: 0 10px 0 20px; font-size: 14px; color: #666; line-height: 22px;}
+.entrustedSample span em{ border-bottom: 1px solid #999;}
+.entrustedSample img{ display: block; font-size: 14px; background: #666; line-height: 22px;}
+.entrustedSample span.esampleTit01{ font-size: 16px; font-weight: bold; color: #2b6fad; border: 1px solid #2b6fad; width:110px; height: 30px; line-height: 30px; text-align: center; font-weight: bold; padding: 0;border-radius: 25px; margin: 0 auto;}
+.entrustedSample span.esampleTit02{ font-weight: bold; font-size: 16px; color: #444; padding: 12px 0; text-align: center;}
+.entrustedSample span.esampleTit04{ padding: 10px 10px 10px 15px; text-indent: 2em;}
+.orange{ color: #fe7920; line-height: 24px; font-size: 14px;}
+.uploaderTips{color:#999 !important;}
+#infoShow{width: 800px;
+    overflow: hidden;
+    background: #fff;
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    margin: 0 0 0 -400px;
+    border: 5px solid #f1f1f1;
+    z-index: 999;
+display: none}
+    .infoClose{width:100%; height: 40px; overflow: hidden; background: #fafafa; }
+    .infoClose a{ display: block; float: right; color: #333;width:40px; height: 40px; text-align: center; line-height: 40px}
+        .infoFilter{width:100%;height: 100%; background: #000; position: fixed; top: 0; left: 0; z-index: 888;filter:alpha(Opacity=40);-moz-opacity:0.4;opacity: 0.4; display: none }
+</style>
+{/if !empty($step) && $step ==4/}
+<link rel="stylesheet" type="text/css" href="{/version file='new_step.css'/}" />
+{//if/}
+</head>
+<body id="body" style="margin-top: 0px;">
+{/if !empty($step) && $step ==4/}
+{/include file='register/register_head.html' head_step=4/}
+{/else/}
+    {/*include 'new_header.html' cur='企业管理'*/}
+    {/include file="new_header.html" par="企业管理" cur="企业认证"/}
+{//if/}
+<div class="content step-content" id="content">
+    {/if !empty($step) && $step ==4/}
+    <div class="step-tit"><i class="icon-shield"></i>职位发布成功，通过企业认证就可以展示啦</div>
+    {//if/}
+    <div class="new-alert-pop">
+		<div>
+            <p>
+				<i class="warning-icon"></i>
+                {/if $audit_result['licence_audit_type']==3||$audit_result['letter_audit_type']==3/}
+				<span>拒绝理由：
+                    {/if $audit_result['licence_audit_type']==3/}
+                    【营业执照】{/$audit_result['licence_audit_expire']/}；
+                    {//if/}
+                    {/if $audit_result['letter_audit_type']==3/}
+                    【委托书】{/$audit_result['letter_audit_expire']/}
+                    {//if/}
+
+                </span>
+                {/else/}
+                <span>根据国务院令《人力资源市场暂行条例》相关规定：需用人单位提供<em>营业执照</em>和<em>招聘委托证明</em>。</span>
+                {//if/}
+			</p>
+		</div>
+	</div>
+
+    <section class="section">
+        
+    	<hgroup style="overflow: hidden;">
+        	<div class="part">
+            	<!--<div class="hd">
+                	<a href="javascript:void(0)" class="cu" forid='infowirte'>有营业执照</a><a href="javascript:void(0)" forid='infoShow'>没有营业执照如何认证?</a>
+                	<div class="clear"></div>
+                </div>-->
+                <div class="bd" id="infowirte" style="position:relative">
+                    <div class="clearfix" style="padding: 20px 10px 20px 10px;position:absolute;width: 254px;right: 20px;top: 70px;background: #fafafa;border-radius: 4px;">
+                       <div style="color: #444;margin-bottom: 10px;font-weight: bold; text-align: center;">手机拍照上传资料</div>
+                        <div class="imgBox" style="border: 1px solid #f1f1f1;width: 160px;margin:0 auto"><img id="codeimg"/></div>
+                        <div class="textBox" style="color:#999;font-size:14px;line-height: 23px;margin-top: 10px;text-align: center">
+                            微信扫描二维码，关注汇博招聘
+                        </div>
+                    </div>
+                    <div class="entrustedSample">
+                    	<span class="esampleTit01">委托书示例</span>
+                    	<span class="esampleTit02">授权委托书</span>
+                    	<span class="esampleTit03">重庆聚焦人才服务有限公司：<br />今委托，<em>&nbsp;&nbsp;&nbsp;赵XX&nbsp;&nbsp;&nbsp;</em>同志（身份证号码：<em>&nbsp;&nbsp;&nbsp;51021019872024XXXX&nbsp;&nbsp;&nbsp;</em>）为我单位的代理人，全权代表我单位办理在你公司（汇博人才网/汇博人才市场）发布招聘信息事宜。</span>
+                    	<span class="esampleTit04">我(单位)对代理人依规定办理的有关登记事宜均承担法律责任。</span>
+                    	<img src="{/$siteurl.style/}/img/company/eSample.jpg?123"/>
+                    </div>
+                    <form id="formlicenceValidate" action="{/$action/}" method="post">
+                        <div class="form">
+                            <input type="hidden" name="hddvalidateid" value="{/$validateid/}"/>
+                            <input type="hidden" name="hddActionType" value="{/$ActionType/}"/>
+                            {/if in_array($ActionType,array('all',1))/}
+                            <div class="guidTitx">上传营业执照<a style="cursor: pointer" id="showInfo">没有营业执照如何验证？</a></div>
+                            <input type="hidden" id="hddLicenceurl" name="hddLicenceurl"  value="{/$audit_result['licence_data']['licence_file_url']/}"/>
+
+                            <div class="formMod">
+                                <div class="l">企业全称<i>&nbsp;</i></div>
+                                <div class="r">
+                                    <span class="formText">
+                                        <input type="text" value="{/if $audit_result['licence_data']['company_name']/}{/$audit_result['licence_data']['company_name']/}{/else/}{/$companyname/}{//if/}" name="txtCompanyName" id="comN"  class="text" style="width:214px;">
+                                    </span>
+                                    <span class="tipPos">
+                                        <span class="tipLay">
+                                            <!--<span class="tipArr"></span>
+                                            <span class="tipLayTxt tipw245">请按照营业执照上的企业名称填写</span> -->
+                                        </span>
+                                    </span>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                            
+                            <div class="formMod">
+                                <div class="l">上传营业执照副本<i>&nbsp;</i></div>
+                                <div class="r">
+                                    {/$up_img_html.html/}
+                                    <span class="tipTxt orange" style="margin:0; clear:both;width:300px;height:auto;line-height:22px">营业执照副本扫描件中的注册号(统一社会信用代码)、企业名称、法人代表、年检章等需清晰可辨别，否则不能通过认证(注：营业执照需加盖公司鲜章！！！)。</span>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                            {//if/}
+
+                            {/if in_array($ActionType,array('all','2'))/}
+                            <div class="guidTitx" style="width: 68%;">上传招聘委托书</div>
+                            <div class="guidPowerx">
+                                <span>
+                                    委托书填写说明：<br />
+                                    下载委托书模板→填写委托人姓名、身份证号→<em>签名并加盖公司鲜章</em>→上传委托书电子图片（扫码上传更快捷）→客服审核→成功
+                                </span>
+                                <a href="//assets.huibo.com/common/qiyeweituoshu.doc?v=1" class="btn1 btnsF16" style="width:150px">下载委托书模板</a>
+                            </div>
+
+                            <input type="hidden" id="hddPowerOfAttorney" name="hddPowerOfAttorney"  value="{/$audit_result['letter_data']['letter_file_url']/}"/>
+                            <div class="formMod">
+                                <div class="l">上传招聘委托书图片<i>&nbsp;</i></div>
+                                <div class="r">
+                                    {/$up_img1_html.html/}
+                                    <span class="tipTxt orange" style="margin:0; clear:both;width:300px;height:auto;line-height:22px">注：委托人姓名、身份证号、委托人与受托人签名、公司鲜章等需清晰可辨别，否则不通过认证</span>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                            {//if/}
+                            <div class="formBtn" style="margin-left: 222px; height: 280px; overflow: hidden;">
+                                <a href="javascript:void(0)" class="btn1 btnsF16" id="upLicLnk">提&nbsp;&nbsp;交</a>
+                                    {/if !empty($step) && $step ==4/}
+                                    <a href="/index" class="next-btns btnsF16">下次再传</a>
+                                    {//if/}
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="infoFilter"></div>
+                <div id="infoShow" style="">
+                    <div class="infoClose">
+                        <a href="#">×</a>
+                    </div>
+ 				<div class="bd"  style="text-align: left;">
+                    <div class="txt">
+                    	<p class="tit">联系您的招聘顾问以获取帮助：</p>
+                        <p style="font-size: 12px;margin:10px 0 5px 0">1、如您拥有“税务证/机构代码证/核名通知书/行业证行可（如：办学证行可）”，请事先准备好相关扫描件（电子档）。并联系您的招聘顾问！</p>
+                        <p style="font-size: 12px"><font color="red">2、请尽快准备好营业执照进行企业认证，否则您的部分操作会受到影响！（如：不能完整查看求职者简历）</font></p>
+                    </div>
+                    <div class="ser">
+                        <dl>
+                            <dt><img width="90" height="90" style="border:1px solid #ddd" src="{/$siteurl.style/}/img/headphoto/userPic1.png" /></dt>
+                            <!--<img width="90" height="90" style="border:1px solid #ddd" src="{/$customerService['photo']/}" />-->
+                            <dd style="font-size: 12px">
+                                <p class="serType">客服顾问</p>
+                                <p>姓名：{/$customerService['name']/}</p>
+                                <p>热线：{/$customerService["phone"]/}</p>
+                                <p>
+                                    {/if !empty($customerService['qq'])/}
+                                    <a style="padding-left:0px;" target="_blank" href="//wpa.qq.com/msgrd?v=3&amp;uin={/$customerService['qq']/}&amp;site=qq&amp;menu=yes">
+                                        <img src="//wpa.qq.com/pa?p=2:2851501208:51" alt="点击这里给我发消息" title="点击这里给我发消息" width="79" height="25" border="0">
+                                    </a>
+                                    {/else/}
+                                    <script charset="utf-8" type="text/javascript" src="//wpa.b.qq.com/cgi/wpa.php?key=XzkzODA0MDQyNl8xMjgzMTBfNDAwODg3Mjg4N18"></script>
+                                    {//if/}
+                                </p>
+                            </dd>
+                        </dl>
+                        {/if $hasHRManager/}
+                        <dl>
+                            <dt><img width="90" height="90" style="border:1px solid #ddd" src="{/$siteurl.style/}/img/headphoto/userPic1.png" /></dt>
+                            <!--<img width="90" height="90" style="border:1px solid #ddd" src="{/$hrManager['head_photo_url']/}" />-->
+                            <dd style="font-size: 12px;width: 250px;">
+                                <p class="serType">招聘顾问</p>
+                                <p>姓名：{/$hrManager["user_name"]/}</p>
+                                <p>热线：{/$customerService["phone400"]/} {/if !empty($hrManager["tel"])/}转 {/$hrManager["tel"]/}（分机号）{//if/}</p>
+                                <p><!-- WPA Button Begin -->
+    <script charset="utf-8" type="text/javascript" src="//wpa.b.qq.com/cgi/wpa.php?key=XzkzODA0MDQyNl8xMjgzMTBfNDAwODg3Mjg4N18"></script>
+    <!-- WPA Button End --></p>
+                            </dd>
+                        </dl>
+                        {//if/}
+                        <div class="clear"></div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </hgroup>
+    </section>
+</div>
+<section class="floatRT"><a href="{/get_url rule='/about/message' domain='main'/}" target="_blank" class="serviceLink">我有问题要反馈</a><b></b></section>
+<div class="dgBox upLicBox" id="infoWin" style="display:none;">
+	<p class="tit">请再次核对以下信息是否与营业执照副本上一致，不一致将无法通过认证！</p>
+    <p><i>企业全称：</i><span id="companyName"></span></p>
+    <div class="upLicBtn">
+    	<a href="javascript:void(0)" class="btn1 btnsF12" id="btnSave">确定</a><a href="javascript:void(0)" class="btn3 btnsF12" id="btnCancel">取消</a>
+    </div>
+</div>
+
+<!-------弹窗上传营业资质------>
+<div class="iphoneImg">
+    <form id="form1" action='{/$siteurl.company|replace:"http:":""/}/licencevalidate/saveTempLicence/' method="post" enctype="multipart/form-data">
+        <input style="display:none" type="file" id="Filedata" name="Filedata">
+    </form>
+</div>
+
+<script type="text/javascript">
+
+    var uploader_img, uploader1_file;
+    hbjs.use('@confirmBox', function(m) {
+
+        var	ConfirmBox      = m['widge.overlay.confirmBox'],
+            Dialog          = m['widge.overlay.hbDialog'];
+        var up_options_{/$up_img_html.id/} = {
+            up_id: '.{/$up_img_html.id/}',
+            auto: {/$up_img_html.config.auto/},
+            BASE_URL: "{/$up_img_html.config.BASE_URL/}",
+            fileNumLimit: 1,//文件数量 默认5个 每张1M fileSingleSizeLimit: 1024 * 1024,
+            fileSingleSizeLimit: {/$up_img_html.config.fileSingleSizeLimit/},//每个文件大小
+            file_name: '{/$up_img_html.config.file_name/}',//返回接收上传的文件名称隐藏域
+            fileVal: '{/$up_img_html.config.fileVal/}',//上传接收name
+            defaults_files: {/$up_img_html.config.defaults_files/},//默认文件
+            accept: {/$up_img_html.config.accept/},//允许文件类型
+            formData: {/$up_img_html.config.form_data/},//上传删除携带参数
+            server: '{/get_url rule="/licencevalidate/picture/"/}',
+            deleteServer: '{/get_url rule="/licencevalidate/DelTempFile/"/}',
+            error_hint_fun: function (msg) {
+                //$.anchorMsg(msg,{icon: "error"},500000);
+				ConfirmBox.timeBomb(msg, {
+					name: 'fail',
+					timeout: 2000,
+					width: 18 * msg.length + 70
+				});
+            },
+            confirm_hint_fun: function (confirm_msg, deleteServerAjax) {
+                //询问框
+                ConfirmBox.confirm(confirm_msg,'删除图片', function(obj){
+                    deleteServerAjax();
+                    $("#hddLicenceurl").val('');
+                    this.hide();
+                },{
+                    width :300,
+                    close : 'x'
+                });
+
+            },
+             add_file_succeed_fun:function (file, ret) {
+
+                $("#hddLicenceurl").val(ret.data.newname);
+
+             }
+        };
+        uploader_img = $('.{/$up_img_html.id/}').powerWebUpload(up_options_{/$up_img_html.id/});
+        var up_options_{/$up_img1_html.id/} = {
+            up_id: '.{/$up_img1_html.id/}',
+            auto: {/$up_img1_html.config.auto/},
+            BASE_URL: "{/$up_img1_html.config.BASE_URL/}",
+            fileNumLimit: 1,//文件数量 默认5个 每张1M fileSingleSizeLimit: 1024 * 1024,
+            fileSingleSizeLimit: {/$up_img1_html.config.fileSingleSizeLimit/},//每个文件大小
+            file_name: '{/$up_img1_html.config.file_name/}',//返回接收上传的文件名称隐藏域
+            fileVal: '{/$up_img1_html.config.fileVal/}',//上传接收name
+            defaults_files: {/$up_img1_html.config.defaults_files/},//默认文件
+            accept: {/$up_img1_html.config.accept/},//允许文件类型
+            formData: {/$up_img1_html.config.form_data/},//上传删除携带参数
+            server: '{/get_url rule="/licencevalidate/picture/"/}',
+            deleteServer: '{/get_url rule="/licencevalidate/DelTempFile/"/}',
+            error_hint_fun: function (msg) {
+                //$.anchorMsg(msg,{icon: "error"},500000);
+				ConfirmBox.timeBomb(msg, {
+					name: 'fail',
+					timeout: 2000,
+					width: 18 * msg.length + 70
+				});
+            },
+            confirm_hint_fun: function (confirm_msg, deleteServerAjax) {
+                //询问框
+                ConfirmBox.confirm(confirm_msg,'删除图片', function(obj){
+                    deleteServerAjax();
+                    $("#hddPowerOfAttorney").val('');
+                    this.hide();
+                },{
+                    width :300,
+                    close : 'x'
+                });
+
+            },
+             add_file_succeed_fun:function (file, ret) {
+
+                $("#hddPowerOfAttorney").val(ret.data.newname);
+
+             }
+        };
+        uploader_img = $('.{/$up_img1_html.id/}').powerWebUpload(up_options_{/$up_img1_html.id/});
+
+        $('#showInfo').click(function(){
+           $('#infoShow,.infoFilter').show();
+        });
+        $('.infoClose').click(function(){
+            $('#infoShow,.infoFilter').hide();
+        });
+    });
+
+
+    var loadcodeurl = function() {
+        $('#codeimg').removeAttr('width').removeAttr('height').attr('src',"{/$siteurl.style/}/img/c/indicator_medium.gif");
+        $.getJSON('{/get_url rule="/account/twodimensioncode/"/}',function(result){
+            if(result&&result.status) {
+                $('#codeimg').removeAttr('src').attr({width:160,src:result.data.codeurl});
+            }else {
+                $('#codeimg').attr({title:'加载失败，请刷新页面',src:''});
+            }
+        });
+    }
+
+    $('#codeimg').click(function(){
+        loadcodeurl();
+    });
+
+    loadcodeurl();
+
+var $tSch = $('#tSch');
+$("#uploadByMobile").click(function(){
+    $.showModal('/licencevalidate/mobileLicence/',{title:'扫码上传营业执照'});
+});
+$('#upLicLnk').click(function() {
+    var hddLicenceurl = $('input[name=hddLicenceurl]').val();
+    // var hddPowerOfAttorney = $('input[name=hddPowerOfAttorney]').val();
+    {/if in_array($ActionType,array('all',1))/}
+    if(hddLicenceurl=='' || hddLicenceurl == null){
+        $.message('请上传营业执照！',{title:'系统提示！'});return false;
+    }
+    {//if/}
+
+    {/if in_array($ActionType,array('all',1))/}
+	var v =form1Valid.form();
+    if(!v) return false;
+	var name = $('input[name="txtCompanyName"]').val();
+		// licence =  $('input[name="txtLicenceId"]').val(),
+		// legalperson	= $('input[name="txtlegalperson"]').val();
+	$('#companyName').html(name);
+	//$('#licence').html(licence);
+	//$('#legalperson').html(legalperson);
+	$.showModal('#infoWin',{title:'认证资料确认',contentType:'selector'});
+    {/else/}
+    //提交资料
+    DataPOST();
+    {//if/}
+});
+//  if(navigator.userAgent.indexOf("MSIE")>0) {
+//      var version = $.browser.version;
+//      if (version == "9.0" || version == "8.0" || version == "10.0") {
+//          //$('#Filedata').hide();
+//          $('#upload_licence').uploadify({
+//              auto: true,
+//              swf: '/swf/uploadify.swf',
+//              uploader: '/licencevalidate/saveTempLicence/',
+//              formData: {
+//                  'upload_cookie_userid': '{/$upload_cookie_userid/}',
+//                  'upload_cookie_nickname': '{/$upload_cookie_nickname/}',
+//                  'upload_cookie_usertype': '{/$upload_cookie_usertype/}',
+//                  'upload_cookie_userkey': '{/$upload_cookie_userkey/}',
+//                  'upload_cookie_tick': '{/$upload_cookie_tick/}'
+//              },
+//              queueID: 'showImage',
+//              fileSizeLimit: '3072kb',
+//              fileTypeExts: '*.jpg;*.bmp;*.gif;*.jpeg;*.png',
+//              buttonImage: '{/$siteurl.style/}/uploadify/submit.png',
+//              fileTypeDesc: 'All Files',
+//              removeCompleted: true,
+//              queueSizeLimit: 5,
+//              method: 'post',
+//              cancelImage: '{/$siteurl.style/}/uploadify/cancel.png',
+//              width: 85,
+//              height: 27,
+//              multi: false,
+//              itemTemplate: '<img src="" id="imgView" style="display:none" />',
+//              onSelect: function () {
+//                  $('#showImage').show();
+//              },
+//              onUploadSuccess: function (file, data, response) {
+//                  if (data != null && data != undefined && data != '') {
+//                      var json = eval("(" + data + ")");
+//                      if (json.error == 100) {
+//                          $.anchorMsg("请选择您要上传的文件", {icon: "warning"});
+//                      } else if (json.error == 101) {
+//                          $.anchorMsg("文件超过最大限制", {icon: "warning"});
+//                      } else if (json.error == 102) {
+//                          $.anchorMsg("您上传的文件格式有误", {icon: "warning"});
+//                      } else if (json.error == 104) {
+//                          $.anchorMsg("文件上传失败", {icon: "warning"});
+//                      } else {
+//                          var path = json.path;
+//                          $('#imgView').attr('src', path + '?' + Math.random().toString().replace('.', '0'));
+//                          $('#imgView').show();
+//                          $('#hddLicenceurl').val(json.name);
+//                      }
+//                  }
+//              },
+//              onSelectError: function (file, errorCode, errorMsg) {
+//                  var settings = this.settings;
+//                  switch (errorCode) {
+//                      case SWFUpload.QUEUE_ERROR.FILE_EXCEEDS_SIZE_LIMIT:
+//                        $.anchorMsg("文件超过最大限制", { icon: "warning" });
+//                        //$.anchorMsg('抱歉 "' + file.name + '" 文件超过了大小限制 (' + settings.fileSizeLimit + ').', {icon: 'warning'});
+//                          break;
+//                      case SWFUpload.QUEUE_ERROR.ZERO_BYTE_FILE:
+//                          $.anchorMsg('文件 "' + file.name + '" 为空.', {icon: 'warning'});
+//                          break;
+//                      case SWFUpload.QUEUE_ERROR.INVALID_FILETYPE:
+//                        $.anchorMsg("您上传的文件格式有误", { icon: "warning" });
+//                        //$.anchorMsg('文件 "' + file.name + '" 类型不支持 (' + settings.fileTypeDesc + ').', {icon: 'warning'});
+//                          break;
+//                  }
+//              }
+//          });
+//      }
+//  };
+    $('#upload_licence').click(function () {
+        $("#Filedata").click();
+    });
+//  $("input[name='Filedata']").on('change',function () {
+//     // alert($('#Filedata').val());
+//      if(checkFileExt($('#Filedata').val())){
+//          $.anchorMsg("您上传的文件格式有误", { icon: "warning" });
+//          $('#Filedata').attr('value','');
+//          return;
+//      }
+//      var  obj_file = document.getElementById("Filedata");
+//      var  filesize = obj_file.files[0].size;
+//      var maxSize = 3*1024*1024;
+//      if(filesize>maxSize){
+//          $.anchorMsg("文件超过最大限制", { icon: "warning" });
+//          $('#Filedata').attr('value','');
+//          return;
+//      }
+//      $('#form1').ajaxSubmit({beforeSubmit: checkMe, data: {}, success: success, dataType: 'json'});
+//  });
+
+
+//  function checkFileExt(filename)
+//  {
+//      var flag = false; //状态
+//      var arr = ["jpg","png","jpeg"];
+//      //取出上传文件的扩展名
+//      var index = filename.lastIndexOf(".");
+//      var ext = filename.substr(index+1);
+//      //循环比较
+//      for(var i=0;i<arr.length;i++)
+//      {
+//          if(ext == arr[i])
+//          {
+//              flag = true; //一旦找到合适的，立即退出循环
+//              break;
+//          }
+//      }
+//      //条件判断
+//      if(!flag)
+//      {
+//          return true;
+//      }
+//  }
+    function success(json){
+      if(json && json.error){
+          if(json.error==100){
+                $.anchorMsg("请选择您要上传的文件", { icon: "warning" });
+            }else if(json.error==101){
+                $.anchorMsg("文件超过最大限制", { icon: "warning" });
+            }else if(json.error==102){
+                $.anchorMsg("您上传的文件格式有误", { icon: "warning" });
+            }else if (json.error==104) {
+              $.anchorMsg("文件大小超过限制或格式不对", {icon: "warning"});
+          }
+          return false;
+      }
+      $("input[name='hddLicenceurl']").val(json.name);
+      $('#showImage').show();
+      $("#licenceImage").attr({'src':json.path}).show();
+      $("#uploadFile1").hide();
+    }
+
+    function checkMe(){
+      $(".iphoneImg").hide();
+      return true;
+    }
+//上传营业执照
+
+$('#btnSave').click(function(){
+    //提交资料
+    DataPOST();
+    $(this).closeDialog();
+});
+//提交资料
+function DataPOST(){
+
+    var licence_infor = get_licence_infor();
+
+    $.ajax({
+        url:$("#formlicenceValidate").attr("action"),
+        type:"post",
+        dataType:"json",
+        data:licence_infor,
+        success:function(json){
+            if(!(json.success||false)){
+                $.message(json.error,{title:'操作失败！'});
+                return false;
+            }
+            {/if !empty($step) && $step ==4/}
+            location.href="{/get_url rule='/index/'/}";
+            {/else/}
+            location.href="{/get_url rule='/licencevalidate'/}";
+            {//if/}
+            //$.anchorMsg("保存成功！");
+            return false;
+        }
+    });
+
+}
+$('#btnCancel').click(function(){
+	$(this).closeDialog();
+});
+
+
+$(document).ready(function(e) {
+   // $.focusblur("#tSchText");
+	//$.focusColor('input.text');
+	//$.focusblur('#comN');
+	$('#tSchText').bind('focus',function(){
+		$(this).animate({'width':200});
+		$tSch.css({'background':'#fffdef','border':'1px solid #e8dd9e'})
+	}).bind('blur',function(){
+		$(this).animate({'width':150});
+		$tSch.css({'background':'#fff','border':'1px solid #dadada'})
+	});
+	$('div.hd').find('a').click(function(){
+		var id = $(this).attr('forid');
+		$(this).siblings('a').removeClass('cu').end().addClass('cu');
+		$('#'+id).siblings('.bd').hide().end().show();
+	});
+
+});
+
+var form1Valid = $('#formlicenceValidate').validate({
+	rules:{
+		txtCompanyName: { required: true, rangelength: [6, 40] }
+		// txtLicenceId:{required: true},
+  //       txtlegalperson:{required: true}
+	},
+	messages:{
+		txtCompanyName:{
+			required: '请输入企业全称 <span class="tipArr"></span>',
+			rangelength: '请输入长度为6-40位的企业全称<span class="tipArr"></span>'
+		}
+		//txtLicenceId:{required: '请输入注册码号<span class="tipArr"></span>'},
+        //txtlegalperson:{required: '请输入法人代表<span class="tipArr"></span>'}
+	},
+	errorClasses:{
+		txtCompanyName:{
+			required: 'tipLayErr tipw150',
+			rangelength: 'tipLayErr tipw245'
+		}
+        // txtLicenceId:{
+        //     required: 'tipLayErr tipw150'
+        // },
+        // txtlegalperson:{
+        //     required: 'tipLayErr tipw150'
+        // }
+    },
+	tipClasses:{
+    	txtCompanyName:'tipLayTxt tipw245'
+        // txtLicenceId:'tipLayTxt tipw245',
+        // txtlegalperson:'tipLayTxt tipw245'
+	},
+	errorElement:'span',
+	errorPlacement: function(error, element){
+		element.parent().next().find('.tipLay').append(error);
+	},
+	success: function(label){
+		label.text(" ");
+	}
+});
+function get_licence_infor(){
+    var licence_infor = {};
+    var $licence_form = $("#formlicenceValidate");
+    licence_infor.hddActionType = $licence_form.find("input[name=hddActionType]").val();
+    {/if in_array($ActionType,array('all',1))/}
+    licence_infor.companyname   = $licence_form.find("input[name=txtCompanyName]").val();
+    // licence_infor.licenceid     = $licence_form.find("input[name=txtLicenceId]").val();
+    // licence_infor.legalperson   = $licence_form.find("input[name=txtlegalperson]").val();
+    licence_infor.hddLicenceurl = $licence_form.find("input[name=hddLicenceurl]").val();
+    {//if/}
+    {/if in_array($ActionType,array('all',2))/}
+    licence_infor.hddPowerOfAttorney = $licence_form.find("input[name=hddPowerOfAttorney]").val();
+    {//if/}
+
+    return licence_infor;
+}
+
+
+</script>
+{/include file="chat/chat.html"/}
+</body>
+</html>

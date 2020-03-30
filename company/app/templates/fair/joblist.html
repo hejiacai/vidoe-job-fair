@@ -1,0 +1,383 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+<title>{/$title/}</title>
+<!–[if lt IE9]> 
+<script src="{/version file='html5.js'/}"></script>  
+<![endif]–>
+<link rel="stylesheet" type="text/css" href="{/version file="base.css"/}" />
+<link rel="stylesheet" type="text/css" href="{/version file="comback.css"/}" />
+<link rel="stylesheet" type="text/css" href="{/version file="icons.css"/}" />
+
+<script type="text/javascript" language="javascript" src="{/version file="jquery-1.8.3.min.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="dialog.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="ui_inputFocus.js"/}"></script><!--输入框获取焦点-->
+<script type="text/javascript" language="javascript" src="{/version file="ui_hovchange.js"/}"></script><!--指向改变class-->
+<script type="text/javascript" language="javascript" src="{/version file="common.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="ui_validate.js"/}"></script><!--验证-->
+<script type="text/javascript" language="javascript" src="{/version file="jquery.form.js"/}"></script><!--表单提交-->
+
+</head>
+<body id="body">
+<style type="text/css">
+section.section{}
+.section hgroup{padding:0;zoom:1;background:url({/$siteurl.style/}/img/c/recBj.jpg) repeat-y #fafafa;}
+.left{float:left; display:inline; width:391px; min-height:430px;}
+.left .lTit{height:53px; line-height:53px; border-bottom:1px solid #e1e1e1; padding-left:17px; color:#666;}
+.left .lCon{padding:0 0 20px 0; zoom:1; font-size:12px;}
+.left .lCon dl{padding:13px 17px; zoom:1; height:39px; border-bottom:1px solid #efefef;}
+.left .lCon dl dt{text-align:center; width:65px; float:left; display:inline;}
+.left .lCon dl dt p.week{background:#3f7098; height:19px; line-height:19px; width:65px; color:#fff;}
+.left .lCon dl dt p.date{height:20px; border:1px solid #e6e6e6; border-top:0; width:63px; background:#fff;}
+.left .lCon dl dd{width:275px; float:left; display:inline; margin-left:15px; line-height:20px;}
+.left .lCon dl dd a{color:#444;}
+.left .lCon dl.hov{background:#f1f1f1;}
+.left .lCon dl.cu{background:#fffac8;}
+
+.right{float:left; display:inline; width:609px; min-height:430px}
+.right .rCon{padding:0 0 30px 0; zoom:1;}
+.rCon .jobTit{height:53px; border-bottom:1px solid #e1e1e1; padding:0 20px;zoom:1;}
+.rCon .jobTit .tipTit{width:260px; float:left; display:inline;line-height:53px; color:#666;}
+.rCon .jobTit .tipTit b{color:#444; margin:0 7px;}
+.rCon .jobTit .btn{width:80px; float:right; display:inline;margin:15px 0 0 10px;}
+
+.rCon .addJob{ border-bottom:1px solid #e1e1e1; padding:25px; zoom:1; position:relative; z-index:1; margin-bottom:20px;}
+.rCon .addJob .formBtn{margin:0 0 0 62px;}
+.rCon .addJob a.close{position:absolute; right:14px; top:10px; color:#999;}
+.rCon .addJob a.close:hover{color:#00aaff;}
+.rCon .addJob a.hbFntWes{font-size:14px;}
+.rCon .jobCon{padding:20px 20px 20px 10px; zoom:1;}
+.jobCon .jobLst{font-size:12px;}
+.jobCon .jobLst ul li{border-bottom:1px solid #efefef; padding:0 10px;zoom:1;}
+.jobCon .jobLst ul li .lstT{line-height:36px;position:relative; z-index:1; height:36px;}
+.jobLst ul li .lstT .formChb{margin:0 13px 0 0;*margin:0 6px 0 0;}
+.jobLst ul li .lstT .formChb input.chb{margin:13px 0 0 0;*margin:6px 0 0 0;margin:11px 0 0 0 \9;}
+.jobLst ul li .lstT .jobName{float:left; display:inline; font-size:14px;position:absolute; left:26px; top:0;}
+.jobLst ul li .lstT .tipTxt{float:right; display:inline;}
+.jobLst ul li .lstT .tipTxt a{margin-left:15px;}
+.jobLst ul li .lstC{}
+.jobLst ul li .lstC p{margin-left:26px; color:#999; padding-bottom:10px; zoom:1;}
+.jobLst ul li .lstC i.num{margin-right:30px;}
+.jobLst ul li.hov{background:#fff;}
+
+.rCon .jobCon .allBtn{margin:30px 0 0 10px; height:30px;}
+.rCon .jobCon .allBtn .formChb{margin:0;}
+.rCon .jobCon .allBtn .formChb label{margin-left:10px;}
+.page{text-align:left;}
+.page a{width:25px; height:25px; margin:0 4px;}
+.page a:first-child{margin-left:10px;}
+
+.rCon .jobCon .noData{padding:100px 0; zoom:1; font-size:20px; background:none;}
+.rCon .jobCon .noData i.hbFntWes{font-size:45px; margin-right:10px; vertical-align:middle; color:#F9ae0c;}
+
+.noDataJob{background:#fff; padding:120px 270px; zoom:1; font-size:20px; text-align:left;}
+.noDataJob p{margin-left:44px;}
+.noDataJob p.titTxt{margin:0;}
+.noDataJob i.hbFntWes{font-size:45px; margin-right:10px; vertical-align:middle; color:#F9ae0c;}
+</style>
+{/include 'nav.html' parent="现场招聘" cur='现场招聘'/}
+<div class="content" id="content">
+	<section class="section" style="overflow:hidden">
+            <div class="postSchListBg">
+                    <div class="postSchList">
+                        <div class="zList">
+                            <a href="{/get_url rule='/fair'/}"  ><span>我的招聘会</span></a>
+                            <a href="{/get_url rule='/fairjob'/}" class="cut"><span>现场职位管理</span></a>
+                            <a href="{/get_url rule='/fairsceneinvite'/}" ><span>发出的邀请</span></a>
+                            <a class="last" href="{/get_url rule='/faironline'/}"><span>邀请网站求职者</span></a>
+                        </div>
+                    </div>
+            </div>
+		<hgroup>
+        	<div class="noData noDataJob" {/if empty($no_anyscene)/}style="display: none;"{//if/}>
+            	<p class="titTxt"><i class="hbFntWes">&#xf06a;</i>近期未参加任何场次招聘会，无法管理职位</p>
+                <p><a href="{/$siteurl.main/}{/get_url rule="/zhaopinhui/enterprise" data="fairApply=true"/}" class="btn3 btnsF14">我要参会</a></p>
+            </div>
+            <div class="bd" {/if !empty($no_anyscene)/}style="display: none;"{//if/}>
+                <div class="left">
+                    <p class="lTit">最近参加的招聘会</p>
+                    <div class="lCon" id="lst">
+                    	{/if !empty($scenelist) && count($scenelist)>0/}
+                    	{/foreach $scenelist as $item=>$value/}
+                    		<dl {/if $value.scene_id == $scene_id/}class="cu"{//if/}>
+	                            <dt>
+	                                <p class="week">{/$value.theweekday/}</p>
+	                                <p class="date">{/$value.thesimpledate/}</p>
+	                            </dt>
+	                            <dd><a onclick="joblist.chooseScene(this);" href="javascript:void(0);" thevalue="{/$value.scene_id/}">{/$value.subject/}</a></dd>
+	                        </dl>
+                    	{//foreach/}
+                    	{//if/}
+                    </div>
+                </div>
+                <div class="right">
+                    <div class="rCon">
+                        <div class="jobTit">
+                            <div class="tipTit">该场招聘会职位</div>
+                            <div class="btn"><a id="btnAddJob" href="javascript:void(0);" class="btn1 btnsF12">添加职位</a></div>
+                        </div>
+                        <div class="jobCon">
+                            <div class="addJob" id="divAddJob" style="display:none;">
+                            	<form method="post" action="{/get_url rule='/fairjob/addjob'/}" id="formAddJob">
+                                <a class="close hbFntWes" href="javascript:void(0);" id="btnCloseAddJob">&#xf00d;</a>
+                                <div class="formMod">
+                                    <div class="l">职位名称</div>
+                                    <div class="r">
+                                  		<span class="formText">
+                                    		<input name="txtStation" type="text" class="text" value="" style="width:240px;" />
+                                 		</span>
+                                        <span class="tipPos">
+                    						<span class="tipLay">
+                    						</span>
+                						</span>
+                                    </div>
+                                    <div class="clear"></div>
+                                </div>
+                                <div class="formMod">
+                                    <div class="l">职位详情</div>
+                                    <div class="r">
+                                        <span class="formTextarea">
+                                            <textarea name="txtContent" class="textarea" style="width:430px; height:80px;"></textarea>
+                                        </span>
+                                        <span class="tipPos">
+                    						<span class="tipLay">
+                    						</span>
+                						</span>
+                                    </div>
+                                    <div class="clear"></div>
+                                </div>
+                                <div class="formBtn"><a id="btnSubmitData" href="javascript:void(0);" class="btn1 btnsF12">添加</a></div>
+                                <input type="hidden" name="hddthesceneid" value="{/$scene_id/}" />
+                                </form>
+                            </div>
+                            <div class="noData" {/if !empty($job_list) && count($job_list)>0/}style="display:none;"{//if/}><i class="hbFntWes">&#xf06a;</i>还未添加任何职位</div>
+                            <div class="lstBox" {/if empty($job_list) || count($job_list)==0/}style="display:none;"{//if/}>
+                                <div class="jobLst" id="lst1">
+                                    <ul>
+                                    	{/if !empty($job_list) && count($job_list)>0/}
+                                    	{/foreach $job_list as $item=>$value/}
+                                        <li>
+                                            <div class="lstT">
+                                                <span class="formChb">{/if $scene_id != $is_begin_or_end_sceneid/}<input type="checkbox" name="chkjob" id="{/$value.job_id/}" class="chb">{//if/}</span>
+                                                <span class="jobName"><b>{/$value.station/}</b></span>
+                                                <span class="tipTxt">{/if $scene_id != $is_begin_or_end_sceneid/}<a onclick="joblist.editJob(this);" editval="{/$value.job_id/}" href="javascript:void(0);" id="btnEditJob{/$value.job_id/}">编辑</a><a onclick="joblist.delJob(this);" delval="{/$value.job_id/}" id="btnDelJob{/$value.job_id/}" href="javascript:void(0);">删除</a>{//if/}</span>
+                                                <div class="clear"></div>
+                                            </div>
+                                            <div class="lstC">
+                                                <p>{/$value.content/}</p>
+                                            </div>
+                                        </li>
+                                        {//foreach/}
+                    					{//if/}
+                                    </ul>
+                                </div>
+                                <div class="allBtn">
+                                    <span class="formChb">{/if $scene_id != $is_begin_or_end_sceneid/}<input type="checkbox" name="job" id="chkMenu" class="chb"><label for="chkMenu">全选</label>{//if/}</span>
+                                    {/if $scene_id != $is_begin_or_end_sceneid/}<a id="btnDelMulti" href="javascript:void(0);" class="btn1 btnsF12">批量删除</a>{//if/}
+                                </div>
+                           		{/$pager/}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </hgroup>
+    </section>
+</div>
+{/include file="footer.html"/}
+<section class="floatRT"><a href="{/get_url rule='/about/message' domain='main'/}" target="_blank" class="serviceLink">我有问题要反馈</a><b></b></section>
+<script>
+var addJobValid;
+var joblist={
+	initialize:function(){
+		//初始化控件
+		this._initControl();
+	},
+	_initControl:function(){
+		$('#chkMenu').bindCheckBox('chkjob');
+		$('#btnAddJob').click(function(){
+			if($('#divAddJob').is(':hidden')){
+				$('#divAddJob').show();
+			}else{
+				$('#divAddJob').hide();
+			}
+		});
+		$('#btnCloseAddJob').click(function(){
+			$('#divAddJob').hide();
+		});
+		$.validator.addMethod("validateJobStation", function(value, element) {
+            if (value.caseLength() > 30) {
+                return false;
+            }
+            return true;
+
+        }, '职位名称长度不能大于30<span class="tipArr"></span>');
+		addJobValid = $("#formAddJob").validate({
+		    rules: {
+				txtStation: {
+		            required: true,
+		            validateJobStation: true
+		        },
+        		txtContent: { required: true, maxlength: 4000 }
+		    },
+		    messages: {
+		    	txtStation:{required:'请输入职位名称<span class="tipArr"></span>'},
+		    	txtContent:{required:'请输入职位详情<span class="tipArr"></span>', maxlength: '职位详情不能超过4000字<span class="tipArr"></span>'}
+		    },
+		    errorElement: 'span',
+		    errorClasses: {
+		    	txtStation: { required: 'tipLayErr tipw180', validateJobStation: 'tipLayErr tipw180'},
+		    	txtContent: { required: 'tipLayErr tipw180', maxlength: 'tipLayErr tipw180'}
+		    },
+		    errorPlacement: function(error, element) {
+				element.parent().nextAll().find('.tipLay').append(error);
+
+		    },
+		    success: function(label) {
+		    	label.text(" ");
+		    }
+		});
+		$('#btnSubmitData').click(function(){
+			var data = { operate: 'addJob' };
+            $('#btnSubmitData').submitForm({ beforeSubmit: $.proxy(addJobValid.form,addJobValid),data:data, success: joblist.addSuccess, clearForm: false });
+            return false;
+        });
+        $('#btnDelMulti').click(function(){
+        	var checkboxs = $('#lst1').find(':input[name="chkjob"][checked]');
+            if(checkboxs.length == 0){
+            	$.anchorMsg('请选择需要删除的职位', { icon: 'warning' }); return;
+            }
+        	var jobids = new Array();
+       		checkboxs.each(function(){
+       			jobids.push($(this).attr('id'));
+           	});
+       		var sceneid = $(':input[name="hddthesceneid"]').val();
+    		$.confirm('删除后将不可恢复，是否继续？','',function(){
+    			$.getJSON('{/get_url rule="/fairjob/delFairJobMulti/" data="jobids='+jobids.join(',')+'&sceneid='+sceneid+'"/}', function(json) {
+    				if (json && json.error) {
+    					$.message(json.error, { title: "系统提示", icon: "fail" });
+    					return;
+    	            }
+    				if (json && json.success) {
+    					$.anchorMsg(json.success, { onclose: function() {
+    						if(json.sceneid){
+    							window.location.href='{/get_url rule="/fairjob/index" data="sceneid='+json.sceneid+'"/}';
+    						}else{
+    							window.location.href='{/get_url rule="/fairjob/index"/}';
+    						}
+    		         	}
+    		         	});
+    				}
+    			});
+    		},function(){
+    			
+    		});
+		});
+	},
+	chooseScene:function(obj){
+		var scene = $(obj).attr('thevalue');
+		window.location.href='{/get_url rule="/fairjob/index" data="sceneid='+scene+'"/}';
+	},
+	addSuccess:function(json){
+		if (json && json.error){
+			$.message(json.error, { title: "系统提示", icon: "fail" });
+			return;
+		}
+		if (json && json.success) {
+          	//成功
+       		$.anchorMsg(json.success, { onclose: function() {
+				if(json.sceneid){
+					window.location.href='{/get_url rule="/fairjob/index" data="sceneid='+json.sceneid+'"/}';
+				}else{
+					window.location.href='{/get_url rule="/fairjob/index"/}';
+				}
+         	}
+         	});
+	    }
+	},
+	editJob:function(obj){
+		var jobid = $(obj).attr('editval');
+		$.showModal('{/get_url rule="/fairjob/jobeditshow" data="jobid='+jobid+'&obj=joblist&callback=editCallback&v='+Math.random()+'"/}',{title:'修改职位'});
+	},
+	delJob:function(obj){
+		var jobid = $(obj).attr('delval');
+		var sceneid = $(':input[name="hddthesceneid"]').val();
+		$.confirm('删除后将不可恢复，是否继续？','',function(){
+			$.getJSON('{/get_url rule="/fairjob/delFairJob/" data="jobid='+jobid+'&sceneid='+sceneid+'"/}', function(json) {
+				if (json && json.error) {
+					$.message(json.error, { title: "系统提示", icon: "fail" });
+					return;
+	            }
+				if (json && json.success) {
+					$.anchorMsg(json.success, { onclose: function() {
+						if(json.sceneid){
+							window.location.href='{/get_url rule="/fairjob/index" data="sceneid='+json.sceneid+'"/}';
+						}else{
+							window.location.href='{/get_url rule="/fairjob/index"/}';
+						}
+		         	}
+		         	});
+				}
+			});
+		},function(){
+			
+		});
+	},
+	editCallback:function(sceneid){
+		if(sceneid){
+			window.location.href='{/get_url rule="/fairjob/index" data="sceneid='+sceneid+'"/}';
+		}else{
+			window.location.href='{/get_url rule="/fairjob/index"/}';
+		}
+	}
+};
+joblist.initialize();
+</script>
+
+
+
+
+
+<script>
+$.setIndex("zindex");//为需要赋层级设置的元素设置class为zindex
+$('#booth1').click(function() {
+	$.showModal('/company/ui/booth.html?v=aaaa',{title:'邀请到展位'});
+});
+$('#editJob1').click(function() {
+	$.showModal('/company/ui/editJob.html?v=aaaa',{title:'编辑职位'});
+});
+$('#editJob2').click(function() {
+	$.showModal('/company/ui/editJob.html?v=aaaa',{title:'编辑职位'});
+});
+$('#editJob3').click(function() {
+	$.showModal('/company/ui/editJob.html?v=aaaa',{title:'编辑职位'});
+});
+$('#editJob4').click(function() {
+	$.showModal('/company/ui/editJob.html?v=aaaa',{title:'编辑职位'});
+});
+$('#editJob5').click(function() {
+	$.showModal('/company/ui/editJob.html?v=aaaa',{title:'编辑职位'});
+});
+
+
+$(document).ready(function() {
+	$('#lst').find('dl').hover(function(){
+		$(this).addClass('hov');
+	},function(){
+		$(this).removeClass('hov');
+	});
+	$('#lst1').find('li').hover(function(){
+		$(this).addClass('hov');
+	},function(){
+		$(this).removeClass('hov');
+	});
+});
+
+</script>
+</body>
+</html>

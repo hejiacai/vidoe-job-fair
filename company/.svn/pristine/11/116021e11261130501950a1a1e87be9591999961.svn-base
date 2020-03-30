@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+	<!--<script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.min.js'/}"></script>-->
+</head>
+<body>
+<style>
+	.dialogCont {text-align: left}
+	.dialogCont img {margin: 0 auto; display: block;}
+	.ui_dialog_title {text-align: left;}
+	.dialogCont .set-top {padding: 10px 25px;}
+	.dialogCont .set-top p {margin: 10px 0px;}
+	.dialogCont .set-top .know {display: inline;}
+	.set-top-foot {padding: 10px 0;background-color: #f3f3f3;text-align: right;}
+	.hb_ui_dialog .ui_dialog_container {padding: 0px;}
+	.dialogCont select {height: 30px;}
+	.dialogCont ul li span {line-height: 30px; height: 30px;}
+	.set-top .mgl5 {padding: 0 3px;}
+	.dialogCont span.clearfix.orange {color:#999;margin-top:10px;line-height: 20px;}
+	i.alert-icon {background: #fff url({/$siteurl.style/}/img/company/promotions.png) no-repeat;display: inline-block;width: 18px;height: 18px;vertical-align: middle;margin-right: 5px}
+	.update-top .name {width: 105px;}
+	
+	.set-top li{
+		position: relative;
+		padding-bottom:1.5em;
+	}
+	.set-top li .errword{
+		position:absolute;
+		top:30px;
+		left:4em;
+		color: #ff9b00;
+		display:none;
+	}
+</style>
+<form id="formjob">
+<input type="hidden" value="{/$job_id/}" name="hiddenjob" />
+<div style="display: block;">
+	<div class="dialogCont">
+		<img src="{/$siteurl.style/}/img/p/zdtg.jpg" />
+		{/if !$params['is_already']/}
+		<div class="set-top" id="set-top">
+			<!--没有置顶的-->
+			<p class="gray6"><!--将<strong>{/$job.station/}</strong>设为“<font color="#e72200">置顶</font>”，当求职者搜索特定关键词或该职位所属的职位类别时，会一直出现在列表最顶端，有助于提升该职位招聘效果！<span style="color:#444;">-->一个行业的一个职位类别下的<font style="color: #e72200;">置顶职位最多只展示5个</font>，如：医药/医疗行业的职位最多展示5个，如果超过5个置顶职位，随机展示5个。</span></p>
+                        <strong class="know">请设置需要置顶的关键词</strong><span>（一个关键词1天需{/$params['price']/}元）</span>
+			<div style="color:#999;font-size:12px;padding-top:10px">注意：<span style="color: #498ec1;">关键词一般为10个字以内</span>能表达完整语义的词语，例如“销售”“销售经理”“大区销售经理”“前端开发”“PHP工程师”“PHP”等。</div>
+			<ul id="tops">
+				<li class="clearfix mgt10 list">
+					<span class="left">关键词<input type="text" name="txtword" class="text" />置顶</span>
+					<select class="mgl5 left" name="dllday">
+						<option>1</option>
+						<option>2</option>
+						<option>3</option>
+						<option>4</option>
+						<option>5</option>
+					</select>
+					<span class="left mgl5">天 <a href="javascript:void(0)" class="add">增加关键词</a></span>
+					<div class="errword">请输入关键字</div>
+				</li>
+			</ul>
+			<span class="clearfix mgt10" style="line-height: 30px;display:block">在以下职位分类搜索时也会置顶：<b>{/$jobsorts[1]['jobsort_name']/}，{/$jobsorts[2]['jobsort_name']/}</b></span>
+			<span style="color:#e72200">（您行业所在的“{/$jobsorts[1]['jobsort_name']/}”类别已有{/$sameSortJobNumber/}个职位置顶{/if $sameSortJobNumber>5/}，系统会随机展示5个{//if/}）</span>
+			<span class="clearfix orange" style="display:block"><i class="alert-icon"></i>优先使用推广金进行抵扣</span>
+		</div>
+		{/else/}
+		<div class="set-top" id="set-top">	
+			<!--已经有置顶的-->
+			<p class="gray6"><strong style="margin-right:2px;">{/$job.station/}</strong>已在以下关键词列表中置顶推广</p>
+			<p class="gray6">在以下职位分类搜索时也会置顶：<strong style="margin-right:2px;">{/$jobsorts[1]['jobsort_name']/}，{/$jobsorts[2]['jobsort_name']/}</strong></p>
+			<div class="update-top">
+				{/foreach $toplist as $v/}
+				<div class="list">
+					<input type="hidden" name="txtword" value="{/$v.keyword/}" />
+					<div class="clearfix item">
+						<a href="javascript:void(0);" class="delay" style="margin-left:20px;float:right;">延长时间</a>
+						<span class="name left">{/$v.keyword/}</span> 
+						<span class="left">置顶至&nbsp;{/$v.end_time/}</span>
+						<div class="left extend-box" style="display: none">
+							<span class="left">延长</span>
+							<select class="mgl5 left ddlday disabled" name="dllday" style="margin-top: -2px;#margin-top: 0px; height:20px;">
+								<option value="1">1天</option>
+								<option value="2">2天</option>
+								<option value="3">3天</option>
+								<option value="4">4天</option>
+								<option value="5">5天</option>
+							</select>
+						</div>
+					</div>
+				</div>
+				{//foreach/}
+				<ul id="tops"></ul>
+			</div>
+			{/if count($toplist) < 3/}
+			<a href="javascript:void(0)" class="add">增加关键字</a>
+			{//if/}
+			<span class="clearfix orange" style="display:block;"><i class="alert-icon"></i>优先使用推广金进行抵扣</span>
+		</div>
+		{//if/}
+	</div>
+	<div class="dialogFooter set-top-foot">
+		<a class="btn1 btnsF14 top-submit" href="javascript:void(0);">确定</a>
+		<a class="btn3 btnsF14 cancel" href="javascript:void(0);">取消</a>
+	</div>
+</div>
+</form>
+
+<ul style="display:none;" class="modal">
+	<li class="clearfix mgt10 list">
+		<span class="left">关键词<input type="text" name="txtword" class="text" />置顶</span>
+		<select class="mgl5 left" name="dllday">
+			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+			<option value="4">4</option>
+			<option value="5">5</option>
+		</select>
+		<span class="left mgl5">天<a href="javascript:void(0)" class="del mgl5">删除</a></span>
+		<div class="errword">请输入关键字</div>
+	</li>
+	
+</ul>
+</body>
+<script>
+
+	$('.text').change(function(){
+		var text_val = $(this).val();
+		if (/^([\u4e00-\u9fa5]+|[0-9a-zA-Z\/.\-\\#\+]+)$/.test(text_val)) {
+                } else {
+			var new_val = '';
+			for(var i=0;i<text_val.length;i++)
+			{
+				if (/^([\u4e00-\u9fa5]+|[0-9a-zA-Z\/.\-\\#\+]+)$/.test(text_val.charAt(i))) {
+					new_val += text_val.charAt(i);
+				}
+			}
+			$(this).val(new_val);
+		}
+	});
+	
+//	输入框失焦判断
+//	$('input[class=txtword]').on('blur',function(){
+//		if($(this).val){
+//			$(this).siblings('.errword').hide()
+//		}else{
+//			$(this).siblings('.errword').show()
+//		}
+//		
+//	})
+</script>
+</html>
+

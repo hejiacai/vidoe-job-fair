@@ -1,0 +1,184 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+<title>汇博人才网_招聘中心_我的账户</title>
+<!–[if lt IE9]> 
+<script type="text/javascript" language="javascript" src="{/version file='html5.js'/}"></script>
+<![endif]–>
+<link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='comback.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='icons.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='repcalendar.css'/}" />
+
+<link rel="stylesheet" type="text/css" href="{/version file='account.css'/}" />
+
+<script type="text/javascript" language="javascript" src="{/version file='version.js'/}"></script>
+<script type="text/javascript">
+window.CONFIG = {
+	HOST: '{/$siteurl.style/}',
+	COMBOPATH: '/js/v2/'
+}
+</script>
+<script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+<script type="text/javascript" src="{/version file='global.js'/}"></script>
+
+<style type="text/css">
+.hb_ui_dropv3_select{text-align: left;width:auto!important;min-width:140px}
+.hb_ui_dropv3_select ul{width:100%;#width:340px}
+.hb_ui_dropv3_select li{height:30px;line-height:30px;overflow:hidden;}
+.search-box .day-select label{display: inline-block;height: 30px;line-height: 40px;overflow: hidden;width: 93px;white-space:nowrap;text-overflow:ellipsis;float:left;margin:0 0 0 10px}
+</style>
+
+</head>
+<body id="body">
+{/include file="new_header.html" par="企业管理" cur="操作日志"/}
+<div class="content" id="content">
+  <!--20160627 mijing--->
+  <div class="data-search">
+  		<div class="search-box clearfix">
+        	<form id="Form1">
+  			<span class="title">账号：</span>
+  			<div id="companyAccountSelecter" class="day-select">
+            	<i class="arr"></i>
+                <label>全部</label>
+  				<!--<p><i class="arr"></i><span>全部</span></p>-->
+                <ul></ul>
+  			</div>
+  			<p id="daySelecter" class="day">
+            	<input type="hidden" name="day" value="{/$pathdata['day']/}" id="hidDay" />
+	  			<a href="javascript:" {/if $pathdata['day']==7/}class="cur"{//if/} data-value="7">近7天</a><a href="javascript:" {/if $pathdata['day']==30/}class="cur"{//if/} data-value="30">1个月</a><a href="javascript:" {/if $pathdata['day']==90/}class="cur"{//if/} data-value="90">3个月</a>
+  			</p>
+  			<div class="time">
+	  			<span class="title">日期：</span>
+	  			<p class="text"><input id="stime" name="stime" value="{/$pathdata['stime']/}" type="text" readonly="readonly" /><i class="icon-time J-stime"></i></p><span class="wenz">~</span>
+	  			<p class="text"><input id="etime" name="etime" value="{/$pathdata['etime']/}" type="text" readonly="readonly" /><i class="icon-time J-etime"></i></p>
+	  			<input id="submitBtn" type="button" value="查询" class="butn" />
+  			</div>
+            </form>
+  		</div>
+  		<div class="serach-list">
+  			<table>
+  				<tr>
+  					<th style="width:200px">时间</th>
+  					<th style="width:100px">操作账户</th>
+  					<th>操作内容</th>
+  				</tr>
+  				{/foreach $data as $k=>$v/}
+  				<tr>
+  					<td>{/$v['create_time']/}</td>
+  					<td>{/$v['company_name']/}</td>
+  					<td>{/$v['content']/}</td>
+  				</tr>
+  				{//foreach/}
+  			</table>
+  			{/$pager/}
+  		</div>
+  </div>
+  <!--/20160627 mijing---> 
+</div>
+
+{/include file="./footer.html"/}
+<script type="text/javascript">
+hbjs.use('@select, @calendar, @dateFormat', function(m){
+	
+	var dataFormat = m['tools.dateFormat'];
+	
+	function getDate(day){
+		var zdate = new Date();
+		var sdate = zdate.getTime() - (1 * 24 * 60 * 60 * 1000);
+		var edate = new dataFormat(new Date(sdate - (day * 24 * 60 * 60 * 1000)));
+		return edate.toString('yyyy-MM-dd');
+	}
+	
+	var $ = m['jquery'],
+		Select = m['widge.select'];
+		Calendar = m['widge.calendar.calendar'];
+		
+	//账号
+	var companyAccountData = [{label: '全部',value: -1}];
+	{/foreach $sub_account as $sk=>$sv/}
+	companyAccountData.push({title: "{/$sv['user_id']/}", label: "<span>{/$sv['user_id']/}</span>",value:{/$sv['account_id']/}});	
+	{//foreach/}
+	
+    var a_selectedValue=-1;	
+	{/if !empty({/$pathdata['account_id']/})/}	
+	   a_selectedValue={/$pathdata['account_id']/};	
+	{//if/}
+	var userSelecter = new Select({
+		trigger: $('#companyAccountSelecter'),
+		className: 'dropv3_select',
+		align: {baseXY: [0, '100%-1']},
+		selectName: 'account_id',
+		maxHeight: 200,
+		selectedValue:a_selectedValue,
+		dataSource: companyAccountData
+	});
+	
+	var daySelecter = $('#daySelecter');
+	var dayItems = daySelecter.children('a');
+	var hidDay = daySelecter.children('input');
+	
+	
+	var t1 = "{/$pathdata['stime']/}" || null;
+	var t2 = "{/$pathdata['etime']/}" || null;
+	var c1 = new Calendar({
+		trigger: $('#stime'), 
+		range: [null, t2]
+	})
+	var c2 = new Calendar({
+		trigger: $('#etime'),
+		range: [t1, null]
+	})
+	
+	c1.on('selectDate', function(date){
+		c2.range([date.value, null]);
+	});
+	c2.on('selectDate', function(date){
+		c1.range([null, date.value]);
+	});
+
+	$("#submitBtn").click(function(){
+		$("#Form1").submit();
+    });
+	
+	daySelecter.on('click', 'a', function(e){
+		var target = $(e.currentTarget);
+		dayItems.removeClass('cur');
+		target.addClass('cur');
+		hidDay.val(target.attr('data-value'));
+		t1 = getDate(hidDay.val()-1);
+		t2 = getDate(0);
+		$("#stime").val(t1);
+		$("#etime").val(t2);
+		c1.range([null, t2]);
+		c2.range([t1, null]);
+	});
+	
+	var isUserSelecterInit = true;
+	userSelecter.after('show',function(){
+		if(!isUserSelecterInit) return;
+		var arr = [];
+		var w = this.get('items').outerWidth(true),
+			iw;
+		this.get('items').each(function(){
+			iw = $(this).find('span').outerWidth();
+			if(iw > w){
+				arr.push(iw);
+			}
+		});
+		if(arr.length){
+			userSelecter.resetSize(Math.max.apply(null, arr) + 30, 'auto');
+		}
+		isUserSelecterInit = false;
+	});
+});
+
+</script>
+{/include file="chat/chat.html"/}
+</body>
+</html>

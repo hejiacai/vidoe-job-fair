@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+</head>
+<body>
+<style>
+.openSrvBox{width:335px;font-size:12px;}
+.openSrvBox .openTxt{margin-bottom:20px;}
+.openSrvBox .openTxt dl{margin-top:10px;}
+.openSrvBox .openTxt dl dt{font-weight:bold; height:26px; line-height:26px;}
+.openSrvBox .openTxt dl dd .photoImg{width:61px; height:76px; float:left; display:inline; background:url({/$siteurl.style/}/img/common/user61_76.jpg) no-repeat;}
+.openSrvBox .openTxt dl dd .photoImg img{width:61px; height:76px;}
+.openSrvBox .openTxt dl dd .txt{float:left; display:inline; margin-left:10px;}
+.openSrvBox .btn{text-align:right; border-top:1px solid #dadada; padding-top:10px;}
+
+.renSrvBox{width:335px;font-size:12px;}
+.renSrvBox .renTxt{margin-bottom:20px;}
+.renSrvBox .renTxt dl{margin-top:10px;}
+.renSrvBox .renTxt dl dt{font-weight:bold; height:26px; line-height:26px;}
+.renSrvBox .renTxt dl dd .photoImg{width:61px; height:76px; float:left; display:inline; background:url({/$siteurl.style/}/img/common/user61_76.jpg) no-repeat;}
+.renSrvBox .renTxt dl dd .photoImg img{width:61px; height:76px;}
+.renSrvBox .renTxt dl dd .txt{float:left; display:inline; margin-left:10px;}
+.renSrvBox .btn{text-align:right; border-top:1px solid #dadada; padding-top:10px;}
+
+</style>
+<div class="dgBox openSrvBox">
+	<div class="openTxt">
+        <p class="txt" style="text-align:center;font-size:14px;padding-top:6px">
+        	{/if $company['is_opened'] === '0'/}
+				尊敬的用户，开通会员服务，请联系客服
+			{/else/}
+				您的黄金会员将在{/date('Y-m-d', strtotime($company['end_time']))/}到期，为了不影响您的招聘，请及时联系您的招聘顾问续费！
+			{//if/}
+		</p>
+        <dl>
+        	{/if $company['is_opened'] === '0'/}
+            {/else/}
+	            <dt>到期不续费将有如下影响：</dt>
+	            <dd>1、所有职位将不再被求职者看到。</dd>
+	            <dd>2、不能再获取（下载）简历的联系方式。</dd>
+            {//if/}
+        </dl>
+        {/if $hasHRManager/}
+        <dl>
+            <dt>您的招聘顾问：</dt>
+            <dd>
+                <div class="photoImg"><img src="{/if !empty($hrManager['head_photo_url'])/}{/$hrManager['head_photo_url']/}{/else/}{/$siteurl.style/}/img/common/user61_76.jpg{//if/}"/></div>
+                <div class="txt">
+                    <p>{/$hrManager["user_name"]/}</p>
+                    <p>{/$customerService["phone400"]/}</p>
+                            {/if $hrManager["tel"]!=''/}<p style="font-size: 12px; line-height: 24px;">400-1010-970转{/$hrManager["tel"]/}</p>{//if/}
+		                    {/if $hrManager["mobile"]!=''/}<p style="font-size: 12px; line-height: 24px;">{/$hrManager["mobile"]/}</p>{//if/}
+		                    {/if $hrManager["qq"]!=''/}
+		                    	<p style="margin-top: 5px;"><a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin={/$hrManager["qq"]/}&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:{/$hrManager["qq"]/}:51" alt="点击这里给我发消息" title="点击这里给我发消息"/></a></p>
+		                	{/else/}
+		                		<p style="margin-top: 5px;"><!-- WPA Button Begin -->
+<script charset="utf-8" type="text/javascript" src="http://wpa.b.qq.com/cgi/wpa.php?key=XzkzODA0MDQyNl8xMjgzMTBfNDAwODg3Mjg4N18"></script>
+<!-- WPA Button End --></p>
+		                	{//if/}
+                </div>
+                <div class="clear"></div>
+            </dd>
+        </dl>
+        {/else/}
+             <dl>
+                <dt>客服顾问：</dt>
+                <dd>
+                    <div class="photoImg"><img src="{/if !empty($hrManager['head_photo_url'])/}{/$hrManager['head_photo_url']/}{/else/}{/$siteurl.style/}/img/common/user61_76.jpg{//if/}"/></div>
+                    <div class="txt">
+                        <p>热线：400-1010-970</p>
+                                        <p style="font-size: 12px; line-height: 24px;">客服：88394111转1（9：00－18：00）</p>
+                                            <p style="margin-top: 5px;"><a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin={/$company_ser_qq/}&site=qq&menu=yes"><img border="0"  width="92" height="22" src="{/$siteurl.style/}/img/c/new_index/firmicon06.png" alt="点击这里给我发消息" title="点击这里给我发消息"/></p>
+   
+                    </div>
+                    <div class="clear"></div>
+                </dd>
+            </dl>
+        {//if/}
+        
+    </div>
+    <div class="btn"><a href="javascript:void(0);" onclick="$(this).closeDialog();" class="btn1 btnsF14" id="closeClick">我知道了</a></div>
+</div>
+<script>
+</script>
+</body>
+</html>

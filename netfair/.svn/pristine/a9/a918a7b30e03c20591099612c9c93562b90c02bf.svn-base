@@ -1,0 +1,644 @@
+
+<link rel="stylesheet" type="text/css" href="{/version file='mobile.swiper.css'/}">
+<script type="text/javascript" language="javascript" src="{/version file='mobile.swiper.js'/}"></script>
+<script type="text/javascript" language="javascript"  src='{/version file="aliyun-webrtc-sdk-1.12.0.js"/}'></script>
+<div class="videoTopJobFair">
+	<div class="imgs">
+		<div class="swiper-container swiper-container-company">
+			<div class="swiper-wrapper">
+			{/foreach $person_action_history as $items/}
+				<div class="swiper-slide">
+					{/foreach $items as $v/}
+					<span>
+						<img src="{/$v['headphoto']/}" onerror="nofind('{/$v['default_photo']/}');"/>
+						<em>{/$v['str_lable']/}</em>
+					</span>
+					{//foreach/}
+				</div>
+			{//foreach/}
+			</div>
+		</div>
+	</div>
+	
+    <div class="videoTopJobFairMain">
+<!--        <div class="logo_img" {/if !$s_logo/}style="display:none;"{//if/}>
+            <img  src="{/$s_logo/}" class="video_top_img"/>
+        </div>-->
+		
+        <div class="videonewTopRt">
+			<h2>{/$s_title/}</h2>
+			<p>时间：{/$shuang_xuan_time_str/}</p>
+			<p>规模：已报名{/$company_num/}家企业    {/$job_num/}个岗位     {/$apply_num/}人报名<a href="javascript:;" class="scaleMore" {/if empty($s_content)/}style="display:none;"{//if/}>详情</a></p>
+		</div>
+    </div>
+</div>
+<div class="videoNav">
+    <div class="videoNavMain">
+		<div class="videoNavlf">
+			<a href="{/get_url rule='/videohall/VideoInterviewHall'/}?sid={/$sid/}" {/if $par == '视频面试大厅'/}class="cur"{//if/}>视频面试大厅</a>
+			<a href="{/get_url rule='/videohall/JobWanters'/}?sid={/$sid/}" {/if $par == '求职者大厅'/}class="cur"{//if/}>求职者大厅</a>
+			<a href="{/get_url rule='/videohall/InterviewList'/}?sid={/$sid/}" {/if $par == '面试结果'/}class="cur"{//if/}>面试结果</a>
+			<a href="{/get_url rule='/videohall/Jobs'/}?sid={/$sid/}" {/if $par == '招聘职位'/}class="cur"{//if/}>招聘职位</a>
+		</div>
+		<div class="videoNavrt">
+			<span>今日</span>
+			<p>
+			</p>
+			<span>名求职者已入场</span>
+		</div>
+    </div>
+</div>
+
+<div style="position: relative;width: 100%;">	
+	<img class="bg-cloud1" src="{/$siteurl.style/}/img/company/video/bg-cloud_01.png" alt="背景图">
+	<img class="bg-cloud2" src="{/$siteurl.style/}/img/company/video/bg-cloud_02.png" alt="背景图">
+	<img class="bg-cloud3" src="{/$siteurl.style/}/img/company/video/bg-cloud_03.png" alt="背景图">
+</div>
+<!-- 详情浮层 -->
+<span class="msgIcon"></span>
+<div class="scaleMorePop">
+	<div>{/$s_content/}</div>
+</div>
+<div id="public_dialog_kmAPP" style="display: none;">
+	<ul class="public_dialog_kmAPP_ul">
+		<li>
+			<div class="lyldialog_app-box clearfix">
+				<img src="{/$siteurl.style/}/img/blue/company/android1.png" />
+				<p style="font-size: 14px;color: #333"></p><p class="wxTip">微信扫码下载APP</p>
+				<span style="font-size: 12px;color: #666"></span>
+			</div>
+		</li>
+		<li>
+			<img src="{/$siteurl.style/}/img/blue/netfair/km_rq_help_right.jpg" >
+		</li>
+		<li>
+			<img src="{/$siteurl.style/}/img/blue/netfair/km_rq_help.jpg" >
+		</li>
+	</ul>
+</div>
+<!-- 入场检测弹出层 -->
+
+<div id="check_come">
+	<div class="check_come-box">
+	 <form action="" method="get">
+	 <div class="setTime">
+		 <div class="settime_top">
+		 <div class="setTime_left">
+			 <span class="szsj">第一步：设置面试时间</span>
+             <span class="spn_right">求职者仅能在该时间内申请视频面试</span>
+             
+		 </div>
+		 <a href="javascript:void(0);" id="setButton" class="setInterviewTime">
+		 	设置
+		 </a>
+		 </div>
+		 <div class="time_selet">
+		     {/foreach $time_list as $v/}
+		     <!-- <p>{/$v['date']/}  {/$v['time_type_str']/}   {/$v['time_str']/}</p> -->
+				 <!-- <table>
+					 <tbody>
+						 <tr>
+							 <td class="show_time">{/$v['date']/}  {/$v['time_type_str']/}   {/$v['time_str']/}</td>
+							 <td class="no_start">{/$v['status_str']/}</td>
+							 {/if $v["status_str"] != "进行中"/}<td><a href="javascript:editTime({/$v['id']/});" class="setInterviewTime">修改</a></td>{//if/}
+						 </tr>
+					 </tbody>
+				 </table> -->
+					 <div class="time_li">
+						 <div class="time_li_left">
+							 <span class="show_time">{/$v['date']/}  {/$v['time_type_str']/}   {/$v['time_str']/}</span>
+							 <span class="no_start">{/$v['status_str']/}</span>
+						 </div>
+						 <div class="time_li_right">
+							 {/if $v["status_str"] != "进行中"/}<a href="javascript:editTime({/$v['id']/});" class="setInterviewTime">修改</a>{//if/}
+						 </div>
+					 </div>
+		     {//foreach/}
+		 </div>
+	 </div>
+	
+	 <div class="check_content">
+		  
+		 <!-- <div class="content">选择面试方式</div> -->
+		 <div class="radio_vid">
+			 <div class="content">第二步：选择面试方式</div>
+			 <div class="radio_check"><i class="radio_click" data-type = "1"></i><em>电脑面试</em><span style="color: red; margin-left: 10px;">需准备摄像头、麦克风、耳机设备</span></div>
+			 <div class="radio_check"><i class="radio_click cur" data-type = "2"></i><em>手机面试</em><span style="color: red; margin-left: 10px;">需下载手机app</span></div>			 
+		 </div>
+		 <!-- <div class="radio_vid"></div> -->
+	 </div>
+		<div class="videoPopBtn">
+			<a href="javascript:void(0);" id="saveState" data-type = "2">
+				确定
+			</a>
+		</div>
+		</form>
+		 </div>
+</div>
+
+<div id="xieyi" style="display: none;">
+	<div>
+	<div class="xieyi_title">
+		为保障活动顺利开展，面试当天及时处理以下情况：
+	</div>
+	<div class="xieyi_content">
+		<p>1.面试当天，如有求职者申请，请及时处理</p>
+		<p>2.初面通过的求职者，请及时邀约复面，并反馈结果</p>
+		<div class="showTi">如累计5个求职者超过30分钟未处理，将取消本场及后续场次参会资格</div>
+		<div class="lookRule"><i class="is_agree_deal" data-type = "0"></i><span>我已阅读并同意该协议</span></div>
+	</div>
+	<div class="videoPopBtn">
+		<a href="javascript:void(0)" id="comeIn">
+			进入招聘会
+		</a>
+	</div>
+	</div>
+</div>
+
+<div class="deviceCheckDialog" style="display:none;">
+	<div class="deviceCheckDialog-box">
+		<p class="video-device">
+			<em>请插入:</em>
+			<span class="devicefail j_videoDevice_text">摄像头<i class="deviceIcon failIcon j_videoDevice"></i></span>
+			<span class="devicefail j_audioDevice_text">麦克风<i class="deviceIcon failIcon j_audioDevice"></i></span>
+			<span class="devicefail j_audioDevice_text">耳机<i class="deviceIcon failIcon j_audioDevice"></i></span>
+			<!-- <span id="j_browser_text" class="devicefail j_browser_text">浏览器<i id="j_browser" class="deviceIcon devicefail j_browser"></i></span> -->
+			<span class="againCheckBtn">重新检测</span>
+		</p>
+		<div class="RQ-box">
+			<div class="saomaTip">汇博企业APP 扫一扫</div>
+			<img id='rtcScanCodeImg' src="{/get_url rule='/video/RtcScanCode'/}?job_id={/$base_job_id/}&resume_id={/$base_resume_id/}&net_apply_id={/$apply_id/}" >
+			<div class="noHuiboAPP">没有汇博APP？<a href="javascript:void(0);" id="downloadErWeiMaBtn">点击下载</a></div>
+		</div>
+	</div>
+</div>
+<div class="downloadErWeiMaDialog" style="display:none;">
+	<div class="downloadErWeiMaDialog-box">
+		<img src="{/$siteurl.style/}/img/company/company_code_new.jpg" />
+		<p>微信扫一扫</p>
+	</div>
+</div>
+{/if $cur/}
+<div class="videoImproveEquipment videoImproveEquipmentCheck" id="videoCheckTopDiv">
+				<!-- <img src="{/$siteurl.style/}/img/company/video/eng_icon04.png" > -->
+			    {/if $souece == 2/}
+			        {/if $has_login/}
+			            <img src="{/$siteurl.style/}/img/company/video/netfair_check_warn.gif" ><em>面试时</em><span class="color-red fw14Bold">点击“手机面试”</span><em>，打开app扫码功能，</em><span class="color-red fw14Bold">扫描二维码</span><em>即可面试</em>
+			        {/else/}
+			            <img src="{/$siteurl.style/}/img/company/video/netfair_check_warn.gif" ><em>您还未下载快米app，</em><span class="color-red fw14Bold">无法进行视频面试</span><a href="javascript:void(0);" id="showkm_RQbtn" class="ahref mar-lef">下载</a>
+			        {//if/}
+			    {/else/}
+			        {/if $chat_type == 1/}
+				<!-- 面试前插上<em class="red">摄像头</em>与<em class="red">耳机</em>，并增强<em class="red">麦克风</em>，以免求职者无法与你沟通<img src="{/$siteurl.style/}/img/company/video/eng_icon23.png" class="queryIcon" > -->
+			    <!-- 电脑设备不完善（根据检测的不完善设备动态显示相关设备）：善摄像头、麦克风、耳机设备，无法面试
+			    电脑设备已完善：全部做成勾选项 -->
+					<p class="video-device video_left">
+						<!-- <span>请插入: </span> -->
+						<img src="{/$siteurl.style/}/img/company/video/netfair_check_warn.gif" >
+						<em>无法视频面试,</em><span>请连接:</span>
+						<img class="videoStatus" src="{/$siteurl.style/}/img/company/video/netfair_check_01.png" >
+						<span class="videoStatus">摄像头</span>
+						<img class="maikeStatus" src="{/$siteurl.style/}/img/company/video/netfair_check_02.png" >
+						<span class="maikeStatus">麦克风</span>
+						<img class="voiceStatus" src="{/$siteurl.style/}/img/company/video/netfair_check_03.png" >
+						<span class="voiceStatus">耳机</span>
+					</p>
+			        {/else if $has_login/}
+			        <img src="{/$siteurl.style/}/img/company/video/netfair_check_warn.gif" ><em>面试时</em><span class="color-red fw14Bold">点击“手机面试”</span><em>，打开app扫码功能，</em><span class="color-red fw14Bold">扫描二维码</span><em>即可面试</em>
+			        {/else/}
+			        <img src="{/$siteurl.style/}/img/company/video/netfair_check_warn.gif" ><em>您还未下载汇博app，</em><span class="color-red fw14Bold">无法进行视频面试</span><a href="javascript:void(0);" id="showkm_huiboRQbtn" class="ahref mar-lef">下载</a>
+			        {//if/}
+			    {//if/}
+			</div>
+
+<div class="videoIhalMain secondinterview">
+	<div class="guide-tabbar">
+		<div class="guide-tabbar-li {/if $cur == '初面'/}guide-tabbar-liActive{//if/}" id="viedoOne"><a href="{/get_url rule='/videohall/VideoInterviewHall'/}?sid={/$sid/}">初面({/$interview_one_num/}人待面试)</a></div>
+		<div class="guide-icon">></div>
+		<div class="guide-tabbar-li {/if $cur == '复面'/}guide-tabbar-liActive{//if/}"><a href="{/get_url rule='/videohall/VideoInterviewBySecond'/}?sid={/$sid/}">复面({/$interview_second_num/}人)</a></div>
+		<div class="guide-icon">></div>
+		<div class="guide-tabbar-li {/if $cur == '通过'/}guide-tabbar-liActive{//if/}"><a href="{/get_url rule='/videohall/VideoInterviewBySecond'/}?sid={/$sid/}&type=2">{/$interview_second_pass_num/}人面试通过</a></div>
+		<div class="but_list">
+            <a href="{/get_url rule='/videohall/Questions'/}?sid={/$sid/}" target="_blank"><button type="button" class="statSearchBtn" id="comproblem"><img src="{/$siteurl.style/}/img/company/video/netfair_check_questIcon.png">常见问题</button></a>
+            <button type="button" class="statSearchBtn" id="interviewps"><img src="{/$siteurl.style/}/img/company/video/netfair_check_guide.png" >新手教程</button>
+        </div>
+	</div>
+{//if/}
+
+<script type="text/javascript">
+			var aliWebrtc = new AliRtcEngine();
+	var downloadErWeiMaDialog=null,deviceCheckDialog=null;
+    var interviewTimeDialog;
+    function editTime(id){
+        interviewTimeDialog.setContent('{/get_url rule="/videohall/ModCompanyInterviewTime"/}?sid={/$sid/}&id='+id).show();
+    }
+	hbjs.use('@confirmBox, @jobDialog', function (m) {
+	    var ConfirmBox = m['widge.overlay.confirmBox'],
+	        Dialog = m['widge.overlay.hbDialog'],
+	        cookie = m['tools.cookie'],
+	        $ = m['jquery'].extend(m['cqjob.jobDialog']);
+			var close = '×';
+			var width = 600;
+			var zIndex = 9999;
+		var public_dialog_kmAPP = new Dialog({
+			idName: 'public_dialog_kmAPP',
+			title: 'APP下载',
+			width: 700,
+			close: 'x',
+			zIndex: 9999,
+			content:$('#public_dialog_kmAPP').html(),
+			isAjax: true
+		});
+		
+		var checkCome = new Dialog({
+			idName: 'check_come',
+			title: '活动设置',
+			width: 700,
+			zIndex: 9999,
+			content:$('#check_come').html(),
+			isAjax: true
+		});
+		var checkXieyi = new Dialog({
+			idName: 'xieyi',
+			title: '活动举办协议',
+			width: 700,
+			zIndex: 9999,
+			content:$('#xieyi').html(),
+			isAjax: true
+		});
+
+        interviewTimeDialog = new Dialog({
+            close: close,
+            idName: 'informTraining_dialog',
+            title: '面试时间设置',
+            width: width,
+            zIndex: zIndex
+        });
+		downloadErWeiMaDialog = new Dialog({
+		    close: close,
+		    idName: 'downloadErWeiMaDialog',
+		    title: '汇博APP下载',
+		    width: 350,
+		    zIndex: zIndex,
+			isAjax: true,
+		    content:$(".downloadErWeiMaDialog").html(),
+		});
+		deviceCheckDialog = new Dialog({
+		    close: close,
+		    idName: 'deviceCheckDialog',
+		    title: '无法检测到设备',
+		    width: 424,
+		    zIndex: zIndex,
+			isAjax: true,
+		    content:$(".deviceCheckDialog").html()
+		});
+		deviceCheckDialog.query('#downloadErWeiMaBtn').on('click', function(){
+			deviceCheckDialog.hide();
+		    downloadErWeiMaDialog.show();
+		});
+		deviceCheckDialog.query('.againCheckBtn').on('click', function(){
+			deviceCheckDialog.hide();
+			var setT = setTimeout(function(){
+				deviceCheckDialog.show();
+				checkStyle(true);
+				clearTimeout(setT);
+			},500)
+		});
+		var checkBlowsDialog = new Dialog({
+			idName: 'checkBlowsDialog',
+			title: '提示',
+			width: 350,
+			zIndex: zIndex,
+			content:'<div class="checkBlowsDialog-box"><div class="checkBlows-con">您的浏览器型号或版本过低，部分功能可能无法使用，建议您更换谷歌浏览器</div><div class="videoPopBtn"><a href="javascript:{/$siteurl.style/}/down/chrome.exe;">下载谷歌浏览器</a></div></div>'
+		});
+		if(isIE()){
+			checkBlowsDialog.show();
+			return false;
+		}
+		// $('#showPop').on('click', function(){
+		// 	checkCome.show();
+		// })
+		var check_in_type = Number('{/$check_in_type/}');
+		var isShow = '{/$has_read_guide_pic/}'
+		var popType_t = '{/$souece/}'
+		var chat_typ =  '{/$chat_type/}'
+
+		 console.log('弹出类型',check_in_type)
+		$(document).ready(function(){
+			if(check_in_type== 0){
+                if(chat_typ > 0){
+                    interviewTimeDialog.setContent('{/get_url rule="/videohall/InterviewTimeList"/}?sid={/$sid/}').show();
+                }else{
+                    checkCome.show();
+                }
+			}else if(check_in_type== 2){
+				checkXieyi.show();
+			}
+		})
+        
+		// else if(check_in_type== 0 && isShow){
+		// 	if(popType_t == 1){
+		// 		if(chat_typ == 1){
+		// 			$('.computer_pop').show();
+		// 			$('#computer_pop_bg_img').attr("src", "{/$siteurl.style/}/img/company/activity/computer_step_one.jpg");
+		// 		}else{
+		// 			$('.phone_pop').show();
+		// 			$('#phone_pop_bg_img').attr("src", "{/$siteurl.style/}/img/company/activity/phone_step_one.jpg");
+		// 		}
+		// 	}else{
+		// 		$('.kuaimi_pop').show();
+		// 		$('#kuaimi_pop_bg_img').attr("src", "{/$siteurl.style/}/img/company/activity/kuaimi_step_one.jpg");
+		// 	}
+		// }
+		// $(document).ready(function(){
+		// 	var isShow = '{/$has_read_guide_pic/}'
+		// 	var popType_t = '{/$souece/}'
+		// 	var chat_typ =  '{/$chat_type/}'
+		// 	if(isShow){
+		// 		if(popType_t == 1){ 
+		// 			if(chat_typ == 1){
+		// 				$('.computer_pop').show();
+		// 				$('#computer_pop_bg_img').attr("src", "{/$siteurl.style/}/img/company/activity/computer_step_one.jpg");
+		// 			}else{
+		// 				$('.phone_pop').show();
+		// 				$('#phone_pop_bg_img').attr("src", "{/$siteurl.style/}/img/company/activity/phone_step_one.jpg");
+		// 			}
+		// 		}else{
+		// 			$('.kuaimi_pop').show();
+		// 			$('#kuaimi_pop_bg_img').attr("src", "{/$siteurl.style/}/img/company/activity/kuaimi_step_one.jpg");
+		// 		}
+		// 	}
+		// }); 
+		$('#showkm_RQbtn').on('click', function(){
+			public_dialog_kmAPP.show();
+		});
+		$('#showkm_huiboRQbtn').on('click', function(){
+			downloadErWeiMaDialog.show();
+		});
+		checkCome.query(".setInterviewTime").on("click", function(){
+			checkCome.hide()
+		});
+		checkCome.query(".setInterviewTime1").on("click", function(){
+			checkCome.setContent($(this).attr('data-id'))
+		});
+		
+        checkCome.query(".radio_click").on("click", function(){
+			$('.radio_click').removeClass('cur');
+			$(this).addClass('cur');
+			checkCome.query("#saveState").attr('data-type',$(this).attr('data-type'))
+		});
+		// checkCome.query("#setButton").on("click", function(){
+		// 	checkCome.hide();
+		// })
+        checkCome.query("#saveState").on("click", function(){
+            var chat_type = $(this).attr('data-type');
+			console.log(chat_type)
+             $.post("{/get_url rule='/videohall/SaveAction'/}", {sid: '{/$sid/}', chat_type: chat_type ? chat_type : 0}, function (e) {
+
+                 if(e.status){
+                     checkCome.hide();
+                     checkXieyi.show();
+                     return;
+                 }
+
+                 ConfirmBox.timeBomb(e.msg,{
+                    name: 'fail',
+                    width:'auto',
+                    timeout : 2000
+                });
+                return;
+             }, 'json');
+        });
+		checkXieyi.query(".is_agree_deal").on("click", function(){
+			if($(this).hasClass('is_agree_dealcur')){
+				$(this).removeClass('is_agree_dealcur');
+				$(this).attr('data-type','0');
+			}else{
+				$(this).addClass('is_agree_dealcur');
+				$(this).attr('data-type','1');
+			}
+		})
+        checkXieyi.query("#comeIn").on("click", function(){
+            var is_agree_deal = checkXieyi.query(".is_agree_deal").attr('data-type');
+             $.post("{/get_url rule='/videohall/SaveAction'/}", {sid: '{/$sid/}', is_agree_deal: is_agree_deal ? is_agree_deal : 0}, function (e) {
+                 if(e.status){
+                     checkXieyi.hide();
+					 setTimeout(function() {
+						 window.location.reload();
+					 },300);
+					 
+                     return;
+                 }
+                 
+                 ConfirmBox.timeBomb(e.msg,{
+                    name: 'fail',
+                    width:'auto',
+                    timeout : 2000
+                });
+                return;
+             },  'json');
+        });
+	});
+	
+	var mySwiperCompany = new Swiper('.swiper-container-company', {
+	    autoplay : true,
+	    autoplayDisableOnInteraction : false,
+	    speed:5000,
+	    loop : true,
+	    freeMode:true,
+	    slidesPerView : 5,
+	    slidesPerGroup : 1
+	});
+	
+	var studentStr = '{/$entry_num/}';
+	var studentHtml ='';
+//	 var studentTime = setInterval(student,10000);
+    student();
+	function student(){
+		studentHtml = '';
+		for(var i=0;i<studentStr.length;i++){
+			studentHtml += '<em>'+studentStr[i]+'</em>';
+		}
+		$('.videoNavrt p').html(studentHtml);
+	}
+	
+	
+	$('.imgs .swiper-slide span:odd').addClass('odd');
+	$('.videoSchoolIntro a').click(function(){
+		$(this).toggleClass('cur');
+		if($(this).hasClass('cur')){
+			$('.videoSchoolIntro span').css('height','auto');
+			$('.videoSchoolIntro a').text('收起更多');
+		}else{
+			$('.videoSchoolIntro span').css('height','20px');
+			$('.videoSchoolIntro a').text('查看更多');
+		}
+	});
+    $('.scaleMore').on('click', function(){
+        var thisTop = $(this).offset().top;
+        var thisLeft = $(this).offset().left;
+		$('.msgIcon').slideToggle().css({
+			top:thisTop+22,
+			left:thisLeft
+		});
+		$('.scaleMorePop').slideToggle().css('top',thisTop+32);
+    });
+    
+    function nofind(img){
+        var imgElement=event.srcElement;
+        $(imgElement).attr('src',img);
+        imgElement.onerror=null;// 控制不要一直跳动
+    }
+	function isIE() {
+		if(!!window.ActiveXObject || "ActiveXObject" in window){
+		  return true;
+		}else{
+		  return false;
+	　　 }
+	}
+	// var has_checked = false;
+		function checkStyle(isShowDialog1){
+			var isShowDialog = isShowDialog1 ? isShowDialog1 : false;
+			if(isIE()){
+				$('.j_videoDevice').addClass('failIcon').removeClass('successIcon');
+				$('.j_videoDevice_text').addClass('devicefail').removeClass('devicesuccess');
+				$('.j_audioDevice').addClass('failIcon').removeClass('successIcon');
+				$('.j_audioDevice_text').addClass('devicefail').removeClass('devicesuccess');
+				$('.j_browser').addClass('failIcon').removeClass('successIcon');
+				$('.j_browser_text').addClass('devicefail').removeClass('devicesuccess');
+				
+				if(isShowDialog){
+					return false;
+				}
+			}
+			// if (!has_checked) {
+			    aliWebrtc.isSupport({isDebug: true}).then(function(re) {
+					if(!re.isSupported && isShowDialog){
+						deviceCheckDialog.show();
+						return false;	
+					}
+					console.log('checkDevice_success->',re)
+			       checkTypeStatus(true,true,isShowDialog);
+			        // has_checked = true;
+					if(isShowDialog){
+						return true;
+					}
+			    }).catch(function(error){
+                    console.log('checkDevice_error->',error);
+			        var browserVersion = error.browser_version;
+			        var versionNo = browserVersion.split(".");
+					var browserStatus = error.browser == 'Chrome' && versionNo[0]>60 ? true : false;
+					checkTypeStatus(error.videoDevice,error.audioDevice,isShowDialog);
+					if(isShowDialog){
+						deviceCheckDialog.show();
+						return false;	
+					}
+			    });
+			    // has_checked = true;
+			// }
+		}
+		function checkTypeStatus(videoStatus,voiceStatus,isShowDialog){
+			if(!isShowDialog){
+				if(videoStatus && voiceStatus){
+					$('.video_left').hide();
+				}else{
+					if(videoStatus){
+						$(".videoStatus").hide();
+					}
+					if(voiceStatus){
+						$(".maikeStatus").hide();
+						$(".voiceStatus").hide();
+					}
+					
+				}
+				return false;
+			}
+			if(videoStatus && voiceStatus){
+				$('.j_videoDevice').removeClass('failIcon').addClass('successIcon');
+				$('.j_videoDevice_text').removeClass('devicefail').addClass('devicesuccess');
+				$('.j_audioDevice').removeClass('failIcon').addClass('successIcon');
+				$('.j_audioDevice_text').removeClass('devicefail').addClass('devicesuccess');
+				$('.j_browser').removeClass('failIcon').addClass('successIcon');
+				$('.j_browser_text').removeClass('devicefail').addClass('devicesuccess');
+				$('.videoImproveEquipmentCheck').hide();
+			}else{
+				if(videoStatus){
+					$('.j_videoDevice').removeClass('failIcon').addClass('successIcon');
+					$('.j_videoDevice_text').removeClass('devicefail').addClass('devicesuccess');
+				}else{
+					$('.j_videoDevice').addClass('failIcon').removeClass('successIcon');
+					$('.j_videoDevice_text').addClass('devicefail').removeClass('devicesuccess');
+				}
+				if(voiceStatus){
+					$('.j_audioDevice').removeClass('failIcon').addClass('successIcon');
+					$('.j_audioDevice_text').removeClass('devicefail').addClass('devicesuccess');
+					$('.j_browser').addClass('failIcon').removeClass('successIcon');
+					$('.j_browser_text').addClass('devicefail').removeClass('devicesuccess');
+				}else{
+					$('.j_audioDevice').addClass('failIcon').removeClass('successIcon');
+					$('.j_audioDevice_text').addClass('devicefail').removeClass('devicesuccess');
+					$('.j_browser').removeClass('failIcon').addClass('successIcon');
+					$('.j_browser_text').removeClass('devicefail').addClass('devicesuccess');
+				}
+			}
+			
+		}
+		       function checkVideo(msg,id){
+				   return
+		           if(!msg.isSupported){
+		               if(!msg.audioDevice){
+		                   $('.audioDevice').show();
+		               }else{
+		                   $('.audioDevice').hide();
+		               }
+		
+		               if(!msg.videoDevice){
+		                   $('.videoDevice').show();
+		               }else{
+		                   $('.videoDevice').hide();
+		               }
+		
+		               if(msg.browser.toLowerCase() != 'chrome'){
+		                   $('.browserDevice').show();
+		               }else{
+		                   $('.browserDevice').hide();
+		               }
+		
+		               $("#videoCheckTopDiv").show();
+		           }else{
+		               $("#videoCheckTopDiv").hide();
+		           }
+		
+		           if(id){
+		               if(!msg.isSupported){
+		                   checkVideoDialog.show();
+		                   return;
+		               }
+		
+		               $.ajax({
+		                   type: 'post',
+		                   url: '{/get_url rule="/videohall/StartInterview"/}',
+		                   data: {id: id},
+		                   dataType: 'json',
+		                   success: function (res) {
+		                       if(res.isNeedLogin){
+		                           window.location.reload();
+		                           return;
+		                       }
+		                       if(!res.status){
+		                           ConfirmBox.timeBomb(res.msg,{
+		                               name: 'fail',
+		                               width:'auto',
+		                               timeout : 2000
+		                           });
+									setTimeout("window.location.reload()",2000);
+		                           return;
+		                       }
+		//                        window.open("https:{/base_lib_Constant::COMPANY_URL_NO_HTTP/}/chat/?resume_id=" + res.data.resume_id + "&job_id=" + res.data.job_id + "&net_apply_id=" + res.data.id + "&sid=" + res.data.sid,"_blank");
+		//                        setTimeout(function(){ window.location.reload(); }, 3000);
+		                       window.location.href = "https:{/base_lib_Constant::COMPANY_URL_NO_HTTP/}/chat/?resume_id=" + res.data.resume_id + "&job_id=" + res.data.job_id + "&net_apply_id=" + res.data.id + "&sid=" + res.data.sid;
+		                   }
+		               });
+		           }
+		       }
+</script>

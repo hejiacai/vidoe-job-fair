@@ -1,0 +1,381 @@
+<!doctype html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+<title>{/$title/}</title>
+<!–[if lt IE9]> 
+<script src="{/version file='html5.js'/}"></script>
+<![endif]–>
+<link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='comback.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='resument2015.css'/}" />
+<script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.min.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='common.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='dialog.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='ui_inputFocus.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='ui_validate.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='jquery.form.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='ui_dropdownlist.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='ui_tooltip.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='ui_autocomplete.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='jquery.email.tip.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='jquery.metadata.js'/}"></script><!--指向改变class-->
+<style>
+.tips{position:relative; display:block;}
+.tips i.hbFntWes{font-size:16px; margin-left:5px;}
+.tipBox{position:absolute;right:3px;top:21px;color:#444;background:#fff; border:1px solid #dadada; padding:5px 0;zoom:1; line-height:22px;}
+.tipBox ul li a{color:#444; width:85px; display:block; padding:0 10px;}
+.tipBox ul li a:hover{color:#00aaff; background:#f5f5f5;}
+.tipBox ul li.rLnk{position:relative; z-index:1;}
+.tipBox ul li.rLnk .downCmt{position:absolute; left:-28px; top:23px; background:#fff; border:1px solid #dadada; width:160px; font-size:12px;padding:10px; zoom:1;}
+.tipBox ul li.rLnk .downCmt i.hbIconMoon{font-size:14px; margin-right:5px;}
+.tipBox ul li.rLnk a.Un{cursor:text; color:#999;}
+.tipBox ul li.rLnk a.Un:hover{color:#999;}
+</style>
+</head>
+<body id="body">
+{/include 'new_header.html' par="全职招聘" cur='简历管理'/}
+
+<div class="resumentNbg" style="overflow: inherit;">
+
+<!---20151208 微信二维码 start -->
+<style>
+    .content{position: relative}
+    .ewmBox{display: none;position: absolute;right:-180px;top:0px;width:160px;background: #fff;border:1px solid #dedede;text-align: center;padding:30px 0;font-size:16px;color:#333;font-family:"微软雅黑"}
+    .ewmBox img{border:1px solid #e9e9e9;margin-bottom: 5px;width: 118px;height: 118px;}
+    .ewmBox a{display: inline-block;width:24px;height:24px;background: url({/$siteurl.style/}/img/c/weixin/close2.jpg) no-repeat;position: absolute;top:0px;right:0px}
+    .ewmBox a:hover{background: url({/$siteurl.style/}/img/c/weixin/close2_hover.jpg) no-repeat}
+</style>
+<div class="ewmBox" id="ewmBox">
+    <a href="" class="close"></a>
+    <img src="" />
+    <p>关注汇博招聘<br />随时随地筛选简历</p>
+</div>
+<!---20151208 微信二维码 end -->
+
+{/include 'resume/apply/nav.html' par="回收站"/}
+<div class="rMentRt">
+    <div class="rMenTit"><span>共<b>{/$totalSize/}</b>份简历</span></div>
+    <div class="rMetSelt" style="">
+        <div class="subMetz" style="padding-top:25px;#padding-top:14px;">
+               {/if count($origintypes)>0/}
+                    <span>简历来源：</span>
+                    {/foreach $origintypes as $type/}
+                    <a  href='javascript:;'  data-type='{/$type["id"]/}' class='origintype{/if $type["id"]=={/$origin_id/}/} cut{//if/} origintype_{/$type["id"]/}'>{/$type['name']/}</a>
+                    {//foreach/}
+                {//if/}
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="rMentBtn">
+        <a href="javascript:;" class="recycleBin">清空回收站</a>
+    	<label>
+        	<input name="c" class="resuemSelectAll" type="checkbox" value="" /><span>全选</span>
+        </label>
+        <p>
+            <a href="javascript:;" class="resumeBack">恢复</a>
+            <a href="javascript:;" class="deleteResume">删除</a>
+        </p>
+        <div class="rMentSech">
+            <input type="text" name="t" id="keyword" class="rMenText" value="{/if !empty($keyword)/}{/$keyword/}{//if/}" />
+            <input type="button" name="b" id="searchKey" value="" class="rMentBtnx" />
+        </div>
+    </div>
+    <div class="rMentLitBg">
+        {/if $totalSize>0/}
+        {/foreach $recyclesData as $key=>$recycle/}
+            <div class="rMentLit" >
+                    <div class="rMentLx">
+                    <label>
+                        <input name="chkrecycle" type="checkbox" value="{/$key/}" /><b>简历来源：{/$recycle['origin_type']/}</b>
+                    </label>
+                                                                                                                              
+                    </div>
+                <div class="rMentLv" data-id ="{/$key/}">
+                    <a href="javascript:;" style=' cursor:default;' class="rMentLink">
+                            <div class="mImgBg"><p> <img class="mImg" src="{/if $recycle['small_photo']/}{/$recycle['small_photo']/}{/else/}{/$siteurl.style/}/img/c/new_resume/headportrait.png{//if/}" />
+                            </p></div>
+                        <div>
+                            <p class="mTit1"><b>{/$recycle['user_name']/}</b>
+                                {/if !empty($recycle['sex'])/}{/$recycle['sex']/}{//if/}
+                                {/if !empty($recycle['work_year'])/}/{/$recycle['work_year']/}{//if/}
+                                /{/$recycle['age']/}
+                                {/if !empty($recycle['area'])/}/{/$recycle['area']/}{//if/}
+                                
+                                {/if !empty($recycle['remark'])/}<i class='remark_contr'></i><span class='remark_show'>{/$recycle['remark']/}<img src="{/$siteurl.style/}/img/c/new_resume/hbtip2.png" width="5" height="22"></span>{//if/}
+                            </p>
+                             {/if !empty({/$recycle['school']/})/}<p class="mTit3">{/$recycle['school']/}<span>|</span>
+                                 {/if !empty($recycle['major_desc'])/}{/$recycle['major_desc']/}<span>|</span>{//if/}
+                                 {/if !empty($recycle['school_degree'])/}{/$recycle['school_degree']/}{//if/}</p>
+                             {//if/}
+                             {/if !empty($recycle['worklist'])/}
+                                <p class="mTit2"><b>{/$recycle['worklist'][0]['station']/}</b><span>|</span>{/$recycle['worklist'][0]['company_name']/}<span>|</span>{/$recycle['worklist'][0]['start_time']/}-{/$recycle['worklist'][0]['end_time']/}</p>
+                              {//if/}
+                        </div>
+                    </a>
+                         <div class="rMentLinkv">
+                            <a href="javascript:;">&nbsp;</a>
+                            <a href="javascript:;" class="mTit4 singleBack">恢复</a>
+                            <a href="javascript:;">&nbsp;</a>
+                        </div>
+                        <div class="clear"></div>
+                </div>
+                <div class="clear"></div>
+            </div>
+        {//foreach/}
+        {/else/}
+        <div class="noData">
+        	<p>未找到相关简历，请更换筛选条件、关键词再试！</p>
+        </div>
+        {//if/}
+        <div class="clear"></div>
+    </div>
+    {/if $totalSize >0/}    
+        <div class="rMentBtn">
+            <label>
+                    <input name="c" class="resuemSelectAll" type="checkbox" value="" /><span>全选</span>
+            </label>
+            <p>
+                <a href="javascript:;" class="resumeBack">恢复</a>
+                <a href="javascript:;" class="deleteResume">删除</a>
+            </p>
+        </div>
+    {//if/}
+        {/$pager/}
+</div>
+<div class="clear"></div>
+</div>
+<!--弹窗职位不匹配提示结束-->
+<!--2019.6.3更新简历完善度浮动图标-->
+{/if $is_question == 1/}
+<style>
+	.resume_complete{
+		position: fixed;
+	    margin-left: 516px;
+	    left: 50%;
+	    bottom: 210px;
+	}
+</style>
+<a href="javascript:void(0);" class="resume_complete"><img src="{/$siteurl.style/}/img/company/resume_complete.png"/></a>
+{//if/}
+{/include file="msgpop.html"/}
+{/include file="footer.html"/}
+<script>
+ $.setIndex("zindex");//为需要赋层级设置的元素设置class为zindex
+
+var recycle ={
+    init:function() {
+         //回车事件
+       $("#keyword").keydown(function(e){
+            if(e.keyCode == 13){
+                $("#onSubmit").click();
+            }
+        });
+        // 水印 
+        $('#keyword').watermark('输入姓名或简历编号');
+        //全选 反选
+        $(".resuemSelectAll").click(function(){
+            if($(this).is(':checked')) {
+                $('.rMentLit label input[name="chkrecycle"]').attr('checked','checked');	
+            }else {
+                $('.rMentLit label input[name="chkrecycle"]:checked').removeAttr('checked');
+            }
+        });
+        //      单选
+		$('.rMentLit label input[name="chkrecycle"]').click(function(){
+			if(!$(this).prop('checked')){
+				$(".resuemSelectAll").removeAttr('checked');
+			}
+			var chkapplyLengthAll = $('.rMentLit label input[name="chkrecycle"]').length;
+			var chkapplyLength = $('.rMentLit label input[name="chkrecycle"]:checked').length;
+			if(chkapplyLength == chkapplyLengthAll){
+				$(".resuemSelectAll").attr('checked','checked');
+			}
+			
+		});
+        $(".remark_contr").mouseover(function(e){
+            e.preventDefault();
+          $(this).next(".remark_show").addClass("mTitcut2");
+        }).mouseout(function(e){
+            e.preventDefault();
+          $(this).next(".remark_show").removeClass("mTitcut2");
+        });
+        //批量简历恢复
+        $(".resumeBack").click(function(e){
+          
+                var ids = recycle.selectIds();
+                if(ids.length<=0) {
+                    $.anchor('请选择需要恢复的简历',{icon:'info'});
+                    return;
+                }
+                 $.confirm("确定要将选中简历全部恢复吗？","恢复简历",function (){
+                    recycle.recovery(ids.join(","));
+                });
+        });
+        //简历单个恢复
+        $(".singleBack").click(function(e){
+             var id = $(this).parents(".rMentLv").attr("data-id");
+            if(typeof id != 'undefined' && id > 0) {
+                $.confirm("确定要将该简历恢复吗？","恢复简历",function () {
+                    recycle.recovery("" + id);
+                });
+            } else {
+                $.anchor('请选择一个简历后再进行恢复',{icon:'warning'});
+            }
+        });
+        //简历批量删除
+        $(".deleteResume").click(function(){
+            var ids = recycle.selectIds();
+            if (ids.length > 0) {
+                 $.confirm("确定要将该简历删除吗？","删除简历",function () {
+                    recycle.deleteresume(ids.join(","));
+                 });
+            } else {
+                $.anchor('请选择简历后再进行删除',{icon:'warning'});
+            }
+        });
+        //清空回收站
+        $(".recycleBin").click(function(){
+             $.confirm("回收站内的数据将被全部删除，并且不能恢复，是否继续清空？","清空回收站",function () {
+                recycle.clearresume();
+            });
+        });
+        //提交搜索
+        $("#searchKey").click(function(){
+             //搜索条件
+             var job_id = "";
+             var keyword = $("#keyword").val();
+             recycle.submit(job_id,keyword);
+        });
+        //按来源查看
+        $(".origintype").click(function(){
+             var origin_id = $(this).attr("data-type");
+             recycle.submit(origin_id,"");
+        });
+    },
+    selectIds:function(){
+        var checkboxs = $('.rMentLitBg').find('input[name="chkrecycle"]:checked'),
+        ids = [];
+        for(var i=0,len=checkboxs.length;i<len;i+=1) {
+            ids.push($(checkboxs[i]).val());
+        } 	
+        return ids;
+    },
+    submit:function(origin_id,keyword){
+        if(keyword =='输入姓名或简历编号'){
+            keyword ="";
+        }
+        var data =[];
+            if(origin_id !=''){
+                data.push("origin_id="+origin_id);
+            }
+            if(keyword !=''){
+                data.push("keyword="+keyword);
+                data.push("search_model=1");
+            }
+        if(data.length >0){
+            window.location.href = '{/get_url rule="/recycle/index/"/}'+"?"+data.join("&");
+        }else{
+            window.location.href = '{/get_url rule="/recycle/index/"/}'
+        } 
+    },
+    recovery : function(ids) {
+            $.getJSON('{/get_url rule="/recycle/recoverydo/" data="ids='+ids+'&v='+Math.random()+'"/}', function(result){
+                if (result.success) {
+                    //删除列表
+                     $.anchorMsg("恢复成功", { icon: 'success'}); 
+                    window.location.reload();
+                } else {
+                    $.anchorMsg(result.error, { icon: 'warning'}); 
+                }
+            });
+    },
+    deleteresume : function (ids) {
+        $.getJSON('{/get_url rule="/recycle/delete/" data="ids='+ids+'&v='+Math.random()+'"/}', function(result){
+            if (result.success) {
+                $.anchorMsg('删除成功');
+                setTimeout("window.location.reload()", 500);
+            } else {
+                $.anchorMsg(result.error, {icon: 'warning'}); 
+            }
+        });
+    },
+    clearresume : function () {
+        $.getJSON('{/get_url rule="/recycle/clear"/}', function(result) {
+            if (result.success) {
+                $.anchorMsg('删除成功');
+                setTimeout("window.location.reload()", 500);
+            } else {
+                $.anchorMsg(result.error, {icon: 'warning'}); 
+            }
+        });
+    }
+
+}
+    
+recycle.init();
+$.getJSON('{/get_url rule="/account/twodimensioncode/"/}',function(result){
+    if(result&&result.status) {
+        var src = result.data.codeurl;
+        $('#ewmBox img').attr('src',src);
+        $('#ewmBox').show();
+    }
+});
+
+$("#ewmBox").find("a").click(function(){$(this).parents("#ewmBox").hide();return false;});
+</script>
+<!--2019.6.3更新-->
+<script>
+	var resumeCompleteDialog;
+    hbjs.use('@hbCommon, @jobDialog, @validator, @confirmBox', function(m) {
+
+        var $ = m['product.hbCommon'].extend(m['cqjob.jobDialog']);
+        var Dialog = m['widge.overlay.hbDialog'];
+        var confirmBox = m['widge.overlay.confirmBox'];
+
+        function showModel(icon, msg) {
+            var pWidth = 70, fontWidth = 18;
+            confirmBox.timeBomb(msg, {
+                name: icon,
+                width: pWidth + msg.length * fontWidth
+            });
+        }
+
+		//2019.6.3更新
+		//简历完善度
+		resumeCompleteDialog = new Dialog({
+			close: 'x',
+			idName: 'resume_complete_dialog',
+			title: '简历完善度调研',
+			content: "{/get_url rule='/answer/index/'/}",
+			width:'auto',
+			isAjax: true
+		})
+		$('.resume_complete').on('click',function(){
+			resumeCompleteDialog.show()
+		})
+	})
+</script>
+
+<script  type="text/javascript">
+    var action_url = '{/$siteurl.style/}';
+    action_dom = [
+        ['.origintype_0', 356],
+        ['.origintype_1', 357],
+        ['.origintype_3', 358],
+        ['.origintype_5', 359],
+        ['.origintype_4', 360],
+        ['.recycleBin', 361],
+        ['.resumeBack', 362],
+        ['.deleteResume', 363],
+        ['#keyword', 364],
+        ['.rMentLink', 365],
+        ['.singleBack', 366]
+    ];
+</script>
+<script type="text/javascript" language="javascript" src="{/version file='action.js'/}"></script>
+<!--2019.6.3更新 完-->
+</body>
+</html>

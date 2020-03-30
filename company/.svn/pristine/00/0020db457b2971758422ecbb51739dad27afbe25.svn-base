@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+<title>{/$title/}</title>
+<!–[if lt IE9]> 
+<script type="text/javascript" language="javascript" src="{/version file="html5.js"/}"></script>
+<![endif]–>
+<link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='login.css'/}" />
+
+<script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.min.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='common.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='jquery.form.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='dialog.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='ui_validate.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='ui_inputFocus.js'/}"></script><!--输入框获取焦点-->
+<script type="text/javascript" language="javascript" src="{/version file='jplayer.js'/}"></script>
+<link rel="stylesheet" type="text/css" href="{/version file='jplayer.blue.monday.css'/}" />
+<style>
+	body{background: #f2f2f2}
+	body,div,ul,li,p{margin:0;padding:0}
+	.error-box{width:970px;margin:145px auto;background: url({/$siteurl.style/}/img/company/errtipicon.jpg) left center no-repeat;font-family: '微软雅黑';text-align: left;}
+	.error-box-content{width:590px;margin-left: 318px;border:1px solid #d9d9d9;border-radius: 10px;background: #fff;padding:38px}
+	.error-box-content p{color:#888481;font-size:28px}
+	.error-box-content div{font-size: 14px;color:#3f3f3f;line-height: 24px;margin-top: 10px;font-family: '宋体'}
+	.error-box-content a{color:#3b87b5;text-decoration: none}
+	.error-box-content strong{color:#ff6161}
+</style>
+</head>
+<body>
+	<div class="error-box">
+		<div class="error-box-content">
+			{/if $err_type == 1/}
+			<p>登录失败</p>
+			<div>
+				您的账号已被禁用。
+                {/if !$is_main/}
+                <br/>请登录管理员帐号，在<b style='font-size: 14px;'>【账户管理】--【账号管理】</b>中进行解禁。
+                {//if/}
+                </p>
+				如需帮助请致电<strong>{/$HuiboPhone400/}</strong>进行咨询
+			</div>
+			{/else if $err_type == 2/}
+			<p>登陆失败</p>
+			<div>
+				贵公司之前已经拥有了平台账号</p>
+				当前账号，<a href="javascript:void(0)">{/$user_id/}</a>属于重复注册账号，已经无法使用<br />
+				请使用原有账号进行登陆<br />
+				若有疑问可致电<strong>{/$HuiboPhone400/}</strong>咨询
+			</div>
+			{//if/}
+		</div>
+	</div>
+</body>

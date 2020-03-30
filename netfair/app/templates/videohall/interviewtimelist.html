@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>汇博人才网-面试时间设置</title>
+		<link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+        <link rel="stylesheet" type="text/css" href="{/version file='video_eng.css'/}" />
+        <link rel="stylesheet" type="text/css" href="{/version file='m_font_style.css'/}">
+        <link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}">
+		<script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.min.js'/}"></script>
+        
+        <script type="text/javascript" src="{/version file='version.js'/}"></script>
+        <script type="text/javascript">
+            window.CONFIG = {
+                HOST: '{/$siteurl.style/}',
+                COMBOPATH: '/js/v2/'
+            }
+        </script>
+        <script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+        <script type="text/javascript" src="{/version file='global.js'/}"></script>
+        <script type="text/javascript" language="javascript" src="{/version file='confirmBox.js'/}"></script>
+        <script type="text/javascript" language="javascript" src="{/version file='dialog.js'/}"></script>
+    </head>
+	<body>
+		<div class="jobVacancyPop" style="width:600px">
+			<div class="jobVacancyAdd">
+				<span style=" color: #ff1a1a;">求职者仅能在设置的面试时间段内进行申请视频面试</span>
+				<a href='{/get_url rule="/videohall/ModCompanyInterviewTime"/}?sid={/$sid/}'>新建</a>
+			</div>
+			<div style="max-height: 400px; overflow-y: auto;">
+			<table class="jobVacancyTab">
+                {/foreach $list as $v/}
+				<tr>
+					<td>{/$v['date']/}  {/$v['time_type_str']/}   {/$v['time_str']/}</td>
+					<td>{/$v['status_str']/}</td>
+					<td>
+						{/if $v["status_str"] != "进行中"/}<a href='{/get_url rule="/videohall/ModCompanyInterviewTime"/}?id={/$v["id"]/}&sid={/$sid/}'>修改</a>{//if/}
+						{/if $v["status_str"] != "进行中"/}<a href="javascript:;" class='del' data-id="{/$v['id']/}">删除</a>{//if/}
+					</td>
+				</tr>
+                {//foreach/}
+			</table>
+			</div>
+			<div class="videoPopBtn">
+				<a href="javascript:;" id="videoPopBtnz">保存</a>
+			</div>
+		</div>
+
+<!-- 新增面试时间 -->
+
+<script type="text/javascript">
+hbjs.use('@confirmBox, @jobDialog', function (m) {
+    var ConfirmBox = m['widge.overlay.confirmBox'],
+        $ = m['jquery'].extend(m['cqjob.jobDialog']);
+	$('#videoPopBtnz').click(function(){
+        parent.location.reload();
+//		parent.interviewTimeDialog.hide();
+	});
+    $('.del').on('click', function(){
+        var id = $(this).attr('data-id');
+        $.confirm('是否删除该场面试？', '提示', function () {
+            $.ajax({
+                type: 'post',
+                url: '{/get_url rule="/videohall/DelCompanyInterviewTime"/}',
+                data: {id: id},
+                dataType: 'json',
+                success: function (res) {
+                    if(!res.status){
+                        ConfirmBox.timeBomb(res.msg,{
+                            name: 'fail',
+                            width:'auto',
+                            timeout : 2000
+                        });
+                        return;
+                    }
+                    ConfirmBox.timeBomb(res.msg,{
+                        name: 'success',
+                        width:'auto',
+                        timeout : 2000
+                    });
+                    window.location.href = '{/get_url rule="/videohall/InterviewTimeList"/}?sid={/$sid/}&from=del';
+                }
+            });
+        });
+    });
+});
+</script>
+	</body>
+</html>

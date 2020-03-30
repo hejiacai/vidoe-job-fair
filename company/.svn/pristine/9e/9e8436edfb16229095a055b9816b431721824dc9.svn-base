@@ -1,0 +1,777 @@
+<link rel="stylesheet" type="text/css" href="{/version file='m_font_style.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='index_newlayer.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='uploadstyle2.css'/}" />
+<script type="text/javascript" language="javascript" src="{/version file='upload.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='jquery.cookie.js'/}"></script>
+<div class="my_newMask" style="display: none"></div>
+<div class="my_newLayer" style="display: none;">
+	<form method="post" id="modify_submit" action="/index/SaveModifyNotice">
+	<p class="my_title">完善企业信息，提升招聘效果</p>
+	<p class="my_smtitle">求职者找工作时，十分关心企业以下信息，完善它们&nbsp;<span class="my_red">增加简历投递量！</span></p>
+	{/if $need_alert_modify['franace']/}
+	<div class="caption clearfix">
+		<div class="content_l">
+			<span class="my_contenttitle">融资阶段</span>
+		</div>
+		<div class="content_r">
+			<ul class="financing">
+				{/foreach $franaces as $k=>$v/}
+				<li data-id="{/$k/}"><span></span>{/$v/}</li>
+				{//foreach/}
+			</ul>
+		</div>
+	</div>
+	{//if/}
+
+	{/if $need_alert_modify['photolist']/}
+	<div class="caption clearfix">
+		<div class="content_l">
+			<span class="my_contenttitle">企业办公环境</span>
+		</div>
+		<div class="content_r">
+			<div class="feedback-img">
+				{/$up_img_html.html/}
+			</div>
+		</div>
+	</div>
+	{//if/}
+
+	{/if $need_alert_modify['project']/}
+	<div class="caption clearfix">
+		<div class="content_l">
+			<span class="my_contenttitle">产品/项目介绍</span>
+		</div>
+		<div class="content_r" id="list1">
+			<span class="my_add">添加&nbsp;<span class="icon-resume_drop-down"></span></span>
+			<div class="my_temp">
+				<div class="my_content">
+					<div>
+						<span class="my_content_l" placeholder="">名称</span>
+						<input type="text" name="project_name" class="nameinput" placeholder="请输入15字以内产品/项目名称" maxlength="15">
+					</div>
+					<div class="content_two">
+						<span class="my_content_l">简介</span>
+						<textarea class="nameinput_two" name="project_info" placeholder="请输入100字以内产品/项目简介" maxlength="100"></textarea>
+					</div>
+					<div class="content_three">
+						<span class="my_content_l">图片</span>
+						<div class="my_pic">
+							{/$project_img_html.html/}
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="addcontent">
+				<span class="icon-AI-_-07 jxtj"></span>
+				<span style="margin-left: 10px;">继续添加</span>
+			</div>
+		</div>
+	</div>
+	{//if/}
+
+	{/if $need_alert_modify['manager']/}
+	<div class="caption clearfix">
+		<div class="content_l">
+			<span class="my_contenttitle">老板/高管介绍</span>
+		</div>
+		<div class="content_r">
+			<span class="my_add_two">添加&nbsp;<span class="icon-resume_drop-down"></span></span>
+			<div class="my_temp_two" id="list2">
+				<div class="my_content_two">
+					<div class="clearfix">
+						<div style="float: left;">
+							<span class="my_content_l">姓名</span>
+							<input type="text" class="nameinput_small" name="manager_name" placeholder="请输入高管姓名">
+						</div>
+						<div style="float: right;margin-right: 12px;">
+							<span class="my_content_l">职位</span>
+							<input type="text" class="nameinput_small" name="manager_station" id="manager_station" placeholder="请输入高管职位">
+						</div>
+					</div>
+					<div class="content_two">
+						<span class="my_content_l">简介</span>
+						<textarea class="nameinput_two" id="nameinput_two" name="manager_info" placeholder="例如：耶鲁大学经济学及东亚研究学士学位、耶鲁法学院法学博士学位。"></textarea>
+					</div>
+					<div class="content_three">
+						<span class="my_content_l">图片</span>
+						<div class="my_pic">
+							{/$manager_img_html.html/}
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="addcontent_two">
+				<span class="icon-AI-_-07 jxtj"></span>
+				<span style="margin-left: 10px;">继续添加</span>
+			</div>
+		</div>
+	</div>
+	{//if/}
+	<div class="my_line"></div>
+	<div class="my_footer">
+		<a href="javascript:;" class="my_save">保存</a>
+		<a href="#" class="my_remove">关闭</a>
+		<div class="remind">
+			<span class="gou"></span>
+			<span>本月不再提醒</span>
+		</div>
+	</div>
+
+	</form>
+</div>
+<script>
+	var uploader_img;
+	var project_img;
+	var manage_img;
+	hbjs.use('@hbCommon, @jobDialog, @validator, @areaDrop, @confirmBox, @areaDrop', function(m) {
+		//var $ = m['product.hbCommon'].extend(m['cqjob.jobDialog']);
+		var Dialog = m['widge.overlay.hbDialog'];
+		var AreaDrop = m['product.areaDrop'];
+		var validatorForm = m['widge.validator.form'];
+		var ConfirmBox = m['widge.overlay.confirmBox'];
+		var fontSize = 18,
+		pWidth = 70;
+{/if $need_alert_modify['photolist']/}
+		//相册
+		$(function () {
+			var up_options_{/$up_img_html.id/} = {
+				up_id: '.{/$up_img_html.id/}',
+				auto: {/$up_img_html.config.auto/},
+				BASE_URL: "{/$up_img_html.config.BASE_URL/}",
+				fileNumLimit: {/$up_img_html.config.fileNumLimit/},//文件数量 默认5个 每张1M fileSingleSizeLimit: 1024 * 1024,
+				fileSingleSizeLimit: {/$up_img_html.config.fileSingleSizeLimit/},//每个文件大小
+				file_name: '{/$up_img_html.config.file_name/}',//返回接收上传的文件名称隐藏域
+				fileVal: '{/$up_img_html.config.fileVal/}',//上传接收name
+				defaults_files: {/$up_img_html.config.defaults_files/},//默认文件
+				accept: {/$up_img_html.config.accept/},//允许文件类型
+				formData: {/$up_img_html.config.form_data/},//上传删除携带参数
+				server: '{/get_url rule="/environment/UploadEnvalop/"/}',
+				deleteServer: '{/get_url rule="/environment/DelTempFile/"/}',
+				error_hint_fun: function (msg) {
+					ConfirmBox.timeBomb(msg, {
+						name: 'fail',
+						timeout: 2000,
+						width: fontSize * msg.length + pWidth
+					});
+				},
+				confirm_hint_fun: function (confirm_msg, deleteServerAjax) {
+					//询问框
+					ConfirmBox.confirm(confirm_msg,'删除图片', function(obj){
+						deleteServerAjax();
+						this.hide();
+					},{
+						width :300,
+						close : 'x',
+						zIndex : 99999
+					});
+				},
+			};
+			uploader_img = $('.{/$up_img_html.id/}').powerWebUpload(up_options_{/$up_img_html.id/});
+		});
+{//if/}
+
+{/if $need_alert_modify['project']/}
+		//产品
+		$(function () {
+			var up_options_{/$project_img_html.id/} = {
+				up_id: '.{/$project_img_html.id/}',
+				auto: {/$project_img_html.config.auto/},
+				BASE_URL: "{/$project_img_html.config.BASE_URL/}",
+				fileNumLimit: {/$project_img_html.config.fileNumLimit/},//文件数量 默认5个 每张1M fileSingleSizeLimit: 1024 * 1024,
+				fileSingleSizeLimit: {/$project_img_html.config.fileSingleSizeLimit/},//每个文件大小
+				file_name: '{/$project_img_html.config.file_name/}',//返回接收上传的文件名称隐藏域
+				fileVal: '{/$project_img_html.config.fileVal/}',//上传接收name
+				defaults_files: {/$project_img_html.config.defaults_files/},//默认文件
+				accept: {/$project_img_html.config.accept/},//允许文件类型
+				formData: {/$project_img_html.config.form_data/},//上传删除携带参数
+				server: '{/get_url rule="/introduceProject/Picture/"/}',
+				deleteServer: '{/get_url rule="/introduceManage/DelTempFile/"/}',
+				error_hint_fun: function (msg) {
+					ConfirmBox.timeBomb(msg, {
+						name: 'fail',
+						timeout: 2000,
+						width: fontSize * msg.length + pWidth
+					});
+				},
+				confirm_hint_fun: function (confirm_msg, deleteServerAjax) {
+					//询问框
+					ConfirmBox.confirm(confirm_msg,'删除图片', function(obj){
+						deleteServerAjax();
+						this.hide();
+					},{
+						width :300,
+						close : 'x',
+						zIndex : 99999
+					});
+				},
+			};
+			project_img = $('.{/$project_img_html.id/}').powerWebUpload(up_options_{/$project_img_html.id/});
+		});
+{//if/}
+
+{/if $need_alert_modify['manager']/}
+		//高管
+		$(function () {
+			var up_options_{/$manager_img_html.id/} = {
+				up_id: '.{/$manager_img_html.id/}',
+				auto: {/$manager_img_html.config.auto/},
+				BASE_URL: "{/$manager_img_html.config.BASE_URL/}",
+				fileNumLimit: {/$manager_img_html.config.fileNumLimit/},//文件数量 默认5个 每张1M fileSingleSizeLimit: 1024 * 1024,
+				fileSingleSizeLimit: {/$manager_img_html.config.fileSingleSizeLimit/},//每个文件大小
+				file_name: '{/$manager_img_html.config.file_name/}',//返回接收上传的文件名称隐藏域
+				fileVal: '{/$manager_img_html.config.fileVal/}',//上传接收name
+				defaults_files: {/$manager_img_html.config.defaults_files/},//默认文件
+				accept: {/$manager_img_html.config.accept/},//允许文件类型
+				formData: {/$manager_img_html.config.form_data/},//上传删除携带参数
+				server: '{/get_url rule="/introduceManage/Picture/"/}',
+				deleteServer: '{/get_url rule="/introduceManage/DelTempFile/"/}',
+				error_hint_fun: function (msg) {
+					ConfirmBox.timeBomb(msg, {
+						name: 'fail',
+						timeout: 2000,
+						width: fontSize * msg.length + pWidth
+					});
+				},
+				confirm_hint_fun: function (confirm_msg, deleteServerAjax) {
+					//询问框
+					ConfirmBox.confirm(confirm_msg,'删除图片', function(obj){
+						deleteServerAjax();
+						this.hide();
+					},{
+						width :300,
+						close : 'x',
+						zIndex : 99999
+					});
+				},
+			};
+			manage_img = $('.{/$manager_img_html.id/}').powerWebUpload(up_options_{/$manager_img_html.id/});
+		});
+{//if/}
+	});
+</script>
+<script type="text/javascript">
+	$(function(){
+		var layerHeight = $('.my_newLayer').height()
+		var dHeight = $(window).height()
+		var my_layer_top = dHeight - layerHeight
+		
+		$('.my_newLayer').css('top',my_layer_top/2)
+		// if($('.my_newLayer').height() < 350) {
+		// 	$('.my_newLayer').css('top',my_layer_top/2)
+		// }
+		
+		$('.financing li').click(function(){
+			$(this).children().addClass('pop')
+			$(this).siblings().children().removeClass('pop')
+		})
+		$('.my_add').click(function(){
+			$(this).hide()
+			$('.my_content').css('display','inline-block')
+			$('.addcontent').show()
+			var layerHeight = $('.my_newLayer').height()
+			var dHeight = $(window).height()
+			var my_layer_top = dHeight - layerHeight
+			$('.my_newLayer').css('top',my_layer_top/2)
+		})
+	
+		$('.my_add_two').click(function(){
+			$(this).hide()
+			$('.my_content_two').css('display','inline-block')
+			$('.addcontent_two').show()
+			var layerHeight = $('.my_newLayer').height()
+			var dHeight = $(window).height()
+			var my_layer_top = dHeight - layerHeight
+			$('.my_newLayer').css('top',my_layer_top/2)
+		})
+		var chars = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+		function generateMixed(n) {
+		     var res = "";
+		     for(var i = 0; i < n ; i ++) {
+		         var id = Math.ceil(Math.random()*26);
+		         res += chars[id];
+		     }
+		     return res;
+		}
+		$('.addcontent').click(function(){
+			var pic_name = generateMixed(5)
+			$.ajax({
+			    type: 'post',
+			    url: '/index/NoticeGetImgUpload',
+				data: {type:1,pic_name:pic_name},
+			    dataType: 'json',
+			    success: function (res) {
+					console.log(res)
+					if(res.status){
+						if($('.my_temp').children().length<=3){
+							$('.my_temp').append('<div></div>'+
+							'<div class="my_content">'+
+								'<div>'+
+									'<span class="my_content_l">名称</span>'+
+									'<input type="text" class="nameinput" name="project_name" placeholder="请输入产品/项目名称" maxlength="15">'+
+								'</div>'+
+								'<div class="content_two">'+
+									'<span class="my_content_l">简介</span>'+
+									'<textarea class="nameinput_two" name="project_info" placeholder="请输入产品/项目简介" maxlength="100"></textarea>'+
+								'</div>'+
+								'<div class="content_three">'+
+									'<span class="my_content_l">图片</span>'+
+									'<div class="my_pic">'+
+										res.up_html+
+									'</div>'+
+								'</div>'+
+							'</div>')
+							$('.my_content').css('display','inline-block')
+						}
+						for(var i=0;i<$('.my_temp').children().length;i++){
+							if($('.my_temp').children().length==5){
+								$('.addcontent').hide()
+							}
+						}
+					}
+			    }
+			});
+			var layerHeight = $('.my_newLayer').height()
+			var dHeight = $(window).height()
+			var my_layer_top = dHeight - layerHeight
+			$('.my_newLayer').css('top',my_layer_top/2)
+		})
+		$('.addcontent_two').click(function(){
+			var pic_name_two = generateMixed(6)
+			$.ajax({
+			    type: 'post',
+			    url: '/index/NoticeGetImgUpload',
+				data: {type:2,pic_name:pic_name_two},
+			    dataType: 'json',
+			    success: function (res) {
+					console.log(res)
+					if($('.my_temp_two').children().length<=9){
+						$('.my_temp_two').append('<div></div>'+
+						'<div class="my_content_two">'+
+							'<div class="clearfix">'+
+								'<div style="float: left;">'+
+									'<span class="my_content_l">姓名</span>'+
+									'<input type="text" class="nameinput_small" name="manager_name" placeholder="请输入高管姓名">'+
+								'</div>'+
+								'<div style="float: right;margin-right: 12px;">'+
+									'<span class="my_content_l">职位</span>'+
+									'<input type="text" class="nameinput_small" name="manager_station" id="manager_station" placeholder="请输入高管职位">'+
+								'</div>'+
+							'</div>'+
+							'<div class="content_two">'+
+								'<span class="my_content_l">简介</span>'+
+								'<textarea class="nameinput_two" id="nameinput_two" name="manager_info" placeholder="例如：耶鲁大学经济学及东亚研究学士学位、耶鲁法学院法学博士学位。 限60字"></textarea>'+
+							'</div>'+
+							'<div class="content_three">'+
+								'<span class="my_content_l">图片</span>'+
+								'<div class="my_pic">'+
+									res.up_html+
+								'</div>'+
+							'</div>'+
+						'</div>')
+						$('.my_content_two').css('display','inline-block')
+					}
+					for(var i=0;i<$('.my_temp_two').children().length;i++){
+						if($('.my_temp_two').children().length==9){
+							$('.addcontent_two').hide()
+						}
+					}
+			    }
+			});
+			var layerHeight = $('.my_newLayer').height()
+			var dHeight = $(window).height()
+			var my_layer_top = dHeight - layerHeight
+			$('.my_newLayer').css('top',my_layer_top/2)
+		})
+		$('.remind').click(function(){
+			$('.gou').toggleClass('pop2')
+		})
+		// $('.my_remove').click(function(){
+		// 	$('.my_newLayer').hide()
+		// 	$('.my_newMask').hide()
+		// })
+	})
+</script>
+<script type="text/javascript">
+	function trans() {
+		var myData = {
+			france: '',
+			hddNewPhotoName: [],
+			project_arr: [],
+			manager_arr: [],
+		}
+		var dom1 = $('.financing li').children('.pop').parents("li")
+		myData.france = dom1.attr("data-id")
+		var dom2 = $('.feedback-img').find("[name='hddNewPhotoName[]']")
+		$.each(dom2,function(){
+			myData.hddNewPhotoName.push($(this).val())
+		})
+		var dom3 = $('#list1 .my_content')
+		$.each(dom3,function(index,item) {
+			var obj = {
+				name: $(this).find("[name='project_name']").val(),
+				info: $(this).find("[name='project_info']").val(),
+				// pic: $(this).find('.uploader2').children('input').val()
+				pic: []
+			}
+			var pic_v = $(this).find('.uploader2').children('input')
+			$.each(pic_v,function(){
+				obj.pic.push($(this).val())
+			})
+			myData.project_arr.push(obj)
+		})
+		var dom4 = $('#list2 .my_content_two')
+		$.each(dom4,function(index,item) {
+			var obj = {
+				name: $(this).find("[name='manager_name']").val(),
+				info: $(this).find("[name='manager_info']").val(),
+				station: $(this).find("[name='manager_station']").val(),
+				// pic: $(this).find('.uploader2').children('input').attr('name')
+				pic: []
+			}
+			var pic_v = $(this).find('.uploader2').children('input')
+			$.each(pic_v,function(){
+				obj.pic.push($(this).val())
+			})
+			myData.manager_arr.push(obj)
+		})
+		
+		return myData
+	}
+	
+	hbjs.use('@confirmBox', function(m) {
+	var	ConfirmBox      = m['widge.overlay.confirmBox'],
+		Dialog          = m['widge.overlay.hbDialog'],
+		cookie          = m['tools.cookie'],
+		fontSize = 18,
+		pWidth = 70;
+	    var data = {};
+
+		$('.my_remove').click(function(){
+			$('.my_newLayer,.my_newMask').hide();
+			informationCookie();
+		});
+		
+		$('.my_save').click(function(){
+			data = trans()
+			console.log(data)
+
+			if(data.france != undefined || data.hddNewPhotoName.length != 0 || $('.my_content').is(":visible") || $('.my_content_two').is(":visible")){
+				if($('.my_content').is(":visible")){
+					if($('.nameinput').val() == '') {
+						var msg = '内容未完善，请填写';
+						ConfirmBox.timeBomb(msg,{
+							name: 'fail',
+							width:fontSize * msg.length + pWidth,
+							timeout : 1000
+						});
+						return false;
+					}else if($('.nameinput_two').val() == '') {
+						var msg = '内容未完善，请填写';
+						ConfirmBox.timeBomb(msg,{
+							name: 'fail',
+							width:fontSize * msg.length + pWidth,
+							timeout : 1000
+						});
+						return false;
+					}else if($('#list1 .my_content').find('.uploader2').children('input').val() == '') {
+						var msg = '内容未完善，请填写';
+						ConfirmBox.timeBomb(msg,{
+							name: 'fail',
+							width:fontSize * msg.length + pWidth,
+							timeout : 1000
+						});
+						return false;
+					}else {
+						$.ajax({
+							type: 'post',
+							url: '/index/SaveModifyNotice',
+							data: data,
+							dataType: 'json',
+							success: function (res) {
+								console.log(res)
+								if(!res.status){
+									var msg = '未填写内容，请填写';
+									ConfirmBox.timeBomb(msg,{
+										name: 'fail',
+										width:fontSize * msg.length + pWidth,
+										timeout : 1000
+									});
+									return false;
+								}else if(res.status){
+									var msg = '保存成功';
+									ConfirmBox.timeBomb(msg,{
+										name: 'success',
+										width:fontSize * msg.length + pWidth,
+										timeout : 1000
+									});
+									$('.my_newLayer,.my_newMask').hide();
+									informationCookie();
+								}
+							}
+						});
+					}
+				}else if($('.my_content_two').is(":visible")) {
+					if($('.nameinput_small').val() == '') {
+						var msg = '内容未完善，请填写';
+						ConfirmBox.timeBomb(msg,{
+							name: 'fail',
+							width:fontSize * msg.length + pWidth,
+							timeout : 1000
+						});
+						return false;
+					}else if($('#nameinput_two').val() == '') {
+						var msg = '内容未完善，请填写';
+						ConfirmBox.timeBomb(msg,{
+							name: 'fail',
+							width:fontSize * msg.length + pWidth,
+							timeout : 1000
+						});
+						return false;
+					}else if($('#manager_station').val() == ''){
+						var msg = '内容未完善，请填写';
+						ConfirmBox.timeBomb(msg,{
+							name: 'fail',
+							width:fontSize * msg.length + pWidth,
+							timeout : 1000
+						});
+						return false;
+					}else if($('#list2 .my_content_two').find('.uploader2').children('input').val() == '') {
+						var msg = '内容未完善，请填写';
+						ConfirmBox.timeBomb(msg,{
+							name: 'fail',
+							width:fontSize * msg.length + pWidth,
+							timeout : 1000
+						});
+						return false;
+					}else {
+						$.ajax({
+							type: 'post',
+							url: '/index/SaveModifyNotice',
+							data: data,
+							dataType: 'json',
+							success: function (res) {
+								console.log(res)
+								if(!res.status){
+									var msg = '未填写内容，请填写';
+									ConfirmBox.timeBomb(msg,{
+										name: 'fail',
+										width:fontSize * msg.length + pWidth,
+										timeout : 1000
+									});
+									return false;
+								}else if(res.status){
+									var msg = '保存成功';
+									ConfirmBox.timeBomb(msg,{
+										name: 'success',
+										width:fontSize * msg.length + pWidth,
+										timeout : 1000
+									});
+									$('.my_newLayer,.my_newMask').hide();
+									informationCookie();
+								}
+							}
+						});
+					}
+				}else if($('.my_content').is(":hidden") && $('.my_content_two').is(":hidden")) {
+					data.project_arr = []
+					data.manager_arr = []
+					$.ajax({
+						type: 'post',
+						url: '/index/SaveModifyNotice',
+						data: data,
+						dataType: 'json',
+						success: function (res) {
+							console.log(res)
+							if(!res.status){
+								var msg = '未填写内容，请填写';
+								ConfirmBox.timeBomb(msg,{
+									name: 'fail',
+									width:fontSize * msg.length + pWidth,
+									timeout : 1000
+								});
+								return false;
+							}else if(res.status){
+								var msg = '保存成功';
+								ConfirmBox.timeBomb(msg,{
+									name: 'success',
+									width:fontSize * msg.length + pWidth,
+									timeout : 1000
+								});
+								$('.my_newLayer,.my_newMask').hide();
+								informationCookie();
+							}
+						}
+					});
+				}else if($('.my_content').is(":hidden") && $('.my_content_two').is(":visible")) {
+					data.project_arr = []
+					$.ajax({
+						type: 'post',
+						url: '/index/SaveModifyNotice',
+						data: data,
+						dataType: 'json',
+						success: function (res) {
+							console.log(res)
+							if(!res.status){
+								var msg = '未填写内容，请填写';
+								ConfirmBox.timeBomb(msg,{
+									name: 'fail',
+									width:fontSize * msg.length + pWidth,
+									timeout : 1000
+								});
+								return false;
+							}else if(res.status){
+								var msg = '保存成功';
+								ConfirmBox.timeBomb(msg,{
+									name: 'success',
+									width:fontSize * msg.length + pWidth,
+									timeout : 1000
+								});
+								$('.my_newLayer,.my_newMask').hide();
+								informationCookie();
+							}
+						}
+					});
+				}else if($('.my_content').is(":visible") && $('.my_content_two').is(":hidden")) {
+					data.manager_arr = []
+					$.ajax({
+						type: 'post',
+						url: '/index/SaveModifyNotice',
+						data: data,
+						dataType: 'json',
+						success: function (res) {
+							console.log(res)
+							if(!res.status){
+								var msg = '未填写内容，请填写';
+								ConfirmBox.timeBomb(msg,{
+									name: 'fail',
+									width:fontSize * msg.length + pWidth,
+									timeout : 1000
+								});
+								return false;
+							}else if(res.status){
+								var msg = '保存成功';
+								ConfirmBox.timeBomb(msg,{
+									name: 'success',
+									width:fontSize * msg.length + pWidth,
+									timeout : 1000
+								});
+								$('.my_newLayer,.my_newMask').hide();
+								informationCookie();
+							}
+						}
+					});
+				}else if(data.hddNewPhotoName.length != 0 && $('.my_content_two').is(":hidden")) {
+					data.manager_arr = []
+					$.ajax({
+						type: 'post',
+						url: '/index/SaveModifyNotice',
+						data: data,
+						dataType: 'json',
+						success: function (res) {
+							console.log(res)
+							if(!res.status){
+								var msg = '未填写内容，请填写';
+								ConfirmBox.timeBomb(msg,{
+									name: 'fail',
+									width:fontSize * msg.length + pWidth,
+									timeout : 1000
+								});
+								return false;
+							}else if(res.status){
+								var msg = '保存成功';
+								ConfirmBox.timeBomb(msg,{
+									name: 'success',
+									width:fontSize * msg.length + pWidth,
+									timeout : 1000
+								});
+								$('.my_newLayer,.my_newMask').hide();
+								informationCookie();
+							}
+						}
+					});
+				}else if(data.hddNewPhotoName.length != 0 && $('.my_content').is(":hidden")) {
+					data.project_arr = []
+					$.ajax({
+						type: 'post',
+						url: '/index/SaveModifyNotice',
+						data: data,
+						dataType: 'json',
+						success: function (res) {
+							console.log(res)
+							if(!res.status){
+								var msg = '未填写内容，请填写';
+								ConfirmBox.timeBomb(msg,{
+									name: 'fail',
+									width:fontSize * msg.length + pWidth,
+									timeout : 1000
+								});
+								return false;
+							}else if(res.status){
+								var msg = '保存成功';
+								ConfirmBox.timeBomb(msg,{
+									name: 'success',
+									width:fontSize * msg.length + pWidth,
+									timeout : 1000
+								});
+								$('.my_newLayer,.my_newMask').hide();
+								informationCookie();
+							}
+						}
+					});
+				}else {
+					$.ajax({
+						type: 'post',
+						url: '/index/SaveModifyNotice',
+						data: data,
+						dataType: 'json',
+						success: function (res) {
+							console.log(res)
+							if(!res.status){
+								var msg = '未填写内容，请填写';
+								ConfirmBox.timeBomb(msg,{
+									name: 'fail',
+									width:fontSize * msg.length + pWidth,
+									timeout : 1000
+								});
+								return false;
+							}else if(res.status){
+								var msg = '保存成功';
+								ConfirmBox.timeBomb(msg,{
+									name: 'success',
+									width:fontSize * msg.length + pWidth,
+									timeout : 1000
+								});
+								$('.my_newLayer,.my_newMask').hide();
+								informationCookie();
+							}
+						}
+					});
+				}
+			}else {
+				var msg = '未填写内容，请填写';
+				ConfirmBox.timeBomb(msg,{
+					name: 'fail',
+					width:fontSize * msg.length + pWidth,
+					timeout : 1000
+				});
+				return false;
+			}
+		})
+		
+		function informationCookie(){
+			console.log('cookie生效');
+			var tomorrow;
+			if($('.gou').hasClass('pop2')){
+				tomorrow = 30;
+			}else{
+				tomorrow = 1;
+			}
+			// cookie.set('has_informationCookie',true,{expires:tomorrow,path:'/',domain:"{/base_lib_Constant::COOKIE_DOMAIN/}"});
+			$.cookie("my_layerCookie","none",{expires: tomorrow, path: '/', domain:"{/base_lib_Constant::COOKIE_DOMAIN/}"})
+		}
+		
+		
+	})
+</script>

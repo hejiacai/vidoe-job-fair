@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{/$title/}</title>
+    <link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+    <script type="text/javascript" src="{/version file='version.js'/}"></script>
+    <script type="text/javascript">
+      window.CONFIG = {
+        HOST: '{/$siteurl.style/}',
+        COMBOPATH: '/js/v2/'
+      }
+    </script>
+    <script type="text/javascript">
+        hbjs.loadJS('{/$siteurl.style/}/js/v2/cqjob/common.js');
+    </script>
+    <script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js,global.js'/}"></script>
+
+    <style>
+    	*{ font-family: "微软雅黑";}
+    	body{margin: 0px;}
+        .invBox{width:600px;font-size:12px;}
+        .invBox .invFormHd{border-bottom:1px solid #dadada; padding-bottom:10px;}
+        .invBox .formMod clearfix{margin-bottom:10px;}
+        .invForm .formMod clearfix .l{width:70px; font-size:12px;}
+        .invForm .formMod clearfix .l i{font-size:14px;}
+        .invForm .formMod clearfix .r{width:415px;}
+        .invForm .formMod clearfix .r .formTextarea textarea.textarea{width:360px;height:50px;padding:0 0 0 5px;line-height:22px;font-size:12px;}
+        .invForm .invFormTxt{margin:0 0 0 120px;color:#999;}
+        .invForm .formText input.text{font-size:12px; border: 1px solid #e8e8e8; color: #444;}
+        .invForm .formText .gray{color:#999; font-size:12px;}
+        .invForm .formBtn{margin:20px 0 0 75px;}
+        .invForm .sms{margin:20px 0 0 92px;text-align: left;}
+        .invForm .sms .txt{color:#999; height:28px; line-height:20px;margin-bottom: 10px;}
+        .invForm .sms .txt em{color:#368cf1;}
+        .invForm .sms .smsBox{width:465px;}
+        .invForm .sms .smsBox .formTextarea textarea.textarea{width:459px; height:85px; font-size:14px; line-height:24px; text-align:left;color: #333; font-family: "微软雅黑";}
+        .invForm .smsT{position:relative; z-index:1;}
+        .invForm .smsT .formRad input.radio{*margin:3px 0 0 10px;width: 16px;height: 16px;margin-top: 8px;margin-left: 10px;}
+        .invForm .smsT .formRad label{margin-right:0;}
+        .invForm .smsT .tipTxt{float:left; display:inline;}
+        .invForm .smsT b{background:url({/$siteurl.style/}/img/c/invit.jpg) no-repeat; width:13px; height:7px; position:absolute; left:63px; top:-7px;}
+        .invForm .sms .smsC{width:465px; overflow:hidden;display:inline;}
+        .drop .dropSeld, .drop{height: 30px;line-height: 30px;}
+        .formMod .tipTxt{float: inherit;display: block;}
+        .formMod .l i{color: #fb5957;}
+        .formMod .l{width: 80px;}
+        .invForm .drop{height: 36px;line-height: 36px;}
+        .invForm .formText input.text{height: 28px;line-height: 28px;}
+        .formMod{margin-bottom: 15px;}
+        .formTextarea textarea.textarea{width: 465px; height: 100px; line-height: 24px;}
+        .tipLayErr{color: #fb5957;border: none;}
+        .tips{text-align: left;margin-left: 90px;margin-top: 5px;}
+        .btnsF14{padding: 0 20px;}
+        .invForm .drop{
+        	appearance:none;  
+            -moz-appearance:none;
+            -webkit-appearance:none;
+            border: 1px solid #e8e8e8;
+            background: url({/$siteurl.style/}/img/company/triangle.png) 150px center no-repeat #fff;
+			height: auto;
+			line-height: 16px;
+			padding: 5px 5px;
+			outline: none;
+        }
+        .tipLayErr{ background: none;}
+        .dialog .dialogFooter{ background: none; border: none; padding-left: 93px;text-align: left;}
+        .invBox{ max-height: 500px; overflow-y: auto;}
+
+
+        .ques-mark {
+            width: 16px;
+            height: 14px;
+            display: inline-block;
+            position: relative;
+            background: url(http://assets.hb.com/img/blue/company/question-mark.png) 1px 0px no-repeat;
+            top: 2px;
+            left: 3px;
+        }
+        .dialog{ background: #fff!important; padding: 0!important;}
+
+
+        .mi-icon-tip-2 {
+            display: block;
+            position: absolute;
+            width: 325px;
+            height: 363px;
+            background: url(http://assets.hb.com/img/blue/companyindex/mi-icon-bg.png) 0 0 no-repeat;
+            top: 35px;
+            left: 183px;
+            box-sizing: border-box;
+            padding: 22px 0  0 35px;
+            text-align: left;
+        }
+        .mi-icon-tip-2 h3 {
+            font-size: 16px;
+            color: #fb5958;
+            font-weight: bold;
+            margin-bottom: 10px;
+            line-height: 25px;
+        }
+         .mi-icon-tip-2 p {
+            font-size: 13px;
+            line-height: 23px;
+        }
+        .hb_ui_prt{z-index: 100008!important;}
+        body, button, input, select, textarea{font-family: "Microsoft YaHei";}
+        .tit{color: #999;font-size: 14px;}
+        .tit em {color: #368cf1;font-size: 14px;}
+    </style>
+</head>
+<body style="margin: 0px;">
+<form id="formInvite" method="post" action="">
+    <input type="hidden" name="person_id" value="{/$person_id/}">
+    <input type="hidden" name="apply_id" value="{/$apply_id/}">
+    <input type="hidden" name="job_id" value="{/$job_id/}">
+    <div class="dgBox invBox">
+        <div class="invForm">
+            <div class="formMod clearfix">
+                <div class="l">{/$_title/}地点<i>*</i></div>
+                <div class="r">
+                    <span class="formText">
+                        <input id="txtAddress" name="txtAddress" type="text" class="text" value="{/$address/}" style="width:389px;display:block;">
+                    </span>
+                </div>
+                <div class="clear"></div>
+                <p class="tips"></p>
+            </div>
+            <div class="formMod clearfix">
+                <div class="l">{/$_title/}时间<i>*</i></div>
+                <div class="r">
+                    <span class="formText">
+                       <select id="timeDate" name="timeDate" style='width: 170px;margin-right: 14px;' class="drop">
+                           {/foreach $date_json as $k=>$v/}
+                           <option value="{/$v['id']/}" name="timeDate">{/$v['name']/}</option>
+                           {//foreach/}
+                       </select>
+                        <select id="time" name="time" style='width: 170px;' class="drop">
+                            <option value="08:00:00" name="time">8:00</option>
+                            <option value="08:30:00" name="time">8:30</option>
+                            <option value="09:00:00" name="time">9:00</option>
+                            <option value="09:30:00" name="time">9:30</option>
+                            <option value="10:00:00" name="time">10:00</option>
+                            <option value="10:30:00" name="time">10:30</option>
+                            <option value="11:00:00" name="time">11:00</option>
+                            <option value="11:30:00" name="time">11:30</option>
+                            <option value="12:00:00" name="time">12:00</option>
+                            <option value="12:30:00" name="time">12:30</option>
+                            <option value="13:00:00" name="time">13:00</option>
+                            <option value="13:30:00" name="time">13:30</option>
+                            <option value="14:00:00" name="time">14:00</option>
+                            <option value="14:30:00" name="time">14:30</option>
+                            <option value="15:00:00" name="time">15:00</option>
+                            <option value="15:30:00" name="time">15:30</option>
+                            <option value="16:00:00" name="time">16:00</option>
+                            <option value="16:30:00" name="time">16:30</option>
+                            <option value="17:00:00" name="time">17:00</option>
+                            <option value="17:30:00" name="time">17:30</option>
+                            <option value="18:00:00" name="time">18:00</option>
+                            <option value="18:30:00" name="time">18:30</option>
+                            <option value="19:00:00" name="time">19:00</option>
+                            <option value="19:30:00" name="time">19:30</option>
+                            <option value="20:00:00" name="time">20:00</option>
+                            <option value="20:30:00" name="time">20:30</option>
+                       </select>
+                    </span>
+                </div>
+                <div class="clear"></div>
+                <p class="tips"></p>
+            </div>
+            <div class="formMod clearfix">
+                <div class="l">联系人<i>*</i></div>
+                <div class="r">
+                    <span class="formText">
+                        <input id="txtLinkman" name="txtLinkman" type="text" class="text" value="{/$link_man/}" style="width:170px;">
+                    </span>
+                </div>
+                <div class="clear"></div>
+                <p class="tips"></p>
+            </div>
+            <div class="formMod clearfix">
+                <div class="l">联系电话<i>*</i></div>
+                <div class="r">
+                    <span class="formText">
+                        <input id="txtLinktel" name="txtLinktel" type="text" class="text" value="{/$link_phone/}" style="width:170px;">
+                    </span>
+                </div>
+                <div class="clear"></div>
+                <p class="tips"></p>
+            </div>
+            <div class="formMod clearfix">
+                <div class="l">备注信息<i>&nbsp;</i></div>
+                <div class="r" style="position:relative">
+                    <span class="formTextarea">
+                        <textarea style="font-size: 12px;width: 465px;height: 100px;line-height: 24px;" id="txtRemark" name="txtRemark" class="left textarea watermark" watermark="如需带什么资料等..." ></textarea>
+                    </span>
+                </div>
+                <div class="clear"></div>
+                <p class="tips"></p>
+            </div>
+            {/if $need_buy/}
+            <p class="tit">发送{/$title/}将消耗<em>{/$need_spent/}个兼职币</em> </p>
+            {//if/}
+            <div id="inviteFormBtn" class="dialogFooter set-top-foot" style="margin-top: 20px;background: #fff;border: none;padding-left: 93px;text-align: left;">
+                <a href="javascript:void(0);" id="btnSendInvite" class="btn1 btnsF14">发送</a>
+                <a id="btnCancelInvite" href="javascript:void(0);" class="btn3 btnsF14">取消</a>
+            </div>
+        </div>
+    </div>
+</form>
+{/include file='./common/showloading.html'/}
+<script>
+    var pay_dialog;
+    hbjs.use(' @confirmBox', function(m){
+        var confirmBox = m['widge.overlay.confirmBox'],
+        fontSize = 18,
+        pWidth = 70;
+
+//    验证
+    $('form :input,form :selected').blur(function(){
+      var $parent = $(this).parent().parent().parent().find('.tips');
+      $parent.find(".tipLayErr").remove();
+      if( $(this).is('#txtStation') ){
+        console.log($parent);
+        if( this.value==""){
+          var errorMsg = '请输入职位名称';
+          $parent.append('<span class="tipLayErr onError">'+errorMsg+'</span>');
+        }
+      }
+      if( $(this).is('#txtAddress') ){
+        if( this.value==""){
+          var errorMsg = '请输入{/$_title/}地点';
+          $parent.append('<span class="tipLayErr onError">'+errorMsg+'</span>');
+        }
+        else if(this.value.length > 50 || this.value.length < 3)
+        {
+            var errorMsg = '{/$_title/}地点请输入3-50字';
+            $parent.append('<span class="tipLayErr onError">' + errorMsg + '</span>');
+        }
+      }
+        if( $(this).is('#txtCompanyname') ){
+            if( this.value==""){
+                var errorMsg = '请输入公司名称';
+                $parent.append('<span class="tipLayErr onError">'+errorMsg+'</span>');
+            }
+        }
+        if ($(this).is('#txtLinkman')) {
+            if (this.value == "") {
+                var errorMsg = '请输入联系人';
+                $parent.append('<span class="tipLayErr onError">' + errorMsg + '</span>');
+            }
+            else if(this.value.length > 10 || this.value.length < 2)
+            {
+                var errorMsg = '联系人输入2-10字';
+                $parent.append('<span class="tipLayErr onError">' + errorMsg + '</span>');
+            }
+
+        }
+      if( $(this).is('#txtLinktel') ){
+        if( this.value=="" || this.value.length<11){
+          var errorMsg = '联系电话输入有误，请重新输入';
+          $parent.append('<span class="tipLayErr onError">'+errorMsg+'</span>');
+        }
+      }
+    }).keyup(function(){
+      $(this).triggerHandler("blur");
+    }).focus(function(){
+      $(this).triggerHandler("blur");
+    });
+
+      var limit = true;
+      //提交，最终验证。
+      $('#btnSendInvite').click(function () {
+          if(limit){
+              limit = false;
+              var _that = $(this);
+              $("form :input,form :selected").trigger('blur');
+              var numError = $('form .onError').length;
+              if (numError) {
+                  limit = true;
+                  return false;
+              }else{
+
+                  showLoading()
+                  $.post("{/get_url rule="/partresume/$do_url/"/}",$("#formInvite").serialize(),function(data){
+                      closeLoading()
+                      limit = true;
+                      if(data&&!data.status){
+                          confirmBox.timeBomb(data.msg, {
+                              name : 'fail',
+                              timeout : 3000,
+                              width: fontSize * data.msg.length + pWidth
+                          })
+                          if(data.code==112){
+                              setTimeout(function () {
+                                  window.location.reload();
+                              },1200)
+                          }
+                          else if(data.code && data.code == 113){
+
+                              confirmBox.timeBomb(data.msg, {
+                                  name : 'fail',
+                                  timeout : 1500,
+                                  width: fontSize * data.msg.length + pWidth
+                              })
+                              setTimeout(function () {
+                                  pay_dialog = $.showModal(encodeURI("{/$buy_url/}"), {title: '兼职币不足，请选择购买',defind_index:10006,noclick:true});
+                              },1500)
+
+                              return false;
+                          }
+                      }else{
+                          confirmBox.timeBomb(data.msg, {
+                              name : 'success',
+                              timeout :3000,
+                              width: fontSize * data.msg.length + pWidth
+                          });
+                          _that.closeDialog();
+                          setTimeout(function () {
+	                        window.location.reload();
+	                    },1200)
+                      }
+
+                  },'json');
+                  //  $('#formInvite').submit();
+
+              }
+          }else{
+            confirmBox.timeBomb('请勿重复提交', {
+              name : 'success',
+              timeout :3000,
+              width: 220
+            });
+//            alert("请勿重复提交");
+          }
+
+      });
+
+      $('#btnCancelInvite').click(function(){
+          $(this).closeDialog();
+      });
+
+
+
+
+    });
+
+
+
+
+</script>
+</body>
+</html>

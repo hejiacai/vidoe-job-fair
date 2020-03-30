@@ -1,0 +1,39 @@
+<style>
+.interResBox{width:328px;font-size:14px;}
+.interResTxt{margin-bottom:10px;}
+.interResTxt span.formRad{display:block; height:88px; width:360px;}
+.interResTxt span.btn{display:block;width:360px; text-align:center;}
+.radioDiv{display:block;width:100px; padding-bottom: 8px; float:left;overflow: hidden; text-align: left;}
+</style>
+<div class="dgBox interResBox">
+	<input type="hidden" name ="ids" value="{/$ids/}" id="deleteinvites">
+	<div class="interResTxt" id="aresultContainer">
+        <span class="formRad">
+            <label class="radioDiv" for="notcometoaudition"><input type="radio" value="1" name="radWorkState" id="notcometoaudition" class="radio">未参加面试</label>
+            <label class="radioDiv" for="employ"><input type="radio" value="2" name="radWorkState" id="employ" class="radio">已发offer</label>
+            <label class="radioDiv" for="eliminate"><input type="radio" value="3" name="radWorkState" id="eliminate" class="radio">面试未过</label>
+            <label class="radioDiv" for="refuseoffer"><input type="radio" value="4" name="radWorkState" id="refuseoffer" class="radio">拒绝offer</label>
+            <label class="radioDiv" for="entry"><input type="radio" value="5" name="radWorkState" id="entry" class="radio">已入职</label>
+        </span>
+        <span class="btn"><a href="#" class="btn1 btnsF12" id="btnSetResultOk">确定</a><a href="#" class="btn3 btnsF12" id="btnSetResultCancel">取消</a></span>
+    </div>
+</div>
+<script type="text/javascript">
+
+$('#btnSetResultOk').click(function (e) {
+    e.preventDefault();
+    var result = $('#aresultContainer').find("[type='radio']:checked").val();	
+    var ids    = $('#deleteinvites').val();
+    if (typeof ids != 'undefined' && ids != '' && ids != null) {
+        invite._serResult(ids, result);
+    }
+
+    $(this).closeDialog();
+});
+
+$('#btnSetResultCancel').click(function (e) {
+	e.preventDefault();
+	$(this).closeDialog();
+});
+
+</script>

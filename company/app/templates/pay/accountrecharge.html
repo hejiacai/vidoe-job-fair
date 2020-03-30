@@ -1,0 +1,392 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+<title>{/$title/}</title>
+<!–[if lt IE9]> 
+<script src="{/version file='html5.js'/}"></script>  
+<![endif]–>
+<link rel="stylesheet" type="text/css" href="{/version file="base.css"/}" />
+<link rel="stylesheet" type="text/css" href="{/version file="comback.css"/}" />
+<link rel="stylesheet" type="text/css" href="{/version file="combacklst.css"/}" />
+<link rel="stylesheet" type="text/css" href="{/version file="icons.css"/}" />
+
+<script type="text/javascript" language="javascript" src="{/version file="jquery-1.8.3.min.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="common.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="dialog.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="ui_menudisplay.js"/}"></script><!--下拉菜单-->
+<script type="text/javascript" language="javascript" src="{/version file="ui_inputFocus.js"/}"></script><!--输入框获取焦点-->
+<script type="text/javascript" language="javascript" src="{/version file="ui_hovchange.js"/}"></script><!--指向改变class-->
+<style type="text/css">
+.part{}
+.part .hd{border-bottom:1px solid #dadada;height:40px;}
+.part .hd  a{height:38px;line-height:38px;font-size:14px;margin:0 10px;padding:0 10px;display:inline-block;float:left;display:inline;border:1px solid #dadada;border-top:2px solid #dadada;border-bottom:0;color:#666;}
+.part .hd  a:hover{background:#f8f8f8;}
+.part .hd  a.cu{font-weight:bold;border-top:2px solid #2b90d8;border-bottom:1px solid #fff;}
+.part .hd  a.cu:hover{background:#fff;}
+
+
+
+.bd .form{margin:20px 0;}
+.bd .formMod .l{width:94px;}
+.bd .formMod .r{width:400px;}
+.bd .formMod .r .orange{margin:0 10px 0 0;font-size:22px;}
+
+.payType{padding:0 20px 0;}
+.payType p.tit{font-weight:bold;margin-bottom:10px;}
+.payType .tagT{border-bottom:1px solid #ccc;padding-bottom:20px;}
+.payType .tagT ul li{width:154px;height:84px;float:left;margin:0 20px 0 0; position:relative; z-index:1; cursor:pointer;}
+.payType .tagT ul li b{display:inline-block;width:150px;height:80px;border:1px solid #ccc; position:absolute;left:2px;top:2px;background:url({/$siteurl.style/}/img/c/c.gif) no-repeat;}
+.payType .tagT ul li.lst1 b{background-position:0 -80px;}
+.payType .tagT ul li.lst2 b{background-position:-150px -80px;}
+.payType .tagT ul li.lst3 b{background-position:-300px -80px;}
+.payType .tagT ul li.lst4 b{background-position:-450px -80px;}
+.payType .tagT ul li i.hbFntWes{ position:absolute;right:-16px;top:2px;background:#d9534f;display:inline-block;color:#fff;font-size:12px;width:16px;height:16px; text-align:center;line-height:16px;display:none;}
+.payType .tagT ul li.cu i.hbFntWes{display:block;}
+.payType .tagT ul li.cu b{border:2px solid #d9534f;}
+
+.payType .tagC{padding:20px 0;}
+.dom1 p,.dom2 p{margin:0 0 20px 0;font-size:12px;}
+.dom1 .lst{width:875px;margin:0 auto;}
+.dom1 ul li{width:153px;height:58px;float:left;display:inline;background:url({/$siteurl.style/}/img/c/c.gif) no-repeat;margin:0 20px 15px 0;border:1px solid #ccc;}
+.dom1 ul li.lst1{background-position:0 -160px}
+.dom1 ul li.lst2{background-position:-153px -160px}
+.dom1 ul li.lst3{background-position:-306px -160px}
+.dom1 ul li.lst4{background-position:-459px -160px}
+.dom1 ul li.lst5{background-position:-612px -160px}
+.dom1 ul li.lst6{background-position:-0 -218px}
+.dom1 ul li.lst7{background-position:-153px -218px}
+.dom1 ul li.lst8{background-position:-306px -218px}
+.dom1 ul li.lst9{background-position:-459px -218px}
+.dom1 ul li.lst10{background-position:-612px -218px}
+.dom1 ul li.lst11{background-position:0px -276px}
+.dom1 ul li.lst12{background-position:-153px -276px}
+.dom1 .btn{margin:0 0 0 22px;}
+.dom1 .btn a.btn1{margin:0;}
+
+.dom2 ul li{float:left;display:inline;border:1px solid #ccc;margin:0 49px 20px;width:360px;height:200px;}
+
+.dom2 ul li dl dt{height:60px;width:360px;background:url({/$siteurl.style/}/img/c/c.gif) no-repeat;margin:20px 0 10px;}
+.dom2 ul li dl dd{padding:0 10px;zoom:1;line-height:25px;}
+.dom2 ul li dl dd p{margin:0 0 0 10px;}
+.dom2 ul li.lst1 dl dt{background-position:0 -334px;}
+.dom2 ul li.lst2 dl dt{background-position:-359px -334px;}
+</style>
+</head>
+<body id="body">
+{/include 'new_header.html' cur='企业管理'/}
+<div class="content" id="content">
+	<section class="section">
+		<hgroup>
+		<form id="frmCharge" name="frmCharge" method="post" target="_blank" >
+        	<div class="part">
+            	<div class="hd yahei">
+                	<a href="/pay" class="cu">账户充值</a><a href="/pay/list">充值记录</a><div class="clear"></div>
+                </div>
+                <div class="bd">
+                    <div class="form">
+                    	<div class="formMod">
+                        	<div class="l">当前余额<i>&nbsp;</i></div>
+                            <div class="r">
+                            	<span class="tipTxt" style="margin:0;"><span class="orange strong">{/$amount/}</span>元</span>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="formMod">
+                        	<div class="l">充值金额<i>&nbsp;</i></div>
+                            <div class="r">
+                                <span class="formText">
+                                    <input type="text" style="width:50px;" class="text" name='txtAmount' id="txtAmount"  />
+                                </span>
+                                <span class="tipTxt">元</span>
+                            </div>
+                        	<div class="clear"></div>
+                        </div>
+                    </div>
+                    <div class="payType">
+                    	<p class="tit">请选择支付方式：</p>
+                        <div class="tag">
+                            <div class="tagT" id="tab">
+                                <ul>
+                                <li class="lst1 cu" url='{/get_url rule="/alipay/"/}'><i class="hbFntWes">&#xf00c;</i><b></b></li>
+                                <li class="lst2" url='{/get_url rule="/chinabank/"/}'><i class="hbFntWes">&#xf00c;</i><b></b></li>
+                                <li class="lst3" url='{/get_url rule="/yeepay/"/}'><i class="hbFntWes">&#xf00c;</i><b></b></li>
+                                <li class="lst4"><i class="hbFntWes">&#xf00c;</i><b></b></li>
+                                </ul>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="tagC" id="tabCon">
+                            	<div class="tagCon dom1">
+                            		<!-- 
+                                    <p>支持下列银行卡在线支付（银行卡需开通网上支付功能）</p>
+                                    <div class="lst">
+                                        <ul>
+                                        <li class="lst1"></li>
+                                        <li class="lst2"></li>
+                                        <li class="lst3"></li>
+                                        <li class="lst4"></li>
+                                        <li class="lst5"></li>
+                                        <li class="lst6"></li>
+                                        <li class="lst7"></li>
+                                        <li class="lst8"></li>
+                                        <li class="lst9"></li>
+                                        <li class="lst10"></li>
+                                        <li class="lst11"></li>
+                                        <li class="lst12"></li>
+                                        </ul>
+                                        <div class="clear"></div>
+                                    </div>
+                                    --> 
+                                    <div class="btn"><a href="javascript:void(0)" class="btn1 btnsF16" id="btnRecharge">立即充值</a></div>
+                                </div>
+                                <div class="tagCon dom2" style="display:none;">
+                                	<p>请将款项转账到以下银行账号，转账后请及时联系您的招聘顾问</p>
+                                    <div class="lst">
+                                    	<ul>
+                                        <li class="lst1">
+                                        	<dl>
+                                            <dt></dt>
+                                            <dd>
+                                            	<p>收款单位：重庆汇博信息科技有限公司</p>
+                                                <p>账号：5103&nbsp;0101&nbsp;2001&nbsp;0000&nbsp;090</p>
+                                                <p>开户银行：重庆农村商业银行两江新区支行龙头寺分理处</p>
+                                                <!--<p><a href="#">将收款信息发送到手机</a></p>-->
+                                            </dd>
+                                            </dl>
+                                        </li>
+                                        <li class="lst2">
+                                        	<dl>
+                                            <dt></dt>
+                                            <dd>
+                                            	<p>收款单位：重庆汇博信息科技有限公司</p>
+                                                <p>账号：5000&nbsp;1013&nbsp;6000&nbsp;5020&nbsp;4286</p>
+                                                <p>开户银行：中国建设银行重庆渝中支行上清寺分理处</p>
+                                                <!--<p><a href="#">将收款信息发送到手机</a></p>-->
+                                            </dd>
+                                            </dl>
+                                        </li>
+                                        </ul>
+                                        <div class="clear"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+           </form> 
+        </hgroup>
+    </section>
+</div>
+{/include file="footer.html"/}
+<section class="floatRT"><a href="{/get_url rule='/about/message' domain='main'/}" target="_blank" class="serviceLink">我有问题要反馈</a><b></b></section>
+<script>
+menuDis('#hdR','li','.box','hov');
+hovChange('.dropLstCon','li','hov');
+
+
+$(document).ready(function(e) {
+	$.focusblur('#addInfo');
+	$.focusColor('input.text');
+	$.focusColor('textarea.textarea');
+	
+	$('#tab').find('li').click(function(){
+		var thisIndex = $(this).index();
+		$(this).addClass('cu').siblings('li').removeClass('cu');
+		if(thisIndex == 3){
+			$('#tabCon').find('.dom1').css({'display':'none'});
+			$('#tabCon').find('.dom2').css({'display':'block'});
+		}else{
+			$('#tabCon').find('.dom2').css({'display':'none'});
+			$('#tabCon').find('.dom1').css({'display':'block'});
+		};
+	});
+	
+	
+    $('#jobTab').find('li').click(function(){
+		if($(this).hasClass('cu')){
+			return false;
+		}else{
+			var thisIndex = $(this).index();
+			$(this).addClass('cu').siblings('li').removeClass('cu');
+			$('#jobTabC').find('.tabCon').eq(thisIndex).css({'display':'block'}).siblings('.tabCon').css({'display':'none'});
+			$('#tabRight').find('p').eq(thisIndex).css({'display':'block'}).siblings('p').css({'display':'none'});
+		}
+	});
+	
+	
+});
+
+/**
+ * ZhangYu  账户充值
+ */
+var accountrecharge = {
+	init:function() {
+		$('#btnRecharge').click(function(){
+			var amount = $("#txtAmount").val();
+			if(amount == ''|| amount==null||parseFloat(amount)==0){
+				return;
+			}
+			var url = $('#tab').find('li.cu').attr('url');
+			$('#frmCharge').attr('action',url).submit();	
+		});
+		$("#txtAmount").validateNumber({type:'Decimal',precision:2,align:"right"}); 
+	}
+};
+(function($) { 
+	   $.fn.validateNumber = function(settings) {  
+	     var defaults = {type:"Int",precision:-1,align:"right"}  
+	        
+	     if (settings){  
+	        $.extend(defaults, settings);  
+	     };  
+	      
+	     var OnPasteCheckInteger=function(){
+		     //粘贴时验证整数  
+	        if (window.clipboardData) {  
+	            if(window.clipboardData.getData('text'))  
+	            {  
+	                if (isNaN(window.clipboardData.getData('text')) || window.clipboardData.getData('text').indexOf(".") >= 0) {  
+	                    clipboardData.setData('text', '');  
+	                } else {  
+	                    clipboardData.setData('text',clipboardData.getData('text'));  
+	                }  
+	            }  
+	        }   
+	        else if (navigator.userAgent.indexOf("Opera") != -1) {  
+	            if(window.location){  
+	                if (isNaN(window.location) || window.location.indexOf(".") >= 0) {  
+	                    window.location = '';  
+	                }  
+	            }  
+	        }  
+	      };  
+	        
+	      var OnPasteCheckDecimal = function() {
+		      //粘贴时验证带小数的数字  
+	        if (window.clipboardData) {  
+	            if (isNaN(window.clipboardData.getData('text') + this.value)) {  
+	                clipboardData.setData('text', '');  
+	            } else {  
+	                clipboardData.setData('text', clipboardData.getData('text'));  
+	            }  
+	        }   
+	        else if (navigator.userAgent.indexOf("Opera") != -1) {  
+	            if (isNaN(window.location + this.value)) {  
+	                window.location = '';  
+	            }  
+	        }  
+	    };  
+	      
+	    var OnBlur = function () {
+		    //文本框失去焦点时格式化数字如"0001" --> "1"  
+	        if(isNaN(this.value)){
+		        //如果不是数字则清空  
+	            this.value = "";  
+	            return;  
+	        }  
+	          
+	        while(this.value.indexOf("0") == 0 && this.value.length > 1){  
+	            this.value = this.value.substring(1, this.value.length);  
+	        }  
+	                  
+	        if(defaults.type == "Decimal"){   
+	            if(this.value.indexOf(".") == 0){  
+	                this.value = "0"+this.value;  
+	            }                         
+	            if(defaults.precision >= 0 && this.value.indexOf(".") >= 0){  
+	                if(defaults.precision > 0){  
+	                    this.value = this.value.substr(0,this.value.indexOf(".") + defaults.precision + 1);    
+	                }  
+	                else{  
+	                    this.value = this.value.substr(0,this.value.indexOf("."));  
+	                }  
+	            }  
+	        }  
+	        else if(this.value.indexOf(".") >=0){  
+	            this.value = this.value.substr(0,this.value.indexOf("."));  
+	        }  
+	    };  
+	      
+	    var InputCheckInteger = function(e) {
+		    //验证输入是否整数  
+	        //在FF下屏蔽退格、方向键等功能键，charCode在IE下为undefined非0  
+	        if (e.charCode == 0){   
+	            return;  
+	        }   
+	          
+	        var event =  window.event || e;  
+	        var currentKey = event.charCode || event.keyCode || event.which;  
+	          
+	        if (!((currentKey > 47 && currentKey < 58))) {  
+	            if (window.event){
+		            //IE  
+	                event.returnValue = false;     
+	             }  
+	             else{
+		             //Firefox   
+	                event.preventDefault();  
+	             }   
+	        }  
+	    };  
+	  
+	    var InputCheckDecimal = function(e) {
+		    //验证输入是否数字      
+	        //在FF下屏蔽退格、方向键等功能键，charCode在IE下为undefined非0  
+	        if (e.charCode == 0){   
+	            return;  
+	        }  
+	        var event =  window.event || e;          
+	        var currentKey = event.charCode || event.keyCode || event.which;  
+	        var num = this.value.replace(/,/g, '');  
+	        if (num.indexOf(".") == -1) {  
+	            if (!((currentKey > 47 && currentKey < 58) || (currentKey == 46))) {              
+	                 if (window.event){
+		                 //IE  
+	                    event.returnValue = false;     
+	                 }  
+	                 else{
+		                 //Firefox    
+	                    event.preventDefault();    
+	                 }  
+	            }  
+	        }   
+	        else {  
+	            if (!(currentKey > 47 && currentKey < 58)) {  
+	                 if (window.event){
+		                 //IE  
+	                    event.returnValue = false;     
+	                 }                   
+	                 else{
+		                 //Firefox  
+	                    event.preventDefault();  
+	                 }  
+	            }  
+	        }  
+	    };  
+	     this.each(function(){  
+	        if($(this).is("input[type=text]") || $(this).is("textarea")){          
+	            $(this).css("imeMode","disabled");
+	            //限制输入法切换  
+	            $(this).css("textAlign",defaults.align);  
+	            $(this).bind("blur",OnBlur);  
+	              
+	            if(defaults.type == "Decimal"){  
+	                $(this).bind("beforepaste",OnPasteCheckDecimal);  
+	                $(this).bind("keypress",InputCheckDecimal);                  
+	            }else{  
+	                $(this).bind("beforepaste",OnPasteCheckInteger);  
+	                $(this).bind("keypress",InputCheckInteger);  
+	            }  
+	        }  
+	     });   
+	     return this;  
+	   };    
+	 })(jQuery);
+accountrecharge.init();
+</script>
+</body>
+</html>

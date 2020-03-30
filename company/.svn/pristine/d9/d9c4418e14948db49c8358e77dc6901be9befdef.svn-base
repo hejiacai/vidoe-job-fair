@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+</head>
+<body>
+   <form id="formjob" method="post" action="{/get_url rule='/job/BatchStopJobDo/'/}">	
+	<div style="padding:60px 30px;font-size:14px" class="confirm-close-job-con">
+		关闭（停止招聘）后，
+		{/foreach $joblist as $key=>$job/}
+            <input type="hidden" name="hddjobID[]" value="{/$job['job_id']/}" />
+            {/if $job@index eq 3/}
+            	{/continue/}
+            {//if/}
+            <font color="#4382AE">{/$job['station']/}</font>
+			{/if !($job@last)/}，{//if/}
+        {//foreach/}{/if count($joblist)>3/}......等{/count($joblist)/}个职位{//if/}不再被求职者看到，确定关闭吗？
+	</div>
+	<div class="dialogFooter set-top-foot">
+		<div id="requirt_load_1">
+			<a class="btn1 btnsF14" href="javascript:void(0);" id="btnStopJobSave">确定</a><a  id="btnStopJobCancel" class="btn3 btnsF14" href="javascript:void(0);">取消</a>
+		</div>
+	</div>
+	</form>
+<script>
+try{
+	hbjs.use('@form, @jobDialog', function(m){
+		factory(m['cqjob.jobForm'].extend(m['cqjob.jobDialog']));
+	})
+} catch (e) {
+	factory($);
+}
+    
+function factory($){
+	var batchstopjob = {
+		initialize:function(){
+			// 批量停用职位
+			$('#btnStopJobSave').click(function(){
+				$('#requirt_load_1').css('pointer-events','none');
+				$(this).submitForm({success: batchstopjob.successCallBack, clearForm: false});
+				return false;
+			});
+			// 取消 批量停用职位 
+			$('#btnStopJobCancel').click(function(){
+				if(this.trigger){
+					this.trigger('close');
+				} else {
+					$(this).closeDialog();
+				}
+
+			});		
+		},
+		successCallBack:function(result){
+			$('#requirt_load_1').css('pointer-events','');
+			if(result.success) {
+				$.anchorMsg("关闭成功 ", { onclose: function() {
+					//$('#btnStopJobSave').closeDialog();
+					window.location.reload();
+					//location.href = location.href;
+				}});
+			}else{
+				 $.anchorMsg("关闭失败",{icon:'fain'});
+			}
+		}
+	};
+	batchstopjob.initialize();
+}
+</script>
+</body>
+</html>

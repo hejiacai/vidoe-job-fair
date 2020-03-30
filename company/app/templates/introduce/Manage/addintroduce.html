@@ -1,0 +1,247 @@
+<div class="companyStyle-item" style="display: block" id="insert">
+	<form action="" method="post" id="form1">
+		<ul class="companyStyle-form-show clearfix">
+			<li class="clearfix">
+				<span class="companyStyle-form-tit">姓名</span>
+				<div class="companyStyle-form-text">
+                        <span class="formText">
+                            <input type="text" class="text" placeholder="请输入高管姓名 限5字" style="width: 246px;" name="introduce_name" id="introdice_name" value="{/$introduceInfo['name']/}">
+							<input type="hidden" value="{/$introduceInfo['id']/}" name="id">
+						</span>
+					<span class="tipPos">
+                            <span class="tipLay">
+                                <span for="txtStation" generated="true" class="tipLayErr tipw180" style="display: none;">
+                                    请输入高管姓名
+                                    <span class="tipArr"></span>
+                                </span>
+                            </span>
+                        </span>
+				</div>
+			</li>
+			<li class="clearfix">
+				<span class="companyStyle-form-tit">职位</span>
+				<div class="companyStyle-form-text">
+                <span class="formText">
+                    <input type="text" class="text" placeholder="请输入高管职位 限10字" style="width: 246px;" id="position" name="position" value="{/$introduceInfo['position']/}">
+                </span>
+					<span class="tipPos">
+                    <span class="tipLay">
+                        <span for="txtStation" generated="true" class="tipLayErr tipw100" style="display: none;" >
+                            请输入高管职位
+                            <span class="tipArr"></span>
+                        </span>
+                    </span>
+                </span>
+				</div>
+			</li>
+			<li class="clearfix">
+				<span class="companyStyle-form-tit">简介</span>
+				<div class="companyStyle-form-text">
+                        <span class="formTextarea">
+                            <textarea class="textarea" name="txtContent" id="txtContent" placeholder="例如：耶鲁大学经济学及东亚研究学士学位、耶鲁法学院法学博士学位。 限60字">{/$introduceInfo['details']/}</textarea>
+                        	<p class="num"><em>0</em>/60</p>
+						</span>
+					<span class="tipPos">
+                            <span class="tipLay">
+                                <span for="txtStation" generated="true" class="tipLayErr tipw150" style="display: none;">
+                                    请输入高管简介
+                                    <span class="tipArr"></span>
+                                </span>
+                            </span>
+                        </span>
+				</div>
+			</li>
+			<li class="clearfix">
+				<span class="companyStyle-form-tit">个人形象照</span>
+				<div class="companyStyle-form-text clearfix">
+					{/$up_img_html.html/}
+				</div>
+			</li>
+			<li class="clearfix companyStyle-form-btn">
+				<a class="companyStyle-save" href="javascript:;" id="savebtn">保存</a>
+				<a class="companyStyle-cancel" href="javascript:;" onclick="addintroduce_cancel();" {/if $introduceAmount==0/}style="display: none"{//if/}>取消</a>
+			</li>
+		</ul>
+	</form>
+</div>
+<script>
+	var uploader_img;
+	$(function () {
+		var up_options_{/$up_img_html.id/} = {
+			up_id: '.{/$up_img_html.id/}',
+			auto: {/$up_img_html.config.auto/},
+			BASE_URL: "{/$up_img_html.config.BASE_URL/}",
+			fileNumLimit: 1,//文件数量 默认5个 每张1M fileSingleSizeLimit: 1024 * 1024,
+			fileSingleSizeLimit: {/$up_img_html.config.fileSingleSizeLimit/},//每个文件大小
+			file_name: '{/$up_img_html.config.file_name/}',//返回接收上传的文件名称隐藏域
+			fileVal: '{/$up_img_html.config.fileVal/}',//上传接收name
+			defaults_files: {/$up_img_html.config.defaults_files/},//默认文件
+			accept: {/$up_img_html.config.accept/},//允许文件类型
+			formData: {/$up_img_html.config.form_data/},//上传删除携带参数
+			server: '{/get_url rule="/introduceManage/Picture/"/}',
+			deleteServer: '{/get_url rule="/introduceManage/DelTempFile/"/}',
+			error_hint_fun: function (msg) {
+				msg_error_box(msg);
+			},
+			confirm_hint_fun: function (confirm_msg, deleteServerAjax) {
+                confirmBox.confirm(confirm_msg, "提示", function (obj) {
+                    this.hide();
+                    deleteServerAjax();
+                }, {width: 300});
+			},
+		};
+		uploader_img = $('.{/$up_img_html.id/}').powerWebUpload(up_options_{/$up_img_html.id/});
+
+
+        $('#introdice_name').blur(function () {
+            var name = $('#introdice_name').val();
+            if (name == '') {
+               /* $('#introdice_name').focus();*/
+                $('.tipw180').show();
+            }else if($.trim(name).length>5){
+                $('.tipw180').html('高管姓名不能超过5个字');
+                $('.tipw180').show();
+			}else{
+                $('.tipw180').hide();
+            }
+        })
+        $('#position').blur(function () {
+            var position = $('#position').val();
+            if (position == '') {
+                /*$('#position').focus();*/
+                $('.tipw100').show();
+            }else if($.trim(position).length>10){
+                $('.tipw100').html('职位不超过10个字');
+                $('.tipw100').show();
+            } else {
+                $('.tipw100').hide();
+            }
+        })
+        $('#txtContent').blur(function () {
+            var details = $('#txtContent').val();
+            if (details == '') {
+                /*$('#txtContent').focus();*/
+                $('.tipw150').show();
+            }else if($.trim(details).length>60){
+                $('.tipw150').html('高管简介不能超过60个字');
+                $('.tipw150').show();
+            } else {
+                $('.tipw150').hide();
+            }
+        })
+
+        $('#savebtn').click(function () {
+            var name = $('#introdice_name').val();
+            var details = $('#txtContent').val();
+            var position = $('#position').val();
+            var  id = '{/$introduceInfo["id"]/}';
+            if (name == '') {
+                /*$('#introdice_name').focus();*/
+                $('.tipw180').show();
+            }else if($.trim(name).length>5){
+                $('.tipw180').html('高管姓名不能超过5个字');
+                $('.tipw180').show();
+            }else if (position == '') {
+                /*$('#position').focus();*/
+                $('.tipw100').show();
+            }else if($.trim(position).length>10){
+                $('.tipw100').html('职位不超过10个字');
+                $('.tipw100').show();
+            }else if (details == '') {
+                /*$('#txtContent').focus();*/
+                $('.tipw150').show();
+            }else if($.trim(details).length>60){
+                $('.tipw150').html('高管简介不能超过60个字');
+                $('.tipw150').show();
+            }else{
+                $.ajax({
+                    type: 'post',
+                    url: '{/get_url rule="/introduceManage/AddIntroduceManage/"/}',
+                    data: $('#form1').serialize(),//只要将表单序列化就可以了
+                    async: false,//false-同步请求
+                    dataType: 'json',
+                    success: function (data) {
+                        if (id){
+                            if (data.status ) {
+                                $('#editul_'+id).show();
+                                $('#editul_'+id).html(data.re_html);
+                                $('#edit_'+id).html('');
+                                $.anchorMsg(data.msg, {icon: 'success'});
+                            } else {
+                                //提示错误
+                                if (data.isNeedLogin) {
+                                    $.anchorMsg('离开太久了,请重新登录!', {icon: 'fail'});
+                                }else{
+                                    $.anchorMsg(data.msg, {icon: 'fail'});
+                                }
+                            }
+						}else{
+                            if (data.status ) {
+                                /*$('#introduce_list').html(data.data);
+                                $('#addintroduce_edit').html('');
+                                if (data.count>=5){
+                                    $('.addProject').hide();
+                                } else{
+                                    $('.addProject').show();
+                                }*/
+                                $.anchorMsg(data.msg, {icon: 'success'});
+                                window.location.reload();
+                            } else {
+                                //提示错误
+                                if (data.isNeedLogin) {
+                                    $.anchorMsg('离开太久了,请重新登录!', {icon: 'fail'});
+                                }else{
+                                    $.anchorMsg(data.msg, {icon: 'fail'});
+                                }
+                            }
+						}
+
+                    },
+                    error: function (request) {
+                        $.anchorMsg("数据请求失败.请稍后重试", {icon: 'fail'});
+                        re = false;
+                    }
+                });
+            }
+        })
+      $("#txtContent").on('input propertychange', function () {
+        //获取输入内容
+        var userDesc = $(this).val();
+
+        //判断字数
+        var len;
+        if (userDesc) {
+          len = checkNum(userDesc, 60);
+        } else {
+          len = 0
+        }
+        //显示字数
+        $(".num em").html(len);
+      });
+
+
+	});
+    //控制输入字数
+    function checkNum(str,maxLength) {
+      var maxLength = maxLength;
+      var result;
+      if(str && str.length > maxLength){
+        result = maxLength
+      }else{
+        result = str.length;
+      }
+      return result
+    }
+
+	function addintroduce_cancel() {
+        var  id = '{/$introduceInfo["id"]/}';
+        if (id){
+            $('#editul_'+id).show();
+            $('#edit_'+id).html('');
+		} else{
+            $('#addintroduce_edit').html('');
+            is_addProject = false;
+		}
+
+	}
+</script>

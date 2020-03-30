@@ -1,0 +1,291 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+</head>
+<body>
+<style>
+.invLst{width:500px;font-size:12px;}
+
+.invForm{}
+.invForm .formMod .l{width:110px;}
+.invForm .formMod .r{width:380px;}
+.invForm .formMod .r .formTextarea textarea.textarea{width:325px;height:80px;padding:0 0 0 5px;line-height:22px;font-size:12px;}
+.invForm .formBtn{margin:20px 0 0 120px;}
+.invLst .lst{padding-bottom:10px;margin-bottom:10px;}
+.invLst .lst .lstCon{}
+.invLst .lst .lstCon ul li{height:30px;line-height:30px;border-bottom:1px dashed #dadada;padding:0 10px; vertical-align:bottom;}
+.invLst .lst .lstCon ul li.hov{background:#f1f1f1;}
+.invLst .lst .lstCon ul li .lstL{float:left;display:inline;width:360px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;-o-text-overflow:ellipsis;}
+.invLst .lst .lstCon ul li .lstR{float:right;display:inline;width:75px;}
+.invLst .lst .lstCon ul li .lstR a{margin:0 0 0 10px;}
+.newInv{margin:0 0 20px 20px;}
+.newInv a i.hbFntWes{font-size:16px;margin:0 10px 0 0;}
+.invLst .noData{padding:25px 20px; background:none;}
+</style>
+
+<div class="dgBox invLst">
+	<div id="divShowTemplate">
+		<div class="lst" id="invLst">
+	    	<div class="lstCon" {/if count($template_list)==0/}style="display:none"{//if/} style="overflow-y:scroll;height:93px;">
+	            <ul id="ulTemplateList">
+					{/section name=template loop=$template_list/}
+						<li id="li{/$template_list[template].template_id/}">
+							<span id="tname{/$template_list[template].template_id/}" class="lstL">{/$template_list[template].name/}</span>
+							<span  class="lstR">
+								<a href="javascript:void(0);" class="edt" data-id="{/$template_list[template].template_id/}">编辑</a><a class="del" href="javascript:void(0);" data-id="{/$template_list[template].template_id/}">删除</a>
+							</span>
+						</li>
+					{//section/}
+				</ul>
+	        </div>
+	        <div id="tipNoData" class="noData" {/if $smarty.section.template.show/}style="display:none"{//if/}>暂无模板</div>
+	    </div>
+	    <div class="newInv"><a href="javascript:void(0)" id="btnAddTemplate"><i class="hbFntWes">&#xf055;</i>添加新模板</a></div>
+    </div>
+    <div class="invForm" id="divTemplate" style="display:none;">
+    	<form id="frmTemplate" action="{/get_url rule='/interview/savetemplate/'/}" method="post">
+		<input type="hidden" id="hidTemplateID" name="hidTemplateID" value="0" />
+    	<div class="formMod">
+            <div class="l">模板名称<i>*</i></div>
+            <div class="r">
+                <span class="formText">
+                    <input id="txtName" name="txtName" type="text" class="text" value="" style="width:150px;">
+                </span>
+                <span class="tipPos">
+                	<span class="tipLay">
+                    </span>
+                </span>
+            </div>
+            <div class="clear"></div>
+        </div>         
+        <div class="formMod">
+            <div class="l">面试地点<i>*</i></div>
+            <div class="r">
+                <span class="formText">
+                    <input id="txtAddress" name="txtAddress" type="text" class="text" value="" style="width:250px;">
+                </span>
+                <span class="tipPos">
+                	<span class="tipLay">
+                    </span>
+                </span>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="formMod">
+            <div class="l">联系人<i>*</i></div>
+            <div class="r">
+                <span class="formText">
+                    <input id="txtLinkMan" name="txtLinkMan" type="text" class="text" value="" style="width:150px;">
+                </span>
+                <span class="tipPos">
+                	<span class="tipLay">
+                    </span>
+                </span>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="formMod">
+            <div class="l">联系电话<i>*</i></div>
+            <div class="r">
+                <span class="formText">
+                    <input id="txtLinkTel" name="txtLinkTel" type="text" class="text" value="" style="width:150px;">
+                </span>
+                <span class="tipPos">
+                	<span class="tipLay">
+                    </span>
+                </span>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="formMod">
+            <div class="l">其他<i>&nbsp;</i></div>
+            <div class="r">
+                <span class="formTextarea">
+                    <textarea id="txtRemark" name="txtRemark" class="textarea" rows="6" cols="30"></textarea>
+                </span>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="formBtn">
+        	<a href="javascript:void(0);" id="btnSaveTemplate" class="btn1 btnsF14">保存模板</a>
+        	<a href="javascript:void(0);" id="btnCancel" class="btn3 btnsF14">取消</a>
+        </div>
+        </form>
+    </div>
+</div>
+<script type="text/javascript">
+
+try {
+	hbjs.use('cqjob.jobValidate, cqjob.jobForm, cqjob.jobDialog, cqjob.jobDropList, cqjob.actions', function($, form, jobDialog, jobDropList, actions){
+		factory($.extend(form, jobDialog, jobDropList, actions));
+	});
+} catch (ex) {
+	factory($);
+}
+
+function factory($){
+	var manageTemplateValid;
+	var manageTemplate = {
+		initControls: function() {
+			manageTemplateValid = $('#frmTemplate').validate({
+				rules:
+				{
+					txtName:{required:true,maxlength : 64},
+					txtAddress:{required:true,maxlength:60},
+					txtLinkMan:{required:true,maxlength:15},
+					txtLinkTel:{required:true,tel: true},
+					txtRemark:{maxlength:200}
+				},
+				messages:
+				{
+					txtName:{required:'请输入模板名称<span class="tipArr"></span>',maxlength : '模板名称不超过64字<span class="tipArr"></span>'},
+					txtAddress:{required:'请输入面试地点<span class="tipArr"></span>',maxlength:'面试地址不超过60字<span class="tipArr"></span>'},
+					txtLinkMan:{required:'请输入联系人<span class="tipArr"></span>',maxlength:'联系人不超过15字<span class="tipArr"></span>'},
+					txtLinkTel:{required:'请输入联系电话<span class="tipArr"></span>',tel:'联系电话不正确<span class="tipArr"></span>'},
+					txtRemark:{maxlength:'其他信息不超过200字<span class="tipArr"></span>'}
+				},
+				errorClasses:{
+					txtName:{required:'tipLayErr tipw100',maxlength : 'tipLayErr tipw100'},
+					txtAddress:{required:'tipLayErr tipw100',maxlength:'tipLayErr tipw100'},
+					txtLinkMan:{required:'tipLayErr tipw100',maxlength:'tipLayErr tipw100'},
+					txtLinkTel:{required:'tipLayErr tipw100',tel:'tipLayErr tipw100'},
+					txtRemark:{maxlength:'tipLayErr tipw100'}
+				},
+				errorElement:'span',
+				errorPlacement: function(error, element)
+				{
+					element.parent().nextAll().find('.tipLay').append(error);
+				},
+				success: function(label)
+				{ 
+					label.text(" ");
+				}
+			});
+			$("#btnAddTemplate").click(function(){
+				manageTemplate.clearValue();
+				$("#divTemplate").show();
+				$('#divShowTemplate').hide();
+			});
+			$("#btnSaveTemplate").click(function(){
+				$('#btnSaveTemplate').submitForm({beforeSubmit: $.proxy(manageTemplateValid.form, manageTemplateValid),success: manageTemplate.saveTemplateSuccess, clearForm: false });
+				
+			});
+			$('#btnCancel').click(function(){
+				manageTemplate.clearValue();
+				manageTemplateValid.resetForm();
+				$("#divTemplate").hide();
+				$('#divShowTemplate').show();
+			});
+			$('#ulTemplateList').on('click', 'a', function(e){
+				var target = $(e.currentTarget),
+					attrid = target.attr('data-id');
+				if(target.hasClass('edt')){
+					manageTemplate.editTemplate(attrid);
+				} else {
+					manageTemplate.deleteTemplate(attrid);
+				}
+			});
+		},
+		editTemplate:function(template_id){
+			$("#divTemplate").show();
+			$('#divShowTemplate').hide();
+			$.getJSON('{/get_url rule="/interview/gettemplate/"/}',{template_id:template_id},function(json){
+				if(json.error){
+					$.message(json.error, { title: '系统提示', icon: 'fail' });
+					return;
+				}else{
+					$("#divTemplate").find("#hidTemplateID").val(json.template_id);
+					$("#divTemplate").find('#txtName').val(json.name);
+					$("#divTemplate").find('#txtAddress').val(json.address);
+					$("#divTemplate").find('#txtLinkMan').val(json.link_man);
+					$("#divTemplate").find('#txtLinkTel').val(json.link_tel);
+					$("#divTemplate").find('#txtRemark').val(json.remark);
+				}
+			});
+		},
+		deleteTemplate:function(template_id){
+			$.confirm('确定要删除此模板吗？', '操作提示', function() {
+				$.getJSON('{/get_url rule="/interview/deletetemplate/"/}',{template_id:template_id},function(json){
+					if(json.error){
+						$.message(json.error, { title: '系统提示', icon: 'fail' });
+						return;
+					}else{
+						$.anchorMsg("删除模板成功");
+						$("#li"+template_id).remove();
+						if($('#ulTemplateList').find('li').length==0){
+							$('#ulTemplateList').parent().hide();
+							$('#tipNoData').show();
+						}
+						/*
+						{/if !empty($obj) && !empty($callback)/}
+							{/$obj/}.{/$callback/}('del',template_id,null);
+						{//if/}*/
+						manageTemplate.resetTemplates('del', template_id, null);
+					}
+				});
+			});
+		},
+		clearValue:function(){
+			$("#divTemplate").find("#hidTemplateID").val(0);
+			$("#divTemplate").find('#txtName').val('');
+			$("#divTemplate").find('#txtAddress').val('');
+			$("#divTemplate").find('#txtLinkMan').val('');
+			$("#divTemplate").find('#txtLinkTel').val('');
+			$("#divTemplate").find('#txtRemark').val('');
+		},
+		saveTemplateSuccess:function(json){
+			 if(json && json.error){
+				 $.message(json.error, { title: '系统提示', icon: 'fail' });
+				 return; 
+			 }else{
+				 if(json.is_add=='1'){
+					 var li ='<li id="li'+json.template_id +'"><span id="tname'+ json.template_id +'" class="lstL">'+json.name+'</span><span class="lstR"><a href="javascript:void(0);" class="edt" data-id="' +json.template_id+ '">编辑</a><a class="del" href="javascript:void(0);" data-id="' +json.template_id+ '">删除</a></span></li>';
+					 $("#ulTemplateList").append(li);
+					 manageTemplate.resetTemplates('add', json.template_id, json.name);
+					 /*
+					{/if !empty($obj) && !empty($callback)/}
+						{/$obj/}.{/$callback/}('add',json.template_id,json.name);
+					{//if/}
+					*/
+				 } else {
+					 $("#tname"+json.template_id).html(json.name);
+					/*{/if !empty($obj) && !empty($callback)/}
+						{/$obj/}.{/$callback/}('mod',json.template_id,json.name);
+					{//if/}*/
+					manageTemplate.resetTemplates('mod', json.template_id, json.name);
+				 }
+				 $.anchorMsg("保存模板成功!");
+				 $('#ulTemplateList').parent().show();
+				 $('#tipNoData').hide();
+				 $("#divTemplate").hide();
+				 $('#divShowTemplate').show();
+				 manageTemplate.clearValue();
+			 }
+		},
+		resetTemplates: function(type,template_id,template_name){
+			if(!type && !template_id && $.fn.addItem && $.fn.setDropListValue){return;}
+			switch(type)
+			{
+				case 'add':
+					$('#templateDrop').addItem(template_id,template_name);
+					$('#templateDrop').setDropListValue(template_id);
+					break;
+				case 'del':
+					$('#templateDrop').delItem(template_id);
+					$('#templateDrop').setDropListValue(0);
+					break;
+				case 'mod':
+					$('#templateDrop').delItem(template_id);
+					$('#templateDrop').addItem(template_id,template_name);
+					$('#templateDrop').setDropListValue(template_id);
+					break;
+				default:
+					break;
+			}
+		}
+	}
+	manageTemplate.initControls();
+}
+</script>
+</body>
+</html>

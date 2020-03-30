@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>帮助中心</title>
+		<link rel="stylesheet" type="text/css" href="{/version file='companyHelp.css'/}" />
+	</head>
+	<body>
+		<div class="companyHelpHeader">
+			<div class="topMain">
+				<a href="{/$siteurl.company/}" target="_blank"><img src="{/$siteurl.style/}\img\company\help\companyHelp.jpg" /></a>
+				
+			</div>
+		</div>
+		<!-- 左边 -->
+		<div class="cpyHelpLeft">
+			<div>
+			{/foreach $categorys as $k=>$category/}
+				<a id="category{/$category['category_id']/}" href="javascript:void(0);" data-id="{/$category['category_id']/}" class="category_search">
+					{/if !empty($category['logo_path'])/}<img src="{/$category['logo_path']/}">{//if/}
+					{/$category['category_name']/}
+				</a>
+			{//foreach/}
+			</div>
+		</div>
+		<!-- 搜索框 -->
+		<div class="cpyHelpSchLine">
+			<div class="cpyHelpSch">
+				<input type="text" name="key" id="" value="{/$key_wolrd/}" placeholder="请输入" />
+				<button id="go_search" type="button">搜索</button>
+			</div>
+		</div>
+		
+		
+		
+		<div class="cpyHelpMain">
+			
+			<div class="cpyHelpRight">
+				{/if !empty($questions)/}
+					{/foreach $categorys as $k=>$category/}
+						{/assign var="has_content" value="0"/}
+						{/foreach $questions as $q_k=>$question/}
+							{/if $category['category_id'] == $question['category_id']/}
+								{/assign var="has_content" value="1"/}
+							{//if/}
+						{//foreach/}
+
+						{/if $has_content/}
+						<div class="cpyHelpIssue" id="anchor{/$category['category_id']/}">
+							<h2>{/$category['category_name']/}</h2>
+							{/foreach $questions as $q_k=>$question/}
+								{/if $category['category_id'] == $question['category_id']/}
+									<a href="javascript:void(0);" class="chIssuex"><i></i>{/$question['title']/}</a>
+									<div class="chIssueShow">
+										{/$question['content']/}
+									</div>
+								{//if/}
+							{//foreach/}
+						</div>
+						{//if/}
+					{//foreach/}
+				{/else/}
+					<div class="noHelp">
+						<img src="{/$siteurl.style/}\img\company\help\cpHelp18.png" >非常抱歉，暂无相关内容，您可继续搜索或在线咨询顾问。
+					</div>
+				{//if/}
+
+				{/if $hasHRManager/}
+				<div class="helpService">
+					<b>在线帮助：</b>
+					<span>{/$hrManager['user_name']/} (招聘顾问)</span>
+					<span>电话：{/$hrManager['mobile']/}(微信同号) </span>
+					<span>QQ：{/$hrManager['qq']/}</span>
+					<span>
+						<a style="padding-left:0px;" target="_blank" href="//wpa.qq.com/msgrd?v=3&amp;uin={/$hrManager['qq']/}&amp;site=qq&amp;menu=yes">
+						<img border="0" width="79" height="25" src="//wpa.qq.com/pa?p=2:{/$hrManager['qq']/}:51" alt="点击这里给我发消息" title="点击这里给我发消息">
+						</a>
+					</span>
+				</div>
+				{/else/}
+				<div class="helpService">
+					<b>在线帮助：</b>
+					<span>电话：{/$huibo400/}</span>
+					<span>QQ：{/$defaultHR['qq']/}</span>
+					<span>
+						<a style="padding-left:0px;" target="_blank" href="//wpa.qq.com/msgrd?v=3&amp;uin={/$defaultHR['qq']/}&amp;site=qq&amp;menu=yes">
+						<img border="0" width="79" height="25" src="//wpa.qq.com/pa?p=2:{/$defaultHR['qq']/}:51" alt="点击这里给我发消息" title="点击这里给我发消息">
+						</a>
+					</span>
+				</div>
+				{//if/}
+
+			</div>
+		</div>
+<script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.min.js'/}"></script>
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?fb51309e47424acd6e31c0bd2a65a5a1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<script type="text/javascript" language="javascript" src="{/version file='track.js'/}"></script>
+<script type="text/javascript">
+$(function(){
+	
+
+	  {/if $catoryid/}
+		var thisId = $("#anchor{/$catoryid/}").offset().top;
+		$('body,html').animate({
+			scrollTop:thisId-180
+		},500);
+	  {//if/}
+
+})	
+	
+	$('.cpyHelpLeft a').click(function(){
+		
+		{/if $key_wolrd/}
+			window.location.href =  "/help/index?catoryid="+ $(this).attr('data-id');
+		{/else/}
+			
+			$('.cpyHelpSch input').val('');
+			$(this).addClass('cur').siblings().removeClass('cur');
+			var thisOfset = $(this).attr('data-id');
+			var thisId = $('#anchor'+thisOfset).offset().top;
+			$('body,html').animate({
+				scrollTop:thisId-180
+			},500);
+			
+		{//if/}
+		
+	});
+    $('.chIssuex').click(function(){
+    	$(this).next('.chIssueShow').toggle();
+    	$(this).toggleClass('chIssuexCur');
+    });
+    
+    $('.blueRefreshx').click(function(){
+    	$('#refreshJob').next('.chIssueShow').show();
+    	$('#refreshJob').addClass('chIssuexCur');
+    });
+    
+    $('.blueRefreshz').click(function(){
+    	$('#generalizePost').next('.chIssueShow').show();
+    	$('#generalizePost').addClass('chIssuexCur');
+    });
+
+    $("#go_search").click(function () {
+		window.location.href =  "/help/index?key="+ $('input[name=key]').val();
+    })
+
+
+
+</script>		
+	</body>
+</html>

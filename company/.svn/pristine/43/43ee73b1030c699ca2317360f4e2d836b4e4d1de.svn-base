@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+<title>{/$title/}</title>
+<!–[if lt IE9]> 
+<script type="text/javascript" language="javascript" src="{/version file='html5.js'/}"></script>
+<![endif]–>
+<link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='comback.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='tJob_style.css'/}" />
+
+<script type="text/javascript" src="{/version file='version.js'/}"></script>
+<script type="text/javascript">
+window.CONFIG = {
+	HOST: '{/$siteurl.style/}',
+	COMBOPATH: '/js/v2/'
+}
+</script>
+<script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+<script type="text/javascript" src="{/version file="global.js"/}"></script>
+<script type="text/javascript">
+hbjs.loadJS('{/$siteurl.style/}/js/v2/cqjob/common.js');
+</script>
+</head>
+<body class="tjob_main">
+	<!---延用以前-->
+	{/include file="new_header.html" par="兼职招聘" cur="职位管理"/}
+	<!---延用以前 end-->    
+    <!--new-->
+    <div class="tjob_from tjob_suc">
+    	<p class="suc"><img src="{/$siteurl.style/}/img/part/tjob_suc.jpg" />职位发布成功</p> 	
+    	<p class="desc">我们会对<span class="orange">{/if $need_audit/}公司资料 、职位信息 、营业执照{/else/}职位信息{//if/}</span>进行审核（需1个工作日）<br />审核通过后，该职位会自动向求职者公开 <br />
+            求职者的报名可以在<b>兼职招聘</b>下方的<b>【简历管理】</b>进行查看
+</p>
+    	{/if $need_audit/}<strong>目前缺少： 营业执照</strong>{//if/}
+    	<p style="margin-top: 20px">
+    		{/if $need_audit/}
+    		<a href="{/get_url rule='/licencevalidate/'/}" class="link_up">上传营业执照</a>
+    		{/else/}
+    		<a href="{/get_url rule='/part/index'/}" class="link_up">管理我的职位</a>
+    		{//if/}
+    		<a href="{/get_url rule='/partjob/jobV2/'/}" class="link_ctn">继续发布职位</a>
+    	</p>
+    </div>
+    <!--new end-->
+	{/include file="footer.html"/}
+</body>
+</html>

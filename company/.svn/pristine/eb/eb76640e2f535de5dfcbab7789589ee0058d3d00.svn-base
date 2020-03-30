@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+<title>{/$title/}</title>
+<!–[if lt IE9]>
+<script src="{/version file='html5.js'/}"></script>  
+<![endif]–>
+<link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='comback.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='firmcss.css'/}" />
+
+<link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file="tJob_style.css"/}" />
+
+<script type="text/javascript" language="javascript" src="{/version file="jquery-1.8.3.min.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="common.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="dialog.js"/}"></script>
+<script type="text/javascript" src="{/version file='version.js'/}"></script>
+<script type="text/javascript">
+window.CONFIG = {
+	HOST: '{/$siteurl.style/}',
+	COMBOPATH: '/js/v2/'
+}
+</script>
+<script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+<script type="text/javascript" src="{/version file="global.js"/}"></script>
+<script>
+</script>	
+</head>
+<body class="tpartDgray">
+{/include file="new_header.html" par="兼职招聘"/} 
+        
+    {/if $is_insure_fee/}
+    <div class="compTitMage" style="display:block; height:auto; padding-bottom:30px;">
+    	<h2><em></em>保证金详情</h2>
+        <ul class="subMagel">
+        	<li>
+            	<p>企业名：{/$company.company_name/}</p>
+                {/if !empty($insure_time)/}<p>缴纳保证金时间：{/date("Y-m-d",strtotime($insure_time))/}  {/date("H:i",strtotime($insure_time))/}</p>{//if/}
+                <p>缴纳保证金金额：{/$insure_fee/}</p>
+              <!--  <p>当前保证金余额：<span>800元</span><a href="#" class="numBtnTip">被扣保证金明细</a></p>-->
+                <a href="javascript:;" id="reBackInsure" class="numBtn">申请退回保证金</a>
+                <p class="num2">注：退回后将不能再获得放心企业称号</p>
+            </li>
+        </ul>
+        <h2><em></em>什么情况下会扣保证金？</h2>
+        <p class="num">我们收取1000元保证金只是为了防止出现欺诈求职者后找不到人的情况，如果出现违规（如没有不正当理由拒不支付求职者工资）等情况，我们将会
+用保证金对求职者进行赔付，如果没有出现纠纷，企业可以随时退款，退款将在十天内到账。</p>
+        <h2><em></em>返回保证金需要的条件</h2>
+        <p class="num"></p>
+    </div>
+   {/else/}
+   <div style="text-align:center;color:red">您还没有缴纳保证金</div>
+   {//if/}
+   {/include file="footer.html"/}
+   <section class="floatRT"><a href="{/get_url rule='/about/message' domain='main'/}" target="_blank" class="serviceLink">我有问题要反馈</a><b></b></section>
+   
+<script>
+hbjs.use('@select, @confirmBox, @areaMulitiple, @calling, @jobsort, @jobTooltip, @actions, @hbCommon, @dialog', function(m) {
+    var $ = m['jquery'],
+        select = m['widge.select'],
+        ConfirmBox = m['widge.overlay.confirmBox'],
+        cookie = m['tools.cookie'],
+        Dialog = m['widge.overlay.hbDialog'];
+        
+        var reBackInsureDialog = new Dialog({
+            idName : 'reBackInsureDialog',
+            title : '退回保证金',
+            close : 'x',
+            isAjax : true,
+            width :300
+        });
+
+        
+    var indexObj = {
+        init:function(){
+            //退回保证金
+             $("#reBackInsure").click(function(){
+                 
+                 var html = '<div>'
+                            +'<div style="padding:20px;line-height:25px">'
+                            +'请联系你的招聘顾问进行申请：<br/>电话：{/$default_mobile/}'
+                            +'</div>'
+                            +'</div>';
+                reBackInsureDialog.setContent(html).show();
+             });
+        }
+    }
+    indexObj.init();
+})       
+
+</script>
+</body>
+
+</html>

@@ -1,0 +1,601 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+<title>{/$title/}</title>
+<!–[if lt IE9]>
+<script src="{/version file='html5.js'/}"></script>  
+<![endif]–>
+<link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='comback.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='firmcss.css'/}" />
+
+<link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file="tJob_style.css"/}" />
+
+<script type="text/javascript" src="{/version file='version.js'/}"></script>
+<script type="text/javascript">
+window.CONFIG = {
+	HOST: '{/$siteurl.style/}',
+	COMBOPATH: '/js/v2/'
+}
+</script>
+<script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+<script type="text/javascript" src="{/version file="global.js"/}"></script>
+<script>
+hbjs.loadJS('{/$siteurl.style/}/js/v2/cqjob/common.js'); 
+</script>
+<style>
+  .tjob_from input.textGray{color:#A6A6A6}
+     
+</style>
+</head>
+<body class="tpartDgray">
+  {/include file="new_header.html" par="兼职招聘"/} 
+<!--new-->
+    <div class="tjob_from">
+        {/if $flag/}
+    	<ul class="clearfix stop_list" style="display:none">
+            <li class="cur">
+                <p class="clearfix first">                  
+                    <em></em>
+                    <span>1</span>          
+                </p>
+                <p class="tjob_text">填写企业资料</p>
+            </li>
+            <li>
+                <p class="clearfix last">
+                    <em></em>
+                    <span>2</span>
+                </p>
+                <p class="tjob_text">上传营业执照</p>
+            </li>
+        </ul>
+        {//if/}
+    	<p class="tjob_from_title">发布职位前，请先填写一下企业基本资料哦</p>
+    	<div class="from">
+            <form id="tjobForm" action="{/get_url rule='/partcompany/modifyBasicInfo'/}" method="post">
+    			<div class="formMod">
+                    <div class="l">企业名称</div>
+                    <div class="r">
+                        <span class="formText" style="line-height:30px;">
+                            {/$company.company_name/}
+                        </span>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="formMod">
+                    <div class="l">企业简称</div>
+                    <div class="r">
+                        <span class="formText">
+                            <input type="text" value="{/$company.company_shortname/}" placeholder="公司的口头称呼，没有可以写全称" name="hidCompanyShortName"  class="text"/>
+                        </span>
+                        <span class="tipPos">
+                            <span class="tipLay">
+                            <span data-for="hidCompanyShortName" generated="true" class="tipBar tipw180"></span></span>
+                        </span>
+                        
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="formMod">
+                    <div class="l">主行业</div>
+                        <div class="r">
+                            <span id="newCalling" class="drop formText JobIndDrop zIndex" style="width:250px;border-color:#d0cbcb">
+                                <span>
+                                    <div class="dropSet">  <b class="hbFntWes dropIco"></b> <span id='addMainCalling'>{/if !empty($calling_names[0])/} <span class="seled">{/$calling_names[0]/}</span>{/else/}<span class="seled" style="color:#BFBFBF">请选择主行业</span>{//if/}</span>
+                                      
+                                    </div>
+                                  
+                                </span>
+                                 <input type="hidden" name="main_calling" id="main_calling" value="{/$calling_arr[0]/}" />
+                            </span>
+                              <span class="tipPos">
+                                <span class="tipLay">
+                                	<span data-for="main_calling" generated="true" class="tipBar tipw180"></span></span>
+                                </span>
+                            </span>
+                            
+                        </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="formMod">
+                    <a name="info" id="info"></a>
+                    <div class="l">企业介绍</div>
+                    <div class="r">
+                        <span class="formTextarea">
+                            <textarea name="txtInfo" class="textarea" placeholder="请输入企业简介" style="width: 540px;height: 200px">{/$company['info']/}</textarea>
+                        </span>
+                        <span class="tipPos">
+                            <span class="tipLay">
+                            <span data-for="txtInfo" generated="true" class="tipBar tipw180"></span></span>
+                        </span>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="formMod">
+                    <div class="l">联系人</div>
+                    <div class="r">
+                        <span class="formText">
+                            <input type="text" value="{/$company["linkman"]/}" placeholder="请输入联系人姓名" name="linkman"  class="text"/>
+                        </span>
+                        <span class="tipPos">
+                            <span class="tipLay">
+                            <span data-for="linkman" generated="true" class="tipBar tipw180"></span></span>
+                        </span>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="formMod">
+                    <div class="l">手机号</div>
+                    <div class="r">
+                        <span class="formText">
+                            <input type="text" value="{/$company["link_mobile"]/}" placeholder="请填写手机号" name="link_mobile" class="text">
+                        </span>
+                        <span class="tjob_altOrg" style="float:left">注：手机号和座机号请至少填写一个</span>
+                        <span class="tipPos"><span class="tipLay"><span data-for="link_mobile" generated="true" class="tipBar tipw180"></span></span></span>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="formMod">
+                    <div class="l">座机号</div>
+                    <div class="r">
+                        <span class="formText">
+                            <input type="text" value="{/$phone_infor["zone"]/}" placeholder="区号" name="zone_infor" class="text" style="width:80px;margin-right:10px{/if $phone_infor["zone"] == "区号"/}color:#A6A6A6{//if/}">
+                        </span>
+                        <span class="formText">
+                            <input type="text" value="{/$phone_infor["phone"]/}" placeholder="电话号码" name="phone_infor" class="text" style="width:155px;margin-right:10px;{/if $phone_infor["phone"] == "固定电话"/}color:#A6A6A6{//if/}">
+                        </span>
+                        <span class="formText">
+                            <input type="text" value="{/$phone_infor["ext"]/}" placeholder="分机号"  name="ext_infor" class="text" style="width:80px;{/if $phone_infor["ext"] == "分机号"/}color:#A6A6A6{//if/}">
+                        </span>
+                        <span class="tipPos">
+                            <span class="tipLay">
+                            <span data-for="zoneNo" generated="true" class="tipBar tipw180"></span></span>
+                        </span>
+                    </div>
+                    <div class="clear"></div>
+                </div>                
+                <div class="formMod">
+                    <div class="l">所在地区</div>
+                    <div class="r addressMod" style="z-index:7">
+                    
+                    	<!--
+                        <span class="drop addThrdDrop formText" style="display: block; box-shadow: none;margin-right:10px">
+                       	<b class="hbFntWes dropIco"></b>
+                       	<input type="text" readonly="" style="width:169px;#width:160px" value="渝中区" class="county text">
+                       	<div class="dropLst"><div class="dropLstCon" style="width:122px"><ul><li v="01" class="">不限</li><li v="02" class="">男</li><li v="03" class="">女</li></ul></div></div>
+                   		</span>
+                   		<span class="drop addThrdDrop formText" style="display: block; box-shadow: none;margin-right:10px">
+                       	<b class="hbFntWes dropIco"></b>
+                       	<input type="text" readonly="" style="width:169px;#width:160px" value="渝中区" class="county text">
+                       	<div class="dropLst"><div class="dropLstCon" style="width:122px"><ul><li v="01" class="">不限</li><li v="02" class="">男</li><li v="03" class="">女</li></ul></div></div>
+                   		</span>
+                        -->
+                        
+                        <span class="formText zIndex" id="curarea"  style="z-index:7;margin-left:0px"></span>
+                        <span class="tipPos">
+                            <span class="tipLay">
+                            <span data-for="hidArea" generated="true" class="tipBar tipw180"></span></span>
+                        </span>
+                        
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                 <div class="formMod">
+                    <div class="l">详细地址</div>
+                    <div class="r">
+                        <span class="formText">
+                            <input type="text" value="{/$company.address/}" placeholder="详细地址，如环球广场24楼" name="txtAddress" class="text" style="width: 500px">
+                        </span>
+                        <span class="tipPos">
+                            <span class="tipLay">
+                            <span data-for="txtAddress" generated="true" class="tipBar tipw180"></span></span>
+                        </span>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="formBtn"><a class="btnsF16 btn1" id="btnSaveAddress" href="javascript:void(0);">提交</a></div>
+           	</form>
+    	</div>    	
+    </div>
+ {/include file="footer.html"/}
+   <section class="floatRT"><a href="{/get_url rule='/about/message' domain='main'/}" target="_blank" class="serviceLink">我有问题要反馈</a><b></b></section>
+<script type="text/javascript">
+
+hbjs.use('widge.validator.form, module.verifier, widge.overlay.hbDialog, widge.overlay.confirmBox, product.hbCommon, cqjob.areaSimple', function(ValidatorForm, verifier, Dialog, ConfirmBox, $, areaSimple){
+	$.extend(areaSimple);
+	$('input:text, textarea').placeHolder();
+	
+	var rules = {
+		hidCompanyShortName:{required:true,range:[2,15]},
+		main_calling: 'required',
+		txtInfo:{required:true,range:[2, 4000]},
+		linkman:{required:true,range:[1, 15]},
+		hidArea: {required:true},
+		txtAddress: {required:true,range:[2,50]}
+	};
+	var errorMsgs = {
+		hidCompanyShortName:{
+			required:'请输入公司简称<span class="tipArr"></span>',
+			range:'公司简称请输入1-15个字<span class="tipArr"></span>'
+		},
+		main_calling:'请选择公司行业<span class="tipArr"></span>',
+		txtInfo:{
+            required:'请输入公司简介<span class="tipArr"></span>',
+            range:'公司简介请输入2-4000个字<span class="tipArr"></span>'
+        },
+		linkman:{
+            required:'请输入联系人姓名<span class="tipArr"></span>',
+            range:'联系人姓名不能超过15字<span class="tipArr"></span>'
+        },
+		hidArea: {required:'请选择公司地区<span class="tipArr"></span>'},
+		txtAddress: {required:'请输入公司地址<span class="tipArr"></span>',range:'公司地址不能超过50字<span class="tipArr"></span>'}
+	};
+	
+	var validator = new ValidatorForm({
+		element: $('#tjobForm'),
+		rules: rules,
+		errorMessages: errorMsgs,
+		errorElement: 'span.tipBar',
+		keepKey: true
+	});
+	
+	$('#curarea').singleArea({hddName:'hidArea',showLevel:4,selectArea:'{/$company["area_id"]/}',onSelect:function(a){
+	}});
+    
+	var tipLayErrClass = 'tipLayErr';
+	validator.on('clearItem', function(e){
+		e.label.removeClass(tipLayErrClass);
+	});
+	
+	var linkMobileInput = $('input[name=link_mobile]'),
+		phoneInforInput = $('input[name=phone_infor]'),
+		zoneInforInput = $('input[name=zone_infor]'),
+		extInforInput = $('input[name=ext_infor]'),
+		telStatus = true, mobileStatus = true;
+	
+//	function addTel(f){
+//		var phone_infor, zone_infor, ext_infor,
+//			errorMsg = {
+//				phone_infor:{required:'请输入固定电话<span class="tipArr"></span>', tel:'请输入正确的电话号码<span class="tipArr"></span>'},
+//				zone_infor:{match:'请输入正确的区号<span class="tipArr"></span>'},
+//				ext_infor:{match:'分机号码为数字<span class="tipArr"></span>'}
+//			};
+//		if(f){
+//			phone_infor = {required:true, match: /^\d{1,10}$/};
+//			zone_infor = {match: /^([0-9]{3}[0-9]?)$/};
+//			ext_infor = {match: /^([0-9]+)$/};
+//		} else {
+//			phone_infor = {match: /^\d{1,10}$/};
+//			zone_infor = {match: /^(([0-9]{3}[0-9]?)|\s*)$/};
+//			ext_infor = {match: /^(([0-9]+)|\s*)$/};
+//		}
+//		telStatus = f;
+//		//validator.resetElement($('input[name=zone_infor], input[name=phone_infor], input[name=ext_infor]'));
+//		validator.removeGroup('zoneNo');
+//		validator.addRules({
+//			phone_infor: phone_infor,
+//			zone_infor: zone_infor,
+//			ext_infor: ext_infor
+//		});
+//		validator.addErrorMessages(errorMsg);
+//		validator.addGroup({
+//			zoneNo: 'zone_infor phone_infor ext_infor'
+//		});
+//		
+//	}
+//	function addMobile(f){
+//		if(f){
+//			validator.addRules('link_mobile', 'required mobile');
+//			validator.addErrorMessages('link_mobile', {
+//				required: '请输入正确的电话号码<span class="tipArr"></span>',
+//				mobile: '请输入正确的电话号码<span class="tipArr"></span>'
+//			});
+//		} else {
+//			//validator.resetElement($('input[name=link_mobile]'));
+//			validator.removeRules('link_mobile', 'required');
+//			validator.removeErrorMessages('link_mobile', 'required');
+//		}
+//		mobileStatus = f;
+//	}
+//	
+//	function checkMobile(f){
+//		if(f){
+//			return verifier.required(linkMobileInput) && verifier.mobile(linkMobileInput);
+//		} else {
+//			return verifier.mobile(linkMobileInput);
+//		}
+//	}
+//	function checkPhoneInfor(f){
+//		if(f){
+//			return verifier.required(phoneInforInput) && verifier.tel(phoneInforInput);
+//		} else {
+//			return verifier.tel(phoneInforInput);
+//		}
+//	}
+//	function checkZoneInfor(f){
+//		var match;
+//		if(f){
+//			match = /^([0-9]{3}[0-9]?)$/;
+//		} else {
+//			match = /^(([0-9]{3}[0-9]?)|\s*)$/;
+//		}
+//		return verifier.match(zoneInforInput, match);
+//	}
+//	function checkExtInfor(f){
+//		var match;
+//		if(f){
+//			match = /^([0-9]+)$/;
+//		} else {
+//			match = /^(([0-9]+)|\s*)$/;
+//		}
+//		return verifier.match(extInforInput, match);
+//	}
+//	
+//	if(checkMobile(mobileStatus)){
+//		addTel(false);
+//	} else {
+//		addTel(true);
+//	}
+//	
+//	if(checkZoneInfor(telStatus) && checkPhoneInfor(telStatus) && checkExtInfor(telStatus)){
+//		addMobile(false);
+//	} else {
+//		addMobile(true);
+//	}
+	
+	validator.on('blur', function(e){
+		if(e.name === "link_mobile"){
+			
+		}
+	});
+	validator.on('invalid', function(e){
+		e.label.addClass(tipLayErrClass);
+		if(e.name === "link_mobile"){
+			addTel(true);
+		} else if(e.name === "zone_infor" || e.name === "phone_infor" || e.name === "ext_infor"){
+			addMobile(true);
+		}
+	});
+	validator.on('pass', function(e){
+		e.label.removeClass(tipLayErrClass);
+		if(e.name === "link_mobile"){
+			addTel(false);
+		} else if(e.name === "zone_infor"){
+			if(checkPhoneInfor(telStatus) && checkExtInfor(telStatus)){
+				addMobile(false);
+			} else {
+				addMobile(true);
+			}
+		} else if(e.name === "phone_infor"){
+			if(checkZoneInfor(telStatus) && checkExtInfor(telStatus)){
+				addMobile(false);
+			} else {
+				addMobile(true);
+			}
+		} else if(e.name === "ext_infor"){
+			if(checkZoneInfor(telStatus) && checkPhoneInfor(telStatus)){
+				addMobile(false);
+			} else {
+				addMobile(true);
+			}
+		}
+	});
+	
+        function checkMobileAndTel(){
+            var msg = '请输入正确的电话号码<span class="tipArr"';
+            var flag = true;
+            var mobile_phone = $("input[name='link_mobile']").val();
+            var zone_infor = $("input[name='zone_infor']").val();
+            var phone_infor = $("input[name='phone_infor']").val();
+            var ext_infor = $("input[name='ext_infor']").val();
+            if(mobile_phone =="" && phone_infor==""){
+                flag = false;
+                $("input[name='link_mobile']").parents(".formText").siblings(".tipPos").find(".tipBar").html('手机号码和座机号必选一项<span class="tipArr"').css({width:"180px"}).addClass("tipLayErr").show();
+            }
+            if(phone_infor!=""){
+                //验证手机
+                flag = flag ? checkMobile(mobile_phone,true) : false;
+            }else{
+                flag = flag ? checkMobile(mobile_phone,false) : false;
+            }
+            
+            if(mobile_phone !=""){
+                //验证tel
+                flag = flag ? checkTel(zone_infor,phone_infor,ext_infor,true) : false;
+            }else{
+                flag = flag ? checkTel(zone_infor,phone_infor,ext_infor,false) : false;
+            }
+            
+            return flag;
+        }
+
+        function checkMobile(mobile,can_empty){
+            if(mobile==""){
+                if(!can_empty){
+                    $("input[name='link_mobile']").parents(".formText").siblings(".tipPos").find(".tipBar").html('手机号码和座机号必选一项<span class="tipArr"').css({width:"180px"}).addClass("tipLayErr").show();
+                    return false;
+                }
+                return true;
+            }
+            var match_mobile = /^[1]\d{10}$/;
+            if(!match_mobile.test(mobile)){
+                $("input[name='link_mobile']").parents(".formText").siblings(".tipPos").find(".tipBar").html('请输入正确的手机号码<span class="tipArr"').css({width:"180px"}).addClass("tipLayErr").show();
+                return false;
+            }
+            return true;
+        }
+
+        function checkTel(zone_infor,phone_infor,ext_infor,can_empty){
+            var flag = true;
+            var zone_match = /^[0-9]{3}[0-9]?$/;
+            var ext_match = /^[0-9]+$/;
+            var phone_match = /^\d{1,10}$/;
+            if(zone_infor !=""){
+                if(!zone_match.test(zone_infor)){
+                    $("input[name='zone_infor']").parents(".formText").siblings(".tipPos").find(".tipBar").html('请填写正确的区号<span class="tipArr"').css({width:"140px"}).addClass("tipLayErr").show();
+                    flag = false;
+                    return flag;
+                }
+                if(phone_infor ==""){
+                    $("input[name='zone_infor']").parents(".formText").siblings(".tipPos").find(".tipBar").html('电话号码不能为空<span class="tipArr"').css({width:"140px"}).addClass("tipLayErr").show();
+                    flag = false;
+                    return flag;
+                }
+            }
+            if(ext_infor !=""){
+                if(!ext_match.test(ext_infor)){
+                     $("input[name='ext_infor']").parents(".formText").siblings(".tipPos").find(".tipBar").html('请填写正确的分机号<span class="tipArr"').css({width:"140px"}).addClass("tipLayErr").show();
+                    flag = false;
+                    return flag;
+                }
+                 if(phone_infor ==""){
+                    $("input[name='zone_infor']").parents(".formText").siblings(".tipPos").find(".tipBar").html('电话号码不能为空<span class="tipArr"').css({width:"140px"}).addClass("tipLayErr").show();
+                    flag = false;
+                    return flag;
+                }
+            }
+            if(phone_infor ==""){
+                if(!can_empty){
+                    $("input[name='link_mobile']").parents(".formText").siblings(".tipPos").find(".tipBar").html('手机号码和座机号必选一项<span class="tipArr"').css({width:"140px"}).addClass("tipLayErr").show();
+                    flag = false;
+                }
+            }else{
+                if(!phone_match.test(phone_infor)){
+                     $("input[name='phone_infor']").parents(".formText").siblings(".tipPos").find(".tipBar").html('手机号码和座机号必选一项<span class="tipArr"').css({width:"140px"}).addClass("tipLayErr").show();
+                    flag = false;
+                }
+            }
+            return flag;
+        }
+        
+        function closeErrMsg(){
+            $("input[name='link_mobile']").parents(".formText").siblings(".tipPos").find(".tipBar").html('').css({width:"140px"}).removeClass("tipLayErr").hide();
+            $("input[name='phone_infor']").parents(".formText").siblings(".tipPos").find(".tipBar").html('').css({width:"140px"}).removeClass("tipLayErr").hide();  
+        }
+        $(function(){
+            $("input[name='link_mobile']").focus(function(){
+                closeErrMsg();
+            });
+             $("input[name='zone_infor']").focus(function(){
+                closeErrMsg();
+            });
+             $("input[name='phone_infor']").focus(function(){
+                closeErrMsg();
+            });
+             $("input[name='ext_infor']").focus(function(){
+                closeErrMsg();
+            });
+        })
+        
+        
+	$('#btnSaveAddress').on('click', function(e){
+            //检查验证表单todo
+            validator.submit(function(e){
+                   var r = checkMobileAndTel();
+                   if(!r){
+                       return;
+                   }else{
+                       closeErrMsg();
+                   }
+                var baseInfo = getBaseInfor();
+                $.ajax({
+                    url:"/partcompany/modifyBasicInfo",
+                    type:"post",
+                    dataType:"json",
+                    contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                    data:baseInfo,
+                    success:function(data){
+                    if(data.error){
+                      ConfirmBox.timeBomb(data.error, {name : 'fail', width: 400});
+                      return;
+                          }
+                       ConfirmBox.timeBomb("修改成功", {name : 'success', width: 200});
+                       {/if $flag =="addjob"/}
+                            window.location.href = "{/$siteurl.company|replace:'http:':''/}/partjob/job/";
+                       {/else/}
+                             window.location.href = "{/$siteurl.company|replace:'http:':''/}/part/";
+                        {//if/}
+                    }
+                });
+            });
+	});
+	
+        //获得数据
+        function getBaseInfor(){
+            var baseInfor = {};
+            var $_baseInforForm = $("#tjobForm");
+            baseInfor.main_calling       = $_baseInforForm.find("input[name=main_calling]").val();
+            //baseInfor.next_calling       = $_baseInforForm.find("input[name=next_calling]").val();
+            baseInfor.info      = $_baseInforForm.find("textarea[name=txtInfo]").val();
+            baseInfor.linkman           = $_baseInforForm.find("input[name=linkman]").val();
+            baseInfor.company_shortname           = $_baseInforForm.find("input[name=hidCompanyShortName]").val();
+            baseInfor.link_mobile       = $_baseInforForm.find("input[name=link_mobile]").val();
+            baseInfor.phone_infor       = $_baseInforForm.find("input[name=phone_infor]").val();
+            baseInfor.zone_infor        = $_baseInforForm.find("input[name=zone_infor]").val();
+            baseInfor.ext_infor         = $_baseInforForm.find("input[name=ext_infor]").val();
+            baseInfor.area_id        = $_baseInforForm.find("input[name=hidArea]").val();
+            baseInfor.address         = $_baseInforForm.find("input[name=txtAddress]").val();
+            return baseInfor;
+        }
+//        
+//        //成功回调
+//        function checkForm(){
+//            return true;
+//        }
+//        
+        function successCallBack(data){
+//            if(data.error){
+//                  ConfirmBox.timeBomb(data.error, {name : 'fail', width: 400});
+//                  return;
+//              }
+//              ConfirmBox.timeBomb(data.success, {name : 'success', width: 200});
+        }
+		
+		var callingDialog = new Dialog({
+			close: 'x',
+			isAjax: true,
+			title: '选择主行业',
+			width: 720
+		});
+		
+		$('#newCalling').on('click',function(){
+                        var calling_id = $("#main_calling").val();
+			 callingDialog.setContent('{/$siteurl.company|replace:"http:":""/}/company/selectCalling/type-2-calling_id-'+calling_id).show().on('loadComplete', function(){
+				 var self = this;
+				  this.query('#btnSortSave').on('click', function(){
+					  
+					  var calling_id = self.query(":checked").val();
+					  var calling_name = self.query(":checked").attr('data-name');
+					  updateCalling(calling_id, calling_name);
+				  	  self.hide();
+				  });
+				  this.query('#btnSortClose').on('click', function(){
+				  	   self.hide();
+				  });
+			 });    
+		});
+		callingDialog.after('hide', function(){
+			this.query('#btnSortSave').off();
+			this.query('#btnSortClose').off();
+		});
+                
+		//修改行业
+		function updateCalling(calling_id, calling_name){
+			$("#addMainCalling").empty();
+			$("#main_calling").val(calling_id || '');
+			var h = calling_id ? "<span class='seled'>" + calling_name + "</span>" : '';
+			$("#addMainCalling").html(h);
+			validator.checkElement($("#main_calling"));
+		}
+		
+});
+
+</script>
+</body>
+
+</html>

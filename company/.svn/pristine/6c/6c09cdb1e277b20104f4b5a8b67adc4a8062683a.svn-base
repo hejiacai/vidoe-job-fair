@@ -1,0 +1,185 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+</head>
+<body>
+<style>
+.perAttBox{width:560px;font-size:14px;}
+.perAttBox .formMod .l{width:60px;}
+.perAttBox .formMod .r{width:490px;}
+.perAttBox .formMod .r .formTextarea textarea.textarea{height:60px;}
+.perAttBox .noAtt{text-align:left; font-size:20px; border-bottom:1px solid #dadada; padding:15px 0; zoom:1;background:none;}
+.perAttBox .noAtt i.hbFntWes{font-size:45px; color:#f9ae0c; margin-right:10px; vertical-align:middle;}
+.perAttBox .perAttForm p.tit{height:55px; line-height:50px;}
+.perAttBox .perAttForm .formFile{position:relative; z-index:1; height:29px; line-height:28px; display:block;}
+.perAttBox .perAttForm .formFile input.file{position:absolute; height:23px; width:70px;filter:alpha(opacity=0);
+ -moz-opacity:0; -khtml-opacity:0; opacity:0; left:0; cursor:pointer; top:0;}
+.perAttBox .perAttForm .formBtn{margin:0 0 0 65px;}
+.perAttBox .drop .dropLstCon ul li{height:auto;}
+</style>
+<form id="formFairApply" method="post" action="{/get_url rule='/fair/fairapplydo'/}">
+{/if !base_lib_BaseUtils::nullOrEmpty($scene_id)/}
+<input type="hidden" name="hddthesceneid" value="{/$scene_id/}" />
+{//if/}
+<div class="dgBox perAttBox">
+	{/if base_lib_BaseUtils::nullOrEmpty($scene_id)/}
+	<div class="noData noAtt"><i class="hbFntWes">&#xf06a;</i>您未参加任何场次招聘会，无法邀请求职者</div>
+	{//if/}
+	<div class="perAttForm">
+		{/if base_lib_BaseUtils::nullOrEmpty($scene_id)/}
+		<p class="tit">立即在线订展</p>
+        <div class="formMod">
+            <div class="l">选择场次</div>
+            <div class="r">
+                <span id="tstDropscene" class="drop zindex"></span>
+                <span class="tipPos">
+                    <span class="tipLay">
+                    </span>
+                </span>
+            </div>
+            <div class="clear"></div>
+        </div>
+        {//if/}
+        <div class="formMod">
+            <div class="l">企业名称</div>
+            <div class="r">
+                <span class="formText">
+                    <input name="txtCompanyName" type="text" class="text" style="width:285px;" value="{/if !empty($current_company)/}{/$current_company.company_name/}{//if/}"/>
+                </span>
+                <span class="tipPos">
+                    <span class="tipLay">
+                    </span>
+                </span>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="formMod">
+            <div class="l">联系人</div>
+            <div class="r">
+                <span class="formText">
+                    <input name="txtLinkMan" type="text" class="text" style="width:165px;" value="{/if !empty($current_company)/}{/$current_company.linkman/}{//if/}"/>
+                </span>
+                <span class="tipPos">
+                    <span class="tipLay">
+                    </span>
+                </span>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="formMod">
+            <div class="l">联系电话</div>
+            <div class="r">
+                <span class="formText">
+                    <input name="txtLinkTel" type="text" class="text" style="width:165px;" value="{/if !empty($current_company)/}{/$current_company.link_tel/}{//if/}"/>
+                </span>
+                <span class="tipPos">
+                    <span class="tipLay">
+                    </span>
+                </span>
+            </div>
+            <div class="clear"></div>
+        </div>
+        
+        <div class="formMod">
+           <div class="l">备注信息</div>
+           <div class="r">
+              <span class="formTextarea">
+                 <textarea name="textMark" class="textarea" style="width:460px;"></textarea>
+              </span>
+              <span class="tipPos">
+				<span class="tipLay">
+              	</span>
+              </span>
+           </div>
+           <div class="clear"></div>
+        </div>
+        <div class="formBtn"><a id="btnSubmitData" href="javascript:void(0);" class="btn1 btnsF14">申请参会</a></div>
+    </div>
+</div>
+</form>
+<script>
+$.focusColor('input.text');
+</script>
+<script type="text/javascript">
+var fairApplyValid;
+var fairApply={
+	initialize:function(){
+		//初始化控件
+		this._initControl();
+	},
+	_initControl:function(){
+		{/if base_lib_BaseUtils::nullOrEmpty($scene_id)/}
+		//初始化场次
+		$('#tstDropscene').droplist({defaultTitle:'请选择',noSelectClass:'gray',_itemHeight:22,maxScroll:10,width:468,inputWidth:460,style:'width:468px;',hddName:'hddthesceneid',items:{/$scene_json/},onSelect:function(i,name) {
+			$('#txtFairJobName').val('');
+		}});
+		$.setIndex("zindex");
+		$.focusColor('input.text');
+		{//if/}
+		//客户端验证表单数据
+		fairApplyValid = $("#formFairApply").validate({
+		    rules: {
+				hddthesceneid:{required:true},
+				txtCompanyName:{required:true},
+	            txtLinkMan:{required:true},
+	            txtLinkTel:{required:true,tel: true},
+	            textMark:{maxlength: 256}
+		    },
+		    messages: {
+		    	hddthesceneid:{required:'请选择场次<span class="tipArr"></span>'},
+		    	txtCompanyName:{required:'请输入公司名称<span class="tipArr"></span>'},
+	            txtLinkMan:{required:'请输入联系人姓名<span class="tipArr"></span>'},
+	            txtLinkTel:{required:'请输入联系电话 <span class="tipArr"></span>',tel:'电话号码格式不正确<span class="tipArr"></span>'},
+	            textMark:{maxlength: '备注信息不能超过256个字符<span class="tipArr"></span>'}
+		    },
+		    errorElement: 'span',
+		    errorClasses: {
+		    	hddthesceneid: { required: 'tipLayErr tipw180'},
+		    	txtCompanyName: { required: 'tipLayErr tipw180'},
+		    	txtLinkMan: { required: 'tipLayErr tipw180'},
+		    	txtLinkTel: { required:'tipLayErr tipw180',tel:'tipLayErr tipw180'},
+		    	textMark:{maxlength:'tipLayErr tipw180'}
+		    },
+		    errorPlacement: function(error, element) {
+				element.parent().nextAll().find('.tipLay').append(error);
+
+		    },
+		    success: function(label) {
+		    	label.text(" ");
+		    }
+		});
+		$('#btnSubmitData').click(function(){
+            var data = { operate: 'addFairApply' };
+            $('#btnSubmitData').submitForm({ beforeSubmit: $.proxy(fairApplyValid.form,fairApplyValid),data:data, success: fairApply.applySuccess, clearForm: false });
+            return false;
+        });
+	},
+	applySuccess:function(json){
+		if (json && json.error){
+			$.message(json.error, { title: "系统提示", icon: "fail" });
+			return;
+		}
+		if (json && json.info){
+			$.message(json.info, { title: "系统提示", icon: "info" });
+			return;
+		}
+		if (json && json.success) {
+          	//成功
+       		$.anchorMsg(json.success, { onclose: function() {
+       			{/if !empty($obj) && !empty($callback)/}
+       				{/$obj/}.{/$callback/}(json.sceneid);
+       			{//if/}
+       			$('#btnSubmitData').closeDialog();
+         	}
+         	});
+	    }
+	}
+};
+fairApply.initialize();
+
+
+
+</script>
+</body>
+</html>

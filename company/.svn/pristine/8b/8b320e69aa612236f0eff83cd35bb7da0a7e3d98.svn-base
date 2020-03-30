@@ -1,0 +1,123 @@
+<!doctype html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+<title>{/$title/}</title>
+<!–[if lt IE9]> 
+<script src="{/version file='html5.js'/}"></script>  
+<![endif]–>
+<link rel="stylesheet" type="text/css" href="{/version file="v2-reset.css"/}" />
+<link rel="stylesheet" type="text/css" href="{/version file="comback.css"/}" />
+<link rel="stylesheet" type="text/css" href="{/version file="icons.css"/}" />
+<link rel="stylesheet" type="text/css" href="{/version file="v2-widge.css"/}" />
+<link rel="stylesheet" type="text/css" href="{/version file="v2-pay.css"/}" />
+<link rel="stylesheet" type="text/css" href="{/version file="v2-pay.css"/}" />
+<script type="text/javascript" src="{/version file='version.js'/}"></script>
+<script type="text/javascript">
+window.CONFIG = {
+    HOST: '{/$siteurl.style/}',
+    COMBOPATH: '/js/v2/'
+}
+</script>
+<script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+<script type="text/javascript" src="{/version file='global.js'/}"></script>
+<style>
+.tgj_table{width:100%;margin:20px 0}
+.tgj_table th,.tgj_table td{border-bottom:1px solid #f2f2f2;padding:10px 10px;text-align: center;color:#444}
+</style>
+<style>
+/*推广金支持服务类型*/
+.typeBox dl{float: left;background: #f5f5f5;color:#999;font-size:12px;width:230px;height:60px;overflow: hidden;margin-right:10px}
+.typeBox dt{float: left;margin:12px 10px 0 5px}
+.typeBox dd{margin-top: 10px}
+.typeBox dd p{font-size:14px;font-weight:bold;margin-bottom: 5px}
+.typeBox dd .blue{color:#52c3c7}
+.typeBox dd .blue1{color:#55bae9}
+.typeBox dd .blue2{color:#ec7771}
+.typeBox dd .blue3{color:#70c17a}
+</style>
+</head>
+<body id="body">
+{/include file="new_header.html" par="企业管理" cur="资金管理"/}
+<div class="resumentNbg clearfix">
+{/include 'economicnav.html' par="账户充值"/}
+<div id="pay-main" class="rMentRt" style="background:#fff; overflow:hidden;">        
+    <div class="pay-container">
+        <div class="pay-tab">
+            <a href="{/get_url rule="/pay/"/}">在线充值</a>
+            <a class="{/if $allot/}cur{//if/}" href="{/get_url rule="/pay/index"/}allot-1">招聘服务购买</a>
+            <a href="{/get_url rule="/pay/list/"/}">充值记录</a>
+            <a href="{/get_url rule="/pay/partlist/"/}">兼职充值记录</a>
+            <a class="cur" href="{/get_url rule="/spread/"/}">推广金详情</a>
+        </div>
+        <div style="padding:20px 0px">
+            <p style="color:#999;margin-bottom:10px;float:right;margin-right: 15px;">推广金使用时，系统默认优先使用即将到期的推广金</p><strong>当前推广金余额：<span style="color:#d73937">{/$count/}</span></strong>
+            <!--20151223-->
+            <p style="margin: 20px 0 10px 0"><strong>推广金支持服务类型</strong></p>
+            <div class="typeBox clearfix">
+                <dl style="width:164px;margin-right: 5px">
+                    <dd style="padding:0 10px">
+                        <p class="blue">刷新次数</p>
+                        <span>刷新你的职位，将排名提前</span>
+                    </dd>
+                </dl>
+                <dl style="width:188px;margin-right: 5px"> 
+                    <dd style="padding:0 10px">
+                        <p class="blue1">职位置顶</p>
+                        <span>让职位位居人前，让更多人看到</span>
+                    </dd>
+                </dl>
+                <dl style="width:152px;margin-right: 5px">
+                    <dd style="padding:0 10px">
+                        <p class="blue2">急聘职位</p>
+                        <span>为职位打上标签，更醒目</span>
+                    </dd>
+                </dl>
+                {/if !$isCQService/}
+                <dl style="width:190px;margin-right:0px">
+                    <dd style="padding:0 10px">
+                        <p class="blue3">简历下载</p>
+                        <span>海量简历任您搜，主动发现人才</span>
+                    </dd>
+                </dl>
+                {//if/}
+            </div>
+            <!--/-->
+            <table class="tgj_table">
+                <tr>
+                    <th>来源</th>
+                    <th>添加时间</th>
+                    <th>截至有效期</th>
+                    <th>当前状态</th>
+                    <th>面值</th>
+                    <th>已使用金额</th>
+                </tr>
+                {/foreach $spreads as $k => $spread/}
+                <tr>
+                    <td>{/$spread.from/}</td>
+                    <td>{/$spread['create_time']/}</td>
+                    <td>{/$spread.se_time/}</td>
+                    <td>{/$spread.status/}</td>
+                    <td>￥{/$spread.total/}</td>
+                    <td>￥{/$spread.used/}</td>
+                </tr>
+                {//foreach/}
+            </table>
+        </div>
+        <div class="page">{/$pager/}</div>
+    </div>
+</div>
+</div>
+<div id="sus" class="sus"><a class="backTop hbFntWes" title="返回顶部" href="javascript:void(0);" style="display: none;">&#xf0d8;</a></div>
+{/include file="footer.html"/}
+<section class="floatRT"><a href="{/get_url rule='/about/message' domain='main'/}" target="_blank" class="serviceLink">我有问题要反馈</a><b></b></section>
+<script type="text/javascript">
+hbjs.use('@tabs,@confirmBox,@verifier,@actions',function(m){
+
+});
+</script>
+{/include file="chat/chat.html"/}
+</body>
+</html>

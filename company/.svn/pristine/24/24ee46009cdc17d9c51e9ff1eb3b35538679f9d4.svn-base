@@ -1,0 +1,37 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{/$title/}</title>
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <td class="show-name" style=" width: 220px">职位</td>
+        <td>曝光展示量</td>
+        <td>点击浏览量</td>
+        <td>接收简历</td>
+        <td>邀请面试</td>
+        <td>展示-点击率</td>
+        <td>查看-投递率</td>
+        <td>投递-邀请率</td>
+    </tr>
+    </thead>
+    <tbody>
+
+        {/foreach $list as $visit/}
+        <tr>
+            <td>{/$visit['station']/}</td>
+            <td>{/$visit['exposes_count']/}</td>
+            <td>{/$visit['visit_count']/}</td>
+            <td>{/$visit['apply_count']/}</td>
+            <td>{/$visit['invite_count']/}</td>
+            <td>{/$visit['click_rate']/}%</td>
+            <td>{/$visit['delivery_rate']/}%</td>
+            <td>{/$visit['invitation_rate']/}%</td>
+        </tr>
+        {//foreach/}
+
+    </tbody>
+</table>
+</body>

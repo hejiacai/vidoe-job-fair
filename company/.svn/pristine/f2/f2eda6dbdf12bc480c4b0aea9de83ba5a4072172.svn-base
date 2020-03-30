@@ -1,0 +1,252 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{/$title/}</title>
+    <link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='resumePartTime.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}" />
+    <script type="text/javascript" src="{/version file='version.js'/}"></script>
+    <script type="text/javascript">
+        window.CONFIG = {
+            HOST: '{/$siteurl.style/}',
+            COMBOPATH: '/js/v2/'
+        }
+    </script>
+    <script type="text/javascript">
+        hbjs.loadJS('{/$siteurl.style/}/js/v2/cqjob/common.js');
+    </script>
+    <!--<script type="text/javascript" language="javascript" src="{/version file='dialog.js'/}"></script>-->
+    <script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+    <script type="text/javascript" src="{/version file='global.js'/}"></script>
+    <style>
+        .hb_ui_dialog .ui_dialog_container,.ui_dialog_content{height: 95%}
+        .hb_ui_dialog .ui_dialog_close{background: none !important;  line-height: inherit!important;}
+        .amount-tip-btn{float: left;}
+        .amount-pay{float: right;}
+        .amount h4{width: auto;}
+        .amount-tip-btn a{margin-right: 10px;background: #00bab1;}
+        .amount-tip-btn a:hover{background: #00c9bf;}
+        ._dialog-button.dialogBtn{display: none !important;}
+        .popTxt{width: 300px;}
+        .thispage.ordinary:hover .pay-type{display: block;}
+    </style>
+</head>
+<div class="amount">
+    <div class="amount-tip clearfix">
+        <em>联系招聘顾问购买兼职币，<span>优惠低至6折起</span>，自助购买无优惠</em>
+        <div class="amount-tip-btn">
+            <a class="ordinary-buy online {/if $is_bind_hr/} ask{//if/}"  {/if $is_bind_hr/}  href="javascript:;"{/else/} target="_blank"  href="//wpa.qq.com/msgrd?V=3&uin={/$default_qq/}&Site=QQ客服&Menu=yes"  {//if/} >联系顾问</a>
+            <a href="javascript:void(0);" class="ordinary-buy openOrder" id="">发票须知</a>
+        </div>
+        <h4 class="amount-pay">账户余额：{/sprintf("%.2f", $account_overage)/}元</h4>
+    </div>
+    <h3>普通套餐</h3>
+    <ul class="ordinary-list">
+        {/foreach $resumesetmeal as $key=>$val/}
+        {/if empty($val['discount'])/}
+        <li class="clearfix">
+            <div class="ordinary-name">
+                <p>{/$val['name']/}</p>
+                <em class="ordinary-extra">1年有效</em>
+            </div>
+            <em class="ordinary-num">{/$val['point_num']/}个</em>
+            <strong class="ordinary-pay">￥{/$val['price']/}</strong>
+            <div class="ordinary thispage">
+                <a href="javascript:void(0);" class="ordinary-buy">购买</a>
+                <div class="pay-type" style="top: -108px;">
+                    <a href="javascript:;" class="balance" onclick="javascript:order_pay(1,{/$val['code']/})" title="余额支付">
+                        <i></i>余额
+                    </a>
+                    <a href="javascript:;" class="weichart" onclick="order_pay(2,{/$val['code']/})" title="微信支付">
+                        <i></i>微信
+                    </a>
+                    <a href="javascript:;" class="zhifubao" onclick="order_pay(3,{/$val['code']/})" title="支付宝">
+                        <i></i>支付宝
+                    </a>
+                </div>
+            </div>
+        </li>
+        {//if/}
+        {//foreach/}
+    </ul>
+    <!--<h3>限时特价</h3>-->
+    <div class="ordinary-item">
+        {/foreach $resumesetmeal as $key=>$val/}
+        {/if $val['discount'] > 0/}
+        <div class="clearfix ordinary-con">
+            <i class="ordinary-sale">{/$val['discount']*10/}折</i>
+            <div class="ordinary-name">
+                <p>{/$val['name']/}</p>
+                <em class="ordinary-extra">1年有效</em>
+            </div>
+            <em class="ordinary-num" style="width: 40px;">{/$val['point_num']/}个</em>
+            <div class="ordinary-pay">
+                <p>￥{/$val['price']*$val['discount']/}</p>
+                <span class="ordinary-text">￥{/$val['price']/}</span>
+            </div>
+            <div class="ordinary">
+                <a href="javascript:void(0);" class="ordinary-buy">购买</a>
+                <div class="pay-type">
+                    <a href="javascript:;" class="balance" onclick="javascript:order_pay(1,{/$val['code']/})" title="余额支付">
+                        <i></i>余额
+                    </a>
+                    <a href="javascript:;" class="weichart" onclick="javascript:order_pay(2,{/$val['code']/})" title="微信支付">
+                        <i></i>微信
+                    </a>
+                    <a href="javascript:;" class="zhifubao" onclick="javascript:order_pay(3,{/$val['code']/})" title="支付宝">
+                        <i></i>支付宝
+                    </a>
+                </div>
+            </div>
+        </div>
+        {//if/}
+        {//foreach/}
+    </div>
+</div>
+
+<script>
+    var order_pay,agreementDialog,is_descoty=false,click_type=false,clickTimer,openOrder_dialog;
+    var is_refresh = '{/$is_refresh/}';
+    hbjs.use(' @confirmBox', function(m){
+        var confirmBox = m['widge.overlay.confirmBox'],
+             Dialog = m['widge.overlay.hbDialog'],
+            fontSize = 18,
+            pWidth = 70,
+            $ = m['jquery'];
+          //发票按钮
+          $('.openOrder').click(function () {
+                 openOrder_dialog = new Dialog({
+                    idName : 'openOrderid',
+                    title : '发票须知',
+                    close : 'x',
+                    isAjax : true,
+                    content:"累计消费100元及以上即可申请普通电子发票，开票请添加qq2851501212提交信息，核实后2~4个工作日内发送您邮箱。",
+                    width :400,
+                    //zIndex:10910
+                });
+                openOrder_dialog.show();
+              //$.confirm('累计消费100元及以上即可申请普通电子发票，开票请添加qq2851501212提交信息，核实后2~4个工作日内发送您邮箱。','发票须知')
+          })
+        /**
+         * dialog close listing
+         */
+        setInterval(function () {
+            if(is_descoty)
+            {
+                try{
+                    parent.pay_dialog.close() ;
+                }catch (e){
+                    parent.pay_dialog.destory();
+                }
+            }
+        },400)
+
+
+        $('.ask').click(function () {
+            pay_dialog.show();
+        })
+
+        //咨询
+        var pay_dialog = new Dialog({
+            idName : 'detailconsult',
+            title : '详情咨询',
+            close : 'x',
+            isAjax : true,
+            content:"{/get_url rule='/part/buypointask'/}back_url-{/base_lib_Constant::COMPANY_URL_NO_HTTP/}/part/index",
+            width :400
+        });
+
+        /**
+         * @param pay_type   支付方式 1余额 2微信 3支付宝
+         * @param meal_id    套餐id
+         */
+        order_pay = function(pay_type,meal_id){
+          if(click_type==true){
+            return;
+          }
+          if(click_type==false){
+            click_type=true;
+          }
+          clearTimeout(clickTimer);
+          clickTimer = setTimeout(function () {
+            click_type = false;
+          },2000)
+            if(!pay_type || !meal_id){
+                data.msg = '支付方式错误';
+                confirmBox.timeBomb(data.msg, {
+                    name : 'fail',
+                    timeout : 3000,
+                    width: fontSize * data.msg.length + pWidth
+                })
+            }
+
+            var url = "{/get_url rule="/partorder/createOrder"/}",
+                data = {
+                    pay_type : pay_type,
+                    meal_id  : meal_id,
+                    order_src: 2,
+                    is_refresh:is_refresh
+                };
+            $.post(url, data, function(data){
+                if(!data.status){
+                    confirmBox.timeBomb(data.msg, {
+                        name : 'fail',
+                        timeout : 3000,
+                        width: 300
+                    });
+                    return false;
+                }
+
+                //余额支付，刷新界面
+                if(pay_type == 1){
+                    confirmBox.timeBomb(data.msg, {
+                        name : 'success',
+                        timeout :3000,
+                        width: 70 + data.msg.length*18
+                    });
+                    if(is_refresh == ''){
+                        setTimeout(function () {
+                            window.parent.document.location.reload();
+                        },3000);
+                    }
+                    parent.pay_dialog.close() ;
+                    return false;
+                }else{
+                    //支付宝或者微信，跳转到订单支付界面
+                    var url = '{/get_url rule="/partorder/pay"/}?code_url=' + data.data.code_url + '&order_no=' + data.data.order_data.order_no+ '&is_refresh=' + is_refresh;
+                     agreementDialog = new Dialog({
+                        idName: 'agreement-dialog',
+                        title: '支付',
+                        content: url,
+                        close: 'X',
+                        width:410,
+                        height:550,
+                        isAjax:false,
+                        zIndex:10020
+                    });
+                    agreementDialog.show();
+                    
+                    $('.ui_dialog_close').live('click',function () {
+                        $('.hb_ui_ui-mask').css('z-index',9999)
+                    })
+
+//                    $.showModal(url, {title: '支付', defind_index: 10020, noclick: true});
+                    //window.location.href = '{/get_url rule="/partOrder/pay"/}?code_url=' + data.data.code_url + 'order_no' + data.data.order_data.order_no;
+                }
+
+
+            });
+        }
+
+
+    });
+
+
+
+
+</script>
+</body>
+</html>
+

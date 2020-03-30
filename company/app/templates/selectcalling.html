@@ -1,0 +1,90 @@
+<link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+<style>
+    .edit-status-box .formMod{margin:40px auto;width: 500px;font-size:14px}
+    .formMod .l{width:100px}
+    .drop{margin-top:2px}
+    .buttons{background:#efefef;padding:15px;text-align:center}
+    .btn-gray,
+    .btn-yellow{background:#e4e4e4;color:#666;border:1px solid #cccccc;display:inline-block;padding:10px 20px;border-radius:5px;font-size:16px;margin:0 10px;font-weight:bold}
+    .btn-yellow{background:#ff9900;color:#fff;border:1px solid #ff9900}
+    .btn-gray:hover{background:#d9d8d8;color:#333}
+    .btn-yellow:hover{background:#f59504;color:#fff}
+    .btn-gray span,.btn-yellow span{font-size:12px;font-weight:normal;margin-left:5px}
+    #formcalling a{text-decoration: underline;color:#444}
+</style>
+<div class="edit-status-box" style="padding:35px;font-family:'Arial Negreta','Arial';background:#fff">
+    <p style="font-weight:bold;font-size:18px;color:#2a5368">为了求职者更准确的找到您的职位，我们做了一些行业类别调整，请重新选择：</p>
+      <form id="formcalling" method="post" action="{/get_url rule='/index/UpdateCallingDo/'/}">
+                     <div class="formMod JobIndDrop checkMod">
+                        <a id="calling" name="cal"></a>
+                        <div class="l">所处主行业<i>*</i></div>
+                        <div class="r">
+                            <span id="newCalling" class="drop formText JobIndDrop zIndex" style="width:250px;border-color:#d0cbcb">
+                                <span>
+                                    <div class="dropSet">  <b class="hbFntWes dropIco"></b> <span id='addMainCalling'>{/if !empty($calling_names[0])/} <span class="seled">{/$calling_names[0]/}</span>{//if/}</span>
+                                        <input class="text JobCay" type="text">
+                                    </div>
+                                  
+                                </span>
+                                 <input type ="hidden" name="main_calling" id="main_calling" value="{/$calling_arr[0]/}"/>
+                            </span>
+                            <span class="tipPos" style="left:75px;">
+                                <span class="tipLay"></span>
+                            </span>
+                            
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                     <div id="hidLastCalling" class="formMod JobIndDrop checkMod">
+                        <a id="calling" name="cal"></a>
+                        <div class="l">次要行业<i>&nbsp;</i></div>
+                        <div class="r">
+                            <span id="nextCalling" class="drop formText JobIndDrop zIndex" style="width:250px;border-color:#eee">
+                                <span>
+                                    <div class="dropSet">  <b class="hbFntWes dropIco"></b>  <span id='addNextCalling'></span>
+                                        <input class="text JobCay" type="text">
+                                    </div>
+                                </span>
+                                  <input type ="hidden" name="next_calling" id="next_calling" {/if count($calling_arr)>=2/}value='{/$calling_arr[1]/}'{//if/}>
+                            </span>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+         </form>
+</div>
+<div class="buttons"><a href="javascript:" class="btn-gray">下次再说 <span>我来打酱油的</span></a><a href="javascript:" class="btn-yellow">保存 <span>强过打酱油的</span></a></div>
+<script>
+$('#newCalling').on('click',function(){
+	var calling_id = $("#next_calling").val()
+	$.showModal('/company/selectCalling/type-1-calling_id-'+calling_id,{title:'选择主行业'});       
+});
+$('#nextCalling').on('click',function(){
+   var calling_id = $("#main_calling").val() //todo
+    $.showModal('/company/selectCalling/type-0-calling_id-'+calling_id,{title:'选择次行业'});       
+});
+//修改行业
+function updateCalling(calling_id,calling_name,type){
+   if(type ==1){
+       $("#addMainCalling").empty();
+       $("#main_calling").val(calling_id);
+         var h = "<span class='seled'>"+calling_name+"</span>"
+       $("#addMainCalling").html(h);
+   }else{
+        $("#addNextCalling").empty();
+        $("input[name='next_calling']").val(calling_id);
+         var h = "<span class='seled' id='addNextCalling'>"+calling_name+"</span>"
+       $("#addNextCalling").html(h);
+   }
+}
+//添加次行业
+function addCalling(){
+   $("#hidLastCalling").show();
+   $("#addHtml").hide();
+}
+function deleteCalling(){
+    $("#hidLastCalling").hide();
+    $("#addHtml").css({'display':'inline-block'});
+    $("input[name='next_calling']").val('');
+     $("#addNextCalling").empty();
+}
+</script>

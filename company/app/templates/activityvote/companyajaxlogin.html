@@ -1,0 +1,131 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="utf-8" /> 
+</head>
+<body>
+<style>
+	.ajaxlogin{margin:20px; font-size: 16px;}
+	.ajaxlogin .formMod{
+		margin-bottom: 25px;
+	}
+	.ajaxlogin a{
+		color:#fff;
+	}
+	.ajaxlogin .formMod .l{float: left;width:60px;}
+	.ajaxlogin .formMod .r{float: left;width:220px;}
+	.ajaxlogin .formMod .r input{float: left;width:220px;}
+	.ajaxlogin .btn1{
+		width:220px;
+		height:30px;
+		line-height: 30px;
+	}
+/*.ajaxlogin{width:290px;}*/
+/*.ajaxlogin .formMod .l{width:150px;}
+.ajaxlogin .formMod .r{width:250px;}
+.ajaxlogin .formMod .r .formChb{margin:0;}
+.ajaxlogin .formMod .r .formText input.text{width:197px;}
+.ajaxlogin .formBtn{margin:0 0 20px 30px;}
+.ajaxlogin .formBtn a.btn1{width:168px; text-align:center;}
+.ajaxlogin .txt{font-size:12px;margin:0 0 0 35px;color:#666;}
+.ajaxlogin .txt p{line-height:24px;}
+.ajaxlogin .txt p i{margin:0 10px;}*/
+</style>
+<form  id="frmUserLogin"  action="{/get_url rule='/votesgin/AjaxLoginDo/'/}" method="post">
+<div class="ajaxlogin">
+	<div class="form">
+        <div class="formMod">
+            <div class="l"><label for="id" class="txtLabel">用户名</label></div>
+            <div class="r"><span class="formText"><input type="text" class="text " id="id" name="txtUsername" /></span></div>
+            <div class="clear"></div>
+        </div>
+        <div class="formMod">
+            <div class="l"><label for="pass" class="txtLabel">密　码</label></div>
+            <div class="r"><span class="formText"><input type="password" class="text " id="pass"  name="txtPassword"/></span></div>
+            <div class="clear"></div>
+        </div>
+        <div class="formMod">
+            <div class="l"><label for="pass" class="txtLabel">　</label></div>
+            <div class="r"><span class="formText"><a href="javascript:void(0);" class="zbtn btn1 btnsF16" id="btnLogin">登录</a></span></div>
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>
+</form>
+<script type="text/javascript">
+$(document).ready(function(){
+    $.focusblur('input.text'); 
+});
+
+var frmUserLogin = $("#frmUserLogin").validate({
+	rules:{
+		txtUserName:{
+			required:true
+		},
+		txtPassword:{
+			required:true
+		}
+	},
+	messages:{
+		txtUserName:{
+			required:'请输入用户名 <span class="tipArr"></span>'
+		},
+			txtPassword:{
+			required:'请输入密码<span class="tipArr"></span>'
+		}
+	},
+	errorClasses:{
+		txtUserName:{
+			required:'tipLayErr tipw120'
+		},
+		txtPassword:{
+			required:'tipLayErr tipw120'
+		}
+	},
+	tipClasses:{
+		txtUserName:'tipLayTxt tipw120',
+		txtPassword:'tipLayTxt tipw120'
+	},
+	errorElement:'span',
+	errorPlacement:function(error,element){
+		element.closest('div.formMod').find('.tipPos .tipLay').empty().append(error);
+	},
+	success:function(label){
+		label.text(" ");
+	}
+});
+/**
+ * 登录
+ */
+var login ={
+	init:function() {
+		$("#id,#pass").keydown(function(e){
+	    	if(e.keyCode == 13){
+	            $("#btnLogin").click();
+	        }
+	    });
+     	var val = cookieutility.get('username');
+        if(val) {
+           $('#id').prev().hide();
+           $('#id').focus().val(decodeURI(val)); 
+        }
+		$('#btnLogin').click(function(){
+			$(this).submitForm({ beforeSubmit: $.proxy(frmUserLogin.form, frmUserLogin),success:function(result){
+                    console.log(result);
+		 		if(result.error){
+                    $.message(result.error,{title:'登录失败 '});
+				}
+		 		else if(result.success){
+//		 			$('#btnLogin').closeDialog();
+//                    loginDialog.hide();
+					$.anchorMsg(result.success,{title: "登录成功", icon: "success"});
+					parent.location.reload();
+				}
+			},clearForm:false});			 	
+		});
+	}
+};
+login.init();
+</script>
+</body>
+</html>

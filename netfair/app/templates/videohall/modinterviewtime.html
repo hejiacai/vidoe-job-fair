@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>汇博人才网-面试时间设置</title>
+		<link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+        <link rel="stylesheet" type="text/css" href="{/version file='video_eng.css'/}" />
+        <link rel="stylesheet" type="text/css" href="{/version file='m_font_style.css'/}">
+        <link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}">
+		<script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.min.js'/}"></script>
+        <script type="text/javascript" language="javascript" src="{/version file='WdatePicker.js'/}"></script>
+        
+        <script type="text/javascript" src="{/version file='version.js'/}"></script>
+        <script type="text/javascript">
+            window.CONFIG = {
+                HOST: '{/$siteurl.style/}',
+                COMBOPATH: '/js/v2/'
+            }
+        </script>
+        <script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+        <script type="text/javascript" src="{/version file='global.js'/}"></script>
+        <script type="text/javascript" language="javascript" src="{/version file='confirmBox.js'/}"></script>
+        <script type="text/javascript" language="javascript" src="{/version file='dialog.js'/}"></script>
+        <script language="javascript" type="text/javascript">
+            var disable_dates = new Array();
+            {/if $disable_dates/}
+            {/foreach $disable_dates as $v/}
+            disable_dates.push('{/$v/}');
+            {//foreach/}
+            {//if/}
+            //时间插件
+            var interview_time = {
+                skin: 'whyGreen',
+                dateFmt: 'yyyy-MM-dd',
+                minDate: '{/$min_date/}',
+                maxDate: '{/$max_date/}', //最大日期
+                readOnly: true,
+                onpicking: function (datas) {
+//                    datas.cal.newdate.y + "-" + datas.cal.newdate.M + "-" + datas.cal.newdate.d;
+                },
+                disabledDates : disable_dates
+            };
+        </script>
+	</head>
+	<body>
+<!-- 新增面试时间 -->
+<div class="newInterviewTime" style="padding:10px 0 0 10px">
+	<div class="clearFixWrap">
+		<div class="viewTimeLeft">面试日期</div>
+		<div class="viewTimeRight">
+			<input type="text" readonly="readonly" name="interview_date" placeholder="选择日期" onclick="WdatePicker(interview_time)" value="{/if $interview_data['date']/}{/$interview_data['date']/}{/else/}{/$min_date/}{//if/}"/>
+		</div>
+	</div>
+	<div class="clearFixWrap">
+		<div class="viewTimeLeft">面试时间</div>
+		<div class="viewTimeRight">
+            {/if !$id || $interview_data['time_type'] == 1/}
+			<span>上午：</span>
+			<select name="start_time1">
+				<option value ="">请选择</option>
+                {/foreach $am_times as $v/}
+				<option value ="{/$v/}" {/if $interview_data['start_time_str'] == $v/}selected{//if/}>{/$v/}</option>
+                {//foreach/}
+			</select>
+			<b>~</b>
+			<select name="end_time1">
+				<option value ="">请选择</option>
+				{/foreach $am_times as $v/}
+				<option value ="{/$v/}" {/if $interview_data['end_time_str'] == $v/}selected{//if/}>{/$v/}</option>
+                {//foreach/}
+			</select>
+            {//if/}
+            
+            {/if !$id || $interview_data['time_type'] == 2/}
+			<div class="clear" {/if !$id/}style="padding-top: 10px;"{//if/}></div>
+			<span>下午：</span>
+			<select name="start_time2">
+				<option value ="">请选择</option>
+				{/foreach $pm_times as $v/}
+				<option value ="{/$v/}" {/if $interview_data['start_time_str'] == $v/}selected{//if/}>{/$v/}</option>
+                {//foreach/}
+			</select>
+			<b>~</b>
+			<select name="end_time2">
+				<option value ="">请选择</option>
+				{/foreach $pm_times as $v/}
+				<option value ="{/$v/}" {/if $interview_data['end_time_str'] == $v/}selected{//if/}>{/$v/}</option>
+                {//foreach/}
+			</select>
+            {//if/}
+		</div>
+	</div>
+	<div class="videoPopBtn">
+		<a href="javascript:;" id="videoPopBtnx">保存</a>
+        <a href="javascript:window.history.back(-1);" style="background:#f3f3f3; color: #444;">取消</a>
+	</div>
+</div>
+
+<script type="text/javascript">
+hbjs.use('@confirmBox, @jobDialog', function (m) {
+    var ConfirmBox = m['widge.overlay.confirmBox'];
+    
+	$('#videoPopBtnx').click(function(){
+		var data = {id : '{/$id/}',
+                    sid : '{/$sid/}',
+                    interview_date : $('input[name=interview_date]').val(),
+                    start_time1 : $('select[name=start_time1]').val(),
+                    start_time2 : $('select[name=start_time2]').val(),
+                    end_time1 : $('select[name=end_time1]').val(),
+                    end_time2 : $('select[name=end_time2]').val()}
+        {/if $id && $interview_data['time_type'] == 2/}
+            data.start_time1 = $('select[name=start_time2]').val();
+            data.end_time1 = $('select[name=end_time2]').val();
+        {//if/}
+        $.ajax({
+            type: 'post',
+            url: '{/get_url rule="/videohall/ModCompanyInterviewTimeDo"/}',
+            data: data,
+            dataType: 'json',
+            success: function (res) {
+                if(!res.status){
+                    ConfirmBox.timeBomb(res.msg,{
+                        name: 'fail',
+                        width:'auto',
+                        timeout : 2000
+                    });
+                    return;
+                }
+                ConfirmBox.timeBomb(res.msg,{
+                    name: 'success',
+                    width:'auto',
+                    timeout : 2000
+                });
+                window.location.href = '{/get_url rule="/videohall/InterviewTimeList"/}?sid={/$sid/}';
+            }
+        });
+	});
+});
+</script>
+	</body>
+</html>

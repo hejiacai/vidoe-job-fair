@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+<title>{/$title/}</title>
+<!–[if lt IE9]> 
+<script src="{/version file="html5.js"/}"></script>  
+<![endif]–>
+<link rel="stylesheet" type="text/css" href="{/version file="base.css"/}" />
+<link rel="stylesheet" type="text/css" href="{/version file="comback.css"/}" />
+
+<script type="text/javascript" language="javascript" src="{/version file="jquery-1.8.3.min.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="common.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="dialog.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="ui_menudisplay.js"/}"></script><!--下拉菜单-->
+<script type="text/javascript" language="javascript" src="{/version file="ui_inputFocus.js"/}"></script><!--输入框获取焦点-->
+<script type="text/javascript" language="javascript" src="{/version file="ui_hovchange.js"/}"></script><!--指向改变class-->
+<script type="text/javascript" language="javascript" src="{/version file="ui_drop.js"/}"></script><!--下拉模拟-->
+<script type="text/javascript" language="javascript" src="{/version file="ui_dragsort.js"/}"></script><!--拖动插件-->
+</head>
+<body id="body">
+<style type="text/css">
+.part{}
+.part .hd{border-bottom:1px solid #dadada;height:40px;}
+.part .hd  a{height:38px;line-height:38px;font-size:14px;margin:0 10px;padding:0 10px;display:inline-block;float:left;display:inline;border:1px solid #dadada;border-top:2px solid #dadada;border-bottom:0;color:#666;}
+.part .hd  a:hover{background:#f8f8f8;}
+.part .hd  a.cu{font-weight:bold;border-top:2px solid #2b90d8;border-bottom:1px solid #fff;}
+.part .hd  a.cu:hover{background:#fff;}
+
+
+.table{margin:20px 0;}
+.table table thead tr td{padding:3px 5px 5px;border-bottom:1px solid #ccc;font-weight:bold;font-size:12px;height:30px;line-height:30px;}
+.table table tbody tr td{padding:10px 5px;font-size:12px;border-bottom:1px solid #f1f1f1;}
+.table table tbody tr.last td{border-bottom:1px solid #ccc;}
+.table table tbody tr td .orNo{}
+.table table tbody tr td .time{}
+.table table tbody tr td .cash{}
+.table table tbody tr td .type{}
+.table table tbody tr td .sta{}
+.table table thead tr.tr-bottom td{border:none;font-weight: normal;}
+.table table thead tr.tr-total td{border:none;}
+</style>
+{/*include 'new_header.html' cur='企业管理'*/}
+{/include file="new_header.html" par="企业管理" cur="消费记录"/}
+<div class="content" id="content">
+    <section class="section" style="overflow:hidden">
+        
+        <hgroup>
+            <div class="part">
+                <div class="hd yahei">
+                    
+                    <a href="/pay/paylist" class="cu">余额消费记录1</a>
+                    <a href="/spread/history">推广金消费记录</a>
+                    <div class="clear"></div>
+                </div>
+                <div class="bd">
+                    {/if !empty($items)/}
+                    <div class="table">
+                        <table width="100%" cellpadding="0" cellspacing="0" border="0"> 
+                            <thead>
+                                <tr>
+                                    <td style="text-align:center;width:372px;">时间</td><td style="text-align:center;width:479px;">操作</td><td style="text-align:center;width:229px;">花费</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {/foreach $items as $key => $value/}
+                                <tr class="{/if $value@last/}last{//if/}">
+                                    <td style="text-align:center"><div class="time">{/$value['create_time']/}</div></td>
+                                    <td style="text-align:center">{/if $value['consume_type'] < 3/}{/$value['consume_info']/}{/else/}{/$value['consume_type_text']/}{//if/}</td>
+                                    <td style="text-align:center"><div class="cash"><em>￥{/number_format($value['consume_contract_amount'], 2)/}</em></div></td>
+                                </tr>
+                                {//foreach/}
+                            </tbody>
+                        </table>
+                        <!-- <dl style="line-height: 25px;margin:10px 20px" class="clearfix">
+                            <dd style="float: left;font-size: 12px">当页小计<br><strong>总共累计消费：</strong></dd>
+                            <dd style="float:right;font-size: 14px">￥{/number_format($total, 2)/}<br><strong style="color: #d73937">￥{/number_format($sum, 2)/}</strong></dd>
+                        </dl> -->
+                        <dl class="clearfix" style="line-height: 25px;margin:10px 83px 0 83px;">
+                            <dd style="float:right; text-align:right;font-size:12px;">当页小计：￥{/number_format($total, 2)/}<br /><strong>总共累计消费：￥{/number_format($sum, 2)/}</strong></dd>
+                        </dl> 
+                        <div class="page">
+                         {/$pager/}
+                        </div>
+                    </div>
+                    {/else/}
+                    <div class="noData">暂无消费记录</div>
+                    {//if/}
+                </div>
+            </div>
+        </hgroup>
+    </section>
+</div>
+{/include file="footer.html"/}
+<section class="floatRT"><a href="{/get_url rule='/about/message' domain='main'/}" target="_blank" class="serviceLink">我有问题要反馈</a><b></b></section>
+<script>
+hovChange('.dropLstCon','li','hov');
+var $tSch = $('#tSch');
+
+
+$(document).ready(function(e) {
+    $.focusblur("#tSchText");
+    $.focusblur('#addInfo');
+    $.focusColor('input.text');
+    $.focusColor('textarea.textarea');
+
+    $('#tSchText').bind('focus',function(){
+        $(this).animate({'width':200});
+        $tSch.css({'background':'#fffdef','border':'1px solid #e8dd9e'})
+    }).bind('blur',function(){
+        $(this).animate({'width':150});
+        $tSch.css({'background':'#fff','border':'1px solid #dadada'})
+    });
+    
+});
+
+</script>
+</body>
+</html>

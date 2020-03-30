@@ -1,0 +1,40 @@
+<style>
+    .subcompNavbg{display:none;}
+</style>
+{/include 'new_header.html' cur="视频校招"  no_video_notice="1"/}
+<div class="videoTopJobFair">
+    <div class="videoTopJobFairMain">
+        <img src="{/$s_logo/}" class="video_top_img" {/if !$s_logo/}style="display:none;"{//if/}/>
+        <div class="videoTopRt">
+            <p class="videoSchoolName">{/$s_title/}</p>
+            <span class="{/$shuang_xuan_time_class_name/}">{/$shuang_xuan_time_str/}</span>
+            <div class="videoSchoolIntro">
+                <span>{/$s_content/}</span>
+                <a href="javascript:void(0);" {/if mb_strlen($s_content)<=56/}style="display:none;"{//if/}>查看更多</a>
+            </div>
+        </div>
+        <div class="videoEnterpriseFeatures" {/if !$s_need_complete_company_fc/}style="display:none;"{//if/}>
+            提升学生投递量<a href='{/get_url rule="/environment"/}' target="_blank">完善企业风采</a>
+        </div>
+    </div>
+</div>
+<div class="videoNav">
+    <div>
+        <a href="{/get_url rule='/videohall/VideoInterviewHall'/}?sid={/$sid/}" {/if $par == '视频面试大厅'/}class="cur"{//if/}>视频面试大厅</a>
+        <a href="{/get_url rule='/videohall/JobWanters'/}?sid={/$sid/}" {/if $par == '求职者大厅'/}class="cur"{//if/}>求职者大厅</a>
+        <a href="{/get_url rule='/videohall/InterviewList'/}?sid={/$sid/}" {/if $par == '面试结果'/}class="cur"{//if/}>面试结果</a>
+        <a href="{/get_url rule='/videohall/Jobs'/}?sid={/$sid/}" {/if $par == '招聘职位'/}class="cur"{//if/}>招聘职位</a>
+    </div>
+</div>
+<script type="text/javascript">
+	$('.videoSchoolIntro a').click(function(){
+		$(this).toggleClass('cur');
+		if($(this).hasClass('cur')){
+			$('.videoSchoolIntro span').css('height','auto');
+			$('.videoSchoolIntro a').text('收起更多');
+		}else{
+			$('.videoSchoolIntro span').css('height','20px');
+			$('.videoSchoolIntro a').text('查看更多');
+		}
+	});
+</script>

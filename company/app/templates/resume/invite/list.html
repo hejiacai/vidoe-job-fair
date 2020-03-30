@@ -1,0 +1,910 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+<title>汇博网_招聘中心_{/$title/}</title>
+<!–[if lt IE9]>
+<script src="{/version file='html5.js'/}"></script>
+<![endif]–>
+<link rel="stylesheet" type="text/css" href='{/version file="base.css"/}' />
+<link rel="stylesheet" type="text/css" href='{/version file="comback.css"/}' />
+<link rel="stylesheet" type="text/css" href='{/version file="combacklst.css"/}' />
+
+<script type="text/javascript" language="javascript" src='{/version file="jquery-1.8.3.min.js"/}'></script>
+<script type="text/javascript" language="javascript" src='{/version file="common.js"/}'></script>
+<script type="text/javascript" language="javascript" src="{/version file="jquery.form.js"/}"></script>
+<script type="text/javascript" language="javascript" src='{/version file="dialog.js"/}'></script>
+<script type="text/javascript" language="javascript" src="{/version file="ui_validate.js"/}"></script>
+<script type="text/javascript" language="javascript" src='{/version file="ui_inputFocus.js"/}'></script><!--输入框获取焦点-->
+<script type="text/javascript" language="javascript" src="{/version file='ui_dropdownlist.js'/}"></script>
+<script type="text/javascript" language="javascript" src='{/version file="ui_hovchange.js"/}'></script><!--指向改变class-->
+<script type="text/javascript" language="javascript" src='{/version file="ui_tooltip.js"/}'></script>
+</head>
+<body id="body">
+<style type="text/css">
+.cal{}
+.cal .calHd{padding:20px 10px;zoom:1;border-bottom:1px solid #eee;}
+.cal .calHd .dateNo{float:left;display:inline;width:100px; text-align:right;font-size:60px;color:#d64e14;}
+.cal .calHd .calTxt{float:left;display:inline;width:170px;color:#666;line-height:28px;margin:18px 0 0 20px;}
+.cal .calHd .calTxt .txt{color:#999;}
+
+.recently{border-top:1px solid #fff;border-bottom:1px solid #eee;zoom:1;padding:10px 0;text-align:center;}
+.recently a{display:inline-block;padding:0 10px;height:24px;line-height:24px;font-size:12px;}
+.recently a:hover{}
+.recently a.cu{color:#333;background:#f1f1f1;font-weight:bold; border-radius:3px;}
+
+.calBd{padding:15px;zoom:1;border-top:1px solid #fff;}
+.dateSel{height:30px;width:195px;margin:0 auto 5px;}
+.dateSel a{float:left;display:inline-block;width:20px; text-align:center;margin:0 5px;height:30px;line-height:30px;color:#666;}
+.dateSel a:hover{color:#333;}
+.dateSel .dateSelTxt{float:left;width:132px;height:30px;line-height:30px; text-align:center;font-size:16px;color:#666;}
+.calWeek{background:#f1f1f1;height:28px;line-height:28px;width:301px;margin:0 auto 5px;}
+.calWeek ul li{float:left;display:inline;width:33px;margin:0 5px 0;height:28px;text-align:center;line-height:28px; vertical-align:bottom; }
+.calDateLst{width:301px;margin:0 auto;zoom:1;}
+.calDateLst ul li{float:left;display:inline;width:33px;margin:0 5px 5px;height:28px; text-align:center; vertical-align:bottom;line-height:28px;position:relative; z-index:1;}
+.calDateLst ul li i{display:block;width:3px;height:3px;overflow:hidden;font-size:0;line-height:0; position:absolute;top:23px;left:15px;background:#d26e42;}
+.calDateLst ul li a{display:block;zoom:1;color:#666;}
+.calDateLst ul li.oth a{color:#ddd;}
+.calDateLst ul li a:hover{background:#e7e7e7;color:#333;}
+.calDateLst ul li.cu a,.calDateLst ul li.cu a:hover{background:#5498ca;color:#fff;}
+.calDateLst ul li.today a,.calDateLst ul li.today a:hover{background:#54728c;color:#fff;}
+
+.dateFun{height:50px;border-bottom:1px solid #eee;background:#fff;width:664px; z-index:4;}
+.dateFun .btns{float:left;display:inline;width:250px;margin:14px 0 0 10px;}
+.dateFun .btns a{display:inline-block;padding:0 10px;height:24px;line-height:24px;font-size:12px; border-radius:3px;}
+.dateFun .btns a.cu{color:#333;font-weight:bold;background:#f1f1f1; cursor:text;}
+
+.dateFun .sel{float:left;display:inline;margin:10px 10px 0 10px;}
+.dateFun .sel .drop .dropLstCon ul li{height:auto;}
+
+.invLst{zoom:1;margin-bottom:50px;_margin-bottom:0;}
+.invLst dl{padding-top:1px;padding:0 10px;font-size:12px;}
+.invLst dl dt{height:30px;line-height:30px;padding-left:25px;color:#727d95;border-bottom:1px solid #eee;font-weight:bold;}
+.invLst dl dt span.invDate{display:inline-block;width:125px;}
+.invLst dl dd{height:30px;padding-left:20px;border-bottom:1px solid #eee;zoom:1; vertical-align:bottom;}
+.invLst dl dd .invLay{float:left;display:inline;margin:0 10px 0 0;}
+
+.invLst dl dd .invChk{width:22px; text-align:center;margin:7px 10px 0 0;*margin:5px 10px 0 0;}
+.invLst dl dd .invTime{height:30px;line-height:30px;width:58px;color:#999;}
+.invLst dl dd .invRema{width:20px;margin:8px 10px 0 0;*margin:8px 10px 0 0;}
+.invLst dl dd .invRema a.hbIconMoon{font-size:10px;color:#dd6765;}
+.invLst dl dd .invRema a.hbIconMoon:hover{color:#ee807e;}
+.invLst dl dd .invRema .tooltip-inner{max-width:150px;_width:150px;}
+.invLst dl dd .invUser{width:210px;}
+.invLst dl dd .invUser a.name{float:left;display:inline;height:30px;line-height:30px;margin:0 10px 0 0;font-size:14px;color:#666;}
+.invLst dl dd .invUser span.phone{float:left;display:none;}
+.invLst dl dd .invUser span.phone i.hbFntWes{font-size:20px;float:left;display:inline;margin:5px 5px 0 0;}
+.invLst dl dd .invUser span.phone b{float:left;display:inline;height:30px;line-height:30px;font-weight:normal;}
+.invJob{height:30px;line-height:30px;color:#999;width:110px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;-o-text-overflow:ellipsis;}
+.invLst dl dd .invSta{height:30px;line-height:30px;width:90px;margin:0;float:right; position:relative; z-index:2; text-align:right; _margin-right:10px;}
+.invLst dl dd .invSta .def{display:none;}
+.invLst dl dd .invSta .defHasVal{display:block;}
+.invLst dl dd .invSta .staBox{ position:absolute;top:28px;right:0px;background:#fff;padding:1px;zoom:1;border:1px solid #dadada;box-shadow:0 0 3px #999; text-align:center;display:none;}
+.invLst dl dd .invSta .staBox a{display:block;width:70px;color:#666;}
+.invLst dl dd .invSta .staBox a:hover{background:#f1f1f1;color:#333;}
+.invLst dl dd .invDel{float:right;width:20px;text-align:right;margin:8px 10px 0 0;}
+.invLst dl dd .invDel a{font-size:16px;color:#8d8d8d;line-height:1;display:none;}
+.invLst dl dd .invDel a:hover{color:#7c7c7c;}
+.invLst dl dd.hov .invDel a{display:block;}
+
+.invLst dl dd .invSta .red a{color:#D66564;}
+.invLst dl dd .invSta .red a:hover{color:#d10000;}
+.invLst dl dd .invSta .green a{color:#00c60e;}
+.invLst dl dd .invSta .green a:hover{color:#19e028;}
+.invLst dl dd .invSta .gray a{color:#666;}
+.invLst dl dd .invSta .gray a:hover{color:#333;}
+.invLst dl dd .invRema a.gray {color:#999;}
+.invLst dl dd .invRema a.gray:hover{color:#666;}
+
+
+.invLst dl dd.hov{background:#f3f3f3;}
+.invLst dl dd.hov .invUser span.phone,.invLst dl dd.hov .invDel a.hbFntWes{display:inline;}
+.invLst dl dd.hov .invSta .def{display:block;}
+.invLst dl dd.hov .invSta { z-index:3;}
+
+.invLst dl.today dt{background:#f3f0b3;color:#6c6604;border-bottom:1px solid #f4f1bc;}
+.invLst dl.today dd{background:#fffddd;border-bottom:1px solid #f4f1bc;}
+
+.invLst .topLoad,.invLst .botLoad{font-size:12px;padding:10px 0; text-align:center;}
+.invLst .topLoad a i.hbFntWes,.invLst .botLoad a i.hbFntWes{font-size:14px;margin:0 5px 0 0;}
+.invLst .topLoad p,.invLst .botLoad p{height:30px;line-height:30px; text-align:center;color:#999;background:url({/$siteurl.style/}/img/common/loading.gif) no-repeat 0 center;padding-left:20px;display:inline-block;*display:inline;zoom:1;}
+.invLst .topLoad a,.invLst .botLoad a{display:block;}
+.invLst .topLoad{border-bottom:1px solid #eee;}
+.dateBot{height:50px;border-top:1px solid #eee;background:#fff;width:664px; position:fixed;bottom:0; z-index:4;}
+
+.batch{ position:relative; z-index:3;}
+.batchLnk{margin:10px 0 0 35px;}
+.batchLnk a{margin:0;font-size:12px;padding:0 10px;}
+.batchLnk a i.hbFntWes{font-size:14px;margin:0 5px 0 0; vertical-align:middle;}
+.batchBox{position:absolute;border:1px solid #dadada;bottom:35px;left:35px;background:#fff; border-radius:3px;box-shadow:0 0 4px #999;display:none;width:130px;}
+
+.batch .batchBox ul li{height:30px;line-height:30px; vertical-align:bottom;}
+.batch .batchBox ul li a{height:30px;line-height:30px;display:inline-block;width:120px;font-size:12px; text-align:left;padding-left:10px;color:#666;}
+.batch .batchBox ul li a:hover{color:#333;background:#f1f1f1;}
+.batch .batchBox ul li a .hbFntWes{font-size:16px;margin:0 0 0 5px;}
+
+.batch .batchBox ul li.downComp{ position:relative; z-index:5;}
+.batch .batchBox ul li.downComp .downBox{position:absolute;left:120px;border:1px solid #dadada;box-shadow:0 0 4px #999;bottom:0;background:#fff;display:none;}
+.batch .batchBox ul li.downComp .downBox ul li{}
+.batch .batchBox ul li.downComp .downBox ul li a{width:75px;}
+.recR .datLoad{_margin-top:50px;}
+.recR .rCon .hbTip .tooltip-inner{_width:30px;}
+</style>
+{/include file="nav.html" parent="网络招聘" cur="面试管理"/}
+<div class="content" id="content">
+    {/if $job_count==0/}
+    <section class="noData">
+        <p>您还未发布职位，求职者无法投递简历</p>
+        <p><a href="{/get_url rule="/job/add/"/}" class="btn1 btnsF14">立即发布职位</a></p>
+    </section>
+    {/else/}
+    <section class="recL" id="recL">
+        <div class="lCon" id="lCon">
+        	<div class="cal">
+            	<div class="calHd">
+                	<div class="dateNo">{/(int)date("d")/}</div>
+                    <div class="calTxt">
+                    	<p class="txt">今天是</p>
+                        <p>{/date("Y年m月")/}&nbsp;&nbsp;&nbsp;&nbsp;星期{/$weekdays[date('w')]/}</p>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <form method="get" action="{/get_url rule='/invite/index'/}" id="selectDateForm">
+                <div class="recently" id="quickDate"><a href="javascript:void(0);" class="cu today" v="0" >今天</a><a href="javascript:void(0);" class="sevenDay" v="7">近7天</a><a href="javascript:void(0);" class="thirtyday" v="30">近30天</a><a href="javascript:void(0);" class="ninetyDay" v="90">近90天</a></div>
+                <div class="calBd" id="containerCalendar">
+                	<div class="dateSel">
+                        <a href="javascript:;" class="flt hbFntWes" id="preMonth">&#xf104;</a>
+                        <span class="dateSelTxt">{/preg_replace('/^(.+月)(\d+)日$/','${1}',$search_date)/}</span>
+                        <a href="javascript:;" class="frt hbFntWes" id="nextMonth">&#xf105;</a>
+                    </div>
+                    <div class="calWeek">
+                    	<ul>
+                        <li>日</li>
+                        <li>一</li>
+                        <li>二</li>
+                        <li>三</li>
+                        <li>四</li>
+                        <li>五</li>
+                        <li>六</li>
+                        </ul>
+                    </div>
+                    <div class="calDateLst" id="calDateLst">
+                    	<ul>
+                        {/foreach from=$calendar item=cal_date/}
+                        {/$cal_cls = $cal_date[1]/}
+                        {/if $cal_cls == "curr"/}
+                        {/$cal_cls = 'curr'/}
+                        {//if/}
+                        {/$cal_bold = ''/}
+                        {/if $cal_date[3]/}
+                        {/$cal_bold = '<i></i>'/}
+                        {/else/}
+                        {/$cal_bold = ''/}
+                        {//if/}
+                        <li class="{/$cal_cls/}"><a href="javascript:;" data_date="{/$cal_date[2]/}">{/$cal_date[0]/}</a>{/$cal_bold/}</li>
+                        {//foreach/}
+                        </ul>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+                <input id="selectDate" type="hidden" name="selectDate" value="{/$search_date/}"/>
+                <input id="dateOpt" type="hidden" name="d" value=""/>
+                <input id="currentDateStatus" type="hidden" name="day" value="{/$search_day/}"/>
+                </form>
+            </div>
+        </div>
+    </section>
+    <section class="recR" id="recR">
+        <div class="rCon">
+        	<div class="dateFun" id="dateFun">
+                <div class="sel">
+                    <span class="drop" id="ddlJob"></span>
+                </div>
+            	<div class="btns">
+                    {/foreach from=$invite_results item=result key=id/}
+                    {/$result_title = $result/}
+                    {/if $id==0/}
+                    {/$result_title = "所有"/}
+                    {//if/}
+                    {/$current_class = ""/}
+                    {/if $id == $search_current_class/}
+                    {/$current_class = "cu"/}
+                    {/else/}
+                    {/$current_class = ""/}
+                    {//if/}
+                    <a href="#" class="{/$current_class/}"  onclick="invite.query({/$id/});">{/$result_title/}</a>
+                    {//foreach/}
+                </div>
+            </div>
+            {/if count($invites)==0/}
+            <div class="datLoad">
+                <p>没有面试邀请数据</p>
+            </div>
+            {/else/}
+            <div class="invLst hbTip" id="invLst">
+                <input id="currentPage" type="hidden" name="currentPage" value="{/$invitePage/}"/>
+                <input id="totalPage" type="hidden" name="totalPage" value="{/$inviteTotalPage/}"/>
+                {/$curretn_date = ""/}
+                {/foreach from=$invites item=invite/}
+                {/$this_date = preg_replace('/^(\d+)-(\d+)-(\d+)$/','${1}年${2}月${3}日',$invite['audition_time']|date_format:'%Y-%m-%d')/}
+                {/if $this_date == $search_date/}
+                <dl class="today">
+                {/else/}
+                <dl>
+                {//if/}
+                {/if $current_date!= $this_date/}
+                {/$current_date = $this_date/}
+                {/$day=$weekdays[date('w',strtotime($invite['audition_time']))]/}
+                    <dt><span class="invDate">{/$current_date/}</span><span class="invWeek">星期{/$day/}</span></dt>
+                {//if/}
+                    <dd>
+                        <div class="invLay invChk"><input type="checkbox" name="invite_id" value="{/$invite['invite_id']/}"/></div>
+                        <div class="invLay invTime">{/$invite['audition_time']|date_format:'%H:%M'/}</div>
+                        <div class="invLay invRema">
+                            {/if $invite["remark"]/}
+                            <a href="javascript:void(0);" class="hbIconMoon" data-toggle="tooltip" data-placement="right" title="{/$invite["remark"]/}" onclick="showMark({/$invite['resume_id']/})">&#xe0c4;</a>
+                            {/else/}
+                            <a href="javascript:void(0);" class="hbIconMoon gray" data-toggle="tooltip" data-placement="right" onclick="showMark({/$invite['resume_id']/})">&#xe0c4;</a>
+                            {//if/}
+                        </div>
+                        <div class="invLay invUser">
+                            {/if $invite['re_status']==9/}
+                            <a href="javascript:void(0)" class="name">{/$invite['user_name']/}</a>
+                            {/else/}
+                            <a target="_blank" href="{/get_url rule='/resume/resumeshow/'/}type-network-resumeid-{/$invite["resume_id"]/}.html" class="name">{/$invite['user_name']/}</a>
+                            <span class="phone">
+                                <i class="hbFntWes">&#xf10b;</i><b>{/$invite['mobile_phone']/}</b>
+                            </span>
+                            {//if/}
+                        </div>
+                        <div class="invLay invJob">{/$invite['station']/}</div>
+                        <div class="invLsy invDel"><a href="javascript:void(0);" data-toggle="tooltip" data-placement="left" data-id="{/$invite['invite_id']/}" title="删除">×</a></div>
+                        {/if $invite['re_status']!=9/}
+                        <div class="invLay invSta">
+                            {/$lnk_html=$invite_results[$invite["audition_result"]]/}
+                            {/$lnk_cls =""/}
+                            {/if $invite["audition_result"]==1/}
+                            {/$lnk_cls=" red defHasVal"/}
+                            {/else if  $invite["audition_result"]==2/}
+                            {/$lnk_cls=" green defHasVal"/}
+                            {/else if  $invite["audition_result"]==3/}
+                            {/$lnk_cls=" gray defHasVal"/}
+                            {/else/}
+                            {/$lnk_html="设置面试结果"/}
+                            {//if/}
+                            <span class="def{/$lnk_cls/}">
+                                <a href="javascript:void(0);" class="staLnk" data_id="{/$invite['audition_result']/}">{/$lnk_html/}</a>
+                            </span>
+                            <div class="staBox">
+                                {/foreach from=$invite_results item=result key=id/}
+                                <a href="javascript:void(0);" data_id="{/$id/}">{/$result/}</a>
+                                {//foreach/}
+                            </div>
+                        </div>
+                        {/else/}
+                        <div class="invLay invSta">
+                            <span class="" style="color:red">
+                                对方放弃
+                            </span>
+                        </div>
+                        {//if/}
+                    </dd>
+                </dl>
+                {//foreach/}
+                <div class="botLoad" style="display:none" id="botLoadContainer"><a href="javascript:void(0);"><i class="hbFntWes">&#xf021;</i>往后加载更多</a><p>加载中,请稍后...</p></div>
+            </div>
+            <div class="dateBot" id="dateBot">
+            	<div class="batch">
+                	<div class="batchLnk"><a href="javascript:void(0);" id="batchLnk" class="btn1 btnsF14"><i class="hbFntWes">&#xf067;</i>批量操作</a></div>
+                    <div class="batchBox" id="batchBox">
+                        <ul>
+                        <li><a href="javascript:;" id="batchDelLnk">删除</a></li>
+                        <li class="downComp" id="downComp">
+                            <a href="javascript:;">批量设置面试结果<i class="hbFntWes">&#xf105;</i></a>
+                            <div class="downBox" id="downBox">
+                                <ul>
+                                    {/foreach from=$invite_results item=result key=id/}
+                                    <li><a href="javascript:;" data-id="{/$id/}">{/$result/}</a></li>
+                                    {//foreach/}
+                                </ul>
+                            </div>
+                        </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            {//if/}
+        </div>
+    </section>
+    {//if/}
+  <div class="clear"></div>
+</div>
+<input id="currentDate" type="hidden" name="currentDate" value="{/$current_date/}"/>
+<input id="currentType" type="hidden" name="currentType" value="{/$search_current_class/}"/>
+<input id="currentJob" type="hidden" name="currentJob" value="{/$search_job/}"/>
+<section class="floatRT"><a href="{/get_url rule='/about/message' domain='main'/}" target="_blank" class="serviceLink">我有问题要反馈</a><b></b></section>
+<script>
+var weekdays =new Array(7);
+weekdays[0]="星期日"
+weekdays[1]="星期一"
+weekdays[2]="星期二"
+weekdays[3]="星期三"
+weekdays[4]="星期四"
+weekdays[5]="星期五"
+weekdays[6]="星期六"
+var $win = $(window);
+var $dom = $(document);
+var $body =$('#body');
+var $winWh = $win.width();
+var $winHt = $win.height();
+var $tSch = $('#tSch');
+var $header = $('header');
+var $aside = $('aside');
+var $left = $('#recL');
+var $right = $('#recR');
+var $lay = $('#lay');
+var $dateFun = $('#dateFun');
+var $dateBot = $('#dateBot');
+var inviteResults = GetInviteResults();
+$('#invLst').tooltip({
+ selector: "a[data-toggle=tooltip],p[data-toggle=tooltip]",html:true
+});
+
+$(document).ready(function(e) {
+	$.focusblur("#tSchText");//输入框获取及失去焦点
+	$('#tSchText').bind('focus',function(){
+		$(this).animate({'width':200});
+		$tSch.css({'background':'#fffdef','border':'1px solid #e8dd9e'})
+	}).bind('blur',function(){
+		$(this).animate({'width':150});
+		$tSch.css({'background':'#fff','border':'1px solid #dadada'})
+	});
+
+	var $winWh = $win.width();
+	var $winHt = $win.height();
+	if($winWh<=1260){
+		$body.addClass('w1260');
+	}if($winWh>=1261&&$winWh<=1314){
+		$body.addClass('w1366');
+	}if($winWh>=1315){
+		$body.addClass('w1366gt');
+	};
+
+	var b = function() {
+		$left.css({'position':'static'});
+		$aside.css({'position':'static'});
+		$dateFun.css({'position':'static'});
+		var height = $winHt-($header.height()+$aside.height()+15);
+		if($right.height()<height){
+			$right.height(height);
+		}
+	}
+    jQuery.fn.extend({
+        keepfixed:function() {
+            var $w = $(window);
+            var controly =$w.height()-$(this).height()+$w.scrollTop()-$('#dateFun').height()-$aside.height()-10;
+            $(this).css({top:controly});
+        },
+        scrollTip: function() {
+            var _self = this;
+            if ($.browser.msie&&$.browser.version<=6.0){
+            	 $(this).css({position:"absolute"});
+                _self.keepfixed();
+                $(window).bind('scroll resize',function(e) {
+                	_self.keepfixed();
+                });
+            }
+        }
+    });
+    $('#dateBot').scrollTip();
+	b();
+	$('#calDateLst').find('li').bind('click',function(){
+		$(this).addClass('cu').siblings('li').removeClass('cu');
+	});
+
+    $("#invLst dd").live("mouseleave mouseenter",function(e){
+        if(e.type == "mouseenter"){
+            $(this).addClass("hov").css({'z-index':'3'});
+            var index = $(this).parents("dl").index();
+            var this_is_dt = $(this);
+            var showed_box_index = $(".staBox.showed").parents("dl").index();
+            if(index!=showed_box_index && !!this_is_dt){
+                var showed_box = $(".staBox.showed");
+                showed_box.css("display","none");
+                showed_box.removeClass("showed");
+            }
+        }else if(e.type == "mouseleave"){
+            $(this).removeClass('hov').css({'z-index':'1'});
+            $(".staBox.showed").css("display","none");
+        }
+    });
+
+    $("#invLst dt").live("mouseover mouseout",function(){
+        var showed_box = $(".staBox.showed");
+        showed_box.css("display","none");
+        showed_box.removeClass("showed");
+    });
+
+    $(".staLnk").live("click",function(){
+        //判断弹出层是否够显示
+        $(this).parents("span").next(".staBox").addClass("showed").css("display","block");
+    });
+
+    $(".staBox a").live("click",function(){
+        var $thHtml = $(this).html();
+        var $staLnk = $(this).parents("div.invSta").find('.staLnk');
+        var cls = "def";
+        switch($thHtml){
+            case "未参加面试":
+                cls += " red defHasVal";
+                break;
+            case "录用":
+                cls += " green defHasVal";
+                break;
+            case "淘汰":
+                cls += " gray defHasVal";
+                break;
+            case "未设置":
+                $thHtml = "设置面试结果";
+                break;
+        }
+        $staLnk.html($thHtml).parents('.def').attr({'class':cls});
+        var data_id = $(this).attr("data_id");
+        var staLnk_id = $staLnk.attr("data_id");
+        $(this).parents(".staBox").css({'display':'none'});
+        if(data_id == staLnk_id) return false;
+        var invite_id = $(this).parents("dd").find("input[name=invite_id]").val();
+        $.ajax({
+            url:"{/get_url rule='/invite/state'/}",
+            type:"post",
+            dataType:"json",
+            data:{result:data_id,id:invite_id},
+            success:function(json){
+                if(!(json.success||false)){
+                    $.message(json.error,{title:'设置面试邀请',icon:'fail'});
+                    return false;
+                }
+                $.anchorMsg('设置成功',{icon:'success'});
+                $staLnk.attr("data_id",data_id);
+            return false;
+            }
+        });
+    });
+
+	$('#batchLnk').bind('click',function(){
+		$('#batchBox').css({'display':'block'}).find('#downComp').bind('mouseover',function(){
+			$('#downBox').css({'display':'block'});
+			$('#downComp').bind('mouseout',function(){
+				$('#downBox').css({'display':'none'});
+			});
+		});
+	});
+
+    $("#batchBox").mouseleave(function(){
+        $(this).css({'display':'none'});
+    });
+
+    var currentPage = parseInt($("#currentPage").val());
+    var totalPage = parseInt($("#totalPage").val());
+    var top = $(window).scrollTop();
+    /** Event handler for mouse wheel event. 
+     *鼠标滚动事件 
+     */  
+    var wheel = function(event) {  
+        var delta = 0;  
+        if (!event) /* For IE. */  
+            event = window.event;  
+        if (event.wheelDelta) { /* IE/Opera. */  
+            delta = event.wheelDelta / 120;  
+        } else if (event.detail) {  
+            /** Mozilla case. */  
+            /** In Mozilla, sign of delta is different than in IE. 
+             * Also, delta is multiple of 3. 
+             */  
+            delta = -event.detail / 3;  
+        }  
+        /** If delta is nonzero, handle it. 
+         * Basically, delta is now positive if wheel was scrolled up, 
+         * and negative, if wheel was scrolled down. 
+         */  
+        if (delta)  
+        	loadInvite();  
+        /** Prevent default actions caused by mouse wheel. 
+         * That might be ugly, but we handle scrolls somehow 
+         * anyway, so don't bother here.. 
+         */ 
+        /*  
+        if (event.preventDefault)  
+            event.preventDefault();  
+        event.returnValue = false;*/  
+    }  
+
+    /** Initialization code.  
+     * If you use your own event management code, change it as required. 
+     */  
+    if (window.addEventListener) {  
+        /** DOMMouseScroll is for mozilla. */  
+        window.addEventListener('DOMMouseScroll', wheel, false);  
+    }  
+    /** IE/Opera. */  
+    window.onmousewheel = document.onmousewheel = wheel;  
+	var moreInvitelock = false;
+	var loadInvite =function() {
+		   //没有到页面底部
+        var isTop = false;
+        var isBottom = false;
+        isBottom = ($(window).scrollTop() - $('body').height() + $(window).height())>=0;
+        if(isBottom&&!moreInvitelock){
+            if(currentPage<totalPage){
+                currentPage++;
+                moreInvitelock = true;
+                $("#botLoadContainer").show();
+                var type = $("#currentType").val()||0;
+                var job = $("#currentJob").val();
+                var selectDate = $("#selectDate").val();
+                $.ajax({
+                    url:"{/get_url rule='/invite/moreinvites'/}",
+                    type:'post',
+                    dataType:'json',
+                    data:{index:currentPage,t:type,j:job,selectDate:selectDate},
+                    success:function(json){
+                        if(!json.error){
+                            var str = new StringBuilder();
+                            for(var i=0;i<json.invites.length;i++){
+                                var dl = AddInviteItem(json.invites[i]);
+                                str.Append(dl);
+                            }
+                            moreInvitelock = false;
+                            $('#recR').height('auto');
+                            $("#botLoadContainer").hide().before(str.toString());  
+                        }
+                    }
+                });
+            }
+        }
+    };  
+    //批量操作
+    $("#batchDelLnk").click(function(){
+        var checked_btns = $("#invLst :checked");
+        var ids = new Array();
+        checked_btns.each(function(){
+            ids.push($(this).val());
+        });
+        if(ids.length==0){
+            $.anchorMsg('请选择需要删除的面试邀请', { icon: 'info' });
+            return;
+        }
+        $.confirm("确定要删除吗？","删除面试邀请",function(){
+            $.ajax({
+                url:'{/get_url rule="/invite/deleteinvites"/}',
+                type:"post",
+                dataType:'json',
+                data:{ids:ids.join(",")},
+                success:function(json){
+                    if(!(json.success||false)){
+                        $.message(json.error,{title:'删除面试邀请',icon:'fail'});
+                        return false;
+                    }
+                    $.anchorMsg('删除成功',{icon:'success'});
+                    //location.reload();
+                    invite.queryInvite();
+                }
+            });
+        },function(){});
+        return false;
+    });
+    $.concealElement($('#batchBox'),'batchLnk');
+    $(".invDel a").live("click",function(){
+        var _this = $(this);
+        var id = _this.attr("data-id");
+        $.confirm("确定要删除吗？","删除面试邀请",function(){
+            $.ajax({
+                url:'{/get_url rule="/invite/deleteinvites"/}',
+                type:"post",
+                dataType:'json',
+                data:{ids:id},
+                success:function(json){
+                    if(!(json.success||false)){
+                        $.message(json.error,{title:"删除面试邀请",icon:'fail'});
+                        return false;
+                    }
+                    $.anchorMsg('删除成功');
+                    invite.queryInvite();
+                    //_this.parents("dl").remove();
+                }
+            });
+        },function(){});
+        return false;
+    });
+
+    $("#downComp ul a").click(function(){
+        var checked_btns = $("#invLst :checked");
+        var ids = new Array();
+        checked_btns.each(function(){
+            ids.push($(this).val());
+        });
+        if(ids.length==0){
+            $.anchorMsg('请选择要设置的面试邀请', { icon: 'info' });
+            return;
+        }
+        var result = $(this).attr("data-id");
+        $.ajax({
+            url:'{/get_url rule="/invite/state"/}',
+            type:"post",
+            dataType:'json',
+            data:{id:ids.join(","),result:result},
+            success:function(json){
+                if(!(json.success||false)){
+                    $.message(json.error,{title:"设置面试邀请",icon:'fail'});
+                    return false;
+                }
+                $.anchorMsg('设置成功',{icon:'success'});
+                var html = "设置面试结果";
+                if(result!=0)
+                    html=inviteResults[result];
+                var change_links = checked_btns.parents("dd").find(".staLnk");
+                change_links.attr("data_id",result).html(html);
+                var cls = "";
+                if(result == 1)
+                    cls = "red defHasVal";
+                else if(result == 2)
+                    cls = "green defHasVal";
+                else if(result == 3)
+                    cls = "gray defHasVal";
+                change_links.each(function(){
+                    $(this).parents("span").removeClass("red green gray defHasVal").addClass(cls);
+                });
+            }
+        });
+        return false;
+    });
+	/*
+    $("#dateFun .btns a").click(function(){
+        var href = $(this).attr("href");
+        var current_job_station = $("#currentJob").val();
+        if(!!current_job_station){
+            href+=".j."+current_job_station;
+        }
+        location.href = href;
+        return false;
+    });
+	*/
+    $(".staBox.showed").live("mouseleave",function(e){
+        $(this).css("display","none");
+    });
+});
+$("#ddlJob").droplist({
+    selectValue:'{/$search_job/}',
+    isCanWrite:false,
+    inputWidth:150,
+    style:'width:158px;',
+    hddName:'hddJobid',
+    items:[{id:'',name:'按面试职位查看'}{/$i=1/}{/foreach from=$jobs item=job/},{id:'{/$job/}',name:'{/$job/}'}{//foreach/}],
+    maxScroll:10,
+    _itemHeight:22,
+    onSelect:function(selectID){
+        $("#hddJobid").val(selectID)
+        invite.queryInvite();
+    },
+    defaultTitle:"按面试职位查看"
+});
+
+function AddInviteItem(item){
+    var dl="<dl"+(calendar.isEqSelectDate(item.audition_time)?" class='today' ":"")+">";
+    dl+=GetDateTitle(item.audition_time);
+    dl+=GetInviteInfor(item);
+    dl+="</dl>";
+    return dl;
+}
+
+function GetDateTitle(invite_date){
+    var dt="";
+    var currentDate = $("#currentDate").val();
+    var thisDate = invite_date.replace(/^(\d+)-(\d+)-(\d+) .+$/i,"$1年$2月$3日");
+    if(currentDate == thisDate)
+       return dt;
+    var date = new Date(invite_date.replace(/-/g,"/"));
+    var day = weekdays[date.getDay()];
+    dt+='<dt><span class="invDate">'+thisDate+'</span><span class="invWeek">'+day+'</span></dt>';
+    $("#currentDate").val(thisDate);
+    return dt;
+}
+function GetInviteInfor(invite_infor){
+    var dd="<dd>";
+    dd+='<div class="invLay invChk"><input type="checkbox" name="invite_id" value="'+invite_infor.invite_id+'"/></div>';
+    dd+='<div class="invLay invTime">'+invite_infor.audition_time.replace(/^.+ (\d+):(\d+):\d+$/i,"$1:$2")+'</div>';
+    dd+='<div class="invLay invRema">';
+    if(!!invite_infor.remark){
+        dd+='<a href="javascript:void(0);" class="hbIconMoon" data-toggle="tooltip" data-placement="right" title="'+invite_infor.remark+'" onclick="showMark('+invite_infor.resume_id+')">&#xe0c4;</a>';
+    }else{
+        dd+='<a href="javascript:void(0);" class="hbIconMoon gray" data-toggle="tooltip" data-placement="right"  onclick="showMark('+invite_infor.resume_id+')">&#xe0c4;</a>';
+    }
+    dd+='</div>';
+    dd+='<div class="invLay invUser">';
+    if(invite_infor.re_status==9){
+        dd+='<a href="javascript:void(0)" class="name">'+invite_infor.user_name+'</a>';
+    }else{
+        dd+='<a target="_blank"  href="{/get_url rule='/resume/resumeshow/'/}type-network-resumeid-'+invite_infor.resume_id+'.html" class="name">'+invite_infor.user_name+'</a><span class="phone"><i class="hbFntWes">&#xf10b;</i><b>'+invite_infor.mobile_phone+'</b></span>';
+        
+    }
+    dd+='</div>';
+    dd+='<div class="invLay invJob">'+invite_infor.station+'</div>';
+    dd+='<div class="invLsy invDel"><a href="javascript:void(0)" data-toggle="tooltip" data-placement="left" title="删除">×</a></div>';
+    dd+='<div class="invLay invSta">';
+    if(invite_infor.re_status==9){
+        dd+='<span style="color:red">对方放弃</span>';
+    }else{
+        dd+='<span class="def'+GetInviteCls(invite_infor.audition_result)+'">';
+        dd+='<a href="javascript:void(0);" class="staLnk" data_id="'+invite_infor.audition_result+'">'+GetInviteTitle(invite_infor.audition_result)+'</a>';
+        dd+='</span>';
+
+        dd+= GetResultList();
+    }
+    dd+='</div>';
+    dd+="</dd>";
+    return dd;
+}
+
+function GetInviteCls(invite_audition_result){
+    var cls = "";
+    if(invite_audition_result == 1){
+        cls = " red defHasVal";
+    }else if(invite_audition_result == 2){
+        cls = " green defHasVal";
+    }else if(invite_audition_result == 3){
+        cls = " gray defHasVal";
+    }
+    return cls;
+}
+
+function GetInviteTitle(invite_audition_result){
+    var title = "设置面试结果";
+    if(!!invite_audition_result){
+        title = inviteResults[invite_audition_result]
+    }
+    return title;
+}
+
+function GetResultList(){
+    var list ='<div class="staBox">';
+    {/foreach from=$invite_results item=result key=id/}
+    list +=' <a href="javascript:void(0);" data_id="{/$id/}">{/$result/}</a>';
+    {//foreach/}
+    list +='</div>';
+    return list;
+}
+
+function GetInviteResults(){
+    var inviteResults = new Array();
+    {/foreach from=$invite_results item=result key=key/}
+        inviteResults[{/$key/}] = '{/$result/}';
+    {//foreach/}
+    return inviteResults;
+}
+
+function showMark(resume_id){
+    $.showModal('{/get_url rule="/resumeremark/index/"/}resume_id-'+resume_id,{title:"备注"});
+}
+
+// 查看面试邀请
+var invite = {
+	query:function(current_type) {
+		$("#currentType").val(current_type);
+		this.queryInvite();
+	},
+	queryInvite:function() {
+	    var job_id = $("#hddJobid").val(),
+		    date = $("#selectDate").val(),
+		    current_type = $("#currentType").val(),
+		    day = $('#currentDateStatus').val();	
+			var job_href = "{/get_url rule='/invite/index/'/}";
+        var a = new Array();
+        if(!!current_type){
+			a.push('t');
+			a.push(current_type);	
+        }
+        if(date&&date!='') {
+			a.push('selectDate');
+			a.push(date);	
+       	}
+       	if(job_id&&job_id!='') {
+			a.push('j');
+			a.push(job_id);	         	
+        }
+       	a.push('day');
+       	a.push(day);
+       	a.push('v');
+       	a.push(Math.random());		  
+		location.href=encodeURI(job_href+a.join('-'));	
+	}			
+};
+
+/**
+ * 日历显示控制
+ */
+var calendar = {
+    elementID:'containerCalendar',
+    today:null,
+    currentDate:null,
+    selectDate: null,
+	init:function() {
+		this._event();
+		$('#quickDate').find('a[v]').removeClass('cu').end().find('a[v="{/$search_day/}"]').addClass('cu');
+		this.today = this._parseDate('{/$today/}');
+		this.currentDate = this._parseDate('{/$original_search_date/}');
+		this.selectDate = this.currentDate.Format('yyyy年MM月dd日');
+		this._loadDate(this.selectDate);
+	},
+	isEqSelectDate:function(d) {
+		return this.selectDate == d.replace(/^(\d+)-(\d+)-(\d+) .+$/i,"$1年$2月$3日");
+	},
+	_event:function() {
+	    // 上一月，下一月
+		$('#'+this.elementID).find('#preMonth').click(function(){
+				calendar.currentDate.setMonth(calendar.currentDate.getMonth()-1);
+				calendar._loadDate(calendar.currentDate.Format('yyyy年MM月dd日')); 
+		});	
+		$('#'+this.elementID).find('#nextMonth').click(function(){
+			calendar.currentDate.setMonth(calendar.currentDate.getMonth()+1);
+			calendar._loadDate(calendar.currentDate.Format('yyyy年MM月dd日')); 
+		});			
+		// 点击日期时间
+		$('#'+this.elementID).find('.calDateLst ul').click(function(e){
+			var target = $(e.target);
+			if(target.is('a')) {
+				$('#currentDateStatus').val('-1');
+				target.closest('li').siblings().removeClass('cu').end().addClass('cu');
+				calendar.selectDate = target.attr('data_date');
+				calendar.onSelect(calendar.selectDate);
+				return false;
+			}
+		});
+		// 今天,近7天...
+		$('#quickDate').find('a').click(function() {
+			 var d = calendar.today,
+			 	 day  = $(this).attr('v');
+			 $('#currentDateStatus').val(day); 
+			 d.setDate(d.getDate()-day);
+			 calendar.selectDate = d.Format('yyyy年MM月dd日');
+			 calendar.onSelect(calendar.selectDate);
+			 return false;
+		});			　　		
+	},
+	_loadDate:function(d) {
+		var self = this;
+		$.getJSON(encodeURI("{/get_url rule='/invite/GetCalender/'/}date-"+d),function(result){
+			self._updateStatus(result);
+		});
+	},
+	_updateStatus:function(data) {
+		$('#'+this.elementID).find('.dateSelTxt').html(this.currentDate.Format('yyyy年MM月'));
+		$('#'+this.elementID).find('.calDateLst ul').empty();
+		var a  = new Array();
+		var self = this;
+		$.each(data,function(i,n){
+			a.push('<li class="'+(n[2]==self.selectDate?'cu':n[1])+'"><a href="javascript:void(0);" data_date="'+n[2]+'">'+n[0]+'</a>'+(n[3]?"<i></i>":'')+'</li>');
+		});
+		$('#'+this.elementID).find('.calDateLst ul').html(a.join(''));
+	},
+    _parseDate:function(date){
+		var reggie = /(\d{4})-(\d{2})-(\d{2})/g;
+		var dateArray = reggie.exec(date);
+		var dateObject = new Date(
+		(+dateArray[1]),
+		(+dateArray[2])-1, // Careful, month starts at 0!
+		(+dateArray[3])
+		);
+	    return dateObject;
+	},
+	onSelect:function(d) {
+        $("#selectDate").val(d);
+        $("#selectDateForm").get(0).submit();	
+	}
+}
+calendar.init();
+</script>
+</body>
+</html>

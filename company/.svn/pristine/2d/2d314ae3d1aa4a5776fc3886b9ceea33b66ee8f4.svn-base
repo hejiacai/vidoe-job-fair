@@ -1,0 +1,397 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+<title>{/$title/}</title>
+<link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='comback.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='wechat.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file="v2-widge.css"/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='appeal.css'/}" />
+<!–[if lt IE9]> 
+<script src="{/version file='html5.js'/}"></script>  
+<![endif]–>
+<style>
+body{ background:#e9e9e9;font-family: "微软雅黑";}
+.appeal-lit{font-size:14px; font-family:"微软雅黑"; line-height:24px; color:#999; margin-top:20px;}
+.appeal-title .appeal-title-item1, .appeal-title .appeal-title-item2{ height:50px;}
+.appeal-switch .appeal-switch-alert{ background:none; border:none; padding:0px; margin-top:0px;}
+.appeal-mgent-title .appeal-switch{ margin-top:33px;}
+.subcompNav li.tabList3{ margin-left:10px;_margin-left:4px;}
+/*2018-09-27 wh 面试评价*/
+.appeal-company-mgent .thumbs-up a{color: #2b6fad;}
+.appeal-company-mgent .thumbs-up a:hover{color: #0af;}
+
+</style>
+<script type="text/javascript" src="{/version file='version.js'/}"></script>
+<script type="text/javascript">
+window.CONFIG = {
+    HOST: '{/$siteurl.style/}',
+    COMBOPATH: '/js/v2/'
+}
+</script>
+<script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+<script type="text/javascript" src="{/version file='global.js'/}"></script>
+</head>
+<body> 
+{/include file="new_header.html" par="全职招聘" cur="职位相符度评价"/}
+<div class="appeal-company-mgent">
+ 	<div class="appeal-mgent-title clearfix" style="position: relative">
+        <!--{/if !$is_allow_appraise/}
+            <p style="position: absolute;top: 54px;right: 30px;text-align: right;" id="appealSwitch_set">
+                <a href="" style="color:#333;display: block;margin-bottom:2px;">面试评价功能（未公开）</a>
+                <span style="color:#999;">求职者仍然能评价,但前端未公开展示,可能会影响职位的展示量和投递量<a href="javascript:;" id="appealSwitch" style="color:#00bab1;text-decoration: underline;">公开</a></span>
+            </p>
+        {//if/}-->
+        <div class="appeal-title">
+                <a href="{/get_url rule='/appraise/index'/}" class="appeal-title-item1  {/if $is_complain !=1/}cur{//if/}">全部{/if $is_complain !=1/}({/$total/}){//if/}</a>
+                <a href="{/get_url rule='/appraise/index' data='is_complain=1'/}" class="appeal-title-item2 {/if $is_complain ==1/}cur{//if/}">已申诉{/if $is_complain ==1/}({/$total/}){//if/}</a>
+                <!--<span class="appeal-title-msg">（求职者的面试评价在评论发布后的24小时后展示）</span>-->
+        </div>
+ 	</div>
+        {/if !empty($appraise_list)/}
+ 	<div class="appeal-mgent-cont" id="appealMgent">
+
+        <div class="appeal-lit">
+            职位相符度评价有利于发现您招聘过程中存在的问题<br/>
+            <em style="color: red;">如对评价有异议，请及时申诉，超过30天的职位相符度评价，不能再进行申诉哦</em>
+            <a href="{/get_url rule='/specification/StarAppraise'/}?state=1" class="wh-tit-goodstar j_35_cut_btn" target="_blank">3招斩获5星职位评价！</a>
+        </div>
+
+        <!--foreach item-->
+                {/foreach $appraise_list as $value/}
+ 		<div class="appeal-item">
+                        {/if $value["complain_status"] != 0 && $is_complain == 1/}
+ 			<div class="appeal-item-title"><!--appeal-item-hide 有则隐藏无则显示-->
+	 			<p class="appeal-dealwith">
+	 				<span class="time">{/if !empty($value["complain_check_time"])/}{/date("Y-m-d",strtotime($value["complain_check_time"]))/}{//if/}<i class="icon-arr-switch"></i></span>
+	 				<span class="dealwith-huibo">汇博处理:</span> 
+                                        <span class="color-red">
+                                            {/if $value["complain_status"] ==1/}
+                                                该评论已删除
+                                            {/else if $value["complain_status"] ==2/}
+                                                申诉不通过
+                                            {/else/}
+                                                等待处理
+                                            {//if/}
+                                        </span>	 				
+	 			</p>
+	 			<div class="appeal-dealwith-infor">
+	 				<span class="time">{/date("Y-m-d",strtotime($value["complain_time"]))/}</span>
+	 				<p class="appeal-reason clearfix">
+                                            <span class="title">申诉理由：</span>
+                                            <span class="appeal-reason-cont">
+                                                {/$value.complain_reason_type/}
+                                                <br/>
+                                                {/$value["complain_reason_content"]/}
+                                            </span>
+                                        </p>
+                                        {/if !empty($value.complain_reply)/}
+	 				<p class="appeal-reasonhb clearfix"><span class="title">汇博回复：</span><span class="appeal-reasonhb-cont">{/$value.complain_reply/}</span></p>
+                                        {//if/}
+	 			</div>
+ 			</div>
+                        {//if/}
+ 			<div class="appeal-jobseeker clearfix">
+ 				<span class="head-img"><img onerror="this.src='{/$siteurl.style/}/img/appeal/default_head.jpg'" src="{/if !empty($value.person_small_photo)/}{/$value.person_small_photo/}{/else/}{/$siteurl.style/}/img/appeal/default_head.jpg{//if/}" /></span>
+ 				<div class="appeal-jobseeker-box clearfix">
+                                     {/if $value["complain_status"] ==1 || $value.check_state == 2/}
+                                     
+                                     {/else/}
+                    <div class="appeal-operating clearfix" style="float: right;">
+                        <p class="thumbs-up">
+                            <a class="j_useful_btn"><i class="icon-up"></i>有用（{/$value.useful_count/}）</a>
+                            <u></u>
+                            <a class="appeal JS-appeal" data-id="{/$value.appraise_id/}" data-complaint="{/$value.is_can_complaint/}" href="javascript:;" >申诉</a>
+                            <u></u>
+                            <span class="time">{/date("Y-m-d",strtotime($value.appraise_time))/}</span>
+                            {/if $value["complain_status"] == 0/}
+                            {//if/}
+                        </p>
+                        <!--{/if  $value["complain_status"] !=1 && $value.check_state !=2/}
+                        <p class="reply-appeal">
+                            <a class="reply JS-reply" data-id="{/$value.appraise_id/}" href="javascript:;" >{/if empty($value.com_reply_content)/}回复求职者{/else/}修改回复{//if/}</a>
+                            &nbsp;&nbsp;<a href="{/get_url rule='/appraise/howtoreply'/}" target="_blank" style="color:#868686;">如何回复？</a>
+                        </p>
+                        {//if/}-->
+                    </div>
+
+                                    {//if/}
+                                        {/if $value["complain_status"] ==1/}
+                                            <p class="username">{/$value.person_user_name/}</p>
+                                        {/else if $value.check_state == 2/}
+                                            <p class="username">{/$value.person_user_name/}</p>
+                                        {/else/}
+                                            <span class="username">{/$value.person_user_name/}</span>
+                                        {//if/}
+
+ 					<p class="job-name">面试职位：{/$value.station/}</p>
+                                        <div class="appeal-star" style="float:none;">
+                                            {/if $value.match_level/}
+                                                <span class="appeal-star-title1">岗位职责相符度：</span>
+                                                <p class="public-star"><span style="width:{/$value.match_level * 20/}%"></span></p>
+                                            {//if/}
+                                            {/if $value.welfare_salary_level/}
+                                                <span class="appeal-star-title2">福利薪资相符度：</span>
+                                                <p class="public-star"><span style="width:{/$value.welfare_salary_level * 20/}%"></span></p>
+                                            {//if/}
+                                        </div>
+                                        {/if  $value["complain_status"] ==1/}
+                                            <p class="color-red">申诉通过，已删除</p>
+                                        {/elseif $value["check_state"] == 2/}
+                                            <p class="color-red">审核未通过，已删除</p>
+                                        {/else/}
+                                            {/if !empty($value.tip_array)/}
+                                            <p class="evaluate-label">
+                                                {/foreach $value.tip_array as $tip/}
+                                                <span>{/$tip/}</span>
+                                                {//foreach/}
+                                            </p>
+                                            {//if/}
+                                            <!--<span class="job-tit">面试经过：</span>
+                                            <p class="job-infor-text" style="max-height: 112px">{/html_encode content=$value.content/}</p>
+                                            {/if mb_strlen($value.content)>240/}
+                                            <p class="companyp-switch"><a href="javascript:;">展开<i class="icon-arr-down"></i></a></p>    
+                                            {//if/}-->
+                                            <!--回复-->
+                                           <!-- <div class="appeal-reply">
+                                                    &lt;!&ndash;企业已回复内容&ndash;&gt;
+                                                    <div class="appeal-replytext-box" style='{/if empty($value.com_reply_content)/}display: none{//if/}'>
+                                                            <p class="title"><span class="time">{/date("Y-m-d",strtotime($value["com_reply_time"]))/}</span>企业回复：</p>
+                                                            <div class="text show-reply-content" style="max-height: 112px;overflow: hidden">{/html_encode content=$value.com_reply_content/}</div>
+                                                            {/if mb_strlen($value.com_reply_content)>290/}
+                                                            <p class="companyp-switch"><a href="javascript:;">展开<i class="icon-arr-down"></i></a></p>     
+                                                            {//if/}
+                                                    </div>
+                                                    &lt;!&ndash;/企业已回复内容&ndash;&gt;
+                                                    &lt;!&ndash;企业回复表单&ndash;&gt;
+                                                    <div class="appeal-reply-box">
+                                                            <i class="icon-arr"></i>
+                                                            <textarea name="reply_content" placeholder="如果求职者有谩骂、诋毁等言论，请保持企业形象，切勿和求职者对骂。同时您也可以选择申述">{/trim($value.com_reply_content)/}</textarea>
+                                                            <p class="buttom-box">
+                                                                    <span class="number">{/mb_strlen($value.com_reply_content)/}/500</span>
+                                                                    <a href="javascript:;" data-id="{/$value.appraise_id/}"  class="btn-submit">提交</a>
+                                                                    <a href="javascript:;" data-id="{/$value.appraise_id/}"  class="btn-reset">取消</a>
+                                                            </p>
+                                                    </div>
+                                                    &lt;!&ndash;/企业回复表单&ndash;&gt;
+                                            </div>-->
+ 					<!--/回复-->
+                                        {//if/}
+ 				</div>
+ 			</div>
+ 		</div> 	
+                {//foreach/}
+ 		
+ 	</div>
+         <div class="appeal-page clearfix">
+        {/$pager/}
+        </div>
+        {/else/}
+            <div class="noData">
+                <p>还没有收到职位评价！</p>
+            </div>
+        {//if/}
+<section class="floatRT"><a href="{/get_url rule='/about/message' domain='main'/}" target="_blank" class="serviceLink">我有问题要反馈</a><b></b></section>
+<div class="j_load_page_btn" data-explain="do not delete!" style="display: none"></div>
+<script  type="text/javascript">
+    var action_url = '{/$siteurl.style/}';
+    action_dom = [
+        ['.j_load_page_btn', {/$loadActionType/}],
+        ['.j_useful_btn', 406],
+        ['.j_35_cut_btn', 407]
+    ];
+</script>
+<script type="text/javascript" language="javascript" src="{/version file='action.js'/}"></script>       
+<script>
+    hbjs.use('@confirmBox, @jobDialog', function(m) {
+        var ConfirmBox      = m['widge.overlay.confirmBox'],
+        Dialog          = m['widge.overlay.hbDialog'],
+        cookie          = m['tools.cookie'];
+        var $ = m['jquery'].extend(m['cqjob.jobDialog']);
+	var pWidth = 70,
+        fontWidth = 18;
+        {/if $loadActionType/}
+        $('.j_load_page_btn').click();
+        {//if/}
+        function showModel(icon, msg) {
+            ConfirmBox.timeBomb(msg, {
+                name: icon,
+                width: pWidth + msg.length * fontWidth
+            });
+        }
+		var appealMgent = $("#appealMgent");
+		var appeal = appealMgent.find(".JS-appeal");//申诉点击对象
+		var reply = appealMgent.find(".JS-reply");//回复点击对象
+		var defText = "请您详细描述申诉的具体理由";//申诉输入框默认文字
+		/*申诉*/
+		var tipDialog = new Dialog({
+			close: '╳',
+			idName: 'appeal_dialog',
+			title: '系统提示',
+			width: 390
+		});
+		var appealHtml = ['<span class="title">请选择您申诉的理由：</span><div class="box">',
+                                {/foreach $complans as $k => $c/}
+                                '<label><input type="radio" name="radio" value="{/$k/}" {/if $k==1/}checked="checked"{//if/} />{/$c/}</label>',
+                                {//foreach/}
+                                '<textarea name="textarea" placeholder="'+defText+'"></textarea>','<p><span class="number">0/500</span><span class="error-msg">同一个职位评价只能申诉一次</span></p>','<p class="buttom-box"><a href="javascript:;" class="btn-submit">提 交</a><a href="javascript:;" class="btn-reset">取消</a></p></div>'].join("");
+			
+		appeal.click(function(){
+            var _this = $(this);
+            var is_can_complaint = _this.attr("data-complaint");
+            if(is_can_complaint != 1){
+                showModel('fail', "已超过申诉期限");
+                return false;
+            }
+            tipDialog.setContent({title:'申诉', content:'<form action="" id="appealDialog">'+appealHtml+'<input type="hidden" name="appraise_id" value="'+_this.attr("data-id")+'" /></form>'}).show();
+		});
+		$("body").on("click",".appeal_dialog .btn-submit,.appeal_dialog .btn-reset",function(){
+			var _this = $(this)
+			if(_this.hasClass("btn-submit")){ //提交按钮
+				var _tForm = _this.parents("form");
+				var submid_str = _tForm.serialize();//表单值
+				//这里写ajax提交
+				$.post('{/get_url rule="/appraise/complanAppraise/"/}',submid_str,function(result){
+                                    if (result.success) {
+                                        showModel('success', '申诉成功，工作人员会在一个工作日内处理');
+                                        tipDialog.hide();
+                                        setTimeout('window.location.reload()',3000);
+                                    } else {
+                                        showModel('fail', result.error);
+                                        setTimeout('window.location.reload()',3000);
+                                    }
+                                },"json");
+			}else{
+                            //取消按钮
+				tipDialog.hide();
+			}
+			return false;
+		});
+		//回复
+		var appealReply = $(".appeal-reply-box");
+		reply.click(function(){
+			$(this).parents(".appeal-jobseeker-box").find(".appeal-reply-box").show();
+			$(this).parents(".appeal-jobseeker-box").find(".appeal-replytext-box").hide();
+			return false;
+		});
+		appealReply.find("textarea").keyup(function(){
+			var _this = $(this),
+				_tVal = _this.val();
+				_Number = _this.parents(".appeal-reply-box").find(".number");
+			if(_tVal.length < 500){
+				_Number.html(_tVal.length+"/500");
+			}else if(_tVal.length >= 500){
+				_Number.html("500/500");
+				_this.val(_tVal.substring(0,500));
+			}
+		});		
+
+		//申诉输入框事件
+		$("body").on({
+			keyup:function(){
+				var _this = $(this),_number = _this.parents(".appeal_dialog").find(".number");		
+				if(_this.val().length < 500){				
+					_number.html(_this.val().length+"/500");
+				}else if(_this.val().length > 500){
+					_number.html("500/500");
+					_this.val(_this.val().substring(0,500));
+				}		
+			}
+		},".appeal_dialog textarea");
+		//关闭开启评论
+		$("#appealSwitch").click(function(){
+                     ConfirmBox.confirm("确定要公开面试评价吗？","公开面试评价",function(obj){
+                        var self = this;
+                        self.hide();
+                        $.post('{/get_url rule="/appraise/changeAppeal/"/}',{"value":1},function(result){
+                            if(result.error){
+                                showModel('fail', result.error);
+
+                            }else{
+                                showModel('success', '操作成功');
+                                 $("#appealSwitch").parents("#appealSwitch_set").remove();
+                            }
+                        },"json");
+                     })
+                return false;
+        });
+//        $("#appealSwitch_set a").click(function(){
+//            $("#appealSwitch_box").show();
+//            $("#appealSwitch_set").hide();
+//            return false;
+//        });
+//        $("#hideAppeal").click(function(){
+//            $('#appealSwitch_box').hide();
+//            $('#appealSwitch_set').show();
+//        });
+		//处理展开收起
+		$(".appeal-item-title").click(function(){
+             $(this).toggleClass("appeal-item-hide");
+		});
+        //收起展开
+        $(".companyp-switch").click(function(){
+        	var self = $(this),sHeight = "112px",sHtml = '<a href="">展开<i class="icon-arr-down"></i></a>';        	
+        	if(self[0].switchstatus != "show"){        		
+	        	sHeight = "none";
+	        	sHtml = '<a href="">收起<i class="icon-arr-down" style="background-position:-22px -48px"></i></a>';
+	        	self[0].switchstatus = "show";
+        	}else{
+        		self[0].switchstatus = "hide";
+        	}
+        	self.prev().css({"max-height":sHeight});
+	        self.html(sHtml);
+        	return false;
+        });       
+		//取消提交回复
+                $(".appeal-reply-box .btn-reset").click(function(){
+                    $(this).parents(".appeal-jobseeker-box").find(".appeal-reply-box").hide();
+                    var test = $(this).parents(".appeal-reply").find(".show-reply-content").html();
+                    if(test !=""){
+                        $(this).parents(".appeal-jobseeker-box").find(".appeal-replytext-box").show();
+                    }
+                    return false;
+                });
+                //提交回复
+                $(".appeal-reply-box .btn-submit").click(function(){
+                    
+                    var appraise_id = $(this).attr("data-id");
+                    var content = $(this).parent().siblings("textarea").val();
+                    if(content ==""){
+                        showModel("warning","请输入回复内容");return;
+                    }
+                    if(content.length >500){
+                         showModel("warning","回复内容太长");return;
+                    }
+                    var _this = $(this);
+                    $.post('{/get_url rule="/appraise/replyAppraise/"/}',{"appraise_id":appraise_id,"reply":content},function(result){
+                        if (result.success) {
+                            showModel('success', '回复成功');
+                            var replyBox = _this.parents(".appeal-reply").find(".appeal-reply-box").hide();
+                            var text = replyBox.find("textarea").val();
+                            if(text !=""){
+                                _this.parents(".appeal-reply").find(".appeal-replytext-box").show().find(".text").html(text);
+                                var myDate = new Date();
+                                var year = myDate.getFullYear();
+                                var month = myDate.getMonth()+1;
+                                var day = myDate.getDate();
+                                var date = year+'-'+month+'-'+day;
+                                _this.parents(".appeal-reply").find(".appeal-replytext-box").show().find(".time").html(date);
+                                
+                                _this.parents(".appeal-jobseeker-box").find(".reply-appeal .JS-reply").html("修改");
+                            }
+                        } else {
+                            showModel('fail', result.error);
+                        }
+                       
+                    },"json");
+                });
+});
+</script>
+        
+{/include file="chat/chat.html"/}
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+</head>
+<body>
+<style>
+.mySearchBox{width:420px;font-size:14px; padding-bottom:25px;}
+.mySearchBox .mySearchForm{}
+.mySearchBox .mySearchForm .table{line-height:40px;}
+.mySearchBox .mySearchForm .table tr th,.mySearchBox .mySearchForm .table tr td{border-bottom:1px solid #e6e6e6; height:40px;}
+.mySearchBox .mySearchForm .table i.hbFntWes{font-size:14px; color:#999;}
+.mySearchBox .mySearchForm .table thead tr th{font-size:12px; color:#999;}
+.mySearchBox .mySearchForm .table tr td{font-size:14px;}
+.mySearchBox .mySearchForm .table i.hbFntWes:hover{color:#00aaff;}
+.mySearchBox .mySearchForm .wid380{width:380px;}
+.mySearchBox .mySearchForm .wid40{width:40px; text-align:center;}
+.mySearchBox .mySearchForm .table tr td.del{position:relative; z-index:1;}
+.mySearchBox .mySearchForm .table tr td.del .delBox{position:absolute; right:10px; bottom:0; padding:10px;zoom:1;
+background:#fff; font-size:12px; border:1px solid #dadada; width:170px; text-align:left; line-height:22px;}
+.mySearchBox .mySearchForm .table tr td.del .delBox em{background:url(/img/common/common.gif) no-repeat -132px 0; 
+width:19px; height:10px; font-size:0; position:absolute; right:20px; top:-10px;}
+.delBox .btn{text-align:right;}
+</style>
+<div class="dgBox mySearchBox">
+	<div class="mySearchForm">
+    	<table class="table">
+        	<thead>
+            	<tr>
+                	<th class="wid380" align="left">搜索器名称（点击开始搜索）</th>
+                    <th class="wid40" align="center">删除</th>
+                </tr>
+            </thead>
+            <tbody>
+            	<tr>
+                	<td class="wid380" align="left"><a href="#">搜索器1</a></td>
+                    <td class="wid40 del" align="center">
+                    	<a href="#"><i class="hbFntWes">&#xf00d;</i></a>
+                        <div class="delBox">
+                            <em></em>
+                            <div class="delBoxC">
+                                <p>删除后将不可恢复，确定要删除吗？</p>
+                                <div class="btn"><a href="#" class="btn3 btnsF12">取消</a><a href="#" class="btn1 btnsF12">确定</a></div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                	<td class="wid380" align="left"><a href="#">搜索器1</a></td>
+                    <td class="wid40" align="center"><a href="#"><i class="hbFntWes">&#xf00d;</i></a></td>
+                </tr>
+                <tr>
+                	<td class="wid380" align="left"><a href="#">搜索器1</a></td>
+                    <td class="wid40" align="center"><a href="#"><i class="hbFntWes">&#xf00d;</i></a></td>
+                </tr>
+                <tr>
+                	<td class="wid380" align="left"><a href="#">搜索器1</a></td>
+                    <td class="wid40" align="center"><a href="#"><i class="hbFntWes">&#xf00d;</i></a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<script>
+$.focusColor('input.text');
+$('#sendPhone').click(function() {
+	$.showModal('/www/ui/sendPhone.html?v=aaaa',{title:'免费发送到手机'});
+});
+</script>
+</body>
+</html>

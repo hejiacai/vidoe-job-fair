@@ -1,0 +1,204 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+<title>{/$title/}</title>
+<!–[if lt IE9]> 
+<script src="{/version file='html5.js'/}"></script>  
+<![endif]–>
+<link rel="stylesheet" type="text/css" href="{/version file="base.css"/}" />
+<link rel="stylesheet" type="text/css" href="{/version file="comback.css"/}" />
+
+<script type="text/javascript" language="javascript" src="{/version file="jquery-1.8.3.min.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="common.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="dialog.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="jquery.form.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="ui_validate.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="ui_menudisplay.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="ui_inputFocus.js"/}"></script><!--输入框获取焦点-->
+<script type="text/javascript" language="javascript" src="{/version file="ui_hovchange.js"/}"></script><!--指向改变class-->
+<script type="text/javascript" language="javascript" src="{/version file="ui_drop.js"/}"></script><!--下拉模拟-->
+
+
+</head>
+<body id="body">
+<style type="text/css">
+.srv{padding:20px 0 0;}
+.srv .srvH{font-size:18px; text-align:center;height:50px;}
+.srvTxt{margin:0 0 20px 0;line-height:30px;}
+.srvTxt p.tit span.orange{font-size:16px;margin:0 0 0 10px;}
+.srvTxt p span.line{margin:0 10px;color:#ccc}
+.srvBd{_border-top:1px solid #dadada;height:325px;}
+.srvBd ul li{float:left;display:inline;width:92px; text-align:center;margin-left:-1px;}
+.srvBd ul li.th{width:132px; text-align:left;background:#f3f3f3;}
+.srvBd ul li.th p{padding-left:10px;}
+.srvBd ul li p{height:30px;line-height:30px;font-size:12px;border-bottom:1px solid #dadada;border:1px solid #dadada;margin-top:-1px;}
+.srvBd ul li p.tit{font-weight:bold;background:#f0f0f0}
+.srvBd ul li p.vip{background:#e2f5ff;}
+.srvBd ul li p.gold{background:#f2ffe9;}
+.srvBd ul li.hov{background:#fffceb;}
+.srvBd ul li.hov p.tit{background:#ece3ad;}
+.srvBd ul li.th p.cashTit{font-weight:bold;}
+.srvBd ul li p.cash{height:30px;line-height:30px;}
+.srvBd ul li p.cash input.radio{float:left;display:inline;margin:8px 0 0 12px;cursor:pointer;*margin:4px 0 0 12px;}
+.srvBd ul li p.cash label{float:left;display:inline;font-size:12px; cursor:pointer;margin:0 0 0 2px;}
+.srvBd ul li div.btn{height:30px; text-align:center;background:#fff;display:none;}
+.srvBd ul li div.btn a.btn1{margin:3px 0 0;}
+
+.srvBd ul li.cu{background:#e5e5e5;}
+.srvBd ul li.cu p.tit{background:#d3d3d3;}
+.srvBd ul li.hov div.btn,.srvBd ul li.cur div.btn{display:block;}
+
+
+/* 弹窗 */
+.openSrvBox{width:335px;font-size:12px;}
+.openSrvBox p.txt{margin-bottom:20px;}
+.openSrvBox .formMod .l{width:100px;}
+.openSrvBox .formMod .r{width:210px;}
+.openSrvBox .formBtn{margin:10px 0 0 110px;}
+.openSrvBox .formBtn a{margin:0 10px 0 0;}
+
+</style>
+{/include 'nav.html' parent="账户" cur='开通会员'/}
+<div class="content" id="content">
+	<section class="section">
+    	<hgroup>
+            <div class="bd">
+                <div class="srv">
+				{/if $isopenmembership/}
+                    <div class="srvTxt">
+                    	<p class="tit">您现在是<span class="orange">{/$levelname/}</span></p>
+                        <p>会员有效期：<span class="red">{/$endtime/}</span><span class="line">|</span>还可下载简历：{/$resume_down_num/}份<span class="line">|</span>还可发布职位：{/$job_release_num/}个</p>
+                    </div>				
+				{/else/}
+					<div class="srvH yahei">汇博会员服务，总有一款适合您！</div>
+				{//if/}                  
+                    <div class="srvBd" id="srvBd">
+                        <ul>
+                        <li class="th">
+                            <p>会员类型</p><p>会员有效期</p><p>可发布职位数量</p><p>可下载简历数量</p><p>接收简历数量</p><p>个性化招聘主页</p><p>首页“招聘企业推荐”</p><p>行业频道图片广告</p><p>价格</p>
+                        </li>
+                        <li comlevel="2" kind="5"><p class="tit vip" viptime='12'>VIP（年度A）</p><p>12个月</p><p>100个</p><p>700份</p><p>不限</p><p><i class="hbFntWes green">&#xf00c;</i></p><p>--</p><p><i class="hbFntWes green">&#xf00c;</i></p><p>2200元</p><div class="btn"><a href="javascript:void(0)" class="btn1 btnsF12">立即开通</a></div></li>
+                        <li comlevel="2" kind="4"><p class="tit vip" viptime='12'>VIP（年度B）</p><p>12个月</p><p>100个</p><p>700份</p><p>不限</p><p>--</p><p>--</p><p>--</p><p>1350元</p><div class="btn"><a href="javascript:void(0)" class="btn1 btnsF12">立即开通</a></div></li>
+                        <li comlevel="2" kind="3"><p class="tit vip" viptime='6'>VIP（半年）</p><p>6个月</p><p>100个</p><p>400份</p><p>不限</p><p>--</p><p>--</p><p>--</p><p>850元</p><div class="btn"><a href="javascript:void(0)" class="btn1 btnsF12">立即开通</a></div></li>
+                        <li comlevel="2" kind="2"><p class="tit vip" viptime='3'>VIP（季度）</p><p>3个月</p><p>100个</p><p>250份</p><p>不限</p><p>--</p><p>--</p><p>--</p><p>700元</p><div class="btn"><a href="javascript:void(0)" class="btn1 btnsF12">立即开通</a></div></li>
+                        <li comlevel="2" kind="1"><p class="tit vip" viptime='1'>VIP（月度）</p><p>1个月</p><p>100个</p><p>100份</p><p>不限</p><p>--</p><p>--</p><p>--</p><p>350元</p><div class="btn"><a href="javascript:void(0)" class="btn1 btnsF12">立即开通</a></div></li>
+                        <li comlevel="3" kind="4"><p class="tit gold" viptime='12'>黄金（年度）</p><p>12个月</p><p>300个</p><p>1000份</p><p>不限</p><p><i class="hbFntWes green">&#xf00c;</i></p><p><i class="hbFntWes green">&#xf00c;</i></p><p>--</p><p>3800元</p><div class="btn"><a href="javascript:void(0)" class="btn1 btnsF12">立即开通</a></div></li>
+                        <li comlevel="3" kind="3"><p class="tit gold" viptime='6'>黄金（半年）</p><p>6个月</p><p>300个</p><p>600份</p><p>不限</p><p><i class="hbFntWes green">&#xf00c;</i></p><p><i class="hbFntWes green">&#xf00c;</i></p><p>--</p><p>2400元</p><div class="btn"><a href="javascript:void(0)" class="btn1 btnsF12">立即开通</a></div></li>
+                        <li comlevel="3" kind="2"><p class="tit gold" viptime='3'>黄金（季度）</p><p>3个月</p><p>300个</p><p>400份</p><p>不限</p><p><i class="hbFntWes green">&#xf00c;</i></p><p><i class="hbFntWes green">&#xf00c;</i></p><p>--</p><p>1700元</p><div class="btn"><a href="javascript:void(0)" class="btn1 btnsF12">立即开通</a></div></li>
+                        <li comlevel="3" kind="1"><p class="tit gold" viptime='1'>黄金（月度）</p><p>1个月</p><p>300个</p><p>200份</p><p>不限</p><p><i class="hbFntWes green">&#xf00c;</i></p><p><i class="hbFntWes green">&#xf00c;</i></p><p>--</p><p>750元</p><div class="btn"><a href="javascript:void(0)" class="btn1 btnsF12">立即开通</a></div></li>
+                        </ul>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+            </div>
+
+    	</hgroup>
+    </section>
+</div>
+{/include file="footer.html"/}
+<section class="floatRT"><a href="{/get_url rule='/about/message' domain='main'/}" target="_blank" class="serviceLink">我有问题要反馈</a><b></b></section>
+<div class="dgBox openSrvBox" id="vipBox" style="display:none;">
+<form method="post" action="{/get_url rule="/vipapply/apply/"/}">
+<input type="hidden" name="hddVipType" />
+<input type="hidden" name="hddVipTime" />
+	<p class="txt orange"> </p>
+    <div class="openSrvForm">
+        <div class="formMod">
+            <div class="l">联系人<i>&nbsp;</i></div>
+            <div class="r">
+                <span class="formText">
+                    <input type="text" style="width:158px;" class="text" name="txtLinkMan" value="{/$linkman/}" />
+                </span>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="formMod">
+            <div class="l">联系电话<i>&nbsp;</i></div>
+            <div class="r">
+                <span class="formText">
+                    <input type="text" style="width:158px;" class="text" name="txtLinkTel" value="{/$linktel/}" />
+                </span>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="formBtn"><a href="javascript:void(0)" class="btn1 btnsF14" id="btnConfirm">确定</a><a href="javascript:void(0)" class="btn3 btnsF14" id="btnCancel">取消</a></div>
+    </div>
+   </form> 
+</div>
+
+<script type="text/javascript">
+//menuDis('#hdR','li','.box','hov');
+var vipapply = {
+	vipname:'',
+	viptime:'',	
+	applyBox:null,
+	init:function() {
+	    var readydue = {/if $readydue/} true {/else/} false {//if/};
+		$('#srvBd').find('.btn1').click(function(){
+			 var title = '开通会员',
+			 	 levelname  = $(this).closest('li').find('.tip').text(),
+			     content = levelname +'开通申请已提交，您的销售顾问会及时与您取得联系，请确保联系电话畅通！';	
+			 if(!readydue&&$(this).closest('li').hasClass('cu')) {
+				 title = '续费';
+				 content = '续费申请已提交，您的销售顾问会及时与您取得联系，请确保联系电话畅通！';
+			 }
+			 $('#vipBox').find('.txt').html(content);	
+			 var t = $(this).closest('li');
+			 vipapply.vipname = t.find('.tit').html();
+			 vipapply.viptime = t.find('.tit').attr("viptime");
+			 $('input[name="hddVipType"]').val(vipapply.vipname);
+			 $('input[name="hddVipTime"]').val(vipapply.viptime);
+			 
+			 applyBox = $.showModal('#vipBox',{title:title,contentType:'selector'});
+		});
+		{/if !$readydue/}
+			$('#srvBd').find('li[comlevel="{/$comlevel/}"][kind="{/$servicekind/}"]').addClass('cu').addClass('cur').addClass('hov')
+			.find('.btn1').text('续费');		
+		{//if/}
+		// 确定按钮事件
+		$('#btnConfirm').click(function() {
+		    $('div.alert').show();
+			$(this).closest('form').submitForm({beforeSubmit: function(){return true;}, success: function(result){
+				if (result && result.error){ 
+		            $.message(result.error,{icon: 'error' });
+		            return;
+		        }
+		        $.anchorMsg(result.success);
+		        applyBox.close();	
+			}, clearForm: false });
+			
+		 });
+
+		// 取消事件 
+		$('#btnCancel').click(function(){
+			$(this).closeDialog();
+		});
+		
+		var $tSch = $('#tSch');
+		$('#tSchText').bind('focus',function(){
+			$(this).animate({'width':200});
+			$tSch.css({'background':'#fffdef','border':'1px solid #e8dd9e'})
+		}).bind('blur',function(){
+			$(this).animate({'width':150});
+			$tSch.css({'background':'#fff','border':'1px solid #dadada'})
+		});
+		
+		$('#srvBd').find('li').hover(function(){
+			if($(this).attr('class')=='th'||$(this).attr('class')=='cur'){
+				return false;
+			}else{
+				$(this).addClass('hov');
+			}
+		},function(){
+			$(this).removeClass('hov');
+		});		
+	}
+};
+vipapply.init();
+</script>
+</body>
+</html>

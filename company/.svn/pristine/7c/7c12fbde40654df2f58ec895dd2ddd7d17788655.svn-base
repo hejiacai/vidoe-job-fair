@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>定时刷新</title>
+    <link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='comback.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='m_font_style.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='kalendae.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='postRefresh.css'/}" />
+    <script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.min.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='kalendae.standalone.js'/}"></script>
+    <script type="text/javascript">
+        window.CONFIG = {
+            HOST: '{/$siteurl.style/}',
+            COMBOPATH: '/js/v2/'
+        }
+    </script>
+    <script type="text/javascript" src="{/$siteurl.style/}/min.js?f=/js/v2/hbjs.js,/js/v2/jquery.min.js,/js/v2/base/util.js,/js/v2/base/class.js,/js/v2/base/shape.js,/js/v2/base/event.js,/js/v2/base/aspect.js,/js/v2/base/attribute.js,/js/v2/tools/cookie.js&amp;v=181362724"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='global.js'/}"></script>
+    <script type="text/javascript">
+        hbjs.loadJS('{/$siteurl.style/}/js/v2/cqjob/common.js');
+    </script>
+
+</head>
+<body>
+{/include file="new_header.html" par="全职招聘" cur="职位管理"/}
+<!--<a href="javascript:void(0);" class="postRefreshBtn"><i class="icon-details-time"></i>定时刷新</a>-->
+
+
+<div class="bread">
+    <a href="/">首页</a>&gt;
+    <a href="{/get_url rule='/index/cQJobList'/}" target="_blank">职位管理</a>&gt;
+    <a class="cu">职位刷新</a>
+</div>
+<div class="postRePop" style="display: block;">
+    <form type="post" action="">
+        <div class="allChkPost">
+            <label class="allChk">
+                <input type="checkbox" />全选
+            </label>
+            <a href="javascript:void(0);" class="batchRefresh">批量定时刷新</a>
+            <a href="javascript:void(0);" class="batchCancelRefresh">批量取消</a>
+            <div class="rMentSech">
+                <input type="text" id="keyword" name="station" class="rMenText textGray" value="{/$station/}" placeholder="搜索职位">
+                <input type="submit" id="onSubmit" name="b" value="" class="rMentBtnx">
+            </div>
+        </div>
+    </form>
+    <div class="postTabBd">
+        <table class="postTab">
+            <tr>
+                <th>职位名称</th>
+                <th><span class="tabTx03">刷新日期</span></th>
+                <th><span class="tabTx04">刷新时刻</span></th>
+                <th>操作</th>
+            </tr>
+            {/if $list/}
+            {/foreach $list as $key=>$val/}
+            <tr>
+                <td valign="middle">
+                    <input type="checkbox" name="chkjobPost" class="{/if !$val['can_refresh']/}chbPostBan{/else/} chbPost{//if/}" {/if !$val['can_refresh']/}disabled="disabled"{//if/} value="{/$val['job_id']/}" />
+                    <span class="tabTx01">{/$val['station']/}{/if $val['check_state']==4/}<i class="tabTx02">审核中</i>{//if/}</span>
+                </td>
+                <td>
+                    <span class="tabTx03">{/$val['plan_refresh_date_str']/}{/if $val['plan_refresh_date']/}({/count(explode(',',$val['plan_refresh_date']))/}天){//if/}</span>
+                    <input type="hidden" class="tabTxPut03" value="{/$val['plan_refresh_date']/}" />
+
+                </td>
+                <td>
+                    <span class="tabTx04">{/$val['plan_refresh_times_str']/}</span>
+                    <input type="hidden" class="tabTxPut04" value="{/$val['plan_refresh_times']/}" />
+                </td>
+                <td>
+                    {/if $val['can_refresh']/}
+                    {/if $val['has_refresh']/}
+                    <a href="javascript:void(0);" class="amendRefresh" data-point="{/if $val['need_refresh_point']/}{/$val['need_refresh_point']/}{/else/}0{//if/}" data-id='{/$val['job_id']/}' >更改</a>
+                    <a href="javascript:void(0);" data-id="{/$val['job_id']/}" class="cancelRefresh">取消刷新</a>
+                    {/else/}
+                    <a href="javascript:void(0);" class="setRefresh" data-id='{/$val['job_id']/}'>设置刷新</a>
+                    {//if/}
+                    {//if/}
+
+                </td>
+            </tr>
+            {//foreach/}
+            {/else/}
+
+            暂无职位
+            {//if/}
+
+
+
+
+
+        </table>
+        <input type="hidden" id="chbPostLth" value="" />
+    </div>
+    <!--<div class="postRefreshPopBtn">
+        <a href="javascript:void(0);" class="cancelPostBtn">取消</a>
+        <a href="javascript:void(0);" class="surePostBtn">确定</a>
+    </div>-->
+</div>
+
+<!--定时刷新日期选择-->
+<div class="postPopFilter"></div>
+<div class="postPopDate">
+    <ul class="reFreshDate">
+        <li>
+        	<p style="color: #f00; display: block; padding-bottom: 10px;" class="isShowie">日期选择暂不支持IE浏览器，请换360、chrome等浏览器操作</p>
+            <span class="freshdateTit">刷新日期</span>
+            <input type="text" class="rePutDate" placeholder="请选择日期" readonly="readonly" id="partTotaldate" name="partTotaldate" />
+            <span class="freshdateTit4">共<em>0</em>天</span>
+        </li>
+        <li class="postTimex">
+            <span class="freshdateTit">刷新时刻：</span>
+            <span class="freshdateTit02">每日刷新上限<i>{/$time_count/}</i>次</span>
+            <div class="freshdateList"></div>
+            <div class="freshdateListx">
+                <b>将在选中的时间段内随机刷新</b>
+                <p>
+                    {/foreach $time as $key=>$val/}
+                    <span data-id="{/$key/}"><i></i>{/$val/}</span>
+                    {//foreach/}
+                    <input type="hidden" id="freshdateListxId" value="" />
+                </p>
+            </div>
+        </li>
+        <li>
+            <span class="freshdateTit03">本次定时刷新预计扣除<i id="point">0</i>点刷新点（可用{/$cq_release_point_job_refresh/}点），优先使用刷新点，刷新点不足则扣取推广金/余额，账户资源不足或<em>48小时未处理简历会导致刷新失败</em></span>
+        </li>
+    </ul>
+    <div class="postRefreshPopBtn">
+        <a href="javascript:void(0);" class="cancelPostBtn">取消</a>
+        <a href="javascript:void(0);" class="surePostBtn">确定</a>
+    </div>
+</div>
+<script type="text/javascript">
+	function isIE(){
+		if (window.navigator.userAgent.indexOf("MSIE")>=1) {
+			$('.isShowie').show();
+		}else{
+			$('.isShowie').hide();
+		}
+	}
+	isIE();
+	
+    function calendarTool(inputName, disableMinTime, disableMaxTime, selectedTime = []) {
+        new Kalendae.Input(inputName, {
+            direction: 'any', //past过去   today-past过去（包括当天）  future未来   today-future未来（包括当天）   any任何
+            directionScrolling: true, //指定 direction设定的进行展示，其他不展示
+            months: 1, //展示几个月
+            mode: 'multiple', //模式 single 单选, multiple 多选, range 范围选择
+            blackout: function(date) {
+                if(Kalendae.moment(date).format("YYYY-MM-DD") < disableMinTime || Kalendae.moment(date).format("YYYY-MM-DD") > disableMaxTime) {
+                    return true
+                }
+
+            },
+            selected: selectedTime //默认选择日期
+        });
+    };
+    var disableTime = "{/$start_time/}";
+    var disableMaxTime = "{/$end_time/}";
+    var selectedTime = [];
+
+    calendarTool('partTotaldate',disableTime,disableMaxTime,selectedTime);
+    
+    
+	
+    
+</script>
+<script type="text/javascript">
+    hbjs.use('@confirmBox', function(m) {
+
+        var	ConfirmBox      = m['widge.overlay.confirmBox'],
+                Dialog          = m['widge.overlay.hbDialog'],
+                cookie          = m['tools.cookie'],
+                fontSize = 18,
+                pWidth = 70,
+                msg = '';
+
+
+        $('.postTab tr:even').addClass('odd');
+
+        /*全选*/
+        var allChkAry = [];
+        $(".allChk input").click(function(){
+            allChkAry = [];
+            if ($(this).attr("checked")) {
+                $('.chbPost').attr("checked","checked");
+                $(".postTab .chbPost:checked").each(function(i,n){
+                    allChkAry.push($(n).val());
+                    var allChkArystr = allChkAry.join(',');
+                    $('#chbPostLth').val(allChkArystr);
+                });
+            } else {
+                $('.chbPost').removeAttr("checked");
+                $('#chbPostLth').val('');
+            }
+        });
+//单选
+        var allChkAry2 = [];
+        $('.postTab .chbPost').click(function(){
+            allChkAry2 = [];
+            var thisChk = $(".postTab .chbPost:checked").length;
+            var thisChkTh = $(".postTab .chbPost").length;
+            if(thisChk == thisChkTh){
+                $(".allChk input").attr("checked","checked");
+            }else{
+                $(".allChk input").removeAttr("checked");
+            }
+            $(".postTab .chbPost:checked").each(function(i,n){
+                allChkAry2.push($(n).val());
+                var allChkArystr2 = allChkAry2.join(',');
+                $('#chbPostLth').val(allChkArystr2);
+            });
+
+
+        });
+//算天数
+        $('#partTotaldate').blur(function(){
+            var thisLth = $(this).val();
+            var thisAry = thisLth.split(',');
+            if(thisLth == ''){
+            	thisAry = [];
+            }
+            $('.freshdateTit4 em').text(thisAry.length);
+            takePoint();
+        });
+//取消刷新
+        $('.postTab').on('click','.cancelRefresh', function(){
+            var _this = $(this);
+
+            ConfirmBox.confirm('确定取消定时刷新？','提示', function(obj){
+                $.post("{/get_url rule='/autorefresh/CancelRefresh/'/}",{job_ids:_this.attr('data-id')},function(r){
+                    if(r.isNeedLogin){
+                        var s = "帐号在别处登录，请重新登录";
+                        ConfirmBox.timeBomb(s, {
+                            name: 'fail',
+                            width:fontSize*s.length+pWidth,
+                            timeout : 1000
+                        });
+                        setTimeout("window.location.href='{/base_lib_Constant::COMPANY_URL/}'",900);
+                        return false;
+                    }
+                    if(!r.status){
+                        ConfirmBox.timeBomb(r.msg, {
+                            name: 'fail',
+                            width:fontSize*r.msg.length+pWidth,
+                            timeout : 1000
+                        });
+                        return false;
+                    }
+
+                    ConfirmBox.timeBomb(r.msg, {
+                        name: 'success',
+                        width:fontSize*r.msg.length+pWidth,
+                        timeout : 1000
+                    });
+                    setTimeout("window.location.reload();",'900');
+                },'json');
+            });
+
+        });
+//选时间段	
+        var freshdateAry = [];
+        var freshdateNum = '{/$time_count/}';
+        var freshdateListHtml = "";
+        var freshdateAryx = [];
+        $('.freshdateListx span').on('click', function(){
+            freshdateAry = [];
+            freshdateListHtml = "";
+            freshdateAryx = [];
+
+            $(this).toggleClass('cur');
+            $('.freshdateListx span.cur').each(function(i,n){
+                freshdateAry.push($(n).text());
+                freshdateAryx.push($(n).attr('data-id'));
+            });
+            if(freshdateAry.length > freshdateNum){
+                msg = '最多选择{/$time_count/}个时间段';
+                ConfirmBox.timeBomb(msg, {
+                    name: 'fail',
+                    width:fontSize*msg.length+pWidth,
+                    timeout : 1000
+                });
+                $(this).removeClass('cur');
+                return false;
+            }
+
+//	debugger;
+            for(var i=0;i<freshdateAry.length;i++){
+                freshdateListHtml += "<span>"+freshdateAry[i]+"</span>";
+            }
+            var freshdateStr = freshdateAryx.join(',');
+            takePoint();
+            $('.freshdateList').html(freshdateListHtml);
+            $('#freshdateListxId').val(freshdateStr);
+        });
+//单个更改定时刷新
+        $('.postTab').on('click','.amendRefresh', function(){
+            $('.postPopFilter,.postPopDate').show();
+            var tabTxPut03 = $(this).parents('tr').find('.tabTxPut03').val();
+            var tabTxPut04 = $(this).parents('tr').find('.tabTxPut04').val();
+            $('#freshdateListxId').val(tabTxPut04);
+            $('#point').text($(this).attr('data-point'));
+            $('#chbPostLth').val($(this).attr('data-id'));
+            postTabz(tabTxPut03,tabTxPut04);
+        });
+//设置刷新
+        $('.postTab').on('click','.setRefresh', function(){
+            $('.postPopFilter,.postPopDate').show();
+            $('#chbPostLth').val($(this).attr('data-id'));
+            clearPop();
+        });
+//关闭弹窗
+        $('.cancelPostBtn').click(function(){
+            $('.postPopFilter,.postPopDate').hide();
+            selectedTime = [];
+            $('.freshdateListx p span').removeClass('cur');
+            $('.freshdateList').empty();
+            clearPop();
+        });
+//批量定时刷新
+        $('.batchRefresh').click(function(){
+            if($('.chbPost:checked').length > 0){
+                clearPop();
+                $('.postPopFilter,.postPopDate').show();
+            }else{
+
+                msg = '请选择职位';
+                ConfirmBox.timeBomb(msg, {
+                    name: 'fail',
+                    width:fontSize*msg.length+pWidth,
+                    timeout : 1000
+                });
+            }
+
+        });
+//批量取消刷新
+        $('.batchCancelRefresh').click(function(){
+            var job_ids = $('#chbPostLth').val();
+            if($('.chbPost:checked').length > 0){
+                ConfirmBox.confirm('确定取消定时刷新？','提示', function(obj){
+                    $.post("{/get_url rule='/autorefresh/CancelRefresh/'/}",{job_ids:job_ids},function(r){
+                        if(r.isNeedLogin){
+                            var s = "帐号在别处登录，请重新登录";
+                            ConfirmBox.timeBomb(s, {
+                                name: 'fail',
+                                width:fontSize*s.length+pWidth,
+                                timeout : 1000
+                            });
+                            setTimeout("window.location.href='{/base_lib_Constant::COMPANY_URL/}'",900);
+                            return false;
+                        }
+
+                        if(!r.status){
+                            ConfirmBox.timeBomb(r.msg, {
+                                name: 'fail',
+                                width:fontSize*r.msg.length+pWidth,
+                                timeout : 1000
+                            });
+                            return false;
+                        }
+
+                        ConfirmBox.timeBomb(r.msg, {
+                            name: 'success',
+                            width:fontSize*r.msg.length+pWidth,
+                            timeout : 1000
+                        });
+                         setTimeout("window.location.reload();",900);
+                    },'json');
+                })
+
+
+            }else{
+
+                msg = '请选择职位';
+                ConfirmBox.timeBomb(msg, {
+                    name: 'fail',
+                    width:fontSize*msg.length+pWidth,
+                    timeout : 1000
+                });
+            }
+
+        });
+
+//提交
+        $('.surePostBtn').click(function(){
+            var partTotaldate = $('#partTotaldate').val();
+            var partTotaldates = $('.freshdateList span').length;
+
+            if(partTotaldate == ''){
+                msg = '请选择刷新日期';
+                ConfirmBox.timeBomb(msg, {
+                    name: 'fail',
+                    width:fontSize*msg.length+pWidth,
+                    timeout : 1000
+                });
+                return false;
+            }else if(partTotaldates < 1){
+                msg = '请选择刷新时间段';
+                ConfirmBox.timeBomb(msg, {
+                    name: 'fail',
+                    width:fontSize*msg.length+pWidth,
+                    timeout : 1000
+                });
+                return false;
+            }else{
+                var job_ids = $('#chbPostLth').val();
+                var plan_refresh_date = $('#partTotaldate').val();
+                var plan_refresh_times = $('#freshdateListxId').val();
+                $.post("{/get_url rule='/autorefresh/AddAutoRefresh/'/}",{job_ids:job_ids,plan_refresh_date:plan_refresh_date,plan_refresh_times:plan_refresh_times},function(r){
+                    if(r.isNeedLogin){
+                        var l = "请先登录";
+                        ConfirmBox.timeBomb(l, {
+                            name: 'fail',
+                            width:fontSize*l.length+pWidth,
+                            timeout : 1000
+                        });
+                        $('.postPopFilter,.postPopDate').hide();
+                        setTimeout("window.location.href='{/base_lib_Constant::COMPANY_URL/}'",900);
+                        return false;
+                    }
+                    if(!r.status){
+                        ConfirmBox.timeBomb(r.msg, {
+                            name: 'fail',
+                            width:fontSize*r.msg.length+pWidth,
+                            timeout : 1000
+                        });
+                        return false;
+                    }
+
+					var msgLength = r.msg;
+					if(msgLength.length > 10){
+						 ConfirmBox.alert('<div style="text-align: left;line-height: 24px;">'+r.msg+'</div>',function(){
+		                        window.location.reload();
+		                    },{
+								width :500
+							});
+					}else{
+						ConfirmBox.timeBomb(r.msg, {
+	                        name: 'success',
+	                        width:fontSize*r.msg.length+pWidth,
+	                        timeout : 2000
+	                    });
+                        setTimeout("window.location.reload();",1900);
+					}
+                    
+                   
+                    $('.postPopFilter,.postPopDate').hide();
+
+                },'json');
+
+            }
+
+        });
+//本次定时刷新预计扣除X点刷新点
+        function takePoint(){
+            var postTabChk = $('#chbPostLth').val();
+            var postTabChkAry = postTabChk.split(',').length;
+            //var partTotaldate = $('#partTotaldate').val();
+            var partTotaldateAry = parseInt($('.freshdateTit4 em').text());
+            var freshdateListCurLth = $('.freshdateListx span.cur').length;
+
+            var freshdateTitPut = postTabChkAry * partTotaldateAry * freshdateListCurLth;
+//          console.log("职位个数"+postTabChkAry+ "--日期天数"+ partTotaldateAry+"--刷新时间段--" + freshdateListCurLth);
+            $('.freshdateTit03 i').text(freshdateTitPut);
+        }
+//清除已选数据
+        function clearPop(){
+            selectedTime = [];
+            $('.freshdateListx p span').removeClass('cur');
+            $('.freshdateList').empty();
+            $('#partTotaldate').val('');
+            $('.freshdateTit4 em,.freshdateTit03 i').text('0');
+        }
+//更改刷新数据
+        function postTabz(tabTxPutDate,tabTxPutTime){
+            $('.freshdateListx p span').removeClass('cur');
+            var tabTxPutDateAry = tabTxPutDate.split(',');//日期
+            var tabTxPutTimeAry = tabTxPutTime.split(',');//时间段
+            var tabTxPutTimeAdd = '';
+            $('.freshdateTit4 em').text(tabTxPutDateAry.length);
+            selectedTime = tabTxPutDateAry;
+            //默认选中日期
+            calendarTool('partTotaldate',disableTime,disableMaxTime,selectedTime);
+            $('.freshdateListx p span').each(function(i,n){
+
+                for(m in tabTxPutTimeAry){
+                    if($(n).attr('data-id') == tabTxPutTimeAry[m]){
+                        $(n).addClass('cur');
+                    }
+                }
+            });
+            $('.freshdateListx p span.cur').each(function(i,n){
+                tabTxPutTimeAdd += '<span>'+$(n).text()+'</span>';
+            });
+            $('.freshdateList').html(tabTxPutTimeAdd);
+
+        }
+    })
+
+</script>
+</body>
+</html>

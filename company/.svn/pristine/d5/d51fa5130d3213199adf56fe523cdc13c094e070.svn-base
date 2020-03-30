@@ -1,0 +1,3383 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+<title>{/$title/}</title>
+<!–-[if lt IE9]>
+<script src="{/version file='html5.js'/}"></script>
+<![endif]-–>
+
+<link rel="stylesheet" type="text/css" href="{/version file="base.css"/}" />
+<link rel="stylesheet" type="text/css" href="{/version file="comback.css"/}" />
+<link rel="stylesheet" type="text/css" href="{/version file="icons.css"/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='m_font_style.css'/}"/>
+
+<script type="text/javascript" language="javascript" src="{/version file="jquery-1.8.3.min.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="dialog.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="common.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="ui_inputFocus.js"/}"></script><!--输入框获取焦点-->
+<script type="text/javascript" language="javascript" src="{/version file="ui_dropdownlist.js"/}"></script><!--下拉模拟-->
+<script type="text/javascript" language="javascript" src="{/version file="ui_jobsort.js"/}"></script><!--职位类别-->
+<script type="text/javascript" language="javascript" src="{/version file="ui_area.js"/}"></script><!--职位类别-->
+<script type="text/javascript" language="javascript" src="{/version file="ui_validate.js"/}"></script><!--验证-->
+<script type="text/javascript" language="javascript" src="{/version file="jquery.metadata.js"/}"></script><!--验证-->
+<script type="text/javascript" language="javascript" src="{/version file="jquery.email.tip.js"/}"></script><!--email提示-->
+<script type="text/javascript" language="javascript" src="{/version file="jquery.form.js"/}"></script><!--表单提交-->
+<script type="text/javascript" src="//api.map.baidu.com/api?v=2.0&ak=33f9256a1a1ba5a80eb40f8ed45bce3c"></script>
+
+<script type="text/javascript" src="{/version file='version.js'/}"></script>
+<script type="text/javascript">
+window.CONFIG = {
+    HOST: '{/$siteurl.style/}',
+    COMBOPATH: '/js/v2/'
+}
+</script>
+
+<script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+
+<script type="text/javascript">
+	hbjs.loadJS('{/$siteurl.style/}/js/v2/cqjob/common.js');
+</script>
+<script type="text/javascript" src="{/version file='global.js'/}"></script>
+
+
+<style type="text/css">
+.section .mod{}
+.section .mod h2{font-size:18px;height:35px;line-height:35px;border-bottom:1px solid #dadada;padding:0 0 0 20px;font-family:'微软雅黑','SimHei'}
+.mod .formMod .l{width:195px;}
+.mod .formMod .r{width:750px;}
+.mod .form{padding:20px 0 15px;}
+
+.welMod .formChb{margin-left:0;}
+
+.checkMod .tipTxt a{margin:0 10px 0 0;color:#666}
+
+
+.contactWay{padding:15px 120px;zoom:1; text-align:left;}
+.contactWay p{height:30px; text-align:left;}
+.contactWay p input.radio{float:left;display:inline;width:20px;margin:9px 0 0;margin:8px 0 0\9;*margin:4px 0 0; cursor:pointer;}
+.contactWay p label{float:left;display:inline;width:645px;height:30px;line-height:30px;}
+.contactWay p label b{ font-weight:normal; color:#ccc; font-size:12px; font-family:"宋体"; display:block;}
+
+.contactWayLst{padding:5px;zoom:1;margin-left:20px;background:#f1f1f1;}
+.newContact{margin-top:5px;}
+.newContact ul li{height:32px;padding-left:20px;margin-bottom:5px;}
+.newContact ul li.tipTxt{height:30px;line-height:30px;}
+.newContact ul li a{margin:0 10px 0 0;}
+
+
+.mailGet{padding:15px 120px;zoom:1;}
+.mailGet p{height:30px;}
+.mailGet p input.radio{float:left;display:inline;width:20px;margin:9px 0 0;margin:8px 0 0\9;*margin:4px 0 0; cursor:pointer;}
+.mailGet p label{float:left;display:inline;width:645px;height:30px;line-height:30px;cursor:pointer;}
+.mailGet .mailLst ul li{height:32px;padding-left:10px;margin-bottom:5px;}
+.mailGet .mailLst ul li .tipTxt{height:30px;line-height:30px;}
+.mailGet .mailLst ul li a{margin:0 10px 0 0;}
+.mailGet .mailGetTxt{color:#999;margin:0 0 0 20px;height:24px;line-height:24px;font-size:12px;}
+.formBtn{margin:25px 0 0 155px;}
+.mod .formTextarea textarea.textarea{height:200px; width:600px; line-height:24px;}
+.mod .JobCayMod .r .formChb b{font-weight:normal; line-height:30px; float:left; display:inline; font-size:12px;}
+
+/*update mijing*/
+.valid label{display: block;margin-top: 5px}
+.valid label.gray9{color:#999}
+.valid strong{color:#f60}
+.mailGet .mailLst{background-color: #eee;border-radius: 3px;padding:10px;font-size:12px;color:#999}
+.mailGet .mailLst label{color:#333}
+.mailGet .mailLst p{height: 25px;margin-left: 15px}
+.mailGet .mailLst ul{margin-top:5px}
+.valid .time{font-size:12px;margin-top: 5px;display:block}
+.valid .time a{margin-left: 10px;color:#0099ff}
+.valid .bggray{background-color: #eee;border-radius: 3px;padding:5px 10px 10px 10px;margin-top: 5px}
+.not-enou{font-size:12px}
+/*福利待遇及岗位特点样式*/
+.flitem{display: inline-block;padding: 2px 10px;margin-right:10px;margin-top: 2px;color:#444;/*border:1px solid #ececec;*/line-height: 22px;border-radius: 2px;font-size:12px;background: #fafafa;}
+#selectedFea a { margin-top: 7px;display: inline-block;font-size:12px}
+selectedReward a{margin-top: 7px;display: inline-block;font-size:12px}
+
+.oppenWay{display:block; float:left;width:60px; height:30px; background:url("{/$siteurl.style/}/img/c/new_resume/open.png") -60px 0px no-repeat; margin-right:10px;}
+.oppenWaycut{ background-position:0px 0px;}
+
+.formModv2{ position: relative;}
+.formModv2 p{height:30px;text-align: left;}
+.formModv2 p .txtReApplyType{height:auto;margin-right:2px;};
+/*-----承诺企业新增样式-------*/
+.iconStraw{width:100%; overflow:hidden; height:36px; border-bottom:1px solid #dadada; position:relative;}
+.iconStraw span,.iconStraw b,.iconStraw a{ display:block; float:left;}
+.iconStraw span{font-size: 16px;
+line-height: 36px;
+border-bottom: 1px solid #dadada;  font-weight: bold; text-indent:20px;}
+.iconStraw b{ line-height:36px; color:#004d92; font-weight:normal; font-size:16px; padding:0 30px 0 24px;}
+.iconStraw a{width:86px; height:26px; color:#fff; line-height:26px; text-align:center; background:#ffa413;  font-size:12px; margin-top:4px; border-radius:2px;}
+.iconStraw a em{ color:#fff; font-size:20px; font-weight:normal; padding-left:5px; display:inline-block; vertical-align:-2px;}
+.iconStraw a:hover{ background:#f39704;}
+.iconStraw2{ overflow:hidden; line-height:20px; padding:50px 0 80px 140px;}
+.iconStraw2 i{ display:inline-block; vertical-align:-3px; color:#ffa619; font-weight:normal;}
+.iconStraw2 em{ color:#d73937;}
+.iconStraw i{ display:block;width:15px; height:19px; position:absolute; top:0px; left:122px;background: url({/$siteurl.style/}/img/icon_straw.png) no-repeat;}
+#recommendContent a,#recommendOtherNeed a {margin-right: 5px;}
+
+/*================================= 流程引导 start ======================================*/
+
+.box_step .title span{font-size:20px;color:#54728c;font-weight:bold;font-family:"微软雅黑";padding-left: 10px}
+.box_step .title span i{border-left:4px solid #0ea5a0;height:20px;display: inline-block;float: left;margin-top: 6px}
+.stop_list{margin-left: 143px;margin-bottom: 20px}
+.stop_list li{float:left;width:200px;text-align: center}
+.stop_list li span{display: inline-block;width:30px;height: 30px;background: url({/$siteurl.style/}/img/job/newjob/yuan.jpg) no-repeat;text-align: center;font-size:18px;color:#fff;font-weight:bold;float:left;font-family: arial}
+.stop_list li em{display: inline-block;width:85px;height: 9px;background: url({/$siteurl.style/}/img/job/newjob/hr.jpg) no-repeat;float:left;margin-top: 12px}
+.stop_list li .first span,.stop_list li .first em{float:right}
+.stop_list li .text{font-size:14px;margin-top: 5px;color:#999}
+.stop_list li.cur .text{color:#00bab1}
+.stop_list li.cur span{background: url({/$siteurl.style/}/img/job/newjob/cur_yuan.jpg) no-repeat;}
+.stop_list li.cur em{background: url({/$siteurl.style/}/img/job/newjob/cur_hr.jpg) no-repeat;}
+
+div.not-member {text-align: left}
+/*================================= 流程引导 end ======================================*/
+/*弹窗样式*/
+.new-sign-pop{ text-align:left; padding:0px 18px 28px 18px;width:508px; overflow:hidden; background:#fff; margin:0 auto; font-family:"微软雅黑";}
+.new-sign-pop-company-ver{  padding:0px 18px 28px 18px;overflow:hidden; background:#fff;font-family:"微软雅黑";}
+.new-sign-tit{height:48px; color:#444; line-height:48px; border-bottom:1px dashed #e9e8e8; font-size:16px;}
+.new-sign-tab tr th{ color:#999; text-indent:15px;font-size: 14px}
+.new-sign-tab tr td{ text-indent:15px; color:#444; overflow:hidden;font-size: 14px}
+.new-sign-tab tr td em{ color:#ff4141;}
+.new-sign-tab tr.gray td{ background:#fafafa;}
+.new-sign-char{ display:block; color:#999; font-size:12px; padding:12px 0 16px 0; text-indent:15px;}
+.new-sign-btnx{overflow:hidden;font-size: 14px}
+.new-sign-btnx a.sub-btn{ display:block;width:140px; height:40px; line-height:40px; text-align:center; color:#fff; background:#66bce4; border-radius:2px; float:left; margin-left:15px;font-size: 16px}
+.new-sign-btnx span{ display:block; float:right; color:#999; line-height:40px;margin-right:15px}
+.new-sign-btnx span a{ color:#4e92c4; padding-left:2px;}
+
+.new-sign-popx{padding:15px 0 0 0; padding-bottom:0px; overflow:hidden; font-family:"微软雅黑";font-size:14px}
+.new-sign-popx li{ color:#444; padding-bottom:20px;}
+.new-sign-popx .name{display:block;margin-left: 70px}
+.new-sign-popx li .dtit{display: inline-block;}
+.new-sign-popx li input{ display:inline-block; vertical-align:middle;width:240px; height:34px; border:1px solid #cfcfcf; text-indent:10px; background:none;line-height: 34px;font-size:14px}
+.new-sign-popx li a.present,.new-sign-popx li a.gray{width:120px; height:30px; background:#66bce4; color:#fff; text-align:center; line-height:30px; display:inline-block; margin-right:36px;border-radius:2px;}
+.new-sign-popx li a.gray{ color:#999; background:#f0f0f0;margin-left:30px;margin-right:0px}
+.new-sign-popx li a.code-btn{ display:inline-block;padding:0 15px;height:26px; border:1px solid #58cbe0; background:#58cbe0; vertical-align:middle; margin-left:20px;  #margin-left:51px;text-align:center; line-height:24px; color:#fff;}
+.new-sign-popx li.gray2{ color:#999;}
+.new-sign-popx li a.orange{ color:#ed7f5a; text-decoration:underline;}
+.new-sign-pop-dialog .new-sign-pop{width:auto;}
+.new-sign-tab tr td a{ display:inline-block;width:78px; height:26px; border:1px solid #22a2df; text-align:center; line-height:26px; text-indent:0px; border-radius:2px;font-size: 12px}
+.pact-dialog .ui_dialog_container{padding:20px;line-height:20px;}
+.formText label.txtLabel{top:6px}
+.tangram-suggestion-main{z-index: 9999}
+.tangram-suggestion table tr td{text-align: left!important;}
+.noMajor{width: 440px; overflow: hidden; margin: 40px auto}
+.majorTit{ display: block; color: #333;padding-bottom: 8px}
+.searchMajor{ overflow: hidden;}
+.searchMajor input{ display: block; float: left;width:348px; height: 28px; line-height: 28px; color: #333; border: 1px solid #ccc; text-indent: 6px;}
+.searchMajor a{ display: block;width:60px; height: 31px; float: left; margin-left: 10px; text-align: center; color: #fff; background: #67bce5; line-height: 31px; border-radius: 4px;}
+.dataMx{width:200px; overflow: hidden;}
+.dataMx li{width:100%; height: 24px; line-height: 24px; color: #333;}
+
+.noMajorRequx{ height: 20px; line-height: 20px;}
+.noMajorRequ{ display:block; height:36px;line-height: 36px;}
+.noMajorRequ input{ display:inline-block; vertical-align: middle; margin:0 5px 0 10px;}
+.noBorder{    background: #fff;
+    border: 1px solid #cfcfcf;
+    width: 400px;
+    height:28px;
+    float: left;
+    zoon: 1;
+    padding: 3px 0; display:none;}
+
+.mutilpleSelectBox span.selLabel{    float: left;
+    padding: 3px;
+    zoom: 1;
+    height: 20px;
+    line-height: 20px;}
+.mutilpleSelectBox span.selLabel a{border: 1px solid #c0dff4;
+    background: #e4f5fd;
+    display: inline-block;
+    padding: 0 3px 0 5px;
+    height: 20px;
+    line-height: 20px;
+    white-space: nowrap;}
+.searchMajor input.focus{height:28px;line-height:28px;border:1px solid #9fcdd6;background:#f2fcfe;box-shadow:0 0 5px #9fcdd6;}
+.mutilpleSelectBox{width:410px;}
+
+/*绑定手机号*/
+.boundPhonePop{width:285px; overflow: hidden; padding: 20px; margin: 0 auto; text-align: left;}
+.boundx01,.boundx02{ display: block; padding-bottom: 3px;}
+.boundx01{ line-height: 18px; color: #444;}
+.boundx02{ color: #ff671c;}
+.boundFrom{width:100%; overflow: hidden; padding-top: 15px;}
+.putBound{ display:block; float: left; height: 29px; border: 1px solid #ccc; line-height: 29px; text-indent: 8px;width:282px}
+.noteCodex{width:100%; overflow: hidden; padding-top: 15px;}
+.boundGetCode{ cursor:pointer; display:block; float: right; width:104px; height: 30px; background: #66bce4; color: #fff; text-align: center; line-height: 30px; border-radius: 2px;}
+.noteCodex img{ display: block; float: left; margin-left:15px ; height: 30px;}
+.boundBtn{ display: block;width:282px; height: 32px; text-align: center; line-height: 32px; background: #66bce4; margin-top: 15px; border-radius: 2px; color: #fff;}
+.boundBtn:hover,.boundGetCode:hover{ background: #39ade3; color: #fff;}
+  /*加载层*/
+.chatloading{width:104px; height:30px;text-align:left; font-size:12px;}
+.boundGetCode img{ display:inline-block;width:16px; height:16px;margin-top:7px; color:#666; margin-right: 10px}
+
+/***新套餐弹窗样式****/
+* {
+    margin:0;
+    padding: 0;
+}
+.main-content {
+    color: #444;
+    text-align: left;
+}
+.main-content .body {padding: 20px;padding-bottom: 0px;}
+.main-content .body .type {font-size: 14px;margin-bottom: 15px;}
+.main-content .body .type-con {
+
+}
+.main-content .body .type-con .type-item {position: relative;box-sizing: border-box;padding-left: 40px;margin-bottom: 20px;}
+.main-content .body .type-con .type-item .l {position: absolute;left: 9px;top: 0px;font-size: 20px;color: #999;}
+.main-content .body .type-con  div.active .l {position: absolute;left: 9px;top: 0px;font-size: 20px;color: #ff7a20;}
+
+/*.main-content .body .type-con .type-item .icon-particulars-require {*/
+/*color: #ff7a20;*/
+/*}*/
+.main-content .body .type-con .type-item .r {line-height: 20px;font-size: 14px;}
+.main-content .body .type-con .type-item .r .sub-num {
+    color: #666;
+    margin-bottom: 10px;
+    line-height: 1;
+}
+.main-content .body .type-con .type-item .r .name {font-size: 16px;font-weight: bold;margin-bottom: 5px;color: #ff7a20;}
+.main-content .body .type-con .type-item .r .pro {
+    background: url({/$siteurl.style/}/img/company/pro-job-bg.png) no-repeat;
+    font-size: 12px;
+    color: #fff;
+    display: inline-block;
+    background-size: 100% 100%;
+    margin-left: 8px;
+    line-height: 1;
+    padding: 2px 8px 2px 5px;
+}
+.main-content .body .type-con .type-item .r .desc-1 {
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+.main-content .body .type-con .type-item .r .pro-count {color: #666;margin-bottom: 4px;}
+.main-content .body .type-con .type-item .r .pro-count a {
+    margin-left: 10px;
+    text-decoration: underline;
+    color: #2b6fad;
+}
+.main-content .body .type-con .type-item .r .pro-count a:hover {
+    color: #31a2d6;
+}
+.main-content .body .type-con .type-item .r .desc-2 {color: #999;}
+.main-content .body .type-con .type-item .r .simple-name {font-size: 16px;font-weight: bold;margin-bottom: 5px;}
+.main-content .body .type-con .type-item .r .simple-count {font-size: 12px;font-weight: normal;margin-left: 15px;position: relative;top: -2px;}
+.main-content .other-info {border-top: 1px dashed #f1f1f1;margin: 0 10px 5px 10px;padding: 10px 10px;text-align: center;}
+.main-content .other-info span {font-size: 12px;color: #f00;}
+.main-content .btns {
+    padding-bottom: 20px;
+}
+.main-content .btns .btn-con {overflow: hidden;text-align: center;}
+.main-content .btns .btn-con .confirm {display: inline-block;padding: 5px 20px;background: #66bce4;color: #fff;border-radius: 4px;margin-right: 10px;cursor: pointer;}
+.main-content .btns .btn-con .confirm:hover {
+    background: #31a2d6;
+}
+.main-content .btns .btn-con .cancel {
+    display: inline-block;
+    padding: 5px 20px;
+    background: #eee;
+    color: #999;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.hb_ui_dialog .ui_dialog_title {
+    text-align: left;
+}
+.formModv2 p {
+    height: 30px;
+    text-align: left;
+    float: left;
+    margin-right: 35px;
+}
+.jobrulex {
+    overflow: hidden;
+    color: #999;
+    margin-top:20px;
+    line-height: 22px;
+    font-size: 12px;
+    display: none;
+}
+.jobRefreshx {
+    width: 100%;
+    background: #fafafa;
+    overflow: hidden;
+    padding: 15px 0;
+    margin-top: 15px;
+}
+.jobRefreshx label {
+
+    display: block;
+    float: left;
+    margin-left: 120px;
+    margin-right: 15px;
+}
+.jobRefreshx span {
+    display: block;
+    float: left;
+    font-size: 14px;
+    color: #999;
+    line-height: 22px;
+}
+.blackTip{
+            margin-top: 25px;
+            padding-left: 25px;
+        }
+        .blackTip i{
+            color: orange;
+            font-size: 1.5em;
+            vertical-align: -4px;
+        }
+        .blackTip span{color:red}
+        
+        /*7.19*/
+       	.morePart{display: none;}
+        .hideMoreBtn, .showMoreBtn{
+       		margin-left: 205px;
+       		width:200px;
+       		cursor: pointer;
+       		color:#2b6fad;
+       		
+        }
+        .contactWayLst{
+        	margin-top: 40px;
+        	margin-left: 0;
+        	width:585px;
+        }
+        .contactWayLst p {
+        	color:#999;
+        	margin-left: 20px;
+            height     : auto;
+            text-align : left;
+        }
+        .contactWayLst p:after{
+        	content: '';
+        	display: block;
+        	clear: both;
+        }
+        #ulEmailList:after,#ulEmailList li:after{
+        	content: '';
+        	display: block;
+        	clear: both;
+        }
+        .contactWayLst p input.radio {
+            float   : left;
+            display : inline;
+            width   : 20px;
+            margin  : 9px 0 0;
+            margin  : 8px 0 0 \9;
+            *margin : 4px 0 0;
+            cursor  : pointer;
+        }
+        .contactWayLst p label {
+            float       : left;
+            display     : inline;
+            height      : 30px;
+            line-height : 30px;
+            color:#333;
+        }
+        .contactWayLst p label b {
+            font-weight : normal;
+            color       : #ccc;
+            font-size   : 12px;
+            font-family : "宋体";
+            display     : block;
+        }
+        
+        .detailBtn{
+        	width: 86px;
+		    height: 26px;
+		    color: #fff;
+		    line-height: 26px;
+		    text-align: center;
+		    background: #488dc1;
+		    font-size: 12px;
+		    margin-top: 4px;
+		    border-radius: 2px;
+		    display: block;
+    		float: left;
+    		margin-left: 10px;
+        }
+        .detailBtn:hover{
+        	color:#fff;
+        	background: #1368a9;
+        }
+        .detailBtn em{
+        	color: #fff;
+		    font-size: 20px;
+		    font-weight: normal;
+		    padding-left: 15px;
+		    display: inline-block;
+		    vertical-align: -2px;
+        }
+        
+        .formMod2nd{width: 400px;float:left;}
+        .formMod2nd:after{
+        	content:'',;
+        	display: block;
+        	clear: both;
+        }
+        .otherBtn{cursor: pointer;}
+        #selectedReward{line-height: 30px;}
+        .otherBtn span{
+        	display: inline-block;
+        	transform: scaleY(0.7);
+        	color:#444;
+        }
+</style>
+
+<style>
+			.moreSalary{
+				line-height: 28px;
+				position: relative;
+				z-index: 1;
+			}
+			
+			.moreSalary .drop .dropLst{
+				    height: 150px;
+				    overflow-y: scroll;
+				    overflow-x: hidden;
+				    width: 105px;
+			}
+			
+			.moreSalary #moreSalarySelect{
+				margin-left:15px;
+			}
+			.drop .dropLst{
+				max-height: 150px;
+				overflow-y: scroll;
+				overflow-x: hidden;
+			}
+			
+			.cashMod .drop .dropLstCon ul li{
+				width: 100%;
+			}
+			.repeatJob{width:100%; overflow: hidden; color: #f00; padding-top: 5px;}
+			.repeatJob em{width:16px; height: 16px; line-height: 16px; text-align: center; background: #ccc; border-radius: 50%; display: inline-block; margin-left: 3px; color: #fff;}
+		</style>
+</head>
+<body id="body">
+{/include 'new_header.html' par="全职招聘" cur="职位管理"/}
+<form id="formjobmod" method="post" action="{/get_url rule='/job/jobUpdateDo'/}">
+<div class="content" id="content">
+    <section class="section">
+        <hgroup>
+            <div class="mod">
+
+                {/if $step==2/}
+                <!-- 流程引导 start  新版发布职位（承诺职位）结束引导-->
+                <div class="box_step">
+                    <p class="title"><span><i></i>发布职位</span></p>
+                    <ul class="clearfix stop_list">
+                        <li  class="cur">
+                            <p class="clearfix first">
+                                <em></em>
+                                <span>1</span>
+                            </p>
+                            <p class="text">完善公司资料</p>
+                        </li>
+                        <li class="cur">
+                            <p class="clearfix">
+                                <em></em>
+                                <span>2</span>
+                                <em></em>
+                            </p>
+                            <p class="text">填写职位信息</p>
+                        </li>
+                        <li>
+                            <p class="clearfix last">
+                                <em></em>
+                                <span>3</span>
+                            </p>
+                            <p class="text">发布成功</p>
+                        </li>
+                    </ul>
+                </div>
+                <!-- 流程引导 end -->
+                {//if/}
+
+                <h2>职位描述<span style="font-size:12px; font-weight: 300; color:#999; padding-left:20px;">发布职位前，请详细阅读<a href="{/get_url rule='/specification/Recruitment'/}" target="_blank">《汇博招聘规范》</a>，不符招聘规范的职位在审核或被举报核实后会被强制关闭</span></h2>
+                <input type="hidden" name="jobID" value="{/$job.job_id/}" />
+                <div class="form">
+                    <!-- 招聘公司 -->
+                    {/if $generation_binding/}
+                    <div class="formMod">
+                        <div class="l">招聘公司<i>*</i></div>
+                        <div class="r" style="line-height: 27px;">{/$accounts[$job['company_id']]['company_name_display']/}</div>
+                        <div class="clear"></div>
+                    </div>
+                    {//if/}
+
+                    <!-- 主职位类别 -->
+                    <div class="formMod JobIndDrop checkMod">
+                        <a id="jobsort" name="cal"></a>
+                        <div class="l">职位类别<i>*</i></div>
+                        <div class="r">
+                        	<div id="newJobsort" class="formText mutilpleSelectBox">
+                                <b class="hbFntWes icon">&#xf03a;</b>
+                                <ul class="label">
+                                    {/if $jobsort_arr[0]/}
+                                    <li data-id="{/$jobsort_arr[0]/}"><a href="javascript:">{/$jobsort_names[0]/}<span class="close">×</span></a></li>
+                                    {//if/}
+                                </ul>
+                                <input type ="hidden" name="main_jobsort" id="main_jobsort" value="{/$jobsort_arr[0]/}">
+                            </div>
+
+                        	<!--
+                            <span id="newJobsort" class="drop formText JobIndDrop zIndex" style="width:250px;border-color:#d0cbcb">
+                                <span>
+                                    <div class="dropSet">
+                                        <b class="hbFntWes dropIco"></b><span id='first_jobsort'><span class='seled'>{/$jobsort_names[0]/}</span></span>
+                                        <input class="text JobCay" type="text">
+                                    </div>
+                                </span>
+                                <input type ="hidden" name="main_jobsort" id="main_jobsort" value="{/$jobsort_arr[0]/}">
+                            </span>
+                            -->
+
+                            <!--<a href="javascript:void(0)" id="addHtml"  style="font-size: 12px;margin-top: 5px;float:left; padding-left:8px;{/if count($jobsort_arr)>=2/}display:none{/else/}display: inline-block{//if/}">+添加次类别</a>-->
+                            <span class="tipPos" style="left:75px;"><span class="tipLay"></span></span>
+                            <div class="repeatJob" style="{/if $jobsort_job_num > 0/}display: black{/else/}display: none{//if/}" id="jobsort_job_num_tip">
+                                该职位类别下已有<i id="jobsort_job_num">{/$jobsort_job_num/}</i>个职位，重复职位将不会通过审核
+                                <em title="重复职位不会增加曝光量">?</em>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+
+                    <!-- 次级职位类别 -->
+                    <div id="hidLastJobsort" class="formMod JobIndDrop checkMod" {/if count($jobsort_arr) <= 1/}style="display:none;"{//if/}>
+                        <a id="calling" name="cal"></a>
+                        <div class="l">次要类别<i>&nbsp;</i></div>
+                        <div class="r">
+
+                        	<div id="nextJobsort" class="formText mutilpleSelectBox">
+                                <b class="hbFntWes icon">&#xf03a;</b>
+                                <ul class="label">
+                                    {/if $jobsort_arr[1]/}
+                                    <li data-id="{/$jobsort_arr[1]/}"><a href="javascript:">{/$jobsort_names[1]/}<span class="close">×</span></a></li>
+                                    {//if/}
+                                </ul>
+                                <input type ="hidden" name="next_jobsort" id="next_jobsort" {/if count($jobsort_arr) >= 2/}value='{/$jobsort_arr[1]/}'{//if/}>
+
+                            </div>
+
+                        	<!--
+                            <span id="nextJobsort"  class="drop formText JobIndDrop zIndex" style="width:250px;border-color:#eee">
+                                <span>
+                                    <div class="dropSet"><b class="hbFntWes dropIco"></b><span id="next_jobsort">{/if count($jobsort_names) >= 2/}<span class='seled'>{/$jobsort_names[1]/}</span>{//if/} </span>
+                                        <input class="text JobCay" type="text">
+                                    </div>
+                                </span>
+                                  <input type ="hidden" name="next_jobsort" {/if count($jobsort_arr)>=2/}value='{/$jobsort_arr[1]/}'{//if/}>
+                            </span>
+                            -->
+
+                           <a id="delHtml" href="javascript:void(0)" style="font-size: 12px;margin-top: 5px;margin-left:13px;display: inline-block">删除</a>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+
+
+                    <!-- 职位名称 -->
+                    <div class="formMod">
+                        <div class="l">职位名称<i>*</i></div>
+                        <div class="r">
+                            <span class="formText">
+                                <input type="text" style="width:235px;" value="{/$job.station/}" name="txtStation" id="txtStation" class="text">
+                                <input id="jobType3" type="checkbox" name="radJobType" value="3" {/if $job['job_type']==3/}checked="checked"{//if/}>
+                                <label for="jobType3">实习</label>
+                                <input id="jobtype" type="hidden" name="radJobType" value="{/$job.job_type/}">
+                            </span>
+                            <span class="tipPos">
+                                <span class="tipLay"></span>
+                            </span>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+
+                    <!-- 岗位级别 -->
+                    <!--<div class="formMod">
+                        <div class="l">岗位级别<i>*</i></div>
+                        <div class="r">
+                            <span id="jobLevelDrop" class="drop zindex"></span>
+                            <span class="tipPos">
+                                <span class="tipLay">
+                                </span>
+                             </span>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+
+                    <div class="formMod">
+                        <div class="l">招聘人数<i>*</i></div>
+                        <div class="r">
+                            <span class="formText ">
+                                <input value="{/$job.quantity/}" type="text" name="txtQuantity" class="text" style="width:45px;">
+                            </span>
+                            <span class="tipPos">
+                                <span class="tipLay">
+                                </span>
+                             </span>
+                            <span class="tipTxt font14">人</span>
+                        </div>
+                        <div class="clear"></div>
+                    </div>-->
+                    <div class="formMod">
+                        <div class="l">招聘人数<i>*</i></div>
+                        <div class="r" style="width:260px;">
+	                        <span class="formText">
+	                            <input value="{/$job.quantity/}" type="text" name="txtQuantity" class="text" style="width:45px;">
+	                        </span>
+                            <span class="tipTxt font14">人</span>
+	                        <span class="tipPos">
+	                            <span class="tipLay"></span>
+	                        </span>
+                        
+                        </div>
+                        
+                        <div class="clear"></div>
+                    </div>
+					<div class="formMod">
+                        <div class="l">
+                        岗位级别<i>*</i></div>
+                        <div class="r">
+                        	<span id="jobLevelDrop" class="drop zindex"></span>
+                        
+                            <span class="tipPos">
+                            <span class="tipLay"></span>
+                            </span>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="formMod addressMod">
+                        <div class="l">工作地点<i>*</i></div>
+                        <div class="r" style="padding-top: 5px">
+
+                        	<div class="formText">
+                                <span style='font-size: 16px;font-family: "Microsoft yahei", "Microsoft YaHei", "微软雅黑";margin-right: 10px' id="show_address_span"/>{/$job["add_info"]/}</span>
+                                <a id="editMapBtn" href="javascript:;" style='font-size: 14px;font-family: "Microsoft yahei", "Microsoft YaHei", "微软雅黑"' >修改地址</a>
+
+                                <input name="map_x" type="hidden" value="{/$job['map_x']/}"/>
+                                <input name="map_y" type="hidden" value="{/$job['map_y']/}"/>
+                                <input name="address_id" type="hidden" value="{/$job['address_id']/}"/>
+                                <input name="txtAddInfo" type="hidden" value="{/$job['add_info']/}"/>
+                                <input name="hddArea" type="hidden" value="{/$job['area_id']/}"/>
+
+                            </div>
+                            <span class="tipPos">
+                                <span class="tipLay"></span>
+                            </span>
+
+
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+
+<!--                    <div class="formMod addressMod">
+                        <div class="l">工作地点<i>*</i></div>
+                        <div class="r">
+                            <span id="area"></span>
+                            <span class="tipPos">
+                                <span class="tipLay">
+                                </span>
+                             </span>
+                            <span class="formText" style="margin:10px 0 0 0;clear:both;">
+                                <input name="txtAddInfo" type="text" style="width:425px;" value="{/$job.add_info/}" id="addInfo" class="text watermark" watermark="详细地址描述，如：环球广场25楼汇博人才网">
+                                <div id="searchResultPanel" style="border:1px solid #C0C0C0;width:150px;height:auto; display:none;"></div>
+                            </span>
+                            <span class="tipPos">
+                                <span class="tipLay"></span>
+                            </span>
+                            <p class="formMap" style="color: red; position: relative; font-size: 12px; margin: 5px 0px;">(请拖动图标在地图中标注上班地点)</p>
+                            <span id="mapCon" class="formMap" style="width:650px;height:290px;">
+
+                            </span>
+                        </div>
+                        <div class="clear"></div>
+                    </div>-->
+
+                    <div class="formMod cashMod">
+                        <div class="l">薪资待遇<i>*</i></div>
+                        <div class="r">
+                            <ul id="x_salary_nav" class="x_salary" style="height: 30px">
+                                <li class="x_cura {/if $job.salary_type ==0/}x_cur{//if/}"><label><input value="0" type="radio" name="rd" class="x_radio" {/if $job.salary_type ==0/}checked="checked"{//if/}>定额薪资</label></li>
+                                <li class="x_cura {/if $job.salary_type !=0/}x_cur{//if/}"><label><input value="1" type="radio" name="rd" class="x_radio" {/if $job.salary_type !=0/}checked="checked"{//if/}>底薪+提成</label></li>
+                                <li style="display:none"><input type="checkbox" value="1" name="chkIsSalaryShow" id="xm" class="chb"{/if $job.is_salary_show == 1/}checked{//if/}><label for="xm">显示为面议</label></li>
+                            </ul>
+
+                            <!-- 定额薪资 -->
+                            <div id="x_salaryBg" class="x_sbd">
+                                <div class="x_salaryBg" style="display:block;width: 575px">
+                                    <span id="salaryDrop1" class="drop formText zindex" style="z-index: 994;"></span>
+                                    <span class="tipTxt font14" style="margin-right:10px;">~</span>
+                                    <span id="salaryDrop1End" class="drop formText zindex" style="z-index: 993;"></span>
+                                    
+                                    <span class="tipTxt font14">元/月</span>
+                                    <!-- 13-50薪 -->
+                                    <span class="moreSalary">
+                                        <span id="moreSalarySelect" class="drop zindex"></span>
+                                        <span class="tipPos">
+                                            <span class="tipLay"></span>
+                                        </span>
+                                        薪
+                                    </span>
+									<span class="tipPos">
+									    <span class="tipLay"></span>
+									 </span>
+                                    <span class="tipTxt" style="margin:0;width:400px;color:#999;clear:both;">薪资范围差不超过两倍，真实的薪资更利于提高招聘效果</span>
+                                    <div class="clear"></div>
+                                    <div id="salaryRefer" style="font-size: 14px;color: #999;border-left:1px solid #f1f1f1;font-family: 'Microsoft yahei';line-height: 25px;padding-top: 10px"></div>
+                                </div>
+
+                                <!-------底薪+提成-------->
+                                <div class="x_salaryBg">
+                                    <div class="x_sbg">
+                                        <div>
+                                            <span class="x_tipTxt">底薪：</span>
+                                            <span id="salaryDrop2" class="drop formText zindex" style="z-index: 994;"></span>
+                                            <span class="tipTxt font14" style="margin-right:10px;">~</span>
+                                            <span id="salaryDrop2End" class="drop formText zindex" style="z-index: 993;"></span>
+                                            <span class="tipPos">
+                                                <span class="tipLay"></span>
+                                             </span>
+                                            <span class="tipTxt font14">元/月</span>
+                                            <div class="clear"></div>
+                                        </div>
+                                        <div>
+                                            <span class="x_tipTxt2">平均收入（底薪+提成）：</span>
+                                            <span id="salaryDrop3" class="drop formText zindex" style="z-index: 994;"></span>
+                                            <span class="tipTxt font14" style="margin-right:10px;">~</span>
+                                            <span id="salaryDrop3End" class="drop formText zindex" style="z-index: 993;"></span>
+                                            <span class="tipPos">
+                                                <span class="tipLay"></span>
+                                            </span>
+                                            <span class="tipTxt font14">元/月</span>
+                                            <div class="clear"></div>
+                                        </div>
+                                        <div class="clear"></div>
+                                    </div>
+                                    <span class="tipTxt" style="margin:0;width:400px;color:#999;clear:both;">薪资范围差不超过两倍，真实的薪资更利于提高招聘效果</span>
+                                    <div class="clear"></div>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+
+                    
+
+                    <div class="formMod">
+                        <div class="l">福利待遇<i> </i></div>
+                            <div class="r" id="selectedReward">
+                                {/if count($all_reward_data) > 0/}
+                                {/foreach $all_reward_data as $reward/}
+                                {/if in_array($reward['reward_id'], $default_reward_arr)/}
+                                <span class="formChb flitem">{/$reward['reward_name']/}</span>
+                                {//if/}
+                                {//foreach/}
+                                {//if/}
+                                {/if count($other_reward_arr) > 0/}
+                                {/foreach $other_reward_arr as $reward/}
+                                <span class="flitem">{/$reward/}</span>
+                                {//foreach/}
+                                {//if/}
+                                <a href="javascript:void(0)" style="display: inline-block;font-size:12px" onclick="jobAdd.setWelfare(0,0)">编辑</a>
+                            </div>
+                        <input type="hidden" value='{/$default_reward/}' id="hidDefaultReward" name="hidDefaultReward" />
+                        <input type="hidden" value='{/$other_reward/}' id="hidOtherReward" name="hidOtherReward" />
+                        <div class="clear"></div>
+                    </div>
+
+                {/if count($default_fea_arr) > 0 || count($other_fea_arr) > 0/}
+                    <div class="formMod" >
+                        <div class="l">岗位特点<i> </i></div>
+                            <div class="r" id="selectedFea">
+                                {/if count($all_fea_data) > 0/}
+                                {/foreach $all_fea_data as $fea/}
+                                {/if in_array($fea['feature_id'], $default_fea_arr)/}
+                                <span class="formChb flitem">{/$fea['feature_name']/}</span>
+                                {//if/}
+                                {//foreach/}
+                                {//if/}
+                                {/if count($other_fea_arr) > 0/}
+                                {/foreach $other_fea_arr as $fea/}
+                                <span class="flitem">{/$fea/}</span>
+                                {//foreach/}
+                                {//if/}
+                            <a href="javascript:void(0)" style="margin-top: 7px;display: inline-block;font-size:12px" onclick="jobAdd.setCharac(0,0)">点击添加</a>
+                        </div>
+                        <input type="hidden" value='{/$default_fea/}' id="hidDefaultFea" name="hidDefaultFea" />
+                        <input type="hidden" value='{/$other_fea/}' id="hidOtherFea" name="hidOtherFea" />
+                        <div class="clear"></div>
+                    </div>
+                {//if/}
+                    <div class="formMod" style="margin:20px 0;">
+                        <div class="l">有效期<i>*</i></div>
+                        <div class="r">
+                            <span class="formText ">
+                                <input onkeyup="jobAdd.changeEndtime(this);" value="{/$job.valid_days/}" name="txtValidDays" type="text" style="width:45px;" class="text">
+                            </span>
+                            <span class="tipTxt font14">天</span>
+                            <span id="endTimeSpan" class="tipTxt font14" style="margin-left:20px;"></span>
+                            <span class="tipPos">
+                                <span class="tipLay"></span>
+                            </span>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="formMod">
+	                    <div class="l">岗位描述<i>*</i></div>
+	                    <div class="r">
+	                        <span id="recommendContent" style="display:none;clear:both;display:block;">模板：</span>
+	                        <span class="formTextarea">
+	                            <textarea class="textarea" name="txtContent" id="txtContent" placeholder="请输入岗位描述和任职要求">{/$job.content/}</textarea>
+	                        </span>
+	                        <span class="tipPos">
+	                            <span class="tipLay">
+	                            </span>
+	                        </span>
+	                    </div>
+	                    <div class="clear"></div>
+	                </div>
+                </div>
+				
+                    
+                    
+                    
+                <h2>职位要求</h2>
+                <div class="form">
+                    <div class="formMod">
+                        <div class="l">工作经验<i>*</i></div>
+                        <div class="r">
+                            <span id="workYearDrop" class="drop zindex"></span>
+                            <span class="formChb"><input {/if $job.allow_graduate == 1/}checked="checked"{//if/} value="1" type="checkbox" name="chkNewGraduate" id="yjs" class="chb"><label for="yjs">可接受应届生</label></span>
+                            <span class="tipPos">
+                                <span class="tipLay">
+                                </span>
+                            </span>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+
+                    <div id="yjs_calling" class="formMod JobIndDrop checkMod" style="{/if $job.allow_graduate != 1/}display:none{//if/}">
+                        <a id="professionalSort" name="cal"></a>
+                        <div class="l">应届生专业<i>*</i></div>
+                        <div class="r">
+
+                            <div class="noBorder" style="text-indent:10px;color:#666;line-height:30px;{/if $job.allow_graduate == 1 && empty($job.graduate_profession_ids)&& empty($job.graduate_profession_remark)/} display:block;{//if/}">专业不限</div>
+
+                            <div id="newProfessionalSort" class="formText mutilpleSelectBox" style="{/if  $job.allow_graduate == 1 && empty($job.graduate_profession_ids)&& empty($job.graduate_profession_remark)/} display:none;{//if/}">
+                                <b class="hbFntWes icon">&#xf03a;</b>
+                                <ul class="label">
+                                    {/if $job.allow_graduate == 1/}
+                                    {/if !empty($job.graduate_profession_ids_arr)/}
+                                    {/foreach $job.graduate_profession_ids_arr as $v/}
+                                    <li data-id="{/$v['id']/}"><a href="javascript:">{/$v['name']/}<span class="close">×</span></a></li>
+                                    {//foreach/}
+                                    {//if/}
+                                    {//if/}
+                                </ul>
+                                <div id="GraduateProfessionRemark">
+                                    {/if $job.allow_graduate == 1/}
+                                    {/if !empty($job['graduate_profession_remark'])/}
+                                    <span class="selLabel"><a href="javascript:">{/$job['graduate_profession_remark']/}<span class="closeBox">×</span></a></span>
+                                    {//if/}
+                                    {//if/}
+                                </div>
+
+                                <input type ="hidden" name="main_professionalSort" id="main_professionalSort" value="{/if $job.allow_graduate == 1 && !empty($job.graduate_profession_ids)/}{/$job.graduate_profession_ids/}{//if/}{/if $job.allow_graduate == 1 && empty($job.graduate_profession_ids)&& empty($job.graduate_profession_remark)/}00{//if/}" >
+                            </div>
+                            <label class="noMajorRequ" id="no_professionalSort"><input type="checkbox"{/if $job.allow_graduate == 1 && empty($job.graduate_profession_ids)&& empty($job.graduate_profession_remark)/}checked="checked"{//if/} name="checkbox" />专业不限</label>
+                            <!--<span class="tipPos" style="left:75px;"><span class="tipLay"></span></span>-->
+                            <div class="clear"></div>
+                            <input type="hidden" name="professionRemark" id="professionRemark" value="{/$job['graduate_profession_remark']/}"/>
+                            <div class="noMajorRequx" {/if $job.allow_graduate == 1 && empty($job.graduate_profession_ids) && empty($job.graduate_profession_remark)/} style="display: none;"{//if/}>没有找到想要的专业？<a href="javaScript:;" class="noMajorRequxz">点击这里输入</a></div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+
+                    <div class="formMod">
+                        <div class="l">最低学历<i>*</i></div>
+                        <div class="r">
+                            <span id="degreeDrop" class="drop zindex">
+                            </span>
+                            <span></span>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+
+                    {/*<div class="formMod">*/}
+                        {/*<div class="l">性别要求<i>&nbsp;</i></div>*/}
+                        {/*<div class="r">*/}
+                            {/*<span id="sexDrop" class="drop zindex">*/}
+                            {/*</span>*/}
+                            {/*<span></span>*/}
+                        {/*</div>*/}
+                        {/*<div class="clear"></div>*/}
+                    {/*</div>*/}
+
+                    <div class="formMod ageMod">
+                        <div class="l">年龄要求<i>&nbsp;</i></div>
+                        <div class="r">
+                            <span id="ageDrop1" class="drop zindex">
+                            </span>
+                            <span></span>
+                            <span class="tipTxt font14" style="margin-right:5px;">-</span>
+                            <span id="ageDrop2" class="drop zindex">
+                            </span>
+                            <span></span>
+                            <span class="tipTxt font14">岁</span>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+					<div class="morePart">
+	                    <div class="formMod">
+	                        <div class="l">语言要求<i>&nbsp;</i></div>
+	                        <div class="r">
+	                            <span id="languageDrop" class="drop zindex">
+	                            </span>
+	                            <span></span>
+	                        </div>
+	                        <div class="clear"></div>
+	                    </div>
+	
+	                    <div class="formMod">
+	                        <div class="l">补充说明<i>&nbsp;</i></div>
+	                        <div class="r">
+	                            <span id="recommendOtherNeed" style="display:none;">模板：</span>
+	                            <span class="formTextarea">
+	                                <textarea name="txtOtherNeed" class="textarea" id="txtOtherNeed" placeholder="如：需要哪方面的经验、什么专业的背景、具有什么能力等">{/$job.other_need/}</textarea>
+	                            </span>
+	                            <span class="tipPos">
+	                                <span class="tipLay">
+	                                </span>
+	                            </span>
+	                        </div>
+	                        <div class="clear"></div>
+	                    </div>
+                    </div>
+                
+					<div class="showMoreBtn"><i class="icon-AI-_-22"></i> 更多要求</div>
+	                <div class="hideMoreBtn" style="display:none"><i class="icon-AI-_-23"></i> 收起更多要求</div>
+				</div>
+				<h2 class='otherBtn'>高级设置&nbsp;&nbsp;<span style="display:none">▼</span><span>▲</span></h2>
+				<div class="form">
+					<div class="formMod">
+                        <div class="l">职位招聘人<i>&nbsp;</i></div>
+                        <div class="r">
+                            <span id="recuiterDrop" class="drop zindex"></span>
+                            <span class="tipPos">
+                                <span class="tipLay"></span>
+                            </span>
+                        	<span class="formChb" style="color:#444;font-weight: normal"><input value="1" type="checkbox" name="param_allow_link" id="pa_allow_link" {/if $job.allow_online_talk == 1/}checked="checked"{//if/}  class="chb"><label for="param_allow_link">允许在线聊天
+                        	<img src="{/$siteurl.style/}/img/company/chat/allow.png" alt="" style="position: relative;top: 5px;"/></label></span>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <!--邮箱接收-->
+                    <div class="formMod">
+                        <div class="l">邮箱接收简历<i>&nbsp;</i></div>
+                        <div class="r">
+                            <span id="emailDrop" class="drop zindex"></span>
+                            <span class="tipPos">
+                                <span class="tipLay"></span>
+                            </span>
+                        <div class="mailLst contactWayLst" style="{/if $job.allow_email == 1/}display:none;{//if/}">
+                        	<p>
+	                            <input class="radio" type="radio" name="emailType" value="2" {/if $job.allow_email == 1 || $job.allow_email == 2/}checked="checked"{//if/} style="{/if empty($email)/}display:none{//if/}" id="conE1"/><label for="conE1" style="{/if empty($email)/}display:none{//if/}">使用企业邮箱</label>
+	                        </p>    
+	                        <p style="{/if empty($email)/}display:none{//if/}">{/$email/}</p>
+	                        <p>    
+	                            <input class="radio" type="radio" name="emailType" value="3" id="conE2" {/if $job.allow_email == 3|| empty($email)/}checked="checked"{//if/} /><label for="conE2">使用新的邮箱</label>
+	                        </p>
+	                        <ul id="ulEmailList" {/if empty($email)/}{/else/}{/if $job.allow_email != 3/}style="display: none"{//if/}{//if/}>
+	                                {/section name=link loop=$linkemail/}
+                            <li>
+                                <span class="formText" style="margin-left:15px;">
+                                    <input id="email{/$smarty.section.link.index+1/}" name="email{/$smarty.section.link.index+1/}" type="text" value="{/if $job.allow_email==3/}{/$linkemail[link]/}{//if/}" style="width:200px;" class="text newMail watermark { txtToMailValidate: true, email: true }" watermark="输入邮箱地址">
+                                </span>
+                                <span class="tipTxt" style="margin-left:15px;"><a href="javascript:void(0);" onclick="jobAdd.addNewEmail(this);">增加</a>{/if $smarty.section.link.index!=0/}<a href="javascript:void(0);" onclick="jobAdd.delNewEmail(this);">删除</a>{//if/}</span>
+                                <span class="tipPos">
+                                    <span class="tipLay"></span>
+                                </span>
+                            </li>
+                            {/sectionelse/}
+                            <li>
+                                <span class="formText" style="margin-left:15px;">
+                                    <input  id="email1" name="email1" type="text" watermark="输入邮箱地址" style="width:200px;" class="text newMail watermark">
+                                </span>
+                                <span class="tipTxt" style="margin-left:15px;"><a href="javascript:void(0);" onclick="jobAdd.addNewEmail(this);">增加</a></span>
+                                <span class="tipPos">
+                                    <span class="tipLay"></span>
+                                </span>
+                            </li>
+                            {//section/}
+	                            </ul>
+	                            <input type="hidden" name="emailCount" value="1">
+	                        </div>
+	                        
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <!--回复承诺-->
+                    <div class="formMod">
+                        <div class="l">简历回复承诺<i>&nbsp;</i></div>
+                        <div class="r">
+                        	{/if $mustreply_job_status !=3/}
+                        	<input type="hidden" name="txtBaseReApplyType" value="{/$re_apply_type/}"/>
+                            <span id="promiseDrop" class="drop zindex"></span>
+                            <span class="tipPos">
+                                <span class="tipLay"></span>
+                            </span>
+                            <a class="detailBtn" href="{/$siteurl.company|replace:'http:':''/}/job/mustreplydetail" target="_blank">查看详情<em class="hbFntWes">&#xf105;</em></a><span style="position:relative;top:5px;color:red;padding-left:15px">还能承诺{/$last_mustreply_job|intval/}个职位</span>
+                        	<div class="jobrulex" {/if $re_apply_type/}style="display:block"{//if/}>
+                        		请遵守<a href="javascript:;" onclick="jobAdd.aboutmustreply(this);">《简历回复承诺规则》</a>；一旦承诺，请按约定及时回复求职者投递来的简历，逾期未回复简历将被自动回绝，该功能使用将受到限制。
+	                        </div>
+	                        {/else/}
+	                        <div class="iconStraw2">
+	                            <input type="hidden" class="radio txtReApplyType" style="height:auto;" name="txtReApplyType" id="txtReApplyType1" value="0" checked="checked"/>
+	                            <i class="hbIconMoon">&#xe0f5;</i>
+	                            	因未按承诺及时回复求职者简历，{/if $last_banned_day==0/}<em>今天</em>过后{/else/}<em>{/$last_banned_day/}</em>天后{//if/}才能再次承诺。
+	                        </div>
+	                        {//if/}
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    
+                    <div class="morePart">	
+                        <!--自动过滤-->
+                        <div class="formMod">
+                            <div class="l">自动过滤简历<i>&nbsp;</i></div>
+                            <div class="r">
+                                <p>
+                                	<a href="javascript:;" class="oppenWay {/if $is_automatic/}oppenWaycut{//if/}"></a><label for="conW1" style="position:relative;top:5px;">根据职位填写的<span style="color:red">工作年限、最低学历、年龄要求</span>自动回绝那些5个工作日内没处理过的过滤简历</b></label>
+		                        </p>
+		                        <div style="display:none;">
+		                            <input type="hidden" id="AutomaticCheck" name="AutomaticCheck">
+		                            <input type="hidden" id='hddAutomatic' name="hddAutomatic" value="{/if $is_automatic/}1{//if/}">
+		                        </div>
+                            </span>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <!--联系方式-->
+                        <div class="formMod">
+                        <div class="l">联系方式<i>&nbsp;</i></div>
+                        <div class="r">
+                            <span id="contactDrop" class="drop zindex"></span>
+                            <span class="tipPos">
+                                <span class="tipLay"></span>
+                            </span>
+                        
+                        	<div class="contactWayLst contactLst" style="{/if $job.open_linkway != 1/}display:none;{//if/}">
+	                            <!--<p><input type="radio" class="radio" name="newLinkway" id="way1" value="0" {/if $job.self_linkway == 0 || empty($linkways) || count($linkways)<1/}checked="checked"{//if/} /><label for="way1">使用企业联系方式{/if !empty($linkman) && !empty($link_tel)/}（{/$linkman/} {/$link_tel/}）{//if/}</label></p>-->
+                    <p style="{/if empty($company_account_info[$job.account_id]['mobile_phone'])/}display: none{//if/}"><input type="radio" class="radio" name="newLinkway" id="way1" value="4" {/if $job.self_linkway == 4/}checked="checked"{/else if $job.open_linkway != 1 || $job.self_linkway == 0/}checked="checked"{//if/} /><label  for="way1">发布人手机号 <em id="u_moblie">{/$company_account_info[$job.account_id]['mobile_phone']/}</em></label></p>
+                    <p style="{/if empty($company_account_info[$job.account_id]['link_tel'])/}display: none{//if/}"><input type="radio" class="radio" name="newLinkway" id="way3" value="5" {/if $job.self_linkway == 5/}checked="checked"{//if/} /><label  for="way3">发布人办公电话<em id="u_tel">{/$company_account_info[$job.account_id]['link_tel']/}</em></label></p>
+                    <p><input type="radio" class="radio" name="newLinkway" id="way2" value="1" {/if $job.self_linkway == 1/}checked="checked"{//if/} /><label for="way2">其他电话</label></p>
+                    <div class="newContact" style="{/if $job.self_linkway != 1 || empty($linkways) || count($linkways)<1/}display:none;{//if/}">
+                        <ul>
+                            {/section name=link loop=$linkways/}
+                            <li>
+                                    <span class="formText">
+                                        <input id="txtLinkMan{/$smarty.section.link.index+1/}" name="txtLinkMan{/$smarty.section.link.index+1/}" type="text" {/if $job.self_linkway != 1 || $job.open_linkway == 0/}disabled="disabled" {//if/} value="{/if $job.self_linkway == 1 && !empty($linkways) && count($linkways)>0/}{/$linkways[link].link_man/}{//if/}" style="width:120px;" class="text conPeople watermark" watermark="输入电话号码">
+                                    </span>
+                                    <span class="formText" style="margin-left:15px;">
+                                        <input id="txtLinkTel{/$smarty.section.link.index+1/}" name="txtLinkTel{/$smarty.section.link.index+1/}" type="text" {/if $job.self_linkway != 1 || $job.open_linkway == 0/}disabled="disabled" {//if/} value="{/if $job.self_linkway == 1 && !empty($linkways) && count($linkways)>0/}{/$linkways[link].linkman_tel/}{//if/}" style="width:80px;" class="text conPhone watermark" watermark="分机号">
+                                    </span>
+                                <span class="tipTxt" style="margin-left:15px;display: none"><a href="javascript:void(0);" onclick="jobAdd.addNewLinkWay(this);">增加</a>{/if $smarty.section.link.index!=0/}<a href="javascript:void(0);" onclick="jobAdd.delNewLinkWay(this);">删除</a>{//if/}</span>
+                                    <span class="tipPos">
+                                        <span class="tipLay">
+                                        </span>
+                                    </span>
+                            </li>
+                            {/sectionelse/}
+                            <li>
+                                    <span class="formText">
+                                        <input id="txtLinkMan1" disabled="disabled" name="txtLinkMan1" type="text" watermark="输入电话号码" style="width:120px;" class="text conPeople watermark">
+                                    </span>
+                                    <span class="formText" style="margin-left:15px;">
+                                        <input id="txtLinkTel1" disabled="disabled" name="txtLinkTel1" type="text" watermark="分机号" style="width:80px;" class="text conPhone watermark">
+                                    </span>
+                                <span class="tipTxt" style="margin-left:15px;display: none"><a href="javascript:void(0);" onclick="jobAdd.addNewLinkWay(this);">增加</a></span>
+                                    <span class="tipPos">
+                                        <span class="tipLay">
+                                        </span>
+                                    </span>
+                            </li>
+                            {//section/}
+                        </ul>
+                    </div>
+                    <input type="hidden" name="newLinkWayCount" value="{/if empty($linkways) || sizeof($linkways) == 0/}1{/else/}{/sizeof($linkways)/}{//if/}">
+	                        </div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+					</div>
+					<div class="showMoreBtn"><i class="icon-AI-_-22"></i> 更多要求</div>
+                    <div class="hideMoreBtn" style="display:none"><i class="icon-AI-_-23"></i> 收起更多要求</div>
+				</div>
+			
+
+    {/if $isCqNewService && $is_show_refresh && $mod_type!='edit'/}
+    <div class="jobRefreshx">
+        <label for="">
+            <input type="checkbox" value="1" id="isShowRefresh"{/if $can_cash || $can_point_refresh/}checked{//if/} name="is_refresh" {/if !$can_cash && !$can_point_refresh/}disabled{//if/} />
+            同时刷新职位
+        </label>
+        {/if !$can_cash && !$can_point_refresh/}
+                  <span>
+                        		 您的刷新点不足，无法刷新职位，请联系招聘顾问购买<br />
+                        		 未刷新的职位只能展示在刷新职位之后，难以被求职者看到并投递
+                  </span>
+        {//if/}
+        <span class="warning" style="display: none;">未刷新的职位只能展示在刷新职位之后，难以被求职者看到并投递</span>
+        {/if $can_cash/}
+        <span class="showNeed">需消耗<em style="color:red;font-weight: bold">{/$selling/}</em>元推广金（优先使用刷新点，刷新点不足则扣取推广金/余额）</span>
+        {//if/}
+        {/if $can_point_refresh/}
+        <span class="showNeed">需消耗<em style="color:red;font-weight: bold">1</em>个刷新点（优先使用刷新点，刷新点不足则扣取推广金/余额）</span>
+        {//if/}
+    </div>
+    <script>
+        $('#isShowRefresh').on('change',function(){
+            if($(this).is(':checked')){
+                $('.warning').hide();
+                $('.showNeed').show();
+            }else{
+                $('.warning').show();
+                $('.showNeed').hide();
+            }
+        })
+    </script>
+    {//if/}
+
+    {/if !empty($audit_jobcompany)/}
+    <div class="blackTip">
+        <i class="icon-kuaimi_tips_icon"></i>
+                            <span>
+                                {/if $audit_jobcompany["status_type"] == 0/}
+                                    您发布的职位将在审核后展示
+                                 {/else/}
+                                    近期由于您发布违规职位信息被举报，后续发布的职位将在审核后展示，请保证信息真实性以免被延长限制期
+                                {//if/}
+                            </span>
+    </div>
+    {/elseif $company_risk/}
+    <div class="blackTip">
+        <i class="icon-kuaimi_tips_icon"></i>
+                            <span>
+                                    您发布的职位将在审核后展示
+                            </span>
+    </div>
+    {//if/}
+                    
+    <div class="formBtn">
+        <a href="javascript:void(0);" class="btnsF16 btn1" id="{/if $isNewService&&$show_new_service/}newPublish{/else/}publish{//if/}" {/if !$isNewService || !$show_new_service/}onclick="jobAdd.modifyJob(this);"{//if/} >保存</a>
+    </div>
+</div>
+    <input type="hidden" name="is_new_service" value="{/if $isNewService/}1{/else/}0{//if/}">
+    <input type="hidden" name="is_quality" id="is_quality" value="1">
+    <input type="hidden" name="job_num" id="job_num" value="1">
+    <input type="hidden" name="mod_type" id="mod_type" value="{/$mod_type/}">
+        </hgroup>
+    </section>
+</div>
+</form>
+{/if $isNewService&&$show_new_service/}
+<div id="choice-job-type" class="main-content">
+    <div class="body">
+        <div class="type">请设置职位类型：</div>
+        <div class="type-con">
+
+            <div class="type-item pro active">
+                <i  class="l icon-AI-_-19 icon-particulars-require"></i>
+                <div class="r">
+                    <div class="name">精品职位<span class="pro">推荐</span></div>
+                    <div class="desc-1">优先展示职位，招聘效果加倍</div>
+                    {/if $job_boutique_release<=10/}<p class="sub-num">剩余精品职位数:{/$job_boutique_release/}</p>{//if/}
+                    <div class="pro-count">剩余精品点：<span>{/$point_job_boutique_left/}</span> {/if $point_job_boutique_left<=20&&$resource_type!=2/}<a href="javascript:void(0);" id="buyPoint">购买精品点</a>{//if/}</div>
+                    <div class="desc-2">精品职位每24小时需要消耗1个精品点</div>
+                </div>
+            </div>
+            <div class="type-item simple">
+                <i class="l icon-AI-_-19"></i>
+                <div class="r">
+                    <div class="simple-name">免费职位<span class="simple-count">剩余免费职位数：<span>{/$job_count_left_free/}</span></span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="other-info">
+        <span class="pro-info c1" style="{/if empty($point_job_boutique_left) && !empty($job_boutique_release)/}display:block;{/else/}display: none;{//if/}">精品点不足，发布后无法展示，只能暂存在“已结束招聘”职位中{/if $resource_type==2/}，<br/>请联系主账号为您分配更多资源{//if/}</span>
+        <span class="pro-info c2" style="{/if empty($job_boutique_release)/}display:block;{/else/}display: none;{//if/}">精品职位数不足，发布后无法展示，只能暂存在“已结束招聘”职位中{/if $resource_type==2/}，<br/>请联系主账号为您分配更多资源{//if/}</span>
+        <span class="pro-info c3" style="{/if $is_pay/}display:block;{/else/}display: none;{//if/}">此职位已扣过精品点，24小时内不会重复扣点。</span>
+        <span class="simple-info" style="display: none;">免费职位数不足，发布后无法展示，只能暂存在“已结束招聘”职位中{/if $resource_type==2/}，<br/>请联系主账号为您分配更多资源{//if/}</span>
+    </div>
+    <div class="btns">
+        <div class="btn-con">
+            <div class="confirm new_publish" id="modPublish">{/if empty($point_job_boutique_left) ||empty($point_job_boutique_left)/}暂存职位{/else/}确定{//if/}</div>
+            <div class="cancel" id="cancelPub">取消</div>
+        </div>
+    </div>
+</div>
+{//if/}
+{/include file="footer.html"/}
+<section class="floatRT"><a href="{/get_url rule='/about/message' domain='main'/}" target="_blank" class="serviceLink">我有问题要反馈</a><b></b></section>
+<script>
+    $('#choice-job-type .body .type-con .type-item').on('click',function () {
+        $(this).siblings().removeClass('active').find('i').removeClass('icon-particulars-require')
+        $(this).addClass('active').find('i').addClass('icon-particulars-require');
+        var jobNum = 1;
+        if($(this).hasClass('pro')){
+            $('#is_quality').val(1);
+            if('{/$point_job_boutique_left/}'<jobNum && '{/$job_boutique_release/}'>=jobNum && '{/$is_pay/}'==''){
+                $('#choice-job-type .other-info span').hide().siblings('.c1').show();
+                $('#choice-job-type .btns .confirm').text('暂存职位');
+            }else if('{/$job_boutique_release/}'<jobNum) {
+                $('#choice-job-type .other-info span').hide().siblings('.c2').show();
+                $('#choice-job-type .btns .confirm').text('暂存职位');
+            }else if('{/$is_pay/}'&&'{/$job_boutique_release/}'>=jobNum){
+                $('#choice-job-type .other-info span').hide().siblings('.c3').show();
+                $('#choice-job-type .btns .confirm').text('确定')
+            }else{
+                $('#choice-job-type .other-info span').hide();
+                $('#choice-job-type .btns .confirm').text('确定')
+            }
+        }else {
+            $('#is_quality').val(0);
+            if(Number($(this).find('.simple-count span').text())<jobNum){
+                $('#choice-job-type .other-info span').hide().siblings('.simple-info').show();
+                $('#choice-job-type .btns .confirm').text('暂存职位')
+            }else {
+                $('#choice-job-type .other-info span').hide()
+                $('#choice-job-type .btns .confirm').text('确定')
+            }
+        }
+    })
+
+</script>
+<script type="text/javascript">
+
+//hbjs.use('@jobSorter', function (m) {
+	//var $ = m['jquery'],
+		//jobSorter = m['product.jobSort.jobSorter'];
+var mapDialog,
+    o_mapDialog,newPublish,dialog_msg,is_quality;
+
+//hbjs.use('product.jobSort.jobSorter, widge.overlay.hbDialog', function (jobSorter, Dialog, $, util, cookie){
+hbjs.use('@jobSorter, @dialog', function (m) {
+
+	var $ = m['jquery'],
+		jobSorter = m['product.jobSort.jobSorter'],
+		Dialog = m['widge.overlay.hbDialog'];
+
+    var jobsortInput = $('#newJobsort'),
+        jobsortHidInput = $('input[name=main_jobsort]'),
+		jobsortInput2 = $('#nextJobsort'),
+        jobsortHidInput2 = $('input[name=next_jobsort]'),
+		txtStation = $('input[name=txtStation]');
+
+    $("#jobType3").on('click',function() {
+        if ($(this).is(":checked")) {
+            $("#jobtype").val($(this).val());
+        } else {
+            $("#jobtype").val(1);
+        }
+    });
+
+	var newJobsort = new jobSorter({
+			trigger: jobsortInput,
+			selectedId:  jobsortHidInput.val(),
+			maxLength: 1,
+			search: {
+				dataSource: 'http://www.huibo.com/jobsort/searchJobsort?jobSortName={{query}}&pageSize={{pageSize}}&callback=jobsortcallback',
+				size: 10
+			},
+			model: true
+		});
+		/*
+		nextJobsort = new jobSorter({
+			trigger: jobsortInput2,
+			selectedId:  jobsortHidInput2.val(),
+			maxLength: 1,
+			search: {
+				dataSource: 'http://www.huibo.com/jobsort/searchJobsort?jobSortName={{query}}&pageSize={{pageSize}}&callback=jobsortcallback',
+				size: 10
+			},
+			model: true
+		});
+		*/
+
+	newJobsort.on('submit', function(e){
+		var val = e.data.label.join(',');
+		if(val){
+			txtStation.val(val);
+			txtStation.trigger('blur');
+            txtStation.focus();
+		}
+	});
+
+
+    //应届生专员 应届生专业  main_professionalSort
+
+    var newProfessionalSort = $('#newProfessionalSort');
+    var newProfessionalSortHidInput =  $('input[name=main_professionalSort]');
+    var newJobsort = new jobSorter({
+        dialog:{title:'请选择应届生专业'},
+		trigger: newProfessionalSort,
+		selectedId:newProfessionalSortHidInput.val(),
+		maxLength: 5,
+		search: {
+			dataSource: '{/$siteurl.main/}/profession/SearchJobsort?jobSortName={{query}}&pageSize={{pageSize}}&callback=jobsortcallback',
+			size: 10,
+            template:{empty: '<div class="empty">没找到专业，换个关键词试试！</div>'}
+		},
+        url: '{/version file="professionData.js"/}'
+	});
+
+
+	$('#addHtml').on('click', function() {
+		$("#hidLastJobsort").show();
+        $(this).hide();
+	});
+	$('#delHtml').on('click', function(){
+		 jobsortHidInput2.val('');
+		 nextJobsort.clearAllItem();
+         $("#hidLastJobsort").hide();
+         $("#addHtml").css({'display':'inline-block'});
+	});
+
+	txtStation.blur(function() {
+		jobAdd.getJobTemplate($(this).val());
+		// jobAdd.recommendJob();
+	});
+	o_mapDialog = new Dialog({
+		close: '╳',
+        idName: 'map_dialog1',
+        width: 850,
+		isAjax: true
+	});
+    newPublish = new Dialog({
+        close: '╳',
+        idName: 'newPublishs',
+        title: '发布职位',
+        width: 425,
+        isAjax: true,
+        content: '#choice-job-type'
+    });
+    dialog_msg = new Dialog({
+        close: '╳',
+        idName: 'buyPoints',
+        width: 425,
+        title: '购买精品点',
+        isAjax: true,
+        isOverflow : false,
+        content: '{/get_url rule="/index/GetHRManager/"/}from-buy'
+    });
+    $('#newPublish').on('click', function () {
+        //var jobs = $('.address_ids').val();
+        var job_num = 1;
+         is_quality = $('#is_quality').val();
+
+
+        if(job_num >'{/$point_job_boutique_left/}'&&'{/$job_boutique_release/}'>=job_num &&is_quality == 1 && '{/$is_pay/}'!=1 ){
+            $('#choice-job-type .other-info span').hide().siblings('.c1').show();
+            $('#choice-job-type .btns .confirm').text('暂存职位');
+        }else if(job_num >'{/$job_boutique_release/}' &&is_quality == 1){
+            $('#choice-job-type .other-info span').hide().siblings('.c2').show();
+            $('#choice-job-type .btns .confirm').text('暂存职位');
+        }else if('{/$job_count_left_free/}' <job_num && is_quality == 0){
+            $('#choice-job-type .other-info span').hide().siblings('.simple-info').show();
+            $('#choice-job-type .btns .confirm').text('暂存职位')
+        }else if('{/$is_pay/}' && is_quality == 1 &&'{/$job_boutique_release/}' >=1){
+            $('#choice-job-type .other-info span').hide().siblings('.c3').show();
+            $('#choice-job-type .btns .confirm').text('确定');
+        }else{
+            $('#choice-job-type .other-info span').hide();
+            $('#choice-job-type .btns .confirm').text('确定');
+        }
+//        if(job_num >'{/$job_boutique_release/}' &&is_quality == 1){
+//            $('#choice-job-type .other-info span').hide().siblings('.c2').show();
+//            $('#choice-job-type .btns .confirm').text('暂存职位');
+//        }else{
+//            $('#choice-job-type .other-info span').siblings('.c2').hide();
+//            $('#choice-job-type .btns .confirm').text('确定');
+//        }
+//        if(job_num >'{/$point_job_boutique_left/}'&&'{/$job_boutique_release/}'>=job_num &&is_quality == 1){
+//            $('#choice-job-type .other-info span').hide().siblings('.c1').show();
+//            $('#choice-job-type .btns .confirm').text('暂存职位');
+//        }else{
+//            $('#choice-job-type .other-info span').siblings('.c1').hide();
+//            $('#choice-job-type .btns .confirm').text('确定');
+//        }
+//
+//        if('{/$job_count_left_free/}' <job_num && is_quality == 0){
+//            $('#choice-job-type .other-info span').hide().siblings('.simple-info').show();
+//            $('#choice-job-type .btns .confirm').text('暂存职位')
+//        }else if('{/$job_count_left_free/}'>=job_num && is_quality == 0){
+//            $('#choice-job-type .other-info span').siblings('.simple-info').hide();
+//            $('#choice-job-type .btns .confirm').text('确定')
+//        }
+//        if('{/$is_pay/}' && is_quality == 1 &&'{/$job_boutique_release/}' >=1){
+//            $('#choice-job-type .other-info span').hide().siblings('.c3').show();
+//            $('#choice-job-type .btns .confirm').text('确定')
+//        }
+
+        $('#job_num').val(job_num);
+        if(jobAddValid.form()){
+        newPublish.show();
+          }
+    });
+    $('#buyPoint').on('click', function () {
+        dialog_msg.show();
+    });
+    $('#modPublish').on('click', function () {
+        jobAdd.modifyJob('#newPublish');
+        newPublish.hide();
+    });
+    $('#cancelPub').on('click', function () {
+        newPublish.hide();
+    });
+	$('#editMapBtn').on('click', function(){
+		o_mapDialog.setContent({
+            data:{id:$("input[name=address_id]").val(), max_count: 1},
+			content: '{/get_url rule="/job/selectAddress/"/}'
+		}).show();
+	});
+
+	/*
+    jobsortInput.on('click', function() {
+        $(this).blur();
+        type = 1;
+        jobsortDialog.show();
+    });
+
+    jobsortInput2.on('click', function() {
+        $(this).blur();
+        type = 2;
+        jobsortDialog.show();
+    });
+
+    jobsortDialog.after('show', function() {
+        if (!jobsortComboBoxer) {
+            if (type == 1) {
+                var curLabel = $("#first_jobsort .seled").html(),
+                    curValue = jobsortHidInput.val();
+            } else {
+                var curLabel = $("#next_jobsort .seled").html(),
+                    curValue = jobsortHidInput2.val();
+            }
+
+            jobsortComboBoxer = new comboBoxer({
+                element: this.query('#jobsortDropListGroup')
+            });
+
+            jobsortComboBoxer.addCombos({
+                element: '.ui_dropList:eq(0)',
+                dataSource: '{/$siteurl.main/}/jobsort/GetJobsortInfo'
+            }).addCombos({
+                element: '.ui_dropList:eq(1)',
+                dataSource: '{/$siteurl.main/}/jobsort/GetJobsortInfo?jobsort={{query}}',
+                options: {isCache: true}
+            }).addCombos({
+                element: '.ui_dropList:eq(2)',
+                dataSource: '{/$siteurl.main/}/jobsort/GetJobsortInfo?jobsort={{query}}',
+                options: {isCache: true}
+            });
+
+            jobsortComboBoxer.getCombos().on('change', function (e) {
+                curLabel = e.label;
+                curValue = e.value;
+            }).on('rended', function(e){
+                if (e.data.value === jobsortHidInput.val()) {
+                    e.data.className = this.get('selectClassName');
+                }
+            });
+
+            this.query('#jobsortYesBtn').on('click', function() {
+                if (!curLabel) {
+                    var msg = "请选择第三级菜单";
+                    ConfirmBox.timeBomb(msg, {
+                        name : "fail",
+                        timeout : 1000,
+                        width: fontSize * msg.length + pWidth
+                    });
+                    return;
+                }
+
+                var h = "<span class='seled'>"+curLabel+"</span>";
+                if (type == 1) {
+                    $("#first_jobsort").html(h);
+                    jobsortHidInput.val(curValue);
+                    if ($("#txtStation").val() == "") {
+                        $("#txtStation").val(curLabel);
+                    }
+                } else {
+                    $("#next_jobsort").html(h);
+                    jobsortHidInput2.val(curValue);
+                }
+
+                jobsortDialog.hide();
+            });
+
+            this.query('#jobsortCancelBtn').on('click', function(){
+                jobsortDialog.hide();
+            });
+        }
+    });
+	*/
+
+});
+
+
+var station            = '';
+var template           = "";
+var currenDate         = new Date();
+var isContentConfirm   = false;
+var isOtherNeedConfirm = false;
+var jobAddValid;
+var jobAdd = {
+    hasRefuse : 0,
+    initialize : function() {
+        //初始化控件
+        this._initControl();
+        $('.watermark').watermark2();
+    },
+    setWelfare : function(defaultReward, otherReward) {
+        var reward        = $("#hidDefaultReward").val(),
+            other_rewards = $("#hidOtherReward").val(),
+
+        params = [];
+        if ($("#hidDefaultReward").val())
+            params.push('defaultReward=' + $("#hidDefaultReward").val());
+
+        if ($("#hidOtherReward").val())
+            params.push('otherReward=' + $("#hidOtherReward").val());
+
+        var url = '/reward/jobAddReward/?' + params.join("&");
+        var url = encodeURI(url);
+        $.showModal(url, {title : '福利待遇'}); //福利亮点mijing
+    },
+    setCharac : function(defaultFea, otherFea) {
+        $.showModal('/feature/index/jobid-{/$job_flag/}-defaultFea-'+defaultFea+'-otherFea-'+otherFea,{title:'岗位特点'});//设置岗位特点mijing
+    },
+    refreshReward : function(defaultReward, defaultRewardName, otherReward) {
+            $("#hidDefaultReward").val(defaultReward);
+            $("#hidOtherReward").val(otherReward);
+
+            //重新展示页面
+            var reward_html       = '';
+            var defaultReward_arr = [];
+            var otherReward_arr   = [];
+            if (defaultRewardName != '') {
+                defaultReward_arr = defaultRewardName.split(',');
+            }
+
+            if (otherReward != '') {
+                otherReward_arr = otherReward.split(',');
+            }
+
+            for (var i = 0; i < defaultReward_arr.length; i++) {
+                reward_html = reward_html + "<span class='flitem'>" + defaultReward_arr[i] + "</span>";
+            }
+            for (var k = 0; k < otherReward_arr.length; k++) {
+                reward_html = reward_html + "<span class='flitem'>" + otherReward_arr[k] + "</span>";
+            }
+
+            reward_html = reward_html+ '  <a href="javascript:void(0)" onclick="jobAdd.setWelfare(\''+defaultReward+'\',\''+otherReward+'\')">编辑</a>';
+            $("#selectedReward").html(reward_html);
+    },
+    refreshFea:function(defaultFea, defaultFeaName, otherFea){
+        $("#hidDefaultFea").val(defaultFea);
+        $("#hidOtherFea").val(otherFea);
+
+        //重新展示页面
+        var fea_html       = '';
+        var defaultFea_arr = [];
+        var otherFea_arr   = [];
+        if (defaultFeaName != '') {
+            defaultFea_arr = defaultFeaName.split(',');
+        }
+        if (otherFea != '') {
+            otherFea_arr = otherFea.split(',');
+        }
+        for (var i = 0; i < defaultFea_arr.length; i++) {
+            fea_html = fea_html + "<span class='flitem'>" + defaultFea_arr[i] + "</span>";
+        }
+        for (var k = 0; k < otherFea_arr.length; k++) {
+            fea_html = fea_html + "<span class='flitem'>" + otherFea_arr[k] + "</span>";
+        }
+        fea_html = fea_html + '  <a href="javascript:void(0)" onclick="jobAdd.setCharac(\'' + defaultFea + '\',\'' + otherFea + '\')">点击添加</a>';
+        $("#selectedFea").html(fea_html);
+    },
+	/*
+    addJobsort : function() {
+        $("#hidLastJobsort").show();
+        $("#addHtml").hide();
+    },
+    deleteJobsort : function() {
+         $("input[name='next_jobsort']").val('');
+         $("#next_jobsort").html('');
+         $("#hidLastJobsort").hide();
+         $("#addHtml").css({'display':'inline-block'});
+    },
+	*/
+    //承诺职位相关规则弹窗
+    aboutmustreply : function() {
+         $.showModal('/job/aboutMustReply/', {title:'承诺职位相关规则'});//设置岗位特点mijing
+    },
+    //承诺职位弹窗
+    mustreply : function(txtReApplyType, jobid) {
+        var baseReApplyType = $("input[name='txtBaseReApplyType']").val();
+        var hasCheckV = $(".txtReApplyType:checked").val();
+        var hasRefuse = this.hasRefuse;
+        {/if $no_reply_num > 0/}
+        if (hasRefuse == 0) {
+            $.showModal('/job/mustReply/txtReApplyType-' + txtReApplyType + '-jobid-' + jobid, {title:'温馨提示'});//
+            $(".txtReApplyType:checked").prop({"checked" : false});
+        }
+        {/else if $mustreply_job_status == 1/}
+        if (baseReApplyType == 0) {
+            $.showModal('/job/mustReply/txtReApplyType-' + txtReApplyType + '-jobid-' + jobid, {title:'承诺职位须知'});//
+            $(".txtReApplyType:checked").prop({"checked" : false});
+        }
+        {/else/}
+        if (baseReApplyType == 0) {
+            $.showModal('/job/mustReply/txtReApplyType-' + txtReApplyType + '-jobid-' + jobid, {title:'温馨提示'});//
+            $(".txtReApplyType:checked").prop({"checked" : false});
+        }
+        {//if/}
+    },
+    _initControl:function(){
+        //初始化岗位级别下拉控件
+        $('#jobLevelDrop').droplist({
+            selectValue : '{/$job.job_level/}',
+            noSelectClass : 'gray',
+            inputWidth : 125,
+            style : 'width:133px;',
+            hddName : 'hddJoblevel',
+            items : {/$job_level_json/},
+            onSelect : function(i, name) {
+            }
+        });
+
+        //添加地图
+        /*var map = new BMap.Map("mapCon");
+        map.enableScrollWheelZoom();
+        var pt = new BMap.Point({/$job['map_x']/},{/$job['map_y']/});
+
+        var myIcon = new BMap.Icon("{/$siteurl.style/}/img/common/maplabel.png", new BMap.Size(33,50));
+		marker = new BMap.Marker(pt,{icon:myIcon});  // 创建标注
+		map.addOverlay(marker);              // 将标注添加到地图中
+        marker.enableDragging();
+		marker.setTitle('请拖动至上班位置');
+
+		var label = new BMap.Label("请拖动至上班位置",{offset:new BMap.Size(35,5)});
+		marker.setLabel(label);
+
+		//添加事件，在拖动时去掉文字提示
+		marker.addEventListener('dragstart',function(){
+			label.setStyle({display:'none'});
+		});
+        var geoc = new BMap.Geocoder();
+		marker.addEventListener('dragend',function(e){
+            var poi = marker.getPosition();
+            geoc.getLocation(poi, function(rs){
+                var addComp = rs.addressComponents;
+                $("#addInfo").val(addComp.province + addComp.city + addComp.district + addComp.street + addComp.streetNumber);
+                $(".txtLabel").hide();//清除水印
+                $('input[name=map_x]').val(marker.getPosition().lng);
+                $('input[name=map_y]').val(marker.getPosition().lat);
+            });
+
+		});
+        map.centerAndZoom(pt,18);
+
+        var ac = new BMap.Autocomplete(    //建立一个自动完成的对象
+            {"input" : "addInfo",
+            "location" : map
+        });
+        ac.setInputValue("{/$job.add_info/}");
+        ac.addEventListener("onhighlight", function(e) {  //鼠标放在下拉列表上的事件
+        var str = "";
+            var _value = e.fromitem.value;
+            var value = "";
+            if (e.fromitem.index > -1) {
+                value = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
+            }
+            str = "FromItem<br />index = " + e.fromitem.index + "<br />value = " + value;
+
+            value = "";
+            if (e.toitem.index > -1) {
+                _value = e.toitem.value;
+                value = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
+            }
+            str += "<br />ToItem<br />index = " + e.toitem.index + "<br />value = " + value;
+            G("searchResultPanel").innerHTML = str;
+        });
+
+        var myValue;
+        ac.addEventListener("onconfirm", function(e) {    //鼠标点击下拉列表后的事件
+            var _value = e.item.value;
+            myValue = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
+            G("searchResultPanel").innerHTML ="onconfirm<br />index = " + e.item.index + "<br />myValue = " + myValue;
+            setPlace();
+        });
+
+        function G(id) {
+            return document.getElementById(id);
+        }
+        function setPlace(){
+            map.clearOverlays();    //清除地图上所有覆盖物
+            function myFun(){
+                var pp = local.getResults().getPoi(0).point;    //获取第一个智能搜索的结果
+                map.centerAndZoom(pp, 18);
+                marker.setPosition(pp);
+                map.addOverlay(marker);    //添加标注
+                $('input[name=map_x]').val(pp.lng);
+                $('input[name=map_y]').val(pp.lat);
+            }
+            var local = new BMap.LocalSearch(map, { //智能搜索
+              onSearchComplete: myFun
+            });
+            local.search(myValue);
+        }
+
+        //初始化工作地点控件
+        $('#area').singleArea({
+            hddName : 'hddArea',
+            showLevel : 4,
+            {/if $account_type == "NotMemberTypeArea"/}
+            controlClass:'zindex',
+            disabled: [true, true],
+            onClick: function(data) {
+                if (data.level < 2) {
+                    $.showModal("{/get_url rule="/job/typeArea/"/}", {title : '友情提示'});
+                }
+            }
+            {/else/}
+            controlClass:'zindex',
+            onSelect:function(a){
+                var no_child_area_ids = {/$no_child_area_ids/};
+                //if(a.level == 2 || $.inArray(a.id,no_child_area_ids) >= 0){
+                    var areaDesc = '';
+                    var areas = $('#area').getAreaNames();
+                    for(var i=0;i<areas.length;i++){
+                        areaDesc += areas[i] ;
+                    }
+                    if(myValue != areaDesc){
+                        $("#addInfo").val(areaDesc);
+                        $(".txtLabel").hide();//清除水印
+                        myValue = areaDesc;
+                        setPlace();
+                    }
+                //}
+            }
+            {//if/}
+        });
+
+        $('#area').setArea('{/$job.area_id/}');
+        //详细地址焦点离开
+        $("#addInfo").blur(function(){
+            if($.trim($(this).val()) != '' && myValue != $.trim($(this).val())){
+                myValue = $.trim($(this).val());
+                setPlace();
+            }
+        });*/
+        //初始化薪资下拉控件1
+        $('#salaryDrop1').droplist({
+            {/if $job.salary_type == 0/}defaultTitle:'{/$job.min_salary/}',{//if/}
+            isCanWrite : true,
+            noSelectClass : 'gray',
+            inputWidth : 50,
+            hddName : 'hddSalary1',
+            items : {/$salary_json/},
+            onSelect : function(i, name) {
+                $('input[name=hddSalary1]').trigger('blur');
+            }
+        });
+
+        //初始化薪资下拉控件2
+        $('#salaryDrop1End').droplist({
+            {/if $job.salary_type == 0/}defaultTitle:'{/$job.max_salary/}',{//if/}
+            isCanWrite : true,
+            noSelectClass : 'gray',
+            inputWidth : 50,
+            hddName : 'hddSalary1End',
+            items : {/$salary_json/},
+            onSelect : function(i, name) {
+                $('input[name=hddSalary1End]').trigger('blur');
+            }
+        });
+
+        //初始化薪资下拉控件3
+        $('#salaryDrop2').droplist({
+            {/if $job.salary_type != 0/}defaultTitle:'{/$job.base_min_salary/}',{//if/}
+            isCanWrite : true,
+            noSelectClass : 'gray',
+            inputWidth : 50,
+            hddName : 'hddSalary2',
+            items : {/$salary_json/},
+            onSelect : function(i,name) {
+                $('input[name=hddSalary2]').trigger('blur');
+            }
+        });
+
+        //初始化薪资下拉控件4
+        $('#salaryDrop2End').droplist({
+            {/if $job.salary_type != 0/}defaultTitle:'{/$job.base_max_salary/}',{//if/}
+            isCanWrite : true,
+            noSelectClass : 'gray',
+            inputWidth : 50,
+            hddName : 'hddSalary2End',
+            items : {/$salary_json/},
+            onSelect : function(i, name) {
+                $('input[name=hddSalary2End]').trigger('blur');
+            }
+        });
+
+        //初始化薪资下拉控件5
+        $('#salaryDrop3').droplist({
+            {/if $job.salary_type != 0/}defaultTitle:'{/$job.min_salary/}',{//if/}
+            isCanWrite : true,
+            noSelectClass : 'gray',
+            inputWidth : 50,
+            hddName : 'hddSalary3',
+            items : {/$salary_json/},
+            onSelect : function(i, name) {
+                $('input[name=hddSalary3]').trigger('blur');
+            }
+        });
+
+        //初始化薪资下拉控件6
+        $('#salaryDrop3End').droplist({
+            {/if $job.salary_type != 0/}defaultTitle:'{/$job.max_salary/}',{//if/}
+            isCanWrite : true,
+            noSelectClass : 'gray',
+            inputWidth : 50,
+            hddName : 'hddSalary3End',
+            items : {/$salary_json/},
+            onSelect : function(i, name) {
+                $('input[name=hddSalary3End]').trigger('blur');
+            }
+        });
+
+        //初始化试用期下拉控件
+        $('#probationPeriodDrop').droplist({
+            selectValue:'{/if empty($job.period)/}04{/else/}{/$job.period/}{//if/}',
+            noSelectClass : 'gray',
+            inputWidth : 142,
+            style : 'width:150px;',
+            hddName : 'hddPeriod',
+            items : {/$probation_period_json/},
+            onSelect : function(i, name) {
+                if (i != 0 && i != '01') {
+                    $('#periodSpan').show();
+                    $('#periodInput').show();
+                    $('#periodPercent').show();
+                    $('input[name="txtProbationPeriodFee"]').attr('disabled',false);
+                } else {
+                    $('#periodSpan').closest('div.r').find('span.tipLay').find('span').removeClass().attr('style','display:inline-block;').html('');
+                    $('input[name="txtProbationPeriodFee"]').attr('disabled','disabled');
+                    $('#periodSpan').hide();
+                    $('#periodInput').hide();
+                    $('#periodPercent').hide();
+                }
+            }
+        });
+
+        //初始化有效期
+        jobAdd.changeEndtime($('input[name="txtValidDays"]'));
+
+        //初始化工作年限下拉控件
+        $('#workYearDrop').droplist({
+            selectValue : '{/if $job.work_year_id=='0'/}all{/else/}{/$job.work_year_id/}{//if/}',
+            noSelectClass : 'gray',
+            inputWidth : 105,
+            style : 'width:113px;',
+            hddName : 'hddWorkyear',
+            items : {/$workyear_json/},
+            onSelect : function(i, name) {
+            }
+        });
+
+        //初始化学历下拉控件
+        $('#degreeDrop').droplist({selectValue:'{/if $job.degree_id==0/}all{/else/}{/$job.degree_id/}{//if/}',noSelectClass:'gray',inputWidth:105,style:'width:113px;',hddName:'hddDegree',items:{/$degree_json/},onSelect:function(i,name) {
+        }});
+				
+				//初始化薪资
+				$('#moreSalarySelect').droplist({
+				    defaultTitle: '请选择',
+                    selectValue : "{/$job['salary_month_num']/}",
+				    noSelectClass: 'gray',
+				    inputWidth: 105,
+				    style: 'width:113px;',
+				    hddName: 'moreSalarySelect',
+				    items: {/$more_salary_json/},
+				    onSelect: function (i, name) {
+				    }
+				});
+
+        //初始化性别要求下拉控件
+        $('#sexDrop').droplist({selectValue:'{/$job.sex/}',noSelectClass:'gray',inputWidth:105,style:'width:113px;',hddName:'hddSex',items:{/$sex_json/},onSelect:function(i,name) {
+        }});
+
+        //初始化年龄要求下拉控件1
+        $('#ageDrop1').droplist({selectValue:'{/$job.age_lower/}',noSelectClass:'gray',inputWidth:105,hddName:'hddAge1',items:{/$age_json/},onSelect:function(i,name) {
+        }});
+
+        //初始化年龄要求下拉控件2
+        $('#ageDrop2').droplist({selectValue:'{/$job.age_upper/}',noSelectClass:'gray',inputWidth:105,hddName:'hddAge2',items:{/$age_json/},onSelect:function(i,name) {
+        }});
+
+        //初始化语言下拉控件
+        $('#languageDrop').droplist({selectValue:'{/$job.language_id/}',noSelectClass:'gray',inputWidth:105,style:'width:113px;',hddName:'hddLanguage',items:{/$language_json/},onSelect:function(i,name) {
+        }});
+		
+		//			7.19
+			//发布人下拉
+			$('#recuiterDrop').droplist({
+                selectValue: '{/$job.account_id/}',
+                noSelectClass: 'gray',
+                inputWidth: 105,
+                style: 'width:105px;',
+                hddName: 'param_account_id',
+                items: $.parseJSON('{/$json_account_info/}'),
+                onSelect: function (i, name) {
+                }
+           });
+           //邮箱下拉
+            $('#emailDrop').droplist({
+                selectValue: '{/$job.allow_email/}'==1?0:1,
+                noSelectClass: 'gray',
+                inputWidth: 105,
+                style: 'width:105px;',
+                hddName: 'toMail',
+                items: [{
+                	id:'0',
+                	name:'不需要'
+                },{
+                	id:'1',
+                	name:'需要'
+                }],
+                onSelect: function (i, name) {
+                	if(i==1){
+                		$('.mailLst').show()
+                		$('#ulEmailList').find('input').attr('disabled',false);
+                	}else{
+                		$('.mailLst').hide()
+                		$('#ulEmailList').find('input').attr('disabled','disabled');
+                	}
+                }
+            });
+            //回复承诺下拉
+            var mustreply_job_status='{/$mustreply_job_status/}';
+            if(mustreply_job_status!=3){
+	            $('#promiseDrop').droplist({
+	                selectValue: mustreply_job_status==2 ? '0' : '{/$re_apply_type/}',
+	                noSelectClass: 'gray',
+	                inputWidth: 105,
+	                style: 'width:105px;',
+	                hddName: 'txtReApplyType',
+	                items: [{
+	                	id:'0',
+	                	name:'暂不承诺'
+	                },{
+	                	id:'2',
+	                	name:'2工作日内回复'
+	                },{
+	                	id:'5',
+	                	name:'5工作日内回复'
+	                }],
+	                onSelect: function (i, name) {
+	                	console.log(i)
+			            var baseReApplyType = $("input[name='txtBaseReApplyType']").val();
+			            var jobid = $("input[name='jobID']").val();
+			            if(i != baseReApplyType){
+			                jobAdd.mustreply(txtReApplyType,jobid);
+			            }
+			            if(i!=0){
+                			$('.jobrulex').show()
+	                	}else{
+	                		$('.jobrulex').hide()
+	                	}
+	                }
+	            });
+            }
+            //联系方式下拉
+            var open_linkway='{/$job.open_linkway/}';
+			$('#contactDrop').droplist({
+                selectValue: open_linkway,
+                noSelectClass: 'gray',
+                inputWidth: 105,
+                style: 'width:105px;',
+                hddName: 'showLinkway',
+                items: [{
+                	id:'0',
+                	name:'不展示'
+                },{
+                	id:'1',
+                	name:'展示'
+                }],
+                onSelect: function (i, name) {
+                	var x=newLinkWayRadio.filter(':checked').val();
+                	if(i==1){
+                		$('div.newContact').find('input').attr('disabled', x==1?false:'disabled');
+                		$('.contactLst').show()
+                		//判断当前选择是否有填写手机号，没有则给个提示
+	                    if (x == 5) {
+	                        //办公电话
+	                        if (!$('#u_tel').text()) {
+	                            $.message("该职位招聘人没有填写办公电话哟", {title: "操作提示", icon: "fail"});
+	                            $('#way1').click(); //默认值给到4
+	                        }
+	                    } else if (x == 4) {
+	                        if (!$('#u_moblie').text()) {
+	                            $.message("该职位招聘人没有填写办公电话哟", {title: "操作提示", icon: "fail"});
+	                            $('#way3').click(); //默认值给到4
+	                        }
+	                    }
+                	}else{
+                		$('div.newContact').find('input').attr('disabled', 'disabled');
+                		$('.contactLst').hide();
+                		
+                	}
+                	
+                }
+            });
+	    	if(open_linkway==1){
+	    		console.log('disabled')
+	    		$('div.newContact').find('input').attr('disabled', $('input[name="newLinkway"]').filter(':checked').val()==1?false:'disabled');
+	    		$('.contactLst').show()
+	    	}else{
+	    		$('div.newContact').find('input').attr('disabled', 'disabled');
+	    		$('.contactLst').hide();
+	    	}
+		
+        //承诺职位弹窗开始
+        $(".txtReApplyType").click(function(){
+            var txtReApplyType =$(this).val();
+            var baseReApplyType = $("input[name='txtBaseReApplyType']").val();
+            var jobid = $("input[name='jobID']").val();
+            if(txtReApplyType !=baseReApplyType){
+                jobAdd. mustreply(txtReApplyType,jobid);
+            }
+        });
+
+        //承诺职位弹窗结束
+		var showLinkWayRadio = $('input[name="showLinkway"]');
+		var newLinkWayRadio = $('input[name="newLinkway"]');
+
+        showLinkWayRadio.click(function(){
+			var checked = newLinkWayRadio.filter(':checked').val();
+            if($(this).val() == '0'){
+				$('div.newContact').find('input').attr('disabled', 'disabled');
+                $('div.contactWayLst').hide();
+            }
+            else if($(this).val() == '1'){
+				$('div.newContact').find('input').attr('disabled', checked == 1 ? false : 'disabled');
+                $('div.contactWayLst').show();
+                //判断当前选择是否有填写手机号，没有则给个提示
+                var x = $('input[name=newLinkway]').filter(':checked').val(); // 5 u_tel
+                if(x == 5){
+                    //办公电话
+                    if(!$('#u_tel').text()){
+//                        $.message("该职位招聘人没有填写办公电话哟", {title: "操作提示", icon: "fail"});
+                        $('#way1').click(); //默认值给到4
+                    }
+                }else if(x == 4){
+                    if(!$('#u_moblie').text()){
+//                        $.message("该职位招聘人没有填写办公电话哟", {title: "操作提示", icon: "fail"});
+                        $('#way3').click(); //默认值给到4
+                    }
+                }
+            }
+        });
+        newLinkWayRadio.click(function(){
+            if($(this).val() == '1'){
+                $('div.newContact').show();
+                $('div.newContact').find('input').attr('disabled',false);
+            } else {
+                if($(this).val() == '4'){
+                    if(!$('#u_moblie').html()){
+//                        $.message("该职位招聘人没有填写手机号哟", {title: "操作提示", icon: "fail"});
+                    }
+                }else if($(this).val() == '5'){
+                    if(!$('#u_tel').html()){
+//                        $.message("该职位招聘人没有填写办公电话哟", {title: "操作提示", icon: "fail"});
+                    }
+                }
+
+                $('div.newContact').hide();
+                $('div.newContact').find('input').attr('disabled','disabled');
+			}
+        });
+        $('input[name="toMail"]').click(function(){
+            if($(this).val() == '0')
+            {
+                $('div.mailLst').hide();
+				$('#ulEmailList').find('input').attr('disabled','disabled');
+                //$('div.mailLst').find('input').attr('disabled','disabled');
+            }
+            else if($(this).val() == '1')
+            {
+                $('div.mailLst').show();
+				$('input[name=emailType]').trigger('click');
+
+                //$('div.mailLst').find('input').attr('disabled',false);
+            }
+        });
+        $('input[name=emailType]').click(function(){
+            if ($(this).val() == '3') {
+                $('#ulEmailList').show();
+                $('#ulEmailList').find('input').removeAttr('disabled');
+            } else {
+                $('#ulEmailList').hide();
+                $('#ulEmailList').find('input').attr('disabled','disabled');
+            }
+        });
+        $.setIndex('zindex');
+
+        $('input[name="radJobType"]').click(function(){
+            if ($(this).val() == '3'){
+                $('#jobLevelDrop').setDropListValue('01');
+            }else{
+                $('#jobLevelDrop').setDropListValue('02');
+            }
+        });
+
+        //验证职位类别
+        $.validator.addMethod("JobsortValidate", function() {
+            var jobs = $('input[name=main_jobsort]').val();
+            if (jobs==undefined || jobs=='' ) {
+                return false;
+            } else {
+                return true;
+            }
+        }, '请选择职位类别');
+
+        //验证期望地点
+        $.validator.addMethod("AreaValidate", function() {
+            var jobs = $('input[name=hddArea]').val();
+            if (jobs == undefined || jobs=='' ) {
+                return false;
+            } else {
+                return true;
+            }
+        }, '请选择地区');
+
+        //自定义验证方法试用期薪资
+        $.validator.addMethod("ProbationPeriodFeeValidate", function(value, element) {
+            var periodDropValue = $('#probationPeriodDrop').getDropListValue();
+            if(periodDropValue != 0 && periodDropValue != '01')
+            {
+                if($.trim(value) != '')
+                {
+                    return true;
+                }
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+            return false;
+
+        }, '试用期薪资不能为空');
+
+        //自定义验证方法联系人
+        $.validator.addMethod("txtLinkManValidate", function(value, element) {
+            newLinkwayVal = $('input[name="newLinkway"][checked]').val();
+            if(newLinkwayVal == 1)
+            {
+                if($.trim(value) != '' && $.trim(value) != '联系人')
+                {
+                    return true;
+                }
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+            return false;
+
+        }, '联系人电话不能为空');
+        //自定义验证方法联系人
+        $.validator.addMethod("txtLinkMan1Validate", function(value, element) {
+            newLinkwayVal = $('input[name="newLinkway"]:checked').val();
+            var showLinkWay = $('input[name="showLinkway"]').val();
+            var tel = /^[0-9]+$/i;
+
+            if(newLinkwayVal == 1 && showLinkWay == 1) {
+                if(tel.test(value)) {
+                    return true;
+                }
+                return false;
+            }
+            else {
+                return true;
+            }
+            return false;
+
+        }, '请不要输入非数字内容，如：“-”、空格等');
+        //自定义验证方法联系人电话
+        $.validator.addMethod("txtLinkTelValidate", function(value, element) {
+            newLinkwayVal = $('input[name="newLinkway"][checked]').val();
+            if(newLinkwayVal == 1)
+            {
+                if($.trim(value) != '' && $.trim(value) != '联系电话')
+                {
+                    return true;
+                }
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+            return false;
+
+        }, '联系人电话不能为空');
+
+        //自定义验证方法邮箱
+        $.validator.addMethod("txtToMailValidate", function(value, element) {
+            var toMailVal = $('input[name="toMail"]:checked').val();
+            var emailType = $('input[name="emailType"]:checked').val();
+
+            if(toMailVal == 1 && emailType == 3) {
+                if($.trim(value) == '' || $.trim(value) == '输入邮箱地址'){
+                    return false;
+                }
+                return true;
+            }else{
+                return true;
+            }
+            return false;
+
+        }, '请输入邮箱');
+
+        $.validator.addMethod("ageAstrict", function (value, element, params) {
+            var ageLower = $(params[0]).val();
+            var isNum = /^\d*$/;
+
+            if (!ageLower) return false;
+            if (!(isNum.test(ageLower)) || !(isNum.test(value))) {
+                return false;
+            } else {
+                if (parseInt(value) == 0 || parseInt(ageLower) == 0) {
+                    return true;
+                }
+                if (parseInt(value) >= parseInt(ageLower)) {
+                    return true;
+                }
+                return false;
+            }
+        }, "年龄下限不能小于年龄上限");
+
+        //验证多个Email格式
+        $.validator.addMethod("checkingemail", function (value, element) {
+            if (value == '' || value == null ||value.length == 0) {
+                return true;
+            }
+            var arrary = value.split(",");
+            if (arrary.length > 3) {
+                return false;
+            }
+            for (key in arrary) {
+                var flag = Reg.email.test(arrary[key]);
+                if (!flag) {
+                    return false;
+                }
+            }
+            return true;
+        }, "您指定本信息使用单独的联系方式，请输入正确的email");
+
+        var inputId = /(\d)(End)?$/,
+            inputName = "input[name=hddSalary{x}]";
+
+        $.validator.addMethod('comparePrice', function (value, element){
+            var matched = inputId.exec(element.name);
+            var id = matched[1],
+                EndName = matched[2] ? id : id + 'End',
+                otherInput = $(inputName.replace('{x}', EndName)),
+                otherValue = parseInt(otherInput.val()),
+                value = parseInt(value),
+                f;
+
+            //校招企业模拟登录不用填薪资
+            var allowGraduate = $('#yjs').is(":checked");
+            if((value == 0 || isNaN(value)) && (otherValue == 0 || isNaN(otherValue)) && eval('{/$can_pub_no_salary/}') && allowGraduate)
+                return true;
+
+            if (matched[2]) {
+                f = value >= otherValue && value / 3 <= otherValue;
+            } else {
+                f = otherValue >= value && otherValue / 3 <= value;
+            }
+            if (f) {
+                otherInput.removeClass('error');
+            }
+            return f;
+        }, '薪资范围不大于3倍差距<span class="tipArr"></span>');
+
+		$.validator.addMethod('comparePrice_normal', function(value, element){
+			var matched = inputId.exec(element.name);
+			var id = matched[1],
+				EndName = matched[2] ? id : id + 'End',
+				otherInput = $(inputName.replace('{x}', EndName)),
+				otherValue = parseInt(otherInput.val()),
+				value = parseInt(value),
+				f;
+
+            //校招企业模拟登录不用填薪资
+            var allowGraduate = $('#yjs').is(":checked");
+
+            if((value == 0 || isNaN(value)) && (otherValue == 0 || isNaN(otherValue)) && eval('{/$can_pub_no_salary/}') && allowGraduate)
+                return true;
+
+			if(matched[2]){
+				f = value >= otherValue && value / 2 <= otherValue;
+			} else {
+				f = otherValue >= value && otherValue / 2 <= value;
+			}
+			if(f){
+				otherInput.removeClass('error');
+			}
+			return f;
+		}, '薪资范围不大于2倍差距<span class="tipArr"></span>');
+
+        $.validator.addMethod('comparePrice1', function(value, element){
+            var matched = inputId.exec(element.name),
+                id = matched[1],
+                otherId = (id == 2 ? 3 : 2) + (matched[2] || ''),
+                otherInput = $(inputName.replace('{x}', otherId)),
+                otherValue = parseInt(otherInput.val()),
+                value = parseInt(value),
+                f;
+             //校招企业模拟登录不用填薪资
+            var allowGraduate = $('#yjs').is(":checked");
+            if(id == 1 || ((value == 0 || isNaN(value)) && (otherValue == 0 || isNaN(otherValue)) && eval('{/$can_pub_no_salary/}') && allowGraduate)){return true;}
+            if (id == 2) {
+                f = value < otherValue;
+            } else {
+                f = otherValue < value;
+            }
+            if (f) {
+                otherInput.removeClass('error');
+            }
+            return f;
+        }, '平均工资不能低于底薪<span class="tipArr"></span>');
+
+        var minSalaryRules = {
+                required: eval('{/!$can_pub_no_salary || !$job.allow_graduate/}'),
+                number: true,
+                range: [500, 100000],
+                comparePrice_normal: true,
+                comparePrice1: true,
+                digits: true
+            },
+            maxSalaryRules = {
+                required: eval('{/!$can_pub_no_salary || !$job.allow_graduate/}'),
+                number: true,
+                range: [500, 100000],
+                comparePrice_normal: true,
+                comparePrice1: true,
+                digits: true
+            },
+			minSalaryRules_3 = {
+				required: eval('{/!$can_pub_no_salary || !$job.allow_graduate/}'),
+				number: true,
+				range: [500, 100000],
+				comparePrice: true,
+				comparePrice1: true,
+				digits: true
+			},
+			maxSalaryRules_3 = {
+				required: eval('{/!$can_pub_no_salary || !$job.allow_graduate/}'),
+				number: true,
+				range: [500, 100000],
+				comparePrice: true,
+				comparePrice1: true,
+				digits: true
+			},
+            minSalaryMsg = {
+                required: '请输入薪资待遇<span class="tipArr"></span>',
+                number: '薪资只能输入数字<span class="tipArr"></span>',
+                range: '请输入正确的薪资<span class="tipArr"></span>',
+                digits: '薪资只能输入整数<span class="tipArr"></span>'
+            },
+            maxSalaryMsg = {
+                required: '请输入薪资待遇<span class="tipArr"></span>',
+                number: '薪资只能输入数字<span class="tipArr"></span>',
+                range: '请输入正确的薪资<span class="tipArr"></span>',
+                digits: '薪资只能输入整数<span class="tipArr"></span>'
+            };
+
+
+        //客户端验证表单数据
+        jobAddValid = $("#formjobmod").validate({
+            ignore:"#txtOtherReward",
+            rules: {
+                txtStation : {required: true, rangelength: [2, 30]},
+                hddJoblevel :{required: true},
+                // hddJobDept : {hddDept : true},
+                main_jobsort : {JobsortValidate : true},
+                txtQuantity : {required: true, digits: true, min: 1, max: 999 },
+				txtAddInfo:{required: true},
+                //hddArea : {AreaValidate : true},
+				hddArea: {required: true},
+                txtProbationPeriodFee : {ProbationPeriodFeeValidate: true, digits: true, min: 0},
+                txtContent : {required : true, minlength:20, maxlength: 2000 },
+                txtValidDays : {required: true, number: true, min: 1, max: 60, digits: true},
+                hddWorkyear:{required: true},
+                hddDegree:{required:true},
+//                txtOtherNeed : {required: false, minlength:20, maxlength: 2000 },
+//              txtOtherNeed : {required: false, maxlength: 2000 },
+                txtLinkMan1 : {txtLinkMan1Validate: true },
+                txtLinkTel1 : {number: true},
+                txtReApplyType : {required:true},
+                hddSalary1 : minSalaryRules,
+                hddSalary1End :  maxSalaryRules,
+                hddSalary2 : minSalaryRules,
+                hddSalary2End :  maxSalaryRules,
+                hddSalary3 : minSalaryRules_3,
+                hddSalary3End :  maxSalaryRules_3,
+                email1 : {txtToMailValidate: true, email: true }
+            },
+            messages: {
+                txtStation : {required: '请输入职位名称<span class="tipArr"></span>', rangelength: '2-30个字<span class="tipArr"></span>'},
+                hddJoblevel:{required: '请选择岗位级别<span class="tipArr"></span>'},
+                main_jobsort: {JobsortValidate:'请选择职位类别<span class="tipArr"></span>'},
+                txtQuantity: { required: '请输入招聘人数<span class="tipArr"></span>', digits: '招聘人数只能输入整数<span class="tipArr"></span>', min: '招聘人数为1～3位整数<span class="tipArr"></span>', max: '招聘人数为1～3位整数<span class="tipArr"></span>' },
+				txtAddInfo:{ required: '请完善职位详细地址<span class="tipArr"></span>'},
+                //hddArea: {AreaValidate:'请选择工作地点<span class="tipArr"></span>'},
+				hddArea: {required: '请重新编辑地址<span class="tipArr"></span>'},
+                txtProbationPeriodFee: {ProbationPeriodFeeValidate: '试用期薪资不能为空<span class="tipArr"></span>', digits: '试用期薪资只能输入整数<span class="tipArr"></span>', min: '试用期薪资不能小于0<span class="tipArr"></span>'},
+                txtContent: { required: '请输入岗位描述和任职要求<span class="tipArr"></span>', minlength: '太过简单了吧，最少20个字<span class="tipArr"></span>', maxlength: '不能超过2000个字<span class="tipArr"></span>' },
+                txtValidDays: { required: '请输入有效期<span class="tipArr"></span>', number: '请输入1-60之间的整数<span class="tipArr"></span>', min: '请输入1-60之间的整数<span class="tipArr"></span>', max: '请输入1-60之间的整数<span class="tipArr"></span>', digits: '请输入1-60之间的整数<span class="tipArr"></span>'},
+                hddWorkyear: { required: '请选择工作经验<span class="tipArr"></span>'},
+                hddDegree: { required: '请选择最低学历<span class="tipArr"></span>'},
+//              txtOtherNeed: { required: '请输入任职资格<span class="tipArr"></span>', maxlength: '不能超过2000个字<span class="tipArr"></span>' },
+                //txtLinkMan1: { required: '联系人电话不能为空<span class="tipArr"></span>', txtLinkMan1Validate: '请不要输入非数字内容，如：“-”、空格等<span class="tipArr"></span>' },
+                txtLinkMan1: { txtLinkMan1Validate: '请不要输入非数字内容，如：“-”、空格等<span class="tipArr"></span>' },
+                txtLinkTel1: { number: '分机号不正确<span class="tipArr"></span>'},
+                txtLinkMan2: { txtLinkManValidate: '联系人电话不能为空<span class="tipArr"></span>' },
+                txtLinkTel2: { txtLinkTelValidate: '联系人电话不能为空<span class="tipArr"></span>',tel:'联系电话不正确<span class="tipArr"></span>'},
+                txtLinkMan3: { txtLinkManValidate: '联系人和电话不能为空<span class="tipArr"></span>' },
+                txtLinkTel3: {txtLinkTelValidate: '联系人电话不能为空<span class="tipArr"></span>',tel:'联系电话不正确<span class="tipArr"></span>'},
+                email1: { txtToMailValidate: '请输入邮箱<span class="tipArr"></span>', email: '邮箱格式不正确<span class="tipArr"></span>' },
+                email2: { txtToMailValidate: '请输入邮箱<span class="tipArr"></span>', email: '邮箱格式不正确<span class="tipArr"></span>' },
+                email3: { txtToMailValidate: '请输入邮箱<span class="tipArr"></span>', email: '邮箱格式不正确<span class="tipArr"></span>' },
+                        txtReApplyType:{required:'请选择简历回复承诺类型<span class="tipArr"></span>'},
+                hddSalary1: minSalaryMsg,
+                hddSalary1End: maxSalaryMsg,
+                hddSalary2: minSalaryMsg,
+                hddSalary2End:  maxSalaryMsg,
+                hddSalary3: minSalaryMsg,
+                hddSalary3End:  maxSalaryMsg
+            },
+            errorElement: 'span',
+            errorClasses: {
+                txtStation: { required: 'tipLayErr tipw180', rangelength: 'tipLayErr tipw180'},
+                hddJoblevel: { required: 'tipLayErr tipw180'},
+                // hddJobDept:{required:'tipLayErr tipw180'},
+                txtReApplyType:{required:'tipLayErr tipw180'},
+                main_jobsort: { JobsortValidate:'tipLayErr tipw180'},
+                txtQuantity: { required: 'tipLayErr tipw180', digits:'tipLayErr tipw180', min:'tipLayErr tipw180', max:'tipLayErr tipw180'},
+				txtAddInfo:{ required: 'tipLayErr tipw180'},
+                hddArea: {required:'tipLayErr tipw180'},
+                hddSalary1: {required: 'tipLayErr tipw180', number: 'tipLayErr tipw180', range: 'tipLayErr tipw180', digits: 'tipLayErr tipw180', comparePrice_normal: 'tipLayErr tipw180',comparePrice1: 'tipLayErr tipw180'},
+                hddSalary1End: {required: 'tipLayErr tipw180', number: 'tipLayErr tipw180', range: 'tipLayErr tipw180', digits: 'tipLayErr tipw180', comparePrice_normal: 'tipLayErr tipw180',comparePrice1: 'tipLayErr tipw180'},
+                hddSalary2: {required: 'tipLayErr tipw180', number: 'tipLayErr tipw180', range: 'tipLayErr tipw180', digits: 'tipLayErr tipw180', comparePrice_normal: 'tipLayErr tipw180',comparePrice1: 'tipLayErr tipw180'},
+                hddSalary2End: {required: 'tipLayErr tipw180', number: 'tipLayErr tipw180', range: 'tipLayErr tipw180', digits: 'tipLayErr tipw180', comparePrice_normal: 'tipLayErr tipw180',comparePrice1: 'tipLayErr tipw180'},
+                hddSalary3: {required: 'tipLayErr tipw180', number: 'tipLayErr tipw180',range: 'tipLayErr tipw180', digits: 'tipLayErr tipw180', comparePrice: 'tipLayErr tipw180',comparePrice1: 'tipLayErr tipw180'},
+                hddSalary3End: {required: 'tipLayErr tipw180', number: 'tipLayErr tipw180', range: 'tipLayErr tipw180', digits: 'tipLayErr tipw180', comparePrice: 'tipLayErr tipw180',comparePrice1: 'tipLayErr tipw180'},
+                txtProbationPeriodFee: {ProbationPeriodFeeValidate:'tipLayErr tipw180', digits: 'tipLayErr tipw180', min: 'tipLayErr tipw180'},
+                txtContent: { required: 'tipLayErr tipw180', minlength: 'tipLayErr tipw180', maxlength: 'tipLayErr tipw180' },
+                txtValidDays: { required: 'tipLayErr tipw180', number: 'tipLayErr tipw180', min: 'tipLayErr tipw180', max: 'tipLayErr tipw180', digits: 'tipLayErr tipw180'},
+                hddWorkyear: { required: 'tipLayErr tipw180'},
+                hddDegree: { required: 'tipLayErr tipw180'},
+//              txtOtherNeed: { required: 'tipLayErr tipw180',maxlength: 'tipLayErr tipw180' },
+                //txtLinkMan1: { required: 'tipLayErr tipw180', txtLinkMan1Validate: 'tipLayErr tipw245' },
+                txtLinkMan1: { txtLinkMan1Validate: 'tipLayErr tipw245' },
+                txtLinkTel1: { number:'tipLayErr tipw180' },
+                txtLinkMan2: { txtLinkManValidate: 'tipLayErr tipw180' },
+                txtLinkTel2: { txtLinkTelValidate: 'tipLayErr tipw180', tel:'tipLayErr tipw180' },
+                txtLinkMan3: { txtLinkManValidate: 'tipLayErr tipw180' },
+                txtLinkTel3: { txtLinkTelValidate: 'tipLayErr tipw180', tel:'tipLayErr tipw180' },
+                email1: { txtToMailValidate: 'tipLayErr tipw180', email: 'tipLayErr tipw180' },
+                email2: { txtToMailValidate: 'tipLayErr tipw180', email: 'tipLayErr tipw180' },
+                email3: { txtToMailValidate: 'tipLayErr tipw180', email: 'tipLayErr tipw180' }
+            },
+            tipClasses:{
+                txtStation: 'tipLayTxt tipw150'
+            },
+            groups:{
+				addressGroup: 'hddArea txtAddInfo',
+                salary1: 'hddSalary1 hddSalary1End',
+                salary2: 'hddSalary2 hddSalary2End',
+                salary3: 'hddSalary3 hddSalary3End',
+                linkway1: 'txtLinkMan1 txtLinkTel1',
+                linkway2: 'txtLinkMan2 txtLinkTel2',
+                linkway3: 'txtLinkMan3 txtLinkTel3'
+            },
+            errorPlacement: function(error, element) {
+                if (element.attr('name') == 'txtValidDays' || element.attr('name') == 'hddjobsort' || element.attr('name') == 'hddArea') {
+                    element.closest('div.r').find('.tipLay').append(error);
+                } else if(element.attr('name') == 'hddSalary1' || element.attr('name') == 'hddSalary1End' || element.attr('name') == 'hddSalary2' || element.attr('name') == 'hddSalary2End'){
+                    element.closest('.x_salaryBg').find('.tipLay').eq(0).append(error);
+                } else if(element.attr('name') == 'hddSalary3' || element.attr('name') == 'hddSalary3End'){
+                    element.closest('.x_salaryBg').find('.tipLay').eq(1).append(error);
+                } else {
+                    element.parent().nextAll().find('.tipLay').append(error);
+                }
+            },
+            success: function(label) {
+                label.text(" ");
+            }
+        });
+
+        var salaryRadio = $('#x_salary_nav input[type=radio]'),
+            x_salaryBg = $('#x_salaryBg .x_salaryBg');
+
+        salaryRadio.each(function(index, val){
+            if ($(this).prop('checked')) {
+                if(x_salaryBg.eq(index).is(':hidden')){
+                    tabSalary(index);
+                }
+                disableSalary(index);
+            }
+        });
+        salaryRadio.on('change', function(e){
+            var index = salaryRadio.index($(e.target));
+            tabSalary(index);
+            disableSalary(index);
+        });
+
+        function tabSalary(index){
+            x_salaryBg.hide();
+            x_salaryBg.eq(index).show();
+        }
+        function disableSalary(index){
+            var hddSalary1 = $('input[name=hddSalary1]'),
+                hddSalary1End = $('input[name=hddSalary1End]'),
+                hddSalary2 = $('input[name=hddSalary2]'),
+                hddSalary2End = $('input[name=hddSalary2End]'),
+                hddSalary3 = $('input[name=hddSalary3]'),
+                hddSalary3End = $('input[name=hddSalary3End]');
+            var f1, f2;
+            if (index === 0) {
+                f1 = false;
+                f2 = true;
+            } else if(index === 1){
+                f1 = true;
+                f2 = false;
+            } else {
+                f1 = f2 = true;
+            }
+            hddSalary1.prop('disabled', f1);
+            hddSalary1End.prop('disabled', f1);
+            hddSalary2.prop('disabled', f2);
+            hddSalary2End.prop('disabled', f2);
+            hddSalary3.prop('disabled', f2);
+            hddSalary3End.prop('disabled', f2);
+        }
+
+        $('#btnMore').click(function(){
+            if ($('#divMore').is(':hidden')) {
+                $('#divMore').show();
+                $(this).removeClass('slideNone').addClass('slideShow').html('点击隐藏更多填写项');
+            } else {
+                $('#divMore').hide();
+                $(this).removeClass('slideShow').addClass('slideNone').html('点击展开更多填写项');
+            }
+        });
+
+        $('#txtContent').setListen({max: 4000, objLeft: $('#spnContent') });
+        $('#txtOtherNeed').setListen({max: 4000, objLeft: $('#spnOtherNeed') });
+        $('#txtReplyContent').setListen({max: 4000, objLeft: $('#spnReplyContent') });
+        $('#txtContent').keydown(function() {
+            isContentConfirm = true;
+        });
+        $('#txtOtherNeed').keydown(function() {
+            isOtherNeedConfirm = true;
+        });
+        $('#btnApplySalary').click(function() {
+            $('#selSalaryLower').val($('#avg_min_salary').html());
+            $('#selSalaryUpper').val($('#avg_max_salary').html());
+            return false;
+        });
+
+        $("#txtOtherReward").focus(function() {
+            if ($(this).val() == "" || $(this).val() == $(this).attr('watermark')) {
+                rewardPoint += 0.1;
+                jobAdd.rewardPointShow();
+            }
+        }).blur(function() {
+            if ($(this).val() == ""|| $(this).val() == $(this).attr('watermark')) {
+                rewardPoint -= 0.1;
+                jobAdd.rewardPointShow();
+            }
+        });
+
+        $('#txtReplyContent').focus(function() {
+            $('#chkAutoReply').attr('checked', true);
+        }).blur(function() {
+            if ($(this).val() == '') {
+                $('#chkAutoReply').attr('checked', false);
+            }
+        });
+
+        $('#contentTrim').click(function() {
+            $('#txtContent').val('');
+        });
+
+        $('#otherNeedTrim').click(function() {
+            $('#txtOtherNeed').val('');
+        });
+
+        $('#replyContentTrim').click(function() {
+            $('#txtReplyContent').val('');
+            $('#chkAutoReply').attr('checked',false);
+        });
+
+        $('#chkIsUpdate').click(function(){
+            if ($(this).attr('checked')) {
+                $('#txtLinkTel').removeAttr('disabled');
+                $('#txtEmail').removeAttr('disabled');
+            } else {
+                $('#txtLinkTel').attr('disabled','disabled');
+                $('#txtEmail').attr('disabled','disabled');
+            }
+        });
+
+        //预览职位
+        $('#btnPreview').click(function() {
+            if (!checkCompanyLogin()) return;
+            jobAdd.preview();
+        });
+
+        $('#txtEndTime').blur(function(){
+            if($(this).val()!='')
+            {
+                $('#txtRefreshEndTime').val($(this).val());
+            }
+        });
+    },
+    addNewLinkWay:function(obj){
+        var linkWayCount = $(obj).closest('ul').find('li').length;
+        if (linkWayCount < 3) {
+            var newLinkWayTemplate = "<li>"+
+                "<span class=\"formText\">"+
+                    "<input id=\"txtLinkMan" + (linkWayCount + 1) + "\" name=\"txtLinkMan" + (linkWayCount + 1) + "\" type=\"text\" watermark=\"输入电话号码\" style=\"width:120px;\" class=\"text conPeople watermark {txtLinkManValidate:true}\">"+
+                "</span>"+
+                "<span class=\"formText\" style=\"margin-left:10px;\">"+
+                    "<input id=\"txtLinkTel" + (linkWayCount + 1) + "\" name=\"txtLinkTel" + (linkWayCount + 1) + "\" type=\"text\" watermark=\"分机号\" style=\"width:80px;\" class=\"text conPhone watermark {txtLinkTelValidate:true, tel:true}\">"+
+                "</span>"+
+                "<span class=\"tipTxt\" style=\"margin-left:10px;\"><a href=\"javascript:void(0);\" onclick=\"jobAdd.addNewLinkWay(this);\">增加</a><a href=\"javascript:void(0);\" onclick=\"jobAdd.delNewLinkWay(this);\">删除</a></span>"+
+                "<span class=\"tipPos\">"+
+                    "<span class=\"tipLay\">"+
+                    "</span>"+
+                "</span>"+
+                "</li>";
+            $(obj).closest('ul').append(newLinkWayTemplate);
+            $.focusblur('input.conPeople');
+            $.focusblur('input.conPhone');
+            $('input[name="newLinkWayCount"]').val($(obj).closest('ul').find('li').length);
+            $('.watermark').watermark2();
+        }
+    },
+    delNewLinkWay:function(obj){
+        var ulTemp       = $(obj).closest('ul');
+        var linkWayCount = ulTemp.find('li').length;
+
+        $(obj).closest('li').remove();
+        if (linkWayCount >= 1) {
+            $.each(ulTemp.find('li'), function (i, n) {
+                $(n).find('input:eq(0)').attr('name', 'txtLinkMan' + (i+1));
+                $(n).find('input:eq(1)').attr('name', 'txtLinkTel' + (i+1));
+                $(n).find('span.tipLay').find('span').attr('for','linkway' + (i+1));
+            });
+
+            $('input[name="newLinkWayCount"]').val(ulTemp.find('li').length);
+        }
+    },
+    addNewEmail:function(obj){
+        var emailCount = $(obj).closest('ul').find('li').length;
+        if (emailCount < 3) {
+            var newEmailTemplate =
+                "<li>"+
+                    "<span class=\"formText\" style=\"margin-left:10px;\">"+
+                        "<input id=\"email" + (emailCount + 1) + "\" name=\"email" + (emailCount + 1) + "\" type=\"text\" watermark=\"输入邮箱地址\" style=\"width:200px;\" class=\"text newMail watermark { txtToMailValidate: true, email: true }\">"+
+                    "</span>"+
+                    "<span class=\"tipTxt\" style=\"margin-left:10px;\"><a href=\"javascript:void(0);\" onclick=\"jobAdd.addNewEmail(this);\">增加</a>&nbsp;<a href=\"javascript:void(0);\" onclick=\"jobAdd.delNewEmail(this);\">删除</a></span>"+
+                    "<span class=\"tipPos\">"+
+                        "<span class=\"tipLay\">"+
+                        "</span>"+
+                    "</span>"+
+                "</li>";
+            $(obj).closest('ul').append(newEmailTemplate);
+            $.focusblur('input.newMail');
+            $('input[name="emailCount"]').val($(obj).closest('ul').find('li').length);
+            $('.watermark').watermark2();
+        }
+    },
+    delNewEmail:function(obj){
+        var ulTemp     = $(obj).closest('ul');
+        var emailCount = ulTemp.find('li').length;
+
+        $(obj).closest('li').remove();
+        if (emailCount >= 1) {
+            $.each(ulTemp.find('li'), function(i, n){
+                $(n).find('input:eq(0)').attr('name', 'email' + (i + 1));
+                $(n).find('span.tipLay').find('span').attr('for', 'email' + (i + 1));
+            });
+            $('input[name="emailCount"]').val(ulTemp.find('li').length);
+        }
+    },
+    changePeriodSymbol:function(obj){
+        var theValue = $.trim($(obj).val());
+        if (!isNaN(theValue)) {
+            if (theValue > 100) {
+                $('#periodPercent').html('元/月');
+            } else {
+                $('#periodPercent').html('%');
+            }
+        } else {
+            $('#periodPercent').html('');
+        }
+    },
+    changeEndtime:function(obj){
+        var theValue = $.trim($(obj).val());
+        if (!isNaN(theValue)) {
+            if (theValue >= 1 && theValue <= 90) {
+                //有效期至2013年8月19日
+                end = new Date();
+                end = new Date(end.valueOf() + theValue * 24 * 60 * 60 * 1000);
+                //$('#endTimeSpan').html('有效期至' + end.toLocaleDateString());
+                $('#endTimeSpan').html('有效期至' + end.getFullYear() + '年' + (end.getMonth() + 1) + '月' + end.getDate() + '日');
+            } else {
+                $('#endTimeSpan').html('');
+            }
+        } else {
+            $('#endTimeSpan').html('');
+        }
+    },
+    modifyJob : function(object) {
+        var automatic = $(".oppenWay").hasClass("oppenWaycut") ? 1 : 0;
+        var data = {operate: "publish", templateID: template, hddAutomatic:automatic};
+
+        if(jobAddValid.form()){
+            //是否展示
+            var showLinkWay = $('input[name="showLinkway"]').val();
+            var newLinkWay = $('input[name="newLinkway"]').filter(':checked').val();
+            var this_job_id = '{/$job.job_id/}';
+            var main_jobsort = $('#main_jobsort').val();
+            var hddComId = '{/$job.company_id/}';
+            var txtLinkMan1 = $("#txtLinkMan1").val();
+            //联系方式展示  联系方式为其他时，需要验证座机号是否填写
+            if(showLinkWay == 1 && newLinkWay == 1){
+                if(txtLinkMan1 == '' || txtLinkMan1 == undefined) {
+                    $.message("请点开更多要求，填写正确的电话号码", {title: "系统提示", icon: "fail"});
+                    return;
+                }
+            }
+            $.ajax({
+                url: "{/get_url rule='/job/SearchSimilarjobs'/}",
+                data: {main_jobsort:main_jobsort,hddComId:hddComId,job_id:this_job_id},
+                dataType: 'json',
+                type: 'POST',
+                success: function(data){
+                    if(data.code == 'error'){
+                        $.message(data.msg, { title: "系统提示", icon: "fail" });return;
+                    }else if(data.code == 'excess'){
+                        $.confirm(data.msg,'重复职位确认',function(){
+                            frompost();
+                        });
+                    }else{
+                        frompost();
+                    }
+                }
+            });
+        }
+        function frompost(){
+            $(object).submitForm({beforeSubmit: $.proxy(jobAddValid.form, jobAddValid), data: data, success: jobAdd.successCallBack, clearForm: false})
+        }
+        return false;
+    },
+    successCallBack : function(json) {
+        if (json && json.status) {
+            if (json.status == "success"){
+                //成功
+                $.anchorMsg("修改职位成功", {
+                    onclose : function() {
+                        {/if $isNewService/}
+                        window.location.href = '{/get_url rule="/index/JobList/"/}';
+                        {/else/}
+                        {/if $step/}
+                        window.location.href = '{/get_url rule="/job/spread/" data="job_id={/$job.job_id/}&type=edit&step=3"/}';
+                        {/else/}
+                        window.location.href = '{/get_url rule="/job/spread/" data="job_id={/$job.job_id/}&type=edit"/}';
+                        {//if/}
+                            {//if/}
+                    }
+                });
+            } else if (json.status == "fail") {
+                //失败
+                $.message("修改职位失败", {title: "操作提示", icon: "fail"});
+            } else if (json.status == "info") {
+                $.message(json.message, {title:"操作提示", icon:'fail', onclose : function() {
+                        var newwindow = window.open('about:blank');
+                        newwindow.location.href = "{/$siteurl.company|replace:'http:':''/}/company/modify";
+                    }
+                });
+            } else if (json.status == "mustreplyinfo") {
+                $.message(json.message,{
+                    title : "操作提示", icon : 'fail', onclose : function() {
+                        $(".txtReApplyType").each(function() {
+                            if ($(this).val() == 0) {
+                                $(this).prop({"checked":true});
+                            }
+                        });
+                    }
+                });
+            }
+        } else {
+            //添加数据出现异常
+            $.message(json.error, {title : "系统提示", icon : "fail"});
+        }
+    },
+    getJobTemplate : function(value) {
+        //获取职位内容模板和推荐职位信息
+        if (station == value) {
+            return;
+        } else {
+            value = encodeURIComponent(value);
+            var jobsort_salary_id = $('input[name=main_jobsort]').val();
+            var addressId = $('input[name=hddArea]').val();
+            var job_id = '{/$job.job_id/}';
+            addressId = addressId.substring(0,2);
+
+            $.getJSON('{/get_url rule="/job/jobLoadTemplates/?job_id='+job_id+'&jobsortid='+jobsort_salary_id+'&jobname='+value+'"/}', function(data) {
+                //增加薪酬查询
+
+                $('#recommendContent').show();
+                $('#recommendOtherNeed').hide();
+
+                if(addressId == '03' && data.salarydata.jobsort_name != '' && data.salarydata.jobsort_name != undefined){
+                    $("#salaryRefer").show();
+                }else{
+                    $("#salaryRefer").hide();
+                }
+
+                //职位类别下的重复职位提示
+                if(data.job_num > 0){
+                    $("#jobsort_job_num_tip").show();
+                    $("#jobsort_job_num").text(data.job_num);
+                }else{
+                    $("#jobsort_job_num_tip").hide();
+                }
+
+
+                var html = '<span style="color:#4E74D9">' + data.salarydata.jobsort_name + '（ 重庆） </span>平均薪酬参考：<br />企业提供：<span style="color:#4E74D9">' + data.salarydata.job_min_salary + '~' + data.salarydata.job_max_salary + '元</span>（数据来自<strong>' + data.salarydata.job_num + '</strong>个职位）<br />求职者期望：<span style="color:#4E74D9">' + data.salarydata.person_salary + '元及以上</span>（数据来自<strong>' + data.salarydata.resume_num + '</strong>份简历）<p style="color: #CCCCCC;font-size: 12px;padding-top: 5px">*数据来源于汇博人才网，仅供参考</p>';
+                document.getElementById("salaryRefer").innerHTML = html;
+
+
+                if (data.content.length <= 0) {
+                    $('#recommendContent').hide();
+                    $('#recommendOtherNeed').hide();
+                    return;
+                }
+                jobAdd.getTheTemplate(data.content);
+            });
+        }
+    },
+    getTemplateContentOrOtherNeed : function (obj) {
+        var theConfirmType = $(obj).attr('theField');
+        if (theConfirmType == 'content' ? isContentConfirm : isOtherNeedConfirm) {
+            $.confirm('该操作会覆盖' + (theConfirmType == 'content' ? '岗位描述' : '任职资格' ) + '原有的信息数据，您确定继续吗？', '', function() {
+                theConfirmType == 'content' ? isContentConfirm = false : isOtherNeedConfirm = false;
+                $.getJSON('{/get_url rule="/job/getTemplateContentOrOtherNeed/" data="templateid=' + $(obj).attr('theVal') + '&field=' + $(obj).attr('theField') + '"/}', function (data) {
+                    if (data && data.content) {
+                        $(obj).closest('div.r').find('textarea').val($.filterHTML(data.content)).focus();
+                    }
+                });
+            }, function() {
+                theConfirmType == 'content' ? isContentConfirm = true : isOtherNeedConfirm = true;
+            });
+        } else {
+            $.getJSON('{/get_url rule="/job/getTemplateContentOrOtherNeed/" data="templateid=' + $(obj).attr('theVal') + '&field=' + $(obj).attr('theField') + '"/}', function (data) {
+                if (data && data.content) {
+                    $(obj).closest('div.r').find('textarea').val($.filterHTML(data.content)).focus();
+                }
+            });
+        }
+    },
+    getTheTemplate : function (data) {
+        var contentHtml   = '模板：';
+        var otherNeedHtml = '模板：';
+        $.each(data, function (i, n) {
+            contentHtml += '<a href="javascript:void(0);" theField="content" theVal="' + n.template_id
+                + '" onclick="jobAdd.getTemplateContentOrOtherNeed(this);">' + n.template_name + '</a>';
+            otherNeedHtml += '<a href="javascript:void(0);" theField="other_need" theVal="' + n.template_id
+                + '" onclick="jobAdd.getTemplateContentOrOtherNeed(this);">' + n.template_name + '</a>';
+        });
+
+        $('#recommendContent').html(contentHtml);
+        //$('#recommendOtherNeed').html(otherNeedHtml);
+    }
+};
+jobAdd.initialize();
+//过滤字符串中的html文本
+$.extend(
+{
+    filterHTML: function(str)
+    {
+        if (str == 'undefined' || str == null || str == '' || str.constructor != String)
+        {
+            return '';
+        }
+        return str.replace(/<.*?>/g, function(match) { return match.replace('<', '').replace('>', ''); });
+    }
+});
+</script>
+
+<script>
+var $tSch = $('#tSch');
+
+$(document).ready(function(e) {
+    $.focusblur("#tSchText");
+    $.focusblur('#addInfo');
+    $.focusColor('input.text');
+    $.focusColor('textarea.textarea');
+    $.focusblur('input.conPeople');
+    $.focusblur('input.conPhone');
+    $.focusblur('input.newMail');
+    $('#tSchText').bind('focus',function(){
+        $(this).animate({'width':200});
+        $tSch.css({'background':'#fffdef','border':'1px solid #e8dd9e'})
+    }).bind('blur',function(){
+        $(this).animate({'width':150});
+        $tSch.css({'background':'#fff','border':'1px solid #dadada'})
+    });
+        $('.oppenWay').click(function(){
+            $(this).toggleClass('oppenWaycut');
+            $('#hddAutomatic').val($(".oppenWay").hasClass("oppenWaycut") ? 1 : 0)
+    })
+    $('#x_salary_nav li').click(function(){
+            $(this).parent("#x_salary_nav").children(".x_cur").removeClass("x_cur");
+            $(this).addClass('x_cur');
+    })
+    showSalaryDiv();
+});
+function showSalaryDiv(){
+    var jobsort_id = $('input[name=main_jobsort]').val();
+    var addressId = $('input[name=hddArea]').val();
+    addressId = addressId.substring(0,2);
+    if(jobsort_id && addressId == '03'){
+        $('#recommendContent').hide();
+        $('#recommendOtherNeed').hide();
+        {/if $jobsalary['jobsort_name']/}
+        
+        $("#salaryRefer").html('<span style="color:#4e74d9">{/$jobsalary['jobsort_name']/}（重庆） </span>平均薪酬参考：<br />企业提供：<span style="color:#4e74d9">{/$jobsalary['job_min_salary']/}~{/$jobsalary['job_max_salary']/}元</span>（数据来自<strong>{/$jobsalary['job_num']/} </strong>个职位）<br />求职者期望：<span style="color:#4e74d9">{/$jobsalary['person_salary']/}元及以上</span>（数据来自<strong>{/$jobsalary['resume_num']/}</strong>份简历）<p style="color: #ccc;font-size: 12px;padding-top: 5px">*数据来源于汇博人才网，仅供参考</p>');
+        {//if/}
+    }
+
+}
+</script>
+
+<script>
+
+    hbjs.use('@jobsort, @calling, @hbCommon, @jobDialog, @confirmBox', function(m){
+        var $ = m['jquery'].extend(m['cqjob.jobsort'], m['cqjob.calling']);
+        var Dialog = m['widge.overlay.hbDialog'];
+                var chatinterval;
+        var seed = "{/$chat_seed/}";
+        var chatBindPhond = function(account_id){  //绑定手机
+         //绑定APP
+        var bindHtml = getBindHtml();
+        var bindDialog = new Dialog({
+                idName: 'bind_dialog',
+                title: '绑定手机',
+                content: bindHtml,
+                close: '╳',
+                width: 370
+        });
+        var bindObj = bindDialog.query("#chatBindPhoen");//弹窗 jquey 对象
+        //图片验证码添加
+        bindObj.on("click","#chatImgCode",function(){
+            $(this).attr('src',"{/$siteurl.company/}/chat/verify/?seed="+seed+"&rand="+Math.random());
+        });
+        //获取短信验证码
+        var countdown = function(){
+            var seconds = bindObj.find('.cutDown i').html();
+            seconds = parseInt(seconds);
+            if(seconds>0){
+                seconds--;
+                bindObj.find('.cutDown i').html(seconds);
+            }else{
+                window.clearInterval(chatinterval);
+                bindObj.find("#chatImgCode").click();
+                bindObj.find(".getPhoneCode").show();
+		bindObj.find(".cutDown").html("<i>60</i>秒后重新获").hide();
+            }
+        };
+        bindObj.on("click",".getPhoneCode",function(){
+            window.clearInterval(chatinterval);//清除倒计时
+            bindObj.find(".getPhoneCode").show();
+            bindObj.find(".cutDown").html("<i>60</i>秒后重新获").hide();
+            var vild_code = bindObj.find("#boundImgCode").val();
+            //发送短信
+            var phone = bindObj.find('#boundPhone').val();
+            if(phone==''){
+                $.anchorMsg("请填写手机号码",{ icon: 'warning' });
+                return;
+            }
+            if(vild_code == ""){
+                $.anchorMsg("请输入图片验证码",{ icon: 'warning' });
+                return;
+            }
+            var pattern = /^[1]\d{10}$/;
+            if(!pattern.exec(phone)){
+                    $.anchorMsg("手机号码格式不正确",{ icon: 'warning' });
+                    return;
+            }
+            var data = {phone:phone,seed:seed,vild_code:vild_code};
+            var sendMsgUrl = "{/$mobile_url/}/chat/sendmobilecode/";
+            bindObj.find(".getPhoneCode").hide();
+            bindObj.find(".chatloading").show();
+            $.getJSON(sendMsgUrl,data,function(result){
+                bindObj.find(".chatloading").hide();
+		if(result && result.error){
+                    bindObj.find("#chatImgCode").click();
+                    bindObj.find(".getPhoneCode").show();
+                    $.anchorMsg(result.error,{ icon: 'warning' });
+                    return;
+		}
+                //显示倒计时
+		bindObj.find(".cutDown").html("<i>60</i>秒后重新获").show();
+                $.anchorMsg("已发送验证码短信到您的手机");
+                
+		bindObj.find("#boundNoteCode").focus();
+		chatinterval = window.setInterval(countdown,1000);
+            });
+        });
+        bindDialog.on('closeX', function () {
+            $('#pa_allow_link').attr({"checked": false});
+        })
+        //绑定
+         bindObj.on("click",".bindSubmit",function(){
+            var _this = $(this);
+            if(_this.hasClass("isLock")){
+                return;
+            }
+            //发送短信
+            var phone = bindObj.find('#boundPhone').val();
+            if(phone == ''){
+                $.anchorMsg("请填写手机号码",{ icon: 'warning' });
+                return;
+            }
+            var pattern = /^[1]\d{10}$/;
+            if(!pattern.exec(phone)){
+                $.anchorMsg("手机号码格式不正确",{ icon: 'warning' });
+                return;
+            }
+            var msg_code = bindObj.find("#boundNoteCode").val();
+            if(msg_code == ""){
+                $.anchorMsg("请输入短信验证码",{ icon: 'warning' });
+                return;
+            }
+            
+            var data = {phone:phone,msg_code:msg_code,account_id:account_id};
+            var bindUrl = "{/$mobile_url/}/chat/bindPerson/";
+            
+            _this.addClass("isLock");
+            _this.html("绑定中，请稍后...");
+           
+            $.getJSON(bindUrl,data,function(result){
+		_this.removeClass("isLock");
+                _this.html("立即绑定");
+                if(result && result.error){
+                    $.anchorMsg(result.error,{ icon: 'warning' });
+                    return;
+		}
+                $.anchorMsg("绑定成功，现在可以随时随地与求职者在线沟通了！");
+                //刷新页面
+                                
+                //绑定成功后添加
+                $("select[name='param_account_id'] option:selected").addClass("curChk");
+                
+                bindDialog.hide();
+                $('#pa_allow_link').attr({"checked": true});
+            });
+            
+         });
+        bindDialog.show();
+    };
+    
+    function getBindHtml(){
+         var html = '<div class="boundPhonePop" id="chatBindPhoen">'
+                       + '<span class="boundx01">绑定手机号后，才能使用聊一聊功能与求职者进行在线沟通。</span>'
+                        +'<span class="boundx02">注：手机号不会展示给求职者。</span>'
+                        +'<div class="boundFrom">'
+                                +'<input type="text" name="boundPhone" id="boundPhone" class="putBound" value="" placeholder="请输入手机号" />'
+                                +'<div class="noteCodex">'
+                                    +'<input type="text" name="boundImgCode" id="boundImgCode" class="putBound" style="width:158px" value="" placeholder="图片验证码" />'
+                                    +'<img id="chatImgCode" src="{/$siteurl.company/}/chat/Verify/seed-{/$chat_seed/}">'
+                                +'</div>'
+                               +'<div class="noteCodex">'
+                                    +'<input type="text" name="boundNoteCode" id="boundNoteCode" class="putBound" style="width:158px" value="" placeholder="短信验证码" />'
+                                    +'<span class="boundGetCode getPhoneCode" >获取验证码</span>'
+                                    +'<span class="boundGetCode chatloading" style="display:none"><img style="height:16px;width:16px" src="{/$siteurl.style/}/img/common/loading.gif"/>发送中...</span>'
+                                    +'<span class="boundGetCode cutDown" style="display:none"><i>60</i>秒后重新获</span>'
+                                +'</div>'
+                                +'<a href="javascript:void(0);" class="boundBtn bindSubmit">立即绑定</a>'
+                        +'</div>'
+		+'</div>';
+        return html;
+    }
+
+        requxzDialog = new Dialog({
+            close: '╳',
+            idName: 'map_dialog1',
+            width: 500,
+            title:'填写专业名称',
+            content:'<div class="noMajor"><p class="majorTit">没有找到想要的专业,你可以在这里输入专业名称后点击提交即可!</p><div class="searchMajor"><input type="text" id="majorStht" placeholder="请填写专业名称,最多可输入25个字"><a href="javaScript:;" id="majorSthmit">提交</a></div></div>'
+        });
+        $('.noMajorRequxz').on('click', function(){
+            requxzDialog.show();
+        });
+        $('#no_professionalSort').click(function(){
+            if($('#no_professionalSort').find('input').is(':checked')){
+                $('#main_professionalSort').val('00');
+                $('#newProfessionalSort.mutilpleSelectBox ul li').html('');
+                $('#newProfessionalSort,.noMajorRequx').hide();
+                $('.noBorder').show();
+            }else{no_professionalSort
+                $('#newProfessionalSort,.noMajorRequx').show();
+                $('.noBorder').hide();
+            }
+        });
+        $('#majorStht').focus(function(){
+        	$(this).addClass('focus');
+        });
+        $('#majorStht').blur(function(){
+        	$(this).removeClass('focus');
+        });
+        $('#majorSthmit').on('click', function(){
+            var majorStht = $('#majorStht').val();
+            if(majorStht.length >25){
+                alert('专业名称最多可输入25个字');
+                return;
+            }
+
+            if (!/^[\u4E00-\u9FA5]+$/.test(majorStht)){
+                alert( "只能输入汉字" );
+                return;
+            }
+            if(majorStht != ''){
+                $('#GraduateProfessionRemark').html('<span class="selLabel"><a href="javascript:">'+majorStht+'<span class="closeBox">×</span></a></span>');
+                $('#newProfessionalSort ul').html('');
+                $('#main_professionalSort').val('');
+                $('#professionRemark').val(majorStht);
+                requxzDialog.hide();
+                $('#majorStht').val('');
+            }else{
+                alert('请填写专业名称');
+            }
+        });
+        $('#GraduateProfessionRemark').on('click', '.selLabel .closeBox', function(){
+            $('#GraduateProfessionRemark .selLabel').remove();
+            $('#professionRemark').val('');
+        });
+
+        $('#yjs').click(function(){
+            if($('#yjs').is(":checked")){
+                //勾选了改选项
+                $('#yjs_calling').show();
+                //可以发布无薪资职位
+                {/if $can_pub_no_salary/}
+                    delete jobAddValid.settings.rules.hddSalary1.required;
+                    delete jobAddValid.settings.rules.hddSalary1End.required;
+                    delete jobAddValid.settings.rules.hddSalary3.required;
+                    delete jobAddValid.settings.rules.hddSalary3End.required;
+                {//if/}
+            }else{
+                $('#yjs_calling').hide();
+                {/if $can_pub_no_salary/}
+                    jobAddValid.settings.rules.hddSalary1.required = true;
+                    jobAddValid.settings.rules.hddSalary1End.required = true;
+                    jobAddValid.settings.rules.hddSalary3.required = true;
+                    jobAddValid.settings.rules.hddSalary3End.required = true;
+                {//if/}
+            }
+        });
+
+        $("select[name='param_account_id']").change(function(){
+            var selectObj = $(this).find("option:selected");
+            if(selectObj.hasClass("curChk")){
+                $('#pa_allow_link').attr({"checked": true});
+            }else{
+                $('#pa_allow_link').attr({"checked": false});
+            }
+        });
+
+        //开启在线沟通
+        var checkAllowDialog
+        function checkCanAllow(){
+            var checkcontent = [
+                '<div class="new-sign-pop-company-ver" style="text-align:center;padding-bottom:0">',
+                '<ul class="new-sign-popx" style="padding-top:10px">',
+                '<li style="padding-bottom:10px">',
+                '<span class="dtit" style="">'+$("select[name='param_account_id'] option:selected").text()+'没有绑定企业APP，无法使用即时沟通功能</span>',
+                '<p style="height:140px;width:140px;margin:15px auto 5px;border-bottom:1px solid #DEDEDE;background:url({/$siteurl.style/}/img/company/acompany_ccountmanage_ewm.jpg) center top no-repeat;"></p>',
+                '<span class="dtit" style="color:#999">扫码下载企业APP</span>',
+                '</li>',
+                '<li style="padding-bottom:10px">',
+                '<a id="companyVerCommit" data-id="'+ 1 +'" href="javascript:;" class="present" style="margin-right:0">确 定</a>',
+                '</li>',
+                '</ul>',
+                '</div>'
+            ].join('');
+            //获取该账号是否关联APP
+            var account_id = $("[name='param_account_id']").val();
+            $.post('{/get_url rule="/job/getRelateInfo"/}',{'account_id':account_id},function(data){
+                if(data.status==false){
+                   chatBindPhond(account_id);
+                }
+            },'json');
+        }
+        //取消在线沟通弹窗提示
+        var registerDialog;
+        function showRegisterDialog(registerContent){
+            if(!registerDialog){
+                registerDialog = new Dialog({
+                    idName: 'new-sign-pop-dialog',
+                    width: 300,
+                    close: 'x',
+                    title:'提示'
+
+                });
+                //不需要！
+            }
+            registerDialog.query('#companyVerCommit').off('click');
+            registerDialog.setContent(registerContent);
+            registerDialog.query('#companyVerCommit').on('click', function(){
+                registerDialog.hide();
+            });
+            registerDialog.show();
+        }
+        function getalertHtml()
+        {
+            var tmp_str  = [
+                '<div class="new-sign-pop-company-ver" style="text-align:center">',
+                '<ul class="new-sign-popx">',
+                '<li style="padding-bottom:10px">',
+                '<span class="dtit" style="">您取消了在线沟通，求职者不能即时与您交流。会影响您的招聘效果</span>',
+                '</li>',
+                '<li style="padding-bottom:10px">',
+                '<a id="companyVerCommit" data-id="'+ 1 +'" href="javascript:;" class="present" style="margin-right:0">确 定</a>',
+                '</li>',
+                '</ul>',
+                '</div>'
+            ].join('');
+            return tmp_str;
+        }
+
+
+        $('#pa_allow_link').click(function(){
+            if($('#pa_allow_link').is(":checked")){
+                checkCanAllow();
+            }else{
+                showRegisterDialog(getalertHtml());
+            }
+        });
+
+        $(function(){
+            var x = $('input[name=newLinkway]').filter(':checked').val();
+            if(x == 1){
+                $('#way2').click();
+            }
+        });
+        $('select[name=param_account_id]').change(function(){
+//            $('#u_moblie').html($('#account_info_'+$(this).val()).attr('data-mobile'));
+//            $('#u_tel').html($('#account_info_'+$(this).val()).attr('data-link'));
+            var mobile = $('#account_info_'+$(this).val()).attr('data-mobile');
+            var link = $('#account_info_'+$(this).val()).attr('data-link');
+
+            if(mobile){
+                $('#u_moblie').html(mobile);
+                $('#way1').parent().show();
+            }else{
+                $('#way1').parent().hide();
+            }
+            if(link){
+                $('#u_tel').html(link);
+                $('#way3').parent().show();
+            }else{
+                $('#way3').parent().hide();
+            }
+
+            if(mobile){
+                $('#way1').click();
+            }else if(link){
+                $('#way3').click();
+            }else{
+                $('#way2').click();
+            }
+
+        });
+        //App
+        {/if !in_array($account_id,$related_account_ids)/}
+        var cookie = m['tools.cookie'];
+        if(cookie.get("addnewApp") != 'show') {
+            var downApp = new Dialog({
+                idName: 'new-downapp-dialog',
+                width: 750,
+                close: 'x',
+                title: ' '
+
+            });
+            downApp.setContent('<div style="margin:0 50px 40px 50px;padding-top:40px;height:356px;padding-left: 277px;background: url({/$siteurl.style/}/img/account/add_appphone.jpg) left 40px no-repeat;font-family: ' + '\'' + 'Microsoft YaHei ' + '\'' + '"><p style="font-size: 18px;color: #444;padding-top: 20px">用<span style="color: #f00">汇博企业APP</span>，发布职位、修改职位更方便</p><dl style="height: 195px;margin-top: 50px"><dt style="float: left;text-align: left"><img src="{/$siteurl.style/}/img/account/add_appewm.jpg" /><span style="font-size: 12px;color: #666;display: block;margin-top: 10px">扫描安装汇博企业APP</span><span style="font-size: 12px;color: #999">支持 安卓 IOS</span></dt><dd style="float: left;margin-left: 60px"><span style="font-size: 16px;color:#333">更多APP专属特权:</span><p style="background: url({/$siteurl.style/}/img/account/add_succ.jpg) 10px center no-repeat;padding-left: 35px;line-height: 14px;font-size: 14px;color: #666;margin-top: 15px">职位分享到朋友圈</p><p style="background: url({/$siteurl.style/}/img/account/add_succ.jpg) 10px center no-repeat;padding-left: 35px;line-height: 14px;font-size: 14px;color: #666;margin-top: 15px">及时与求职者沟通</p><p style="background: url({/$siteurl.style/}/img/account/add_succ.jpg) 10px center no-repeat;padding-left: 35px;line-height: 14px;font-size: 14px;color: #666;margin-top: 15px">职位免费刷新特权</p><p style="background: url({/$siteurl.style/}/img/account/add_succ.jpg) 10px center no-repeat;padding-left: 35px;line-height: 14px;font-size: 14px;color: #666;margin-top: 15px">扫码登录PC端网站</p></dd></dl></div>');
+            downApp.show();
+            cookie.set("addnewApp","show",{path:'/'});
+        }
+        {//if/}
+        
+        
+        //7.19发布职位交互
+//      var Toggleing=false;
+        $('.showMoreBtn').on('click',function(){
+//      	if(Toggleing)return
+//      	Toggleing=true;
+        	$(this).hide().siblings('.hideMoreBtn').show().siblings('.morePart').slideDown()
+//      	Toggleing=false;
+        })
+        $('.hideMoreBtn').on('click',function(){
+//      	if(Toggleing)return
+//      	Toggleing=true;
+        	$(this).hide().siblings('.showMoreBtn').show().siblings('.morePart').slideUp()
+//      	Toggleing=false;
+        })
+        $('.otherBtn').on('click',function(){
+//      	if(Toggleing)return
+//      	Toggleing=true;
+        	$(this).next().slideToggle()
+        	$(this).find('span').toggle()
+//      	Toggleing=false;
+        })
+    });
+</script>
+</body>
+</html>

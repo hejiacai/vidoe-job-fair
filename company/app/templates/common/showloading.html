@@ -1,0 +1,20 @@
+<style>
+    .part-loading{ position: absolute; border: 1px solid #f1f1f1;background: #fafafa;left:50%; top:50%; margin-left:-150px;padding: 10px;border-radius: 4px;z-index: 99999;font-size: 14px;color: #666;}
+    .part-loading img{vertical-align: bottom;}
+</style>
+<div id="part_loading" class="part-loading" style="display:none;position:fixed">
+    <img src="{/$siteurl.style/}/img/c/indicator_medium.gif">
+    正在处理中，请稍后
+</div>
+<script >
+    //z-index_m 背景框的 z-index;z-index-j 背景框的z-index
+    function showLoading(){
+        var target1=document.getElementById('part_loading');
+        target1.style.display="block";
+    }
+    //关闭loading
+    function closeLoading(){
+        var target1=document.getElementById('part_loading');
+        target1.style.display="none";
+    }
+</script>

@@ -1,0 +1,94 @@
+<style>
+	.dropImage{
+		width: 660px;height: 330px;background: #f1f1f1;overflow:hidden;
+	}
+	.newJobCustum{text-align:center; margin-top:10px;}
+	.newJobCustum a{ background:#0092db; color:#fff; margin-bottom:20px;display:inline-block;width:140px; height:40px; text-align:center; line-height:40px; margin-right:15px; font-size:18px;}
+	.newJobCustum p{ font-family:"宋体"; color:#999; line-height:22px;}
+	.njCustumImg{width:660px; height:330px; background:#f1f1f1; margin:0 0 20px 20px;}
+	.popJobbd{width:100%; overflow:hidden; text-align:center}
+	.popJobbd a,.newJobCustum a{ display:inline-block;width:140px; height:40px; text-align:center; line-height:40px; margin-right:15px; font-size:18px;}
+	.popJobbd .newPopQuit{ background:#e6e6e6; color:#808080;}
+	.popJobbd .newPopQuit:hover{ background:#f36865; color:#fff;}
+	.popJobbd .newPopQuit:active{ background:#db5e5c; color:#fff;}
+	.popJobbd .newPopSave{background:#0092db; color:#fff;}
+	.popJobbd .newPopSave:hover,.newJobCustum a:hover{ background:#28aff2; color:#fff;}
+	.popJobbd .newPopSave:active,.newJobCustum a:active{ background:#0086c9;color:#fff;}
+	#dragDiv{width:160px;height:160px}
+	
+	.dropImageBox{
+		zoom:1;margin-bottom:20px;
+	}
+	.dropImageBox:after{
+		content:".";display:block;height:0;clear:both;visibility:hidden;
+	}
+	.dropImageBox .dropImage{
+		float:left;width:400px;height:327px;
+	}
+	.dropImageBox .dropImagePreviewer{
+		float:right;width:215px;border-left:1px #CBCBCB solid;overflow:hidden;
+	}
+	.dropImagePreviewer .preview{
+		text-align:center;margin-bottom:5px;
+	}
+	.dropImagePreviewer .preview div{
+		margin:0 auto;
+	}
+	.dropImagePreviewer .preview p{
+		line-height:18px;font-size:12px;
+	}
+	.dropImagePreviewer .preview #preview120{
+		width:120px;height:120px;overflow:hidden;border:1px solid #ddd;
+	}
+	.dropImagePreviewer .preview #preview160{
+		width:160px;height:160px;overflow:hidden;border:1px solid #ddd;
+	}
+
+.logo_step{text-align: left}     
+.logo_step .l_tit{font-size:16px;color:#566a74;font-weight: bold;font-family:"微软雅黑"}
+.logo_step .l_tit img{vertical-align: middle;margin-right: 10px}
+.logo_step .l_step{margin: 5px 0 20px 42px}
+</style>
+<div id="uplogo1" class="newJobCustum" style="height: 495px">
+    <div style="font-family:'微软雅黑';font-size:14px;font-weight:bold;margin-bottom:10px;margin-top:-10px;#margin-top:0px">图片上传后，将进行审核，若审核不通过，图片将直接删除</div>
+	<label id="fileBtn" for="imageFile">选择图片</label>
+    <p style="margin-top:20px">支持jpg、png图片文件，且文件小于2M</p>
+    <p>请选择尺寸大于160*160px的图片</p>
+    <div class="logo_step" style="margin-top:20px">
+	<p class="l_tit"><img src="{/$siteurl.style/}/img/c/logo_temp/suc.jpg" />正确示例：（请包含logo标志和文字）</p>
+	<p class="l_step"><img src="{/$siteurl.style/}/img/c/logo_temp/logo_1.jpg" /></p>
+	<p class="l_tit"><img src="{/$siteurl.style/}/img/c/logo_temp/error.jpg" />错误示例：</p>
+	<p class="l_step"><img src="{/$siteurl.style/}/img/c/logo_temp/logo_2.jpg" /></p>
+    </div>
+</div>
+<div style="display: none" id="dropImageContainer">
+	<div class="dropImageBox">
+        <div id="dropImage" class="dropImage">
+            <div id="dragDiv">
+                <div id="dragDivBg" style="display:block"></div>
+                <div id="rRightDown"> </div>
+                <div id="rLeftDown"> </div>
+                <div id="rRightUp"> </div>
+                <div id="rLeftUp"> </div>
+                <div id="rRight"> </div>
+                <div id="rLeft"> </div>
+                <div id="rUp"> </div>
+                <div id="rDown"></div>
+            </div> 
+        </div>
+        <div class="dropImagePreviewer">
+        	<div class="preview">
+            	<div id="preview120"></div>
+                <p>120*120</p>
+            </div>
+            <div class="preview">
+            	<div id="preview160"></div>
+                <P>160*160<br />预览效果</P>
+            </div>
+        </div>
+    </div>
+	<div class="popJobbd">
+            <a href="javascript:;" id="newPopQuit" class="newPopQuit">取 消</a>
+            <a href="javascript:;" id="newPopSave" class="newPopSave">保 存</a>
+	</div>
+</div>

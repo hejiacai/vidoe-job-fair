@@ -1,0 +1,237 @@
+<style>
+	.formMod .l{width:135px;font-size:14px;color:#666}
+	.formMod .r{width:auto}
+	.formText input.text{font-size:12px}
+</style>
+<form id="partTimeJobForm">
+<div class="formMod mgt10" style="margin-bottom: 0px">
+    <div class="l">请选择邀请类型：</div>
+    <div class="r">
+    	<p class="mgt5"><input name='txtType' value='offer' {/if !$apply['need_invite']/}checked="checked"{//if/} type="radio" /> 直接录用 <span style="font-size:12px;color:#999">（直接录用，不用面试）</span></p>
+    	<p class="mgt5"><input name='txtType' value='invite' {/if $apply['need_invite']/}checked="checked"{//if/} type="radio" /> 面试邀请 <span style="font-size:12px;color:#999">（需要先参加完面试后再决定是否录用）</span></p>
+    </div>
+    <div class="clear"></div>
+</div>
+<div class="formMod mgt10">
+    <div class="l">邀请职位：</div>
+    <div class="r">
+    	<p class="mgt5">{/$apply['station']/}</p>
+    </div>
+    <div class="clear"></div>
+</div>
+<div class="formMod mgt10">
+    <div class="l" id='switchtime'>{/if $apply['need_invite']/}面试时间{/else/}报到时间{//if/}</div>
+    <div class="r">
+       <span class="formText">
+       		<input class="text" type="text" readonly="readonly" id="dateInput" name="date" style="width:227px" />
+       </span>
+       <div id="timeDeltaSelecter" class="dropv2" style="float:left;width:120px;margin-left:10px">
+            <b class="hbFntWes dropIco">&#xf0d7;</b>
+            <label></label>
+       </div>
+       <span class="tipPos">
+            <span class="tipLay">
+            <span data-for="date" generated="true" class="tipBar tipw120"></span></span>
+       </span>
+    </div>
+    <div class="clear"></div>
+</div>  
+<div class="formMod mgt10">
+    <div class="l" id='switchaddress'>{/if $apply['need_invite']/}面试地点{/else/}报到地点{//if/}</div>
+    <div class="r">
+        <span class="formText">
+            <input type="text" {/if $apply['address'] && $apply['is_need_workaddress'] == 1/}value="{/$apply.address/}"{/else/}placeholder="请输入报到地点"{//if/} name="txtAddress" class="text" />
+        </span>
+        <span class="tipPos">
+            <span class="tipLay">
+            <span data-for="txtAddress" generated="true" class="tipBar tipw120"></span></span>
+        </span>
+    </div>
+    <div class="clear"></div>
+</div>  
+<div class="formMod mgt10">
+    <div class="l">联系人</div>
+    <div class="r">
+        <span class="formText">
+            <input type="text" {/if $apply['link_man']/}value="{/$apply['link_man']/}"{/else/}placeholder="请输入联系人名字"{//if/} name="linkman" class="text">
+        </span>
+        <span class="tipPos">
+            <span class="tipLay">
+            <span data-for="linkman" generated="true" class="tipBar tipw120"></span></span>
+        </span>
+    </div>
+    <div class="clear"></div>
+</div> 
+<div class="formMod mgt10">
+    <div class="l">联系电话</div>
+    <div class="r">
+        <span class="formText">
+            <input type="text" {/if $apply['link_tel']/}value="{/$apply['link_tel']/}"{/else/}placeholder="请输入联系人电话，以便求职者咨询了解"{//if/} name="linkway" class="text">
+        </span>
+        <span class="tipPos">
+            <span class="tipLay">
+            <span data-for="linkway" generated="true" class="tipBar tipw120"></span></span>
+        </span>
+    </div>
+    <div class="clear"></div>
+</div>           
+<div class="formMod mgt10">
+    <div class="l">其他描述：</div>
+    <div class="r">
+    	<span class="formTextarea">
+            <textarea name="description" class="textarea" placeholder="有其他事项可以在此处输入，非必填" style="width: 300px;height: 120px"></textarea>
+        </span>
+        <span class="tipPos">
+            <span class="tipLay">
+            <span data-for="description" generated="true" class="tipBar tipw120"></span></span>
+        </span>
+    </div>
+    <div class="clear"></div>
+</div>                
+<div class="formBtn" style="margin-left: 140px;"><a class="btnsF16 btn1" id="btnSaveAddress" href="javascript:void(0);" style="padding:0 40px;text-decoration: none">提交</a></div>
+</form>
+<p style="margin:20px 30px;color:#999">发送录用通知后，需要求职者再次确认，一但确认，则认为双方的录用关系建立</p>
+
+<script type="text/javascript">
+hbjs.use('widge.calendar.calendar,widge.overlay.confirmBox, widge.select, widge.validator.form, product.hbCommon', function(Calendar, ConfirmBox, Select, ValidatorForm, $){
+	var pWidth = 70,fontWidth = 18;
+	var form = $('#partTimeJobForm');
+	$('#partTimeJobForm input:text, #partTimeJobForm textarea').placeHolder();
+	
+	var t1 = new Date();
+	var c1 = new Calendar({
+		trigger: $('#dateInput'),
+		range: [t1, null],
+		zIndex: 99999
+	});
+	
+	var timeDeltaSelecter = new Select({
+		trigger: $('#timeDeltaSelecter'),
+		className: 'dropv2_select',
+		align: {baseXY: [0, '100%-2']},
+		selectName: 'timeDelta',
+		dataSource: ['08:00','08:30','09:00','09:30','10:00','10:30','11:00','11:30','12:00','12:30','13:00','13:30','14:00','14:30','15:00','15:30','16:00','16:30','17:00','17:30','18:00','18:30','19:00','19:30','20:00'],
+		selectedIndex: 0,
+		maxHeight:200,
+		zIndex: 99999
+	});
+	
+	var rules = {
+			date: 'required',
+			/*
+			hours: {
+				required: true,
+				match: /^(2[0-3]|[01]?\d)$/
+			},
+			minute: {
+				required: true,
+				match: /^[012345]?\d$/
+			},*/
+			txtAddress: {required: true, range: [5, 50]},
+			linkman: {
+				//required: true,
+				range: [2, 10]
+			},
+			linkway: 'required phone',
+			description: {max: 500}
+		},
+		errorMsgs = {
+			date: '请选择日历<span class="tipArr"></span>',
+			/*
+			hours: {
+				required: '请输入小时<span class="tipArr"></span>',
+				match: '请输入正确的小时<span class="tipArr"></span>',
+			},
+			minute: {
+				required: '请选择分钟<span class="tipArr"></span>',
+				match: '请输入正确的分钟<span class="tipArr"></span>'
+			},*/
+			txtAddress: {
+				required: '请输入地点<span class="tipArr"></span>',
+				range: '请输入5-50字<span class="tipArr"></span>'
+			},
+			linkman: {
+				//required: '请输入联系人<span class="tipArr"></span>',
+				range: '请输入2-10字<span class="tipArr"></span>'
+			},
+			linkway: {
+				required: '请输入联系电话<span class="tipArr"></span>',
+				phone: '请输入正确的电话号码<span class="tipArr"></span>'
+			},
+			description: '最多输入500字<span class="tipArr"></span>'
+		}
+		
+	var validator = new ValidatorForm({
+		element: form,
+		rules: rules,
+		errorMessages: errorMsgs,
+		errorElement: 'span.tipBar',
+		/*
+		groups: {
+			jobTime: 'date hours minute'
+		},*/
+		keepKey: true
+	});
+	
+	var tipLayErrClass = 'tipLayErr';
+	validator.on('invalid', function(e){
+		e.label.addClass(tipLayErrClass);
+	});
+	validator.on('pass', function(e){
+		e.label.removeClass(tipLayErrClass);
+	});
+	
+	form.find('#btnSaveAddress').on('click', function(e){
+		submitResult();
+	});
+	
+	if(jobDialog){
+		jobDialog.after('hide', function(){
+			validator.destory();
+			c1.destory();
+		});
+	}
+	$('input[name="txtType"]').click(function(){
+		txtType = $(this).filter(':checked').attr('value');
+		if(txtType == 'invite'){
+			$('#switchtime').text('面试时间');
+			$('#switchaddress').text('面试地点');
+		}
+		if(txtType == 'offer'){
+			$('#switchtime').text('报到时间');
+			$('#switchaddress').text('报到地点');
+		}		
+	});
+	function submitResult(){
+		validator.submit(function(e){
+			$('#btnSaveAddress').hide();
+			$.ajax({
+	            url:"/partjobapply/sendofferdo/applyid-{/$apply['apply_id']/}",
+	            type:"post",
+	            dataType: "json",
+	            contentType: "application/x-www-form-urlencoded; charset=utf-8",
+	            data: form.serialize(),
+	            success:function(json){	            	
+	                if(!(json.success||false)){
+						ConfirmBox.alert(json.error, null, { title: '发送失败' });
+						$('#btnSaveAddress').show();
+	                    return false;
+	                }
+					jobDialog && jobDialog.hide();
+					var msg = json.success;
+					ConfirmBox.timeBomb(msg, {
+						name: 'success',
+						width: pWidth + msg.length * fontWidth,
+						timeout: 1000,
+						callback: function(){
+							window.location.reload();
+						}
+					});
+	                return false;
+	            }
+	        });
+	        return false;
+		});
+	}
+});
+</script>

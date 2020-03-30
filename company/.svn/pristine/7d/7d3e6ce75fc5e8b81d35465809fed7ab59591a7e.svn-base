@@ -1,0 +1,1396 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+<title>{/$title/}</title>
+<!–[if lt IE9]>
+<script src="{/version file='html5.js'/}"></script>
+<![endif]–>
+<link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='comback.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}" />
+
+
+<script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.min.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='common.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='dialog.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='jquery.form.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='ui_inputFocus.js'/}"></script>
+
+<script type="text/javascript" language="javascript" src="{/version file='ui_dropdownlist.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='ui_validate.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='ui_area.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='ui_uploadify.js'/}"></script>
+<script type="text/javascript" src="//api.map.baidu.com/api?v=2.0&ak=33f9256a1a1ba5a80eb40f8ed45bce3c"></script>
+
+
+<script type="text/javascript" src="{/version file='version.js'/}"></script>
+<script type="text/javascript">
+window.CONFIG = {
+	HOST: '{/$siteurl.style/}',
+	COMBOPATH: '/js/v2/'
+}
+</script>
+<script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+<script type="text/javascript" src="{/version file='global.js'/}"></script>
+
+
+<style type="text/css">
+.section .mod{}
+.section .mod h2{font-size:18px;height:35px;line-height:35px;border-bottom:1px solid #dadada;padding:0 0 0 20px;}
+.mod #floagMap { display:none;}
+.mod .formMod .l{width:195px;}
+.mod .formMod .r{width:755px;}
+.mod .form{padding:20px 0 15px;}
+
+#fstNav hgroup{padding:10px 40px; z-index:1}
+.rate{overflow:hidden;line-height:30px;}
+.rate b{float:left;display:inline;width:85px;}
+.rate .bar{float:left;display:inline;margin:7px 10px 0;width:175px;}
+.rate .rateNav{float:left;display:inline;margin:0 0 0 23px;width:610px;}
+.rate .rateNav a{margin:0 5px;font-size:12px;}
+
+section.sectionFix{position:fixed;top:0;left:50%;z-index:1002;margin-left:-500px;*margin-left:-501px;_margin-left:auto;width:1000px;border-bottom:1px solid #dadada;filter:alpha(opacity=90);-moz-opacity:0.9;-khtml-opacity: 0.9;opacity:0.9;}
+.fstBack{height:65px;display:none;}
+.fstBackShow{display:block;_display:none;}
+
+.comNTxt{ z-index:2;}
+.comNTxt .tipLay{top:31px;left:-85px;}
+.comNTxt .tipLay .tipArr{top:-4px;left:36px;width:8px;height:5px;background:url({/$siteurl.style/}/img/common/contrl.gif) no-repeat 0 0; z-index:2}
+.comNTxt .tipLay .tipLayTxt{background:#fffce3;border:1px solid #fad5a8;width:390px;padding:0 5px 5px; position:relative; z-index:1;line-height:22px;}
+.comNTxt .tipLay .tipLayTxt .closeThis{ position:absolute;font-size:12px;right:7px;top:4px;}
+.comNTxt .tipLay .tipLayTxt p img{ vertical-align:middle;}
+
+.logoImg{clear:both;width:100%;float:left; position:relative; z-index:1;width:185px;margin:10px 0 0;border:1px solid #dadada;height:70px;background:url({/$siteurl.style/}/img/common/loadBox.gif) no-repeat center center;}
+.logoImg img{width:185px;height:70px;}
+.logoImg a.del{ position:absolute;right:-10px;top:-10px;font-size:22px;color:#D84D14;background:#fff;}
+.logoImg a.del:hover{color:#cb4647;}
+
+.touPeo{ z-index:2;}
+.touPeo .tipLay{display:none;}
+
+.formBtn{margin:25px 0 0 200px;}
+
+.imgLst{clear:both;width:730px;float:left;margin:15px 0 0;display:inline;}
+.imgLst ul li{float:left;display:inline; position:relative; z-index:1;width:122px;height:125px;margin:0 24px 5px 0;}
+.imgLst ul li .pic{height:82px;}
+.imgLst ul li .pic img{width:120px;height:80px;border:1px solid #dadada;}
+.imgLst ul li a.del{position:absolute;right:-10px;top:-10px;font-size:22px;color:#D84D14;background:#fff; border-radius:15px;}
+.imgLst ul li a.del:hover{color:#cb4647;}
+.imgLst ul li .imgInp{margin:5px 0 0;}
+.imgLst ul li .imgInp input.imgTxt{height:22px;line-height:22px;border:1px solid #fff;font-size:12px;width:120px; text-align:center; cursor:pointer;}
+.imgLst ul li .imgInp input.imgTxtHov{border:1px solid #dadada;}
+.imgLst ul li .load{display:none;width:120px;height:80px;border:1px solid #eaeaea;background:url({/$siteurl.style/}/img/common/loadBox.gif) no-repeat center center;}
+.imgLst ul li .loadTxt{ text-align:center;font-size:12px;display:none;height:24px;line-height:24px;margin-top:5px;}
+
+.imgLst ul li.hov .imgInp input.imgTxt{border:1px solid #aaa;}
+.imgLst ul li.hov .pic img{border:1px solid #cbcbcb}
+.imgLst ul li.imgLoading .load{display:block;}
+.imgLst ul li.imgLoading .loadTxt{display:block;}
+.imgLst ul li.imgLoading .pic,.imgLst ul li.imgLoading .imgInp,.imgLst ul li.imgLoading a.del{display:none;}
+
+
+.comVd .tipTxt i.hbFntWes{font-size:18px;margin:0 5px 0 0; vertical-align:middle;}
+
+.mod .formMod .r .formFile{ position:relative; z-index:1;}
+.mod .formMod .r .formFile .swfUploadBtn{ position:absolute;left:0;top:0;}
+.formTextarea textarea.textarea{width:500px;}
+
+.flitem{display: inline-block;padding: 2px 10px;margin-right:10px;margin-top: 2px;color:#666;border:1px solid #ececec;line-height: 22px;border-radius: 2px;font-size:12px}
+/*#selectedReward a{margin-top: 7px;display: inline-block;font-size:12px}*/
+.upLOGO{display: inline-block;width:103px;height: 103px;overflow: hidden;position: relative}
+.upLOGO span{display: none}
+.upLOGO:hover span{display: block;position: absolute;bottom:0px;left:0px;width:103px;text-align: center;height: 25px;background-color: #000;color:#fff;z-index: 2;font-size:12px;line-height: 25px;}
+#addr:hover{ text-decoration:underline;}
+.mapClose{width:24px; height:24px; display:block; text-align:center; line-height:24px; color:#fff; background:#333; font-family:Arial, Helvetica, sans-serif; float:left;}
+.mapClose:hover{ background:#0cf; color:#fff;}
+/*浮动地图*/
+
+.formMod .icon-square{
+	margin: 0 0 7px 5px;
+}
+.icon-square{
+	background-color:#f2f2f2;color:#666;
+	display:inline-block;padding:3px 10px;font-family:"微软雅黑";
+}
+.icon-square:hover {
+    background-color:#eaffcc;color:#666;
+}
+.icon-square .hbIconMoon{
+	font-size:14px;color:#cacaca;margin-left:5px;
+}
+.icon-checked-square, .icon-checked-square:hover{
+	background-color:#599403;color:#fff;
+}
+.icon-checked-square .hbIconMoon{
+	color:#fff;
+}
+.editComapnyShort{
+	color: red;
+    display: block;
+    padding-left: 205px;
+    padding-top: 10px;
+}
+.textarea {color: #999}
+.tip {margin-left: 225px;margin-right: 266px;box-sizing: border-box;color: #444;background-color: #eee;position: relative;margin-top: -6px;}
+.tip .example {color: red;font-weight: 600;}
+.formMod.tip::before {content: '';position: absolute;border-width: 10px;border-color: transparent transparent #eee transparent;border-style: solid;top: -20px;left: 40px;}
+</style>
+</head>
+<body id="body">
+{/*include 'new_header.html' cur='企业管理'*/}
+{/include file="new_header.html" par="企业管理" cur="企业资料"/}
+<div class="content" id="content">
+    <section class="section" style="overflow:hidden;">
+    	<hgroup>
+            <div class="rate"><b>资料完善度</b><span class="bar"><span class="barBd"><i style="width:{/$precent/}"></i></span><em><i></i>{/$precent/}</em></span><span class="rateNav">{/if $no_complete!=''/}待完善项：{/$no_complete/}{//if/}</span></div>
+        </hgroup>
+    </section>
+    <div class="fstBack" id="fstBack"></div>
+    <section class="section">
+        <hgroup>
+            <div class="mod">
+                <h2 id="jbzl" class="yahei">基本资料</h2>
+                <div class="form">
+                <form id="baseInforForm">
+                    <div class="formMod">
+                        <div class="l">公司名称<i>&nbsp;</i></div>
+                        <div class="r">
+                            <span class="tipTxt font14" style="margin:0 20px 0 0;">{/$company["company_name"]/}</span>
+                            <span class="tipTxt" style="position:relative; z-index:1;margin:0;"><a href="javascript:void(0);" id="comNLnk">修改公司名称</a></span>
+                            <span class="tipPos comNTxt">
+                                <span class="tipLay" style="display:none;">
+                                    <span class="tipArr"></span>
+                                    <span class="tipLayTxt">
+                                        <a href="javascript:void(0);" class="closeThis hbFntWes" id="closeThis">&#xf00d;</a>
+                                        <p>修改公司名称，需要出示含有贵公司公章的有效文件。详情咨询客服。</p>
+                                        <p>服务热线：{/$hot_serve_phone/}</p>
+                                        <p>客服QQ：<a target="_blank" href="//wpa.qq.com/msgrd?v=3&uin=2851501279&site=qq&menu=yes"><img border="0" src="//wpa.qq.com/pa?p=2:2851501279:51" alt="点击这里给我发消息" title="点击这里给我发消息"/></a></p>
+                                    </span>
+                                </span>
+                            </span>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="formMod">
+                        <a id="logo"></a>
+                        <input id="hidLogo" name="hidden_logo" type="hidden" value="{/$company['company_logo_path']/}"/>
+                        <input id="hidDeleteLogo" name="hidden_del_logo" type="hidden" value="{/$company['company_logo_path']/}"/>
+                        <div class="l">logo图片<i>&nbsp;</i></div>
+                        <div class="r">
+                        	<style>
+                        		.upLOGO{display: inline-block;width:103px;height: 103px;overflow: hidden;position: relative; float: left;}
+                        		.upLOGO span{display: none}
+                        		.upLOGO:hover span{display: block;position: absolute;bottom:0px;left:0px;width:103px;text-align: center;height: 25px;background-color: #000;color:#fff;z-index: 2;font-size:12px;line-height: 25px}
+                                .upLOGO_label{width:415px; float: left; height:40px; line-height: 20px;padding: 30px 0px; color:#ccc;}
+                        	</style>
+                             <a href="javascript:;" id="upLOGO" class="upLOGO">
+                             	<img src="{/$logo/}" width="103px" height="103px" />
+                             	<span>上传LOGO</span>
+                             </a>
+                            <p class="upLOGO_label">（注：上传图片后便于求职者能快速认识您的企业，如果您的Logo不利于求职者快速识别您的企业，请在图片上加上公司简称）</p>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="formMod">
+                         <a id="shortname" name="shortname"></a>
+                        <div class="l">公司简称<i>*</i></div>
+                        <div class="r">
+                            <span class="formText">
+                                <input type="text" id='hidCompanyShortName' value="{/$company['company_shortname']/}" class="text" style="width:425px;" name='hidCompanyShortName' />
+                            </span>
+                            <span class="tipPos">
+                                <span class="tipLay">
+                                </span>
+                            </span>
+                        </div>
+                        <div class="clear"></div>
+                        {/if $need_audit_shortname/}<em class="editComapnyShort">简称修改审核中，审核完毕可对外展示</em>{//if/}
+                    </div>
+                    <div class="formMod">
+                        <a id="property" name="pro"></a>
+                        <div class="l">公司性质<i>*</i></div>
+                        <div class="r">
+                            <span class="drop zIndex" id="company_property"></span>
+                            <span class="tipPos">
+                                <span class="tipLay">
+                                </span>
+                            </span>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    {/if $company['is_audit'] != 1/}
+                    <div class="formMod JobIndDrop checkMod">
+                        <a id="calling" name="cal"></a>
+                        <div class="l">所处主行业<i>*</i></div>
+                        <div class="r">
+                            <span id="newCalling" class="drop formText JobIndDrop zIndex" style="width:250px;border-color:#d0cbcb">
+                                <span>
+                                    <div class="dropSet"><b class="hbFntWes dropIco"></b><span id='addMainCalling'>
+                                        {/if !empty($calling_names[0])/}<span class="seled">{/$calling_names[0]/}</span>{//if/}</span>
+                                        <input class="text JobCay" type="text">
+                                    </div>
+                                </span>
+                                <input type="text" name="main_calling" id="main_calling" value="{/$calling_arr[0]/}" style="position:absolute;left:-9999px;top:0;" />
+                            </span>
+                            <a href="javascript:void(0)" id="addHtml" style="font-size: 12px;margin-top: 5px;{/if count($calling_arr)<= 1/}display:inline-block;{/else/}display:none{//if/}">+添加次行业</a>
+                            <span class="tipPos" style="left:90px;">
+                                <span class="tipLay"></span>
+                            </span>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    {/else/}
+                    <div class="formMod JobIndDrop checkMod">
+                        <a id="calling" name="cal"></a>
+                        <div class="l">所处主行业<i>*</i></div>
+                        <div class="r">
+                            <span class="tipTxt font14" style="margin:0 20px 0 0;">{/$calling_names[0]/}</span>
+                            <span class="tipTxt" style="position:relative; z-index:1;margin:0;"><a href="javascript:void(0);" id="callingNLnk">修改行业</a></span>
+                            <a href="javascript:void(0)" id="addHtml" style="font-size: 12px;margin-top: 5px;display:inline-block;"></a>
+                            <span class="tipPos comNTxt" style="z-index:99999">
+                                <span class="tipLay" style="display:none;">
+                                    <span class="tipArr"></span>
+                                    <span class="tipLayTxt" style="width:175px;">
+                                        <a href="javascript:void(0);" class="closeThis hbFntWes" id="closeThis">&#xf00d;</a>
+                                        <p>修改公司行业，请联系客服</p>
+                                        <p>服务热线：400-1010-970</p>
+                                        <p>客服QQ：<a target="_blank" href="//wpa.qq.com/msgrd?v=3&uin=2851501279&site=qq&menu=yes"><img border="0" src="//wpa.qq.com/pa?p=2:2851501279:51" alt="点击这里给我发消息" title="点击这里给我发消息"/></a></p>
+                                    </span>
+                                </span>
+                            </span>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    {//if/}
+
+                    {/if count($calling_arr) > 1 && $company['is_audit'] == 1/}
+                    <div id="hidLastCalling" class="formMod JobIndDrop checkMod" {/if count($calling_arr) <= 1/}style="display:none"{//if/}>
+                        <a id="calling" name="cal"></a>
+                        <div class="l">次要行业<i>&nbsp;</i></div>
+                        <div class="r">{/$calling_names[1]/}</div>
+                        <div class="clear"></div>
+                    </div>
+                    {/else/}
+                    <div id="hidLastCalling" class="formMod JobIndDrop checkMod" {/if count($calling_arr) <= 1/}style="display:none"{//if/}>
+                        <a id="calling" name="cal"></a>
+                        <div class="l">次要行业<i>&nbsp;</i></div>
+                        <div class="r">
+                            <span id="nextCalling" class="drop formText JobIndDrop zIndex" style="width:250px;border-color:#eee">
+                                <span>
+                                    <div class="dropSet"><b class="hbFntWes dropIco"></b>
+                                        <span id='addNextCalling'>{/if count($calling_arr) >= 2/}<span class="seled">{/$calling_names[1]/}</span>{//if/}</span>
+                                        <input class="text JobCay" type="text">
+                                    </div>
+                                </span>
+                                <input type="text" name="next_calling" style="position:absolute;left:-9999px" {/if count($calling_arr) >= 2/}value='{/$calling_arr[1]/}'{//if/}>
+                            </span>
+                            <a id="deleteHtml" href="javascript:void(0)" style="font-size: 12px;margin-top: 5px;margin-left:13px;display: inline-block">删除</a>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    {//if/}
+                    <div class="formMod">
+                        <a id="size" name="size"></a>
+                        <div class="l">公司规模<i>*</i></div>
+                        <div class="r">
+                            <span class="drop zIndex" id="company_size"></span>
+                            <span class="tipPos">
+                                <span class="tipLay">
+                                </span>
+                            </span>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="formMod">
+                        <a id="spot" name="spot"></a>
+                        <div class="l">主营业务及行业地位<i>*</i></div>
+                        <div class="r">
+                            <span class="formText">
+                                <input type="text" id='hidRightSpot' value="{/$company['company_bright_spot']/}" class="text" style="width:425px;" name="hidRightSpot" placeholder="一句话描述清楚公司的主营业务、行业地位，最多50字"/>
+                            </span>
+                            <span class="tipPos">
+                                <span class="tipLay">
+                                </span>
+                            </span>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="formMod">
+                        <a id="info" name="info"></a>
+                        <div class="l">公司简介<i>*</i></div>
+                        <div class="r">
+                            <span class="formTextarea">
+                                <textarea class="textarea" name="info" placeholder="描述公司优势/亮点/特色，如：行业地位、奖项/成就、资质/专利、经营愿景等，最多50字">{/$company["info"]/}</textarea>
+                            </span>
+                            <span class="tipPos">
+                                <span class="tipLay">
+                                </span>
+                            </span>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="formMod tip">
+                        <span class="example">示例：</span>
+                        <span>五星级酒店、BrandZ中国品牌100强、覆盖37个城市、运营5000家门店、已获得3项国家专利（门禁卡管理系统等）、完善的晋升机制、1年调薪两次</span>
+                    </div>
+                    <div class="formMod">
+                        <a id="linkman" name="linkm"></a>
+                        <div class="l">联系人<i>*</i></div>
+                        <div class="r">
+                            <span class="formText">
+                                <input type="text" class="text" style="width:125px;" name="linkman" value="{/$company["linkman"]/}">
+                            </span>
+                            <input name="open_linkman" type="hidden" value="1"/>
+                            <span class="tipPos">
+                                <span class="tipLay">
+                                </span>
+                            </span>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+
+                   <div class="formMod">
+                        <a id="linktel" name="linkt"></a>
+                        <div class="l">座机<i>&nbsp;</i></div>
+                        <div class="r" id="phoneDiv">
+                            <span class="formText">
+                                <input type="text"  placeholder="区号" style="width:45px;{/if $phone_infor["zone"] == "区号"/}color:#A6A6A6{//if/}" class="text" name="zone_infor" value="{/$phone_infor["zone"]/}" id="zoneNo">
+                            </span>
+                            <span class="tipTxt">&nbsp;</span>
+                            <span class="formText">
+                                <input type="text" placeholder="固定电话" style="width:143px;{/if $phone_infor["phone"] == "固定电话"/}color:#A6A6A6{//if/}" class="text" name="phone_infor" value="{/$phone_infor["phone"]/}" id="phoNo">
+                            </span>
+                            <span class="tipTxt">&nbsp;</span>
+                            <span class="formText">
+                                <input type="text" placeholder="分机号" style="width:45px;{/if $phone_infor["ext"] == "分机号"/}color:#A6A6A6{//if/}" class="text" name="ext_infor" value="{/$phone_infor["ext"]/}" id="extNo">
+                            </span>
+                            <span class="tipPos">
+                                <span class="tipLay">
+                                </span>
+                            </span>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+
+                    <div class="formMod">
+                        <a id="mobile"></a>
+                        <div class="l">手机<i>*</i></div>
+                        <div class="r">
+                            <span class="formText">
+                                <input type="text" style="width:125px;" class="text" id="link_mobile" name="link_mobile" value="{/$company["link_mobile"]/}">
+                            </span>
+                            <span class="tipPos">
+                                <span class="tipLay">
+                                </span>
+                            </span>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+            <div class="formMod" id="codeDiv" style="display: none">
+                <div class="clearfix">
+                    <p class="addTel" style="height: 36px;line-height: 36px;text-align: left; position: relative;width:700px; margin-left: 205px">
+                        <input type="text" name="authCode" id="authCode" style="display:block;text-indent:5px;width: 135px; float: left; height: 28px; line-height: 36px; border:1px solid #cfcfcf; color: #333; font-size: 15px;" value="" placeholder="请输入短信验证码">
+                        <span class="authCodex" style="display:block;float:left;height:36px;line-height:36px;background:#64bce4;padding: 0px 12px;color: #fff;border-radius: 4px;margin-right: 15px; font-size: 15px; margin-left: 15px; cursor: pointer">获取验证码</span>
+                                <span class="authCodetipLay" data-for="authCode">
+                            </span>
+                    </p>
+                </div>
+            </div>
+
+                    <div class="formMod">
+                        <a id="fax"></a>
+                        <div class="l">传真<i>&nbsp;</i></div>
+                        <div class="r">
+                            <span class="formText">
+                                <input type="text" style="width:125px;" class="text" name="fax" value="{/$company["fax"]/}">
+                            </span>
+                            <span class="tipTxt gray">求职者不可见</span>
+                            <span class="tipPos">
+                                <span class="tipLay">
+                                </span>
+                            </span>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+
+                    <div class="formMod">
+                        <a id="email"></a>
+                        <div class="l">电子邮件<i>&nbsp;</i></div>
+                        <div class="r">
+                            <span class="formText">
+                                <input type="text" style="width:209px;" class="text" name="email" value="{/$company["email"]/}">
+                            </span>
+                            <span class="tipPos">
+                                <span class="tipLay">
+                                </span>
+                            </span>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+
+                    <div class="formMod">
+                        <a id="hom"></a>
+                        <div class="l">公司网站<i>&nbsp;</i></div>
+                        <div class="r">
+                            <span class="formText">
+                                <input type="text" style="width:209px;" class="text" name="homepage" value="{/$company["homepage"]/}">
+                            </span>
+                            <span class="tipPos">
+                                <span class="tipLay">
+                                </span>
+                            </span>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <!--mijing-->
+				    <div class="formMod welMod">
+                        <div class="l">福利待遇<i>&nbsp;</i></div>
+                        <div class="r" id='selectedReward'>
+
+                        	<!--<a href="javascript:" class="icon_reward icon-square" data-name="hidDefaultReward" data-status="true" data-value="01">五险<i class="hbIconMoon">&#xe0fb;</i></a>
+                                <a href="javascript:" class="icon_reward icon-square" data-name="hidDefaultReward" data-value="02">住房公积金<i class="hbIconMoon">&#xe0fb;</i></a>
+                                <a href="javascript:" class="icon_reward icon-square" data-name="hidDefaultReward" data-value="03">包吃<i class="hbIconMoon">&#xe0fb;</i></a>
+                                <a href="javascript:" class="icon_reward icon-square" data-name="hidDefaultReward" data-value="04">包住<i class="hbIconMoon">&#xe0fb;</i></a>
+                                <a href="javascript:" class="icon_reward icon-square" data-name="hidDefaultReward" data-value="05">周末双休<i class="hbIconMoon">&#xe0fb;</i></a>
+                                <a href="javascript:" class="icon_reward icon-square" data-name="hidDefaultReward" data-value="06">带薪年假<i class="hbIconMoon">&#xe0fb;</i></a>
+                                <a href="javascript:" class="icon_reward icon-square" data-name="hidDefaultReward" data-value="07">交通补助<i class="hbIconMoon">&#xe0fb;</i></a>
+                                <a href="javascript:" class="icon_reward icon-square" data-name="hidDefaultReward" data-value="08">通讯补助<i class="hbIconMoon">&#xe0fb;</i></a>
+                                <a href="javascript:" class="icon_reward icon-square" data-name="hidDefaultReward" data-value="09">年底双薪<i class="hbIconMoon">&#xe0fb;</i></a>
+                                <a href="javascript:" class="icon_reward icon-square" data-name="hidDefaultReward" data-value="10">绩效奖金<i class="hbIconMoon">&#xe0fb;</i></a>
+                                <a href="javascript:" class="icon_reward icon-square" data-name="hidDefaultReward" data-value="11">生育补贴<i class="hbIconMoon">&#xe0fb;</i></a>
+                                <a href="javascript:" class="icon_reward icon-square" data-name="hidDefaultReward" data-value="12">节日礼金<i class="hbIconMoon">&#xe0fb;</i></a>
+                                <a href="javascript:" class="icon_reward icon-square" data-name="hidDefaultReward" data-value="13">定期体检<i class="hbIconMoon">&#xe0fb;</i></a>
+                                <a href="javascript:" class="icon_reward icon-square" data-name="hidDefaultReward" data-value="14">年度旅游<i class="hbIconMoon">&#xe0fb;</i></a>
+                                <a href="javascript:" class="icon_reward icon-square" data-name="hidDefaultReward" data-value="15">生日礼金<i class="hbIconMoon">&#xe0fb;</i></a>
+                                <a href="javascript:" class="icon_reward icon-square" data-name="hidDefaultReward" data-value="16">免费班车<i class="hbIconMoon">&#xe0fb;</i></a>
+                                <a href="javascript:" class="icon_reward icon-square" data-name="hidDefaultReward" data-value="17">弹性工作<i class="hbIconMoon">&#xe0fb;</i></a>
+                                <a href="javascript:" class="icon_reward icon-square" data-name="hidDefaultReward" data-value="18">年底分红<i class="hbIconMoon">&#xe0fb;</i></a>
+                                <a href="javascript:" class="icon_reward icon-square" data-name="hidDefaultReward" data-value="19">白班<i class="hbIconMoon">&#xe0fb;</i></a>-->
+
+                            {/if count($all_reward_data > 0)/}
+                            {/foreach $all_reward_data as $reward/}
+                            {/if in_array($reward['reward_id'], $company_default_rewards)/}
+                            <span class="flitem">{/$reward['reward_name']/}</span>
+                            {//if/}
+                            {//foreach/}
+                            {//if/}
+
+                            {/if count(company_other_rewards) > 0/}
+                            {/foreach $company_other_rewards as $reward/}
+                            <span class="flitem">{/$reward/}</span>
+                            {//foreach/}
+                            {//if/}
+                            <a href="javascript:void(0)" onclick="setWelfare(0,0)">编辑</a>
+
+                        </div>
+
+                        <input type="hidden" value='{/$hidDefaultReward/}' id="hidDefaultReward" name="hidDefaultReward" />
+                        <input type="hidden" value='{/$hidOtherReward/}' id="hidOtherReward" name="hidOtherReward" />
+
+                        <div class="clear"></div>
+                    </div>
+                    <!--mijing end-->
+                    <div class="formBtn" style="display: none">
+                        <a href="javascript:void(0);" class="btnsF16 btn1" id="baseinfo_btn">保存</a>
+                    </div>
+                </form>
+                </div>
+
+                <h2 id="dlwz" class="yahei">地址位置</h2>
+                <div class="form">
+                    <form id="addressForm" action="{/get_url rule='/company/saveMap/'/}">
+                        <div class="formMod addressMod">
+                            <a id="area" name="area"></a>
+                            <div class="l">所在地区<i>*</i></div>
+                            <div class="r">
+                            	 <span class="formText" id="curarea">
+    						     </span>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="formMod">
+                            <a id="addr" name="address"></a>
+                            <div class="l">详细地址<i>*</i></div>
+                            <div class="r">
+                                <span class="formText" >
+                                    <input type="text" style="width:425px;" class="text" id="txtAddress" name="txtAddress" value="{/$company['address']/}" />
+                                    
+                                </span>
+                                <span class="tipPos">
+    	                        	<span class="tipLay ">
+    	                            </span>
+    	                        </span>
+                                <a id="addr"  onclick="return findMap()" style="font-size: 12px;margin-top: 5px;display: inline-block;color:#3D84B8; cursor:pointer;display:none"><i class="hbFntWes" style="font-size: 14px">&#xf041;</i> 在地图中标记</a>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <!-- 地图标记 -->
+                        <div class="formMod">
+                            <a id="map"></a>
+                            <div class="l"></div>
+                            <div class="r">
+                                <span id="mapCon" class="formMap" style="width:650px;height:290px;">
+
+                                </span>
+                                <input type="hidden" id="hidMapX" name="hidMapX" value="{/$map['map_x']/}" />
+                                <input type="hidden" id="hidMapY" name="hidMapY" value="{/$map['map_y']/}" />
+                                <input type="hidden" id="hidMapZoom" name="hidMapZoom" value="{/$map['map_zoom']/}" />
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="formBtn"><a href="javascript:void(0);" id="btnSaveAddress" class="btnsF16 btn1">保存</a></div>
+                    </form>
+                </div>
+            </div>
+        </hgroup>
+    </section>
+</div>
+<div class="sus" id="sus"><a href="javascript:void(0);" class="backTop hbFntWes">&#xf0d8;</a></div>
+{/include file="footer.html"/}
+<section class="floatRT"><a href="//www.huibo.com/about/message" target="_blank" class="serviceLink">我有问题要反馈</a><b></b></section>
+<script type="text/javascript">
+
+hbjs.use('@imageEditor, @confirmBox, @checkBoxer, @jobDialog, @hbCommon, @actions', function(m){
+
+	var imageEditor = m['widge.imageEditor'],
+		ConfirmBox = m['widge.overlay.confirmBox'],
+		checkBoxer = m['widge.checkBoxer'],
+		Dialog = m['widge.overlay.hbDialog'],
+		util = m['base.util'],
+		$ = m['product.hbCommon'].extend(m['cqjob.actions'], m['cqjob.jobDialog']),
+		uploadDialog = new Dialog({
+			close: 'x',
+			idName: 'ui_company_dialog',
+			title: '请上传有识别性的logo图片',
+			width: 700,
+			content: '{/$siteurl.company|replace:"http:":""/}/company/uploadCompanyLogo/',
+			isAjax: true
+		}),
+		fontSize = 18,
+		pWidth = 70,
+		imgEditor;
+
+	$('#upLOGO').on('click', function(e){
+		uploadDialog.show();
+	});
+	uploadDialog.after('hide', function(){
+		this.query('#newPopQuit').off('click');
+		imgEditor.destory();
+	});
+	uploadDialog.on('loadComplete', function(){
+		var uploadPanel = this.query('#uplogo1'),
+			editPanel = this.query('#dropImageContainer'),
+			dropImage = this.query('#dropImage'),
+			uploadingDialog;
+
+		imgEditor = new imageEditor({
+			imageCroperConfig: {
+				element: dropImage,//目标
+				handle: '#dragDiv',
+				color: '#f1f1f1',
+				width: dropImage.width(),
+				height: dropImage.height()
+			},
+			fileUploaderConfig: {
+				imageURL: '{/$logo_virt_path/}'
+			},
+			trigger: this.query('#newPopSave')
+		});
+		imgEditor.on('startUpload', function(e){
+			var msg = "正在上传...";
+			uploadingDialog = ConfirmBox.timeBomb(msg, {
+				name : "warning",
+				timeout : 100000,
+				width: fontSize * msg.length + pWidth
+			});
+		}).on('progresed', function(e){
+			this._imgFileName = e.data.name;
+			this._imgType = e.data.thumb_type;
+			this._imgRatio = e.data.thumb_ratio;
+			this.loadImage(e.url);
+
+			uploadingDialog.hide();
+			uploadPanel.hide();
+			editPanel.show();
+
+			var preview1 = editPanel.find('#preview120'),
+				preview2 = editPanel.find('#preview160');
+
+			this.addPreview(preview1, 120, 120);
+			this.addPreview(preview2, 160, 160);
+		}).on('progressError', function(e){
+            if(e.errorMsg != undefined){
+                ConfirmBox.timeBomb(e.errorMsg, {
+                    name : "fail",
+                    timeout : 3000,
+                    width: fontSize * e.errorMsg.length + pWidth
+                });
+                return;
+            }
+
+            if(e.data.status == 0){
+                ConfirmBox.timeBomb(e.data.errorMsg, {
+                    name : "fail",
+                    timeout : 3000,
+                    width: fontSize * e.data.errorMsg.length + pWidth
+                });
+            }
+		}).on('save', function(e){
+			var self = this;
+			$.ajax({
+				url: '{/$siteurl.company|replace:"http:":""/}/company/saveLogo',
+				data: {
+					cropX: e.cropX,
+					cropY: e.cropY,
+					cropH: e.cropH,
+					cropW: e.cropW,
+					cropPH: e.cropPH,
+					cropPW: e.cropPW,
+					url: e.url,
+					name: this._imgFileName,
+					thumb_type: this._imgType,
+					thumb_ratio: this._imgRatio
+				},
+				success: function(e){
+					e = util.json(e);
+					if(e.state){
+						$('#hidLogo').val(e.image_path);
+						$('#upLOGO > img').attr('src', e.image_url);
+						uploadDialog.hide();
+						delete self._imgFileName;
+						delete self._imgType;
+						delete self._imgRatio;
+					}
+				}
+			});
+		});
+
+		imgEditor.imageCroper.on('loadSuccess', function(){
+			uploadPanel.hide();
+			editPanel.show();
+		}).on('loadError', function(){
+			delete this._imgFileName;
+			delete this._imgType;
+			delete this._imgRatio;
+			uploadPanel.show();
+			editPanel.hide();
+			var msg = '加载图片失败';
+			ConfirmBox.timeBomb(msg, {
+				name : "fail",
+				timeout : 1000,
+				width: fontSize * msg.length + pWidth
+			});
+		});
+
+		this.query('#newPopQuit').on('click', function(){
+			uploadDialog.hide();
+		});
+
+	});
+
+	var rewardCheckBox = new checkBoxer({
+		element: $('.icon_reward'),
+		className: 'icon-checked-square'
+	});
+
+	$.focusblur('#addInfo');
+    $.focusColor('input.text');
+    $.focusColor('textarea.textarea');
+    $.focusblur('input.conPeople');
+    $.focusblur('input.conPhone');
+    $.focusblur('input.newMail');
+    $.focusblur('#zoneNo');
+    $.focusblur('#phoNo');
+    $.focusblur('#extNo');
+    $.focusblur('#vdNam');
+    $.focusblur('#vdSrc');
+
+	$('input').placeHolder();
+
+	$('.mapClose').click(function(){
+		$('#floagMap,#_mask').hide();
+	})
+    $(window).scroll(function(){
+        if ($(document).scrollTop() > 120){
+            $('#sus').find('a.backTop').css({'display':'inline-block'});
+        }else{
+            $('#sus').find('a.backTop').css({'display':'none'});
+        }
+    });
+    $('#link_mobile').bind('input propertychange', function() {
+                var mobile = $(this).val();
+        if(mobile=='{/$company["link_mobile"]/}'){
+            $('#codeDiv').hide();
+        }else{
+            $('#codeDiv').show();
+        }
+    });
+    $('.authCodex').click(function(){
+        if($(this).hasClass("authCodeGray"))
+            return;
+        var txtUserPhone = $('#link_mobile').val();
+
+        if(txtUserPhone == ''){
+            $('.authCodetipLay').html(getAlertMessage("请输入手机号"));
+            return;
+        }else{
+            $('.authCodetipLay').html('');
+        }
+        $.post('{/get_url rule="/company/SendAuthCode"/}', {mobile_phone : txtUserPhone}, function (data) {
+            if(data.isNeedLogin){
+                $.anchorMsg('离开太久了,请重新登录!', {icon: 'fail'});
+                return;
+            }
+            if(data && !data.status){
+                alert(data.msg);
+                return false;
+            }else{
+                alert("发送成功");
+                $('.authCodex').addClass('authCodeGray').html('<b>60</b>秒后重新获取验证码');
+                interval = window.setInterval(coundown,1000);
+            }
+        },"json");
+    });
+    function coundown(){
+        var seconds=$('.authCodeGray').find('b').text();
+        seconds = parseInt(seconds);
+        if(seconds > 0){
+            seconds--;
+            $('.authCodeGray').find('b').text(seconds);
+        }else{
+            window.clearInterval(interval);
+            $('.authCodex').removeClass('authCodeGray').text('获取验证码');
+        }
+    }
+    $('#sus').find('a.backTop').click(function(){
+        $('html,body').animate({ scrollTop: 0 });
+    });
+    $('#jbzlLnk').click(function(){
+        $('html,body').animate({scrollTop:$jbzl-50});
+    });
+    $('#dlwzLnk').click(function(){
+        $('html,body').animate({scrollTop:$dlwz-50});
+    });
+
+    $('#comNLnk,#callingNLnk').click(function(){
+        $(this).parents('.tipTxt').siblings('.comNTxt').find('.tipLay').css({'display':'block'});
+    });
+
+    $('.closeThis').click(function(){
+        $(this).parents('.tipLay').css({'display':'none'});
+    });
+
+    $('#touPeoDrop').hover(function(){
+        $(this).siblings('.tipPos').find('.tipLay').css({'display':'block'});
+    },function(){
+        $(this).siblings('.tipPos').find('.tipLay').css({'display':'none'});
+    });
+
+    $('#imgLst').find('li').find('.imgTxt').bind('focus',function(){
+        $(this).parents('li').addClass('hov');
+    });
+
+    $('#imgLst').find('li').find('.imgTxt').bind('blur',function(){
+        $(this).parents('li').removeClass('hov');
+    });
+
+    $('#imgLst').find('li').find('.imgTxt').hover(function(){
+        $(this).addClass('imgTxtHov');
+    },function(){
+        $(this).removeClass('imgTxtHov');
+    });
+
+	var $jbzl = $('#jbzl').offset().top;
+	var $dlwz = $('#dlwz').offset().top;
+
+	$('#getVd').click(function() {
+    	$.showModal('/company/showVideoInfo',{title:'如何获取视频'});
+	});
+	 $('#newCalling').on('click',function(){
+		  $.showModal('/company/selectCalling/type-1',{title:'选择主行业'});
+	});
+	 $('#nextCalling').on('click',function(){
+		 var calling_id = $("#main_calling").val() //todo
+		 $.showModal('/company/selectCalling/type-0-calling_id-'+calling_id,{title:'选择次行业'});
+	});
+
+	//添加次行业
+	function addCalling(){
+		$("#hidLastCalling").show();
+		$("#addHtml").hide();
+	}
+	function deleteCalling(){
+		 $("#hidLastCalling").hide();
+		 $("#addHtml").css({'display':'inline-block'});
+		 $("input[name='next_calling']").val('');
+		 $("#addNextCalling").empty();
+	}
+
+	$('#addHtml').on('click', function(){
+		addCalling();
+	});
+	$('#deleteHtml').on('click', function(){
+		deleteCalling();
+	});
+
+	$.setIndex('zIndex');
+});
+//修改行业
+function updateCalling(calling_id,calling_name,type){
+    if(type ==1){
+        $("#addMainCalling").empty();
+        $("#main_calling").val(calling_id);
+        var h = "<span class='seled'>"+calling_name+"</span>"
+        $("#addMainCalling").html(h);
+    }else{
+        $("#addNextCalling").empty();
+        $("input[name='next_calling']").val(calling_id);
+        var h = "<span class='seled' id='addNextCalling'>"+calling_name+"</span>"
+        $("#addNextCalling").html(h);
+    }
+}
+
+
+//上传头像
+/*
+function upLOGO(){
+    $.showModal('/company/uploadCompanyLogo/',{title:'上传公司LOGO'});
+}
+*/
+//在地图中标识
+function setWelfare(defaultReward,otherReward){
+	$.showModal('/reward/index/defaultReward-'+defaultReward+'-otherReward-'+otherReward,{title:'设置福利亮点'});//福利亮点mijing
+}
+function refreshReward(defaultReward,defaultRewardName,otherReward){
+    $("#hidDefaultReward").val(defaultReward);
+    $("#hidOtherReward").val(otherReward);
+    //重新展示页面
+    var reward_html = '';
+    var defaultReward_arr = [];
+    var otherReward_arr = [];
+    if(defaultRewardName != ''){
+        defaultReward_arr =defaultRewardName.split(',');
+    }
+    if(otherReward !=''){
+        otherReward_arr = otherReward.split(',');
+    }
+    for(var i=0;i<defaultReward_arr.length;i++){
+        reward_html = reward_html+"<span class='flitem'>"+defaultReward_arr[i]+"</span>";
+    }
+    for(var k=0;k<otherReward_arr.length;k++){
+        reward_html = reward_html+"<span class='flitem'>"+otherReward_arr[k]+"</span>";
+    }
+    reward_html = reward_html+ '  <a href="javascript:void(0)" onclick="setWelfare(\''+defaultReward+'\',\''+otherReward+'\')">编辑</a>';
+    $("#selectedReward").html(reward_html);
+    <!--<span class="formChb flitem">福利待遇1</span> -->
+                            <!--<a href="javascript:void(0)" onclick="setWelfare(0,0)">编辑</a>-->
+}
+
+$(function(){
+
+    //删除LOGO
+    $('#btnDelLogo').live('click',function(){
+    	$('#imgView').attr('src','');
+    	$('#hidLogo').val('');
+		//标记为删除
+        $('#operate').val('delLogo');
+        $('.logoImg').hide();
+    });
+    //上传LOGO
+    $('#upload_logo').uploadify({
+		auto:true,
+		multi:false,
+		swf:'/swf/uploadify.swf',
+		uploader : '/company/saveTempLogo/',
+		formData: {
+			'upload_cookie_userid': '{/$upload_cookie_userid/}',
+			'upload_cookie_nickname':'{/$upload_cookie_nickname/}',
+			'upload_cookie_usertype':'{/$upload_cookie_usertype/}',
+			'upload_cookie_userkey':'{/$upload_cookie_userkey/}',
+			'upload_cookie_tick':'{/$upload_cookie_tick/}'
+		},
+		queueID:'showImage',
+		fileSizeLimit:'350kb',
+		fileTypeExts:'*.jpg;*.bmp;*.gif;*.jpeg;*.png',
+		buttonImage:'{/$siteurl.style/}/uploadify/submit.png',
+		fileTypeDesc:'All Files',
+		method:'post',
+		cancelImage: '{/$siteurl.style/}/uploadify/cancel.png',
+		width:85,
+		height:27,
+		itemTemplate:'<a href="javascript:void(0);" id="btnDelLogo" class="del hbFntWes">&#xf057;</a>'+
+						'<img src="" id="imgView" />',
+		onSelect:function(){
+			$('.logoImg').show();
+		},
+		onUploadSuccess:function(file,data,response){
+			if(data!=null&&data!=undefined&&data!=''){
+				 var json = eval("("+data+")");
+				 if(json.error==100){
+	                 $.anchorMsg("请选择您要上传的文件", { icon: "warning" });
+	             }else if(json.error==101){
+	                 $.anchorMsg("文件超过最大限制", { icon: "warning" });
+	             }else if(json.error==102){
+	                 $.anchorMsg("您上传的文件格式有误", { icon: "warning" });
+	             }else if (json.error==104) {
+	                 $.anchorMsg("文件上传失败", { icon: "warning" });
+	             } else {
+					var path = json.path;
+					$('#imgView').attr('src',path+'?'+Math.random().toString().replace('.','0'));
+					$('#hidLogo').val(json.name);
+					$('#delLogo').val(json.name);
+					$('#operate').val('');//清空删除LOGO操作
+	             }
+			}
+		},
+		onSelectError:function(file,errorCode,errorMsg){
+			var settings = this.settings;
+			switch(errorCode) {
+				case SWFUpload.QUEUE_ERROR.FILE_EXCEEDS_SIZE_LIMIT:
+					$.anchorMsg('抱歉 "' + file.name + '" 文件查过了大小限制 (' + settings.fileSizeLimit + ').',{icon:'warning'});
+					break;
+				case SWFUpload.QUEUE_ERROR.ZERO_BYTE_FILE:
+					$.anchorMsg('文件 "' + file.name + '" 为空.',{icon:'warning'});
+					break;
+				case SWFUpload.QUEUE_ERROR.INVALID_FILETYPE:
+					$.anchorMsg('文件 "' + file.name + '" 类型不支持 (' + settings.fileTypeDesc + ').',{icon:'warning'});
+					break;
+			}
+		}
+	});
+});
+
+hbjs.use('@areaDrop, @form, @jobDialog, @jobDropList', function(m){
+
+	var $ = m['cqjob.jobValidate'].extend(m['cqjob.jobForm'], m['cqjob.jobDialog'], m['cqjob.jobDropList']);
+	var baseInforForm = $('#baseInforForm').validate({
+		rules:{
+			hddComProperty:{required:true},
+			main_calling:{required:true},
+			hddComsize:{required:true},
+			hidCompanyShortName:{required:true,rangelength:[2,15]},
+			hidRightSpot:{required:true,rangelength:[5,50]},
+			email:{email:true},
+			info    :{required:true,rangelength: [2, 4000]},
+			linkman :{required:true,rangelength: [1, 15]},
+			link_mobile:{required:true,match:'^[1][0-9]{10}$'},
+			fax:{tel:true},
+			phone_infor:{match:'^(([0-9]{6,11})|固定电话)$'},
+			zone_infor:{match:"^(([0-9]{3,4})|区号)$"},
+			ext_infor:{match:"^(([0-9]{0,5})|分机号)$"}
+		},
+		messages:{
+			hddComProperty:{required:'请选择公司性质<span class="tipArr"></span>'},
+			main_calling:{required:'请选择公司行业<span class="tipArr"></span>'},
+			hddComsize:{required:'请选择公司规模<span class="tipArr"></span>'},
+			email:{email:'请输入正确的邮件地址<span class="tipArr"></span>'},
+			hidCompanyShortName:{required:'请输入公司简称<span class="tipArr"></span>',
+									rangelength:'公司简称请输入1-15个字<span ckass="tipArr"></span>'
+								},
+			hidRightSpot:{required:'请输入公司描述<span class="tipArr"></span>',
+									rangelength:'请输入公司描述5-50个字<span class="tipArr"></span>'
+				},
+			info    :{
+				required    :'请输入公司简介<span class="tipArr"></span>',
+				rangelength : '公司简介请输入2-4000个字<span class="tipArr"></span>'
+			},
+			linkman :{
+				required    :'请输入联系人姓名<span class="tipArr"></span>',
+				rangelength :'联系人姓名不能超过15字<span class="tipArr"></span>'
+			},
+			link_mobile:{
+                required:'请输入正确的电话号码<span class="tipArr"></span>',
+                match:'请输入正确的电话号码<span class="tipArr"></span>'
+            },
+			fax:{tel:'请输入正确的传真号码<span class="tipArr"></span>'},
+			phone_infor:{required:'请输入固定电话<span class="tipArr"></span>',match:'请输入6-11位的数字<span class="tipArr"></span>'},
+			zone_infor:{match:'请输入正确的区号<span class="tipArr"></span>'},
+			ext_infor:{match:'请输入正确的分机号<span class="tipArr"></span>'}
+		},
+		errorClasses:{
+			hddComProperty:{required:'tipLayErr tipw120'},
+			main_calling:{required:'tipLayErr tipw120'},
+			hddComsize:{required:'tipLayErr tipw120'},
+			email:{email:'tipLayErr tipw120'},
+			hidCompanyShortName:{required:'tipLayErr tipw120',rangelength:'tipLayErr tipw120'},
+			hidRightSpot:{required:'tipLayErr tipw120',rangelength:'tipLayErr tipw150'},
+			info    :{required:'tipLayErr tipw120',rangelength:'tipLayErr tipw120'},
+			linkman :{required:'tipLayErr tipw120',rangelength:'tipLayErr tipw120'},
+			link_mobile :{required:'tipLayErr tipw120',match:'tipLayErr tipw120'},
+			fax:{tel:"tipLayErr tipw120"},
+			phone_infor:{required:"tipLayErr tipw120",match:"tipLayErr tipw120"},
+			zone_infor:{match:"tipLayErr tipw120"},
+			ext_infor:{match:"tipLayErr tipw120"}
+		},
+		errorElement:'span',
+		errorPlacement:function(error,element){
+			element.parent().nextAll(".tipPos").find('.tipLay').append(error);
+		},
+		success:function(label){
+			label.text(" ");
+		}
+	});
+
+	$("#company_property").droplist({
+		isCanWrite:false,
+		inputWidth:125,
+		style:'width:133px',
+		hddName:'hddComProperty',
+		items:[
+			{/$i=1/}
+			{/foreach from=$properties item=property key=id/}
+			{id:'{/$id/}',name:'{/$property/}'}
+			{/if $i++<count($properties)/}
+			,
+			{//if/}
+			{//foreach/}
+		],
+		onSelect:function(i,name){
+			baseInforForm.element($('#hddComProperty'));
+		}
+	});
+	$("#company_property").setDropListValue({/$company["property_id"]/});
+	$("#company_size").droplist({
+		isCanWrite:false,
+		inputWidth:125,
+		style:'width:133px',
+		hddName:'hddComsize',
+		items:[
+			{/$i=1/}
+			{/foreach from=$comsizes item=property key=id/}
+			{id:'{/$id/}',name:'{/$property/}'}
+			{/if $i++<count($comsizes)/}
+			,
+			{//if/}
+			{//foreach/}
+		],
+		onSelect:function(i,name){
+			baseInforForm.element($('#hddComsize'));
+		}
+	});
+
+	$("#company_size").setDropListValue({/$company["size_id"]/});
+
+    function submitBaseInfo(){
+        var baseInfo = getBaseInfor();
+        $.ajax({
+            url:"/company/modifybasicinfo",
+            type:"post",
+            dataType:"json",
+            contentType: "application/x-www-form-urlencoded; charset=utf-8",
+            data:baseInfo,
+            success:function(json){
+                if(!(json.success||false)){
+                    $.message(json.error,{title:'操作失败！'});
+                    return false;
+                }
+                $('#codeDiv').hide();
+//                $.anchorMsg("保存成功！");
+                is_baseinfo_btn = true;
+                company_shortname = $("#baseInforForm").find("input[name=hidCompanyShortName]").val();
+                return false;
+            }
+        });
+    }
+    //统一提交 标识
+    var is_baseinfo_btn=false,
+    company_shortname = "{/$company['company_shortname']/}";
+	$("#baseinfo_btn").click(function(){
+        if(!baseInforForm.form()) return false;
+        var hidCompanyShortName = $.trim($("#baseInforForm").find("input[name=hidCompanyShortName]").val());
+        if(hidCompanyShortName != "{/$base_company_shortname/}" && hidCompanyShortName != company_shortname){
+            $.message("您修改的“公司简称”需在审核后对外展示", function(){
+                submitBaseInfo();
+            });
+            return false;
+        }
+        submitBaseInfo();
+        return false;
+    });
+
+	function getBaseInfor(){
+		var baseInfor = {};
+		var $_baseInforForm = $("#baseInforForm");
+		baseInfor.company_property  = $_baseInforForm.find("input[name=hddComProperty]").val();
+	   // baseInfor.calling_ids       = $_baseInforForm.find("input[name=callingids]").val();
+		baseInfor.main_calling       = $_baseInforForm.find("input[name=main_calling]").val();
+		 baseInfor.next_calling       = $_baseInforForm.find("input[name=next_calling]").val();
+		baseInfor.company_size      = $_baseInforForm.find("input[name=hddComsize]").val();
+		baseInfor.company_info      = $_baseInforForm.find("textarea[name=info]").val();
+		baseInfor.linkman           = $_baseInforForm.find("input[name=linkman]").val();
+		baseInfor.link_mobile       = $_baseInforForm.find("input[name=link_mobile]").val();
+		baseInfor.authCode       = $_baseInforForm.find("input[name=authCode]").val();
+		baseInfor.fax               = $_baseInforForm.find("input[name=fax]").val();
+		baseInfor.email             = $_baseInforForm.find("input[name=email]").val();
+		baseInfor.homepage          = $_baseInforForm.find("input[name=homepage]").val();
+		baseInfor.open_linkman      = $_baseInforForm.find("input[name=open_linkman]").val();
+		//baseInfor.open_mobile       = $_baseInforForm.find("input[name=open_mobile]").val();
+		//baseInfor.show_email        = $_baseInforForm.find("input[name=show_email]").val();
+		//baseInfor.open_tel          = $_baseInforForm.find("input[name=open_phone]").val();
+		baseInfor.phone_infor       = $_baseInforForm.find("input[name=phone_infor]").val();
+		baseInfor.zone_infor        = $_baseInforForm.find("input[name=zone_infor]").val();
+		baseInfor.ext_infor         = $_baseInforForm.find("input[name=ext_infor]").val();
+		baseInfor.logo              = $_baseInforForm.find("input[name=hidden_logo]").val();
+		baseInfor.del_logo			= $_baseInforForm.find("input[name=hidden_del_logo]").val();
+		baseInfor.operate			= $_baseInforForm.find("input[name=operate]").val();
+		baseInfor.hidDefaultReward			= $_baseInforForm.find("input[name=hidDefaultReward]").val()
+		baseInfor.hidOtherReward			= $_baseInforForm.find("input[name=hidOtherReward]").val()
+		baseInfor.hidCompanyShortName			= $_baseInforForm.find("input[name=hidCompanyShortName]").val()
+		baseInfor.hidRightSpot			= $_baseInforForm.find("input[name=hidRightSpot]").val()
+		return baseInfor;
+	}
+
+
+
+	var initPt;
+	var initArea;
+	var map,marker;
+	var myValue;
+	var AreaDrop = m['product.areaDrop'];
+
+	var areaDrop = new AreaDrop({
+		hidName: 'hidArea',
+		container: $('#curarea'),
+		selectedValue: '{/$company["area_id"]/}'
+	});
+
+	areaDrop.on('selectedItem', function(e){
+		var label = this.getLabel();
+		if(myValue != label){
+			$("#txtAddress").val(label);
+			myValue = label;
+
+			var geo = new BMap.Geocoder();
+			geo.getPoint(label, relocateCallback, '');
+		}
+	});
+    
+    //之前是settimeout，会出现ajax请求还未返回就被执行
+    var interval;
+	$('#btnSaveAddress').click(function(){
+        $("#baseinfo_btn").click();
+		interval = setInterval(function () {
+			if (!is_baseinfo_btn) return false;
+			is_baseinfo_btn = false;
+			if(!validAdress.form()) return false;
+			$("#btnSaveAddress").submitForm({
+				beforeSubmit: $.proxy(validAdress.form, validAdress),
+				data: {},
+				success: saveAddressCallback,
+				clearForm: false
+			});
+		},300);
+	});
+
+	initMap();
+
+	$('#txtAddress').focusin(function(){
+		var addr = $(this).val();
+		if(addr == ''){
+			var label = areaDrop.getLabel();
+			$(this).val(label);
+			addr = label;
+		}
+		if(addr != ''){
+			var geo = new BMap.Geocoder();
+			geo.getPoint(addr, relocateCallback, '');
+		}
+	});
+
+	$('#txtAddress').focusout(function(){
+		var addr = $(this).val();
+		if(addr != ''){
+			var geo = new BMap.Geocoder();
+			geo.getPoint(addr, relocateCallback, '');   //缺一个城市名
+		}
+	});
+
+	function relocateCallback(point){
+		if(point == null){
+			var geo = new BMap.Geocoder();
+			geo.getPoint(areaDrop.getLabel(), relocateCallback, '');
+		} else {
+			map.setCenter(point);
+			marker.setPosition(point);
+
+			$('#hidMapX').val(marker.getPosition().lng);
+			$('#hidMapY').val(marker.getPosition().lat);
+			$('#hidMapZoom').val(map.getZoom());
+		}
+	}
+
+	function initMap(){
+		var mapX = $('#hidMapX').val();
+		var mapY = $('#hidMapY').val();
+		var mapZoom = $('#hidMapZoom').val();
+		if(typeof mapZoom =='undefined' || mapZoom == ''){
+			mapZoom = 15;
+		}
+
+		var initPt = null;
+		if(typeof mapX != 'undefined' && mapX!='' && typeof(mapY) != 'undefined' && mapY!=''){
+			initPt = new BMap.Point(mapX,mapY);
+		}
+
+		var address = $('#txtAddress').val();
+
+		//这个逻辑由于单选地区控件是异步加载的，所以这里可能始终取的是空值，暂时保留吧
+		var areaDesc = areaDrop.getLabel();
+
+		var defaultPt = new BMap.Point(106.553057,29.565468);
+
+
+		map = new BMap.Map("mapCon");
+
+
+		//在加载完成，确定中心点后，设置标注点
+		map.addEventListener('load',function(){
+			var pt = null;
+			if(initPt!=null){
+				pt = initPt;
+			}
+			else{
+				pt = new BMap.Point(map.getCenter().lng,map.getCenter().lat);
+			}
+
+			var myIcon = new BMap.Icon("{/$siteurl.style/}/img/common/maplabel.png", new BMap.Size(33,50));
+			marker = new BMap.Marker(pt,{icon:myIcon});  // 创建标注
+			map.addOverlay(marker);              // 将标注添加到地图中
+			marker.enableDragging();
+			marker.setTitle('请拖动至您公司所在位置');
+
+			var label = new BMap.Label("请拖动至您公司所在位置",{offset:new BMap.Size(35,5)});
+			marker.setLabel(label);
+
+			//添加事件，在拖动时去掉文字提示
+			marker.addEventListener('dragstart',function(){
+				label.setStyle({display:'none'});
+			});
+			marker.addEventListener('dragend',function(){
+				$('#hidMapX').val(marker.getPosition().lng);
+				$('#hidMapY').val(marker.getPosition().lat);
+				$('#hidMapZoom').val(map.getZoom());
+			});
+		});
+		if(initPt != null){
+			map.centerAndZoom(new BMap.Point(mapX,mapY), mapZoom);
+		} else if(address != ''){
+			map.centerAndZoom(defaultPt,mapZoom);
+			var geo = new BMap.Geocoder();
+			geo.getPoint(address, relocateCallback, '');
+		} else if(areaDesc != ''){
+			map.centerAndZoom(defaultPt,mapZoom);
+			var geo = new BMap.Geocoder();
+			geo.getPoint(areaDesc, relocateCallback, '');
+		}
+		else{
+			map.centerAndZoom(defaultPt, mapZoom);
+		}
+
+		map.addControl(new BMap.NavigationControl());               // 添加平移缩放控件
+		map.addControl(new BMap.MapTypeControl());          //添加地图类型控件
+		map.addControl(new BMap.OverviewMapControl());              //添加默认缩略地图控件
+		map.enableScrollWheelZoom();                            //启用滚轮放大缩小
+
+		map.addEventListener('zoomend',function(){
+			$('#hidMapZoom').val(map.getZoom());
+		});
+	}
+
+	function saveAddressCallback(json){
+        clearInterval(interval);
+		if(json.error){
+			$.message(json.error,{title:'操作失败！'});
+			return false;
+		}
+		if(json.has_change_map){
+			var map_x = $('#hidMapX').val();
+			var map_y = $('#hidMapY').val();
+			var add_info = $("#txtAddress").val();
+			var id = 0;
+			var area_id = areaDrop.getValue();
+			$.confirm("地址已修改，是否同步到已发布的职位中？",function(){
+				$.post('{/get_url rule="/job/SyncJobAddress/"/}',{add_info:add_info, map_x:map_x, map_y:map_y, area_id:area_id, id:id},function(json){
+					if (json && !json.status) {
+						  $.message("同步失败", { title: "操作提示", icon: "fail" });
+						  return;
+					}
+					$.anchorMsg("同步成功！");
+				},'json');
+			});
+		}else{
+			$.anchorMsg("保存成功！");
+		}
+		return false;
+	}
+
+	var validAdress = $('#addressForm').validate({
+		rules:{
+			txtAddress:{required:true},
+			hidArea:{required:true}
+		},
+		messages:{
+			txtAddress:{required:'请输入公司地址<span class="tipArr"></span>'},
+			hidArea:{required:'请选择公司地区<span class="tipArr"></span>'}
+		},
+		errorClasses:{
+			txtAddress:{required:"tipLayErr tipw120"},
+			hidArea:{required:'tipLayErr tipw120'}
+		},
+		errorElement:'span',
+		errorPlacement:function(error,element){
+			element.parent().nextAll(".tipPos").find('.tipLay').append(error);
+		},
+		success:function(label){
+			label.text(" ");
+		}
+	});
+
+});
+
+</script>
+
+<!--
+<script type="text/javascript">
+
+    $("#phoneDiv input").focus(function(){
+        var thisInput = $(this);
+        var inputName = thisInput.attr("name");
+        var defaultVal = "分机号";
+        if(inputName == "zone_infor"){
+            defaultVal = "区号";
+        }else if(inputName == "phone_infor"){
+            defaultVal = "固定电话";
+        }
+        var currentVal = $.trim(thisInput.val());
+        if(currentVal == defaultVal){
+            thisInput.val("");
+            thisInput.css("color","#000");
+        }
+    });
+
+    $("#phoneDiv input").blur(function(){
+        var thisInput = $(this);
+        var inputName = thisInput.attr("name");
+        var defaultVal = "分机号";
+        if(inputName == "zone_infor"){
+            defaultVal = "区号";
+        }else if(inputName == "phone_infor"){
+            defaultVal = "固定电话";
+        }
+        var currentVal = $.trim(thisInput.val());
+        if(currentVal == defaultVal || currentVal == ""){
+            thisInput.val(defaultVal);
+            thisInput.css("color","#A6A6A6");
+        }
+    });
+
+</script>
+-->
+{/include file="chat/chat.html"/}
+</body>
+</html>

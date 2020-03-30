@@ -1,0 +1,532 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>品牌推广-新建品牌推广广告</title>
+<link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='comback.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='resument2015.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='market.css'/}" />
+<script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.min.js'/}"></script>
+<style type="text/css">
+    #upload_photo{position: relative; z-index: 1;top:0px; left:0px; overflow: hidden; height:30px !important; line-height:30px; cursor: pointer;}
+    #upload_photo-button{ margin-top:-24px;}
+
+    .uploadify-queue-item {  background-color: #F5F5F5;  -webkit-border-radius: 3px;  -moz-border-radius: 3px;  border-radius: 3px;  font: 11px Verdana, Geneva, sans-serif;  max-width: 350px;  padding: 10px;  }
+    .uploadify-error {  background-color: #FDE5DD !important;  }
+    .uploadify-queue-item .cancel a {  background: url('/uploadify/uploadify-cancel.png') 0 0 no-repeat;  float: right;  height:	16px;  text-indent: -9999px;  width: 16px;  }
+    .uploadify-queue-item.completed {  background-color: #E5E5E5;  }
+    .uploadify-progress {  background-color: #E5E5E5;  margin-top: 10px;  width: 100%;  }
+    .uploadify-progress-bar {  background-color: #0099FF;  height: 3px;  width: 1px;  }
+    input.focus{box-shadow:none !important;}
+    .marketPut .error{border-color:#f00000 !important; box-shadow:none;}
+    .makSelect input[type=radio]{width:16px; height:16px; margin-right:3px;}
+    .marketPut label.error{ color:#f00000; margin-left: 10px; box-shadow:none;  }
+    .makSelect .error{ color:#f00000; margin-left: 10px; box-shadow:none;  }
+
+    #fileupload{width:72px; overflow: hidden; margin-left:4px;}
+</style>
+</head>
+
+<body>
+{/include file="new_header.html" par="全职招聘" cur="精准推广"/}
+
+<div class="content">
+    <form id="FormData">
+	<div class="section">
+    	<div class="hgroup">
+        <div class="marketBg">
+            <div class="marketPut">
+                <span>广告位：</span>
+                <span class="radMak">APP首页显示</span>
+                <a href="#" class="markerSimple">（查看示例）</a>
+            </div>
+            <div class="marketPut" style="position: relative;">
+                <span>广告名称：</span>
+                <input class="makPut" type="text" name="title" id="title" value="" />
+            </div>
+            <div class="marketPut" style="position: relative; overflow: hidden;">
+                <div style="width:100%; height:30px; overflow:hidden;">
+                    <span style="height:30px; line-height: 30px;">广告图片：</span>
+                    <a class="pictures" id="upload_photo">上传图片</a>
+                    <i style="position:absolute; top:4px; left: 180px;">（ 图片尺寸：750*90，格式：jpg,png,大小不能超过2MB ）</i>
+                    <p id="imageError" style="position:absolute; top:4px; left: 560px; color:#f00000;"></p>
+                </div>
+                <div id="imageContent" style="padding:0px; margin-top: 5px;">
+                    <div id="Image_load" style="width:400px; margin-left: 73px;"></div>
+                    <img id="demoImage" src="" style="max-width:250px; max-height:90px; margin-left:73px;padding:10px 0px; display: none;"/>
+                    <input type="hidden" id="spread_image" name="spread_image" value=""/>
+                </div>
+            </div>
+            <div class="marketPut" style="position: relative;">
+                <span>目标链接：</span>
+                <input class="makPut" type="text" name="url" id="url" value="" />
+                <i>（请上传手机页面网址）</i>
+            </div>
+            <div class="marketPut" style="position:relative;">
+                <span>广告预算：</span>
+                <input class="makPut" type="text" name="budget" id="budget" value="" />
+                <label id="budget_error" class="error" style="display: none;"></label>
+                <span>元/天</span>
+            </div>
+            <div class="marketPut" style="position:relative;">
+                <span>广告出价：</span>
+                <input class="makPut" type="text" name="bid" id="bid" value="" />
+                <span>元</span>
+                <b>（最低出价：5.00元 ,平均出价：{/$AveragePrice/}元）</b>
+                <i>注：广告排名=出价*广告质量得分</i>
+            </div>
+            <div class="marketPutx">
+            	<span class="makTit">受众选择</span>
+                <div class="marketputBg">
+                    <div class="makSelect tabRadio2" style="overflow: hidden;">
+                        <b style="display: inline-block; float: left;">地区：</b>
+                        <ul class="checks" style="width:856px; float: left; padding-left:5px;">
+                            <li class="hb_ui_boss_checkbox thisAll"><i></i>全选</li>
+                            {/foreach $arealist as $itemarea/}
+                            <li class="hb_ui_boss_checkbox" data-id="{/$itemarea['area_id']/}"><i></i>{/$itemarea['area_name']/}</li>
+                            {//foreach/}
+                        </ul>
+                        <input type="hidden" class="CheckedVal" name="area_ids" id="area_ids"/>
+                    </div>
+                    <ul class="makSelect tabRadio2 checks">
+                        <b style="padding-bottom:20px;">学历：</b>
+                        <li class="hb_ui_boss_checkbox thisAll"><i></i>全选</li>
+                        {/foreach $degreelist as $key=>$itemdegree/}
+                        <li class="hb_ui_boss_checkbox" data-id="{/$key/}"><i></i>{/$itemdegree/}</li>
+                        {//foreach/}
+                        <input type="hidden" class="CheckedVal" name="degree_ids" id="degree_ids"/>
+                    </ul>
+                    <ul class="makSelect tabRadio2 checks">
+                        <b style="padding-bottom:20px;">经验：</b>
+                        <li class="hb_ui_boss_checkbox thisAll"><i></i>全选</li>
+                        {/foreach $workyearlist as $wkey=>$itemworkyear/}
+                        <li class="hb_ui_boss_checkbox" data-id="{/$wkey/}"><i></i>{/$itemworkyear/}</li>
+                        {//foreach/}
+                        <input type="hidden" class="CheckedVal" name="workyear_ids" id="workyear_ids"/>
+                    </ul>
+                    <div class="makSelect tabRadio2">
+                        <b style="padding-bottom: 0px;">年龄：</b>
+                        <span class="hb_ui_boss_checkbox" id="age_notlimit"  style="padding-bottom: 0px;width:80px;"><i></i>不限</span>
+                        <input type="text" name="min_age" id="min_age" class="age" placeholder="最小年龄" />
+                        <span>~</span>
+                        <input type="text" name="max_age" id="max_age" class="age" placeholder="最大年龄" />
+                        <span class="error"></span>
+                    </div>
+                    <div class="makSelect tabRadio2" style="padding-bottom: 0px;">
+                        <b style="padding-bottom: 3px;">性别：</b>
+                        <input type="radio" name="sex" value="0" id="sex0" checked="checked"/>不限
+                        <input type="radio" name="sex" value="1" id="sex1" style="margin-left: 15px;"/>男
+                        <input type="radio" name="sex" value="2" id="sex2" style="margin-left: 15px;"/>女
+                    </div>
+                </div>
+            </div>
+            <div class="marketBtn">
+                <!--<a class="markSuer">确定</a>-->
+                <input id="submit" type="button" class="markSuer" value="确定" style="float:left; display: inline-block;width: 141px;height: 52px;border-radius: 4px;background: #4c90c3;line-height: 52px;text-align: center;color: #fff; border:none;"/>
+                <a style="cursor: pointer;" onclick="pageClose();" class="gray">取消</a>
+            </div>
+        </div>
+    </div>
+    </div>
+    </form>
+    <input id="fileupload" value="上传图片" type="file" name="Filedata" data-url="gossip/Upload/" accept="image/*" style="display:none;" />
+</div>
+
+
+<!------查看示例弹窗------>
+<div class="hb_ui_ui-mask"></div>
+<div class="maketPopx">
+	<p><a href="#" class="popClose">x</a></p>
+    <img src="{/$siteurl.style/}/img/company/maketBanner.jpg" width="410" height="433" />
+</div>
+
+<!--<script type="text/javascript" language="javascript" src="{/version file='ui_uploadify.js'/}"></script>-->
+<script type="text/javascript" language="javascript" src="{/version file='jquery.validate.js'/}"></script>
+
+
+<script src="{/version file='jquery.ui.widget.js'/}"></script>
+<script src="{/version file='jquery.iframe-transport.js'/}"></script>
+<script src="{/version file='jquery.fileupload.js'/}"></script>
+
+<script type="text/javascript">
+$(function(){
+    $('#upload_photo').click(function(){
+        $('#fileupload').trigger("click");
+    });
+	//查看示例
+	$(".markerSimple").click(function(){
+		$('.hb_ui_ui-mask,.maketPopx').show();
+	});
+	$(".hb_ui_ui-mask,.popClose").click(function(){
+		$('.hb_ui_ui-mask,.maketPopx').hide();
+	});
+    //全选
+    $('.checks .thisAll').click(function(){
+        var CheckAll = $(this).prop('data-CheckAll');
+        if(CheckAll == undefined || CheckAll == false){
+            $(this).prop('data-CheckAll' , true);
+            $(this).parent('.checks').find('.hb_ui_boss_checkbox').addClass('hb_ui_boss_checked_checkbox');
+            $(this).parent('.checks').find('.hb_ui_boss_checkbox').prop('checked',true);
+            getCheckedVal(this);
+        }else{
+            $(this).prop('data-CheckAll' , false);
+            $(this).parent('.checks').find('.hb_ui_boss_checkbox').removeClass('hb_ui_boss_checked_checkbox');
+            $(this).parent('.checks').find('.hb_ui_boss_checkbox').prop('checked',false);
+            getCheckedVal(this);
+        }
+    });
+    //单选
+    !$('.checks .hb_ui_boss_checkbox').not('.thisAll').click(function(){
+        $(this).toggleClass('hb_ui_boss_checked_checkbox');
+        var isChecked = $(this).prop('checked');
+        var isCheckedAttr = $(this).attr('checked');
+
+        if((isChecked == true || isChecked == 'checked' ) || (isCheckedAttr == true || isCheckedAttr == 'checked' )){
+            $(this).prop('checked',false);
+        }else {
+            $(this).prop('checked',true);
+        }
+        getCheckedVal(this);
+
+		var CheckBoxSize = $(this).parent().find('li').not('.thisAll').size();
+        var CheckedSize = $(this).parent().find('.hb_ui_boss_checked_checkbox').not('.thisAll').size();
+        if(CheckBoxSize == CheckedSize){
+            $(this).parent('.checks').find('.thisAll').addClass('hb_ui_boss_checked_checkbox');
+        }else{
+            $(this).parent('.checks').find('.thisAll').removeClass('hb_ui_boss_checked_checkbox');
+        }
+
+    });
+    $('#budget,#bid').blur(function(){
+        var bidnumber = parseInt($('#bid').val());
+        var budgetnumber = parseInt($('#budget').val());
+        $('#budget_error').html('');
+        $('#budget_error').hide();
+
+        if(budgetnumber < bidnumber){
+            $('#budget_error').html('广告预算必须大于广告出价');
+            $('#budget_error').show();
+        }
+    });
+    //年龄不限
+    $('#age_notlimit').click(function(){
+        $(this).toggleClass('hb_ui_boss_checked_checkbox');
+        var ischecked = $(this).prop('data-checked');
+        $(this).parent('div').find('.error').html('');
+        if(ischecked == undefined || ischecked == false){
+            $(this).parent('div').find('.age').val('');
+            $(this).parent('div').find('.age').prop('disabled',true);
+            $(this).parent('div').find('.age').css({background:'#dddddd'});
+            $(this).prop('data-checked',true);
+        }else{
+            $(this).prop('data-checked',false);
+            $(this).parent('div').find('.age').prop('disabled',false);
+            $(this).parent('div').find('.age').css({background:'#fff'});
+        }
+    });
+    //手动触发验证 ， 验证通过后提交数据
+    $('#submit').click(function(){
+        var error = true;
+        //校验不通过
+        if(!validform().form()) {
+            error = false;
+        }
+        var bidnumber = parseInt($('#bid').val());
+        var budgetnumber = parseInt($('#budget').val());
+        $('#budget_error').html('');
+        $('#budget_error').hide();
+        if(budgetnumber < bidnumber){
+            $('#budget_error').html('广告预算必须大于广告出价');
+            $('#budget_error').show();
+            error = false;
+        }
+
+        var Notlimit = $('#age_notlimit').prop('data-checked');
+        $('#age_notlimit').parent('div').find('.error').html('');
+        if(Notlimit!=true){
+            var min_age = $('#min_age').val();
+            var max_age = $('#max_age').val();
+            var re = /^[0-9]+.?[0-9]*$/;
+            if(!re.test(min_age) || !re.test(max_age)){
+                $('#age_notlimit').parent('div').find('.error').html('年龄不能为空，且只能为数字');
+                error = false;
+            }else if(max_age <= min_age){
+                $('#age_notlimit').parent('div').find('.error').html('请输入正确的年龄范围');return false;
+                error = false;
+            }
+        }
+
+        //验证通过后提交数据
+        if(error){
+            var data = getFormData();
+            $('#submit').val('处理中...');
+            $('#submit').prop('disabled',true);
+            $('#submit').css({background:'#ededed'});
+            $.ajax({
+                type:"post",
+                url:"{/get_url rule='/companybrandspread/addDo'/}",
+                data:data,
+                dataType:'json',
+                success:function(jsonData){
+                    $('#submit').val('确定');
+                    $('#submit').prop('disabled',false);
+                    $('#submit').css({background:'#4c90c3'});
+                    if(jsonData['status'] == true){
+                        window.location.href="{/get_url rule='/companybrandspread/index'/}";
+                    }else{
+                        alert(jsonData.msg);
+                    }
+                }
+            });
+        }
+    });
+    //初始化 验证
+    validform();
+    //表达验证 规则
+    function validform(){
+        var Validate = $("#FormData").validate({
+            rules: {
+                title: {required:true , maxlength:20},
+                spread_image:'required',
+                url:{required:true, url:true},
+                bid:{required:true, number: true, digits: true,min:5},
+                budget:{required: true, number: true, digits: true, min:5},
+                min_age:{number: true, digits: true},
+                max_age:{number: true, digits: true},
+                area_ids:"required",
+                degree_ids:"required",
+                workyear_ids:"required",
+            },
+            messages: {
+                title: {required:"（请输入广告名称）",maxlength:'（广告名称不能超过20个字）'},
+                spread_image:'（请选择上传广告图片）',
+                url: {required: "（请输入目标链接）", url: "（请输入有效的链接）"},
+                bid: {required:'（请输入广告出价）', number: "（请输入正整数）", digits: "（只能输入正整数）",min:"（最低出价不能小于5元）"},
+                budget: {required: "（请输入广告每天预算）", number: "（请输入正整数）", digits: "（只能输入正整数）",min:"（最低预算不能小于5元）"},
+                min_age: {number: "（请输入数字）", digits: "（只能输入数字）"},
+                max_age: {number: "（请输入数字）", digits: "（只能输入数字）"},
+                area_ids:"（请选择地区）",
+                degree_ids:"（请选择学历）",
+                workyear_ids:"（请选择经验）",
+            },
+            onsubmit:true
+        });
+        return Validate;
+    }
+    //获取表达数据
+    function getFormData(){
+        var data = {};
+
+        data.title = $('#title').val();
+        data.spread_image = $('#spread_image').val();
+        data.url = $('#url').val();
+        data.budget = $('#budget').val();
+        data.bid = $('#bid').val();
+        data.area_ids = $('#area_ids').val();
+        data.degree_ids = $('#degree_ids').val();
+        data.workyear_ids = $('#workyear_ids').val();
+        data.sex = $('input[name=sex]:checked').val();
+        var ageChecked = $('#age_notlimit').prop('data-checked');
+        data.age_lower = ageChecked == true ? 0 : $('#min_age').val();
+        data.age_upper = ageChecked == true ? 0 : $('#max_age').val();
+        return data;
+    }
+
+    //获取选中的值，设置隐藏域value
+    function getCheckedVal(obj){
+        var CheckVal = '';
+        $(obj).parent('.checks').find('.hb_ui_boss_checkbox:not(.thisAll)').each(function(i,thisindex){
+            var thisVal = $(thisindex).attr('checked');
+            if(thisVal == 'checked' || thisVal==true){
+                CheckVal += $(this).attr('data-id')+',';
+            }
+        });
+        CheckVal = CheckVal.length>0? CheckVal.substr(0,CheckVal.length-1) : '';
+        $(obj).parents('.makSelect').find('.CheckedVal').val(CheckVal);
+    }
+
+    var loadindex = "";
+    $('#fileupload').fileupload({
+        url:'/companybrandspread/addTempImage/',
+        dataType: 'json',
+        add: function (e, data) {
+            $('#imageError').html('');
+            //1048576
+            if (data.originalFiles[0]['size'] > 2097152) {
+                $('#imageError').html('请上传小于2MB的图片');
+               return false;
+            }
+            data.submit();
+        },
+        done: function (e, data) {
+            var json = data.result;
+            $('#demoImage').hide();
+            $('#Image_load').html('');
+            if(json.error==100){
+                noLoginError=true;
+                $('#imageError').html("请选择您要上传的文件");
+            }else if(json.error==101){
+                fileNullError=true;
+                $('#imageError').html("文件超过最大限制");
+            }else if(json.error==102){
+                extensionError=true;
+                $('#imageError').html("您上传的文件格式有误");
+            }else if (json.error==103) {
+                maxCountError = true;
+                $('#imageError').html("抱歉！最多允许上传{/$max_photo_count/}张照片");
+            } else if (json.error==104) {
+                photoUploadFail = true;
+                $('#imageError').html("文件上传失败");
+            } else if (json.error==105) {
+                photoUploadFail = true;
+                $('#imageError').html("上传图片尺寸不符合要求");
+            } else {
+                $('#imageError').html("");
+                $('#demoImage').attr('src',json.path);
+                $('#imageContent .error').html('');
+                $('#demoImage').show();
+                $('#spread_image').val(json.path);
+            }
+
+        },
+    });
+
+//    var noLoginError = false;
+//    var fileNullError = false;
+//    var extensionError = false;
+//    var maxCountError = false;
+//    var photoUploadFail = false;
+//    var maxCount = 99;
+//    var queueLength = 0;
+//    var errorCount = 0;
+//    var queueSizeCount = 5;
+//    var queueSize = 0;
+//    var remCount = 0;
+//    var mien_infor;
+//    //上传相片
+//    $('#upload_photo').uploadify({
+//        auto:true,
+//        swf:'/swf/uploadify.swf',
+//        uploader : '/companybrandspread/addTempImage/',
+//        formData: {
+//            'upload_cookie_userid': '{/$upload_cookie_userid/}',
+//            'upload_cookie_nickname':'{/$upload_cookie_nickname/}',
+//            'upload_cookie_usertype':'{/$upload_cookie_usertype/}',
+//            'upload_cookie_userkey':'{/$upload_cookie_userkey/}',
+//            'upload_cookie_tick':'{/$upload_cookie_tick/}',
+//            'upload_cookie_accountid':'{/$upload_cookie_accountid/}'
+//        },
+//        queueID:'Image_load',
+//        fileSizeLimit: "{/$ImageConfig['ImageSize']/}kb",
+//        fileTypeExts:"{/$ImageConfig['ImageTypeWeb']/}",
+//        removeCompleted:false,
+//        buttonImage:'{/$siteurl.style/}/uploadify/submit.png',
+//        fileTypeDesc:'All Files',
+//        method:'post',
+//        cancelImage: '{/$siteurl.style/}/uploadify/cancel.png',
+//        width:85,
+//        height:27,
+//        multi:false,
+//        onSelect:function(file){
+//            queueLength++;
+//            queueSize++;
+//            if(remCount==0){
+//                $('#imageError').html('您最多上传20张');
+//                $('#upload_photo').uploadify('cancel',file.id);
+//                return false;
+//            }
+//            else if( remCount<queueSizeCount && queueSize>remCount){
+//                $('#imageError').html('您本次最多上传'+remCount+'张');
+//                $('#upload_photo').uploadify('cancel',file.id);
+//                return false;
+//            }
+//            else if(queueSize>queueSizeCount){
+//                $('#imageError').html('每次只能上传5张照片');
+//                $('#upload_photo').uploadify('cancel',file.id);
+//                return false;
+//            }
+//            if(queueLength<=maxCount){
+//                return true;
+//            }
+//            else{
+//                $('#upload_photo').uploadify('cancel',file.id);
+//                return false;
+//            }
+//        },
+//        onDialogOpen:function(){
+//            queueSize =0;
+//            remCount = maxCount-queueLength;
+//        },
+//        onUploadSuccess:function(file,data,response){
+//            if(data!=null&&data!=undefined&&data!=''){
+//                var json = eval("("+data+")");
+//                $('#demoImage').hide();
+//                $('#Image_load').html('');
+//                if(json.error==100){
+//                    noLoginError=true;
+//                    $('#imageError').html("请选择您要上传的文件");
+//                }else if(json.error==101){
+//                    fileNullError=true;
+//                    $('#imageError').html("文件超过最大限制");
+//                }else if(json.error==102){
+//                    extensionError=true;
+//                    $('#imageError').html("您上传的文件格式有误");
+//                }else if (json.error==103) {
+//                    maxCountError = true;
+//                    $('#imageError').html("抱歉！最多允许上传{/$max_photo_count/}张照片");
+//                } else if (json.error==104) {
+//                    photoUploadFail = true;
+//                    $('#imageError').html("文件上传失败");
+//                } else if (json.error==105) {
+//                    photoUploadFail = true;
+//                    $('#imageError').html("上传图片尺寸不符合要求");
+//                } else {
+//                    $('#imageError').html("");
+//                    $('#demoImage').attr('src',json.path);
+//                    $('#imageContent .error').html('');
+//                    $('#demoImage').show();
+//                    $('#spread_image').val(json.path);
+//                }
+//            }
+//        },
+//        onSelectError:function(file,errorCode,errorMsg){
+//
+//            var settings = this.settings;
+//            switch(errorCode) {
+//                case SWFUpload.QUEUE_ERROR.QUEUE_LIMIT_EXCEEDED:
+//                    $('#imageError').html("一次最多上传" + settings.queueSizeLimit + "张照片！");
+//                    break;
+//                case SWFUpload.QUEUE_ERROR.FILE_EXCEEDS_SIZE_LIMIT:
+//                    $('#imageError').html('抱歉 "' + file.name + '" 文件超过了大小限制 (' + settings.fileSizeLimit + ').');
+//                    break;
+//                case SWFUpload.QUEUE_ERROR.ZERO_BYTE_FILE:
+//                    $('#imageError').html('文件 "' + file.name + '" 为空.');
+//                    break;
+//                case SWFUpload.QUEUE_ERROR.INVALID_FILETYPE:
+//                    $('#imageError').html('文件 "' + file.name + '" 类型不支持 (' + settings.fileTypeDesc + ').');
+//                    break;
+//            }
+//        },
+//        onQueueComplete:function(data){
+//            if (!noLoginError&&!fileNullError&&!extensionError&&!maxCountError && !photoUploadFail) {
+//                var filesUploadCount= data.uploadsSuccessful - data.uploadsErrored> 0 ?(data.uploadsSuccessful - data.uploadsErrored):0;
+//                if(data.uploadsErrored!=0){
+//                    $('#imageError').html("上传失败，请重新上传");
+//                    return;
+//                }
+//            }
+//        },
+//        onCancel:function(file_id){
+//            queueLength--;
+//        }
+//    });
+});
+
+    function pageClose(){
+        window.location.href="{/get_url rule='/companybrandspread/index'/}";
+    }
+</script>
+</body>
+</html>

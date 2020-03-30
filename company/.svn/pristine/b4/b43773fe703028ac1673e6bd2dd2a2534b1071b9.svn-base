@@ -1,0 +1,557 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+<title>{/$title/}</title>
+<style> 
+body{
+	font-size:12px;font-family:Verdana,"宋体",Arial;color:#444;background:#FFF;
+}
+body, div, label, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, p, blockquote, th, td ,img, button
+{margin:0;padding:0;border:0;outline:0;}
+a{color:#3f74c2;text-decoration:none;}
+a:link{text-decoration:none;}
+a:hover{color:#0af;text-decoration:none;}
+ 
+.clear{clear:both;height:0;line-height:0;overflow:hidden;font-size:0;}
+.clearfix:after{
+	content:".";display:block;height:0;clear:both;visibility:hidden;
+}
+.clearfix{zoom:1;}
+.right{float:right}
+.gray3{color:#333}
+.gray6{color:#666}
+.gray9{color:#999}
+ul,ol,dl,dd,dt{list-style:none;}
+ 
+/*多选控件*/
+.w1000{width:1000px;margin:0 auto}
+.resume-left{border:1px solid #e4e4e4;border-radius:10px;float:left;width:778px;background-color: #fff;padding:30px;_overflow: hidden}
+ 
+.res-infor .img{float:left;width:132px;height:163px;background:url({/$siteurl.style/}/img/v2/resume/head.jpg) left top no-repeat;padding:9px 0 0 12px}
+.res-infor .img a{display: block;width:132px;height: 163px;position: relative}
+.res-infor .img a span{display: none}
+.res-infor .img img{width:120px;height: 150px}
+.res-infor .img a:hover span{display:block;height: 30px;line-height: 30px;background-color: #000;opacity: 0.7;width:121px;position: absolute;bottom:12px;color:#fff;text-align: center}
+.res-infor .infor-box{margin-left: 144px;_float:left;_width:630px;_margin-left:0px}
+ 
+.infor-box .name{margin-left:20px;border-bottom:1px solid #f2f2f2;padding-bottom:10px;height: 28px;_line-height: 30px;_padding-bottom:5px}
+.infor-box .name .sex{width:17px;height: 20px;background:url({/$siteurl.style/}/img/v2/resume/icon.jpg) -93px -79px no-repeat;display: inline-block;float:left;margin-right: 5px;margin-top: 3px}
+.infor-box .name .nan{background-position:-119px -78px }
+.infor-box .name .n{font-size:18px;font-family:"微软雅黑";color:#333;font-weight:normal}
+ 
+ 
+.inf1{color:#333;font-size:14px;padding:7px 0 8px 20px;height: 20px;overflow: hidden}
+.inf1 b{font-weight:normal;}
+.inf1 span{display: inline-block;margin-right: 20px;font-family:"微软雅黑"}
+.inf1 i{display: inline-block;width:16px;height: 14px;background:url({/$siteurl.style/}/img/v2/resume/icon.jpg) -63px 0 no-repeat;margin-right: 5px;vertical-align: -2px;#vertical-align:2px;_vertical-align: -2px}
+.inf1 i.x{background-position: -102px 0;vertical-align: -1px}
+.inf1 i.j{background-position: -124px 0}
+.inf1 i.d{background-position: -83px 0}
+.inf1 i.n{background-position: -145px -73px}
+.inf1 i.v{background-position: -142px -86px}
+
+.inf3 {margin:0 0 10px 20px;font-family:"微软雅黑";color:#333;}
+.inf3 span {font-size: 14px;}
+.inf3 span.text {margin-right: 30px;}
+ 
+.inf2{color:#999;margin-left: 20px;height: 18px;overflow: hidden;font-size:14px;margin-top: 5px}
+.inf2 u{color: #e4e4e4;text-decoration: none;margin: 0 5px;display: inline-block}
+.link,.nolink{height: 42px;background-color: #fafafa;border:1px solid #f1f1f1;border-left:0px;border-radius:0 5px 5px 0;margin-top: 15px;_overflow: hidden;padding-left: 10px}
+.link span{display: inline-block;height: 20px;line-height: 20px;padding:0 10px;color:#999;min-width:110px;margin-top: 12px}
+.link span.last{border:0px}
+.link strong{font-family:Arial;font-size:12px;color:#3d84b8;font-weight:normal}
+.link #spnBasicMobilePhone{border-right:1px solid #f1f1f1}
+.link #spnBasicMobilePhone strong{font-size:16px;font-weight:bold}
+.link i{display: inline-block;width:17px;height: 16px;background:url({/$siteurl.style/}/img/v2/resume/icon.jpg) -93px -48px no-repeat;vertical-align:-2px}
+.link i.e{background-position: -115px -45px;margin-right: 5px}
+.link i.q{background-position: -142px -48px;margin-right: 5px}
+.link i.nop{background-position: -93px -24px;height: 18px;vertical-align: -4px}
+.link i.noe{background-position: -115px -24px;width:21px;margin-right: 5px;vertical-align: -4px}
+.link i.noq{background-position: -142px -24px;margin-right: 5px;width:21px;height: 18px;vertical-align: -4px}
+.nolink{font-size:14px;color:#216ab5;font-weight:bold;text-align: center;line-height: 42px;font-family:"微软雅黑"}
+ 
+.resume-tit{padding-bottom:10px;margin-top: 30px}
+.resume-tit .name{font-size:16px;color:#333;font-family:"微软雅黑"}
+.no-data{padding:30px 0;text-align: center;font-size:12px;color:#999}
+.job-inten{padding-left: 20px}
+.job-inten li{float:left;width:50%;padding-top: 15px}
+.job-inten li span.gray9{float:left;min-width:64px}
+.job-inten li span.gray3{float:left;max-width:300px}
+.exper,.less-train,.project-expr,.other-box{margin-top: 20px}
+.exper .time,.less-train .time,.project-expr .time,.other-box .time{width:110px;color:#999;line-height: 25px;float:left;font-family:"宋体";text-align: right}
+.exper .box-item,.less-train .box-item,.project-expr .box-item,.other-box .box-item{margin-left: 110px}
+.oper{float:right;margin-top: 7px;_margin-top: 5px}
+.oper a,.operCase i{display: inline-block;background:url({/$siteurl.style/}/img/v2/resume/icon.jpg) -22px 0 no-repeat}
+.oper a{float: left}
+.oper .edt{margin-right: 10px}
+.oper .edt,.operCase .edt{width:14px;height: 14px}
+.oper .del,.operCase .del{width:12px;height: 12px;background-position:0 0;margin-top: 2px}
+.oper .edt:hover,.operCase a:hover .edt{background-position: -22px -24px}
+.oper .del:hover,.operCase a:hover .del{background-position: 0 -24px}
+.box-item .tit{background:url({/$siteurl.style/}/img/v2/resume/icon.jpg) 0 -106px no-repeat;display:block;height:24px;overflow: hidden;line-height:24px;padding-left:60px;_line-height: 26px}
+.box-item .tit .name{font-size: 14px;color:#3d84b8;font-family:"微软雅黑"}
+.box-item .tit .name .tag{font-weight:normal;background-color: #ccc;border-radius: 2px;color:#fff;margin-right: 5px;padding:0 4px;font-size:12px}
+.box-item .tit u{color: #e4e4e4;text-decoration: none;margin:0 10px}
+.box-item .infor{border-left: 1px solid #ebebeb;margin-left: 27px;padding:7px 50px 20px 30px;_margin-left: 29px;font-size:14px;line-height: 22px}
+.box-item .infor p{font-family:"微软雅黑"}
+.box-item .infor .cont{color:#777}
+.box-item .infor .fanwei{line-height: 30px;font-weight:100!important;color:#777}
+.box-item .infor .fanwei span{color:#777}
+ 
+.less-train .box-item .infor{padding-bottom: 15px;color:#777}
+.project-expr .box-item{line-height: 25px;color:#777}
+.project-expr .box-item .pfc{color:#333;margin-bottom: 10px}
+.project-expr .box-item .hbFntWes{font-size:12px;color:#ccc;margin:0 5px}
+ 
+.tag-box{padding:0 15px}
+.tag-box li{float: left;height: 35px;background:#e8f7f2;padding-left: 4px;margin-right:40px;margin-top: 20px;white-space:nowrap;overflow: hidden;color:#e4e4e4}
+.tag-box li .name,.tag-box li .cd{display: inline-block;padding:0 20px 0 15px;height: 35px;line-height: 35px}
+.tag-box li .name{background:none;color:#3d84b8;font-size:14px}
+.tag-box li .cd{background:#e8f7f2 url({/$siteurl.style/}/img/v2/resume/tag-2.jpg) right 0 no-repeat;color: #777;font-size:14px}
+.tag-box li strong.cd{vertical-align: 1px;#vertical-align: 2px}
+.tag-box li .cd u{text-decoration: none;color:#c5e1d6;margin:0 5px}
+
+.tag-box.img-box li {width:240px;height:240px;background:none;margin-right:8px;padding:0px;}
+.tag-box.img-box li img {width:240px;}
+
+.other-box .infor{border-left: 1px solid #ebebeb;margin-left: 147px;padding:0px 55px 30px 30px;line-height: 30px;position: relative}
+.other-box .infor .yuan{display: inline-block;width:53px;height: 26px;background:#fff url({/$siteurl.style/}/img/v2/resume/icon.jpg) 0 -104px no-repeat;position: absolute;left:-28px;top:0px;*top:-10px;_left:-61px}
+.other-box .infor .oper{position: absolute;right:0px;top:2px}
+.logo-box{padding:20px 0}
+.logo-box .logo{display: inline-block;width:189px;height: 39px;background: url("{/$siteurl.style/}/img/common/flogo.png") 0 0 no-repeat;float:left;_background: none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled='true', sizingMethod='corp', src='{/$siteurl.style/}/img/common/flogo.png');}
+.logo-box .name{font-size:24px;font-family:"微软雅黑";color:#333;float: left;margin: 10px 0 0 20px}
+
+.footer {
+    color: #999;
+    padding: 30px 0 45px;
+    text-align: center;
+}
+.link .phone{border-right:1px solid #f1f1f1}
+.link .phone strong{font-size:16px;font-weight:bold}
+.topicContent{color:#777;font-size:14px}
+
+.mgb10{margin-bottom:10px;}
+.my-casex li div{ font-size:14px; padding-bottom:6px;}
+.my-casex li div b{ font-size:16px;display:block; padding-top:6px;}
+.my-casex li p{ line-height:24px;}
+</style>
+
+</head>
+<body>
+	<div class="w1000">	
+		<!--流程-->
+		<div class="logo-box clearfix">
+			<a href="{/$homePage/}" class="logo" title="首页"></a>			
+			<a class="name" href="#">简历</a>
+		</div>	
+		<!--主体-->
+		<div class="resume-box clearfix">
+			<!--左边-->			
+			<div class="resume-left" style="padding:20px;width:848px">
+				{/if $resume_src/}
+				<p style="margin-bottom: 10px;color:#999">
+					{/$resume_src/}
+				</p>
+            	{//if/}  
+            	{/if $applydsc/}
+              	<p style="margin-bottom: 10px;color:#999">
+					{/$applydsc/}
+				</p>
+            	{//if/}
+				<div style="padding:10px">
+					<!--个人资料-->
+					<dl class="res-infor clearfix">
+						<dt class="img">{/if !empty($avatar)/}<img src="{/$avatar/}"/>{/else/}<img src="{/$siteurl.style/}/img/v2/resumeM/head-defects.jpg" />{//if/}</dt>
+						<dd class="infor-box">
+							<p class="name">
+								<span class="right gray9">最近登录：{/$last_login_time|date_format:'%Y-%m-%d'/}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;简历编号：{/$resume_id/}</span>
+								<strong class="n">{/$user_name/}</strong>
+							</p>
+							<p class="inf1">							
+	                          	{/if $sex!=''/}<span id="spnBasicSex" v="{/$sex/}">{/if $sex==1/}<i class="n"></i>{/else/}<i class="v"></i>{//if/}{/get_name sex=$sex/}</span>{//if/}
+								{/if $age!=''/}<span><i class="y"></i>{/$age/}</span>{//if/}
+								{/if $degree!=''/}<span><i class="x"></i>{/get_name degree=$degree/}</span>{//if/}
+								{/if $work_year!=''/}<span><i class="j"></i>{/$work_year/}</span>{//if/}
+								{/if $cur_area_name!=''/}<span><i class="d"></i>{/$cur_area_name/}</span>{//if/}
+							</p>
+							<p class="inf3">
+		                        {/if $job_state_text/}
+		                        <span>求职状态：</span>
+		                        <span id="spnApplyStatus" v="{/$job_state_id/}" class="text">{/get_name apply_status=$job_state_id/}</span>
+		                        {//if/}
+		                        {/if (!empty($accession_time))/}
+		                        <span>到岗时间：</span>
+		                        <span id="spnAccessionTime" v="{/$accession_time/}" class="text">{/get_name accession_time=$accession_time/}</span>
+		                        {//if/}
+		                    </p>
+							<p class="inf2">
+								<span>{/if $marriage!=''&&$fertility!=''/}{/get_name marriage=$marriage/}{/get_name fertility=$fertility/}{/elseif $marriage!=''/}{/get_name marriage=$marriage/}{/elseif $fertility!=''/}{/get_name fertility=$fertility/}{/else/}婚育状况：未填写{//if/}</span><u>-</u>
+								<span>户籍：{/if $native_place_name!=''/}{/$native_place_name/}{/else/}未填写{//if/}</span><u>-</u>
+								<span>{/if $stature!=''&&$avoirdupois!=''/}{/$stature/}cm/{/$avoirdupois/}kg{/elseif $stature!=''/}{/$stature/}cm{/elseif $avoirdupois!=''/}{/$avoirdupois/}kg{/else/}身高/体重：未填写{//if/}</span><u>-</u>
+								<span>{/if $political_status!=''/}{/get_name political=$political_status/}{/else/}政治面貌：未填写{//if/}</span>
+							</p>
+							{/if $isshowresumeinfo/}
+							{/if $show_linkway == true/}  
+				        	<p class="link">       
+				              	<span {/if $mobile_phone==''/}style="display:none"{//if/} id="spnBasicMobilePhone"><i class="p"></i><strong>{/$mobile_phone/}</strong><em id="phoneAddr"></em></span>
+								<span {/if $email==''/}style="display:none"{//if/}><strong>邮箱：{/$email/}</strong></span>
+								<span class="last" {/if $qq==''/}style="display:none"{//if/}><strong>QQ：{/$qq/}</strong></span>
+							</p>
+				            {//if/}
+					        {/else/}
+				           	<p class="nolink">您暂未通过企业认证，认证后即可查看完整简历</p>
+					        {//if/}   
+						</dd>
+					</dl>
+				<!--/-->
+
+				<!--求职意向-->
+				<p class="resume-tit"><strong class="name">求职意向</strong></p>
+				<div class="resume-item">
+					<ul class="job-inten clearfix">
+						<li>
+							<span class="gray9">希望从事：</span>
+							<span class="gray3">{/if $exp_job==''/}——{/else/}{/$exp_job/}{//if/}</span>
+							<span class="gray9">{/if $job_type==1&&$is_accept_parttime==1/}（可接受兼职）{/elseif $job_type==2/}（兼职）{/elseif $job_type==3/}（实习）{//if/}</span>
+						</li>
+						<li>
+							<span class="gray9">职位类别：</span>
+							<span class="gray3">{/$str_expect_jobsorts/}</span>
+						</li>
+						<li>
+							<span class="gray9">岗位级别：</span>
+							<span class="gray3">{/if $exp_job_level!=''/}{/get_name job_level=$exp_job_level/}{//if/}</span>
+							<span class="gray9">{/if $is_not_accept_lower_job_level==1&&$exp_job_level!='01'&&$exp_job_level!='02'/}（不低于此级别）{//if/}</span>
+						</li>
+						<li>
+							<span class="gray9">期望行业：</span>
+							<span class="gray3">{/if $str_expect_callings==''/}不限行业{/else/}{/$str_expect_callings/}{//if/}</span>
+						</li>
+						<li>
+							<span class="gray9">期望月薪：</span>
+							<span class="gray3">{/if $exp_salary==''||$exp_salary=='0'/}——{/else/}{/if $exp_salary=='negotiable'/}面议{/else/}{/get_name salary=$exp_salary/} 元/月{//if/}{//if/}</span>
+							<span class="gray9">{/if $is_not_accept_lower_salary==1&&$exp_salary!='negotiable'&&$exp_salary!='01'/}（不低于此薪资）{//if/}</span>
+						</li>
+						<li>
+							<span class="gray9">工作地点：</span>
+							<span class="gray3">{/if $exp_area_names==''/}——{/else/}{/$exp_area_names/}{//if/}</span>
+						</li>
+					</ul>
+				</div>
+				<!--/-->
+
+				<!-- 自我评价 -->
+				{/if !base_lib_BaseUtils::nullOrEmpty($appraise)/}
+				<p class="resume-tit"><strong class="name">自我评价</strong></p>	
+				<div class="resume-item">
+					<div class="other-box">							
+	                    <div class="clearfix">
+							<p class="infor topicContent"><i class="yuan"></i>{/$appraise/}</p>
+						</div>
+					</div>
+				</div>	
+				{//if/}	
+			
+				<!--工作经历-->
+				{/if count($resume_works)>0/}
+				<p class="resume-tit"><strong class="name">工作经历</strong></p>
+				<div class="resume-item">
+					<!--有数据 开始-->
+					<div class="exper">
+						{/foreach $resume_works as $key=>$value/}
+						<div class="clearfix">
+							<span class="time">{/$value['start_time']/}-{/$value['end_time']/}<br />[{/$value['work_time']/}]</span>
+							<div class="box-item">
+								<p class="tit">
+									<strong class="name">{/if $value['job_type'] != $job_type_fulltime/}<span class="tag">{/get_name job_type=$value['job_type']/}</span> {//if/}{/$value['station']/} {/if $value['is_creator']=='1'/}[创始人]{//if/}</strong><u>|</u><strong class="name">{/$value['company_name']/}</strong>
+								</p>
+								<div class="infor">
+									<p class="mgb10">{/assign var=first value=false/}
+                                    {/if $value['is_salary_show'] != '1' && $value['salary_month']/}
+                                    {/$value['salary_month']/}元/月
+                                    {/assign var=first value=true/}
+                                    {//if/}
+                                    {/if (!empty($value['job_level']))/}
+                                    {/if $first/} - {//if/}
+                                    {/assign var=first value=true/}
+                                    {//if/}
+                                    {/get_name job_level=$value['job_level']/}
+                                    {/if (!empty($value['com_property']))/}
+                                    {/if $first/} - {//if/}
+                                    {/assign var=first value=true/}
+                                    {//if/}
+                                    {/get_name com_property=$value['com_property']/}
+                                    {/if (!empty($value['calling_id']))/}
+                                    {/if $first/}，{//if/}
+                                    {/assign var=first value=true/}
+                                    {//if/}
+                                    {/get_name calling=$value['calling_id']/}
+                                    {/if (!empty($value['com_size']))/}
+                                    {/if $first/}，{//if/}
+                                    {/assign var=first value=true/}
+                                    {//if/}
+                                    {/get_name com_size=$value['com_size']/}
+                                	</p>
+									<div class="cont" {/if $value['work_content']==''/}style="display:none"{//if/}>
+										{/html_encode content=$value['work_content']/}
+									</div>
+									<ul class="fanwei">
+										<li {/if $value['job_level']==$job_level_practice || $value['job_level']==$job_level_ordinary || $value['job_level']==$job_level_senior || $value['manage_department']==''/}style="display:none"{//if/}>
+											
+											<span>管辖范围：{/$value['manage_department']|default:'未填写'/}</span>
+										</li>
+										<li {/if $value['job_level']==$job_level_practice || $value['job_level']==$job_level_ordinary || $value['job_level']==$job_level_senior || ($value['subordinate']=='' && $value['report_man']=='')/}style="display:none"{//if/}>
+											<span>下属人数：{/$value['subordinate']|default:'未填写'/}</span>
+											<span style="margin-left: 30px">汇报对象：{/$value['report_man']|default:'未填写'/}</span>
+										</li>
+										
+										<li {/if $value['leave_reason']==''/}style="display:none"{//if/}>
+											<span>离职原因：{/$value['leave_reason']/}</span>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>						
+						{//foreach/}
+					</div>
+					<!--有数据 结束-->						
+				</div>
+				{//if/}		
+				<!--/-->
+				
+				
+				<!--教育培训经历-->
+				{/if count($resume_edus)>0||count($resume_trains)>0/}
+				<p class="resume-tit"><strong class="name">教育培训经历</strong></p>
+				<div class="resume-item">			
+					<!--有数据 开始-->
+					<div class="less-train">					
+					{/foreach $resume_edus as $key=>$value/}
+                     <div class="clearfix">
+						<span class="time">{/if empty($value['start_time'])/}开始时间未填写{/else/} {/$value['start_time']|date_format:'%Y.%m'/}{//if/}-{/if empty($value['end_time'])/}至今{/else/}{/$value['end_time']|date_format:'%Y.%m'/}{//if/}</span>
+						<div class="box-item">
+							<p class="tit">
+								{/if $value['degree']!=''/}<strong class="name">{/get_name degree=$value['degree']/}</strong><u>|</u>{//if/}
+								{/if $value['school']!=''/}<span class="name">{/$value['school']/}</span><u>|</u>{//if/}
+								{/if $value['major_desc']!=''/}<span class="name">{/$value['major_desc']/}</span>{//if/}
+							</p>
+							<p class="infor gray9">{/if $value['edu_detail']!=''/}{/$value['edu_detail']/}<br />{/if $value['duty']!=''/}校内职务：{/$value['duty']/}{//if/}{//if/} </p>							
+						</div>
+					</div>
+                     {//foreach/}
+                     {/foreach $resume_trains as $key=>$value/}
+                     <div class="clearfix">
+							<span class="time">{/if empty($value['start_time'])/}开始时间未填写{/else/} {/$value['start_time']|date_format:'%Y.%m'/}{//if/}-{/if empty($value['end_time'])/}至今{/else/}{/$value['end_time']|date_format:'%Y.%m'/}{//if/}</span>
+							<div class="box-item">
+								<p class="tit">
+									{/if $value['course']!=''/}<strong class="name">{/$value['course']/}</strong><u>|</u>{//if/}
+									{/if $value['institution']!=''/}<span class="name">{/$value['institution']/}</span><u>|</u>{//if/}
+									{/if $value['certificate']!=''/}<span class="name">[证]{/$value['certificate']/}</span>{//if/}
+								</p>
+								<p class="infor gray9">{/if $value['train_detail']!=''/}{/$value['train_detail']/}{//if/} </p>
+							</div>
+						</div>	
+                     {//foreach/}
+					</div>
+					<!--/有数据 结束-->
+				</div>
+				{//if/}	
+				<!--/-->
+				
+				
+				
+				<!--项目经验-->
+				{/if count($resume_projects)>0/}
+				<p class="resume-tit"><strong class="name">项目经验</strong></p>
+				<div class="resume-item">
+					<!--有数据 开始-->
+					<div class="project-expr">
+						{/foreach $resume_projects as $key=>$value/}
+	                     <div class="clearfix">
+							<span class="time">{/$value['start_time']/}-{/$value['end_time']/}</span>
+							<div class="box-item">
+								<p class="tit">
+									{/if $value['project_name']!=''/}<strong class="name">{/$value['project_name']/} </strong><u>|</u>{//if/}
+									{/if $value['duty']!=''/}<span class="name">担任：{/$value['duty']/}</span>{//if/}
+								</p>
+								<div class="infor">
+									 <p class="pfc">
+										 {/if $value['project_detail']!=''/}{/$value['project_detail']/}{//if/}
+										 </p>
+		                                 {/if $value['main_duty']!=''/}{/$value['main_duty']/}{//if/}
+								</div>
+							</div>
+						</div>
+	                    {//foreach/}
+					</div>
+					<!--/有数据 结束-->	
+				</div>
+				{//if/}
+				<!--/-->
+				
+			
+				<!--语言能力-->
+				{/if count($resume_languages)>0/}	
+				<p class="resume-tit"><strong class="name">语言能力</strong></p>
+				<div class="resume-item">
+					 	<!--有数据 开始-->
+						<ul class="clearfix tag-box">
+							{/foreach $resume_languages as $key=>$value/}
+		                     <li>
+								<strong class="name">{/get_name language=$value['language_type']/}</strong>|<span class="cd">{/if $value['skill_level']!=''/}<strong>{/get_name skill_level=$value['skill_level']/} </strong><u>|</u>{//if/}
+								
+								{/if $value['certificates'][0]['cert_name']!=''/}
+		                        <i style="font-style:normal">
+		                        {/section name=language loop=$value['certificates']/}
+		                        	{/if $smarty.section.language.last/}
+		                       			{/$value['certificates'][language]['cert_name']/}
+		                       		{/else/}
+		                       			{/$value['certificates'][language]['cert_name']/}，	
+		                       		{//if/}
+		                       	{//section/}
+		                        </i>
+		                        {//if/}
+								
+								</span>
+							 </li>
+		                      {//foreach/}
+						</ul>
+						<!--/有数据 结束-->	 
+				</div>
+				{//if/}
+				<!--/-->
+					
+				<!--技能专长-->
+				{/if count($resume_skills)>0/}
+				<p class="resume-tit"><strong class="name">技能专长</strong></p>
+				<div class="resume-item">				
+						<!--有数据 开始-->
+						<ul class="clearfix tag-box">
+							{/foreach $resume_skills as $key=>$value/}
+			                  <li>
+								<strong class="name">{/$value['skill_name']/}</strong>|<span class="cd">{/get_name skill_level=$value['skill_level']/}</span>
+							  </li>
+			                  {//foreach/}
+						</ul>
+						<!--/有数据 结束-->
+				</div>
+				{//if/}
+				<!--/-->
+				
+				<!--证书-->
+				{/if count($resume_certificates)>0/}
+				<p class="resume-tit"><strong class="name">证书</strong></p>
+				<div class="resume-item">
+						<!--有数据 开始-->
+						<ul class="clearfix tag-box">
+							{/foreach $resume_certificates as $key=>$value/}
+		                      <li>
+									<strong class="name">{/$value['certificate_name']/}</strong>|{/if $value['gain_time']!=''/}<span class="cd">{/$value['gain_time']/}获得</span>{//if/}
+								</li>
+		                    {//foreach/}
+							
+						</ul>
+						<!--/有数据 结束-->	
+				</div>
+				{//if/}
+				<!--/-->
+
+				{/if !empty($resume_albums)/}
+				<p class="resume-tit"><strong class="name">照片</strong></p>
+				<div class="resume-item">
+					<!--有数据 开始-->
+					<ul class="clearfix tag-box img-box">
+						{/foreach $resume_albums as $key => $value/}
+						<li>
+							<p class="img"><img src="{/base_lib_Constant::YUN_ASSETS_URL_NO_HTTP/}{/$value['photo']/}" style="width:240px;"></p>
+						</li>
+	                    {//foreach/}
+						<div style="clear:both"></div>
+					</ul>
+					<!--/有数据 结束-->	
+				</div>
+				{//if/}
+				
+				<!--其他信息-->
+				{/if count($resume_appends)>0/}
+				<p class="resume-tit"><strong class="name">其他信息</strong></p>	
+				<div class="resume-item">
+						<!--有数据 开始-->
+						<div class="other-box">
+							 {/foreach $resume_appends as $key=>$value/}
+		                     {/if $value['topic_desc']!=''||$value['content']!=''/}
+		                     <div class="clearfix">
+		                     	{/if $value['topic_desc']!=''/}<strong class="time">{/$value['topic_desc']/}</strong>{//if/}
+								 {/if $value['content']!=''/}<p class="infor topicContent"><i class="yuan"></i>{/$value['content']/}</p>{//if/}
+							 </div>
+		                     {//if/}
+		                     {//foreach/}
+						</div>
+						<!--/有数据 结束-->
+				</div>
+				{//if/}
+				<!--/-->
+
+				<!--实践经验-->
+				{/if count($resume_practices)>0/}
+				<p class="resume-tit"><strong class="name">实践经验</strong></p>
+				<div class="resume-item">
+						<!--有数据 开始-->
+						<div class="project-expr">
+							{/foreach $resume_practices as $key=>$value/}
+		                     <div class="clearfix">
+								<span class="time">{/$value['start_time']/}-{/$value['end_time']/}</span>
+								<div class="box-item">
+									<p class="tit">
+										{/if $value['practice_name']!=''/}<strong class="name">{/$value['practice_name']/} </strong>{//if/}
+									</p>
+									<div class="infor">
+		                                 {/if $value['practice_detail']!=''/}{/$value['practice_detail']/}{//if/}
+									</div>
+								</div>
+							</div>
+		                     {//foreach/}
+
+						</div>
+						<!--/有数据 结束-->
+				</div>
+				{//if/}
+				<!--/-->
+				
+				<!--我的作品-->
+				{/if count($resume_achievements)>0/}
+				<p class="resume-tit"><strong class="name">我的作品</strong></p>	
+				<div class="resume-item">	                     
+						<!--有数据 开始-->
+						<ul class="my-case my-casex clearfix">
+						    {/foreach $resume_achievements as $key_resume_achievement=>$value_resume_achievement/}
+						    <li data-achievementid="{/$value_resume_achievement['achievement_id']/}" data-des="{/$value_resume_achievement['achievement_description']/}" data-name="{/$value_resume_achievement['achievement_name']/}">
+						        <div><b>{/$value_resume_achievement['achievement_name']/}:</b></div>
+						        {/if $value_resume_achievement['achievement_description']!=''/}  
+						        <div>{/$value_resume_achievement['achievement_description']/}</div>
+								{//if/}
+							{/foreach $value_resume_achievement['attachments'] as $key_resume_attachment=>$value_resume_attachment/}
+								<p>附件{/$key_resume_attachment+1/}：({/if $value_resume_attachment['achievement_extension'] == 'jpg' || $value_resume_attachment['achievement_extension'] == 'bmp' || $value_resume_attachment['achievement_extension'] == 'gif' || $value_resume_attachment['achievement_extension'] == 'jpeg' || $value_resume_attachment['achievement_extension'] == 'png'/}图片{/else/}文档{//if/})
+								<a href="{/$attachment_virt_path/}{/$value_resume_attachment['achievement_path']/}">{/$attachment_virt_path/}{/$value_resume_attachment['achievement_path']/}</a></p>
+							{//foreach/}
+						    </li>
+						    {//foreach/}
+						</ul>
+						<!--/有数据 结束-->	
+				</div>
+				{//if/}
+				<!--/-->
+		</div>			
+	</div>
+	<!--/-->				
+</div>
+		<!--主体结束-->
+		 <iframe id="printIframe"  height="0" width="0" frameborder="0"></iframe>
+		 <div class="footer">©{/date("Y")/} 汇博人才网 版权所有</div>
+</div>
+</body>
+</html>

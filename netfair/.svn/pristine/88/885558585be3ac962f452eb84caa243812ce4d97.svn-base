@@ -1,0 +1,48 @@
+{/include_php file='app/controller/piwik.php'/}
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?fb51309e47424acd6e31c0bd2a65a5a1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<script type="text/javascript" language="javascript" src="{/version file='track.js'/}"></script>
+<!-- 原有的百度自动推送不支持https,现更换为下列支持https的写法
+<script>
+(function(){
+    var bp = document.createElement('script');
+    bp.src = '//push.zhanzhang.baidu.com/push.js';
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+ -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+<!-- Piwik -->
+<script type="text/javascript">
+
+</script>
+<!-- End Piwik Code -->
+
+<!-- 360 code -->
+<!--<script>(function(){
+var src = (document.location.protocol == "http:") ? "http://js.passport.qihucdn.com/11.0.1.js?c85aede9c1d3b7d83d29336a1b436a73":"https://jspassport.ssl.qhimg.com/11.0.1.js?c85aede9c1d3b7d83d29336a1b436a73";
+document.write('<script src="' + src + '" id="sozz"><\/script>');
+})();
+</script>-->

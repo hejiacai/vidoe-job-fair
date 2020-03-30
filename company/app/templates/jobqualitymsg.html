@@ -1,0 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>{/$title/}</title>
+<!--[if lt IE9] -->
+<script src="{/version file='html5.js'/}"></script>  
+<!-- [endif] -->
+
+<link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='login.css'/}" />
+
+<script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.min.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='common.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='jquery.form.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='dialog.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='ui_validate.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='ui_inputFocus.js'/}"></script><!--输入框获取焦点-->
+<script type="text/javascript" language="javascript" src="{/version file='jplayer.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='cookie.js'/}"></script>
+
+<link rel="stylesheet" type="text/css" href="{/version file='jplayer.blue.monday.css'/}" />
+    <style>
+        .single_refresh_dialog {
+
+        }
+        .single_refresh_dialog .out-con {
+            padding: 15px 25px;
+            text-align: left;
+        }
+        .single_refresh_dialog .out-con .txt {font-size: 14px;line-height: 22px;margin-bottom: 20px;}
+        .single_refresh_dialog .out-con .radio {margin-bottom: 20px;color: #666;cursor: pointer;}
+        .single_refresh_dialog .out-con .radio i {
+            color: #ccc;
+            font-size: 16px;
+            position: relative;
+            top: 2px;
+            margin-right: 4px;
+        }
+        .single_refresh_dialog .out-con .radio i.active {
+            color: #1bb867;
+        }
+        .single_refresh_dialog .out-con .btns {overflow: hidden;text-align: center;}
+        .single_refresh_dialog .out-con .btns div{
+            display: inline-block;
+            font-size: 16px;
+            line-height: 20px;
+            padding: 5px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .single_refresh_dialog .out-con .btns .ok {
+            background: #66bce4;
+            color: #fff;
+            margin-right: 20px;
+        }
+        .single_refresh_dialog .out-con .btns .ok:hover {
+            background: #31a2d6;
+        }
+
+        .single_refresh_dialog .out-con .btns .cancel {
+            background: #eee;
+            color: #999;
+        }
+    </style>
+</head>
+<body >
+<div class="single_refresh_dialog">
+    <div class="out-con">
+        <div class="txt">{/$msg/}</div>
+        {/if $quality_type == 'add'/}
+            <div class="radio"><i class="icon-AI-_-19"></i>下次不再提示</div>
+        {//if/}
+        <input type="hidden" name="job_id" id="job_id" value="{/$job_id/}">
+        <input type="hidden" name="quality_type" id="quality_type" value="{/$quality_type/}">
+        <div class="btns"><div class="ok">确定</div><div class="cancel">取消</div></div>
+    </div>
+</div>
+
+
+<script>
+    //var dialog;
+    hbjs.use('@imageEditor, @confirmBox, @jobsort, @orderActions', function(m) {
+
+        var $ = m['cqjob.jobsort'];
+        var Dialog = m['widge.overlay.hbDialog'],
+                ConfirmBox = m['widge.overlay.confirmBox'],
+                cookie = m['tools.cookie'],
+                orderActions = m['product.orderActions'];
+
+//        dialog = new Dialog({
+//            close : 'X',
+//            idName : 'quality_dialog',
+//            width : 520,
+//            isOverflow : false,
+//            isAjax : true
+//        });
+
+        $('.single_refresh_dialog').on('click', '.btns .ok', function () {
+            var job_id = $("#job_id").val();
+            var quality_type = $("#quality_type").val();
+            var class_name = $(".radio").find("i").hasClass("active");
+            var is_not_show = false;
+            if(class_name){
+                is_not_show = true;
+            }
+            var data = {
+                job_id: job_id,
+                quality_type: quality_type
+            };
+
+
+            $.post("{/get_url rule='/index/JobQualityDo'/}", data, function (data) {
+                if (!data.status) {
+                    if(data.data.code == 501){
+                        //精品点不足，弹出招聘联系人信息框
+                        //$(".job_dialog").hide();
+                        dialog_msg.setContent({
+                            'title' : '设置精品职位',
+                            'content' : '{/get_url rule="/index/GetHRManager/"/}'
+                        }).show();
+                    }else {
+                        dialog.hide();
+                        ConfirmBox.timeBomb(data.msg, {
+                            name: 'fail',
+                            timeout: 3000,
+                            width: data.msg*18 + 20,
+                            zIndex: 999999
+                        });
+                    }
+
+                    return false;
+                }
+                //设置不在提示
+                if(is_not_show && quality_type == 'add'){
+                    cookieutility.set('cd_show_quality', 'not_show', "", "/");
+                }
+                //停招了职位
+                if(data.data.is_stop_job){
+                    parent.dialog.hide();
+                    dialog.setContent({
+                        'title' : '取消精品职位',
+                        'content' : "<div class='succ-cancel-pro'><div class='txt'>"+data.msg+"</div> <div class='btns'><div class='ok'>我知道了</div></div></div>"
+                    }).show();
+                }else{
+                    dialog.hide();
+                    ConfirmBox.timeBomb(data.msg, {
+                        name: 'success',
+                        timeout: 2000,
+                        width: data.msg*18 + 20,
+                        zIndex: 999999,
+                        callback:function(){
+                            window.location.reload();
+                        }
+                    });
+                }
+
+
+
+            });
+
+
+        });
+        $('.single_refresh_dialog').on('click', '.btns .cancel', function () {
+            dialog.hide();
+        });
+        $('.single_refresh_dialog').on('click', '.radio', function () {
+            if ($(this).find('i').hasClass('active')) {
+                $(this).find('i').removeClass('icon-default active')
+            } else {
+                $(this).find('i').addClass('icon-default active')
+            }
+        })
+    })
+</script>
+</body>
+</html>

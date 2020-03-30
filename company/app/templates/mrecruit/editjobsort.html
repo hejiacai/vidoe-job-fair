@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<!--<script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.min.js'/}"></script>-->
+		<style type="text/css">
+			*{padding:0;margin:0;}
+			.wrap{
+				width:500px;
+			}
+			.listtitle span{
+				
+				color:#999;
+			}
+			.joblist span{
+				color:#333;
+			}
+			.listtitle{
+				padding:20px 0;
+				text-align: left;
+			}
+			.joblist{
+				height: 186px;
+				overflow: auto;
+			}
+			.joblist li{
+				padding:5px 0;
+				text-align: left;
+			}
+			.listtitle .title-name,.joblist .list-cell1{
+				display: inline-block;
+				width:180px;
+				padding:0 20px 0 40px;
+				overflow: hidden;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+			}
+			.listtitle .title-show,.joblist .list-cell2{
+				display: inline-block;
+				width:160px;
+			}
+			.joblist a{
+				padding-right:10px;
+			}
+			.joblist label{
+				padding-left:25px;
+				background: url({/$siteurl.style/}/img/company/mrecruit/ckb.png) no-repeat 0 2px;
+			}
+			.joblist label.ckd{
+				background: url({/$siteurl.style/}/img/company/mrecruit/ckbed.jpg) no-repeat 0 2px;
+			}
+			.bggray{
+				background: #fafafa;
+			}
+			.dialogFooter{
+				    background-color: #fafafa;
+    padding: 5px 10px;
+    border-top: 1px solid #ebebeb;
+    text-align: right;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="wrap">
+			<div class="listtitle"><span class="title-name">岗位名称</span><span class="title-show">展示状态</span><span class='title-edit'>操作</span></div>
+			<ul class="joblist">
+				加载中。。。
+			</ul>
+			<div class="dialogFooter">
+				<a id="btnJobSave" href="javascript:void(0);" class="btn1 btnsF12">确定</a>
+			</div>
+		</div>
+		<script>
+			$(function(){
+	            var joblist = JSON.parse('{/$jobs/}');
+	
+				function initlist(){
+					console.log(joblist)
+					var html='';
+					$.each(joblist,function(i,e){
+						html+='<li data-index='+ i + (i%2==0?'':' class="bggray"') +'>';
+						html+='<span class="list-cell1">'+ e.jobname +'</span>';
+						html+='<span class="list-cell2"><label data-index='+i+' data-id='+ e.job_id +' class='+(e.is_effect==1?"ckd":"")+'>是否展示</label></span>';
+						html+=(i<joblist.length-1)?'<a href="javascript:void(0);" class="downBtn">下移</a>':'';
+						html+=(i>0)?'<a href="javascript:void(0);"  class="upBtn">上移</a>':'';
+						html+='</li>';
+					})
+					$('.joblist').html(html)
+				}
+				function movelist(e,num){
+					var index=parseInt($(e).parent('li').attr('data-index'));
+					var template1=joblist[index]
+					var template2=joblist[index+num];
+					joblist[index+num]=template1;
+					joblist[index]=template2;
+					initlist()
+	
+	
+	                //new_up_jobid   交换后靠前的 职位id
+	                //new_down_jobid  交换后靠后的 职位id
+	                var new_down_jobid,new_up_jobid;
+					new_up_jobid=joblist[Math.min(index,index+num)].job_id;
+					new_down_jobid=joblist[Math.max(index,index+num)].job_id;
+	
+					$.post("{/get_url rule='/mrecruit/SetOrder'/}",{new_up_jobid:new_up_jobid,new_down_jobid:new_down_jobid},function (e) {
+							console.log(e);
+	                },'json')
+	
+				}
+				
+				$('.joblist').on('click','.downBtn',function(){movelist(this,1)})
+				$('.joblist').on('click','.upBtn',function(){movelist(this,-1)})
+				initlist()
+				
+				
+				$('.joblist').on('click','.list-cell2 label',function(){
+					var index=$(this).attr('data-index');
+					var data={jobid:$(this).attr('data-id'),status:$(this).is('.ckd')?"0":"1"};
+					var that=this;
+					console.log(data)
+					 $.post("{/get_url rule='/mrecruit/SetStatus'/}",data,function (e) {
+		                joblist[index].is_effect=(parseInt(joblist[index].is_effect)+1)%2;
+		                //ckb[0].checked=!ckb[0].checked;
+		                $(that).toggleClass('ckd')
+		                console.log(joblist)
+		            },'json') 
+		            return false;
+				})
+				
+				$('#btnJobSave').on('click',function(){
+					$('.recuit_dialog .ui_dialog_close')[0].click()
+				})
+			})
+		</script>
+	</body>
+</html>

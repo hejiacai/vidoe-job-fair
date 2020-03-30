@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>获取联系方式</title>
+    <link rel="stylesheet" type="text/css" href="{/version file='m_font_style.css'/}">
+    <link rel="stylesheet" type="text/css" href="{/version file='resumePoint.css'/}">
+    <script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.min.js'/}"></script>
+</head>
+<body>
+    <!-- 获取联系方式增加聊一聊弹窗 -->
+    <div class="wayChatConPop">
+        <p class="chatGreetTit">获取联系方式将扣除<em>1个简历点</em>，3个月内有效，长期查看请保存到电话</p>
+        <div class="wayChatConBtn">
+            <a href="javascript:void(0);" id="btnDeduct">获取联系方式</a>
+            <span><em class="cut" id="j_bind_chat"></em>免费向求职者打招呼，避免漏接电话</span>
+        </div>
+        <div class="wayChatGreet">
+            <span class="chatGreetIcon"></span>
+            <div class="chatGreetSch">
+                <span class="chatGreetTit02">选择打招呼的职位</span>
+                <div class="chatGreetSchx">
+                    <input type="text" value="" id="j_keywords" placeholder="选择打招呼的职位" />
+                    <button type="button" id="j_search_btn">搜索</button>
+                </div>
+            </div>
+            <ul class="chatGreetList" style="overflow-y: auto;">
+                {/foreach $jobs as $j/}
+                <li class="j_job_list_item" data-keywords="{/$j['station']/}">
+                    <span>{/$j['station']/}</span>
+                    <em class="j_job_checkbox" data-job-id="{/$j['job_id']/}"></em>
+                </li>
+                {//foreach/}
+            </ul>
+        </div>
+    </div>
+    <script>
+        try{
+            hbjs.use('cqjob.jobValidate, cqjob.jobForm, cqjob.jobDialog, tools.cookie', function($, form, jobDialog, cookie){
+                var is_chat = cookie.get('wayChatCookie');
+                if (is_chat === 'false') {
+                    $('#j_bind_chat').removeClass('cut');
+                }
+                factory($.extend(form, jobDialog), cookie);
+                //是否选中免费向求职者打招呼
+                $('.wayChatConBtn em').on('click', function(){
+                    $(this).toggleClass('cut');
+                    if($(this).hasClass('cut')){
+                        cookie.set('wayChatCookie', 'true');
+                        $('.wayChatGreet').show();
+                    }else{
+                        cookie.set('wayChatCookie', 'false');
+                        $('.wayChatGreet').hide();
+                    }
+                });
+                $('.chatGreetList li em').on('click', function(){
+                    $('.chatGreetList li em').removeClass('cut');
+                    $(this).toggleClass('cut');
+                });
+            });
+        } catch (ex) {
+            factory($);
+        }
+        function factory($, cookie) {
+            $('#btnDeduct').on('click', function() {
+                isDownLoad = true;
+                if ($('#chkdeductPro').is(':checked')) {
+                    cookie ? cookie.set('downresumeprompt', 'true') : writeCookie('downresumeprompt','true');
+                }
+
+                {/if $recommend_id/}
+                var recommend_id = {/$recommend_id/};
+                var resume_id    = {/$resume_id/};
+                recommend.resumeDown(resume_id, recommend_id);
+                {//if/}
+
+                    if (this.trigger) {
+                        this.trigger('close');
+                    } else {
+                        $(this).closeDialog();
+                    }
+                });
+        }
+
+        $('#j_search_btn').on('click', function(){
+            $('.chatGreetList li em').removeClass('cut');
+            var keywords = $('#j_keywords').val();
+            if (keywords == '' || keywords == 'undefined' || !keywords) {
+                $('.j_job_list_item').show();
+                return false;
+            }
+            $.each($('.j_job_list_item'), function(e, v){
+                v = $(v);
+                if (v.attr('data-keywords').indexOf(keywords) >= 0) {
+                    v.show();
+                } else {
+                    v.hide();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

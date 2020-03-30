@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>校园招聘会数据统计</title>
+	<link rel="stylesheet" type="text/css" href="{/version file='v2-reset.css'/}"/>
+	<link rel="stylesheet" type="text/css" href="{/version file='v2-header.css'/}"/>
+	<link rel="stylesheet" type="text/css" href="{/version file='perback.css'/}"/>
+	<link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}"/>
+	<link rel="stylesheet" type="text/css" href="{/version file='v2-resume.css'/}"/>
+	<link rel="stylesheet" type="text/css" href="{/version file='idangerous.swiper.css'/}"/>
+	<link rel="stylesheet" type="text/css" href="{/version file='comlogin.css'/}"/>
+	<link rel="stylesheet" type="text/css" href="{/version file='topicstatic.css'/}"/>
+	<link rel="stylesheet" type="text/css" href="{/version file='video_eng.css'/}"/>
+	<script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.min.js'/}"></script>
+	<script type="text/javascript" src="{/version file='common.js'/}"></script>
+	<script type="text/javascript" src="{/version file='dialog.js'/}"></script>
+	<script type="text/javascript" src="{/version file='ui_area_mulitiple.js'/}"></script>
+	<script type="text/javascript" src="{/version file='WdatePicker.js'/}"></script>
+	<script type="text/javascript" src="{/version file='layer.js'/}"></script>
+	<style>
+		.tablist {
+			width     : 30em;
+			margin    : 30px auto;
+			font-size : 18px;
+		}
+	</style>
+</head>
+<body style="background: #f6f7f9">
+<header id="header">
+	<div class="hdCon">
+		<div class="logo"><a href="{/$siteurl.main/}"></a></div>
+	</div>
+	<h1>校园招聘</h1>
+</header>
+<ul class="tablist">
+    {/foreach $all_menu as $menu/}
+        {/if in_array($menu['id'],$menu_ids)/}
+			<li data-type="{/$menu['id']/}"
+				data-url="{/$menu['to_url']/}" {/if $cur_menu_id==$menu['id']/} class="cur"{//if/}>{/$menu['name']/}<u
+						class="underline"></u></li>
+        {//if/}
+    {//foreach/}
+</ul>
+
+
+<div class="dataStatNumber">
+	<p>
+		<span>累计已报名：<b>{/$enter_sum_count/}人</b></span>
+		<span>进入会场：<b>{/$enter_count/}人</b></span>
+		<span>已申请视频面试：<b>{/$video_sum_count/}人</b></span>
+		<span>已视频面试：<b>{/$video_count/}人</b></span>
+	</p>
+	<div>
+		<i></i>
+		<span><b></b><em>{/$not_download_total/}人将无法视频面试</em>（请通知学生下载APP）</span>
+	</div>
+</div>
+<div class=" dataStatMain">
+	<div class="dataStatMainPd70">
+		<form id="dopost" action="{/get_url rule='/topiccompanystatic/Video/' domain='www'/}" method="get">
+			<div class="dataStatScreen">
+				<span>招聘会场次</span>
+				<select id="sid" name="sid">
+                    {/foreach $activity_list as $key=>$val/}
+                        {/if $params['sid']==$val['id']/}
+							<option value="{/$val['id']/}" selected>{/$val['title']/}</option>
+                        {/else/}
+							<option value="{/$val['id']/}">{/$val['title']/}</option>
+                        {//if/}
+                    {//foreach/}
+				</select>
+				<span style="margin-right: 16px;">日期</span>
+				<input type="text" readonly="readonly" onclick="WdatePicker()" name="start_time"
+					   value="{/$params['start_time']/}"/>
+				<b>~</b>
+				<input type="text" readonly="readonly" onclick="WdatePicker()" name="end_time"
+					   value="{/$params['end_time']/}"/>
+				<input type="hidden" id="is_download" name="is_download" value="0">
+				<button type="button" class="statSearchBtn">搜索</button>
+				<button type="button" class="statExportBtn">导出Excel</button>
+				<div class="clear"></div>
+			</div>
+		</form>
+		<table class="statTab">
+			<tr>
+				<th>报名时间</th>
+				<th>姓名</th>
+				<th>性别</th>
+				<th>年龄</th>
+				<th>学校</th>
+				<th>专业</th>
+                {/if $now_activity['is_department']/}
+					<th>院系</th>
+                {//if/}
+                {/if $now_activity['is_grade']/}
+					<th>年级</th>
+                {//if/}
+                {/if $now_activity['is_class']/}
+					<th>班级</th>
+                {//if/}
+                {/if $now_activity['is_student_id']/}
+					<th>学号</th>
+                {//if/}
+                {/if $now_activity['is_academic_advisor']/}
+					<th>指导老师</th>
+                {//if/}
+                {/if $now_activity['is_jobsort']/}
+					<th>意向职位类别</th>
+                {//if/}
+                {/if $now_activity['is_poor_family']/}
+					<th>建卡贫困家庭</th>
+                {//if/}
+				<th>简历完善度</th>
+				<th>是否下载APP</th>
+				<th>申请视频面试</th>
+				<th>已面试</th>
+				<th>初面通过</th>
+				<th>投递简历</th>
+				<th>邀请面试</th>
+			</tr>
+            {/if !empty($list)/}
+                {/foreach $list as $key=>$val/}
+					<tr {/if $key%2 == 0/}class="bggray"{//if/}>
+						<td>{/$val['create_time']/}</td>
+						<td netfair_source="{/$val.netfair_source/}">
+							{/$val['student_name']/}
+						</td>
+						<td>{/$val['sex_name']/}</td>
+						<td>{/$val['age']/}</td>
+						<td>{/$val['school_name']/}</td>
+						<td>{/$val['major_desc']/}</td>
+                        {/if $now_activity['is_department']/}
+							<td>{/$val['student_department']/}</td>
+                        {//if/}
+                        {/if $now_activity['is_grade']/}
+							<td>{/$val['student_grade']/}</td>
+                        {//if/}
+                        {/if $now_activity['is_class']/}
+							<td>{/$val['student_class']/}</td>
+                        {//if/}
+                        {/if $now_activity['is_student_id']/}
+							<td>{/$val['student_id']/}</td>
+                        {//if/}
+                        {/if $now_activity['is_academic_advisor']/}
+							<td>{/$val['academic_advisor']/}</td>
+                        {//if/}
+                        {/if $now_activity['is_jobsort']/}
+							<td>{/$val['jobsort']/}</td>
+                        {//if/}
+                        {/if $now_activity['is_poor_family']/}
+							<td>{/$val['is_poor_family']/}</td>
+                        {//if/}
+                        {/if '待完善'==$val['complete_percent']/}
+							<td class="red">
+                                {/$val['complete_percent']/}
+							</td>
+                        {/else/}
+							<td>
+                                {/$val['complete_percent']/}
+							</td>
+                        {//if/}
+
+                        {/if '否'==$val['is_app']/}
+							<td class="red">{/$val['is_app']/}</td>
+                        {/else/}
+							<td>{/$val['is_app']/}</td>
+                        {//if/}
+
+						<td>{/$val['video_num']/}</td>
+						<td>{/$val['video_status_0']/}</td>
+						<td>{/$val['video_status_2']/}</td>
+						<td>{/$val['relate_num']/}</td>
+						<td>{/$val['relate_status_1']/}</td>
+					</tr>
+                {//foreach/}
+            {/else/}
+				<tr class="bggray">
+					<td colspan="20">暂无数据</td>
+				</tr>
+            {//if/}
+		</table>
+		<div class="pagelist">
+            {/$page_html/}
+		</div>
+	</div>
+</div>
+<script>
+    $('#title_nme').text($('#sid').find("option:selected").text());
+    $('.statSearchBtn').click(function () {
+        $('#is_download').val(0);
+        $('#dopost').submit();
+
+    });
+    $('.statExportBtn').click(function () {
+        $('#is_download').val(1);
+        //$('#dopost').submit();
+
+        var data = $('#dopost').serialize();
+        window.location.href = "{/get_url rule='/topiccompanystatic/Video/' domain='www'/}?" + data;
+    });
+    $(".tablist li").on('click', function () {
+        if ($(this).hasClass('cur')) {
+            return;
+        } else {
+            var data_type = $(this).attr('data-type');
+            var data_url = $(this).attr('data-url');
+            console.log(data_url);
+            window.location.href = data_url;
+        }
+        // $(this).addClass('cur')
+        // $('.content').removeClass('cur').eq($(this).index()).addClass('cur');
+    });
+
+</script>
+</body>
+</html>

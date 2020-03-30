@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+</head>
+<body>
+<style>
+.remDelBox{width:335px;font-size:12px;}
+.remDelTxt{margin-bottom:10px;padding:20px 0;zoom:1;}
+.remDelTxt p{font-size:14px;}
+.remDelTxt p em{color:#ED7066;margin:0 10px;}
+.remDelL{float:left;display:inline;margin:5px 0 0 0;}
+.remDelR{float:right;display:inline;}
+.remDelL input{vertical-align:middle;cursor:pointer;}
+.remDelL label{vertical-align:middle;cursor:pointer;margin:0 0 0 5px;}
+</style>
+<div class="dgBox remDelBox">
+	<input type="hidden" name ="ids" value="{/$ids/}" id="refuseapplyids">
+	<div class="remDelTxt">
+    	<p>确定 {/foreach $names as $name/}<em>{/$name/}</em>{//foreach/}不符合应聘职位的要求，不需要参加面试?
+    	</p>
+    </div>
+    <div class="remDelBtn">
+    	<div class="remDelL"><input type="checkbox" name="rem" id="rem" /><label for="rem">下次不要再提示我</label></div>
+        <div class="remDelR"><a href="javascript:void(0)" class="btn1 btnsF14" id="btnTipRefuse">确定</a><a href="javascript:void(0)" class="btn3 btnsF14" id="btnTipCancel">取消</a></div>
+        <div class="clear"></div>
+    </div>
+</div>
+<script type="text/javascript">
+try{
+	hbjs.use('tools.cookie, cqjob.jobValidate, cqjob.jobForm', function(cookie, $, form){
+		factory($.extend(form), cookie);
+	});
+} catch (ex) {
+	factory($);
+}
+
+function factory($, cookie){
+	$('#btnTipRefuse').click(function(){
+		if($('#rem').is(':checked')) {
+		   var val = cookie ? cookie.get('refusewarn') : cookieutility.get('refusewarn');
+		   if(val==null||val==''){
+			  cookie ? cookie.set('refusewarn', true) : cookieutility.set('refusewarn',true);
+		   }
+		}else {
+			cookie ? cookie.remove('refusewarn') : cookieutility.del('refusewarn');
+		}
+	   var ids = $('#refuseapplyids').val();
+	   	   
+	   if(this.trigger){
+		   this.trigger('close');
+	   } else {
+		   $(this).closeDialog();
+	   }
+	   if(typeof applyjob != 'undefined' ) {
+		   applyjob.refuseapply(ids);
+	   } else if(apply != 'undefined') {
+		   apply._refuseapply(ids);
+	   }
+	});
+	$('#btnTipCancel').click(function(){
+		if(this.trigger){
+		   this.trigger('close');
+		} else {
+		   $(this).closeDialog();
+		}
+	});
+}
+</script>
+</body>
+</html>

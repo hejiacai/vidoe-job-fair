@@ -1,0 +1,219 @@
+<!doctype html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="Keywords" content="" />
+	<meta name="Description" content="" />
+	<title>{/$title/}</title>
+	<!–[if lt IE9]>
+	<script src="{/version file='html5.js'/}"></script>
+	<![endif]–>
+	<link rel="stylesheet" type="text/css" href="{/version file='v2-reset.css'/}" />
+	<link rel="stylesheet" type="text/css" href="{/version file='comback.css'/}" />
+	<link rel="stylesheet" type="text/css" href="{/version file='icons.css'/}" />
+	<link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}" />
+	<link rel="stylesheet" type="text/css" href="{/version file='v2-pay.css'/}" />
+	<link rel="stylesheet" type="text/css" href="{/version file='v2-pay.css'/}" />
+	<link rel="stylesheet" type="text/css" href="{/version file='accountindex.css'/}" />
+	<link rel="stylesheet" type="text/css" href="{/version file='repcalendar.css'/}" />
+	<script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.min.js'/}"></script
+	<script type="text/javascript" src="{/version file='version.js'/}"></script>
+	<script type="text/javascript">
+        window.CONFIG = {
+            HOST: '{/$siteurl.style/}',
+            COMBOPATH: '/js/v2/'
+        }
+	</script>
+	<script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+	<script type="text/javascript" src="{/version file='global.js'/}"></script>
+	<style>
+		.tgj_table{width:100%;margin:20px 0 10px 0}
+		.tgj_table th{padding:11px 12px 12px}
+		.tgj_table td{padding:12px 5px 11px}
+		.tgj_table th,.tgj_table td{border-bottom:1px solid #f2f2f2;text-align: center;color:#444}
+		.tgj_table th{border-bottom:1px solid #ccc;}
+
+		.rMentUl li a em.mentIcon01{ background:url('{/$siteurl.style/}/img/account/resource1.png') no-repeat;}
+		.rMentUl li a.cut em.mentIcon01{ background:url('{/$siteurl.style/}/img/account/resource2.png') no-repeat;}
+	</style>
+</head>
+<body id="body">
+{/include file="new_header.html" par="企业管理" cur="资金管理"/}
+<div class="resumentNbg clearfix">
+	{/include 'economicnav.html' par="资源消耗统计"/}
+
+	<div class="account-management rMentRt">
+		<form id="doSearch"  action="{/get_url rule='/consumelog/ConsumeStatic/'/}" method="post">
+			<div class="search-box clearfix">
+				<div class="daybtn {/if $condition['day_type'] == 7/}selected{//if/}" data-value="7">近7天<i class="icon-default"></i></div>
+				<div class="daybtn {/if $condition['day_type'] == 30/}selected{//if/}" data-value="30">近30天<i class="icon-default"></i></div>
+				<div class="dayselect-box">
+					<input type="text" id="stime" name="s_time" readonly="readonly" value="{/$condition['s_time']/}"/>
+					<span>~</span>
+					<input type="text" id="etime" name="e_time" readonly="readonly" value="{/$condition['e_time']/}"/>
+					<p>最多可查询截止到昨天最近一年的数据</p>
+				</div>
+				<input type="hidden" name="action" value="">
+				<input type="hidden" name="day_type" value="{/$condition['day_type']/}">
+				<div class="btn" id="submitBtn"><a href="javascript:;">查询</a></div>
+				<div class="btn" id="doexcel"><a href="javascript:;">导出excel</a></div>
+				{/if $is_main_account/}
+				<div class="greenbtn"><a href="{/get_url rule='/account/resourcelist/'/}">去分配资源</a></div>
+				{//if/}
+			</div>
+		</form>
+
+		<div class="manage-content">
+			<table id="manage-content">
+				<tr>
+					<th class="tal">账户信息</th>
+					<th>简历点</th>
+					<th>推广金</th>
+					<th>刷新点</th>
+					{/if $isCqNewService/}
+						<th>聊一聊</th>
+						<th>短信数</th>
+					{/else/}
+						<th>精品点</th>
+					{//if/}
+					<th>职位数</th>
+				</tr>
+
+				{/foreach $list as $item/}
+					<tr>
+						<td class="account-info">
+						{/if $item['has_head_photo']/}<img src="{/$item['head_photo']/}" />{/else/}<span class="header-img">{/$item['head_photo']/}</span>{//if/}
+							<div class="info-right">
+								<div class="info-top">{/$item['user_id']/}</div>
+								<div class="info-bottom">{/$item['user_name']/}{/if !empty($imte['station'])/}/{/$item['station']/}{//if/}</div>
+							</div>
+							<!--如果是管理员，才有这个p标签-->
+							{/if $item['is_main'] == 1/}
+							<p class="admin-tag">主账号</p>
+							{//if/}
+						</td>
+						<td>{/$item['resume']/}</td>
+						<td>{/$item['spread']/}</td>
+						<td>{/$item['refresh']/}</td>
+
+						{/if $isCqNewService/}
+						<th>{/$item['chat']/}</th>
+						<th>{/$item['sms']/}</th>
+						{/else/}
+						<td>{/$item['bouit']/}</td>
+						{//if/}
+						<td>{/$item['job_num']/}</td>
+					</tr>
+				{//foreach/}
+
+			</table>
+		</div>
+	</div>
+
+</div>
+<div id="sus" class="sus"><a class="backTop hbFntWes" title="返回顶部" href="javascript:void(0);" style="display: none;">&#xf0d8;</a></div>
+{/include file="footer.html"/}
+<section class="floatRT"><a href="{/get_url rule='/about/message' domain='main'/}" target="_blank" class="serviceLink">我有问题要反馈</a><b></b></section>
+<script type="text/javascript">
+    hbjs.use('@select, @calendar, @dateFormat', function(m){
+        var dataFormat = m['tools.dateFormat'];
+		var nowDate=new Date();
+		var getMonth = nowDate.getMonth()+1;
+		var lastMonth = getMonth<10 ? ("0"+getMonth) : getMonth;
+		var lastDay = (nowDate.getFullYear()-1) + "-" + lastMonth + "-" + nowDate.getDate();
+		if(getMonth==2&&nowDate.getDate()==29){
+			lastDay = (nowDate.getFullYear()-1) + "-" + lastMonth + "-" + 28;
+		}
+		var yesterday = getDate(0)
+		
+        function getDate(day){
+            var zdate = new Date();
+            var sdate = zdate.getTime() - (1 * 24 * 60 * 60 * 1000);
+            var edate = new dataFormat(new Date(sdate - (day * 24 * 60 * 60 * 1000)));
+            return edate.toString('yyyy-MM-dd');
+        }
+
+        var $ = m['jquery'],
+            Select = m['widge.select'];
+        	Calendar = m['widge.calendar.calendar'];
+
+        var daySelecter = $('.search-box');
+        var dayItems = daySelecter.children('.daybtn');
+        var hidDay = daySelecter.children('input');
+
+        var t1 = lastDay || null;
+        var t2 = yesterday || null;
+        var c1 = new Calendar({
+            trigger: $('#stime'),
+            range: [lastDay, t2]
+        })
+        var c2 = new Calendar({
+            trigger: $('#etime'),
+            range: [t1, yesterday]
+        })
+
+        c1.on('selectDate', function(date){
+            c2.range([date.value, yesterday]);
+            dayItems.removeClass('selected');
+            $('input[name=day_type]').val(0)
+            if($("#etime").val()===getDate(0)){
+            	if($("#stime").val()===getDate(6)){
+            		$(".daybtn[data-value=7]").addClass('selected')
+            		$('input[name=day_type]').val(6)
+            	}else if($("#stime").val()===getDate(29)){
+            		$(".daybtn[data-value=30]").addClass('selected')
+            		$('input[name=day_type]').val(30)
+            	}
+            }
+        });
+        c2.on('selectDate', function(date){
+            c1.range([lastDay, date.value]);
+            dayItems.removeClass('selected');
+            $('input[name=day_type]').val(0)
+            if($("#etime").val()===getDate(0)){
+            	if($("#stime").val()===getDate(6)){
+            		$(".daybtn[data-value=7]").addClass('selected')
+            		$('input[name=day_type]').val(6)
+            	}else if($("#stime").val()===getDate(29)){
+            		$(".daybtn[data-value=30]").addClass('selected')
+            		$('input[name=day_type]').val(30)
+            	}
+            }
+            
+        });
+
+        $("#submitBtn").click(function(){
+            $('input[name=action]').val('')
+            $("#doSearch").submit();
+        });
+        $('#doexcel').click(function(){
+			$('input[name=action]').val('down_exce')
+            $("#doSearch").submit();
+        });
+
+        daySelecter.on('click', '.daybtn', function(e){
+            var target = $(e.currentTarget);
+            dayItems.removeClass('selected');
+            target.addClass('selected');
+            t1 = getDate(target.attr('data-value')-1);
+            t2 = getDate(0);
+            $("#stime").val(t1);
+            $("#etime").val(t2);
+            c1.range([lastDay, t2]);
+            c2.range([t1, yesterday]);
+
+            $('input[name=day_type]').val($(this).attr('data-value'))
+        });
+
+//      $(window).ready(function(){
+//          t1 = getDate(7-1);
+//          t2 = getDate(0);
+//          $("#stime").val(t1);
+//          $("#etime").val(t2);
+//      })
+    });
+</script>
+{/include file="chat/chat.html"/}
+</body>
+</html>
+

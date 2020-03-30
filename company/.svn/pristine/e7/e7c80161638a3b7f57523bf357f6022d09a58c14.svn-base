@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+<title>{/$title/}</title>
+<!–[if lt IE9]> 
+<script type="text/javascript" language="javascript" src="{/version file='html5.js'/}"></script>
+<![endif]–>
+<link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='comback.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='tJob_style.css'/}" />
+
+<script type="text/javascript" src="{/version file='version.js'/}"></script>
+<script type="text/javascript">
+window.CONFIG = {
+	HOST: '{/$siteurl.style/}',
+	COMBOPATH: '/js/v2/'
+}
+</script>
+<script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+<script type="text/javascript" src="{/version file="global.js"/}"></script>
+<script type="text/javascript">
+hbjs.loadJS('{/$siteurl.style/}/js/v2/cqjob/common.js');
+</script>
+</head>
+<body class="tjob_main">
+	<!---延用以前-->
+	{/include file="new_header.html" par="兼职招聘" cur="报名管理"/}
+	<!---延用以前 end-->     
+    <!--new-->
+    <div class="tjob_manager clearfix">
+    	<div class="tjob_left">
+    		<ul>
+    			<li><a href="{/get_url rule='/partjobapply/'/}">待处理的报名</a></li>
+    			<li class="cur"><a href="{/get_url rule='/partjobapply/applyoffered'/}"><i class="hbFntWes">&#xf0da;</i>录用的报名者</a></li>
+    			<li><a href="{/get_url rule='/partjobapply/applyinvited'/}">需要面试的报名者</a></li>
+    			<li><a href="{/get_url rule='/partjobapply/applyrefused'/}">不合适的报名者</a></li>
+    		</ul>
+    	</div>
+    	<div class="tjob_right">
+    		{/if !empty($offerlist)/}
+    		<table class="tjob_jlmas">
+                {/foreach $offerlist as $k => $apply/}
+    			<tr {/if $apply@iteration is odd/}class="graybg"{//if/}>
+    				<td class="img">
+    					<a href="{/get_url rule='/partresume/resumedetail/'/}resumeid-{/$apply['resume_id']/}-applyid-{/$apply['apply_id']/}" target='_blank'>{/$apply['photo']/}</a>
+    				</td>
+    				<td>
+    					<p><a class="name" href="{/get_url rule='/partresume/resumedetail/'/}resumeid-{/$apply['resume_id']/}-applyid-{/$apply['apply_id']/}" target='_blank'>{/$apply['user_name']/}</a></p>
+    					<p class="mgt5 mgb5">{/$apply['sex']/}{/if $apply['age']/}<u>|</u>{/$apply['age']/}{//if/}{/if $apply['stature']/}<u>|</u>{/$apply['stature']/}{//if/}{/if $apply['address']/}<u>|</u>{/$apply['address']/}{//if/}{/if $apply['station']/}{//if/}</p>
+    					<p class="tel">投递职位：{/$apply['station']/}{/if $apply['offer_time']/}<u>|</u>入职时间：{/date("Y-m-d H:i", strtotime($apply['offer_time']))/}{//if/}</p>
+    				</td>
+    				<td {/if $apply['status']==0/}class="link blue"{/elseif $apply['status']==1/}class="link green"{/elseif $apply['status']==2/}class="link red"{//if/}>
+    					<span>{/if $apply['status']==0/}等待对方确认{/elseif $apply['status']==1/}对方已同意{/elseif $apply['status']==2/}对方已拒绝{//if/}</span>
+    				</td>
+    			</tr>
+                {//foreach/}
+    		</table>
+    		{/$pager/}
+    		{/else/}
+    		<div class="noData">没有录用的报名者信息</div>
+    		{//if/}
+    	</div>
+    </div>
+    <!--new end-->
+	{/include file="footer.html"/}
+</body>
+</html>

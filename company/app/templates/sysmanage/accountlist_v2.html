@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+<title>汇博网_招聘中心_我的账户</title>
+<!–[if lt IE9]> 
+<script src="{/version file='html5.js'/}"></script>  
+<![endif]–>
+<link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='comback.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='icons.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}" />
+	<script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.js'/}"></script>
+<script type="text/javascript" src="{/version file='version.js'/}"></script>
+<script type="text/javascript">
+window.CONFIG = {
+	HOST: '{/$siteurl.style/}',
+	COMBOPATH: '/js/v2/'
+}
+</script>
+<script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+<script type="text/javascript" src="{/version file='global.js'/}"></script>
+<!--引用的字体样式-->
+<link rel="stylesheet" type="text/css" href="{/version file='m_font_style.css'/}" />
+
+<!--引用的公共样式-->
+<link rel="stylesheet" type="text/css" href="{/version file='accountindex.css'/}">
+<style>
+			/*导航样式*/
+.resumentNbg{width:1000px; height:auto; min-height:800px; background:url({/$siteurl.style/}/img/c/new_resume/resumentbg.png) repeat-y #fff;  box-shadow: 0 0 3px #ddd; margin:15px auto; text-align:left; position:relative;overflow: initial;}
+.rMentLt{width:204px; float:left;}
+.rMentRt{width:756px!important; float:left!important; margin:20px 0 0 20px!important;}
+.rMentUl{width:204px;}
+.rMentUl li a{ display:block;width:204px; height:47px; background:url({/$siteurl.style/}/img/c/new_resume/bmline.png) 0 bottom no-repeat; line-height:47px; color:#c2e2ff; font-size:16px;}
+.rMentUl li a em{ display:inline-block; vertical-align:-4px;#vertical-align:0px;width:20px; height:20px; margin:0 10px 0 18px; _margin-top:12px;}
+.rMentUl li a em.mentIcon01{ background:url({/$siteurl.style/}/img/account/account1.png) no-repeat;}
+.rMentUl li a.cut em.mentIcon01{ background:url({/$siteurl.style/}/img/account/account2.png) no-repeat;}
+.rMentUl li a em.mentIcon02{ background:url({/$siteurl.style/}/img/account/resource1.png) no-repeat;}
+.rMentUl li a.cut em.mentIcon02{ background:url({/$siteurl.style/}/img/account/resource2.png) no-repeat;}
+.rMentUl li a.cut{ background:#00c0c7; color:#fff;}
+.cutDown,.getPhoneCode_new{ float: left; line-height: 32px; margin-left: 10px;color: #ccc;}
+.getPhoneCode_new{color: #2b6fad; cursor: pointer}
+/*新建子账号弹框样式*/
+.hb_ui_dialog.adduser-dialog .ui_dialog_container{height:502px;overflow: auto;}
+</style>
+</head>
+<body id="body">
+{/include file="new_header.html" par="企业管理" cur="账号管理"/}
+<input type="hidden" id="old_mobile_phone" name="old_mobile_phone" value="0">
+<div class="content resumentNbg" id="content">
+	<div class="rMentLt">
+	    <ul class="rMentUl">
+	        <li>
+	            <a href="{/get_url rule='/account/accountManage'/}" class="cut">
+	                <em class="mentIcon01"></em>账号管理
+	            </a>
+	        </li>
+	        <li>
+            	<a href="{/get_url rule='/account/resourcelist'/}">
+	                <em class="mentIcon02"></em>资源分配详情
+	            </a>
+	        </li>
+	    </ul>
+	</div>
+  <div class="account-management rMentRt">
+  	<div class="manage-title">
+  		<div class="titles">
+  			<h1>多人同时参与招聘，提升工作效率</h1>
+  			<h2>用户部门也可参与，降低HR沟通成本</h2>
+  		</div>
+  		<a id="addbtn" href="javascript:" class="addbtn"><i></i>添加直聘账号</a>
+		<span class="morePerson">子账号:{/$cq_point_sub_account/}&nbsp;&nbsp; 剩余:<span class="colorblue">{/$release_point_sub_account/}</span></span>
+  	</div>
+
+  	<div class="manage-content">
+  		<table id="manage-content">
+  			<tr>
+  				<th class="tal">账户信息</th>
+                <th>微信绑定</th>
+                <th>APP绑定</th>
+  				<th>账号状态</th>
+  				<th class="mark-par">资源模式　<span class="mark"><div class="mark-con">共享模式：主账号与子账共用简历点、推广金等资源<br />分配模式：可按需为子账号分配简历点等资源</div></span></th>
+  				<th>联系方式</th>
+  				<th>最近登录</th>
+  				<th>操作</th>
+  			</tr>
+            {/foreach $account_list as $key=>$v/}
+            <tr>
+  				<td class="account-info">
+  						{/if $v['has_head_photo']/}<img src="{/$siteurl.style/}{/$v['head_photo']/}" alt="" />{/else/}<span class="header-img">{/$v['head_photo']/}</span>{//if/}
+  						<div class="info-right">
+  							<div class="info-top">{/$v['user_id']/}</div>
+  							<div class="info-bottom">
+                                {/$v['user_name']/}
+                                {/if $v['station']/}
+                                    /{/$v['station']/}
+                                {//if/}
+                            </div>
+  						</div>
+                        {/if $v['is_main']/}
+  						<p class="admin-tag">主账号</p>
+                        {//if/}
+  					
+                </td>
+                <!--下一个td是已绑定微信-->
+                <td>
+                    {/if $v['bind_weixin']/}
+                        <a class="a-underline unbindWeixin" href='javascript:;' data-value='{/$v["open_id"]/}'><i class="wx-mark"></i>解绑</a>
+                    {/else/}
+                        <a class="a-underline" href="{/get_url rule='/account/weixin/'/}" target="_blank"><i class="wx-mark markgray"></i>点击绑定</a>
+                    {//if/}
+                </td>
+                <!--下一个td是已绑定手机-->
+                <td>
+                    {/if !empty($related_list[$v['account_id']])/}
+                	<a class="a-underline unRelatedPerson" href='javascript:;' data-value='{/$related_list[$v["account_id"]]["person_id"]/}' data-account='{/$v["account_id"]/}'>
+                		<i class="phone-mark"><div class="phone-mark-con">绑定手机号<br />{/$person_list[$related_list[$v["account_id"]]["person_id"]]['mobile_phone']/}</div></i>
+                		解绑
+                	</a>
+                    {/else/}
+                    <a class="appbind a-underline" href="javascript:;" data-id="{/$v['account_id']/}"><i class="phone-mark markgray"></i>点击绑定</a>
+                    {//if/}
+                </td>
+                <!--下一个td是未停用账号-->
+  				<td>
+                    {/if $v['state']/}
+                    <div class="account-statu fontgreen"><i></i>已启用</div>
+                    {/else/}
+                    <div class="account-statu fontred"><i></i>已停用</div>
+                    {//if/}
+                </td>
+  				<td data-id="{/$v['account_id']/}">
+                    <a class="{/if !$v['is_main'] && $v['state']/}a-underline divide_resource{/else/}a-gray{//if/}" href="javascript:;">{/if !$v['resource_type'] || $v['resource_type'] == 1/}共享模式{/else/}分配模式{//if/}</a>
+                </td>
+  				<td>
+                    {/$v['mobile_phone']/}<p>{/$v['link_tel']/}</p>
+                </td>
+  				<td>{/$v['last_login_time']/}</td>
+  				<td  style="text-align:left">
+  					<div class="morebtn">
+  						<div>更多<i class="icon--017"></i></div>
+  						<ul data-id="{/$v['account_id']/}">
+  							<li><a class="edit" href="{/get_url rule='/account/editAccount/' data="account_id={/$v['account_id']/}"/}">编辑</a></li>
+                            {/if !$v['is_main']/}
+  							<li><a class="stop" href="javascript:">{/if $v['state']/}停用{/else/}启用{//if/}</a></li>
+                    		<li><a class="delete" href="javascript:">删除</a></li>
+                            {//if/}
+  							<li><a class="log" href="{/get_url rule='/account/AccountLogList' data="account_id={/$v['account_id']/}"/}">操作日志</a></li>
+  							{/if !$v['is_main'] && $v['state']/}<li data-id="{/$v['account_id']/}"><a class="a-underline divide_resource" href='javascript:;'>调整资源模式</a></li>{//if/}
+  						</ul>
+                    </div>
+                </td>
+  			</tr>
+  			
+  			<!--如果是停用账号，添加这一行tr-->
+            {/if !$v['is_main'] && $v['forbid_state'] == 1/}
+  			<tr class="active-acount">
+  				<td colspan="8">此账号被禁用&nbsp;<a class="a-underline freeForbid" href="javascript:;" data-user-id="{/$v['user_id']/}">点此解禁>></a></td>
+  			</tr>
+            {//if/}
+            {//foreach/}
+        </table>
+  	</div>
+  </div>
+  <div class="clear"></div>
+</div>
+
+<div id="childUserFormDiv" style="display:none;">
+<!--	<div class="orangetext">姓名等信息可能将展示在求职端，请真实填写</div>-->
+<form id="childUserForm" autocomplete="off">
+   <table class="updata-pwd-alert">
+    <tbody>
+     <tr>
+      <th><span>用户名</span></th>
+      <td>
+       <div class="input">
+        <span class="formText" style="float:none"><input id="user_id" type="text" name="user_id" placeholder="建议使用公司名+岗位名的首字母"/></span>
+        <p class="error-msg" data-for="user_id"></p>
+       </div></td>
+     </tr>
+     <tr class="borderbottom">
+      <th><span>密　码</span></th>
+      <td>
+       <div class="input">
+        <span class="formText" style="float:none"><input type="password" placeholder="请输入密码6-18位英文和数字" name="password" autocomplete="new-password"/></span>
+        <p class="error-msg" data-for="password"></p>
+       </div></td>
+     </tr>
+
+     <tr>
+      <th><span>姓　名</span></th>
+      <td>
+       <div class="input">
+        <span class="formText" style="float:none"><input type="text" name="user_name" placeholder="2-6个汉字" autocomplete="off"/></span>
+        <p class="error-msg" data-for="user_name"></p>
+       </div></td>
+     </tr>
+     <tr class="no-err-hint">
+      <th><span>职　位</span></th>
+      <td>
+       <div class="input">
+        <span class="formText" style="float:none"><input type="text" name="station" placeholder="例如：技术部经理/策划部主管/人事总监/销售经理"/></span>
+        <p class="error-msg" data-for="station"></p>
+       </div></td>
+     </tr>
+     <tr class="no-err-hint">
+      <th><span style="top: 6px;">手机号</span></th>
+      <td>
+       <div class="input">
+		   <input type="hidden" id="is_phoneCode" name="is_phoneCode" value="0">
+        <span class="formText" style="float:none"><input type="text" name="mobile_phone"  id="mobilephone" /></span>
+        <p class="error-msg" data-for="mobile_phone"></p>
+		  <font color="red">下载企业APP，使用该手机号登录即可招聘</font>
+       </div></td>
+     </tr>
+	 <tr class="PhoneCode" style="display: none">
+		 <th><span>验证码</span></th>
+		 <td>
+			 <input type="text" name="chatCodex" id="chatCodex" value="" style="width: 100px;float: left" placeholder="请输入验证码" />
+			 <span class="getPhoneCode_new" style="display: block;">获取验证码</span>
+			 <span class="cutDown" style="display:none"><i>60</i>秒后重新获取</span>
+		 </td>
+	 </tr>
+     <tr class="borderbottom no-err-hint">
+      <th><span>电　话</span></th>
+      <td class="tele">
+       <div class="input">
+        <div>
+         <span class="formText"><input type="text" placeholder="区号" style="width:80px" name="link_tel1" />&nbsp;~&nbsp;</span>
+         <span class="formText"><input type="text" placeholder="电话号码" style="width:122px" name="link_tel2" />&nbsp;~&nbsp;</span>
+         <span class="formText"><input type="text" placeholder="分机号" style="width:80px" name="link_tel3" /></span>
+        </div>
+        <p style="clear:both" class="error-msg" data-for="tel"></p>
+       </div></td>
+     </tr>
+     {/if $isCqNewService || $isNewService/}
+     <tr class="resource-mode">
+        <th><span>资源模式</span></th>
+        <td>
+            <div class="radiobox radio1 checked">
+                共享模式<span class="smallgray">主账号与子账号共用简历点、推广金等资源</span>
+            </div>
+            <div class="radiobox radio2">
+                分配模式<span class="smallgray">可按需为主账号分配简历点等资源</span>
+            </div>
+            <input id="resource-mode" type="hidden" value="1" name='resource_type'/>
+            <!--隐藏input，true为共享，false为分配-->
+            <div class="resource-box">
+		     	<div class="resource-tip">注：主账号不能代分配模式子账号发布/编辑职位与设置精准推广</div>
+	            <div class="allocate-resource">
+	                <table>
+	                    <tr><th>资源类别</th><th>可分配</th><th>可使用</th></tr>
+	                    <!--传入data-total为最大可分配数值-->
+	                    {/if $isCqNewService/}
+	                        <tr class="input-integer" data-total="{/$ser_data_total['job_num']/}">
+	                            <td>职位数</td>
+	                            <td class="remain">{/$ser_data_total['job_num']/}</td>
+	                            <td><input type="text" value=0  name='job_num'/></td>
+	                        </tr>
+	                        <tr class="input-integer" data-total="{/$ser_data_total['resume_num']/}">
+	                            <td>简历点</td>
+	                            <td class="remain">{/$ser_data_total['resume_num']/}</td>
+	                            <td><input type="text" value=0 name='resume_num'/></td>
+	                        </tr>
+	                        <tr class="input-integer" data-total="{/$ser_data_total['spread']/}">
+	                            <td>推广金</td>
+	                            <td class="remain">{/$ser_data_total['spread']/}</td>
+	                            <td><input class="input-digital" type="text" value=0 name='spread'/></td>
+	                        </tr>
+	                        <tr class="input-integer" data-total="{/$ser_data_total['point_job_refresh']/}">
+	                            <td>刷新点</td>
+	                            <td class="remain">{/$ser_data_total['point_job_refresh']/}</td>
+	                            <td><input type="text" value=0 name='point_job_refresh'/></td>
+	                        </tr>
+	                        <tr class="input-integer" data-total="{/$ser_data_total['point_chat']/}">
+	                            <td>聊一聊次数</td>
+	                            <td class="remain">{/$ser_data_total['point_chat']/}</td>
+	                            <td><input type="text" value=0 name='point_chat'/></td>
+	                        </tr>
+	                        <tr class="input-integer" data-total="{/$ser_data_total['point_message']/}">
+	                            <td>短信数</td>
+	                            <td class="remain">{/$ser_data_total['point_message']/}</td>
+	                            <td><input type="text" value=0 name='point_message'/></td>
+	                        </tr>
+	                    {/else if $isNewService/}
+	                        <tr class="input-integer" data-total="{/$ser_data_total['job_num']/}">
+	                            <td>免费职位数</td>
+	                            <td class="remain">{/$ser_data_total['job_num']/}</td>
+	                            <td><input type="text" value=0 name='job_num'/></td>
+	                        </tr>
+	                        <tr class="input-integer" data-total="{/$ser_data_total['job_boutique']/}">
+	                            <td>精品职位数</td>
+	                            <td class="remain">{/$ser_data_total['job_boutique']/}</td>
+	                            <td><input type="text" value=0 name='job_boutique'/></td>
+	                        </tr>
+	                        <tr class="input-integer" data-total="{/$ser_data_total['resume_num']/}">
+	                            <td>简历点</td>
+	                            <td class="remain">{/$ser_data_total['resume_num']/}</td>
+	                            <td><input type="text" value=0 name='resume_num'/></td>
+	                        </tr>
+	                        <tr class="input-integer" data-total="{/$ser_data_total['spread']/}">
+	                            <td>推广金</td>
+	                            <td class="remain">{/$ser_data_total['spread']/}</td>
+	                            <td><input class="input-digital" type="text" value=0 name='spread'/></td>
+	                        </tr>
+	                        <tr class="input-integer" data-total="{/$ser_data_total['point_job_refresh']/}">
+	                            <td>刷新点</td>
+	                            <td class="remain">{/$ser_data_total['point_job_refresh']/}</td>
+	                            <td><input type="text" value=0 name='point_job_refresh'/></td>
+	                        </tr>
+	                        <tr class="input-integer" data-total="{/$ser_data_total['point_job_boutique']/}">
+	                            <td>精品点</td>
+	                            <td class="remain">{/$ser_data_total['point_job_boutique']/}</td>
+	                            <td><input type="text" value=0 name='point_job_boutique'/></td>
+	                        </tr>
+	                    {//if/}
+	                </table>
+	            </div>
+	        </div>
+        </td>
+     </tr>
+     {//if/}
+	     	<tr>
+	            <td colspan="2">
+	                <div class="button">
+	                    <a href="javascript:void(0);" class="blue-butn">保存</a>
+	                </div>
+	            </td>
+	        </tr>
+        </tbody>
+    </table>
+  </form>
+</div>
+{/include file="./footer.html"/}
+<section class="floatRT"><a href="{/get_url domain='main' rule='/about/message'/}" target="_blank" class="serviceLink">我有问题要反馈</a><b></b></section>
+<script type="text/javascript">
+var release_point_sub_account = '{/$release_point_sub_account/}';
+hbjs.use('@validator, @confirmBox, @hbCommon', function(m){
+
+	var validator = m['widge.validator.form'];
+	var ConfirmBox = m['widge.overlay.confirmBox'];
+	var Dialog = m['widge.overlay.hbDialog'];
+	var $ = m['product.hbCommon'];
+	var fontSize = 18,
+		pWidth = 70;
+	
+    $(".freeForbid").on('click',function(){
+        var login_id = $(this).attr("data-user-id");
+        ConfirmBox.confirm("确定要解禁该帐号吗？", "提示", function() {
+            $.post('{/get_url rule="/account/FreeForbid/"/}',{"login_id":login_id},function(json){
+                if(json.isNeedLogin){
+                    window.location.reload();
+                    return;
+                }
+				if(json && json.error)
+				{
+					alert(json.error);
+					return false;
+				}
+				alert("解除禁用成功！");
+				window.location.href=window.location.href;
+			},"json");
+        }, {
+            width : 300,
+            close : 'x'
+        });
+    });
+	$('#manage-content').on('click', 'a', function(e){
+		var target = $(e.currentTarget),
+			id = target.parent().parent().attr('data-id');
+			
+		if(target.hasClass('stop')){
+			$.ajax({
+				url: "{/get_url rule='/account/SetAccountState/'/}",
+				type: "post",
+				dataType: "json",
+				data: {account_id:id},
+				success:function(json){
+					if(json.isNeedLogin || json.status){
+						window.location.reload();
+						return;
+					}
+					alert(json.msg);
+				}
+			});
+		} else if(target.hasClass('delete')){
+            ConfirmBox.confirm("<p class='fz16'>确定要删除该帐号吗？</p><div class='color_orange'>若此账号上有剩余资源，删除账号后，剩余资源将会自动回收至主账号账号。</div>", "提示", function() {
+                $.ajax({
+                    url:"{/get_url rule='/account/DelAccount/'/}",
+                    type:"post",
+                    dataType: "json",
+                    data: {account_id:id},
+                    success:function(json){
+                        if(json.isNeedLogin || json.status){
+                            window.location.reload();
+                            return;
+                        }
+                        alert(json.msg);
+                    }
+                });
+            }, {
+                width : 300,
+                close : 'x'
+            });
+		}
+	});
+	
+	var blindAppHtml =
+		'<style>\n' +
+        '        .app-flow{padding: 34px 0 70px 60px;text-align: left;}\n' +
+        '        .app-flow-tit{color: #444;font-size: 16px;padding-bottom: 20px;}\n' +
+        '        .app-flow-tit span{color: #ff5400;}\n' +
+        '    </style>\n' +
+        '<div class="app-flow">\n' +
+        '    <p class="app-flow-tit">1、添加子账号，如已添加略过此步骤<span>（可直接绑定主账号账号）</span></p>\n' +
+        '    <img src="{/$siteurl.style/}/img/account/flow_01.jpg" alt="" width="178" height="40" style="margin-bottom: 30px;">\n' +
+        '    <p class="app-flow-tit">2、打开app，用<span>汇博求职者账号</span>登陆,没有则右上角注册即可</p>\n' +
+        '    <img src="{/$siteurl.style/}/img/account/flow_02.jpg" alt="" width="810" height="358">\n' +
+        '    <p class="app-flow-tit">3、进入“我的”，点击“请绑定”，输入添加的直聘子账号或企业主账号，即绑定成功！</p>\n' +
+        '    <img src="{/$siteurl.style/}/img/account/flow_03.jpg" alt="" width="810" height="350">\n' +
+        '</div>';
+    var blindAppDialog = new Dialog({
+            idName: 'flowAPP-dialog',
+            title: '绑定app操作流程说明',
+            content: blindAppHtml,
+            close: '╳',
+            width: 900,
+			height:600
+        });
+	var blindAppDialogNew = new Dialog({
+		idName: 'flowAPP-dialog',
+		title: '绑定手机号',
+		content: "",
+		close: '╳',
+		width: 600,
+		initHeight:350
+	});
+    $('.appbind').on('click', function(){
+        /*blindAppDialog.show();*/
+		var account_id = $(this).attr('data-id');
+		blindAppDialogNew.setContent({content:"{/get_url rule='/account/AccountBind/'/}?account_id="+account_id}).show();
+    });
+	var chatinterval;
+	var countdown = function(){
+
+		var seconds = childUserDialog.query('#childUserForm').find('.cutDown i').html();
+		seconds = parseInt(seconds);
+		if(seconds>0){
+			seconds--;
+			childUserDialog.query('#childUserForm').find('.cutDown i').html(seconds);
+			childUserDialog.query('#childUserForm').find('.getPhoneCode_new').hide();
+			childUserDialog.query('#childUserForm').find('.cutDown').show();
+		}else{
+			clearInterval(chatinterval);
+			childUserDialog.query('#childUserForm').find('.getPhoneCode_new').show();
+			childUserDialog.query('#childUserForm').find('.cutDown').hide();
+			childUserDialog.query('#childUserForm').find('.cutDown i').text("60");
+		}
+	}
+	$(document).on('click','.getPhoneCode_new', function(){
+		var chatPhonex = childUserDialog.query('#childUserForm').find('#mobilephone').val();
+		var pattern = /^[1]\d{10}$/;
+		if(chatPhonex == ''){
+			ConfirmBox.timeBomb("请输入手机号",{name: 'fail', timeout : 1000, width:230});
+		}else if(!pattern.test(chatPhonex)){
+			ConfirmBox.timeBomb("手机号码格式不正确",{name: 'fail', timeout : 1000, width:230});
+		}else{
+			$.ajax({
+				url:"{/get_url rule='/account/SendMobileCode/'/}",
+				type: "post",
+				dataType: "json",
+				data: {mobile_phone:chatPhonex},
+				success:function(json){
+                    if(json.isNeedLogin){
+                        window.location.reload();
+                        return;
+                    }
+					if(json.status){
+						ConfirmBox.timeBomb(json.msg,{
+							name: 'success',
+							timeout : 1000,
+							width:fontSize * json.msg.length + pWidth
+						});
+						return;
+					}
+					ConfirmBox.timeBomb(json.msg,{
+						name: 'fail',
+						timeout : 1000,
+						width:fontSize * json.msg.length + pWidth
+					});
+					return;
+				}
+			});
+			chatinterval = setInterval(countdown,1000);
+		}
+	});
+    
+    var divideResourceDialog = new Dialog({
+		idName: 'divide-dialog',
+		title: '分配资源',
+		isAjax: true,
+		close: '╳',
+		width: 520
+	});
+    $('.divide_resource').on('click', function(){
+        var account_id = $(this).parent().attr('data-id');
+        divideResourceDialog.setContent({content:"{/get_url rule='/account/divideSer/'/}?account_id="+account_id}).show();
+    });
+    $('.divide-dialog').on('click','.gray-btn',function(){
+    	divideResourceDialog.hide()
+    })
+    
+    var childUserDialog = new Dialog({
+		idName: 'adduser-dialog',
+		title: '添加账号',
+		content: $('#childUserFormDiv').html(),
+		close: '╳',
+		width: 520,
+		height:552,
+	});
+	
+	childUserDialog.query('input[type=text], input[type=password]').placeHolder();
+	
+	
+	$('#addbtn').on('click', function(){
+		if(release_point_sub_account > 0){
+			childUserDialog.show();
+		}else{
+			$.message("添加失败！直聘账号已达到最大数量。", {title: '系统提示', icon: 'fail'});
+			return;
+		}
+
+	});
+    
+	var validRules = {
+		user_id: {
+			required:true,
+			range: [3, 20],
+			match:/^[A-Za-z0-9_]*$/,
+			remote: {
+				url: "{/get_url rule='/account/checkUserId/'/}",
+				type: 'post',
+				dataType: 'json',
+				data: { txtUserID: function(){
+					return childUserDialog.query("#user_id").val()
+				}},
+				callback: function(json) {
+					return json && json.state;
+				}
+			}
+		},
+		password: {
+			required: true,
+			range:[6, 18],
+			inputRegValiPwd: {
+				user: childUserDialog.query('#user_id')
+			}
+		},
+		user_name:{
+			required: true,
+			inputValiUserName: true/*,
+			match: /^[A-Za-z0-9_\u4e00-\u9fa5]+$/i,
+			range: [2, 20]*/
+		},
+		mobile_phone: {
+			mobile: true
+		},
+        link_tel1: {
+            match: /^([0-9]{3}[0-9]?)?$/
+		},
+		link_tel2: {
+			match: /^([0-9]{6,8}?)?$/
+		},
+		link_tel3: {
+			match: /^[0-9]{0,5}$/
+		}
+	};
+	
+	var errMsgs = {
+		user_id: {
+			required: '请填写用户名',
+			range: '用户名3-20位字符',
+			match: '用户名为字母、数字、下划线组成',
+			remote: '该用户名已被注册，请更换'
+		},
+		password: {
+			required: '请填写密码',
+			range: '密码6-18位字符'
+		},
+		user_name:{
+			required: '请填写姓名' /*,
+			match: '姓名为中文、字母、数字、下划线组成',
+			range: '姓名2-20位字符'*/
+		},
+		mobile_phone: {
+			mobile: '请填写正确的手机号码'
+		},
+        link_tel1: {
+			match: '请输入正确的区号'
+		},
+		link_tel2: {
+			match: '请输入6-8位的数字'
+		},
+		link_tel3: '请输入正确的办公电话'
+	};
+	
+	var telGroup = {tel: 'link_tel1 link_tel2 link_tel3'};
+	var childUserValidator = new validator({
+		element: childUserDialog.query('#childUserForm'),
+		rules: validRules,
+		errorMessages: errMsgs,
+		groups: telGroup,
+		keepKey: true,
+		errorElement: 'p'
+	});
+
+	//密码验证规则
+	var regErrMessage;
+	function inputRegValiPwd(element, param){
+		var value = element.val(),
+			userName = (param['user'] && param['user'].val()) || '',
+			patten = new RegExp('^[0-9]+$'),
+			numReg = /^(\d)\1+$/;
+			
+                var pwd_reg_length = /^\w{6,18}$/; 
+                var pwd_reg_1      = /[0-9]+/;
+                var pwd_reg_2      = /[a-zA-Z]+/;
+                var pwd_reg_3      = /([\w])\1{3,}/;
+                var pwd_reg_4      = /[^\w]/;
+                if(!pwd_reg_length.test(value) || pwd_reg_4.test(value)){
+                    regErrMessage = "密码为6-18位数字+字母组合<span class='tipArr'></span>";
+                    return false;
+                }
+                if(!pwd_reg_1.test(value) || !pwd_reg_2.test(value)){
+                    regErrMessage = "密码为数字+字母组合<span class='tipArr'></span>";
+                    return false; //密码为数字、字母、下划线组合 
+                }
+                if(pwd_reg_3.test(value)){
+                    regErrMessage = "单个字符不能连续输入4次及以上<span class='tipArr'></span>";
+                    return false;//密码不能重复4个或以上字符
+                }
+		return true;
+	}
+	
+	childUserValidator.addMethod('inputRegValiPwd', inputRegValiPwd, function(){
+		return regErrMessage;
+	});
+	
+	//姓名验证
+	var userNameErrMessage;
+	function inputValiUserName(element){
+		var value = element.val();
+		var language = 	/^[A-Za-z0-9\u4e00-\u9fa5]+$/i;
+		
+		if(!language.test(value)){
+			userNameErrMessage = '姓名为中文或字母';
+			return false;
+		}
+		
+		language = /^[A-Za-z0-9]+$/i;
+		if(language.test(value)){
+			if(value.length < 2 || value.length > 20){
+				userNameErrMessage = '2-20位英文（1-10个汉字）';
+				return false;
+			}
+		}
+		
+		language = /[\u4e00-\u9fa5]+/;
+		if(language.test(value)){
+			if(value.length < 1 || value.length > 10){
+				userNameErrMessage = '2-20位英文（1-10个汉字）';
+				return false;
+			}
+		}
+		
+		return true;
+	}
+	
+	childUserValidator.addMethod('inputValiUserName', inputValiUserName, function(){
+		return userNameErrMessage;
+	});
+	
+	/*
+	childUserValidator.addRules(
+		'password', {
+			inputRegValiPwd: {
+				user: childUserDialog.query('#user_id')
+			}
+		}
+	);
+	*/
+	//选择分配模式
+ 	childUserDialog.query(".radiobox").on('click',function(){
+ 		
+ 		$(this).addClass("checked");
+ 		$(this).siblings(".radiobox").removeClass("checked");
+ 		if($(this).hasClass("radio1")){
+ 			childUserDialog.query("#resource-mode").val(1);
+ 			$(".resource-box").slideUp(300)
+ 			
+ 			$(".hb_ui_dialog.adduser-dialog .ui_dialog_container").animate({
+ 				scrollTop:0+'px'
+ 			},300)
+ 		}else{
+ 			childUserDialog.query("#resource-mode").val(2);
+ 			$(".resource-box").slideDown(300)
+ 			
+ 			$(".hb_ui_dialog.adduser-dialog .ui_dialog_container").animate({
+ 				scrollTop:395+'px'
+ 			},300)
+ 		}
+ 	});
+ 	
+ 	childUserDialog.query('.input-integer input').on('focus',function(){
+ 		if(this.value==0)this.value="";
+ 	})
+
+ 	
+ 	//限制分配资源的输入值并且自动计算余额
+ 	childUserDialog.query('.input-integer input').on('keyup blur',function(e){
+		var p=$(this).parents(".input-integer");
+		var total=parseInt(p.attr('data-total'));
+		this.value=Math.floor(this.value)
+		//if($(this).hasClass("input-digital")){
+			//this.value = this.value.replace(".","$#$").replace(/\./g,"").replace("$#$","."); 
+			//this.value=this.value.replace(/^(\d+)\.(\d\d).*$/,'$1.$2')
+		//}else{
+			this.value=this.value.replace(/[^\d]+/g,'')
+			//if(this.value>=1&&this.value.indexOf('0')==0)this.value=this.value.substring(1)
+		//}
+		
+		if(this.value>total){
+			this.value=total
+		}else if(this.value<0){
+			this.value=0
+		}
+		$(this).attr('data-input',this.value)
+		var result=p.attr('data-total')-this.value;
+		p.children(".remain").html(/\./.test(result)?result.toFixed(2):result)
+		//if($(this).hasClass("input-digital"))p.children(".remain").html(parseFloat((p.attr('data-total')-this.value).toFixed(2)))
+		if(e.type=="blur"&&this.value=="") this.value=0
+	});
+    
+	childUserDialog.query('.blue-butn').on('click', function(){
+		if(release_point_sub_account < 1){
+			$.message("添加失败！直聘账号已达到最大数量。", {title: '系统提示', icon: 'fail'});
+			return;
+		}
+		childUserValidator.submit(function(){
+			$.ajax({
+				url:"{/get_url rule='/account/AddAccount/'/}",
+				type: "post",
+				dataType: "json",
+				data: childUserValidator.get('element').serialize(),
+				success:function(json){
+                    if(json.isNeedLogin){
+                        window.location.reload();
+                        return;
+                    }
+					if(json.status){
+//						alert('添加成功');
+					  ConfirmBox.timeBomb('子账号创建成功',{
+							name: 'success',
+							timeout : 1000,
+                            width:230
+						  });
+						  setTimeout(function () {
+							window.location.reload();
+						  },1200)
+//						window.location.reload();
+						return;
+					}
+					$.message(json.msg, {title: '系统提示', icon: 'fail'});
+					if(json.data.is_bind){
+						childUserDialog.query('#childUserForm').find('.PhoneCode').show();
+						childUserDialog.query('#childUserForm').find('#is_phoneCode').val(1);
+						$('#old_mobile_phone').val(childUserDialog.query('#childUserForm').find('#mobilephone').val());
+					}
+					return;
+				}
+			});
+		});
+	});
+	
+    $(".unbindWeixin").on("click",function(){
+        var openid = $(this).attr('data-value');
+
+        ConfirmBox.confirm('确定解除绑定吗？', '解绑微信', function() {
+            $.getJSON('{/get_url rule="/account/unbindweixin/"/}', {openid:openid}, function(result) {
+                if(!result.status) {
+                    alert(result.msg); 
+                }
+                window.location.reload();
+            });
+        }, {
+            width : 300,
+            close : 'x'
+        });
+    });
+    
+    //解除绑定
+    $(".unRelatedPerson").on("click",function(){
+        var person_id = $(this).attr('data-value');
+        var account_id = $(this).attr("data-account");
+        ConfirmBox.confirm('确定解除绑定吗？', '解绑app', function() {
+            $.getJSON('{/get_url rule="/account/delRelatedPerson/"/}', {person_id:person_id,account_id:account_id}, function(result) {
+                if(result.error) {
+                    alert(result.error); 
+                }
+                window.location.reload();
+            });
+        }, {
+            width : 300,
+            close : 'x'
+        });
+    });
+	$(document).on('blur','#mobilephone', function(){
+		showphonecode();
+	});
+	function showphonecode(){
+		var old_mobile_phone=$('#old_mobile_phone').val();
+		var mobile_phone = childUserDialog.query('#childUserForm').find('#mobilephone').val();
+		if(old_mobile_phone!=mobile_phone){
+			childUserDialog.query('#childUserForm').find('#is_phoneCode').val(0);
+			childUserDialog.query('#childUserForm').find('.PhoneCode').hide();
+		}
+	}
+});
+
+
+
+</script>
+</body>
+</html>

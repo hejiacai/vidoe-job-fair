@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>{/$title/}</title>
+</head>
+<body>
+	<div>
+		<a href="{/get_url rule="/recharge/"/}">账户充值</a>
+		<a href="{/get_url rule="/recharge/list/"/}">充值记录</a>
+	</div>
+	<form id="formAccountRecharge" action="AccountRecharge.aspx" method="post" enableviewstate="false">
+	<div>
+		当前余额：0元<br/>
+		充值金额：<input type="text" />元
+		<div>
+			<label><input type="radio" id="yeepay" name="pay_way" checked="checked" value="1" /><span>易宝支付</span></label>
+          	<label><input type="radio"  id="chinabank" name="pay_way" value="2"/><span>网银</span></label>
+          	<label><input type="radio"  id="alipay" name="pay_way" value="3"/><span>支付宝</span></label>
+		</div>
+		<div>
+			<a href="javascript:void(0);" id="btnRecharge">立即支付</a>
+		</div>
+	</div>
+	</form>
+</body>
+</html>

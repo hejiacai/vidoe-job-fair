@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+	{/if !empty($list)/}
+	<div class="table-box">
+		<table border="1" cellspacing="2" cellpadding="2" align="CENTER" >
+		    
+		    
+		    	<tr>
+			        <th>购买时间</th>
+			        <th>职位量</th>
+			        <th>状态</th>
+			        <th>截止有效期</th>
+			    </tr>
+		        {/foreach $list as $v/}
+		        <tr>
+		            <td>{/$v['create_time']/}</td>
+		            <td>{/$v['job_num']/}</td>
+		            <td>{/$v['status']/}</td>
+		            <td>{/$v['end_time']/}</td>
+		        </tr>
+		        {//foreach/}
+		    
+		    
+		
+		</table>
+	</div>
+	{/else/}
+	
+		        <div colspan="4" class="tac">暂无购买</div>
+	
+	{//if/}
+</body>
+</html>

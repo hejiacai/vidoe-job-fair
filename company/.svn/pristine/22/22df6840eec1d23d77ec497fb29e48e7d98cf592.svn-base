@@ -1,0 +1,1382 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+<title>{/$title|default:'企业资料修改'/}-汇博网</title>
+<!–[if lt IE9]>
+<script src="{/version file="html5.js"/}"></script>
+<![endif]–>
+<link rel="stylesheet" type="text/css" href="{/version file="base.css"/}" />
+	<link rel="stylesheet" type="text/css" href="{/version file="v2-reset.css"/}" />
+<link rel="stylesheet" type="text/css" href="{/version file="comback.css"/}" />
+<link rel="stylesheet" type="text/css" href="{/version file="v2-widge.css"/}" />
+
+
+<script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.min.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='common.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='dialog.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='jquery.form.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='ui_inputFocus.js'/}"></script>
+
+<script type="text/javascript" language="javascript" src="{/version file='ui_dropdownlist.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='ui_validate.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='ui_area.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='ui_uploadify.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='ui_calling.js'/}"></script>
+
+<script type="text/javascript" src="{/version file='version.js'/}"></script>
+<script type="text/javascript">
+window.CONFIG = {
+	HOST: '{/$siteurl.style/}',
+	COMBOPATH: '/js/v2/'
+}
+</script>
+<script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+<script type="text/javascript" src="{/version file='global.js'/}"></script>
+
+<style type="text/css">
+.section .mod{}
+.section .mod h2{font-size:18px;height:35px;line-height:35px;border-bottom:1px solid #dadada;padding:0 0 0 20px;}
+.mod #floagMap { display:none;}
+.mod .formMod .l{width:195px;}
+.mod .formMod .r{width:755px;}
+.mod .form{padding:20px 0 15px;}
+
+#fstNav hgroup{padding:10px 40px; z-index:1}
+.rate{overflow:hidden;line-height:30px;}
+.rate b{float:left;display:inline;width:85px;}
+.rate .bar{float:left;display:inline;margin:7px 10px 0;width:175px;}
+.rate .rateNav{float:left;display:inline;margin:0 0 0 23px;width:610px;}
+.rate .rateNav a{margin:0 5px;font-size:12px;}
+
+section.sectionFix{position:fixed;top:0;left:50%;z-index:1002;margin-left:-500px;*margin-left:-501px;_margin-left:auto;width:1000px;border-bottom:1px solid #dadada;filter:alpha(opacity=90);-moz-opacity:0.9;-khtml-opacity: 0.9;opacity:0.9;}
+.fstBack{height:65px;display:none;}
+.fstBackShow{display:block;_display:none;}
+
+.comNTxt{ z-index:2;}
+.comNTxt .tipLay{top:31px;left:-85px;}
+.comNTxt .tipLay .tipArr{top:-4px;left:36px;width:8px;height:5px;background:url({/$siteurl.style/}/img/common/contrl.gif) no-repeat 0 0; z-index:2}
+.comNTxt .tipLay .tipLayTxt{background:#fffce3;border:1px solid #fad5a8;width:390px;padding:0 5px 5px; position:relative; z-index:1;line-height:22px;}
+.comNTxt .tipLay .tipLayTxt .closeThis{ position:absolute;font-size:12px;right:7px;top:4px;}
+.comNTxt .tipLay .tipLayTxt p img{ vertical-align:middle;}
+
+.logoImg{clear:both;width:100%;float:left; position:relative; z-index:1;width:185px;margin:10px 0 0;border:1px solid #dadada;height:70px;background:url({/$siteurl.style/}/img/common/loadBox.gif) no-repeat center center;}
+.logoImg img{width:185px;height:70px;}
+.logoImg a.del{ position:absolute;right:-10px;top:-10px;font-size:22px;color:#D84D14;background:#fff;}
+.logoImg a.del:hover{color:#cb4647;}
+
+.touPeo{ z-index:2;}
+.touPeo .tipLay{display:none;}
+
+.formBtn{margin:25px 0 0 200px;}
+
+.imgLst{clear:both;width:730px;float:left;margin:15px 0 0;display:inline;}
+.imgLst ul li{float:left;display:inline; position:relative; z-index:1;width:122px;height:125px;margin:0 24px 5px 0;}
+.imgLst ul li .pic{height:82px;}
+.imgLst ul li .pic img{width:120px;height:80px;border:1px solid #dadada;}
+.imgLst ul li a.del{position:absolute;right:-10px;top:-10px;font-size:22px;color:#D84D14;background:#fff; border-radius:15px;}
+.imgLst ul li a.del:hover{color:#cb4647;}
+.imgLst ul li .imgInp{margin:5px 0 0;}
+.imgLst ul li .imgInp input.imgTxt{height:22px;line-height:22px;border:1px solid #fff;font-size:12px;width:120px; text-align:center; cursor:pointer;}
+.imgLst ul li .imgInp input.imgTxtHov{border:1px solid #dadada;}
+.imgLst ul li .load{display:none;width:120px;height:80px;border:1px solid #eaeaea;background:url({/$siteurl.style/}/img/common/loadBox.gif) no-repeat center center;}
+.imgLst ul li .loadTxt{ text-align:center;font-size:12px;display:none;height:24px;line-height:24px;margin-top:5px;}
+
+.imgLst ul li.hov .imgInp input.imgTxt{border:1px solid #aaa;}
+.imgLst ul li.hov .pic img{border:1px solid #cbcbcb}
+.imgLst ul li.imgLoading .load{display:block;}
+.imgLst ul li.imgLoading .loadTxt{display:block;}
+.imgLst ul li.imgLoading .pic,.imgLst ul li.imgLoading .imgInp,.imgLst ul li.imgLoading a.del{display:none;}
+
+
+.comVd .tipTxt i.hbFntWes{font-size:18px;margin:0 5px 0 0; vertical-align:middle;}
+
+.mod .formMod .r .formFile{ position:relative; z-index:1;}
+.mod .formMod .r .formFile .swfUploadBtn{ position:absolute;left:0;top:0;}
+.formTextarea textarea.textarea{width:500px;}
+
+.flitem{display: inline-block;padding: 2px 10px;margin-right:10px;margin-top: 2px;color:#666;border:1px solid #ececec;line-height: 22px;border-radius: 2px;font-size:12px}
+#selectedReward a{margin-top: 7px;display: inline-block;font-size:12px}
+.upLOGO{display: inline-block;width:103px;height: 103px;overflow: hidden;position: relative}
+.upLOGO span{display: none}
+.upLOGO:hover span{display: block;position: absolute;bottom:0px;left:0px;width:103px;text-align: center;height: 25px;background-color: #000;color:#fff;z-index: 2;font-size:12px;line-height: 25px;}
+#addr:hover{ text-decoration:underline;}
+.mapClose{width:24px; height:24px; display:block; text-align:center; line-height:24px; color:#fff; background:#333; font-family:Arial, Helvetica, sans-serif; float:left;}
+.mapClose:hover{ background:#0cf; color:#fff;}
+/*浮动地图*/
+</style>
+</head>
+<body id="body">
+
+<style type="text/css">
+.banner{width:100%; height:79px; overflow:hidden; position:relative; z-index:1;}
+header,.hdCon{ background:#f0f0f0;}
+.hdCon{ height:30px;}
+.hdL .logo{ height:30px; line-height:30px; color:#8e8e8e; font-family:"宋体"; font-size:12px;}
+.hdR ul li,.hdR ul li a.lnk,.hdR ul .navLst a{ height:30px; line-height:30px;}
+.hdR ul .navLst i{ margin:10px 5px 0 0;}
+.hdR ul li.wemChatlist{width:100px;}
+.hdR ul li.wemChatlist a,.hdR ul li.wemChatlist a:hover{ height:30px; line-height:32px; color:#888;background:url({/$siteurl.style/}/img/newindex/weChat06.png) 0 center no-repeat}
+.hdR ul li.navLst a:hover,.hdR ul li.wemChatlist a:hover,.hdR ul li.tcomInfo a:hover,.hdR ul li.thelpInfo a:hover{ color: #666;}
+.compNavbg{width:100%; overflow:hidden; background:#fff; margin-bottom:20px;}
+.compNav{width:1000px; height:50px; overflow:hidden; margin:0 auto; text-align:left;}
+.compLogo{ display:block; float:left;width:144px; height:30px; background:url({/$siteurl.style/}/img/newindex/compLogo.png) no-repeat; margin:10px 0;}
+.compList{ float:left; padding-left:60px;}
+.compList li{ float:left;}
+.compList li a{ display:block; width:120px; text-align:center;height:50px; line-height:50px; font-size:16px; font-family:"微软雅黑"; color:#2a2623;}
+.compList li a:hover{text-decoration: none;color:#4c4b49;}
+.compList li.cut a{ font-weight:bold; color:#004d92; background:url({/$siteurl.style/}/img/newindex/hbcompany02.png) center bottom no-repeat;}
+.compList li.cut2 a{ font-weight:bold; color:#004d92; background:url({/$siteurl.style/}/img/newindex/weChat07.png) center bottom no-repeat;}
+.comPost{ display:block; float:right;width:110px; height:30px; line-height:30px; font-family:"微软雅黑"; background:url({/$siteurl.style/}/img/newindex/hbcompany03.png) 15px center no-repeat #66bce4; text-indent:40px; margin-top:10px; color:#fff; border-radius:4px;font-size:14px;}
+.comPost:hover{background:url({/$siteurl.style/}/img/newindex/hbcompany03.png) 15px center no-repeat #5ca8cc; color:#fff;text-decoration: none;}
+.comPost:focus,.comPost:active{background-color: #4aa2f2 }
+.subcompNavbg{width:100%; overflow:hidden; background:#2b6fad; height:36px; text-align:left;}
+.subcompMage{width:1000px; margin:0 auto;}
+.subcompNav{ float:left; overflow:hidden;}
+.subcompNav li{ float:left; display:none;}
+.subcompNav li a{ display:block; float:left; color:#fff; color:#d2e5f6; font-family:"微软雅黑"; height:16px; line-height:16px; padding:0 20px; border-right:1px solid #23598c;border-left:1px solid #368ad9; margin-top:11px; font-size: 14px;}
+.subcompNav li a.first{ border-left:none;}
+.subcompNav li a.last{ border-right:none;}
+.subcompNav li a.cut{ font-weight:bold; color:#fff;}
+.subcompNav li a:hover{color:#fff;text-decoration: none;}
+.subcompNav li.tabList3{ margin-left:97px;_margin-left:48px;}
+.subcompNav li.tabList4{ margin-left:217px; _margin-left:108px;}
+.subcompRt{ float:right;}
+.subcompRt a{ display:block; height:36px; padding-left:20px; line-height:36px; color:#d2e5f6; float:left; font-family:"微软雅黑"; font-size: 14px; }
+.subcompRt a.compHome{ background:url({/$siteurl.style/}/img/newindex/hbcompany04.png) left center no-repeat; margin-right:20px;}
+.subcompRt a.compHome:hover{background:url({/$siteurl.style/}/img/newindex/hbcompany04cut.png) left center no-repeat;color:#fff;}
+.subcompRt a.compSch{ background:url({/$siteurl.style/}/img/newindex/hbcompany05.png) left center no-repeat;}
+.subcompRt a.compSch:hover{background:url({/$siteurl.style/}/img/newindex/hbcompany05cut.png) left center no-repeat;color:#fff;}
+.hdR ul li a em.num{left:25px; top:2px;}
+.comPostBg,.comPostBgcut{ width:110px; height:50px; overflow:hidden; float:right;background:url({/$siteurl.style/}/img/newindex/weChat07.png) center bottom no-repeat;}
+
+.compList li a{ position: relative;}
+.notice_icon {background:url({/$siteurl.style/}/img/newindex/bubble.png);width:23px; height:21px; font-size: 12px; font-family: "宋体"; line-height: 18px; color:#fff; position: absolute;top:5px; right:4px; text-align: center;}
+
+#hidRightSpot {height: 160px;}
+.showTip {margin-left: 205px;margin-right: 254px;position: relative;}
+.showTip .tip {display: none;padding: 10px;box-sizing: border-box;color: #999999;font-size: 14px;background:rgba(244,247,249,1);box-shadow:0px 2px 5px 0px rgba(239,239,239,0.75);position: absolute;z-index: 9999;top: 28px;}
+.showTip .example {color: #2B6FAC;font-weight: 400;width: 28px;cursor: default;}
+.showTip .example:hover + .tip {display: block;}
+.showTip .tip::before {content: '';position: absolute;border-width: 10px;border-color: transparent transparent rgba(244,247,249,1) transparent;border-style: solid;top: -14px;left: 6px;}
+
+</style>
+{/include file="new_header.html" par="企业管理" cur="代招客户"/}
+<div class="content" id="content">
+    
+    <div class="fstBack" id="fstBack"></div>
+
+    <section class="section">
+        <hgroup>
+            <div class="mod">
+                <h2 id="jbzl" class="yahei">添加客户&nbsp; <span style="font-size: 12px;color:#999">已有<font color="red">{/$sub_count/}</font>个代招客户，还可添加<font color="red">{/$left_count/}</font>个</span></h2>
+                <div class="form">
+                <form id="baseInforForm">
+                	<input name="company_id" type="hidden" value="{/$company['company_id']/}"/>
+                	<input name="company_flag" type="hidden" value="{/$company['company_flag']/}"/>
+                    <div class="formMod">
+                        <a id="logo"></a>
+                        <input id="hidLogo" name="hidden_logo" type="hidden" value="{/$company['company_logo_path']/}"/>
+                        <input id="hidDeleteLogo" name="hidden_del_logo" type="hidden" value="{/$company['company_logo_path']/}"/>
+                        <div class="l">公司LOGO<i>&nbsp;</i></div>
+                        <div class="r">
+                        	<style>
+                        		.upLOGO{display: inline-block;width:103px;height: 103px;overflow: hidden;position: relative}
+                        		.upLOGO span{display: none}
+                        		.upLOGO:hover span{display: block;position: absolute;bottom:0px;left:0px;width:103px;text-align: center;height: 25px;background-color: #000;color:#fff;z-index: 2;font-size:12px;line-height: 25px}
+                        	</style>
+                             <a href="javascript:;" id="upLOGO" class="upLOGO">
+                             	<img src="{/$logo/}" width="103px" height="103px" />
+                             	<span>上传LOGO</span>
+                             </a>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="formMod">
+                         <a id="shortname" name="shortname"></a>
+                        <div class="l">客户全称</div>
+                        <div class="r">
+                            <span class="formText mgt5">{/$company['company_name']/}</span>
+                            <span class="tipPos">
+                                <span class="tipLay"></span>
+                            </span>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="formMod">
+                         <a id="shortname" name="shortname"></a>
+                        <div class="l">客户简称</div>
+                        <div class="r">
+                            <span class="formText mgt5">{/$company['company_shortname']/}</span>
+                            <span class="tipPos">
+                                <span class="tipLay"></span>
+                            </span>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="formMod">
+                        <a id="property" name="pro"></a>
+                        <div class="l">公司性质<i>*</i></div>
+                        <div class="r">
+                            <span class="drop zIndex" id="company_property"></span>
+                            <span class="tipPos">
+                                <span class="tipLay">
+                                </span>
+                            </span>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="formMod JobIndDrop checkMod">
+                        <a id="calling" name="cal"></a>
+                        <div class="l">所处行业<i>*</i></div>
+                        <div class="r">
+                            <span id="newCalling" class="drop formText JobIndDrop zIndex" style="width:250px;border-color:#d0cbcb">
+                                <span>
+                                    <div class="dropSet">  <b class="hbFntWes dropIco"></b> <span id='addMainCalling'>{/if !empty($calling_names[0])/} <span class="seled">{/$calling_names[0]/}</span>{//if/}</span>
+                                        <input class="text JobCay" type="text">
+                                    </div>
+                                  
+                                </span>
+                                 <input type="text" name="main_calling" id="main_calling" value="{/$calling_arr[0]/}" style="position:absolute;left:-9999px;top:0;" />
+                            </span>
+                            <span class="tipPos">
+                                <span class="tipLay"></span>
+                            </span>
+                            
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="formMod">
+                        <a id="size" name="size"></a>
+                        <div class="l">公司规模<i>*</i></div>
+                        <div class="r">
+                            <span class="drop zIndex" id="company_size"></span>
+                            <span class="tipPos">
+                                <span class="tipLay">
+                                </span>
+                            </span>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="formMod">
+                        <a id="spot" name="spot"></a>
+                        <div class="l">公司优势<i>*</i></div>
+                        <div class="r">
+                            <span class="formTextarea">
+                                <textarea class="textarea" id='hidRightSpot' name="hidRightSpot" placeholder="描述公司优势/亮点/特色，如：行业地位、奖项/成就、资质/专利、经营愿景等，最多50字">{/$company['company_bright_spot']/}</textarea>
+                            </span>
+                            <span class="tipPos">
+                                <span class="tipLay" data-for="hidRightSpot"></span>
+                            </span>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="formMod showTip">
+                        <span class="example">示例</span>
+                        <div class="tip">
+                            <span id="spot_detail">{/$spots/}</span>
+                        </div>
+                    </div>
+                    <div class="formMod">
+                        <a id="info" name="info"></a>
+                        <div class="l">公司简介<i>*</i></div>
+                        <div class="r">
+                            <span class="formTextarea">
+                                <textarea class="textarea" name="info">{/$company["info"]/}</textarea>
+                            </span>
+                            <span class="tipPos">
+                                <span class="tipLay">
+                                </span>
+                            </span>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+					<div class="formMod">
+                        <a id="linkman" name="linkm"></a>
+                        <div class="l">联系人<i>*</i></div>
+                        <div class="r">
+                            <span class="formText">
+                                <input type="text" class="text" style="width:125px;" name="linkman" value="{/$company["linkman"]/}">
+                            </span>
+                            <input name="open_linkman" type="hidden" value="1"/>
+                            <span class="tipPos">
+                                <span class="tipLay">
+                                </span>
+                            </span>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+
+                   <div class="formMod">
+                        <a id="linktel" name="linkt"></a>
+                        <div class="l">座机<i>*</i></div>
+                        <div class="r" id="phoneDiv">
+                            <span class="formText">
+                                <input type="text" style="width:45px;{/if $phone_infor["zone"] == "区号"/}color:#A6A6A6{//if/}" class="text" name="zone_infor" value="{/$phone_infor["zone"]/}" id="zoneNo">
+                            </span>
+                            <span class="tipTxt">&nbsp;</span>
+                            <span class="formText">
+                                <input type="text" style="width:143px;{/if $phone_infor["phone"] == "固定电话"/}color:#A6A6A6{//if/}" class="text" name="phone_infor" value="{/$phone_infor["phone"]/}" id="phoNo">
+                            </span>
+                            <span class="tipTxt">&nbsp;</span>
+                            <span class="formText">
+                                <input type="text" style="width:45px;{/if $phone_infor["ext"] == "分机号"/}color:#A6A6A6{//if/}" class="text" name="ext_infor" value="{/$phone_infor["ext"]/}" id="extNo">
+                            </span>
+                            <!--<span class="tipTxt">&nbsp;</span>
+                            <span class="drop zIndex" id="open_phone"></span>
+                            --><span class="tipPos">
+                                <span class="tipLay">
+                                </span>
+                            </span>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+
+                    <div class="formMod">
+                        <a id="mobile"></a>
+                        <div class="l">手机<i>&nbsp;</i></div>
+                        <div class="r">
+                            <span class="formText">
+                                <input type="text" style="width:125px;" class="text" name="link_mobile" value="{/$company["link_mobile"]/}">
+                            </span><!--
+                            <span class="tipTxt">&nbsp;</span>
+                           	<span class="drop zIndex" id="open_mobile"></span>
+                            --><span class="tipPos">
+                                <span class="tipLay">
+                                </span>
+                            </span>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="formMod addressMod">
+                        <a id="area" name="area"></a>
+                        <div class="l">所在地区<i>*</i></div>
+                        <div class="r">
+                        	 <span class="formText zIndex" id="curarea">
+						     </span>
+                             <span class="tipPos">
+                                <span class="tipLay">
+                                </span>
+                            </span>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+
+                    <div class="formMod">
+                        <a id="addr" name="address"></a>
+                        <div class="l">详细地址<i>*</i></div>
+                        <div class="r">
+                            <span class="formText zIndex" >
+                                <input type="text" style="width:425px;" class="text" id="txtAddress" name="txtAddress" value="{/$company['address']/}" />
+                                
+                            </span>
+                            <span class="tipPos">
+	                        	<span class="tipLay ">
+	                            </span>
+	                        </span>
+                            
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+					<div class="formMod">
+                        <a id="hom"></a>
+                        <div class="l">公司网站<i>&nbsp;</i></div>
+                        <div class="r">
+                            <span class="formText">
+                                <input type="text" style="width:209px;" class="text" name="homepage" value="{/$company["homepage"]/}">
+                            </span>
+                            <span class="tipPos">
+                                <span class="tipLay">
+                                </span>
+                            </span>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="formMod welMod">
+                        <div class="l">福利待遇<i>&nbsp;</i></div>
+                        <div class="r" id='selectedReward'>
+                            {/if count($all_reward_data > 0)/}
+                                {/foreach $all_reward_data as $reward/}
+                                    {/if in_array($reward['reward_id'],$company_default_rewards)/}
+                                            <span class="flitem">{/$reward['reward_name']/}</span> 
+                                    {//if/}
+                                {//foreach/}
+                            {//if/}
+                            {/if count(company_other_rewards)>0/}
+                                {/foreach $company_other_rewards as $reward/}
+                                    <span class="flitem">{/$reward/}</span> 
+                                {//foreach/}
+                            {//if/}
+                            <a href="javascript:void(0)" onclick="setWelfare(0,0)">编辑</a>
+                        </div>
+                        <input type="hidden" value='{/$hidDefaultReward/}' id="hidDefaultReward" name="hidDefaultReward" />
+                        <input type="hidden" value='{/$hidOtherReward/}' id="hidOtherReward" name="hidOtherReward" />
+                        <div class="clear"></div>
+                    </div>
+                    <div class="formMod">
+                        <a id="photo"></a>
+                        <div class="l">公司图片<i>&nbsp;</i></div>
+                        <div class="r">
+                            <span style="margin:0 10px 0 0;" class="tipTxt formFile"><input type="file" id="upload_photo" name="upload_photo"></span>
+                            <a href="javascript:void(0)" id="btnSubmitPhoto" onclick="$('#upload_photo').uploadify('upload','*');" style="display:none"></a>
+                            <span class="tipTxt gray">已上传图片<span class="green" id="alr_photo_count">{/$alr_photo_count/}</span>/<span class="red">{/$max_photo_count/}</span>，每张最大2MB,单次可选择{/$singel_photo_count/}张，支持jpg/gif/png格式</span>
+                            <span class="imgLst">
+                                <ul id="imgLst">
+                               		{/foreach $photo_albums as $key=>$value/}
+                               			<li id="li{/$value['photo_id']/}">
+                               				<input type="hidden" id="photo_id" name="photo_id" value="{/$value['photo_id']/}">
+                               				<input type="hidden" id="photo_path" name="photo_path" value="{/$value['photo_path']/}">
+								            <a class="del hbFntWes" onclick="delPhoto(this);return false;" href="javascript:void(0);">&#xf057;</a>
+								            <div class="pic"><img src="{/$photo_virt_path/}{/$value['photo_path']/}"></div>
+								            <div class="load"></div>
+								            <div class="imgInp">
+								            <input type="text" class="oldImg imgTxt" value="{/$value['photo_name']/}" />
+								            <span style="display:none" v="{/$value['photo_name']/}"></span>
+								            </div>
+								        </li>
+                               		{//foreach/}
+                                </ul>
+                                <div class="clear"></div>
+                            </span>
+                            <span id="spnDelPhoto" style="dispaly:none">
+
+                            </span>
+                            <span id="spnModPhoto" style="dispaly:none">
+
+                            </span>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="formBtn"><a href="javascript:void(0);" id="baseinfo_btn" class="btnsF16 btn1">保存</a></div>
+                </form>
+                </div>
+                
+            </div>
+        </hgroup>
+    </section>
+</div>
+{/include file="footer.html"/}
+<section class="floatRT"><a href="{/get_url rule='/about/message' domain='main'/}" target="_blank" class="serviceLink">我有问题要反馈</a><b></b></section>
+<script type="text/javascript">
+
+try {
+	hbjs.use(factory);
+} catch(e) {
+	factory($);
+}
+
+function factory($){
+	$(window).scroll(function(){
+        if ($(document).scrollTop() > 120){
+            $('#sus').find('a.backTop').css({'display':'inline-block'});
+        }else{
+            $('#sus').find('a.backTop').css({'display':'none'});
+        }
+    });
+    $('#sus').find('a.backTop').click(function(){
+        $('html,body').animate({ scrollTop: 0 });
+    });
+}
+</script>
+<script type="text/javascript">
+
+hbjs.use('@imageEditor, @confirmBox', function(m){
+	
+	
+	var imageEditor = m['widge.imageEditor'],
+		ConfirmBox = m['widge.overlay.confirmBox'],
+		Dialog = m['widge.overlay.hbDialog'],
+		util = m['base.util'],
+		$ = m['jquery'],
+		uploadDialog = new Dialog({
+			close: 'x',
+			idName: 'ui_company_dialog',
+			title: '上传公司LOGO',
+			width: 700,
+			content: '{/$siteurl.company|replace:"http:":""/}/hrcompany/uploadCompanyLogo/',
+			isAjax: true
+		}),
+		fontSize = 18,
+		pWidth = 70,
+		imgEditor;
+	
+	$('#upLOGO').on('click', function(e){
+		uploadDialog.show();
+	});
+	uploadDialog.after('hide', function(){
+		this.query('#newPopQuit').off('click');
+		imgEditor.destory();
+	});
+	uploadDialog.on('loadComplete', function(){
+		var uploadPanel = this.query('#uplogo1'),
+			editPanel = this.query('#dropImageContainer'),
+			dropImage = this.query('#dropImage'),
+			uploadingDialog;
+		
+		imgEditor = new imageEditor({
+			imageCroperConfig: {
+				element: dropImage,//目标
+				handle: '#dragDiv',
+				color: '#f1f1f1',
+				width: dropImage.width(),
+				height: dropImage.height()
+			},
+			fileUploaderConfig: {
+				uploadURL: '{/$siteurl.company|replace:"http:":""/}/hrcompany/uploadImage', 
+				imageURL: '{/$logo_virt_path/}'
+			},
+			trigger: this.query('#newPopSave')
+		});
+		imgEditor.on('startUpload', function(e){
+			var msg = "正在上传...";
+			uploadingDialog = ConfirmBox.timeBomb(msg, {
+				name : "warning",
+				timeout : 100000,
+				width: fontSize * msg.length + pWidth
+			});
+		}).on('progresed', function(e){
+			this._imgFileName = e.data.name;
+			this._imgType = e.data.thumb_type;
+			this._imgRatio = e.data.thumb_ratio;
+			this.loadImage(e.url);
+				
+			uploadingDialog.hide();
+			uploadPanel.hide();
+			editPanel.show();
+
+			var preview1 = editPanel.find('#preview120'),
+				preview2 = editPanel.find('#preview160');
+				
+			this.addPreview(preview1, 120, 120);
+			this.addPreview(preview2, 160, 160);
+		}).on('progressError', function(e){
+			ConfirmBox.timeBomb(e.data.errorMsg, {
+				name : "fail",
+				timeout : 1000,
+				width: fontSize * e.data.errorMsg.length + pWidth
+			});
+		}).on('save', function(e){
+			var self = this;
+			$.ajax({
+				url: '{/$siteurl.company|replace:"http:":""/}/hrcompany/saveLogo',
+				data: {
+					cropX: e.cropX,
+					cropY: e.cropY,
+					cropH: e.cropH,
+					cropW: e.cropW,
+					cropPH: e.cropPH,
+					cropPW: e.cropPW,
+					url: e.url,
+					name: this._imgFileName,
+					thumb_type: this._imgType,
+					thumb_ratio: this._imgRatio
+				},
+				success: function(e){
+					e = util.json(e);
+					if(e.state){
+						$('#hidLogo').val(e.image_path);
+						$('#upLOGO > img').attr('src', e.image_url);
+						uploadDialog.hide();
+						delete self._imgFileName;
+						delete self._imgType;
+						delete self._imgRatio;
+					}
+				}
+			});
+		});
+		
+		imgEditor.imageCroper.on('loadSuccess', function(){
+			uploadPanel.hide();
+			editPanel.show();
+		}).on('loadError', function(){
+			delete this._imgFileName;
+			delete this._imgType;
+			delete this._imgRatio;
+			uploadPanel.show();
+			editPanel.hide();
+			var msg = '加载图片失败';
+			ConfirmBox.timeBomb(msg, {
+				name : "fail",
+				timeout : 1000,
+				width: fontSize * msg.length + pWidth
+			});
+		});
+		
+		this.query('#newPopQuit').on('click', function(){
+			uploadDialog.hide();
+		});
+		
+	});
+	
+});
+
+
+var $jbzl = $('#jbzl').offset().top;
+/*
+var $dlwz = $('#dlwz').offset().top;
+*/
+//var $qyfc = $('#qyfc').offset().top;
+ $('#newCalling').on('click',function(){
+      $.showModal('/company/selectCalling/type-1',{title:'选择主行业'});       
+});
+ $('#nextCalling').on('click',function(){
+     var calling_id = $("#main_calling").val() //todo
+      $.showModal('/hrcompany/selectCalling/type-0-calling_id-'+calling_id,{title:'选择次行业'});       
+});
+//修改行业
+ function updateCalling(calling_id,calling_name,type){
+    if(type ==1){
+        $("#addMainCalling").empty();
+        $("#main_calling").val(calling_id);
+          var h = "<span class='seled'>"+calling_name+"</span>"
+        $("#addMainCalling").html(h);
+    }else{
+         $("#addNextCalling").empty();
+         $("input[name='next_calling']").val(calling_id);
+          var h = "<span class='seled' id='addNextCalling'>"+calling_name+"</span>"
+        $("#addNextCalling").html(h);
+    }
+}
+//添加次行业
+function addCalling(){
+    $("#hidLastCalling").show();
+    $("#addHtml").hide();
+}
+function deleteCalling(){
+     $("#hidLastCalling").hide();
+     $("#addHtml").css({'display':'inline-block'});
+     $("input[name='next_calling']").val('');
+      $("#addNextCalling").empty();
+}
+
+
+//上传头像
+/*
+function upLOGO(){
+    $.showModal('/company/uploadCompanyLogo/',{title:'上传公司LOGO'});
+}
+*/
+
+//在地图中标识
+function setWelfare(defaultReward,otherReward) {
+	var reward        = $("#hidDefaultReward").val(),
+        other_rewards = $("#hidOtherReward").val(),
+
+    params = [];
+    if ($("#hidDefaultReward").val())
+        params.push('defaultReward=' + $("#hidDefaultReward").val());
+
+    if ($("#hidOtherReward").val())
+        params.push('otherReward=' + $("#hidOtherReward").val());
+
+    $.showModal('/reward/jobAddReward/?' + params.join("&"), {title : '福利待遇'}); //福利亮点mijing
+}
+
+var jobAdd = {
+    refreshReward : function(defaultReward, defaultRewardName, otherReward) {
+        $("#hidDefaultReward").val(defaultReward);
+        $("#hidOtherReward").val(otherReward);
+        //重新展示页面
+        var reward_html       = '';
+        var defaultReward_arr = [];
+        var otherReward_arr   = [];
+        if (defaultRewardName != '') {
+            defaultReward_arr = defaultRewardName.split(',');
+        }
+
+        if (otherReward != '') {
+            otherReward_arr = otherReward.split(',');
+        }
+
+        for (var i = 0; i < defaultReward_arr.length; i++) {
+            reward_html = reward_html + "<span class='flitem'>" + defaultReward_arr[i] + "</span>";
+        }
+
+        for (var k = 0 ;k < otherReward_arr.length; k++) {
+            reward_html = reward_html + "<span class='flitem'>" + otherReward_arr[k] + "</span>";
+        }
+
+        reward_html = reward_html + '<a href="javascript:void(0)" onclick="setWelfare()">编辑</a>';
+        $("#selectedReward").html(reward_html);
+    }
+}
+
+var baseInforForm;
+baseInforForm = $('#baseInforForm').validate({
+    rules:{
+        hddComProperty:{required:true},
+        main_calling:{required:true},
+        hddComsize:{required:true},
+        // hidCompanyName:{required:true,rangelength:[2,30]},
+        // hidCompanyShortName:{required:true,rangelength:[2,15]},
+        hidRightSpot:{required:true,rangelength:[5,50]},
+        email:{email:true},
+        info    :{required:true,rangelength: [2, 4000]},
+        txtAddress:{required:true},
+        hidArea:{required:true},
+        linkman :{required:true,rangelength: [1, 15]},
+        link_mobile:{match:'^[1][0-9]{10}$'},
+        fax:{tel:true},
+        phone_infor:{required:true,match:'^[0-9]{6,11}$'},
+        zone_infor:{match:"^(([0-9]{3,4})|区号)$"},
+        ext_infor:{match:"^(([0-9]+)|分机号)$"}
+    },
+    messages:{
+        hddComProperty:{required:'请选择公司性质<span class="tipArr"></span>'},
+        main_calling:{required:'请选择公司行业<span class="tipArr"></span>'},
+        hddComsize:{required:'请选择公司规模<span class="tipArr"></span>'},
+        email:{email:'请输入正确的邮件地址<span class="tipArr"></span>'},
+        // hidCompanyShortName:{required:'请输入公司简称<span class="tipArr"></span>',
+        //                         rangelength:'公司简称请输入2-15个字<span ckass="tipArr"></span>'
+        //                     },
+        // hidCompanyName:{required:'请输入公司全称<span class="tipArr"></span>',
+        //                         rangelength:'公司全称请输入2-30个字<span ckass="tipArr"></span>'
+        //                     },
+        hidRightSpot:{required:'请输入公司优势<span class="tipArr"></span>',
+                                rangelength:'请输入公司优势5-50个字<span class="tipArr"></span>'
+            },
+        info    :{
+            required    :'请输入公司简介<span class="tipArr"></span>',
+            rangelength : '公司简介请输入2-4000个字<span class="tipArr"></span>'
+        },
+        txtAddress:{required:'请输入公司地址<span class="tipArr"></span>'},
+        hidArea:{required:'请选择公司地区<span class="tipArr"></span>'},
+
+        linkman :{
+            required    :'请输入联系人姓名<span class="tipArr"></span>',
+            rangelength :'联系人姓名不能超过15字<span class="tipArr"></span>'
+        },
+        link_mobile:{match:'请输入正确的电话号码<span class="tipArr"></span>'},
+        fax:{tel:'请输入正确的传真号码<span class="tipArr"></span>'},
+        phone_infor:{required:'请输入固定电话<span class="tipArr"></span>',match:'请输入6-11位的数字<span class="tipArr"></span>'},
+        zone_infor:{match:'请输入正确的区号<span class="tipArr"></span>'},
+        ext_infor:{match:'分机号码为数字<span class="tipArr"></span>'}
+    },
+    errorClasses:{
+        hddComProperty:{required:'tipLayErr tipw120'},
+        main_calling:{required:'tipLayErr tipw120'},
+        hddComsize:{required:'tipLayErr tipw120'},
+        email:{email:'tipLayErr tipw120'},
+        // hidCompanyName:{required:'tipLayErr tipw120',rangelength:'tipLayErr tipw120'},
+        // hidCompanyShortName:{required:'tipLayErr tipw120',rangelength:'tipLayErr tipw120'},
+        hidRightSpot:{required:'tipLayErr tipw120',rangelength:'tipLayErr tipw150'},
+        info    :{required:'tipLayErr tipw120',rangelength:'tipLayErr tipw120'},
+        linkman :{required:'tipLayErr tipw120',rangelength:'tipLayErr tipw120'},
+        link_mobile :{match:'tipLayErr tipw120'},
+        fax:{tel:"tipLayErr tipw120"},
+        phone_infor:{required:"tipLayErr tipw120",match:"tipLayErr tipw120"},
+        zone_infor:{match:"tipLayErr tipw120"},
+        ext_infor:{match:"tipLayErr tipw120"},
+        txtAddress:{required:"tipLayErr tipw120"},
+        hidArea:{required:'tipLayErr tipw120'}
+    },
+    errorElement:'span',
+    errorPlacement:function(error,element){
+        element.parent().nextAll(".tipPos").find('.tipLay').append(error);
+    },
+    success:function(label){
+        label.text(" ");
+    }
+
+});
+
+$(document).ready(function(e) {
+    $.focusblur('#addInfo');
+    $.focusColor('input.text');
+    $.focusColor('textarea.textarea');
+    $.focusblur('input.conPeople');
+    $.focusblur('input.conPhone');
+    $.focusblur('input.newMail');
+    $.focusblur('#zoneNo');
+    $.focusblur('#phoNo');
+    $.focusblur('#extNo');
+    $.focusblur('#vdNam');
+    $.focusblur('#vdSrc');
+	$('.mapClose').click(function(){
+		$('#floagMap,#_mask').hide();							  
+	})
+    $(window).scroll(function(){
+        if ($(document).scrollTop() > 120){
+            $('#sus').find('a.backTop').css({'display':'inline-block'});
+        }else{
+            $('#sus').find('a.backTop').css({'display':'none'});
+        }
+    });
+    $('#sus').find('a.backTop').click(function(){
+        $('html,body').animate({ scrollTop: 0 });
+    });
+    $('#jbzlLnk').click(function(){
+        $('html,body').animate({scrollTop:$jbzl-50});
+    });
+	/*
+    $('#dlwzLnk').click(function(){
+        $('html,body').animate({scrollTop:$dlwz-50});
+    });*/
+    //公司相册屏蔽
+//    $('#qyfcLnk').click(function(){
+//        $('html,body').animate({scrollTop:$qyfc-50});
+//    });
+    $('#comNLnk').click(function(){
+        $(this).parents('.tipTxt').siblings('.comNTxt').find('.tipLay').css({'display':'block'});
+    });
+    $('#closeThis').click(function(){
+        $(this).parents('.tipLay').css({'display':'none'});
+    });
+    $('#touPeoDrop').hover(function(){
+        $(this).siblings('.tipPos').find('.tipLay').css({'display':'block'});
+    },function(){
+        $(this).siblings('.tipPos').find('.tipLay').css({'display':'none'});
+    });
+    $('#imgLst').find('li').find('.imgTxt').bind('focus',function(){
+        $(this).parents('li').addClass('hov');
+    });
+    $('#imgLst').find('li').find('.imgTxt').bind('blur',function(){
+        $(this).parents('li').removeClass('hov');
+    });
+    $('#imgLst').find('li').find('.imgTxt').hover(function(){
+        $(this).addClass('imgTxtHov');
+    },function(){
+        $(this).removeClass('imgTxtHov');
+    })
+});
+
+$("#company_property").droplist({
+    isCanWrite:false,
+    inputWidth:125,
+    style:'width:133px',
+    hddName:'hddComProperty',
+    items:[
+        {/$i=1/}
+        {/foreach from=$properties item=property key=id/}
+        {id:'{/$id/}',name:'{/$property/}'}
+        {/if $i++<count($properties)/}
+        ,
+        {//if/}
+        {//foreach/}
+    ],
+    onSelect:function(i,name){
+    	baseInforForm.element($('#hddComProperty'));
+    }
+});
+$("#company_property").setDropListValue({/$company["property_id"]/});
+$("#company_size").droplist({
+    isCanWrite:false,
+    inputWidth:125,
+    style:'width:133px',
+    hddName:'hddComsize',
+    items:[
+        {/$i=1/}
+        {/foreach from=$comsizes item=property key=id/}
+        {id:'{/$id/}',name:'{/$property/}'}
+        {/if $i++<count($comsizes)/}
+        ,
+        {//if/}
+        {//foreach/}
+    ],
+    onSelect:function(i,name){
+    	baseInforForm.element($('#hddComsize'));
+    }
+});
+$("#company_size").setDropListValue({/$company["size_id"]/});
+
+//$('#company_calling').calling({hddName:"callingids", type:'multiple', isLimit:true, max:3, unLimitedLevel:3,onSelect:function(){
+//	baseInforForm.element($('input[name=callingids]'));
+//}});
+// $("#company_calling").setCallingValue("{/$company["calling_ids"]/}");
+
+
+$(function(){
+    $("#baseinfo_btn").click(function(){
+        if(!baseInforForm.form()) return false;
+        var baseInfo = getBaseInfor();
+
+        if($(this).hasClass('_locked')) return false;
+        $(this).addClass('_locked');
+
+        $.ajax({
+            url:"/hrcompany/modifybasicinfo",
+            type:"post",
+            dataType:"json",
+            contentType: "application/x-www-form-urlencoded; charset=utf-8",
+            data:baseInfo,
+            success:function(json){
+                if(!(json.success||false)){
+                    $.message(json.error,{title:'操作失败！'});
+                    $(this).removeClass('_locked');
+                    return false;
+                }
+                $.anchorMsg("保存成功！");
+                 setTimeout(function(argument) {
+                    window.location.href = '/hrmanage/index';
+                },1000);
+                return false;
+            }
+        });
+        return false;
+    });
+    //删除LOGO
+    $('#btnDelLogo').live('click',function(){
+    	$('#imgView').attr('src','');
+    	$('#hidLogo').val('');
+		//标记为删除
+        $('#operate').val('delLogo');
+        $('.logoImg').hide();
+    });
+    //上传LOGO
+    $('#upload_logo').uploadify({
+		auto:true,
+		multi:false,
+		swf:'/swf/uploadify.swf',
+		uploader : '/company/saveTempLogo/',
+		formData: {
+			'upload_cookie_userid': '{/$upload_cookie_userid/}',
+			'upload_cookie_nickname':'{/$upload_cookie_nickname/}',
+			'upload_cookie_usertype':'{/$upload_cookie_usertype/}',
+			'upload_cookie_userkey':'{/$upload_cookie_userkey/}',
+			'upload_cookie_tick':'{/$upload_cookie_tick/}'
+		},
+		queueID:'showImage',
+		fileSizeLimit:'350kb',
+		fileTypeExts:'*.jpg;*.bmp;*.gif;*.jpeg;*.png',
+		buttonImage:'{/$siteurl.style/}/uploadify/submit.png',
+		fileTypeDesc:'All Files',
+		method:'post',
+		cancelImage: '{/$siteurl.style/}/uploadify/cancel.png',
+		width:85,
+		height:27,
+		itemTemplate:'<a href="javascript:void(0);" id="btnDelLogo" class="del hbFntWes">&#xf057;</a>'+
+						'<img src="" id="imgView" />',
+		onSelect:function(){
+			$('.logoImg').show();
+		},
+		onUploadSuccess:function(file,data,response){
+			if(data!=null&&data!=undefined&&data!=''){
+				 var json = eval("("+data+")");
+				 if(json.error==100){
+	                 $.anchorMsg("请选择您要上传的文件", { icon: "warning" });
+	             }else if(json.error==101){
+	                 $.anchorMsg("文件超过最大限制", { icon: "warning" });
+	             }else if(json.error==102){
+	                 $.anchorMsg("您上传的文件格式有误", { icon: "warning" });
+	             }else if (json.error==104) {
+	                 $.anchorMsg("文件上传失败", { icon: "warning" });
+	             } else {
+					var path = json.path;
+					$('#imgView').attr('src',path+'?'+Math.random().toString().replace('.','0'));
+					$('#hidLogo').val(json.name);
+					$('#delLogo').val(json.name);
+					$('#operate').val('');//清空删除LOGO操作
+	             }
+			}
+		},
+		onSelectError:function(file,errorCode,errorMsg){
+			var settings = this.settings;
+			switch(errorCode) {
+				case SWFUpload.QUEUE_ERROR.FILE_EXCEEDS_SIZE_LIMIT:
+					$.anchorMsg('抱歉 "' + file.name + '" 文件查过了大小限制 (' + settings.fileSizeLimit + ').',{icon:'warning'});
+					break;
+				case SWFUpload.QUEUE_ERROR.ZERO_BYTE_FILE:
+					$.anchorMsg('文件 "' + file.name + '" 为空.',{icon:'warning'});
+					break;
+				case SWFUpload.QUEUE_ERROR.INVALID_FILETYPE:
+					$.anchorMsg('文件 "' + file.name + '" 类型不支持 (' + settings.fileTypeDesc + ').',{icon:'warning'});
+					break;
+			}
+		}
+	});
+});
+
+function getBaseInfor(){
+    var baseInfor = {};
+    var $_baseInforForm = $("#baseInforForm");
+    baseInfor.company_id  			= $_baseInforForm.find("input[name=company_id]").val();
+    baseInfor.company_flag  		= $_baseInforForm.find("input[name=company_flag]").val();
+    baseInfor.company_name  		= $_baseInforForm.find("input[name=hidCompanyName]").val();
+    baseInfor.company_property  	= $_baseInforForm.find("input[name=hddComProperty]").val();
+   // baseInfor.calling_ids     	  = $_baseInforForm.find("input[name=callingids]").val();
+    baseInfor.main_calling      	= $_baseInforForm.find("input[name=main_calling]").val();
+     // baseInfor.next_calling  	     = $_baseInforForm.find("input[name=next_calling]").val();
+    baseInfor.company_size      	= $_baseInforForm.find("input[name=hddComsize]").val();
+    baseInfor.company_info      	= $_baseInforForm.find("textarea[name=info]").val();
+    baseInfor.linkman           	= $_baseInforForm.find("input[name=linkman]").val();
+    baseInfor.link_mobile       	= $_baseInforForm.find("input[name=link_mobile]").val();
+    baseInfor.fax               	= $_baseInforForm.find("input[name=fax]").val();
+    baseInfor.email             	= $_baseInforForm.find("input[name=email]").val();
+    baseInfor.homepage          	= $_baseInforForm.find("input[name=homepage]").val();
+    baseInfor.open_linkman      	= $_baseInforForm.find("input[name=open_linkman]").val();
+
+    baseInfor.hidArea      			= $_baseInforForm.find("input[name=hidArea]").val();
+    baseInfor.txtAddress      		= $_baseInforForm.find("input[name=txtAddress]").val();
+    //baseInfor.open_mobile     	  = $_baseInforForm.find("input[name=open_mobile]").val();
+    //baseInfor.show_email      	  = $_baseInforForm.find("input[name=show_email]").val();
+    //baseInfor.open_tel        	  = $_baseInforForm.find("input[name=open_phone]").val();
+    baseInfor.phone_infor       	= $_baseInforForm.find("input[name=phone_infor]").val();
+    baseInfor.zone_infor        	= $_baseInforForm.find("input[name=zone_infor]").val();
+    baseInfor.ext_infor         	= $_baseInforForm.find("input[name=ext_infor]").val();
+    baseInfor.logo              	= $_baseInforForm.find("input[name=hidden_logo]").val();
+    baseInfor.del_logo				= $_baseInforForm.find("input[name=hidden_del_logo]").val();
+    baseInfor.operate				= $_baseInforForm.find("input[name=operate]").val();
+    baseInfor.hidDefaultReward		= $_baseInforForm.find("input[name=hidDefaultReward]").val()
+    baseInfor.hidOtherReward		= $_baseInforForm.find("input[name=hidOtherReward]").val()
+    baseInfor.hidCompanyShortName	= $_baseInforForm.find("input[name=hidCompanyShortName]").val()
+    //baseInfor.hidRightSpot			= $_baseInforForm.find("input[name=hidRightSpot]").val();
+    baseInfor.hidRightSpot			= $_baseInforForm.find("#hidRightSpot").val()
+    var list = $_baseInforForm.find("input.pics");
+    var arr = [];
+    for(var i=0;i<list.length;i++){
+    	if(list.eq(i).val() !== ''){
+    		arr.push(list.eq(i).val());
+    	}
+    }
+    baseInfor.hddNewPhotoName		= arr;
+    var list = $_baseInforForm.find("input.delpics");
+    var arr = [];
+    for(var i=0;i<list.length;i++){
+    	if(list.eq(i).val() !== ''){
+    		arr.push(list.eq(i).val());
+    	}
+    }
+    baseInfor.hddDelPhotoID		= arr;
+    var list = $_baseInforForm.find("input.modpics");
+    var arr = [];
+    for(var i=0;i<list.length;i++){
+    	if(list.eq(i).val() !== ''){
+    		arr.push(list.eq(i).val());
+    	}
+    }
+    baseInfor.hddModPhotoID		= arr;
+    return baseInfor;
+}
+</script>
+<script type="text/javascript">
+var initPt;
+var initArea;
+$(function(){
+	$('#curarea').singleArea({hddName:'hidArea',showLevel:4,selectArea:'{/$company["area_id"]/}'});
+	
+	$.setIndex('zIndex');
+	$('#btnSaveAddress').click(function(){
+		if(!validAdress.form()) return false;
+		$("#btnSaveAddress").submitForm({ beforeSubmit: $.proxy(validAdress.form, validAdress), data: {}, success: saveAddressCallback, clearForm: false });
+        return false;
+	});
+
+	$('#txtAddress').focusin(function(){
+		var addr = $(this).val();
+		if(addr==''){
+			var areaDesc='';
+			var areas = $('#curarea').getAreaNames();
+			for(var i=0;i<areas.length;i++){
+				areaDesc += areas[i] ;
+			}
+			$(this).val(areaDesc);
+			addr = areaDesc;
+		}
+	});
+
+	$('#txtAddress').focusout(function(){
+		var addr = $(this).val();
+	});
+});
+</script>
+<script type="text/javascript">
+//2014-11-13 huangwt 去掉企业相册                              
+var noLoginError = false;
+var fileNullError = false;
+var extensionError = false;
+var maxCountError = false;
+var photoUploadFail = false;
+var mien_infor;
+
+var maxCount = 5;
+var queueLength = 0;
+var errorCount = 0;
+var queueSizeCount = 5;
+var queueSize = 0;
+var remCount = 0;
+$(document).ready(function(){
+		//上传相片
+	    $('#upload_photo').uploadify({
+			auto:true,
+			swf:'/swf/uploadify.swf',
+			uploader : '/company/saveTempPhoto/',
+			formData: {
+				'upload_cookie_userid': '{/$upload_cookie_userid/}',
+				'upload_cookie_nickname':'{/$upload_cookie_nickname/}',
+				'upload_cookie_usertype':'{/$upload_cookie_usertype/}',
+				'upload_cookie_userkey':'{/$upload_cookie_userkey/}',
+				'upload_cookie_tick':'{/$upload_cookie_tick/}',
+                                'upload_cookie_accountid':'{/$upload_cookie_accountid/}'
+			},
+			queueID:'imgLst',
+			fileSizeLimit: '2048kb',
+			fileTypeExts:'*.jpg;*.bmp;*.gif;*.jpeg;*.png',
+			removeCompleted:false,
+			buttonImage:'{/$siteurl.style/}/uploadify/submit.png',
+			fileTypeDesc:'All Files',
+			method:'post',
+			cancelImage: '{/$siteurl.style/}/uploadify/cancel.png',
+			width:85,
+			height:27,
+			multi:true,
+			itemTemplate:'<li class="imgLoading" id="${fileID}">'
+	            +'<a class="del hbFntWes" href="javascript:$(\'#${instanceID}\').uploadify(\'cancel\', \'${fileID}\')">&#xf057;</a>'
+	            +'<div class="pic"><img src=""></div>'
+	            +'<div class="load"></div>'
+	            +'<div class="loadTxt">上传中...</div>'
+	            +'<div class="imgInp" style="display:none">'
+	            +'<input type="text" class="newImg imgTxt" value="" />'
+	            +'<span style="display:none" v="" /></span>'
+	            +'<input type="hidden" class="pics" name="hddNewPhotoName[]" value="" />'
+	            +'</div>'
+	        	+'</li>',
+	        onSelect:function(file){
+        		queueLength++;
+        		queueSize++;
+				if(remCount==0){
+					$.anchorMsg('您最多上传20张',{icon:'warning'});
+					$('#upload_photo').uploadify('cancel',file.id);
+					return false;
+				}
+				else if( remCount<queueSizeCount && queueSize>remCount){
+					$.anchorMsg('您本次最多上传'+remCount+'张',{icon:'warning'});
+					$('#upload_photo').uploadify('cancel',file.id);
+					return false;
+				}
+				else if(queueSize>queueSizeCount){
+					$.anchorMsg('每次只能上传5张照片',{icon:'warning'});
+					$('#upload_photo').uploadify('cancel',file.id);
+					return false;
+				}
+				if(queueLength<=maxCount){
+					return true;
+				}
+				else{
+					$('#upload_photo').uploadify('cancel',file.id);
+					return false;
+				}
+	        },
+	        onDialogOpen:function(){
+	        	queueSize =0;
+	        	remCount = maxCount-queueLength;
+		    },
+	        onUploadSuccess:function(file,data,response){
+	        	if(data!=null&&data!=undefined&&data!=''){
+	        		var json = eval("("+data+")");
+					 if(json.error==100){
+		                 noLoginError=true;
+		                 $.anchorMsg("请选择您要上传的文件", { icon: "warning" });
+		             }else if(json.error==101){
+		             	 fileNullError=true;
+		                 $.anchorMsg("文件超过最大限制", { icon: "warning" });
+		             }else if(json.error==102){
+		             	 extensionError=true;
+		                 $.anchorMsg("您上传的文件格式有误", { icon: "warning" });
+		             }else if (json.error==103) {
+		             	 maxCountError = true;
+		                 $.anchorMsg("抱歉！最多允许上传{/$max_photo_count/}张照片", { icon: "warning" });
+		             } else if (json.error==104) {
+		             	 photoUploadFail = true;
+		                 $.anchorMsg("文件上传失败", { icon: "warning" });
+		             } else {
+	     				var path = json.path;
+	     				$('#'+file.id).removeClass('imgLoading');
+	     				$('#'+file.id).find('img').attr('src',path+'?'+Math.random().toString().replace('.','0'));
+	     				$('#'+file.id).find('.loadTxt').hide();
+	     				$('#'+file.id).find('.imgInp').show().find('input').val(json.name).next().attr('v',json.name);
+	     				$('#'+file.id).find('input[name^=hddNewPhotoName]').val(json.newname+'|'+json.name);
+	     			}
+	            }
+			},
+			onSelectError:function(file,errorCode,errorMsg){
+
+				var settings = this.settings;
+				switch(errorCode) {
+					case SWFUpload.QUEUE_ERROR.QUEUE_LIMIT_EXCEEDED:
+						$.anchorMsg("一次最多上传" + settings.queueSizeLimit + "张照片！", { icon: "warning" });
+						break;
+					case SWFUpload.QUEUE_ERROR.FILE_EXCEEDS_SIZE_LIMIT:
+						$.anchorMsg('抱歉 "' + file.name + '" 文件查过了大小限制 (' + settings.fileSizeLimit + ').',{icon:'warning'});
+						break;
+					case SWFUpload.QUEUE_ERROR.ZERO_BYTE_FILE:
+						$.anchorMsg('文件 "' + file.name + '" 为空.',{icon:'warning'});
+						break;
+					case SWFUpload.QUEUE_ERROR.INVALID_FILETYPE:
+						$.anchorMsg('文件 "' + file.name + '" 类型不支持 (' + settings.fileTypeDesc + ').',{icon:'warning'});
+						break;
+				}
+			},
+			onQueueComplete:function(data){
+				if (!noLoginError&&!fileNullError&&!extensionError&&!maxCountError && !photoUploadFail) {
+	                var filesUploadCount= data.uploadsSuccessful - data.uploadsErrored> 0 ?(data.uploadsSuccessful - data.uploadsErrored):0;
+	                if(data.uploadsErrored!=0){
+	                    $.anchorMsg("上传失败，请重新上传",{ icon: "warning" });
+	                    return;
+	                }
+	            }
+			},
+			onCancel:function(file_id){
+				queueLength--;
+			}
+	});
+
+
+  	//已经上传名称的事件
+    $('#imgLst .oldImg').live('mouseover', function(event) {
+        event.preventDefault();
+        $(this).closest('li').addClass('hov');
+    }).live('mouseout', function(event) {
+        event.preventDefault();
+        $(this).closest('li').removeClass('hov');
+    }).live('focus', function(event) {
+        event.preventDefault();
+        $(this).addClass('imgTxtHov');
+    }).live('blur', function(event) {
+        event.preventDefault();
+        var _slef = $(this);
+        _slef.removeClass('imgTxtHov');
+        var oldName = _slef.next().attr('v');
+        var photo_id = _slef.closest('li').find('input[name=photo_id]').val();
+        if (_slef.val().trim().length == 0) {
+            $.anchorMsg('请填写你要修改相片的名称', { icon: 'warning' });
+            _slef.val(oldName);
+            return;
+        }
+        if (_slef.val().trim().length >= 64) {
+            $.anchorMsg('相片名称过长', { icon: 'warning' });
+            _slef.val(oldName);
+            return;
+        }
+        if (_slef.val() != oldName) {
+        	$('#spnModPhoto').append('<input type="hidden" class="modpics" name="hddModPhotoID[]" value="'+photo_id+'|'+_slef.val()+'">');
+        }
+    });
+    //还未保存的
+     $('#imgLst .newImg').live('mouseover', function(event) {
+        event.preventDefault();
+        $(this).closest('li').addClass('hov');
+    }).live('mouseout', function(event) {
+        event.preventDefault();
+        $(this).closest('li').removeClass('hov');
+    }).live('focus', function(event) {
+        event.preventDefault();
+        $(this).addClass('imgTxtHov');
+    }).live('blur', function(event) {
+        event.preventDefault();
+        var _slef = $(this);
+        _slef.removeClass('imgTxtHov');
+        var oldName = _slef.next().attr('v');
+        if (_slef.val().trim().length == 0) {
+            $.anchorMsg('请填写你要修改相片的名称', { icon: 'warning' });
+            _slef.val(oldName);
+            return;
+        }
+        if (_slef.val().trim().length >= 64) {
+            $.anchorMsg('相片名称过长', { icon: 'warning' });
+            return;
+        }
+        if (_slef.val() != oldName) {
+            var temp_data = _slef.closest('li').find('input[name^=hddNewPhotoName]');
+            var img_path = temp_data.val().split('|')[0];
+            temp_data.val(img_path+'|'+_slef.val());
+        }
+    });
+
+    $("#phoneDiv input").focus(function(){
+        var thisInput = $(this);
+        var inputName = thisInput.attr("name");
+        var defaultVal = "分机号";
+        if(inputName == "zone_infor"){
+            defaultVal = "区号";
+        }else if(inputName == "phone_infor"){
+            defaultVal = "固定电话";
+        }
+        var currentVal = $.trim(thisInput.val());
+        if(currentVal == defaultVal){
+            thisInput.val("");
+            thisInput.css("color","#000");
+        }
+    });
+
+    $("#phoneDiv input").blur(function(){
+        var thisInput = $(this);
+        var inputName = thisInput.attr("name");
+        var defaultVal = "分机号";
+        if(inputName == "zone_infor"){
+            defaultVal = "区号";
+        }else if(inputName == "phone_infor"){
+            defaultVal = "固定电话";
+        }
+        var currentVal = $.trim(thisInput.val());
+        if(currentVal == defaultVal || currentVal == ""){
+            thisInput.val(defaultVal);
+            thisInput.css("color","#A6A6A6");
+        }
+    });
+
+    
+    $(".rateNav a").click(function(){
+        var key = $(this).attr("k");
+        var fixHeight = $("#fstNav").height();
+        scroller(key, 700, fixHeight);
+        return false;
+    });
+});
+
+//保存数据成功
+function sucPhotoCallBack(json){
+	if(json&&json.error){
+		$.message(json.error,{icon:'warning'});
+		return;
+	}
+	var temp = '<li id="li{0}">'
+				+'<input type="hidden" id="photo_id" name="photo_id" value="{0}">'
+				+'<input type="hidden" id="photo_path" name="photo_path" value="{1}">'
+		   		+'<a class="del hbFntWes" onclick="delPhoto(this);return false;" href="javascript:void(0);">&#xf057;</a>'
+		    	+'<div class="pic"><img src="{/$photo_virt_path/}{2}"></div>'
+		    	+'<div class="load"></div>'
+		    	+'<div class="imgInp">'
+		    	+'<input type="text" class="oldImg imgTxt" value="{3}" />'
+		    	+'<span style="display:none" v="{3}" /></span>'
+		   		+'</div>'
+				+'</li>';
+	//清空数据
+	$('#imgLst').empty();
+	for(var i=0;i< json.company_photo.length;i++){
+		var photo = json.company_photo[i];
+		$('#imgLst').append($.format(temp,photo.photo_id,photo.photo_path,photo.photo_thumb_path,photo.photo_name));
+	}
+	$('#alr_photo_count').html(json.alr_photo_count);
+	$('#spnDelPhoto').empty();
+	$('#spnModPhoto').empty();
+    $("#vdNam").val(mien_infor.has_data?mien_infor.mien_name:"视频名称");
+    $("#vdSrc").val(mien_infor.has_data?mien_infor.mien_path:"优酷、土豆等网站的视频url地址");
+    $.focusblur('#vdNam');
+    $.focusblur('#vdSrc');
+	$.anchorMsg("保存数据成功！");
+	return;
+}
+
+//删除相片
+function delPhoto(obj){
+	var self = $(obj);
+	var li = self.closest('li');
+	var photo_id = li.find('input[name=photo_id]').val();
+	li.remove();
+	maxCount++;
+	$('#spnDelPhoto').append('<input type="hidden" class="delpics" name="hddDelPhotoID[]" value="'+photo_id+'">');
+}
+
+
+
+$(function(){
+    var flag = '{/$flag/}';
+    var fixHeight = $("#fstNav").height();
+    scroller(flag, 700, fixHeight);
+});
+</script>
+</body>
+</html>

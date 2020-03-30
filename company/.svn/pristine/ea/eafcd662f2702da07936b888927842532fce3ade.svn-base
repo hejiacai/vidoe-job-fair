@@ -1,0 +1,568 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+body{ background:#dfdfdf;}
+*{ padding:0; margin:0; font-size:14px; font-family:"微软雅黑"; font-style:normal;}
+img{ border:none;}
+a{ text-decoration:none;}
+.batchJobbg{ width:900px; overflow:hidden; background:#f9f9f9; }
+.batchTit{ height:60px; background:#62829e;}
+.batchTit span{ color:#aedfff; font-size:20px; font-weight:bold; line-height:60px; display:block; float:left; padding-left:20px;}
+.batchTit a{ display:block; float:right;width:40px; height:40px; margin:10px 10px 0 0; background:url(img/batchJob01.png) -40px 0 no-repeat;}
+.batchTit a:hover{ background-position:0 0;}
+.batchText{ display:inline-block; vertical-align:middle;width:240px; height:28px; background:#fff; border:1px solid #f0f0f0; margin:0 10px 0 6px; line-height:28px; text-indent:8px; color:#333;}
+.batchTab{ margin:20px auto;}
+.batchTab tr td{ padding-bottom:6px; color:#666; font-size:14px;}
+.batchTab tr td b{ display:inline-block; vertical-align:middle; color:#f00;}
+.batchTabx{ padding:20px 0px 0px 10px;  border-top:1px solid #e9e9e9; background:#fff; overflow:hidden;}
+.batchTab2{ border-bottom:1px solid #bcd6ec;}
+.batchTab2 tr td{ color:#999;}
+.batchTab2 tr td b{ color:#f00; display:inline-block; vertical-align:middle; padding-left:6px;}
+.batchTab2 tr td span,.batchTab2 tr td label{display:inline-block; vertical-align:middle; margin-left:15px;}
+.batchTab2 tr td label input,.batchTab3 table td label input{display:inline-block; vertical-align:middle; margin-right:5px;}
+.batchBtnBd{width:100%; background: #fff; text-align:center; overflow:hidden; padding:40px 0 30px 0;}
+.batchBtnBd a{ display:inline-block;width:30%; height:40px; line-height:40px; text-align:center; color:#fff; background:#00c0c7; border:1px solid #00c0c7; border-radius: 4px;} 
+.batchBtnBd a:hover{background:#00b1b8; border:1px solid #00b1b8;}
+.batchBtnBd a.gray{ background:#eee; border:1px solid #eee; color:#999; margin-left:30px;}
+.batchBtnBd a.gray:hover{background:#d7d6d6; border:1px solid #d7d6d6;}
+.batchTab3{width:890px;height:280px; overflow-x:hidden; overflow-y:auto;#overflow:hidden; #position:relative; }
+.batchTab3 table td{ padding-bottom:5px;}
+.batchTab3 table td label{ margin-top:5px;}
+.batchTip{ display:block; float:left;width:16px; height:16px; background:url({/$siteurl.style/}/img/company/batchJob02.png) no-repeat; margin-top:11px;}
+.batch{ display:block;width:300px; height:18px; overflow:hidden;text-overflow: ellipsis;white-space: nowrap;}
+.formText input.text{font-size:12px;}
+.formText .gray{color:#999; font-size:12px;}
+.drop .dropSeld{ text-align:left;}
+.batchTarea{display:inline-block; vertical-align:top;width:350px; height:40px; border:1px solid #f0f0f0; margin:0px 5px;}
+.textGray {
+    color: #ccc;
+}
+.tipPos {
+    display: inline;
+    float: left;
+    font-size: 12px;
+    height: 30px;
+    left: 12px;
+    padding-right: 10px;
+    position: relative;
+    top: 0;
+    z-index: 1;
+}
+.tipLayErr {
+    background: none repeat scroll 0 0 #fff2ef;
+    border: 1px solid #d66564;
+    color: #333;
+    display: inline-block;
+    line-height: 28px;
+    padding: 0 5px;
+    position: relative;
+    text-align: left;
+    z-index: 3;
+}
+.tipw180 {
+    width: 180px;
+}
+.drop .dropLst{ height:200px; overflow-y: auto;}
+.consume_note{ overflow: hidden; color: #444; font-size: 12px; padding-top: 10px;}
+.consume_note span{ color: #fe6b23;}
+.consume_note b{ font-weight: inherit; color: #999;}
+.consume_note em{ color: #fe6b23;}
+</style>
+</head>
+<body>
+<form id="formMultiInvite" method="post" action="{/get_url rule='/invite/sendInviteMulti2'/}">
+<div class="batchJobbg">
+	<table class="batchTab" width="780" border="0" cellspacing="0" cellpadding="0">
+		<tr>
+			<td width="110" height="30" align="right" valign="middle">公司名称&nbsp;&nbsp;<b>*</b></td>
+			<td height="30" align="left" valign="middle">
+			    <span class="formText">
+				  <input type="text" id="company_name"  name="company_name"  class="batchText" value="{/if !empty($currentcompany.company_shortname)/}{/$currentcompany.company_shortname/}{/else/}{/$currentcompany.company_name/}{//if/}" />
+				</span>
+				<span class="tipPos">
+			    	<span class="tipLay"></span>
+			    </span>
+			</td> 
+		</tr>
+		<tr>
+			<td width="110" height="30" align="right" valign="middle">联系电话&nbsp;&nbsp;<b>*</b></td>
+			<td height="30" align="left" valign="middle">
+				<span class="formText">
+				  	<input type="text" id="link_tel" name="link_tel"  class="batchText" value="{/$currentcompany.link_tel/}" />
+				</span>
+				<span class="tipPos">
+					<span class="tipLay"></span>
+				</span>
+			</td>
+		</tr>
+		<tr>
+			<td width="110" height="30" align="right" valign="middle">面试地点&nbsp;&nbsp;<b>*</b></td>
+			<td height="30" align="left" valign="middle">
+			    <span class="formText">
+			    	<input type="text" id="address" name="address"  class="batchText" value="{/$currentcompany.address/}" />
+			    </span>  
+				<span class="tipPos">
+			    	<span class="tipLay"></span>
+			    </span>
+			</td>
+		</tr>
+		<tr>
+			<td width="110" height="30" align="right" valign="middle">联系人&nbsp;&nbsp;<b>*</b></td>
+			<td height="30" align="left" valign="middle"> 
+				<span class="formText">
+					<input type="text" id="linkman" name="linkman"  class="batchText" value="{/$currentcompany.linkman/}" />
+				</span>
+				<span class="tipPos">
+					<span class="tipLay"></span>
+			    </span>
+			</td>
+		</tr>
+		<tr>
+			<td width="110" height="30" align="right" valign="top">其他&nbsp;&nbsp;&nbsp;&nbsp;</td>
+			<td height="30" align="left" valign="top"  colspan="3">
+				<span class="formText">
+					<textarea id="remark" name="remark" watermark="如需带什么资料等..." class="batchTarea watermark"></textarea>
+				</span>  
+				<span class="tipPos">
+					<span class="tipLay"></span>
+				</span>  
+			</td>
+		</tr>
+	</table>
+	<div class="batchTabx">
+		<table class="batchTab2" width="890" border="0" cellspacing="0" cellpadding="0">
+		  <tr>
+		    <td width="106" height="40" align="left" valign="middle">求职者姓名<b>*</b></td>
+		    <td width="190" height="40" align="center" valign="middle">面试职位<b>*</b></td>
+		    <td width="270" height="40" align="center" valign="middle">面试时间<b>*</b></td>
+		    <td height="40" align="center" valign="middle">
+		    	<span>邀请内容</span>
+		    	<label>
+		        	<input name="smsType" id="radSimple" type="radio" value="1" checked="checked" />精简
+		        </label>
+		        <label>
+		        	<input name="smsType" id="radComplete" type="radio" value="2" />完整
+		        </label>
+		    </td>
+		  </tr>
+		</table>
+		<div class="batchTab3">
+		  	<table width="890" border="0" cellspacing="0" cellpadding="0">
+		  		{/section name=resume loop=$resume_arr/}
+			    <tr id="option{/$resume_arr[resume].apply_id/}">
+			    	<td width="106" height="35" align="left" valign="middle">
+				    	<label>
+				        	<input name="chkResume[]" type="checkbox" tagresumeid="{/$resume_arr[resume].resume_id/}" checked="checked" id="chkResume{/$smarty.section.resume.index/}"  value="{/$smarty.section.resume.index/}" />{/$resume_arr[resume].user_name/}
+				            <input id="hddApplyID{/$smarty.section.resume.index/}" name="hddApplyID{/$smarty.section.resume.index/}" type="hidden"  value="{/$resume_arr[resume].apply_id/}"/>
+				            <input id="hddResumeID{/$smarty.section.resume.index/}" name="hddResumeID{/$smarty.section.resume.index/}" type="hidden" value="{/$resume_arr[resume].resume_id/}"/>
+				            <input id="hddResumeName{/$smarty.section.resume.index/}" name="hddResumeName{/$smarty.section.resume.index/}" type="hidden" value="{/$resume_arr[resume].user_name/}"/>
+				            <input id="hddInviteJobID{/$smarty.section.resume.index/}" name="hddInviteJobID{/$smarty.section.resume.index/}" type="hidden" value="{/$resume_arr[resume].job_id/}"/>
+				            <input id="hddInviteJobName{/$smarty.section.resume.index/}" name="hddInviteJobName{/$smarty.section.resume.index/}" type="hidden" value=""/>
+				            <input id="hddInviteDate{/$smarty.section.resume.index/}" name="hddInviteDate{/$smarty.section.resume.index/}" type="hidden" value=""/>
+				            <input id="hddInviteTime{/$smarty.section.resume.index/}" name="hddInviteTime{/$smarty.section.resume.index/}" type="hidden" value=""/>
+				            <input id="hddInviteCustomTime{/$smarty.section.resume.index/}" name="hddInviteCustomTime{/$smarty.section.resume.index/}" type="hidden" value=""/>
+				        </label>
+				    </td>
+			   		<td width="190" height="35" align="center" valign="middle">
+				        <span id="txtStation{/$smarty.section.resume.index/}" class="drop zindex" style="margin-top:5px; margin-right:6px; "></span>
+				    </td>
+				    <td width="270" height="35" align="center" valign="middle">
+				        <span id="dateDrop{/$smarty.section.resume.index/}" class="drop zindex" style="width:146px; margin-top:5px;margin-right:3px;  " ></span>
+					    <span id="timeDrop{/$smarty.section.resume.index/}" class="drop zindex" style="margin-top:5px; margin-right:6px; "></span>
+					    <span id="spanCustomTime{/$smarty.section.resume.index/}" class="formText" style="display:none;">
+							<input disabled="disabled" id="txtCustomTime{/$smarty.section.resume.index/}"   type="text" class="text"  style="width:80px;margin:5px 6px 0px 0px;">
+			            </span>
+				    	<b class="batchTip" id="datetime_error{/$smarty.section.resume.index/}" title="请选择面试时间" style="display:none;"></b>
+				    </td>
+				    <td height="35" align="left" valign="middle">
+				    	<em class="batch" id="simple{/$smarty.section.resume.index/}"  title="{/$currentcompany.company_name/}通知您面试【{/$resume_arr[resume].station/}】 \r\n详情http://huibo.cn/AHMNz">{/$currentcompany.company_name/}通知您面试【{/$resume_arr[resume].station/}】 详情http://huibo.cn/AHMNz</em>
+				    	<em class="batch" id="complete{/$smarty.section.resume.index/}" style="display:none"  title="{/$currentcompany.company_name/}通知您面试【{/$resume_arr[resume].station/}】 \r\n地点:{/$currentcompany.address/}\r\n  联系人:{/$currentcompany.linkman/}">{/$currentcompany.company_name/}通知您面试【{/$resume_arr[resume].station/}】 地点:{/$currentcompany.address/}  联系人:{/$currentcompany.linkman/}</em>
+				    </td>
+			  	</tr>
+		  		{//section/}
+		  	</table>
+		</div>
+		{/if $pricing_resource_data['isCqNewService']/}
+			<input type="hidden" name="consume_point"/>
+			<input type="hidden" name="pointV2"/>
+		<div class="consume_note">发送邀请需消耗<span id="consume_point" ></span>条短信，剩余短信<span>{/$pricing_resource_data['cq_release_point_message']/}</span>条<b>（若短信不足则每条短信扣取<em>0.2</em>元推广金/余额）</b></div>
+		{//if/}
+	</div>
+	<div class="batchBtnBd">
+		<a href="javascript:void(0);" onclick="inviteMulti.invite(this);" id="btnSendInvite" >发 送</a>
+	    <a href="javascript:void(0);" onclick="javascript:$(this).closeDialog();"  class="gray">取 消</a>
+	</div>
+</div>
+</form>
+<script>
+	checklength();
+	function checklength(){
+        var check = $("input[name='chkResume[]']:checked").length;
+        $("#pointV2").html("{/$point_message/}"*check);
+        $("input[name=consume_point]").val(check);
+        $("input[name=pointV2]").val("{/$point_message/}"*check);
+        $("#consume_point").html($("input[name='chkResume[]']:checked").length);
+    }
+    $("input[type='checkbox']").click(function() {
+    	checklength()
+    });
+var resume_count = {/count($resume_arr)/};
+var cid;
+var cid2 = -999;
+var inviteMulti = {
+	initialize : function() {
+		//初始化控件
+		this._initControl();
+	},
+	_initControl : function() {
+		{/section name = resume loop = $resume_arr/}
+
+	    //初始化面试日期下拉控件
+		$('#dateDrop{/$smarty.section.resume.index/}').droplist({
+			defaultTitle : '请选择',
+			noSelectClass : 'gray',
+			inputWidth : 136,
+			style : 'width:144px;*width:148px;text-align:left;',
+			hddName : 'hddDate{/$smarty.section.resume.index/}',
+			items : {/$date_json/},
+			onSelect : function (i, name) {
+				$(':input[name="hddInviteDate{/$smarty.section.resume.index/}"]').val($('#dateDrop{/$smarty.section.resume.index/}').getDropListValue());
+				if (i == 99) {
+					$('#timeDrop{/$smarty.section.resume.index/}').hide();
+					$('#spanCustomTime{/$smarty.section.resume.index/}').show();
+					$('#txtCustomTime{/$smarty.section.resume.index/}').removeAttr('disabled');
+					$(':input[name="hddtime{/$smarty.section.resume.index/}"]').attr('disabled', 'disabled');
+					$('#txtCustomTime{/$smarty.section.resume.index/}').val('');
+				} else {
+					$('#timeDrop{/$smarty.section.resume.index/}').show();
+					$('#spanCustomTime{/$smarty.section.resume.index/}').hide();
+					$('#txtCustomTime{/$smarty.section.resume.index/}').attr('disabled', 'disabled');
+					$(':input[name="hddtime{/$smarty.section.resume.index/}"]').removeAttr('disabled');
+					$('#timeDrop{/$smarty.section.resume.index/}').setDropListValue('');
+				}
+			}
+		});
+
+		//初始化面试时间下拉控件
+		$('#timeDrop{/$smarty.section.resume.index/}').droplist({
+			defaultTitle : '请选择',
+			maxScroll : 10,
+			noSelectClass : 'gray',
+			inputWidth : 60,
+			style : 'width:68px;*width:75px;text-align:left;',
+			hddName : 'hddtime{/$smarty.section.resume.index/}',
+			items : [
+				{id:"8:00", name:"8:00"},
+				{id:"8:30", name:"8:30"},
+				{id:"9:00", name:"9:00"},
+				{id:"9:30", name:"9:30"},
+				{id:"10:00", name:"10:00"},
+				{id:"10:30", name:"10:30"},
+				{id:"11:00", name:"11:00"},
+				{id:"11:30", name:"11:30"},
+				{id:"12:00", name:"12:00"},
+				{id:"12:30", name:"12:30"},
+				{id:"13:00", name:"13:00"},
+				{id:"13:30", name:"13:30"},
+				{id:"14:00", name:"14:00"},
+				{id:"14:30", name:"14:30"},
+				{id:"15:00", name:"15:00"},
+				{id:"15:30", name:"15:30"},
+				{id:"16:00", name:"16:00"},
+				{id:"16:30", name:"16:30"},
+				{id:"17:00", name:"17:00"},
+				{id:"17:30", name:"17:30"},
+				{id:"18:00", name:"18:00"},
+				{id:"18:30", name:"18:30"},
+				{id:"19:00", name:"19:00"},
+				{id:"19:30", name:"19:30"},
+				{id:"20:00", name:"20:00"}
+			],
+			onSelect : function(n, name) {
+				$(':input[name="hddInviteTime{/$smarty.section.resume.index/}"]').val($('#timeDrop{/$smarty.section.resume.index/}').getDropListValue());
+			}
+		});
+
+		//初始化面试职位下拉控件
+		$('#txtStation{/$smarty.section.resume.index/}').droplist({
+			defaultTitle : '请选择',
+			maxScroll : 10,
+			noSelectClass : 'gray',
+			inputWidth : 136,
+			style : 'width:144px;*width:149px;text-align: left;',
+			hddName : 'hddStation{/$smarty.section.resume.index/}',
+			items : {/$jobs/},
+			selectValue : '{/$resume_arr[resume].job_id/}',
+			maxScroll : 10,
+			onSelect : function(i, name) {
+				inviteMulti._smsinfochange({/$smarty.section.resume.index/});
+				$(':input[name="hddInviteJobID{/$smarty.section.resume.index/}"]').val($('#txtStation{/$smarty.section.resume.index/}').getDropListValue());
+            }
+		});
+		{//section/}
+
+		$("#company_name").watermark();
+		$("#address").watermark();
+		$("#linkman").watermark();
+		$("#link_tel").watermark();
+		$('#remark').watermark();
+		$.setIndex('zindex');
+
+        //初始化邀请内容选择控件
+        $('input[type="radio"][name="smsType"]').click(function() {
+            var smstype = $(this).val();
+            if(smstype == "1"){
+				$("em[id^='simple']").show();
+				$("em[id^='complete']").hide();
+            } else {
+				{/if base_lib_BaseUtils::nullOrEmpty($canComplete) || $canComplete != true/}
+				$.anchorMsg("您不能使用该功能", {icon: 'warning'});
+				return false;
+				{//if/}
+              	$("em[id^='simple']").hide();
+              	$("em[id^='complete']").show();
+            }
+        });
+
+       	 //客户端验证表单数据
+		inviteValid = $("#formMultiInvite").validate({
+		    rules: {
+			    company_name:{required: true, minlength:1, maxlength: 20 },
+		        address:{required: true, minlength:1, maxlength: 60 },
+		        linkman:{required: true, minlength:1, maxlength: 15 },
+		        link_tel:{ required: true, tel: true },
+		        remark:{maxlength: 200 }
+		    },
+		    messages: {
+		    	company_name:{ required: '请输入公司名称<span class="tipArr"></span>',minlength:'公司名称请输入1-20个字符<span class="tipArr"></span>',maxlength:'公司名称请输入1-20个字符<span class="tipArr"></span>'},
+		    	address: { required: '请输入面试地点<span class="tipArr"></span>',minlength:'面试地点请输入1-60个字符<span class="tipArr"></span>',maxlength:'面试地点请输入1-60个字符<span class="tipArr"></span>'},
+		    	linkman: {required:'请输入联系人<span class="tipArr"></span>',minlength:'联系人请输入1-15个字符<span class="tipArr"></span>',maxlength:'联系人请输入1-15个字符<span class="tipArr"></span>'},
+		    	link_tel: {required:'请输入联系电话<span class="tipArr"></span>',tel:'联系电话不正确<span class="tipArr"></span>'},
+		    	remark:{maxlength:'其他信息不能超过200个字<span class="tipArr"></span>'}
+		    },
+		    errorElement: 'span',
+		    errorClasses: {
+		    	company_name: { required: 'tipLayErr tipw180',minlength:'tipLayErr tipw180',maxlength:'tipLayErr tipw180'},
+		    	address: { required: 'tipLayErr tipw180',minlength:'tipLayErr tipw180',maxlength:'tipLayErr tipw180'},
+		    	linkman: {required:'tipLayErr tipw180',minlength:'tipLayErr tipw180',maxlength:'tipLayErr tipw180'},
+		        link_tel: {required:'tipLayErr tipw180',tel:'tipLayErr tipw180'},
+		        remark:{maxlength:'tipLayErr tipw180'}
+		    },
+		    errorPlacement: function(error, element) {
+			    if (element.attr('theinputtype') == 'stations'){
+			    	element.parent().next().find('.tipLay').append(error);
+			    } else { 
+					element.parent().nextAll().find('.tipLay').append(error);
+				}
+		    },
+		    success: function(label) {
+		    	label.text(" ");
+		    }
+		});
+        
+        cid = setTimeout("inviteMulti._smsinfochange(-1)", 500);
+
+	},
+	invite : function(object) {
+		if (cid2 == -999) {
+			cid2 = setTimeout("inviteMulti._inviteValidate()", 500);
+		}
+		var validate = $("#formMultiInvite").valid();
+		if (validate == false) {
+			return false;
+		}
+
+		var cusvalidate = true;
+		var inviteCount = 0;
+		$(':input[name="chkResume[]"]').each(function() {
+			var tagindex = $(this).val();
+			var resumeid = $(this).attr("tagresumeid");
+
+            if ($(this).attr("checked")) {
+				inviteCount++;
+				$("#hddResumeID" + tagindex).val(resumeid); 
+				$("#hddInviteJobName" + tagindex).val($("#txtStation" + tagindex).find(".dropSeld").text().replace("(停招)",""));
+
+				var dateval = $("#hddInviteDate" + tagindex).val();
+				var timeval = $("#hddInviteTime" + tagindex).val();
+				if (dateval == 99) {
+					var cusdateval = $("#txtCustomTime" + tagindex).val();
+					if ($.trim(cusdateval) == "") {
+						$("#hddInviteCustomTime" + tagindex).val(''); 
+						$("#datetime_error" + tagindex).show();
+						cusvalidate = false;
+					} else {
+						$("#hddInviteCustomTime" + tagindex).val(cusdateval); 
+						$("#datetime_error" + tagindex).hide();
+					}
+				} else {
+					$("#hddInviteCustomTime" + tagindex).val(''); 
+					if (dateval == "" || timeval == "") {
+						$("#datetime_error" + tagindex).show();
+						cusvalidate = false;
+					} else {
+						$("#datetime_error" + tagindex).hide();
+					}
+				}
+            } else {
+				$("#hddInviteJobName" + tagindex).val("");
+				$("#hddResumeID" + tagindex).val('0');
+				$("#datetime_error" + tagindex).hide(); 
+            } 
+	    });
+
+	    if (cusvalidate == false) {
+            return false;
+		}
+
+		if (inviteCount <= 0) {
+			$.anchor('请选择邀请简历', {icon:'info'});
+			return false;
+		}
+		var data = { operate : "invite"};
+        $(object).submitForm({data: data, success: inviteMulti.successCallBack, clearForm: false})
+        return false;
+	},
+	_smsinfochange : function(updateInex) {
+		var smscontent_simple   = "";
+		var smscontent_complete = "";
+        if (updateInex != undefined && updateInex == -1) {
+	        for (var i = 0; i < resume_count; i++) {
+	        	{/if $company_resources->account_type == 'hr_main'/}
+	        	smscontent_simple = "您获得" + $("#company_name").val() 
+	         					+ "【" + $("#txtStation" + i).find("span[class='dropSeld cu']").text().replace("(停招)", "") + "】的面试\r\n详情http://huibo.cn/AHMNz";
+
+	         	smscontent_complete = "您获得" + $("#company_name").val()
+	         					+ "【" + $("#txtStation"+i).find("span[class='dropSeld cu']").text().replace("(停招)", "") 
+	         					+ "】的面试 \r\n地点:" + $("#address").val()
+	         					+ "  \r\n联系人:" + $("#linkman").val()
+	         					+ "  \r\n电话:" + $("#link_tel").val()
+	         					+ "\r\n" + ($("#remark").val().replace("如需带什么资料等...", "") != "" ? "  注:" + $("#remark").val() : "");
+				{/else/}
+				smscontent_simple = $("#company_name").val() 
+	         					+ "通知您面试【" + $("#txtStation" + i).find("span[class='dropSeld cu']").text().replace("(停招)", "") + "】\r\n详情http://huibo.cn/AHMNz";
+
+	         	smscontent_complete = $("#company_name").val()
+	         					+"通知您面试【" + $("#txtStation"+i).find("span[class='dropSeld cu']").text().replace("(停招)", "")
+	         					+ "】 \r\n地点:" + $("#address").val()
+	         					+ "  \r\n联系人:" + $("#linkman").val()
+	         					+ "  \r\n电话:" + $("#link_tel").val()
+	         					+ "\r\n" + ($("#remark").val().replace("如需带什么资料等...", "") != "" ? "  注:" + $("#remark").val() : "");
+				{//if/}
+
+				$("#complete" + i).text(smscontent_complete);
+				$("#complete" + i).attr("title", smscontent_complete);
+				$("#simple" + i).text(smscontent_simple);
+				$("#simple" + i).attr("title", smscontent_simple);
+			}
+        } else if (updateInex != undefined) {
+            var i = updateInex;
+            {/if $company_resources->account_type == 'hr_main'/}
+            smscontent_simple = "您获得" + $("#company_name").val() 
+         					+ "【" + $("#txtStation" + i).find("span[class='dropSeld cu']").text().replace("(停招)", "") + "】的面试\r\n详情http://huibo.cn/AHMNz";
+
+         	smscontent_complete = "您获得" + $("#company_name").val()
+         					+ "【" + $("#txtStation"+i).find("span[class='dropSeld cu']").text().replace("(停招)", "") 
+         					+ "】的面试 \r\n地点:" + $("#address").val()
+         					+ "  \r\n联系人:" + $("#linkman").val()
+         					+ "  \r\n电话:" + $("#link_tel").val()
+         					+ "\r\n" + ($("#remark").val().replace("如需带什么资料等...", "") != "" ? "  注:" + $("#remark").val() : "");
+			{/else/}
+    	    smscontent_simple = $("#company_name").val() 
+    	    				+ "通知您面试【" + $("#txtStation" + i).find("span[class='dropSeld cu']").text().replace("(停招)", "") + "】 \r\n详情http://huibo.cn/AHMNz";
+
+         	smscontent_complete = $("#company_name").val()
+         					+ "通知您面试【"+$("#txtStation"+i).find("span[class='dropSeld cu']").text().replace("(停招)","")
+         					+ "】 \r\n地点:"+$("#address").val()
+         					+ "  联系人:" + $("#linkman").val()
+         					+ "  电话:" + $("#link_tel").val() 
+         					+ "\r\n" + ($("#remark").val().replace("如需带什么资料等...", "") != "" ? "  注:" + $("#remark").val() : "");
+         	{//if/}
+			
+			$("#complete" + i).text(smscontent_complete);
+			$("#complete" + i).attr("title", smscontent_complete);
+			$("#simple" + i).text(smscontent_simple);
+			$("#simple" + i).attr("title", smscontent_simple);
+        }
+
+		clearTimeout(cid);
+		cid = setTimeout("inviteMulti._smsinfochange(-1)", 500);
+	},
+	successCallBack : function(json) {
+		// 提交form后，回调函数
+		if (json && json.error) {
+		    if(json.error == '短信数/推广金/余额不足'){
+                $.showModal("{/get_url rule='/resume/resumeinfomsghtml'/}?type=2", {title:'提示'});
+			}else{
+                $.message(json.error, {title: "系统提示", icon: "fail"});
+			}
+			return;
+		}
+
+	    if (json && json.status) {
+	    	if (json.inviteperson.length > 0) {
+	    		var applyids = new Array();
+	    		for (var i = 0; i < json.inviteperson.length; i++) {
+	    			applyids[i] = json.inviteperson[i].apply_id;
+	    			$("#option" + json.inviteperson[i].apply_id).css("display", "none");
+		        }
+	    		apply._setSelectMultiAppId(applyids);
+		    }
+
+	        if (json.status == "succeed") {
+	          	//成功
+	       		$.anchorMsg("面试邀请发送成功", {
+	       			onclose: function() {
+	       				$('#btnSendInvite').closeDialog();
+	       			}
+	    		});
+	    		window.location.reload();
+	        } else if (json.status == "fail") {
+                //失败
+	        	$.message(json.successitem + json.failitem, { title: "系统提示", icon: "fail" });
+	        }
+	    }
+	},
+	_inviteValidate : function() {
+		//$.proxy(inviteValid.form, inviteValid);
+		$(':input[name="chkResume[]"]').each(function(){
+			var tagindex = $(this).val();
+			var resumeid = $(this).attr("tagresumeid");
+			if ($(this).attr("checked")) {
+			    $("#hddResumeID" + tagindex).val(resumeid); 
+				
+				var dateval = $("#hddInviteDate" + tagindex).val();
+				var timeval = $("#hddInviteTime" + tagindex).val();
+			    if (dateval == 99) {
+			        var cusdateval = $("#txtCustomTime"+tagindex).val(); 
+			        if ($.trim(cusdateval) == "") {
+			        	$("#hddInviteCustomTime" + tagindex).val(''); 
+			        	$("#datetime_error" + tagindex).show();
+			        } else {
+			        	$("#hddInviteCustomTime" + tagindex).val(cusdateval); 
+			        	$("#datetime_error" + tagindex).hide();
+			        }
+			    } else {
+					$("#hddInviteCustomTime" + tagindex).val(''); 
+					if (dateval == "" || timeval == ""){
+					  	$("#datetime_error" + tagindex).show();
+					} else {
+					  	$("#datetime_error" + tagindex).hide();
+					}
+			    }
+			} else {
+				$("#hddResumeID" + tagindex).val('0');
+				$("#datetime_error" + tagindex).hide(); 
+			} 
+		});
+		clearTimeout(cid2);
+		cid2 = setTimeout("inviteMulti._inviteValidate()", 500);
+    }
+};
+inviteMulti.initialize();
+</script>
+</body>
+</html>

@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>{/$shaungxuan_net_info.title/}</title>
+	<link rel="stylesheet" type="text/css" href="{/version file='base.css'/}"/>
+	<link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}"/>
+	<link rel="stylesheet" type="text/css" href="{/version file='videjobfair.css'/}"/>
+	<link rel="stylesheet" type="text/css" href="{/version file='mobile.swiper.css'/}"/>
+	<link rel="stylesheet" type="text/css" href="{/version file='m_font_style.css'/}"/>
+	<link rel="stylesheet" type="text/css" href="{/version file='center.css'/}"/>
+	<script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.min.js'/}"></script>
+	<script type="text/javascript" language="javascript" src="{/version file='mobile.swiper.js'/}"></script>
+	<script type="text/javascript" src="{/version file='jquery.cookie.js'/}"></script>
+	<script type="text/javascript" src="{/version file='layer.js'/}"></script>
+	<link type="text/css" href="{/version file='layer.css'/}">
+	<script type="text/javascript" src="{/version file='base_script.js'/}"></script>
+	<style>
+		.newheadMage .login_reg u,.newheadMage .login_reg .reg_new {
+			display : none;
+		}
+	</style>
+</head>
+<body>
+
+{/$head_data/}
+
+{/*顶部*/}
+<div class="businessHallTop"
+	 style="background: url({/$shaungxuan_net_info.pc_post_path/}/{/$shaungxuan_net_info.pc_poster/}) center top no-repeat; background-size: 100% 100%;">
+    {/*<span class="businessHallTit">{/$shaungxuan_net_info.title/}</span>*/}
+    {/*<span class="businessHallTime">{/$shaungxuan_net_info.start_time|date_format:'m-d H:i'/}*/}
+    {/*		--{/$shaungxuan_net_info.end_time|date_format:'m-d H:i'/}</span>*/}
+    {/*<span class="businessHallCoop"><em>主办：{/$shaungxuan_net_info.sponsor/}</em><em>承办：重庆市人才交流服务中心</em><em>协办：重庆汇博信息科技有限公司</em></span>*/}
+    {/if $person_action_history/}
+		<div class="businessHallRoll">
+			<div class="imgs">
+				<div class="swiper-container swiper-container-company">
+					<div class="swiper-wrapper">
+                        {/foreach $person_action_history as $val/}
+							<div class="swiper-slide">
+								<span>
+									<img src="{/$val.headphoto/}"
+										 onerror="javascript:this.src='{/$val.default_photo/}'"/>
+									<em>{/$val.str_lable/}</em>
+								</span>
+							</div>
+                        {//foreach/}
+					</div>
+				</div>
+			</div>
+		</div>
+    {//if/}
+</div>
+{/*活动内容*/}
+
+
+<div class="businessHallNum">
+    {/if $shaungxuan_net_info.content/}
+		<div class="businessHallIntroduce">
+			<div class="businessHallIntroduce_temp">
+				<i class="introduceleft"></i>
+				<i class="introduceright"></i>
+				<p>
+                    {/$shaungxuan_net_info.content|truncate:145:'...'/}
+                    {/if mb_strlen($shaungxuan_net_info.content)>145/}
+						<a href="javascript:void(0);"
+						   onclick="showDialog('活动介绍','800')">详情</a>
+                    {//if/}
+				</p>
+				<div class="clear"></div>
+			</div>
+		</div>
+    {//if/}
+	<div class="businessHallNumx businessHallNumxLeft" {/if !$shaungxuan_net_info.content/}style="border-radius: 8px 0 0 8px;"{//if/}>
+		<em>招聘企业</em>
+		<span>{/$school_tip_data.company_num/}<i>家</i></span>
+	</div>
+	<div class="businessHallNumx businessHallNumxCenter">
+		<em>招聘岗位</em>
+		<span>{/$school_tip_data.job_num/}<i>个</i></span>
+	</div>
+    {/if $sid != 70/}
+		<div class="businessHallNumx businessHallNumxRight" {/if !$shaungxuan_net_info.content/}style="border-radius: 0 8px 8px 0;"{//if/}>
+			<em>参与求职者</em>
+			<span>{/$school_tip_data.person_num/}<i>人</i></span>
+		</div>
+    {//if/}
+	<div class="clear"></div>
+</div>
+
+{/if $interviewtimenet_data/}
+	<div class="various_time">
+        {/if $interviewtimenet_beabout_state == 0/}
+			<div class="various_time_l" style="top: 31px">
+				<span class="vt_title">剩余报名时间：</span>
+				<span class="vt_time" id="vt_day">{/$interviewtimenet_beabout_time.day/}</span><span class="vt_unit">天</span>
+				<span class="vt_time" id="vt_hour">{/$interviewtimenet_beabout_time.hour/}</span><span class="vt_unit">小时</span>
+				<span class="vt_time" id="vt_minute">{/$interviewtimenet_beabout_time.minute/}</span><span class="vt_unit">分</span>
+				<span class="vt_time" id="vt_second">{/$interviewtimenet_beabout_time.second/}</span><span class="vt_unit">秒</span>
+			</div>
+        {//if/}
+		<div class="various_time_r {/if !$interviewtimenet_beabout_state == 0/}no_various_time_r_temp{//if/}">
+			<span class="vt_title vt_title_temp {/if !$interviewtimenet_beabout_state == 0/}no_various_time_r{//if/}">视频面试时间：</span>
+			<div class="vt_content">
+                {/foreach $interviewtimenet_data as $val/}
+					<span class="vt_delTime">{/$val.start_time_desc/}</span>
+                {//foreach/}
+			</div>
+		</div>
+	</div>
+{//if/}
+
+<div class="businessHallTab">
+	<a href="javascript:;" class="JobFairList_type_change {/if $JobFairList_type=='company'/}cur{//if/}" data_id="company"><span
+				class="icon-pc-enterprise pcicon_one"></span>企业大厅</a>
+	<a href="javascript:;" class="JobFairList_type_change {/if $JobFairList_type=='person'/}cur{//if/}" data_id="person"><span
+				class="icon-icon_recruit_industry pcicon_two"></span>求职者大厅</a>
+	<div class="clear"></div>
+</div>
+
+<div id="list_data">
+    {/$list_html/}
+</div>
+
+<!-- 浮动右边	 -->
+<div class="businessHallWindow">
+	<a href="javascript:;" class="companySignedUp">
+		<img src="{/$siteurl.style/}/img/company/video/videi_job_img09.png"/>企业报名
+	</a>
+	<a href="{/$head_info_data.company_login_url/}?redirect=/shuangxuannet" class="companyLogin">
+		<img src="{/$siteurl.style/}/img/company/video/videi_job_img10.png"/>企业登录
+	</a>
+</div>
+
+<!-- 企业报名弹窗 -->
+<div class="m_master"></div>
+<div class="companySignx">
+	<div class="companySignTit">
+		<span class="companySignPhone">报名联系电话：{/$shaungxuan_net_info.enter_phone_desc/}</span>
+		<i class="companySignClose"></i>
+	</div>
+	<span class="companyNameTit">企业报名</span>
+	<div class="signPut">
+		<img src="{/$siteurl.style/}/img/company/video/videi_job_img20.jpg"/>
+		<input type="text" name="companyName" id="companyName" placeholder="请输入企业名称" value="">
+	</div>
+	<div class="signPut">
+		<img src="{/$siteurl.style/}/img/company/video/videi_job_img21.jpg"/>
+		<input type="text" name="companyPhone" id="companyPhone" placeholder="请输入联系电话" value="">
+		<input type="hidden" name="sid" id="sid"/>
+	</div>
+	<a href="javascript:void(0);" class="companySignBtn">提交</a>
+</div>
+
+<!-- 企业报名悬浮底部 -->
+<div class="bottombtn">
+    {/if $shaungxuan_net_info.activity_school_state==2 || $shaungxuan_net_info.is_signup == 1 || $interviewtimenet_beabout_state > 0 || !$interviewtimenet_data/}
+		<a href="javascript:void(0);" class="bot_companySignedUp"><span class="icon-employer_sign_off botIcon"></span>企业报名</a>
+    {/else/}
+		<a href="javascript:void(0);" class="bot_companySignedUp"><span class="icon-employer_sign_off botIcon"></span>企业报名</a>
+        {/if $person_enter_data/}
+            {/*已报名*/}
+			<a href="javascript:void(0);" class="bot_workerSignedUp"><span class="icon-apply-succeed botIcon"></span>已报名</a>
+        {/else/}
+			<a href="javascript:void(0);" class="bot_workerSignedUp"><span class="icon-apply-succeed botIcon"></span><span
+						class="bot_workerSignedUp_html">求职者报名</span></a>
+        {//if/}
+    {//if/}
+</div>
+
+<div class="activityDetailsx" style="display: none;">{/$shaungxuan_net_info.content/}</div>
+<form id="web_subscribe_form" action="//www.huibo.com/jobsearch/" method="post"><input type="hidden" name="subscribe_origin" value="nosearchpage">
+</form>
+<script type="text/javascript">
+
+    var vt_top_l_top = $('.various_time').height() - $('.various_time_l').height();
+    $('.various_time_l').css('top', vt_top_l_top / 2 + 'px');
+    $('.vt_title_temp').css('top', vt_top_l_top / 2 + 2 + 'px');
+	
+	
+	var businessHallList_length = $('.businessHallList').children().length
+	for(var i = 0;i < businessHallList_length;i++) {
+		var businessHallLix02 = $('.businessHallList').children().eq(i).children('span').html().replace(/\s/g, "")
+		$('.businessHallList').children().eq(i).children('span').html(businessHallLix02)
+	}
+	
+    var is_IndexAutoAddEnter = Number('{/$is_IndexAutoAddEnter/}');
+    var is_person_enter_data = Number('{/$is_person_enter_data/}');
+    var login_dialog, show_Dialog, Dialog, jobFairCodeHtml;
+    var school_source = Number('{/$head_info_data.school_source/}');
+    var scrollTop = Number('{/$scrollTop/}');
+    var page = 1;
+    var is_company_signup = Number('{/$shaungxuan_net_info.is_company_signup/}');
+    var loadingPage = false;
+    var sid = Number('{/$sid/}');
+    var user_id = Number('{/$user_id/}');
+    var cookie_domain = '{/$cookie_domain/}';
+    var is_businessHallListx = Number('{/$is_businessHallListx/}');
+    $('.businessHallList .businessHallListx:nth-child(3n+2)').addClass('jobSeekersHall3n');
+    var mySwiperCompany = new Swiper('.swiper-container-company', {
+        autoplay: true,
+        autoplayDisableOnInteraction: false,
+        speed: 5000,
+        loop: true,
+        freeMode: true,
+        slidesPerView: 6,
+        slidesPerGroup: 1,
+    });
+
+    hbjs.use('@confirmBox', function (m) {
+
+        var ConfirmBox = m['widge.overlay.confirmBox'],
+            cookie = m['tools.cookie'],
+            fontSize = 18,
+            pWidth = 70;
+        Dialog = m['widge.overlay.hbDialog'];
+
+        var clientWidth = document.body.clientWidth;
+        if (clientWidth < 1400) {
+            $('.businessHallWindow').addClass('businessHallWindow1400');
+        }
+
+        // 参与视频招聘会
+        var jobFairCode = new Dialog({
+            close: 'X',
+            idName: 'jobFairCode_dialog',
+            title: '参与视频招聘会',
+            width: 400,
+        });
+        if (school_source == 1) {
+            jobFairCodeHtml = '<div class="jobFairCodex"><span>因技术原因视频面试当前仅能在app中参与，请提前<i>下载</i>或<i>打开汇博app</i>。对您造成的不便，敬请谅解。</span>' +
+				'<img src="/index/QrCodeScanImage?scan_url={/urlencode($head_info_data.down_app_url)/}" /><em>微信扫码下载</em></div>';
+        } else {
+            jobFairCodeHtml = '<div class="jobFairCodex"><span>因技术原因视频面试当前仅能在app中参与，请提前<i>下载</i>或<i>打开快米app</i>。对您造成的不便，敬请谅解。</span><img src="/index/QrCodeScanImage?scan_url={/urlencode($head_info_data.down_app_url)/}" /><em>微信扫码下载</em></div>';
+        }
+        //单位/职位点击
+        $(document).on('click', '.businessHallListx', function () {
+            //先登录  取消验证登录
+            //          if(!user_id){
+            //              $.cookie("businessHallListx:" + sid, 1, {
+            //                  path: '/',
+            //                  expires: 1,
+            //                  domain: cookie_domain,
+            //              });
+            //              //login_dialog.setContent({content:  '{/get_url rule="/login/Login1" domain='www'/}'});
+            // 	login_dialog.setContent({content: person_login_url, 'title': '求职者登录'});
+            //              login_dialog._addLoading();
+            //              login_dialog.on('loadComplete', function () {
+            //                  login_dialog._removeLoading();
+            //              });
+            //              login_dialog.show();
+            //              return false;
+            // }
+            jobFairCode.setContent(jobFairCodeHtml).show();
+        });
+        //自动点击
+        if (is_businessHallListx) {
+            $('.businessHallListx').click();
+        }
+
+        //报名成功
+        var signedUpSuccess = new Dialog({
+            close: 'X',
+            idName: 'signedUpSuccess_dialog',
+            title: '参与视频招聘会',
+            width: 400,
+        });
+        if (school_source == 1) {
+            signedUpSuccessHtml = '<div class="jobFairCodex"><span>{/if !$person_enter_data/}报名成功，{//if/}面试将于{/$interviewtimenet_beabout/}正式开始。<br>因技术原因视频面试当前仅能在app中参与，请提前<i>下载</i>或<i>打开汇博app</i>。对您造成的不便，敬请谅解。</span><img src="/index/QrCodeScanImage?scan_url={/urlencode($head_info_data.down_app_url)/}" /><em>微信扫码下载</em></div>';
+        } else {
+            signedUpSuccessHtml = '<div class="jobFairCodex"><span>{/if !$person_enter_data/}报名成功，{//if/}面试将于{/$interviewtimenet_beabout/}正式开始。<br>因技术原因视频面试当前仅能在app中参与，请提前<i>下载</i>或<i>打开快米app</i>。对您造成的不便，敬请谅解。</span><img src="/index/QrCodeScanImage?scan_url={/urlencode($head_info_data.down_app_url)/}" /><em>微信扫码下载</em></div>';
+        }
+        if(is_IndexAutoAddEnter && !is_person_enter_data){
+            signedUpSuccess.setContent(signedUpSuccessHtml).show();
+        }else if(is_person_enter_data){
+            // 您已报名该场活动
+			var msg = "您已报名该场活动";
+            ConfirmBox.timeBomb(msg, {
+                name: 'success',
+                width: fontSize * msg.length + pWidth,
+            });
+		}
+
+        //求职者报名
+        $(document).on('click', '.bot_workerSignedUp', function () {
+            if (!user_id) {
+                $.cookie("IndexAutoAddEnter:" + sid, 1, {
+                    path: '/',
+                    expires: 1,
+                    domain: cookie_domain,
+                });
+                //先登录
+                login_dialog.setContent({content: person_login_url, 'title': '求职者登录'});
+                login_dialog._addLoading();
+                login_dialog.on('loadComplete', function () {
+                    login_dialog._removeLoading();
+                });
+                login_dialog.show();
+                return false;
+            }
+            var url = "{/get_url rule="/index/IndexAutoAddEnter"/}",
+                data = {sid: sid};
+            ajax_request_function(url, data, {
+                success: function (data) {
+                    $('.bot_workerSignedUp .bot_workerSignedUp_html').html('已报名');
+                    signedUpSuccess.setContent(signedUpSuccessHtml).show();
+                },
+            }, true);
+        });
+
+        // 填写企业报名信息
+        $(document).on('click', '.companySignedUp', function () {
+            $('.m_master,.companySignx').show();
+        });
+        $(document).on('click', '.companySignClose', function () {
+            $('.m_master,.companySignx').hide();
+        });
+        $('body').on('click', '.companySignBtn', function () {
+            var companyName = $('#companyName').val();
+            var companyPhone = $('#companyPhone').val();
+            var msg = '';
+            if (companyName == '') {
+                msg = '请输入企业名称';
+                return ConfirmBox.timeBomb(msg, {
+                    name: 'fail',
+                    width: fontSize * msg.length + pWidth,
+                });
+            }
+            if (companyPhone == '') {
+                msg = '请输入联系电话';
+                return ConfirmBox.timeBomb(msg, {
+                    name: 'fail',
+                    width: fontSize * msg.length + pWidth,
+                });
+            }
+            if (is_company_signup == 0) {
+                msg = '该场活动需线下人工审核，请直接联系工作人员电话报名。';
+                return ConfirmBox.timeBomb(msg, {
+                    name: 'fail',
+                    width: fontSize * msg.length + pWidth,
+                });
+            }
+            // else if (!(/^1\d{10}$/.test(companyPhone))) {
+            //     msg = '请输入正确手机号';
+            //     ConfirmBox.timeBomb(msg, {
+            //         name: 'fail',
+            //         width: fontSize * msg.length + pWidth,
+            //     });
+            // }
+            var url = "{/get_url rule='/index/ApplyCompanyPost'/}",
+                data = {sid: sid, company_name: companyName, link_tel: companyPhone};
+            ajax_request_function(url, data, {
+                success: function (data) {
+                    ConfirmBox.timeBomb(data.msg, {
+                        name: 'success',
+                        width: fontSize * data.msg.length + pWidth,
+                    });
+                    setTimeout(function () {
+                        $('.m_master,.companySignx').hide();
+                    }, 800);
+                },
+            });
+        });
+
+        // 提示信息
+        var jobFairCode03 = new Dialog({
+            close: '×',
+            idName: 'jobFairCode_dialog03',
+            title: '提示',
+            width: 400,
+            isAjax: true,
+        });
+
+        var jobFairCodexHtml1 = '<div class="companySignz" style="padding-bottom:20px;overflow: hidden;">' +
+            '<span class="companySignPhone1">企业报名后才可查看求职者简历</span>' +
+            '<div class="companySignBtn2-box"><a href="javascript:void(0);" class="companySignBtn2 cancel">取消</a>' +
+            '<a href="javascript:void(0);" class="companySignBtn1 yes">企业报名</a><div>	' +
+            '</div>';
+        $(document).on('click', '.jobSeekersHall', function () {
+            jobFairCode03.setContent(jobFairCodexHtml1).show();
+        });
+
+        $('body').on('click', '.yes', function () {
+            jobFairCode03.setContent(jobFairCodexHtml1).hide();
+            $('.m_master,.companySignx').show();
+        });
+        $('body').on('click', '.cancel', function () {
+            jobFairCode03.setContent(jobFairCodexHtml1).hide();
+        });
+
+        //底部悬浮按钮
+        $('.bot_companySignedUp').click(function () {
+            $('.m_master,.companySignx').show();
+        });
+    });
+
+    function showDialog(title, width) {
+        var content = $('.activityDetailsx').text();
+        show_Dialog = new Dialog({
+            close: 'X',
+            idName: 'show_Dialog_dialog',
+            title: title,
+            content: '<div class="introduceContent">' + content + '</div>',
+            width: width ? width : 400,
+        });
+        show_Dialog.show();
+    }
+
+    $(function () {
+        //企业大厅--求职大厅 切换
+        $('.JobFairList_type_change').on('click', function () {
+            var type = $(this).attr('data_id');
+            $.cookie("JobFairList_type", type, {path: '/', expires: 1});
+            $('.JobFairList_type_change').removeClass('cur');
+            $(this).addClass('cur');
+            page = 1;//重置翻页
+            loadingPage = false;
+            GetListData(true);
+        });
+
+        //滑动翻页
+        $(document).on('scroll', function () {
+            if ($('.JobFairList_type_change.cur').attr('data_id') == 'person') {
+                if (typeof init_loadingPage == 'number' && init_loadingPage == 1) {
+                    return false;
+                }
+                if (loadingPage == 2) {
+                    // $('.myLoading').html('到底了');
+                    return false;
+                }
+                if (loadingPage == 2) {
+                    // $('.myLoading').html('到底了');
+                    return false;
+                }
+                if (loadingPage == 1) {
+                    return false;
+                }
+                if ($(document).scrollTop() > $('body').height() - 30 - $(window).height()) {
+                    page++;
+                    loadingPage = 1;
+                    GetListData();
+                }
+            }
+        });
+
+        if (scrollTop) {
+            $('body,html').animate({
+                scrollTop: 0,
+            }, 500);
+        }
+
+
+		
+
+        // 倒计时
+        var day = parseInt($('#vt_day').html());
+        var hour = parseInt($('#vt_hour').html());
+        var minute = parseInt($('#vt_minute').html());
+        var second = parseInt($('#vt_second').html());
+        var total = (second + minute * 60 + hour * 60 * 60 + day * 24 * 60 * 60) * 1000;
+        console.log(total);
+        // countFunc(total);
+        timeId = setInterval(function () {
+            total = total - 1000;
+            countFunc(total);
+        }, 1000);
+
+        function checkTime(i) { //将0-9的数字前面加上0，例1变为01
+            if (i < 10) {
+                i = "0" + i;
+            }
+            return i;
+        }
+
+        function countFunc(remainingTime) {
+            if (remainingTime >= 0) {
+                var days = parseInt(remainingTime / 1000 / 60 / 60 / 24, 10); //计算剩余的天数
+                var hours = parseInt(remainingTime / 1000 / 60 / 60 % 24, 10); //计算剩余的小时
+                var minutes = parseInt(remainingTime / 1000 / 60 % 60, 10); //计算剩余的分钟
+                var seconds = parseInt(remainingTime / 1000 % 60, 10); //计算剩余的秒数
+                days = checkTime(days);
+                hours = checkTime(hours);
+                minutes = checkTime(minutes);
+                seconds = checkTime(seconds);
+                $("#vt_day").html(days);
+                $("#vt_hour").html(hours);
+                $("#vt_minute").html(minutes);
+                $("#vt_second").html(seconds);
+            } else {
+                clearInterval(timeId);
+                $("#vt_day").html("00");
+                $("#vt_hour").html("00");
+                $("#vt_minute").html("00");
+                $("#vt_second").html('00');
+            }
+        }
+    });
+
+    //列表翻页
+    function GetListData(is_html) {
+        $.ajax({
+            type: 'post',
+            url: "{/get_url rule='/index/JobFairListAjax'/}",
+            data: {sid: '{/$sid/}', page: page},
+            dataType: 'json',
+            success: function (dataObj) {
+                if (dataObj.code == 200) {
+                    if (dataObj.data.list_html) {
+                        if (is_html) {
+                            $('#list_data').html(dataObj.data.list_html);
+                        } else {
+                            if (typeof init_loadingPage_nodata == 'number' && init_loadingPage_nodata == 1) {
+                                $('#list_data').append(dataObj.data.list_html);
+                            } else {
+                                $('#list_data .businessHallList').append(dataObj.data.list_html);
+                            }
+
+                        }
+                        setTimeout(function () {
+                            if (loadingPage != 2) {
+                                loadingPage = false;
+                            }
+                        }, 300);
+                    }
+                } else {
+                    msg_error(dataObj.msg);
+                }
+            },
+        });
+    }
+</script>
+
+</body>
+</html>

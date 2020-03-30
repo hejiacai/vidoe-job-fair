@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>聊一聊</title>
+    <link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='chat.css'/}" />
+    <script type="text/javascript" language="javascript" src='{/version file="jquery-1.8.3.min.js"/}'></script>
+    
+    <link rel="stylesheet" type="text/css" href="{/version file='comback.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='icons.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='account.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}" />
+
+    <script type="text/javascript" src="{/version file='version.js'/}"></script>
+    <script type="text/javascript">
+    window.CONFIG = {
+            HOST: '{/$siteurl.style/}',
+            COMBOPATH: '/js/v2/'
+    }
+    </script>
+    <script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+    <script type="text/javascript" src="{/version file='global.js'/}"></script>
+    <style>
+        .chatRightList{height:545px}
+        .chatRightList .hiddenPart{display:none}
+        .chatRightList .applyStatus{display:none}
+        .charDgScrollHeight .hideRead{display:none}
+        .charDgScrollHeight .dialogmVoice font.hiddenVoiceTime{display:none}
+        .charDgScrollHeight .dialogoVoice font.hiddenVoiceTime{display:none}
+        .bindButton{
+            display:inline-block;
+            margin-left:10px;
+            width: 100px;
+            height: 30px;
+            background: #66bce4;
+            font-size: 14px;
+            color: #fff;
+            line-height: 30px;
+            border-radius: 2px;
+            outline: none;
+            border:none;
+            cursor: pointer
+        }
+    </style>
+</head>
+	<body style="background:#fff">
+            {/include file="new_header.html" par="全职招聘" no_video_notice=1/}
+            	<div class="notChart" id="noBindCart" style="background: #fff;height:100%">
+			<img src="{/$siteurl.style/}/img/company/chat/chat_icon13.jpg"/>
+                        {/if $error_type ==1/}
+                            <span>{/$error_msg/}
+                            <a class="bindButton" href="javascript:endChannel('{/$channel_id/}');">{/$buttom_name/}</a>
+                            </span>
+                        {/else/}
+                        <span>{/$error_msg/}
+                            {/if !empty($back_url)/}
+                            <a class="bindButton" href="{/$back_url/}">返回面试大厅</a>
+                            {/else/}
+                            <a class="bindButton" href="{/$netfair_url/}/videohall/VideoInterviewHall/?sid={/$sid/}">{/$buttom_name/}</a>
+                            {//if/}
+                        </span>
+                        {//if/}
+			
+                        
+		</div>
+<script>
+   function endChannel(channel_id){
+       var baseInfoUrl = "{/$siteurl.company/}/video/GetApplyBaseInfo";
+        $.post(baseInfoUrl, {channel_id:channel_id,"type":"setApplyEnd"}, function(re){
+           console.log("结束状态成功");
+           window.location.reload();
+        },'json'); 
+       
+   }
+
+</script>
+
+</body>
+</html>

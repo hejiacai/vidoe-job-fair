@@ -1,0 +1,36 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{/$title/}</title>
+</head>
+<body>
+<style>
+    td{text-align: left;}
+
+</style>
+<table border="1">
+    <thead>
+
+    <tr>
+        <th width="200" class="name">招聘职位</th>
+        <th width="150">收到简历</th>
+        <th width="158">邀请面试	</th>
+        <th width="162">面试到场</th>
+        <th width="163">面试通过</th>
+        <th width="150">入职人数</th>
+    </tr>
+    </thead>
+    <tbody>
+    {/foreach $list as $v/}
+    <tr>
+        <td class="name overtext">{/$v['station_new']/}</td>
+        <td class="overtext pos">{/$v['total_count']/}</td>
+        <td class="overtext">{/$v['invit_num']/}</td>
+        <td class="overtext">{/$v['present_num']/}</td>
+        <td class="overtext">{/$v['pass_num']/}</td>
+        <td class="overtext">{/$v['entry_num']/}</td>
+    </tr>
+    {//foreach/}
+    </tbody>
+</table>
+</body>

@@ -1,0 +1,98 @@
+<?php
+	/** 
+	 * @ClassName 简历备注控制器 
+	 * @Desc 简历备注
+	 * @author chenwei@huibo.com
+	 * @date 2013-9-27 上午09:55:20 
+	 * 
+	 * tags 
+	*/
+
+	class controller_resumeremark extends components_cbasepage {
+
+	    function __construct() {
+	        parent::__construct();
+	    }
+
+	    /**
+	     *@Desc 列表展示
+	     *@return array
+	    */
+	    public function pageIndex($inPath) {
+	    	$pathdata = base_lib_BaseUtils::sstripslashes($this->getUrlParams($inPath));
+	    	$resume_id = base_lib_BaseUtils::getStr($pathdata['resume_id'],'int',0);
+	    	$service_resumeremark = new base_service_company_resume_resumeremark();;
+	    	$remarks = $service_resumeremark->getResumeRemarkList($this->_userid, $resume_id, 5, 'remark_id,remark,update_time');
+	    	$this->_aParams['remarks'] = $remarks->items;
+	    	$this->_aParams['resume_id'] = $resume_id;
+	    	return $this->render('resume/remarkmanage.html', $this->_aParams);
+	    }
+	    
+	    /**
+	     *@Desc 保存简历备注
+	     *@return type_name
+	    */
+	    public function pageRemarkDo($param) {
+	    	$pathdata = base_lib_BaseUtils::sstripslashes($this->getUrlParams($inPath));
+	    	$operate = base_lib_BaseUtils::getStr($pathdata['operate'],'string','');
+	    	$service_resumeremark = new base_service_company_resume_resumeremark();;
+	    	if($operate=='delete'){
+	    		$remark_id = base_lib_BaseUtils::getStr($pathdata['remark_id'],'int',0);
+	    		$resume_id = base_lib_BaseUtils::getStr($pathdata['resume_id'],'int',0);
+	    		$remark = $service_resumeremark->delResumRemark($this->_userid,$resume_id, $remark_id);
+				if(!$remark){
+					echo json_encode(array('error'=>'删除备注失败'));
+					return ;
+				}
+		    	//获取备注数量
+				$remark_list = $service_resumeremark->getResumeRemarkList($this->_userid, $resume_id, 'remark_id');
+				if($remark_list!==false && count($remark_list->items)>0){
+					$remark_count = count($remark_list->items);
+				}
+				
+				echo json_encode(array('success'=>'true','remark_id'=>$remark_id,'remark_count'=>$remark_count));
+	    	}
+	    	elseif ($operate=='save'){
+	    		$path_data = base_lib_BaseUtils::saddslashes($this->getUrlParams($inPath));
+				$resume_id = base_lib_BaseUtils::getStr($path_data['hidResumeId'],'int',0);
+				$val = new base_lib_Validator();
+				
+				$remark = $val->getStr($path_data['taRemark'],0,30,'备注内容不能超过30字',true);
+				if($val->has_err)
+				{
+					echo $val->toJsonWithHtml();
+					return ;
+				}
+				$items = array('remark'=>$remark,'company_id'=>$this->_userid,'resume_id'=>$resume_id,'update_time'=>date('Y-m-d H:i:s',time()));
+				$remark_id = $service_resumeremark->addResumeRemark($items);
+				if(!$remark_id){
+					echo json_encode(array('error'=>'新增备注失败'));
+					return ;
+				}
+	    		//获取备注数量
+				$remark_list = $service_resumeremark->getResumeRemarkList($this->_userid, $resume_id, 'remark_id');
+				if($remark_list!==false && count($remark_list->items)>0){
+					$remark_count = count($remark_list->items);
+				}
+				echo json_encode(array('remark_id'=>$remark_id,'remark'=>$remark,'update_time'=>date('Y-m-d H:i:s',time()),'remark_count'=>$remark_count));
+	    	}
+	    	return;
+	    }
+		// 获取备注
+		public function pageResumeRemark($inPath) {
+			$path_data = base_lib_BaseUtils::saddslashes($this->getUrlParams($inPath));
+			$resume_remark = new base_service_company_resume_resumeremark();
+			$resume_id = base_lib_BaseUtils::getStr($path_data['resumeid'],'int',null);
+			if(base_lib_BaseUtils::nullOrEmpty($resume_id)) {
+				$json['remark'] = '';
+		   		echo json_encode($json);	
+		   	    return;			
+			}
+			$remark = $resume_remark->getLastResumeRemark($this->_userid,$resume_id,'remark,update_time');
+			$json['remark'] = base_lib_BaseUtils::nullOrEmpty($remark['remark'])?'':  base_lib_BaseUtils::cutstr($remark['remark'],8,'utf-8','',"...");
+			$json['updatetime'] = base_lib_BaseUtils::nullOrEmpty($remark['update_time'])?'':date('Y-m-d',strtotime($remark['update_time']));
+			echo  json_encode($json);
+			return;
+		}
+	    
+	}

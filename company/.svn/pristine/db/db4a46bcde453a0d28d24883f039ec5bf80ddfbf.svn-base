@@ -1,0 +1,604 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+<title>{/$title/}</title>
+<!–[if lt IE9]>
+<script src="{/version file='html5.js'/}"></script>
+<![endif]–>
+<link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='comback.css'/}" />
+<!--<link rel="stylesheet" type="text/css" href="/css/icons.css" />-->
+<link rel="stylesheet" type="text/css" href="{/version file="job-manage.css"/}" />
+<script type="text/javascript" language="javascript" src="{/version file="jquery-1.8.3.min.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="common.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="dialog.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="mediaquery.js"/}"></script><!--响应式兼容-->
+<script type="text/javascript" language="javascript" src="{/version file="ui_menudisplay.js"/}"></script><!--下拉菜单-->
+<script type="text/javascript" language="javascript" src="{/version file="ui_inputFocus.js"/}"></script><!--输入框获取焦点-->
+<script type="text/javascript" language="javascript" src="{/version file="ui_hovchange.js"/}"></script><!--指向改变class-->
+<script type="text/javascript" language="javascript" src="{/version file="ui_drop.js"/}"></script><!--下拉模拟-->
+<!--<script type="text/javascript" language="javascript" src="{/version file="ui_dragsort.js"/}"></script>--><!--拖动插件-->
+<script type="text/javascript" language="javascript" src="{/version file="jquery.form.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='ui_validate.js'/}"></script>
+<script type="text/javascript" src="{/version file='version.js'/}"></script>
+<script type="text/javascript">
+        window.CONFIG = {
+                HOST: '{/$siteurl.style/}',
+                COMBOPATH: '/js/v2/'
+        }
+</script>
+<script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='global.js'/}"></script>
+</head>
+<body id="body">
+<style type="text/css">
+div.content{background:url({/$siteurl.style/}/img/c/index_secr1.jpg) repeat-y right 0 #fff;}
+section.secL{float:left;display:inline;width:750px;}
+section.secR{float:right;display:inline;width:250px;}
+.hd .tabT{height:40px;}
+.hd .tabT .l{float:left;display:inline;}
+.hd .tabT .l ul{float:left; display:inline;}
+/*mj 修改*/
+#auto-refresh{position: relative}
+#auto-refresh em{font-size:12px;color:#666}
+.alt{float:left;border:1px solid #fcde81;background-color: #fdf7d5;color:#666;font-size:12px;padding:3px 5px;margin: 5px 15px;position: relative}
+.hd .tabT .alt i{display: inline-block;width:5px;height: 7px;background: url({/$siteurl.style/}/img/v2/job/ma-icon.jpg) 0 -55px no-repeat;position: absolute;left:-5px;top:8px}
+.hd .tabT .alt{color:#ec8601}
+.hg1 .alt{line-height: 22px;padding:10px;position: absolute;bottom:27px;left:0px;margin:0px;display: none}
+.hg1 .alt i{display: inline-block;width:9px;height: 6px;background: url({/$siteurl.style/}/img/v2/job/ma-icon.jpg) -15px -55px no-repeat;position: absolute;left:85px;bottom:-6px}
+.hd .tabT .l ul li{float:left;display:inline;margin:0 10px 0 0; height:38px; line-height:38px;}
+.hd .tabT .l ul li a{display:inline-block;height:38px;line-height:38px;padding:0 15px;font-size:14px; position:relative; z-index:1;zoom:1;background:#f1f1f1;border:1px solid #e4e4e4;color:#4d4d4d;}
+.hd .tabT .l ul li a:hover{background:#ececec;color:#333;}
+.hd .tabT .l ul li.cu a,.hd .tabT .l ul li.cu a:hover{color:#333;background:#fff;border:1px solid #e4e4e4;border-bottom:1px solid #fff;position:relative; z-index:10;font-weight:bold}
+.oper-box{font-size:12px;padding-top:10px}
+.oper-box .all{float:left;margin-top: 2px}
+.oper-box .all input{margin-right: 5px;vertical-align: middle}
+.sort-select,.select{float:left;margin-left: 10px}
+.sort-select .tit,.select .tit{background-color: #f2f2f2;padding:0px 12px;margin:0px;cursor: pointer;height: 28px;line-height: 28px;float:left}
+.sort-select .tit i,.select .tit i{font-size:12px;color:#b3b3b3;margin:8px 0 0 5px}
+.sort-select a,.select a{color:#666}
+.sort-select ul,.select ul{display: none}
+.show-sort{position: relative;zoom:1;z-index: 2}
+.show-sort .tit{background: #fff;border:1px solid #bfbfbf;border-bottom:0px;padding:0 11px;height:26px;line-height: 26px}
+.show-sort ul{display:inline-block;position: absolute;top:26px;left:0px;border:1px solid #bfbfbf;border-top:0px;background-color: #fff;padding: 5px 0;width:100%}
+.show-sort ul li{cursor: pointer}
+.show-sort ul li a{display: block;padding:2px 10px;background-color: #fff;#position: relative;#zoom:1}
+.show-sort ul li a:hover{background-color:#f2f2f2}
+.search{border:1px solid #ddd;float:right;width:165px;height: 26px;position: relative;background-color: #fff}
+.search span{position: absolute;top:4px;left:5px;color:#666}
+.search input{float:left;width:129px;height: 20px;border:0px;padding:3px}
+.search button{width:27px;height:26px;float:right;background: none;border:0px;color:#e1e1e1;font-size:14px}
+.icon-ji,.icon-ding{width:16px;height: 16px;background: url({/$siteurl.style/}/img/v2/job/ma-icon.jpg) -26px 0 no-repeat;display: inline-block;vertical-align: middle;margin-left: 3px}
+.icon-ding{background-position: 0 0}
+.hg1 p.refresh,.hg1 p.release{margin: 10px 10px 5px 0}
+.hg1 p.refresh a,.hg1 p.release a{display: block;height: 46px;color:#fff;font-size:16px;line-height: 46px;font-weight:bold;text-align: center;margin-left: 0px}
+.hg1 p.refresh a i{font-weight:normal;vertical-align: middle;margin-right: 5px}
+.hg1 p.refresh a{background-color: #7cb1d6}
+.hg1 p.release{padding-bottom: 20px}
+.hg1 p.release a{background-color: #3d85b8}
+.hg1 p.refresh a:hover{background-color: #6d9cbd}
+.hg1 p.release a:hover{background-color: #34729e}
+.ico-status{display: inline-block;width:42px;height: 19px;background:url({/$siteurl.style/}/img/v2/job/ma-icon.jpg) -52px -26px no-repeat;vertical-align: middle;cursor: pointer}
+.open{background-position: 0 -26px}
+.bd .lst .red{color:#ed2801}
+.hg1 .red{color:#ff766f}
+/*/*/
+.hd .tabT .l .tipLay{top:6px;left:0;}
+.hd .tabT .l .tipLayTxt{line-height:23px;background:#fffce3;border:1px solid #fad5a8;color:#d78727}
+.hd .tabT .l .tipLay .tipArr{top:9px;background:url({/$siteurl.style/}/img/common/contrl.gif) no-repeat 0 -5px;}
+.hd .tabT .r{float:right;display:inline;margin:5px 0 0;width:275px;}
+.hd .tabT .r a.btn3{float:left; display:inline;}
+.hd .tabT .r .liSchBox{background:none repeat scroll 0 0 #FFFFFF; border:1px solid #e3e3e3; display:inline; float:right; position:relative; z-index:1;}
+.hd .tabT .r .liSchBox .txtLabel{left:5px;position:absolute;top:0; color:#999999;cursor:text;}
+.hd .tabT .r .liSchBox input{background:none repeat scroll 0 0 transparent; border:0 none;float:left; font-size:12px; height:25px;line-height: 25px;margin:0 5px; width:120px;}
+.hd .tabT .r .liSchBox a.hbFntWes{float:left; font-size:14px; background:#f6f6f6; color:#999; height:25px; line-height:25px; padding:0 7px; zoom:1;}
+.hd .tabT .r .liSchBox a.hbFntWes:hover{background:#f1f1f1;}
+/*mj 修改*/
+.bd{border-top:1px solid #e4e4e4;position:relative; z-index:1;top:-1px;}
+/*/*/
+.bd .lst{padding:10px 0;zoom:1; position:relative; z-index:1;}
+.bd .lst .table{font-size:12px;width:100%}
+.bd .lst .table .formChb input.chb{margin:0;}
+.lst .table tr th{font-weight:normal; color:#999; border-bottom:1px solid #dadada;padding:8px 5px; zoom:1; text-align:left; height:20px; line-height:20px;}
+.lst .table tr td{border-bottom:1px solid #f1f1f1; padding:8px 5px; zoom:1; color:#424242; text-align:left; height:20px; line-height:20px;}
+.lst .table .wid220{width:260px; overflow:hidden;white-space:nowrap;text-overflow:ellipsis;height:20px; }
+.lst .table .wid300{width:300px; position: relative;}
+.lst .table .wid110{width:110px;}
+.lst .table .wid120{width:120px;}
+.lst .table .wid90{width:90px;}
+.lst .table .wid80{width:65px;}
+.lst .table .wid160{width:170px;}
+.lst .table .wid140{width:140px;}
+.lst .table .wid30{width:30px;}
+.lst .table .wid300 .reason{
+    width:280px; cursor: pointer; height: 45px; line-height: 24px;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+}
+.lst .table .lstBox span.tipTxt a{color:#999; margin:0 2px;}
+.lst .table .lstBox span.tipTxt a.more{}
+.lst .table .lstBox .tipLoadTxt{background:url({/$siteurl.style/}/img/common/loading.gif) no-repeat 4px 4px;}
+.lst .table .lstBox tr.hov{background:#fffdf3;}
+.lst .table .lstBox b{font-weight:normal; background:#FFFCE3; border:1px solid #FAD5A8; color:#ff3b3b; padding:2px 4px; margin-left:5px;}
+.lst .table .lstBox tr.hov span.tipTxt a{color:#3d84b8;}
+.lst .table .lstBox tr.hov span.tipTxt a:hover{color:#0af;}
+.lst .table .lstBox tr.hov a.jobName{color:#3d84b8;}
+.lst .table .lstBox tr.hov a.jobName:hover{color:#0af;}
+.lst .table .lstBox tr.hov span.tipTxt .tipTxtBox a{color:#424242;}
+.lst .table .lstBox tr.hov span.tipTxt .tipTxtBox a:hover{background:#f2f2f2; color:#424242;}
+.lst1 .table .lstBox a.jobName{line-height:20px; font-size:12px; font-weight:bold;}/*mj 12*/
+.lst1 .table .lstBox a.aud{cursor:text; color:#424242; font-weight:bold; font-size:14px;}
+.lst1 .table .lstBox span.tipTxt{position:relative;}
+.lst1 .table .lstBox span.tipTxt i.hbFntWes{font-size:14px; margin-left:3px;}
+.lst1 .table .lstBox span.tipTxt .tipTxtBox{position:absolute; right:-10px;top:22px;width:100px; background:#fff; padding:5px 0; zoom:1; border:1px solid #dadada;z-index: 2}
+.lst1 .table .lstBox span.tipTxt .tipTxtBox a{display:block; padding:0 10px; zoom:1; line-height:22px; color:#424242; margin:0;}
+.lst1 .table .lstBox span.rec a.unRead{font-size:12px;color:#fff;background:#aaa; margin-left:2px;padding:0 4px;border-radius:5px;height:18px;line-height:18px;}
+.lst1 .table .lstBox span.rec a.unRead:hover{background:#999;}
+.lst2 .table .lstBox a.jobName{font-size:14px; font-weight:bold; color:#666;}
+.lst1 .table .lstBox em.num,.lst2 .table .lstBox em.num{font-size:12px;color:#fff;margin:0 5px;background:#ed7066;padding:0 3px;margin-left:5px;border-radius:5px;height:16px;line-height:16px; cursor:pointer;}
+.allBtn{margin:15px 0 0 5px;}
+
+.remTxt{height:30px; line-height:30px; background:#fffce3; border:1px solid #fad5a8; font-size:12px; margin-top:10px; padding-left:10px;}
+.remTxt a{margin-left:5px;}
+
+.section .noData{font-size:18px;margin:85px 0;}
+.section .noData p{margin-bottom:20px;}
+
+/*右侧*/
+.hg1{padding:20px 10px 0 20px;zoom:1;font-family:"宋体";border-bottom:1px solid #DEDEDE}/*mj 修改*/
+
+.hg1 p.comName{font-size:12px; font-weight:bold; margin-bottom:5px; line-height:18px;}
+.hg1 span{font-size:12px; display:block; line-height:22px;}
+.hg1 span em{color:#666;}
+.hg1 span .expTxt i.hbFntWes{font-size:14px; margin-left:5px; cursor:pointer; color:#3d84b8;}
+.hg1 span .expTxt{position:relative; z-index:1; height:28px; line-height:28px; display:inline;}
+.hg1 span .expTxt .expBox{position:absolute; bottom:24px;left:-90px; background:#fffbe8; border:1px solid #ffe6bb; width:165px; padding:0 10px; zoom:1; line-height:26px; z-index:999;}
+.hg1 span .expTxt .expBox em{ background:url({/$siteurl.style/}/img/common/common.gif) no-repeat -174px -12px; height:10px; width:19px; font-size:0; position:absolute; left:90px; bottom:-10px;}
+.hg1 span .expTxt .expBox b{margin:0 3px;}
+.hg1 span .expTxt .expBox p{line-height:20px; padding:5px 0; zoom:1;}
+.hg1 p{font-size:12px; line-height:24px;_line-height:22px}/*mj 修改*/
+.hg1 p em{color:#666;}
+.hg1 p a{margin-left:10px;}
+.hg1 p i.time{color:#666; font-family:'Times New Roman',Helvetica,sans-serif;}
+.hg1 i.ico{vertical-align:middle;}
+.hg1 p a.btnsF14{padding:0 75px; zoom:1; margin:8px 0 0 0; width:208px; padding:0; text-align:center;}
+
+.secR h3{font-weight:bold;}
+.hg2{border-bottom:1px solid #dedede;border-top:1px solid #fff}
+.hg2 h3{margin-bottom:10px; font-size:14px; color:#999; font-weight:normal;}
+.hg2 dl{height:85px;}
+.hg2 dl dt{width:61px;height:76px;background:url({/$siteurl.style/}/img/common/user100_125.jpg) no-repeat;float:left;margin:5px 0 0;}
+.hg2 dl dt img{width:61px; height:76px;}
+.hg2 dl dd{float:left;display:inline;margin:5px 0 0 10px;}
+.hg2 dl dd p{font-size:12px; color:#999;}
+.hg2 dl dd p.name{color:#424242;}
+.hg2 dl dd p b{font-weight:normal;}
+
+/*招聘会*/
+.hg3{border-top:1px solid #fff;}
+.hg3 h3{margin-bottom:15px;}
+.hg3 h3 a{float:right; font-size:12px; font-weight:normal;}
+.hg3Tab{}
+.hg3TabT{margin-bottom:15px;}
+.hg3TabT ul li{float:left;display:inline;width:55px;height:50px;border:1px solid #dadada; text-align:center;margin:0 10px 0 0; cursor:pointer; position:relative; z-index:1;}
+.hg3TabT ul li p.week{background:#e6eefb;color:#55738b;height:30px;line-height:30px;}
+.hg3TabT ul li p.date{background:#fff;color:#666;font-size:12px;height:20px;line-height:20px;}
+.hg3TabT ul li b{ position:absolute;top:50px;left:50%;margin-left:-6px;background:url({/$siteurl.style/}/img/c/c.gif) no-repeat -430px 0;width:12px;height:6px;display:none;}
+.hg3TabT ul li.cu b{display:block;}
+.hg3TabT ul li.cu p.week{background:#54728c;color:#fff;}
+.hg3TabCon{font-size:12px;}
+.hg3TabCon dl dt{margin-bottom:5px;}
+.hg3TabCon dl dd p{color:#999;margin-bottom:10px;}
+.hg3TabCon dl dd p a.btn3{margin:0;}
+
+.RefreshTip{width:530px;}
+.RefreshTip p{test-align:left;line-height:26px;}
+.RefreshTip p.tit{padding-bottom:5px;line-height:28px; font-weight:bold;}
+.RefreshTip div{margin:20px 0 0 190px;}
+
+/*==========开诚布公弹窗========*/
+.speak_fBg{width:640px; background:#fff; font-family:"微软雅黑"; position:absolute; top:0;left:50%;margin:140px 0 0 -320px;z-index:10001; overflow:hidden;border-radius:5px;-moz-border-radius:5px;-webkit-border-radius:5px;-o-border-radius:5px;}
+.speakTit{width:560px; padding:40px; background:#fff; overflow:hidden; text-align:left;}
+.speakTit span,.speakTit b{ display:block; color:#333;line-height:25px;}
+.speakTit i{ display:block; color:#ed1919;}
+.speakTit p{ text-align:right; color:#999;}
+.set_bm{width:640px; overflow:hidden; background:#f2f8f8;}
+.sala_btn{ display:block; text-align:center; color:#0bb0ed; padding:30px 0 0 0;}
+.sala_btn:hover{ text-decoration:underline;}
+.set_btn{margin:30px 0 30px 0;}
+.set_btn a{ display:inline-block; padding:8px 26px; color:#fff; background:#1fa4c7; margin-right:10px; border:1px solid #1fa4c7; border-radius:5px;-moz-border-radius:5px;-webkit-border-radius:5px;-o-border-radius:5px;}
+.set_btn a:hover{ background:#0eaed8; border:1px solid #0eaed8;}
+.set_btn a:active{ background:#1691b1; border:1px solid #1691b1;}
+.set_btn .btn_shut{ background:#f2f8f8; border:1px solid #ccc; color:#666;}
+.set_btn .btn_shut:hover{background:#f94e4e; border:1px solid #f94e4e; color:#fff; }
+.set_btn .btn_shut:active{ background:#d54949; border:1px solid #d54949;}
+
+/*新版职位列表*/
+section.secL{display:inline;width:1000px;}
+.newCtantBg{ overflow:hidden; padding:0px; border-top:1px solid #fff;}
+.newConsultant{ overflow:hidden; border-bottom:1px solid #DEDEDE; padding:10px 8px;}
+.newConsultant li{ float:left;}
+.newConsultant li a{ display:block; float:right; margin:25px 0 0 5px;}
+.newConsultant li p{ color:#424242; line-height:24px;}
+.newConsultant li p em{ color:#999; padding-left:10px;}
+div.content{background:#fff}
+.lst .table tr td span img{ display:inline-block; vertical-align:top; margin-left:2px;}
+.lst .table .lstBox b.gen-binding {background: #ff9b00;border:0px;color:#feffff;border-radius: 2px}
+.myjob-span{padding: 0px 15px 0 20px;margin:0px;display:block;float:left;position: relative;line-height: 25px}
+.myjob-span input{position: absolute;left:0px;top:7px;#top:2px;margin:0;padding:0}
+
+.show_alt{ white-space:initial;display: none; width: 260px;
+    overflow: hidden; position: absolute;top: 50px;
+    left: 5px; z-index: 10; display: none;padding: 8px; line-height:20px;
+    font-size: 12px; border: 1px solid #f6e5a6; background: #fffadd; color: #604e29;}
+</style>
+{/include 'new_header.html' par="全职招聘" cur='职位管理'/}
+<div class="content" id="content">
+    <!---20151208 微信二维码 start -->
+      <style>
+          .content{position: relative}
+          .ewmBox{display: none;position: absolute;right:-110px;top:0px;width:100px;}
+          .ewmBox a{display: inline-block;width:24px;height:24px;background: url({/$siteurl.style/}/img/c/weixin/close2.jpg) no-repeat;position: absolute;top:0px;right:0px}
+          .ewmBox a:hover{background: url({/$siteurl.style/}/img/c/weixin/close2_hover.jpg) no-repeat}
+      </style>
+      <!--<div class="ewmBox" id="ewmBox">
+          <a href="" class="close"></a>
+          <img src="ewm1.jpg" />
+          <p>关注汇博招聘<br />随时随地刷新简历</p>
+      </div>-->
+      <div class="ewmBox" id="ewmBox1" style="top:0px;display: block;">
+        <img src="{/$siteurl.style/}/img/company/company_code.jpg" />
+        <!--<p style="font-size: 14px;color:#4e74d9">汇博企业版 APP<br><span style="font-size: 16px">随时处理简历<br>提高招聘效率</span></p>-->
+    </div>
+      <!---20151208 微信二维码 end -->
+	<section class="secL">
+    	<hgroup style="min-height:600px;">
+            <div class="hd" id="tab">
+                <div class="tabT" id="TabT">
+                    <div class="l">
+                        <ul>
+                            <li><a class="md_inmrecruit" href="{/get_url rule="/index/JobList/"/}">招聘中（<em id="jobListUseCount">{/$use_job_count/}</em>）<b></b></a></li>
+                            <li class="cu"><a class="md_endmrecruit" href="{/get_url rule="/index/JobList/" data="status=$stop_job_status"/}">已结束招聘（<em id="jobListStopCount">{/$stop_job_count/}</em>）<b></b></a></li>
+                        </ul>
+                        {/if $job_over_time_count > 0/}
+                        <div class="tipPos">
+                        	<div class="tipLay">
+                            	<div class="tipLayTxt tipw100"><div class="tipArr"></div>{/$job_over_time_count/}个职位刚刚过期</div>
+                            </div>
+                        </div>
+                        {//if/}
+                    </div>
+                    <div class="r">
+                        <label class="myjob-span clearfix"><input class="md_myjob" type="checkbox" name="myjob" {/if $is_myjob/}checked{//if/} />我的职位</label>
+                    	<form method="get" id="formSearchMyJob" action='{/get_url rule="/index/JobList/" data="status=$stop_job_status"/}'>
+                    		<div class="liSchBox" id="liSchBox"><input value="{/if !base_lib_BaseUtils::nullOrEmpty($search_keyword)/}{/$search_keyword/}{//if/}" name="txtStation" type="text" watermark="搜索职位" id="liSchText" class="text watermark"><a onclick="$('#formSearchMyJob').submit();" id="btnSearch" name="btnSearch" class="hbFntWes md_search" href="javascript:void(0);">&#xf002;</a></div>
+                   		</form>
+                    </div>
+                </div>
+            </div>
+            <div class="bd" id="TabC">
+                <div class="tabCon">
+                    <div class="lst lst2" id="lst2" {/if empty($job_list) || count($job_list) == 0/}style="display:none;"{//if/}>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th class="wid30"><span class="formChb"><input id="upAllSelect" type="checkbox" class="chb"></span></th>
+                                    <th class="wid300">职位名称</th>
+                                    <th class="wid120">职位招聘人</th>
+                                    <th class="wid120">收到的简历</th>
+                                    <th class="wid120">未读简历</th>
+                                    <th class="wid120">待处理的简历</th>
+                                    <th class="wid120">过期时间</th>
+                                    <th class="wid140">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody class="lstBox" id="lstBox">
+                            	{/section name=job loop=$job_list/}
+                                <tr id="li{/$job_list[job].job_id/}">
+                                    <td class="wid30"><span class="formChb"><input value="{/$job_list[job].job_id/}" type="checkbox" name="chkjob" class="chb"></span></td>
+                                    <td class="wid300">
+                                    	<p>
+                                    		<a title="{/$job_list[job].station/}" class="{/if $job_list[job].check_state == 4/}aud{/else/}jobName{//if/}" {/if $status==$stop_job_status && $job_list[job].check_state!=2 && $job_list[job].check_state!=4/}href="{/get_url rule="/job/mod/" data="job_id={/$job_list[job].job_id/}"/}" target="_blank"{/else/}href="javascript:void(0);"{//if/}>{/$job_list[job].sub_station/}</a>
+	                                    	{/if $status == $stop_job_status && $job_list[job].check_state == 2/}
+	                                		<b>审核未通过</b>
+                                            {/if $job_list[job].audit_remark/}
+                                                <div class="reason" >
+                                            {/base_lib_BaseUtils::cutstr($job_list[job].audit_remark,45,"utf-8","","...")/}
+                                                    {/*{/$job_list[job].audit_remark/}*/}
+                                                    <div class="show_alt" style="{/if mb_strlen($job_list[job].audit_remark)>20/}width:450px{//if/}">
+                                                        {/html_encode content=$job_list[job].audit_remark/}
+                                                        {/if $job_list[job]['error_msg_button']/}
+                                                            <br/>
+                                                            {/$job_list[job]['error_msg_button']/}
+                                                        {//if/}
+                                                    </div>
+                                                </div>
+                                                {//if/}
+	                                		{/elseif $status == $stop_job_status && $job_list[job].check_state == 4/}
+	                                		<b title="我们会在1个工作日内完成审核，在此期间求职者将无法看到该职位">审核中</b>
+                                            {/elseif $status == $stop_job_status && $job_list[job].check_state == 9/}
+                                            <b title="">失效</b>
+	                                		{/else/}
+	                                		{/if !base_lib_BaseUtils::nullOrEmpty($job_list[job].urgent_mark) && $job_list[job].urgent_mark == true/}
+                                            <em class="num" title="{/$job_list[job].urgent_end_date/}截止">急</em>
+                                            {//if/}
+	                                		{//if/}
+                                		</p>
+                                        {/if $job_list[job]['generation_bidding']/}
+                                            <p style="color:#999">
+                                                {/base_lib_BaseUtils::cutStr($accounts[$job_list[job]['company_id']]['company_name_display'], 15, 'utf-8', '', '...')/}
+                                                <b class="gen-binding">代招</b>
+                                            </p>
+                                        {//if/}
+                                   	</td>
+                                    <!--发布人-->
+                                    <td>{/$job_list[job].account_user_name/}</td>
+                                    <td class="wid120">
+                                    	{/if $status==$stop_job_status && $job_list[job].check_state==2/}<em>_</em>{/else/}<a {/if $job_list[job].applyCount>0/}target='_blank' href='{/get_url rule="/apply/Index/" data="job_id={/$job_list[job].job_id/}&show_model=1&search_model=0"/}'{/else/}href='javascript:void(0);'{//if/}>{/$job_list[job].applyCount/}</a>{//if/}
+                                    </td>
+                                    <td class="wid120">
+                                        {/if $status == $stop_job_status && $job_list[job].check_state == 2/}
+                                        <em>_</em>
+                                        {/else/}
+                                        <span>
+                                            <a {/if $job_list[job].applyNotReadCount > 0/}target='_blank' href='{/get_url rule="/apply/Index/" data="job_id={/$job_list[job].job_id/}&child_status=2&show_not_use=0"/}'{/else/}href='javascript:void(0);'{//if/}>{/$job_list[job].applyNotReadCount/}</a>
+                                            {/if $job_list[job].applyNotReadCount > 0/}
+                                            <img src="{/$siteurl.style/}/img/c/new_index/reddian.png" />
+                                            {//if/}
+                                        </span>
+                                        {//if/}
+                                    </td>
+                                    <td class="wid120">
+                                        {/if $status==$stop_job_status && $job_list[job].check_state==2/}<em>_</em>{/else/}
+                                        <span>
+                                            <a {/if $job_list[job].no_reply_num > 0/}target='_blank' href='{/get_url rule="/apply/Index/" data="job_id={/$job_list[job].job_id/}&show_not_use=0"/}'{/else/}href='javascript:void(0);'{//if/}>{/$job_list[job].no_reply_num/}</a>
+                                            {/if $job_list[job].no_reply_num > 0/}
+                                            <img src="{/$siteurl.style/}/img/c/new_index/reddian.png">
+                                            {//if/}
+                                        </span>
+                                        {//if/}
+                                    </td>
+                                    <td class="wid120">
+                                    	{/if $status == $stop_job_status && ($job_list[job].check_state == 2 || $job_list[job].check_state == 9)/}
+                                		<em>{/date('Y-m-d', strtotime($job_list[job].end_time))/}</em>
+                                		{/else/}
+                                        {/if $status == $stop_job_status && $job_list[job].status == 0/}
+                        				{/if strtotime(date('Y-m-d',strtotime($job_list[job].end_time)))-strtotime(date('Y-m-d',time()))>=0/}
+                        				<em>{/date('Y-m-d', strtotime($job_list[job].end_time))/}</em>
+                       					{/else/}
+                       					<em>已过期</em>
+                        				{//if/}
+                               			{/else/}
+                                        {/if $job_list[job].hidden_end_time == false/}<em class="red">{/$job_list[job].end_time_name/}</em>{/else/}<em>已过期</em>{//if/}</em>
+                                		{//if/}
+                                		{//if/}
+                                    </td>
+                                    <td class="wid140">
+                                        <span class="tipTxt">
+                                        {/if $status==$stop_job_status/}
+                            			<a href="{/get_url rule="/job/mod/" data="job_id={/$job_list[job].job_id/}"/}" class="editLnk md_repub" target="_blank">重新发布</a>
+                            			{//if/}
+                                        <a onclick="joblist.deleteJob({/$job_list[job].job_id/})" href="javascript:void(0);" class="lnk md_delete">删除</a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                {//section/}
+                            </tbody>
+                        </table>
+                        <div class="allBtn">
+                        <span class="formChb"><input id="downAllSelect" type="checkbox" class="chb"><label for="downAllSelect">全选</label></span>
+                        <a href="javascript:void(0);" onclick="joblist.deleteChooseJobs();" class="btn3 btnsF12">删除</a>
+                    </div>
+                    </div>
+                    <div class="noData" {/if !empty($job_list) && count($job_list) > 0/}style="display:none;"{//if/}>
+                    	<p>{/if !base_lib_BaseUtils::nullOrEmpty($search_keyword)/}未找到相关职位，请更换关键词重试或<a href='{/get_url rule="/index/joblist/" data="status=$stop_job_status"/}'>查看全部职位</a>{/else/}没有停止招聘的职位{//if/}</p>
+                    </div>
+                </div>
+            </div>
+        </hgroup>
+    </section>
+
+    <div class="clear"></div>
+</div>
+{/include file="msgpop.html"/}
+{/include file="footer.html"/}
+{/include file="message_box_content.html"/}
+<section class="floatRT"><a href="{/get_url rule='/about/message' domain='main'/}" target="_blank" class="serviceLink">我有问题要反馈</a><b></b></section>
+<!-- <div class="dgBox nPubBox" id="rePubJobDiv" style="display:none;">
+	<p class="tit">该职位已过期，需重新设置有效期方可重新发布！</p>
+    <form id="formReJobDiv" action="{/get_url rule="/index/repubjob/"/}" method="post">
+    <div class="formMod">
+        <div class="l">有效期</div>
+        <div class="r">
+            <span class="formText">
+            	<input type="hidden" id="hidJobID" name="job_id" />
+            	<input type="hidden" id="hidSetEndTime" name="hidSetEndTime" value="1" />
+                <input onkeyup="joblist.changeEndtime(this);" type="text" style="width:45px;" class="text" name="txtEndTime" id="txtEndTime" >
+            </span>
+            <span class="tipTxt font14">天</span>
+            <span id="endTimeSpan"  class="tipTxt font14" style="margin-left:20px;"></span>
+            <span class="tipPos">
+          		<span class="tipLay">
+          			<span class="tipLayErr tipw180" for="txtEndTime" generated="true" style="display: none;">
+					</span>
+          		</span>
+        	</span>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="nPubBtn"><a class="btn1 btnsF12" href="javascript:void(0)" id="btnRePubJob" onclick="joblist.rePubJobSetEndTime(this);">确&nbsp;定</a><a class="btn3 btnsF12" href="javascript:void(0)" onClick="$(this).closeDialog();">取&nbsp;消</a></div>
+    </form>
+</div> -->
+<script>
+
+var selece_myjob = $('input[name=myjob]');
+selece_myjob.click(function(){
+    var url = '{/$siteurl.company|replace:"http:":""/}/index/JobList/status-0-position-joblist?';
+    if(selece_myjob.is(':checked')){
+        url += '&ismyjob=true';
+    }
+    window.location.href = url;
+});
+
+var joblist = {
+	initialize:function(){
+		$('#upAllSelect').bindCheckBox('chkjob', '#lstBox');
+		$('#downAllSelect').bindCheckBox('chkjob', '#lstBox');
+
+        $('#upAllSelect').click(function() {
+			if ($(this).is(':checked')) {
+				$('#downAllSelect').attr('checked', 'checked');
+			} else {
+				$('#downAllSelect').removeAttr('checked');
+			}
+		});
+
+        $('#downAllSelect').click(function() {
+			if ($(this).is(':checked')) {
+				$('#upAllSelect').attr('checked', 'checked');
+			} else {
+				$('#upAllSelect').removeAttr('checked');
+			}
+		});
+
+		$('.reason').hover(function(){
+			$(this).find('.show_alt').toggle();
+		});
+//		$('.reason').mouseleave(function(){
+//            $('.show_alt').hide();
+//		});
+
+		$('#lst2').find('tr').hover(function(){
+			$(this).addClass('hov');
+		},function(){
+			$(this).removeClass('hov');
+		});
+
+		$('.watermark').watermark2();
+	},
+	deleteJob : function(job_id) {
+		$.confirm('删除后将不可恢复，确定要删除吗？', '操作提示', function() {
+			$.getJSON('{/get_url rule="/index/delete/"/}', {job_id:job_id}, function (json) {
+	            if (json.error) {
+	                $.message(json.error, {title : '系统提示', icon : 'fail'});
+	                return;
+	            }
+
+	            if (json.success) {
+	                var jobListStopCount = parseInt($("#jobListStopCount").html());
+
+                    $("#jobListStopCount").html(jobListStopCount - 1);
+	                $("#li" + job_id).remove();
+
+	                $.anchorMsg('删除成功');
+
+	                if ($('#lstBox').find('tr').length <= 0) {
+		        		$('#lst2').remove();
+		        		$('div.noData').show();
+		        	}
+	            }
+	        });
+		});
+	},
+	deleteChooseJobs : function() {
+		var checkboxs = $('#lstBox').find('input[name="chkjob"]:checked'),
+			jobids = [];
+   	   	for (var i = 0, len = checkboxs.length; i < len; i += 1) {
+   	   		jobids.push($(checkboxs[i]).val());
+   	   	}
+
+   	 	if (jobids.length <= 0) {
+			$.anchor('请选择需要删除的职位', {icon:'info'});
+			return;
+		}
+
+   	 	$.confirm('删除职位后不能恢复，确定删除吗？', '操作提示', function() {
+			$.getJSON('{/get_url rule="/index/deletechoosejob/" data="jobids=' + jobids.join('-jobids-') + '&v='+Math.random()+'"/}', function (json) {
+	            if (json.error) {
+	                $.message(json.error, {title: '系统提示', icon: 'fail'});
+	                return;
+	            }
+
+	            if (json.fail) {
+	            	$.message(json.failitem, {title: '系统提示', icon: 'fail'});
+	            } else if(json.success) {
+	            	$.anchorMsg('删除职位成功');
+	            }
+
+	            if (json.job_ids) {
+		            var count = json.job_ids.length;
+		            if (count > 0) {
+		                var jobListStopCount = parseInt($("#jobListStopCount").html());
+
+		                $("#jobListStopCount").html(jobListStopCount - count);
+		                $.each(json.job_ids, function (i, item) {
+	            			$("#li" + item).remove();
+	            		});
+
+		                if ($('#lstBox').find('tr').length <= 0) {
+			        		$('#lst2').remove();
+			        		$('div.noData').show();
+			        	}
+		            }
+	            }
+	        });
+		});
+	}
+};
+
+joblist.initialize();
+
+function banner_on() {
+    joblist.tanchuang();
+}
+
+function clocse_show_banner() {
+    $("#show_banner").hide();
+}
+
+
+$.getJSON('{/get_url rule="/account/twodimensioncode/"/}',function(result){
+    if(result&&result.status) {
+        var src = result.data.codeurl;
+        $('#ewmBox img').attr('src',src);
+        $('#ewmBox').show();
+    }
+});
+
+$("#ewmBox,#ewmBox1").find("a").click(function(){$(this).parents(".ewmBox").hide();return false;});
+</script>
+
+ {/include file="chat/chat.html"/}
+
+
+
+<script  type="text/javascript">
+    var action_url = '{/$siteurl.style/}';
+
+
+    if(typeof action_dom == 'object'){}else{
+        action_dom = [];
+    }
+    action_dom.push( ['.md_inmrecruit', 154]);
+    action_dom.push( ['.md_endmrecruit', 155]);
+    action_dom.push( ['.md_myjob', 180]);
+    action_dom.push( ['.md_search', 181]);
+    action_dom.push( ['.md_repub', 182]);
+    action_dom.push( ['.md_delete', 183]);
+    /**
+     180=> '我的职位',
+     181=> '搜索职位',
+     182=> '重新发布',
+     183=> '删除',
+     */
+</script>
+<script type="text/javascript" language="javascript" src="{/version file='action.js'/}"></script>
+
+</body>
+</html>

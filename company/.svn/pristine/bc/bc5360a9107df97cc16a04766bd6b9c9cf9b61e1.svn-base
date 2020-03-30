@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>聊一聊</title>
+<link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='chat.css'/}" />
+<script type="text/javascript" language="javascript" src='{/version file="jquery-1.8.3.min.js"/}'></script>
+<link rel="stylesheet" type="text/css" href="{/version file='m_font_style.css'/}">
+<link rel="stylesheet" type="text/css" href="{/version file='comback.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='icons.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='account.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='video_eng.css'/}" />
+<!--<link rel="stylesheet" type="text/css" href="{/version file='alirtc.css'/}" />-->
+
+<script type="text/javascript" src="{/version file='WdatePicker.js'/}"></script>
+<script type="text/javascript" src="{/version file='version.js'/}"></script>
+<script type="text/javascript" language="javascript"  src='{/version file="aliyun-webrtc-sdk-1.9.0.min.js"/}'></script>
+<script type="text/javascript" language="javascript"  src='{/version file="chatvideo.js"/}'></script>
+<script type="text/javascript">
+window.CONFIG = {
+        HOST: '{/$siteurl.style/}',
+        COMBOPATH: '/js/v2/'
+}
+</script>
+<script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+<script type="text/javascript" src="{/version file='global.js'/}"></script>
+<style>
+.chatRightList{height:545px}
+.chatRightList .hiddenPart{display:none}
+.chatRightList .applyStatus{display:none}
+.charDgScrollHeight .hideRead{display:none}
+.charDgScrollHeight .dialogmVoice font.hiddenVoiceTime{display:none}
+.charDgScrollHeight .dialogoVoice font.hiddenVoiceTime{display:none}
+.siteArea{height:200px; overflow-y: auto}
+.chat_code{ width:100px; height: 146px; position: absolute; top: 135px; left: 50%; margin-left: 510px; overflow: hidden; border: 1px solid #f1f1f1;}
+.close-chat{display: inline-block;width: 20px;height: 20px;text-align: center;line-height: 18px;font-size:15px;background-color: #4c6984;border-radius: 10px;margin-top: 18px;margin-left: -15px;z-index:999;}
+</style>
+</head>
+<body style="background: #fff;">
+{/include file="new_header.html" no_video_notice=1  par="全职招聘"/}    
+
+<div class="chat-main">
+    <div class="chat-left">
+        <div class="chat-search">
+            <a href="javascript:void(0)" onclick="hideHistory()"><返回</a>
+            <div class="searchInputBox">
+                <input type="text" placeholder="搜索一个月内聊过的求职者" id="j_search_input" onclick="showHistory()">
+                <i class="icon-svg45" id="j_search_btn"></i>
+            </div>
+        </div>
+        <ul class="chat-left-list" id="myFrendList">
+
+        </ul>
+            <ul class="chat-left-list" id="myHistoryList">
+                <!-- 里面的html结构和上面这个列表的一样 -->
+                <!--<li>
+                    <a href="javascript:void(0);" class="frendPart frendCard_p20664548" data-sessionid="p20664548" data-jobid="15152953">
+                        <img class="head-img" src="//imgs.huibo.com/photo/2019-06-28/0628479395_middle.jpg">
+                        <p>
+                            <span class="chat-list-tit01">
+                                <span class="frendUserName">测试</span>
+                                <span><em></em></span>
+                                <span class="frendStation">暂无职位</span>
+                                <i class="chat-list-icon01 jobstatus" style="display: none;"></i>
+                            </span>
+                            <span class="chat-list-tit02 msgPro">
+                                <em class="readStatus"></em>
+                                <span class="msgContent">3333</span>
+                            </span>
+                        </p>
+                        <span class="chat-list-time msgTime">09:27</span>
+                        <span class="chat-list-msg notReadMsgCount msgPro" style="display:none"></span>
+                    </a>
+                </li>-->
+        </ul>
+        <div class="chat-more">
+            <a href="javascript:void(0)" onclick="showHistory()">历史联系人</a>
+        </div>
+    </div>
+    <div class="chat-right">
+        <div class="viewProfileDetail" data-attr="{/$siteurl.company/}/recommend/RecommendResumeInfoV2?resumeid=">
+           
+        </div>
+        <div class="chatRightList">
+        </div>
+        <div class="chatPutx">
+            <div class="chatPutFac">
+                <span class="chatPhiz"></span>
+                <span class="chatReply md_nomol_replay">常用回复</span>
+                <span class="chatArea md_addres">发送地址</span>
+                <span class="chatCard" style="display: none;">发送职位</span><!-- 聊天卡片，样式写好了，暂时不用上 -->
+                <span class="chatLog" id="j_msg_history" onclick="showHistoryR()">聊天记录</span>
+            </div>
+            <div class="chatTextareax">
+                    <textarea name="chatTextarea" class="chatTextarea" id="chatTextarea"></textarea>
+            </div>
+            <div class="chatBmsubmint">
+                <span>按下Ctrl+Enter发送</span>
+                <button class="chartSend">发送</button>
+            </div>
+        </div>
+        <div class="tipBox"><span class="j_have_chat_notice"></span><a class="ignoreTip">忽略</a></div>
+        <div class="chatHistoryBox">
+            <div class="historyTitle">
+                    <div class="historyTitleLeft">
+                            消息记录
+                            <div class="historyClose" onclick="hideHistoryR()">×</div>
+                    </div>
+                    <div class="historyTitleRight">
+                            (聊天记录仅保存一个月)
+                    </div>
+            </div>
+            <div class="historyList" id="j_history_list">
+
+            </div>
+            <div class="chatHistoryBottom">
+                <input type="text" class="historyKey">
+                <i class="icon-svg45" onclick="getChatHistory('', '')"></i>
+                <input type="text" class="historyTimeIpt" readonly="readonly" data-days="" value="{/date('Y-m-d', time())/}">
+
+                <!-- <input type="text" class="historyTime" readonly="readonly" onclick="WdatePicker({opposite:true,disabledDates:['5$'],specialDates:['2019-9-01','2019-08-15']})" data-days="2019-9-01,2019-08-15" value="2019-09-10"> -->
+                <div class="historyPages">
+                        <a href="javascript:void(0);" class="historyPageBtn historyPageBtnL j_page_last" data-page=""><i class="icon-chat_left_start"></i></a>
+                        <a href="javascript:void(0);" class="historyPageBtn historyPageBtnL mr30 j_page_pre" data-page="1"><i class="icon-chat_left"></i></a>
+                        <a href="javascript:void(0);" class="historyPageBtn historyPageBtnR j_page_after" data-page="2"><i class="icon-chat_right"></i></a>
+                        <a href="javascript:void(0);" class="historyPageBtn historyPageBtnR " data-page="1"><i class="icon-chat_right_end"></i></a>
+                        <!--<a href="javascript:void(0);" class="historyPageBtn historyPageBtnL" data-page="firstday"><i class="icon-chat_left_start"></i></a>
+                        <a href="javascript:void(0);" class="historyPageBtn historyPageBtnL mr30" data-page="preday"><i class="icon-chat_left"></i></a>
+                        <a href="javascript:void(0);" class="historyPageBtn historyPageBtnR" data-page="afterday"><i class="icon-chat_right"></i></a>
+                        <a href="javascript:void(0);" class="historyPageBtn historyPageBtnR" data-page="today"><i class="icon-chat_right_end"></i></a>-->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="chatVideo" style="display:none">
+        <div class="chatVideoTop">
+            <div class='local-video' style="display:none" style="height:100%;width:100%">
+                <video autoplay playsinline style="height:100%;width:100%"></video>
+            </div>
+            
+            <!-- 等待对方接受邀请 -->
+            <!-- 视频面试结束 -->
+
+        </div>
+        <div class="chatVideoBottom">
+            <textarea name="chatVideoSaveRemarkTxt"  placeholder="可填写面试备注,保存后在简历详情中查看"></textarea>
+            <span class="chatVideoSaveBtn chatVideoSaveRemark">保存</span>
+        </div>
+    </div>
+</div>
+            
+        
+<!--企业二维码-->
+<div class="chat_code">
+    <img src="{/$siteurl.style/}/img/company/chat/chat_code_new03.jpg"/>
+</div>
+<div class="notChart" style="display:none">
+    <img src="{/$siteurl.style/}/img/company/chat/chat_icon13.jpg"/>
+    <span>还没有聊天记录哦~<br />
+        主动寻找求职者进行沟通吧！</span>
+    <a href="{/$siteurl.company/}/apply/">前往沟通</a>
+</div>
+<div id="showLoginOut" style="display:none">
+    <div class="m_master"></div>
+    <div class="chatPopx">
+            <img src="{/$siteurl.style/}/img/company/chat/chat_icon19.png" />
+            <span>你已在其他窗口/浏览器打开聊一聊，当前页面聊天已下线，刷新后可继续在此页面聊天。</span>
+            <a href="javascript:;" onclick="window.location.reload();">点此刷新</a>
+    </div>
+</div>
+<div id="ieNotShow" style="display:none">
+    <div class="m_master"></div>
+    <div class="chatPopx">
+            <img src="{/$siteurl.style/}/img/company/chat/chat_icon19.png" />
+            <span>您当前浏览器版本过低，不支持聊一聊功能</span>
+            <a href="javascript:;" style="display:none" onclick="window.location.reload();">去升级</a>
+    </div>
+</div>
+
+<!--<button id="opDone">删除消息记录</button>-->
+<!--引入聊一聊主要JS_API-->
+<script type="text/javascript" language="javascript" src='{/$siteurl.style/}/js/chat/json2.js'></script>
+
+<script type="text/javascript" language="javascript" src='{/$siteurl.style/}/js/chat/nim/NIM_Web_SDK_v6.10.0.js'></script>
+<script type="text/javascript" language="javascript" src='{/$siteurl.style/}/js/chat/nim/NIM_Web_NIM_v6.10.0.js'></script>
+<script type="text/javascript" src="{/version file='nimwebim.js'/}"></script>
+<script type="text/javascript" language="javascript" src='{/$siteurl.style/}/js/chat/qqface.js'></script>
+<!--用于获取文件MD5，上传图片需要先获取文件的 MD5-->
+<script type="text/javascript" src='{/version file="spark-md5.js"/}'></script>
+<script>
+    var newSession = [];//新的会话
+    {/if $has_init_info/}
+    var _session = {/$init_info/};
+    newSession.push(_session);
+    {//if/}
+</script>
+<script> 
+//聊一聊
+//第一步 登录
+    //SDK 登录 企业信息
+    var loginInfo = {
+        'sdkAppID': "{/$swy_info['appkey']/}", //用户所属应用id,必填
+        'accountType':"{/$swy_info['account_type']/}",
+        'identifier': "{/$swy_info['accid']/}", //当前用户ID,必须是否字符串类型，必填
+        'identifierNick': "{/$swy_info['nick_name']/}", //当前用户昵称，不用填写，登录接口会返回用户的昵称，如果没有设置，则返回用户的id
+        'headurl': "{/$swy_info['photo']/}" //当前用户默认头像，选填，如果设置过头像，则可以通过拉取个人资料接口来得到头像信息
+    };
+   // console.log("{/$swy_info['token']/}",loginInfo);
+    var mywebinfo = {
+        facePath        : '{/$siteurl.style/}/img/company/chat/face2/',//qq图标
+        defaultImgUrl   : '{/$siteurl.style/}/img/company/chat/chat_icon08.png',//默认头像
+        showResumeUrl   : "{/$siteurl.company/}/resume/resumeshow",
+        getResumeUrl    : '{/$siteurl.company/}/chat/GetResumeAndJobData', //获取简历信息 参数 job_ids  resume_ids
+        sendMsgUrl      : '{/$mobile_url/}/chat/getSendMsgJob',
+        showResumeType  :"{/if $net_apply_id > 0/}1{/else/}0{//if/}"
+    };
+
+    function onConnect() {
+        console.log('nim 连接成功');
+    }
+
+    function onWillReconnect(obj) {
+        // 此时说明 SDK 已经断开连接, 请开发者在界面上提示用户连接已断开, 而且正在重新建立连接
+        window.location.reload();
+       /* console.log(obj.retryCount);
+        console.log(obj.duration);*/
+    }
+    function onDisconnect(error) {
+        if (error) {
+            switch (error.code) {
+                // 账号或者密码错误, 请跳转到登录页面并提示错误
+                case 302:
+                    break;
+                // 重复登录, 已经在其它端登录了, 请跳转到登录页面并提示错误
+                case 417:
+                    $("#showLoginOut").show();
+                    break;
+                // 被踢, 请提示错误后跳转到登录页面
+                case 'kicked':
+                    $("#showLoginOut").show();
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    function onError(error) {
+        console.log(error);
+    }
+
+    //数据同步完成  拉取会话 初始化UI
+    function onSyncDone() {
+        nim.getLocalSessions({
+            limit: 100,
+            done: getLocalSessionsDone
+        });
+    }
+
+    // 引入SDK类的引用以后，获取SDK对象实例
+    var nim = SDK.NIM.getInstance({
+        //debug: true,
+        appKey: "{/$swy_info['appkey']/}",
+        account: "{/$swy_info['accid']/}",
+        token: "{/$swy_info['token']/}",
+        db:true,
+        // privateConf: {}, // 私有化部署方案所需的配置
+        // 收到消息事件触发
+        onmsg: function (msg) {
+            if(msg.scene==myWebim.nimType){
+               // console.log('onmsg',msg);
+                myWebim.getNewMsg(msg);
+            }
+        },
+        onconnect: onConnect,              //连接成功
+        onwillreconnect: onWillReconnect,
+        ondisconnect: onDisconnect,       //失去连接
+        onerror: onError,                 //连接出错了
+        onsessions: onSessions,           //初始化的会话
+        onupdatesession: onUpdateSession, //会话更新
+        onsyncdone: onSyncDone   //数据同步完成
+    });
+
+    //初始化的基本信息
+    myWebim.init(loginInfo,mywebinfo,newSession,nim);
+
+    //初始化的会话列表
+    function onSessions(sessions) {
+    }
+
+    //收到消息，发送消息触发 和用户的会话
+    function onUpdateSession(session) {
+        console.log('会话更新了', session);
+        if(session.scene==myWebim.nimType){
+            if (myWebim.sessionMap[session.id]) {
+                myWebim.newSession = nim.mergeSessions(myWebim.newSession, session);
+            } else {
+                objSessions = myWebim.sessionMergeDataNew([session]);
+                myWebim.newSession = nim.mergeSessions(myWebim.newSession, objSessions);
+            }
+            myWebim.setReadOnUpSession(session);
+         }
+    }
+
+    //同步数据成功后的获取会话数及信息 初始化UI
+    function getLocalSessionsDone(error, obj) {
+        if (!error) {
+            var objSessions = obj.sessions;
+            console.log('初始化会话数据',objSessions,myWebim.newSession);
+            objSessions = myWebim.sessionMergeDataNew(objSessions);
+            myWebim.newSession = nim.mergeSessions(myWebim.newSession, objSessions);
+            myWebim.initSessionsUI();
+        }
+    }
+
+    //删除回话
+    $('#opDone').on('click',function () {
+        nim.disconnect();
+        console.log(1111);
+        /*nim.deleteLocalMsgsBySession({
+            scene: 'p2p',
+            to: mywebim.sess_id,
+            delLastMsg: true,
+            done: deleteLocalMsgsBySessionDone
+        });*/
+        //myWebim.sendNormalMsg('hello');
+        /* function deleteLocalMsgsBySessionDone(error, obj) {
+            console.log(error);
+            console.log(obj);
+            console.log('删除会话本地消息' + (!error?'成功':'失败'));
+        }
+        nim.clearServerHistoryMsgs({
+            account: mywebim.sess_id,
+            delRoam: true,
+            done: clearServerHistoryMsgsDone
+        });
+        function clearServerHistoryMsgsDone(error, obj) {
+            console.log('删除服务器消息' + (!error?'成功':'失败'), error, obj);
+        }*/
+
+    });
+    //初始化表情
+    $('.chatPhiz').qqFace({
+        id : 'facebox', //表情盒子的ID
+        assign:'chatTextarea', //给那个控件赋值
+        path:'{/$siteurl.style/}/img/company/chat/face2/'	//表情存放的路径
+    });
+    //查看结果
+    function replace_em(str){
+        str = str.replace(/\</g,'&lt;');
+        str = str.replace(/\>/g,'&gt;');
+        str = str.replace(/\n/g,'<br/>');
+        str = str.replace(/\[em_([0-9]*)\]/g,'<img src="face/$1.gif" border="0" />');
+        return str;
+    }
+
+
+</script>
+
+<script type="text/javascript">
+var VideoaAnchorMsg;   
+var VideoConfirmBox;
+var anchorMsg;
+hbjs.use('@validator, @fileUploader, @confirmBox, @hbCommon, @jobDialog', function(m){
+    var validator = m['widge.validator.form'];
+    var fileUploader = m['widge.fileUploader'];
+    var ConfirmBox = m['widge.overlay.confirmBox'];
+    var Dialog = m['widge.overlay.hbDialog'];
+    var $ = m['product.hbCommon'].extend(m['cqjob.jobDialog']);
+    var cookie = m['tools.cookie'];
+    VideoaAnchorMsg = $.anchorMsg;
+    VideoConfirmBox = ConfirmBox;
+    var temp_list       = {/$template_list/}; //常用语列表
+    var address_list    = {/$address_list/};
+    //常用语
+   $(".chatReply").on("click",function(){
+       var templateHtml = getSendHtml();
+        var templateDialog = new Dialog({
+            idName: 'uppwd_dialog',
+            title: '常用语',
+            content: templateHtml,
+            close: '╳',
+            width: 550
+        });
+        var templateObj = templateDialog.query('#MyTemplate');
+        var save_html = getSvaeHtml();    //发送框
+        templateObj.append($(save_html)); //编辑编辑框
+        var editHtml  = getEditHtml();
+        templateObj.append($(editHtml));
+        //取消编辑
+        templateObj.on("click",".inReplyx .inClose",function(){
+            templateObj.find(".chatReplyPop").hide();
+            templateObj.find(".editReplyPop").show();
+            templateObj.find(".inReplyx").hide();
+            
+            var replyObj    = templateObj.find(".inReplyx");
+            replyObj.find(".inSaveEdit").attr("data-id",""); //将ID置空
+            
+            
+        });
+        //保存编辑
+        templateObj.on("click",".inReplyx .inSaveEdit",function(){
+            var _this = $(this);
+            if(_this.hasClass("isLock")){
+                alert("保存中，请稍后...");
+                return;
+            }
+            var id = $(this).attr("data-id"); //如果有ID 则是编辑 如果没有ID 则是新增
+            var eidtObj     = templateObj.find(".edit_"+id);
+            var sendObj     = templateObj.find(".send_"+id);
+            var replyObj    = templateObj.find(".inReplyx");
+            var text        = templateObj.find(".inReplyx textarea").val();
+            var is_add      = id == "" ? true : false;
+             _this.html("保存中...");
+            _this.addClass("isLock");
+             $.ajax({
+                url:"{/$siteurl.company/}/chat/saveTemplate",
+                type:"post",
+                dataType: "json",
+                data: {id:id,'content':text},
+                success:function(json){
+                    _this.html("保存")
+                    _this.removeClass("isLock");
+                    if(json.error){
+                        $.anchorMsg(json.error,{ icon: 'warning' });
+                        return;
+                    }
+                    var new_id = json.id;
+                    updateTempList(new_id,text,is_add);
+                    //如果是新增
+                    if(is_add){
+                        var send_html = '<li><span class="send_'+new_id+'">'+text+'</span><a href="javascript:void(0);" data-id="'+new_id+'" class="sendTemplate">发送</a></li>';
+                        var edit_html = '<li><span class="edit_'+new_id+'">'+text+'</span><a href="javascript:void(0);" data-id="'+new_id+'" class="closeReply">删除</a><a href="javascript:void(0);" data-id="'+new_id+'" class="editReply">编辑</a></li>';
+                        //prepend
+                        templateObj.find(".chatReplyPop .replyList").prepend(send_html);
+                        templateObj.find(".editReplyPop .editReplyList").prepend(edit_html);
+                    }else{
+                        eidtObj.html(text);
+                        sendObj.html(text);
+                    }
+                    //返回编辑页面
+                    templateObj.find(".editReplyPop").show();
+                    templateObj.find(".inReplyx").hide();
+                }
+            });
+        });
+        
+        //删除
+        templateObj.on("click",".closeReply",function(){ //编辑
+             var id = $(this).attr("data-id");
+            ConfirmBox.confirm("确定要删除该条常用语吗？","提示",function(obj){
+                var self = this;
+                self.hide();
+                          
+                $.ajax({
+                    url:"{/$siteurl.company/}/chat/DeleteTempList",
+                    type:"post",
+                    dataType: "json",
+                    data: {id:id},
+                    success:function(json){
+                        if(json.error){
+                            $.anchorMsg(json.error,{ icon: 'warning' });
+                            return;
+                        }
+                        //更新 temp_list
+                        delete_templist(id);
+                        var eidtObj     = templateObj.find(".edit_"+id);
+                        var sendObj     = templateObj.find(".send_"+id);
+                        eidtObj.parent("li").remove();
+                        sendObj.parent("li").remove();
+                        $.anchorMsg("删除成功");
+                    }
+                });
+            });
+        });
+        
+        
+        templateObj.on("click",".replyEdit",function(){ //编辑
+            templateObj.find(".chatReplyPop").hide();
+            templateObj.find(".editReplyPop").show();
+        });
+        templateObj.on("click",".sendTemplate",function(){
+            
+            var text = $(this).prev("span").text();
+            //发送text
+            myWebim.addOneMsg(text);
+            templateDialog.hide();
+        });
+        templateObj.on("click",".goBack",function(){
+            templateObj.find(".chatReplyPop").show();
+            templateObj.find(".editReplyPop").hide();
+        });
+        //删除
+        //编辑
+        templateObj.on("click",".editReply",function(){
+            //debugger;
+            var id          = $(this).attr("data-id");
+            var eidtObj     = templateObj.find(".edit_"+id);
+            var sendObj     = templateObj.find(".send_"+id);
+            var replyObj    = templateObj.find(".inReplyx");
+            var text    = eidtObj.text();
+            //隐藏 发送 和 编辑 html 显示修改
+            templateObj.find(".chatReplyPop").hide();
+            templateObj.find(".editReplyPop").hide();
+            templateObj.find(".inReplyx").show();
+            replyObj.show();
+            replyObj.find("textarea").val(text)
+            replyObj.find(".inSaveEdit").attr("data-id",id);
+        });
+        //新增
+        templateObj.on("click",".addReplyBtn",function(){
+            //debugger;
+            var replyObj    = templateObj.find(".inReplyx");
+            //隐藏 发送 和 编辑 html 显示修改
+            templateObj.find(".chatReplyPop").hide();
+            templateObj.find(".editReplyPop").hide();
+            templateObj.find(".inReplyx").show();
+            replyObj.show();
+            replyObj.find("textarea").val("")
+            replyObj.find(".inSaveEdit").attr("data-id","");
+        });
+        
+        templateDialog.show();
+        
+        
+
+   });
+    //保存备注
+    $("body").on("click",".chatVideoSaveRemark",function(){
+        var value = $("textarea[name='chatVideoSaveRemarkTxt']").val();
+        console.log(value);
+        if(value == ""){
+            $.anchorMsg("备注内容不能为空",{ icon: 'warning' });return;
+        }
+        resume_id = "{/$resume_id/}";
+        var url = "{/get_url rule='/resumeremark/RemarkDo'/}";
+            $.post(url, {hidResumeId:resume_id,taRemark:value,"operate":"save"}, function(re){
+                if(re.error){
+                    $.anchorMsg(re.error,{ icon: 'warning' });
+                    return;
+                }else{
+                    $.anchorMsg("保存成功");
+                    return;
+                }
+            },'json');
+    });
+    //更新temp_list
+    var updateTempList = function(id,content,is_add){
+        if(is_add){ //新增
+            temp_list.unshift({id:id,content:content});
+        }else{ //编辑
+            for(var i in temp_list){
+                var _id = temp_list[i].id;
+                if( _id == id){
+                    temp_list[i]["content"] = content;
+                    break;
+                }
+            }
+        }
+    }
+    
+    var delete_templist = function(id){
+        var new_temp_list = [];
+        for(var i in temp_list){
+              var _id = temp_list[i].id;
+              if( _id != id){
+                  new_temp_list.push(temp_list[i]);
+              }
+          }
+        temp_list = new_temp_list;
+    }
+    
+   //获取常用回复发送html
+   var getSendHtml = function(){
+        var templateHtml = "";
+        var _html = '<div id="MyTemplate"><div class="chatReplyPop"><a href="javascript:void(0);" class="replyEdit">编辑</a><ul class="replyList">';
+        var _content_html = '';
+        for(var i in temp_list){
+            _content_html = _content_html + '<li><span class="send_'+temp_list[i].id+'">'+temp_list[i].content+'</span><a href="javascript:void(0);" data-id="'+temp_list[i].id+'" class="sendTemplate">发送</a></li>';
+        }
+        var end_html = '</ul></div></div>';
+        templateHtml = _html + _content_html + end_html;
+        return templateHtml;
+   }
+   
+   //获取常用回复编辑标签
+   var getEditHtml = function(){
+       var editHtml = "";
+       var editStart = '<div class="editReplyPop" style="display:none"><a href="javascript:void(0);" class="goBack">返回</a><ul class="editReplyList">';
+       var _content_html = '';
+        for(var i in temp_list){
+            _content_html = _content_html + '<li><span class="edit_'+temp_list[i].id+'">'+temp_list[i].content+'</span><a href="javascript:void(0);" data-id="'+temp_list[i].id+'" class="closeReply">删除</a><a href="javascript:void(0);" data-id="'+temp_list[i].id+'" class="editReply">编辑</a></li>';
+        }
+       var editEnd   = '</ul><div class="addReply"><a class="addReplyBtn" href="javascript:void(0);">新增常用回复</a><span>（最多10条）</span><span class="error">最多只能新增10条常用回复</span></div>';
+       
+       templateHtml = editStart + _content_html + editEnd;
+        return templateHtml;
+   }
+   
+   var getSvaeHtml = function(){
+       var html = '<div class="inReplyx" style="display:none">'
+                       + '<div class="inTextAreax">'
+                           + '<em class="textAreaError">1252</em>'
+                            +'<textarea name="inTextArea" class="inTextArea" placeholder=""></textarea>'
+                            +'<span>最多可输入60字</span>'
+                        +'</div>'
+                        +'<div class="inTextAreaz">'
+                           + '<a href="javascript:void(0);" data-id="" class="inSaveEdit" style="display: inline-block;">保存</a>'
+                            +'<a href="javascript:void(0);" class="inClose">取消</a>'
+                        +'</div>'
+                    +'</div>'
+        return html;
+   };
+   
+   //公司地址
+   $(".chatArea").on("click",function(){
+        var addressHtml = getAddressHtml();
+        var addressDialog = new Dialog({
+                idName: 'address_dialog',
+                title: '公司地址',
+                content: addressHtml,
+                close: '╳',
+                width: 470
+        });
+        var addressObj = addressDialog.query(".sitePopx");
+        addressObj.on("click","li",function(){ //选择
+            addressObj.find("li").removeClass("cut");
+            $(this).addClass("cut");
+        });
+        
+        addressObj.on("click",".siteSave",function(){ //保存
+            var objLi = addressObj.find("li.cut");
+            var text = objLi.find("span").attr("data-attr");
+            myWebim.addOneMsg(text);
+            addressDialog.hide();
+        });
+        addressDialog.show();
+   });
+
+    var getAddressHtml = function(){
+        var start_html = '<div class="sitePopx"><ul class="siteArea">';
+        var li_html     = "";
+            for(var i in address_list){
+                var _address = address_list[i];
+                var _class   = _address["id"] == 0 ? "cut" : "";
+                var is_company = _address["id"] == 0 ? "(公司地址)" : "(工作地址)";
+                    li_html = li_html + '<li class="'+_class+'"><i></i><span data-attr="'+_address.add_info+'">'+_address.add_info+is_company+'</span></li><li>';
+            }                  
+        var end_html = '</ul> <a href="javascript:void(0);" class="siteSave">确定发送</a></div>';
+        return start_html + li_html + end_html;
+   }
+   // $.anchorMsg("删除头像失败，请稍后再试",{ icon: 'warning' });
+   
+    {/if $net_apply_id >0/}
+    var net_apply_id = {/$net_apply_id/};
+    var sid          = {/$sid/};
+    var videoInfo    = {
+        netApplyId          : net_apply_id,
+        sid                 : sid,
+        videoAuthInfoUrl    : "{/$siteurl.company/}/video/GetToken",
+        createRoomUrl       : "{/$siteurl.company/}/video/createRoom",
+        baseInfoUrl         : "{/$siteurl.company/}/video/GetApplyBaseInfo",
+        nextUrl             : "{/$siteurl.company/}/chat/",
+        schoolNetFairUrl    : "{/$siteurl.company/}/videohall/VideoInterviewHall/?sid={/$sid/}",
+        companyName         : "{/$company_name/}",
+        applySource        : "{/$apply_source/}",
+        resumeId            : "{/$resume_id/}"
+    };
+    
+    AliRtcEngine.isSupport().then(re => {
+        chatVideo.init(videoInfo,ConfirmBox,anchorMsg); 
+        //创建房间
+        
+    }).catch(err => {
+        console.log(err);
+//        if(!err.audioDevice){
+//            alert("没有可用视频设备");
+//            return;
+//        }
+        if(!err.isSupported){
+            alert(err.message);
+        }
+    });
+//    chatVideo.init(videoInfo,ConfirmBox,anchorMsg); 
+   {//if/}
+});      
+    // 9.10新增js
+    function showHistory(){
+		if($('.chat-left').hasClass('show'))return false;
+        searchPerson('');
+        $('.chat-left').addClass('show')
+    }
+
+    function searchSubmit() {
+        var keyword = $('#j_search_input').val();
+        searchPerson(keyword);
+        $('.chat-left').addClass('show');
+    }
+    //这个失去焦点的方法在测试的时候用
+    // $('#j_search_input').on('blur', function(){
+    //     searchSubmit();
+    // });
+	$('#j_search_btn').on('click',function(){
+		searchSubmit();
+	});
+    $('#j_search_input').on('keypress',function (event) {
+        if(event.which == 13){
+            searchSubmit();
+        }
+    });
+    //筛选联系过的求职者
+    function searchPerson(keyword) {
+        var url = "{/get_url rule='/chat/getAccountChatHistory'/}";
+        if (keyword) {
+            var data = {keyword: keyword};
+        }else{
+            var data = {};
+        }
+
+        var allFaces        = myWebim.getFaceCodeObj();//表情
+        $.post(url, data, function(re){
+            if (re.status && re.data) {
+
+                var html = '';
+                var init_info = re.data['init_info'];
+                var list = re.data['list'];
+                if ($.isEmptyObject(list)) {
+                    $('#myHistoryList').html('<li style="text-align: center;margin-top: 10px;color:#ccc">暂无相关历史联系人</li>');
+                    return false;
+                }
+                var has_init_info = re.data['has_init_info'];
+                //$('.chatDivPart').addClass('hiddenPart');
+                var sessionMap      = myWebim.sessionMap;
+                var sessType = myWebim.nimType1; //设置会话类型
+                for(var i in list){
+
+                       // console.log('init_info',init_info[i]);
+                        if(!sessionMap[sessType  + init_info[i].SessionId] && $('.msgCard_'+init_info[i].SessionId).length===0){
+                        list[i].photo = init_info[i].SessionImage ? init_info[i].SessionImage : 'user_img.png';
+                            var frend_data = {
+                                Account_id: init_info[i].SessionId,
+                                ApplyId: "",
+                                C2cAccount: "",
+                                C2cNick: "",
+                                IsNewSession: false,
+                                LastMsgContent: "",
+                                MsgShow: "[其他]",
+                                MsgTimeStamp: init_info[i].msg_timestamp,
+                                ResumeId: list[i].resume_id,
+                                SessionId: init_info[i].SessionId,
+                                SessionImage: init_info[i].SessionImage,
+                                SessionJobId: list[i].job_id,
+                                SessionJobStation: list[i].station,
+                                SessionNick: list[i].p_name,
+                                unread: 0
+                            };
+                    	if ($('.'+sessType + init_info[i].SessionId).length == 0) {
+                        	myWebim.frendList.push(frend_data);
+                        }
+                    } else {
+                    	//$('.' + sessType + "_" + init_info[i].SessionId).removeClass('hiddenPart');
+                    }
+                    list[i].msg_content = myWebim.getMsgEmojiV2(list[i].msg_content,allFaces);
+                    html += '<li>\n' +
+                        '                        <a href="javascript:void(0);" class="frendPart frendCard_' + init_info[i].SessionId + '" data-sessionid="' + init_info[i].SessionId + '" data-jobid="' + list[i].job_id + '" data-timestamp="'+ (parseInt(list[i].msg_timestamp)*1000) +  +'" data-starttime="'+ (parseInt(list[i].start_timestamp)*1000) +'" data-endtime="'+ (parseInt(list[i].msg_endstamp)*1000) +'">'+
+                    	'                            <img class="head-img" src="' + init_info[i].SessionImage + '">'+
+						'                            <p>\n' +
+                        '                                <span class="chat-list-tit01">\n' +
+                        '                                    <span class="frendUserName">' + list[i].p_name + '</span>\n' +
+                        '                                    <span><em></em></span>\n' +
+                        '                                    <span class="frendStation">' + list[i].station + '</span>\n' +
+                        '                                    <i class="chat-list-icon01 jobstatus" style="display: none;"></i>\n' +
+                        '                                </span>\n' +
+                        '                                <span class="chat-list-tit02 msgPro">\n' +
+                        '                                    <em class="readStatus"></em>\n' +
+                        '                                    <span class="msgContent">'+ list[i].msg_content +'</span>\n' +
+                        '                                </span>\n' +
+                        '                            </p>\n' +
+                        '                            <span class="chat-list-time msgTime">' + myWebim.timeToDate(list[i].msg_timestamp)+'</span>\n' +
+                        '                            <span class="chat-list-msg notReadMsgCount msgPro" style="display:none">0</span>\n' +
+                        '                            <span class="j_close_chat close-chat" style="display: none;">×</span>'+
+                        '                        </a>\n' +
+                        '                    </li>';
+                }
+                if (has_init_info) {
+
+                   var notInMap = new Array();
+                    for(var k in init_info) {
+                        if (!sessionMap[sessType + init_info[k].SessionId] && $('.msgCard_'+init_info[k].SessionId).length===0) {
+                            myWebim.addChatMsgPart(myWebim.initNewSession(init_info[k]), true);
+                            notInMap.push(myWebim.initNewSession(init_info[k]));
+                        }
+                    }
+                    if(notInMap.length>0){
+                        myWebim.refreshMsgTopTips(notInMap);
+                    }
+
+            	}
+               // console.log(html);
+                $('.chat-right').removeClass('tipShow');
+                $('#myHistoryList').html(html);
+                $('#j_search_input').removeAttr('onclick');
+                //myWebim.sess_id = init_info[0].SessionId;//更改当前正在聊天的人
+                myWebim.changeSession(init_info[0].SessionId);
+                //查询当前对话的求职者14天内是否有过聊天记录
+                //$('.' + myWebim.msgFre + init_info[0].SessionId).removeClass('hiddenPart');
+                /*var selToID   = myWebim.sess_id;
+                var sess_data = myWebim.getSessDataBySessId(selToID);
+                var resume_id = sess_data.ResumeId;
+                var url = "/chat/checkChatHistory";
+                $.post(url, {resume_id:resume_id}, function(re){
+                    if (!re.status) {
+                        $('.j_have_chat_notice').html(re.msg);
+						$('.chat-right').addClass('tipShow')
+                        // $('.tipBox').show();
+                    } else {
+                        $('.j_have_chat_notice').html('');
+						$('.chat-right').removeClass('tipShow')
+                        // $('.tipBox').hide();
+                    }
+                },'json');
+                //切换后关闭语言
+                myWebim.closeAudio();*/
+            }
+        },'json');
+    }
+
+    $('#myHistoryList').on('click', 'a', function(){
+		$('#j_history_list').html('');
+        $("#myHistoryList").find("a.cut").removeClass("cut");
+        $('.chat-right').removeClass('tipShow');
+        $('.historyTimeIpt').val('');
+        $('.chatRightList .chatDivPart').addClass('hiddenPart');
+        myWebim.sess_id = $(this).attr('data-sessionid');//历史联系人更改当前正在聊天的人
+        $('.' + myWebim.msgFre + myWebim.sess_id).removeClass('hiddenPart');
+		$('.frendPart').removeClass('cut');
+        $('.' + myWebim.frendFre + myWebim.sess_id).addClass('cut');
+		firstDate.setTime($(this).attr('data-starttime'))
+		lastDate.setTime($(this).attr('data-endtime')|| formatDate(new Date()))
+		//$('.historyTimeIpt').val(formatDate(lastDate))
+        var selToID   = myWebim.sess_id;
+        var sess_data = myWebim.getSessDataBySessId(selToID);
+        var resume_id = sess_data.ResumeId;
+        var url = "/chat/checkChatHistoryV2";
+		$('.chat-right').removeClass('tipShow')
+        $.post(url, {resume_id:resume_id}, function(re){
+            if (!re.status) {
+                $('.j_have_chat_notice').html(re.msg);
+				$('.chat-right').addClass('tipShow')
+                // $('.tipBox').show();
+            } else {
+                $('.j_have_chat_notice').html('');
+				$('.chat-right').removeClass('tipShow')
+                // $('.tipBox').hide();
+            }
+        },'json');
+        //切换后关闭语言
+        myWebim.closeAudio();
+      
+        
+    });
+
+        
+    function hideHistory(){
+        $('#j_search_input').attr('onclick', 'showHistory()');
+        $('.chat-left').removeClass('show');
+        $('#j_search_input').val('');
+        //$('#myFrendList li a').eq(0).click();
+    }
+    //页面最老那条聊天数据的日期
+	var first_msg_date = '';
+	function getChatHistory(msg_date, keyword, page) {
+        $('#j_history_list').html('');
+	    keyword=keyword||$('.historyKey').val();
+		var selToID   = myWebim.sess_id;
+		var sess_data = myWebim.getSessDataBySessId(selToID);
+		var resume_id = sess_data.ResumeId;
+		var url = "{/get_url rule='/chat/getChatHistory'/}";
+		$.post(url, {resume_id:resume_id, msg_date:msg_date, keyword:keyword, page:page}, function(re){
+			if (re.status && re.data) {
+				var data = re.data;
+				var list = data.list;
+				var html = '';
+				var curr_msg_date = '';
+				$('.j_page_pre').attr('data-page',data.pre_page);
+				$('.j_page_after').attr('data-page', data.after_page);
+				$('.j_page_last').attr('data-page',data.total_page);
+				var allFaces        = myWebim.getFaceCodeObj();//表情
+				if (!$.isEmptyObject(list)) {
+					for(var i in list) {
+						if (curr_msg_date != list[i].msg_date) {
+							html += '<div class="historyTopTime j_'+ list[i].msg_date +'">' + list[i].msg_date + '</div>';
+                            curr_msg_date = list[i].msg_date;
+						}
+						if (i == 0) {
+							first_msg_date = list[i].msg_format_date;
+						}
+						if (list[i].send_origin == 1) {
+							html += '<div class="historyMsgMe">\n';
+						} else {
+							html += '<div class="historyMsgOther">\n';
+						}
+						html += '   <span class="historyName">' + list[i].from_name + '</span><span class="historyTime" style="" data-time="' + list[i].msg_timestamp + '">' + list[i].send_time + '</span>';
+						if (list[i].msg_type == 1) {
+							list[i].msg_content = myWebim.getMsgEmoji(list[i].msg_content,allFaces);
+						}
+						html += '       <div class="historyMsg">\n' +
+							list[i].msg_content +
+							'   </div>\n' +
+							'</div>';
+						$('.historyTimeIpt').val(first_msg_date);
+					}
+					if (myWebim.sess_id != $('.historyTimeIpt').attr('data-session-id')) {
+						$('.historyTimeIpt').attr('data-session-id', myWebim.sess_id);
+					}
+				} else {
+					html = '<div class="historyTopTime">没有符合条件的聊天记录</div>';
+				}
+				$('#j_history_list').html(html);
+				addGray(data.curr_page,data.total_page)
+			}
+		},'json');
+	}
+    function showHistoryR(){
+        //调用获取聊天记录的方法,默认不需要关键字
+        getChatHistory('', '');
+        $('.chat-right').addClass('show');
+    }
+    function hideHistoryR(){
+		curDate.setTime(nowDate)
+		//$('.historyTimeIpt').val(formatDate(curDate))
+        $('.chat-right').removeClass('show')
+    }
+
+    $('.historyTimeIpt').on('click',function(){
+        var spacialDates=$(this).attr('data-days').split(',');
+        WdatePicker({
+            minDate:"#F{formatDate(firstDate)}",
+            maxDate:"#F{formatDate(lostDate)}",
+            specialDates:spacialDates,
+			onpicked:function(){
+				curDate=new Date(this.value);
+				var msg_date = $('.historyTimeIpt').val();
+				getChatHistory(msg_date);
+			}
+        })
+    })
+
+    $('body').on('click', '.ignoreTip', function(){
+        // $('.tipBox').hide();
+		$('.chat-right').removeClass('tipShow')
+    });
+	
+	// 9.12新增js
+
+	var curDate=new Date();
+	var nowDate=new Date();
+	var lastDate=new Date();
+	var activeDate = new Date();
+	var firstDate=new Date( nowDate.getTime() - 30*24*3600*1000 );
+	var lostDate=new Date( nowDate.getTime());
+	var pageL=$('.historyPageBtnL');
+	var pageR=$('.historyPageBtnR');
+	function plus0(num){
+		return (num < 10 ? "0" : "") +num
+	}
+	function formatDate(date){
+		return date.getFullYear()+"-"+plus0(date.getMonth()+1)+"-"+ plus0(date.getDate())
+	}
+	$('.historyPageBtn').on('click',function(){
+		if($(this).hasClass('gray'))return false;
+		var page = $(this).attr('data-page');
+		var keyword = $('.historyKey').val();
+		getChatHistory('',keyword,page);
+	});
+	
+	function addGray(cur,total){
+		if(cur==1){
+			pageR.addClass('gray')
+		}else{
+		    pageR.removeClass('gray')
+		}
+		if(cur>=total){
+			pageL.addClass('gray')
+		}else{
+			pageL.removeClass('gray')
+		}
+	}
+</script>
+
+{/if !empty($net_apply_id)/}
+<script type="text/javascript">
+$(function(){
+
+    //chatVideo.init(videoInfo);     
+});   
+</script>
+{//if/}
+
+
+
+<script  type="text/javascript">
+    var action_url = '{/$siteurl.style/}';
+    if(typeof action_dom == 'object'){}else{
+        action_dom = [];
+    }
+    action_dom.push( ['.charResume', 151]);
+    action_dom.push( ['.md_nomol_replay', 152]);
+    action_dom.push( ['.md_addres', 153]);
+
+</script>
+<script type="text/javascript" language="javascript" src="{/version file='action.js'/}"></script>
+</body>
+</html>

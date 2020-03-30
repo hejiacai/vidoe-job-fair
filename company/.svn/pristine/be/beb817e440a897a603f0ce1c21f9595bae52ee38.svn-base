@@ -1,0 +1,918 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>企业微招聘编辑</title>
+		<link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+		<link rel="stylesheet" type="text/css" href="{/version file='icons.css'/}" />
+		<link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}" />
+		<link rel="stylesheet" type="text/css" href="{/version file='ratePoster.css'/}" />
+		<link rel="stylesheet" type="text/css" href="{/version file='m_font_style.css'/}" />
+		<!--<link rel="stylesheet" type="text/css" href="{/version file='companyStyle.css'/}" />-->
+
+		<script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.min.js'/}"></script>
+		<script type="text/javascript">
+            window.CONFIG = {
+                HOST: '{/$siteurl.style/}',
+                COMBOPATH: '/js/v2/'
+            }
+		</script>
+		<script type="text/javascript" language="javascript" src="{/version file='common.js'/}"></script>
+		<script type="text/javascript" language="javascript" src="{/version file='dialog.js'/}"></script>
+		<script type="text/javascript" language="javascript" src="{/version file='jquery.form.js'/}"></script>
+		<script type="text/javascript" language="javascript" src="{/version file='ui_validate.js'/}"></script>
+		<script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+		<script type="text/javascript" src="{/version file='global.js'/}"></script>
+		<script type="text/javascript">
+            hbjs.loadJS('{/$siteurl.style/}/js/v2/cqjob/common.js');
+//          hbjs.loadJS('{/$siteurl.style/}/webuploader/js/webuploader.js');
+//      hbjs.loadJS('{/$siteurl.style/}/webuploader/js/upload.js');
+//      hbjs.loadJS('{/$siteurl.style/}/js/jquery_lightbox2/js/lightbox.js');
+		</script>
+		
+		{/$up_img_html.hand_html/}
+<style type="text/css">
+	.hb_ui_dialog .ui_dialog_container{ padding: 0;}
+	.welfareAmend_dialog .dialogFooter{ 
+		text-align: right;
+		background-color: #fafafa;
+	    padding: 10px 10px;
+	    border-top: 1px solid #ebebeb;
+	    text-align: right;
+    }
+	.rateImgList div {
+		position: relative;
+		width: 9999px;
+	}
+	
+	.ratePosterLeft{
+				position: relative;
+				overflow: visible;
+			}
+	.rateImgMain{
+				overflow: visible;
+			}
+	.rateImgBtn{
+		position: absolute;
+		top:200px;
+		right:-37px;
+		writing-mode:tb-rl;
+		color:#ccc;
+		font-size: 17px;
+	}
+	.rateImgBtn ul{
+		position:absolute;
+		width:100%;
+	}
+	.rateImgBtn li{
+		width:100%;
+		text-align: center;
+		
+	}
+	
+	.rateImgBtn .dot{
+		display: inline-block;
+		width:8px;
+		height:8px;
+		border-radius: 4px;
+		border:1px solid #999;
+		box-sizing: border-box;
+	}
+	.rateImgBtn li.cur .dot{
+		background: #999;
+	}
+	.rateImgUp{
+		margin-top:240px;
+	}
+	.rateImgDown{
+		margin-top:30px;
+	}
+	.rateImgDown,.rateImgUp{
+		width:22px;
+		color:#999;
+		text-align: center;
+		-webkit-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		cursor: pointer;
+	}
+	.rateImgDown:hover,.rateImgUp:hover{
+		color:#444;
+	}
+	.rateImgDown i,.rateImgUp i{
+		display: block;
+		width:22px;
+		height:22px;
+		margin:5px 0;
+	}
+	.rateImgDown i{
+		background: url({/$siteurl.style/}/img/company/mrecruit/pc_down_off_icon.png);
+	}
+	.rateImgDown:hover i{
+		background: url({/$siteurl.style/}/img/company/mrecruit/pc_down_on_icon.png);
+	}
+	.rateImgUp i{
+		background: url({/$siteurl.style/}/img/company/mrecruit/pc_up_off_icon.png);
+	}
+	.rateImgUp:hover i{
+		background: url({/$siteurl.style/}/img/company/mrecruit/pc_up_on_icon.png);
+	}
+	.editText{
+		padding-left: 15px;
+	}
+	.editText b{
+		color:#ffa200;
+	}
+	.editBox{
+		position: relative;
+		border:1px solid #f1f1f1;
+	}
+	.editBox li{
+		padding:0 20px;
+		line-height: 40px;
+	}
+	.editBox li.bggray{
+		background: #fafafa;
+	}
+	.editBox li:hover,.editBox li.bggray:hover{
+		background: #f5faff;
+	}
+	.editBox .list-cell1{
+		display:inline-block;
+		width:80px;
+	}
+	.editBox .list-cell2{
+		display:inline-block;
+		width:220px;
+	}
+	.editBox a{
+		padding-right: 10px;
+	}
+	.editMore {
+		border-top: 1px dashed #f1f1f1;
+		margin-top: 34px;
+		padding:14px;
+	}
+	.editMore i{
+		color:#2b6fad;
+		padding-right:9px;
+	}
+	.editMore a{
+		display: inline-block;
+		padding:8px 10px;
+		border:1px solid #f1f1f1;
+		color: #444;
+		border-radius: 20px;
+		margin-left: 14px;
+	}
+	.editMore a:hover{
+		color:#0af;
+		border:1px solid #0af;
+	}
+	
+	.rateForm{background: #fff;}
+	.rateForm a{
+		float: none;
+		margin:auto;
+	}
+	
+	/*关于我们弹窗*/
+	.aboutUs_dialog #aboutPost{
+		padding:20px;
+	}
+	.aboutUs_dialog #hidRightSpot{
+		width:725px;
+		padding-left: 5px;
+		outline:none;
+		border: 1px solid #f0f0f0;
+		height:32px;
+	}
+	.aboutUs_dialog #info{
+		width:725px;
+		border: 1px solid #f0f0f0;
+	}
+	.aboutUs_dialog .input-err{
+		color:#ff0000;
+	}
+	.aboutUs_dialog .formTextarea p.num{
+		position: absolute;
+	    bottom: -24px;
+	    right: 0;
+	    color: #ccc;
+	    font-size: 14px;
+	}
+	.aboutUs_dialog .formMod .l{
+		font-size: 16px;
+		color:#333;
+		height:40px;
+		line-height: 40px;
+	}
+	.aboutUs_dialog .formMod .l.l3{
+		font-size: 16px;
+		color:#999;
+		width:100%;
+		text-align: left;
+	}
+	.aboutUs_dialog .uploader2 .filelist li{
+		margin-top:8px;
+		overflow: visible;
+	}
+	.aboutUs_dialog .uploader2 .filelist div.file-panel{
+		overflow: visible;
+	}
+	.aboutUs_dialog .uploader2 .filelist div.file-panel span{
+		position: absolute;
+	    top: -10px;
+	    right: -10px;
+		box-shadow: none;
+		background: #e60a0a;
+	}
+	.aboutUs_dialog .uploader2 .statusBar{
+		padding-top: 0;
+	}
+	
+	
+	.rateImgx{
+		width:335px;
+		height:592px;
+	}
+	
+	
+	.editMask{
+		position: absolute;
+		display:none;
+		width:100%;
+		height:100%;
+		text-align: center;
+		background: #000000;
+		filter: alpha(opacity=20);
+	    -moz-opacity: 0.2;
+	    -khtml-opacity: 0.2;
+	    opacity: 0.2;
+	    z-index: 10;
+	}
+	.editMask table,.editMask tr,.editMask td{
+		width:100%;
+		height:100%;
+	}
+</style>
+	</head>
+	<body>
+		<div class="gpHeader">
+			<div>
+				<span>企业微招聘<i>编辑中</i></span>
+				<!--<a href="{/get_url rule='/'/}">返回首页</a>-->
+			</div>
+		</div>
+		<div class="ratePosterMain">
+			<div class="ratePosterLeft">
+				
+				<div class="clear"></div>
+				<div class="rateImgMain">
+					<div class="rateImgTitle">
+						<img src="{/$siteurl.style/}/img/company/mrecruit/phoneicon_orange.png" alt="" />手机上可查看完整效果
+					</div>
+					<div class="rateImgBtn">
+						<div class="rateImgText">鼠标滚动可翻页</div>
+					</div>
+					<!-- 当前版本不需要了 -->
+					<!-- <div class="rateImgBtn">
+						<ul>
+						</ul>
+						<div class="rateImgUp"><i></i>上<br />一<br />页</div>
+						<div class="rateImgDown">下<br />一<br />页<i></i></div>
+					</div> -->
+					<div class="rateImgx">
+						<iframe id="iframeH5" style="width:100%;height:100%;" src="{/$h5_url/}" frameborder="0"></iframe>
+						<!--此处图片地址应该传过来-->
+						<!--<img src="//company.huibo.com/createposter/CompanyPoster/company_flag-entmz1j59-poster_type-2" />-->
+					</div>
+					<div class="rateImgz">
+						<div class="rateImgList">
+							<div id="imgBox">
+								{/foreach $page_style as $template/}
+									<span  data-key="{/$template['id']/}" class="{/if $template['id'] == $introduce['template_type']/}cut{//if/}" >
+										<i></i>
+										<img src="{/$template['pic_url']/}" />
+									</span>
+								{//foreach/}
+							</div>
+						</div>
+						<a href="javascript:void(0);" class="rateImgLeft"></a>
+						<a href="javascript:void(0);" class="rateImgRight"></a>
+					</div>
+				</div>
+                <input type="hidden" id="imgKey" value="2" name="imgKey"/>
+			</div>
+			<div class="ratePosterRight">
+				<a href="javascript:window.history.go(-1);" class="editRatex" style="margin-left: 0;"><i></i>退出编辑</a><span class="editText">编辑后<b>点击预览</b>可查看最新效果</span>
+				
+				<div class="perfectDesit">
+					<img src="{/$siteurl.style/}/img/company/mrecruit/music_tip_icon.jpg"/>
+					<span>
+						完善<em>产品/项目介绍、高管团队</em>可显著提升招聘效果
+					</span>
+					<a href="javascript:void(0);">背景音乐</a>
+				</div>
+				<div class="editBox">
+					<ul></ul>
+					<div class="editMore"></div>
+					<div class="editMask"><table><tr><td>保存中</td></tr></table></div>
+				</div>
+				
+				
+				<div class="rateForm">
+						<a href="javascript:void(0);" class="rateSave">预览并保存</a>
+					</div>
+			</div>
+		</div>
+<script type="text/javascript">
+	//------------------全局变量定义区------------------
+	var aboutUs = undefined ,recuit_dialog = undefined, wel_dialog=undefined, rateMusic=undefined;
+	var cur_temp_id = parseInt('{/$introduce["template_type"]/}');//当前模板
+	var curStyle=cur_temp_id,curPage=1,is_reward_close = false;
+	var h5_url = "{/$h5_url/}";
+	var allMould=['首页','企业简介/工作环境','公司福利','高管团队','产品/项目介绍','岗位招聘'];
+	var mouldNow="{/$introduce['page_order']/}".split(',');//,mouldMore="{/$introduce['mouldMore']/}".split(',');
+	var mouldMore=[];
+	if (!Array.prototype.indexOf){
+	  Array.prototype.indexOf = function(elt /*, from*/){
+	    var len = this.length >>> 0;
+	
+	    var from = Number(arguments[1]) || 0;
+	    from = (from < 0)
+	         ? Math.ceil(from)
+	         : Math.floor(from);
+	    if (from < 0)
+	      from += len;
+	
+	    for (; from < len; from++){
+	      if (from in this && this[from] === elt)
+	        return from;
+	    }
+	    return -1;
+	  };
+	}
+	$.each(allMould,function(i,e){
+		if(mouldNow.indexOf( ( i + 1 ) + "" ) == -1){
+			mouldMore.push( ( i + 1 ) + "" )
+		}
+	})
+    //------------------全局变量定义区------------------
+
+
+hbjs.use('@confirmBox',function(m) {
+	var	confirmBox = m['widge.overlay.confirmBox'],
+		Dialog = m['widge.overlay.hbDialog'],
+		fontSize = 18,
+		pWidth = 70;
+    var AreaDrop = m['product.areaDrop'];
+    var validatorForm = m['widge.validator.form'];
+        
+    
+		console.log(mouldNow);
+		console.log(mouldMore);
+	$(window).ready(function(){
+		
+	})
+
+	
+	var welfareAmend = new Dialog({
+		idName : 'welfareAmend_dialog',
+		title : '福利待遇',
+		width : 590,
+		isOverflow : false,
+		isAjax : true
+	});
+//	var rateAreaPop = new Dialog({
+//		idName : 'welfareAmend_dialog',
+//		title : '公司地址',
+//		width : 500,
+//		isOverflow : false,
+//		isAjax : true
+//	});
+//	aboutUs = new Dialog({
+//		idName : 'aboutUs_dialog',
+//		title : '关于我们',
+//		width : 770,
+//		//height: 500,
+//		close:'X',
+//		isOverflow : false,
+//		isAjax : true,
+//		content: '{/get_url rule="/mrecruit/EditAboutUs"/}'
+//	});
+
+//添加背景音乐
+	rateMusic = new Dialog({
+		idName : 'rateMusic_dialog',
+		title : '选择背景音乐',
+		width : 670,
+		close:'X',
+		isOverflow : false,
+		isAjax : true,
+		content: '{/get_url rule="/mrecruit/MusicEdit"/}'
+	});
+	
+	$('.perfectDesit a').on('click', function(){
+		rateMusic.show();
+	});
+	
+
+	
+	
+	var paraobj={
+		all:allMould,
+		queue:mouldNow,
+		more:mouldMore,
+		ul:".editBox ul"
+	};
+	function arrlist(obj){
+		var html="";
+		//循环列表
+		$.each(obj.queue,function(i,e){
+			html+='<li data-page='+ e + (i%2==0?'':' class="bggray"') +'>';
+			html+='<span class="list-cell1">第'+(i+1)+'页</span>';
+			html+='<span class="list-cell2" >'+obj.all[e-1]+'</span>';
+			html+=(i<obj.queue.length-1&&i!=0)?'<a href="javascript:void(0);" class="downBtn">下移</a>':'';
+			html+=(i>1)?'<a href="javascript:void(0);"  class="upBtn">上移</a>':'';
+			html+=(e!=1)?'<a href="javascript:void(0);" class="editBtn">编辑</a>':'';
+			html+=(i>0)?'<a href="javascript:void(0);"  class="deleBtn">删除</a>':'';
+			html+='</li>';
+		})
+		$(obj.ul).html(html)
+		
+		//添加模块列表
+		var htmlmore="";
+		if(obj.more.length>0 && obj.more[0]!=""){
+			$('.editMore').show()
+			htmlmore='<span><i class="icon-svg47"></i>添加模块：</span>';
+			$.each(obj.more,function(i,e){
+				htmlmore+='<a href="javascript:void(0);" class="addBtn" data-page='+e+'>'+obj.all[e-1]+'</a>';
+			})
+			
+		}else{
+			$('.editMore').hide()
+		}
+			$(obj.ul).next().html(htmlmore)
+			
+			
+		
+	}
+	 //绑定事件
+		$('.editBox').on('click','.downBtn',function(e){movelist(this,1,paraobj);e.stopPropagation();})
+		$('.editBox').on('click','.upBtn',function(e){movelist(this,-1,paraobj);e.stopPropagation();})
+		$('.editBox').on('click','.deleBtn',function(e){delelist(this,paraobj);e.stopPropagation();})
+		$('.editBox').on('click','.addBtn',function(e){addlist(this,paraobj);e.stopPropagation();})
+		$('.editBox').on('click','.editBtn',function(e){editlist(this,paraobj);e.stopPropagation();})
+	//上移下移
+	function movelist(e,num,obj){
+		$('.editMask').show()
+		var template1=($(e).parent('li').attr('data-page'));
+		var index=obj.queue.indexOf(template1);
+		var template2=obj.queue[index+num];
+		obj.queue[index+num]=template1;
+		obj.queue[index]=template2;
+		arrlist(obj)
+		
+		var data = {};
+		data.page_order = mouldNow.join(',');
+
+        $.post("/mrecruit/SaveEdit/",data,function(r){
+            if(r.status){
+            	// 保存成功
+            	curPage=index+num+1;
+//          	$('.s'+curStyle+'p'+curPage)[0].src=$('.s'+curStyle+'p'+curPage)[0].src;
+//          	$('.s'+curStyle+'p'+(curPage-num))[0].src=$('.s'+curStyle+'p'+(curPage-num))[0].src;
+				$('.p'+curPage).remove()
+				$('.p'+(index+1)).remove()
+            	changesrc()
+				arrlist(obj)
+				$('.editMask').hide()
+                return;
+            }else{
+                //保存失败
+				console.log(r.msg)
+			}
+
+        },'json');
+	}
+	//删除模块
+	function delelist(e,obj){ 
+		$.confirm('是否删除该页面？','提示',function(){
+			$('.editMask').show()
+			var index=obj.queue.indexOf(($(e).parent('li').attr('data-page')));
+			var sp=obj.queue.splice(index,1);
+			obj.more=obj.more.concat(sp).sort();
+			var data = {};
+			data.page_order = mouldNow.join(',');
+	
+	        $.post("/mrecruit/SaveEdit/",data,function(r){
+	            if(r.status){
+	            	// 保存成功
+	            	curPage=1;
+	            	$('.rateImgx img:not(.p'+curPage+')').remove()
+	            	createLi()
+	            	changesrc()
+					arrlist(obj)
+					$('.editMask').hide()
+	                return;
+	            }else{
+	                //保存失败
+					console.log(r.msg)
+				}
+			})
+		})
+	}
+	//添加模块
+	function addlist(e,obj){
+		console.log(curPage)
+		var page=($(e).attr('data-page'));
+		var index=obj.more.indexOf(page);
+		var sp=obj.more.splice(index,1);
+		if(page==1){
+			obj.queue.unshift(page);
+		}else{
+			obj.queue.push(page);
+			if(page>2){
+				$.post("/mrecruit/IsHaveData/",{which_page:page},function(r){
+					
+					if(!r.status){
+						editlist(e,obj)
+					}else if(r.status){
+						createLi()
+		            	changesrc()
+					}
+				})
+			}
+		}
+		var data = {};
+		data.page_order = mouldNow.join(',');
+
+        $.post("/mrecruit/SaveEdit/",data,function(r){
+            if(r.status){
+            	// 保存成功
+            	curPage=obj.queue.indexOf(page)+1;
+            	console.log(curPage)
+            	if(page==2){
+            		createLi()
+		            changesrc()
+            	}
+            	//$('.rateImgx img').remove()
+				arrlist(obj)
+            }else{
+                //保存失败
+				console.log(r.msg)
+			}
+
+		})
+	}
+	//编辑
+	function editlist(e,obj){
+		var page=null;
+		var type=null;
+		if($(e).is('.addBtn')){
+			page=parseInt($(e).attr('data-page'))
+			type='add';
+		}else if($(e).is('.editBtn')){
+			page=parseInt($(e).parent('li').attr('data-page'))
+			type='edit'
+		}
+		switch (page){
+			case 2:
+//              aboutUs.setContent({
+//                  content: '{/get_url rule="/mrecruit/EditAboutUs"/}'+'?v='+Math.random()
+//              }).show();
+			aboutUs = new Dialog({
+					idName : 'aboutUs_dialog',
+					title : '关于我们',
+					width : 770,
+					//height: 500,
+					close:'X',
+					isOverflow : false,
+					isAjax : true,
+					content: '{/get_url rule="/mrecruit/EditAboutUs"/}'
+				});
+				aboutUs.on('closeX', function(e){
+                    aboutUs.destory();
+                    $.post("/mrecruit/IsHaveData/",{which_page:page},function(r){
+                    	console.log(r)
+						if(!r.status){
+							var index=obj.queue.indexOf(page);
+							var sp=obj.queue.splice(index,1);
+							obj.more=obj.more.concat(sp).sort();
+							var data = {};
+							data.page_order = mouldNow.join(',');
+//							curPage=1;
+//			            	$('.rateImgx img').remove()
+//			            	createLi()
+//			            	changesrc()
+//							arrlist(obj)
+							$.post("/mrecruit/SaveEdit/",data,function(r){
+					            if(r.status){
+					            	// 保存成功
+//					            	if(type='add'){
+//						            	curPage=1;
+//						            	$('.rateImgx img').remove()
+//									}else if(type='edit'){
+//										curPage=index+1;
+//									}
+										curPage=1;
+										createLi()
+						            	changesrc()
+										arrlist(obj)
+					                return;
+					            }else{
+					                //保存失败
+									console.log(r.msg)
+								}
+							})
+						}
+					})
+                });
+				aboutUs.show()
+				break;
+			case 3:
+
+                $.showModal('/reward/index/src-mrecruit-defaultReward-'+0+'-otherReward-'+0,{title:'福利待遇',
+                onclose:function(){
+					    //判断福利有无内容
+						$.post("/mrecruit/IsHaveData/",{which_page:page},function(r){
+							if(!r.status){
+								var index=obj.queue.indexOf(page);
+								var sp=obj.queue.splice(index,1);
+								obj.more=obj.more.concat(sp).sort();
+								var data = {};
+								data.page_order = mouldNow.join(',');
+								$.post("/mrecruit/SaveEdit/",data,function(r){
+						            if(r.status){
+						            	// 保存成功
+//						            	if(type='add'){
+//							            	curPage=1;
+//							            	$('.rateImgx img').remove()
+//										}else if(type='edit'){
+//											curPage=index+1;
+//										}
+						            	curPage=1;
+						            	createLi()
+						            	changesrc()
+						            	console.log(obj)
+										arrlist(obj)
+						                return;
+						            }else{
+						                //保存失败
+										console.log(r.msg)
+									}
+								})
+							}
+						})
+					
+                }});
+//				$('.wel_dialog').on('closeX',function(){
+//					
+//				})
+                
+				break;
+			case 6:
+                recuit_dialog=new Dialog({
+                    idName : 'recuit_dialog',
+                    title : '岗位招聘（仅显示在招）',
+                    width : 'auto',
+                    //height: 285,
+                    close:'X',
+                    isOverflow : true,
+                    isAjax : true,
+                    content: '{/get_url rule="/mrecruit/getSortJobspage"/}'
+                })
+                recuit_dialog.on('closeX', function(e){
+                    recuit_dialog.destory();
+                    $.post("/mrecruit/IsHaveData/",{which_page:page},function(r){
+                    	console.log(r)
+						if(!r.status){
+							var index=obj.queue.indexOf(page);
+							var sp=obj.queue.splice(index,1);
+							obj.more=obj.more.concat(sp).sort();
+							var data = {};
+							data.page_order = mouldNow.join(',');
+//							curPage=1;
+//			            	$('.rateImgx img').remove()
+//			            	createLi()
+//			            	changesrc()
+//							arrlist(obj)
+							$.post("/mrecruit/SaveEdit/",data,function(r){
+					            if(r.status){
+					            	// 保存成功
+//					            	if(type='add'){
+//						            	curPage=1;
+//						            	$('.rateImgx img').remove()
+//									}else if(type='edit'){
+//										curPage=index+1;
+//									}
+										curPage=1;
+										createLi()
+						            	changesrc()
+										arrlist(obj)
+					                return;
+					            }else{
+					                //保存失败
+									console.log(r.msg)
+								}
+							})
+						}
+					})
+                });
+				recuit_dialog.show()
+				break;
+			case 5:
+				$.message('是否编辑完成？',{title:'提示',onclose:function(){
+					location.href=location.href;
+				}})
+				var tempwindow=window.open('about:blank');
+				tempwindow.location.href='{/get_url rule="/introduceProject/index/"/}';
+				//window.open('{/get_url rule="/introduceProject/index/"/}')
+				break;
+			case 4:
+				$.message('是否编辑完成？',{title:'提示',onclose:function(){
+					location.href=location.href;
+				}})
+				var tempwindow=window.open('about:blank');
+				tempwindow.location.href='{/get_url rule="/introduceManage/index/"/}';
+//				window.open('{/get_url rule="/introduceManage/index/"/}')
+				break;
+			default:
+				break;
+		}
+	}
+		
+		//初始化列表
+		arrlist(paraobj)
+		
+		
+	//目前两种风格不需要改变位置
+	//跳转时海报的位置
+//	$('.rateImgList div span').ready(function(){
+//		if($('.rateImgList div span').length<=3){
+//	            return
+//	        }else {
+//	            if($('#imgKey').val()-1<2){
+//	                $('.rateImgList div').css({'left':0+'px'})
+//	                return;
+//	            }
+//	            if($('#imgKey').val()-1<=$('.rateImgList div span').length-1 && $('#imgKey').val()-1>$('.rateImgList div span').length-3) {
+//	                $('.rateImgList div').css({'left':-(($('.rateImgList div span').eq($('#imgKey').val()-1).outerWidth(true))*($('.rateImgList div span').length-3))+'px'});
+//	                return;
+//	            }
+//	        }
+//      $('.rateImgList div').css({'left':-(($('#imgKey').val()-1)*($('.rateImgList div span').eq($('#imgKey').val()-1).outerWidth(true)))+'px'})
+//   });
+	
+//选择分享海报
+	$(document).on('click','.rateImgList span', function(){
+        var _that =  $(this);
+		var thisId = _that.attr('data-key');
+		if(curStyle==thisId)return false;
+        _that.addClass('cut').siblings().removeClass('cut');
+        var thisIndex = _that.index()+1;
+//      console.log('111',thisIndex)
+        
+        $('#imgKey').val(thisId);
+        curStyle=thisId;
+		var url='{/get_url rule="/mrecruit/getPic"/}'+'?save_temp=true&tempid='+curStyle+'&v='+Math.random();
+		$.post(url,{},function(res){
+			changesrc()
+		})
+        // curPage=1;
+        // changesrc()
+        //var url = _that.attr("data-url");
+//      var url='{/get_url rule="/mrecruit/getPic?page='+curPage+'&tempid='+curStyle+'"/}'
+//      $('.rateImgx img').attr('src',url);
+        //$('.rateImgx a').attr('href',url);
+
+
+        if($('.rateImgList div span').length<=3){
+            return
+        }else {
+            if(thisIndex<2){
+                $('.rateImgList div').animate({'left':0+'px'})
+                return;
+            }
+            if(thisIndex<=$('.rateImgList div span').length-1 && thisIndex>$('.rateImgList div span').length-3) {
+                $('.rateImgList div').animate({'left':-(($(this).outerWidth(true))*($('.rateImgList div span').length-3))+'px'});
+                return;
+            }
+        }
+        $('.rateImgList div').animate({'left':-((thisIndex-1)*($(this).outerWidth(true)))+'px'})
+	});
+
+    $('.rateSave').on("click",function(){
+
+        data = {};
+		data.page_order = mouldNow.join(',');
+		data.tempid = curStyle;
+
+        $.post("/mrecruit/SaveEdit/",data,function(r){
+            if(r.status){
+            	location.href='{/get_url rule="/mrecruit/index"/}'
+				// 保存成功
+                return;
+            }else{
+                //保存失败
+				console.log(r.msg)
+			}
+
+        },'json');
+    })
+
+
+
+//左右按钮选择海报
+	$('.rateImgLeft').on('click',function () {
+		console.log( $('.rateImgList div span.cut').index(),$('.rateImgList div span').length);
+		if($('.rateImgList div span.cut').index()<=0){
+			$('.rateImgList div span').eq($('.rateImgList div span').length-1)[0].click()
+		}else{
+        	$('.rateImgList div span').eq($('.rateImgList div span.cut').index()-1)[0].click()
+        }
+    })
+    $('.rateImgRight').on('click',function () {
+		if($('.rateImgList div span.cut').index()>=$('.rateImgList div span').length-1){
+			$('.rateImgList div span').eq(0)[0].click()
+		}else{
+        	$('.rateImgList div span').eq($('.rateImgList div span.cut').index()+1)[0].click()
+        }
+    })
+
+		
+//         function changesrc(){
+// //			console.log('改变地址时'+curPage)
+// //      	var url='{/get_url rule="/mrecruit/getPic?page='+curPage+'&tempid='+curStyle+'"/}'
+// //      	$(".rateImgBtn li").removeClass('cur').eq(curPage-1).addClass('cur')
+// //      	$('.rateImgx img').prop('src',url)
+//         	//$('.rateImgx a').prop('href',url);
+//         				$('.rateImgx img').hide();
+// 			$(".rateImgBtn li").removeClass('cur').eq(curPage-1).addClass('cur')
+//         	if($('.s'+curStyle+'.p'+curPage).length>0){
+// //      		已有该图片
+//         		$('.s'+curStyle+'.p'+curPage).show()
+//         	}else{
+// //      		没有找到图片
+//         		var url='{/get_url rule="/mrecruit/getPic"/}'+'?page='+curPage+'&tempid='+curStyle+'&v='+Math.random();
+//         		$('.rateImgx').append('<img class="s'+curStyle+' p'+curPage+'" src='+url+'/>')
+//         	}
+//         	
+//         }
+//       //上下翻页
+//       $('.rateImgUp').on('click',function(){
+//       	curPage=(curPage==1)?curPage:(curPage-1);
+//       	changesrc()
+//       })
+//       $('.rateImgDown').on('click',function(){
+//       	curPage=(curPage == $(".rateImgBtn li").length)?curPage:(curPage+1);
+//       	changesrc()
+//       })
+	// $(".rateImgBtn").on('click','li',function(){
+//       	curPage=$(this).index()+1;
+//       	changesrc()
+//       })
+//		$(".editBox ul").on('click','li',function(){
+//      	curPage=$(this).index()+1;
+//      	changesrc()
+//      })
+		function changesrc(){
+			var iframeH5=document.getElementById('iframeH5');
+			iframeH5.src=iframeH5.src
+		}
+		function createLi(){
+			// var list='';
+			// for(var i=0;i<mouldNow.length;i++){
+			// 	list+='<li><div class="dot"></li>'
+			// 	//list+='<li'+(i==0?'class="cur"':'')+'></li>';
+			// }
+			// $('.rateImgBtn ul').html(list)
+		}
+		
+		curStyle=getQueryString('curStyle')||curStyle;
+		
+		//获取url参数
+		function getQueryString(name) {  
+	        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");  
+	        var r = window.location.search.substr(1).match(reg);  
+	        if (r != null) return unescape(r[2]);
+	        return null;  
+	    }  
+	    // createLi()
+		$('.rateImgList div span[data-key='+ curStyle +']')[0].click()
+		
+		
+		
+		//小于3张隐藏左右按钮
+		if($('.rateImgList span').length<=3) {
+            $('.rateImgLeft,.rateImgRight').hide();
+		}
+});
+
+		
+
+</script>
+    </body>
+</html>

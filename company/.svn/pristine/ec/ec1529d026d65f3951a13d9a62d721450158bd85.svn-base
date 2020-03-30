@@ -1,0 +1,536 @@
+<html xmlns:o="urn:schemas-microsoft-com:office:office"
+			xmlns:w="urn:schemas-microsoft-com:office:word"
+			xmlns="http://www.w3.org/TR/REC-html40">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+<xml><w:WordDocument><w:View>Print</w:View></xml>
+<title>{/$title/}</title>
+</head>
+<body>
+<style type="text/css">
+body{background:#F0EEEF; font-family:Verdana, Geneva, sans-serif; font-size:14px; line-height:24px;}
+i,em{font-style:normal;}
+body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,select,textarea,th,td,div{margin:0;padding:0;}
+p{margin:0;padding:0;}
+.table{padding:0 15px; zoom:1; width:100%; background:#fff; margin:20px auto 0; color:#444;}
+.table a{font-size:12px;}
+.table a:link,.table a:visited{color:#999; text-decoration:none;}
+.table a:hover{color:#00aaff;}
+.img{background:#F4F4F4;height:141px;overflow:hidden;text-align:center;}
+.txt p{height:24px;line-height:24px;overflow:hidden;text-align:center;text-overflow:ellipsis;white-space:nowrap;width:200px; font-size:12px;}
+.txt p a{color:#666; text-decoration:none;}
+.txt p a:link,.txt p a:visited{color:#666;}
+.txt p a:hover{color:#00aaff;}
+.workBox{margin:0 auto;overflow:hidden;text-align:center;width:200px;}
+.workBox img{max-height:141px;max-width:200px;_height:141px;_width:200px; vertical-align:top;}
+.mark{display:inline-block;*display:inline; zoom:1;border:1px solid #a6a6a6; 
+border-bottom:2px solid #a6a6a6;font-size:12px;height:23px;line-height:23px; margin:0 15px 5px 0;padding:0 10px; vertical-align:middle;}
+/* 职位标签 */
+	.jobTags {
+	  font-size: 0; }
+	  .jobTags em {
+	    display: inline-block;
+	    line-height: 30px;
+	    margin: 5px;
+	    margin-left: 0;
+	    font-size: 14px;
+	    color: #7d8aa4;
+	    background: #f6f7f9;
+	    border-radius: 4px;
+	    padding: 0 5px; }
+</style>
+<table class="table" cellpadding="0" cellspacing="0">
+	<tbody>
+    	<!--logo及编号begin-->
+        <tr>
+        	<td>
+            	<table cellpadding="0" cellspacing="0" width="100%">
+            		{/if $resume_src/}
+                		<tr>
+                			<td colspan="2">{/$resume_src/}</td>
+                		</tr>
+                	{//if/}  
+                	{/if $applydsc/}
+                	<tr>
+                		<td colspan="2">{/$applydsc/}</td>
+                	</tr>
+                	{//if/}                	              	
+                	<tr>
+                    	<td align="left">简历编号:{/$resume_id/}&nbsp;&nbsp;&nbsp;&nbsp;最近登录:{/$last_login_time|date_format:'%Y-%m-%d'/}</td>
+                        <td align="right"><img src="{/$siteurl.style/}/img/common/flogo.png" /></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <!--logo及编号end-->
+    	<tr>
+            <td>
+                <table align="left" cellpadding="0" cellspacing="0" style="*margin:0 15px; display:inline;">
+                    <tbody>
+        <tr>
+            <!--照片begin-->
+            <td align="left" width="120" style="padding:5px 15px 5px 0; zoom:1;"><img src="{/if $avatar!=''/}{/$avatar/}{/else/}{/$siteurl.style/}/img/common/user120_150.jpg{//if/}" height="150" width="120" border="0"/></td>
+            <!--照片end-->
+            <!--基本信息begin-->
+            <td align="left">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td><b style="font-size:24px;">{/$user_name/}</b><i style="font-size:14px;">（{/get_name sex=$sex/}，{/$age/}{/if $marriage!=''&&$fertility!=''/}，{/get_name marriage=$marriage/}{/get_name fertility=$fertility/}{/elseif $marriage!=''/}，{/get_name marriage=$marriage/}{/elseif $fertility!=''/}，{/get_name fertility=$fertility/}{//if/}{/if $stature!=''&&$avoirdupois!=''/}，{/$stature/}cm/{/$avoirdupois/}kg{/elseif $stature!=''/}{/$stature/}cm{/elseif $avoirdupois!=''/}{/$avoirdupois/}kg{//if/}）</i></td>
+                        </tr>
+                        <tr><td height="5"></td></tr>
+                        <tr>
+                            <td style="font-size:14px;">{/if $degree!=''/}<i style="margin-right:10px; border-right:1px solid #dadada; padding-right:10px;">{/get_name degree=$degree/}</i>{//if/}{/if $work_year!=''/}<i style="margin-right:10px; border-right:1px solid #dadada; padding-right:10px;">|{/$work_year/}</i>{//if/}{/if $political_status!=''/}<i  style="margin-right:10px; border-right:1px solid #dadada; padding-right:10px;">|{/get_name political=$political_status/}</i>{//if/}<i  style="margin-right:10px; border-right:1px solid #dadada; padding-right:10px;">|现居：{/$cur_area_name/}</i>{/if $native_place_name!=''/}<i class="end">|户籍：{/$native_place_name/}</i>{//if/}</td>
+                        </tr>
+                        <tr><td height="10"></td></tr>
+                        <tr>
+                            <td>
+                                <table style="font-size:12px; color:#999; line-height:20px;">
+                                    <tbody>
+                                        <tr>
+                                            <td>希望从事：{/$exp_job/}（{/get_name job_level=$exp_job_level/}{/if $is_not_accept_lower_job_level==1/}，对低级别岗位没有兴趣{//if/}）</td>
+                                        </tr>
+                                        <tr>
+                                            <td>期望行业：{/if $str_expect_callings==''/}--{/else/}{/$str_expect_callings/}{//if/}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>期望薪资：{/if $exp_salary==''||$exp_salary=='0'/}——{/else/}{/if $exp_salary=='negotiable'/}薪资面议{/else/}{/get_name salary=$exp_salary/} 元/月{//if/} {/if $is_not_accept_lower_salary==1&&$exp_salary!='negotiable'&&$exp_salary!='01'/}（对低于此薪资的岗位没有兴趣）{//if/}{//if/}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>意向地区：{/if $exp_area_names==''/}——{/else/}{/$exp_area_names/}{/if $job_type==1&&$is_accept_parttime==1/}（可接受兼职）{/elseif $job_type==2/}（兼职）{/elseif $job_type==3/}（实习）{//if/}{//if/}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+                    </tbody>
+                </table>
+            </td>
+            <!--基本信息end-->
+        </tr>
+        <!--工作经验begin-->
+        {/foreach $resume_works as $key=>$value/}
+      	{/if $value@first/}
+        <tr>
+        	<td>
+                <table width="100%" cellpadding="0" cellspacing="0" align="left" style="padding:0 0 5px 0; zoom:1; *margin:0 15px 10px 15px; display:inline;">
+                    <thead>
+                        <tr>
+                            <th align="left" style="border-bottom:2px solid #aaa;padding-bottom:5px;" colspan="2"><b style="font-size:16px; font-family:'微软雅黑'; font-weight:normal;">工作经验</b></th>
+                        </tr>
+                    </thead>
+                    <tbody>       
+       	 {//if/}
+                        <tr>
+                            <td width="145" align="right" valign="top" style="color:#dadada; padding:5px 15px 5px 0; zoom:1;line-height:15px;font-size:12px;">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td align="right">{/$value['start_time']/}-{/$value['end_time']/}</td>
+                                        </tr>
+                                        <tr>
+                                            <td align="right">（{/$value['work_time']/}）</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                            <td align="left" valign="top" {/if $value@last/}style="padding:5px 0; zoom:1;font-size:12px;" {/else/}style="border-bottom:1px dotted #ccc; padding:5px 0; zoom:1;font-size:12px;"{//if/}>
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td style="line-height:15px;">
+                                                <b style="padding-right:15px; zoom:1;">{/$value['station']/}</b>
+                                                {/if $value['job_level']!=''/}<i style="margin-right:10px; padding-left:10px; border-left:1px solid #dadada;">{/get_name job_level=$value['job_level']/}</i>{//if/}
+                                                {/if $value['salary_month']!='' && $value['is_salary_show']/}<i style="margin-right:10px; padding-left:10px; border-left:1px solid #dadada;">{/$value['salary_month']/}元/月</i>{//if/}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <i>{/$value['company_name']/}</i>
+                                                <em>（{/get_name calling=$value['calling_id']/}，{/get_name com_property=$value['com_property']/}，{/get_name com_size=$value['com_size']/}）</em>
+                                            </td>
+                                        </tr>
+                                        {/if $value['tag_names']/}
+                                            <tr>
+                                                <td>
+                                                    <div class="jobTags">
+                                                        {/foreach $value['tag_names'] as $tag_name/}
+                                                            <em>{/$tag_name/}</em>
+                                                        {//foreach/}
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        {//if/}
+                                        <tr>
+                                            <td style="padding-top:5px;color:#999;">{/html_encode content=$value['work_content']/}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+					 {/if $value@last/}
+                    </tbody>
+                </table>	
+            </td>
+        </tr>
+
+        {//if/}
+        {//foreach/} 
+        <!--工作经验end-->
+        <!--项目经验begin-->
+        {/foreach $resume_projects as $key=>$value/}
+        {/if $value@first/}
+        <tr>
+        	<td>
+            	<table width="100%" cellpadding="0" cellspacing="0" align="left" style="padding:0 0 5px 0; zoom:1;display:inline;">
+                	<thead>
+                    	<tr>
+                        	<th align="left" colspan="2" style="border-bottom:2px solid #aaa;padding-bottom:5px; width:100%;"><b style="font-size:16px; font-family:'微软雅黑'; font-weight:normal;">项目经验</b></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+         {//if/}           
+                    	<tr>
+                        	<td width="145" align="left" valign="top" style="color:#dadada;padding:5px 15px 5px 0; zoom:1;line-height:15px;font-size:12px;">
+                            	<table>
+                                	<tbody>
+                                    	<tr><td align="right">{/$value['start_time']/}-{/$value['end_time']/}</td></tr>
+                                        <tr><td align="right"> {/if $value['project_time']!=''/}({/$value['project_time']/}){//if/}</td></tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                            <td align="left" valign="top" {/if $value@last/}style="padding:5px 0;zoom:1;font-size:12px;" {/else/}style="padding:5px 0;border-bottom:1px dotted #ccc;font-size:12px;"{//if/}>
+                            	<table>
+                                	<tbody>
+                                    	<tr>
+                                        	<td style="line-height:15px;" align="left">
+                                            	<i style="padding-right:15px;">{/$value['project_name']/}</i>
+                                                <i style="margin-right:10px;padding-left:10px;">{/$value['duty']/}</i>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                        	<td style="padding-top:5px;color:#999;" align="left">
+                                            	<p>{/$value['project_detail']/}</p>
+                                                <p>{/$value['main_duty']/}</p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+        {/if $value@last/}            
+                    </tbody>
+                </table>
+            </td>
+       	 </tr>
+        {//if/}
+    	{//foreach/}
+        <!--项目经验end-->
+        <!--教育培训经历begin-->
+        {/if $hasEdusOrTrains/}
+        <tr>
+        	<td>
+            	<table width="100%" cellpadding="0" cellspacing="0" align="left" style="padding:0 0 5px 0; zoom:1; *margin:0 15px 10px 15px; display:inline;">
+                    <thead>
+                        <tr>
+                            <th width="160" align="left" style="border-bottom:2px solid #aaa;padding-bottom:5px;" colspan="2"><b style="font-size:16px; font-family:'微软雅黑'; font-weight:normal;">教育&amp;培训经历</b></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {/foreach $resume_edus as $key=>$value/}
+                    	<tr>
+                        	<td align="right" valign="top" width="145" style="color:#dadada;padding:5px 15px 5px 0;zoom:1;line-height:15px;font-size:12px;">
+                            	<table>
+                                	<tbody>
+                                    	<tr>
+                                        	<td>{/if empty($value['start_time'])/}开始时间未填写{/else/} {/$value['start_time']|date_format:'%Y.%m'/}{//if/}-{/if empty($value['end_time'])/} 至今{/else/}{/$value['end_time']|date_format:'%Y.%m'/}{//if/}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                            <td align="left" valign="top" style="padding:5px 0;zoom:1;font-size:12px;">
+                            	<table>
+                                	<tbody>
+                                    	<tr>
+                                        	<td style="line-height:15px;">
+                                            	<b style="padding-right:15px;">{/get_name degree=$value['degree']/}</b>
+                                                <i style="margin-right:10px;padding-left:10px;border-left:1px solid #dadada;">{/$value['school']/}</i>
+                                                <i style="margin-right:10px;padding-left:10px;border-left:1px solid #dadada;">{/$value['major_desc']/}</i>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                        	<td style="padding-top:5px;color:#999;">{/$value['edu_detail']/}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        {//foreach/}
+						{/foreach $resume_trains as $key=>$value/}
+                        <tr>
+                        	<td align="right" valign="top" width="145" style="color:#dadada;padding:5px 15px 5px 0; zoom:1;line-height:15px;font-size:12px;">
+                            	<table>
+                                	<tbody>
+                                    	<tr>
+                                        	<td>{/if empty($value['start_time'])/}开始时间未填写{/else/} {/$value['start_time']|date_format:'%Y.%m'/}{//if/}-{/if empty($value['end_time'])/} 至今{/else/}{/$value['end_time']|date_format:'%Y.%m'/}{//if/}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                            <td align="left" valign="top"{/if $value@last/}style="padding:5px 0; zoom:1;font-size:12px;" {/else/}style="border-bottom:1px dotted #ccc; padding:5px 0; zoom:1;font-size:12px;"{//if/}>
+                            	<table>
+                                	<tbody>
+                                    	<tr>
+                                        	<td style="line-height:15px;">
+                                            	<b style="padding-right:15px;font-weight:normal;color:#999;">{/$value['course']/}</b>
+                                                <i style="margin-right:10px;padding-left:10px;border-left:1px solid #dadada;">{/$value['institution']/}</i>
+                                                <i style="margin-right:10px;padding-left:10px;border-left:1px solid #dadada;">{/$value['certificate']/}</i>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                        	<td style="padding-top:5px;color:#999;">{/$value['train_detail']/}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        {//foreach/}
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        {//if/}
+        <!--教育培训经历end-->
+        <!--语言能力begin-->
+       {/foreach $resume_languages as $key=>$value/}
+       {/if $value@first/}
+        <tr>
+        	<td>
+            	<table width="100%" cellpadding="0" cellspacing="0" align="left" style="padding:0 0 5px 0; zoom:1; *margin:0 15px 10px 15px; display:inline;">
+                	<thead>
+                        <tr>
+                            <th align="left" style="border-bottom:2px solid #aaa;padding-bottom:5px;" colspan="2"><b style="font-size:16px; font-family:'微软雅黑'; font-weight:normal;">语言能力</b></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+         {//if/}          	 
+                    	<tr>
+                        	<td width="145">&nbsp;</td>
+                            <td align="left" {/if $value@last/}style="padding:5px 0; zoom:1;font-size:12px;" {/else/}style="border-bottom:1px dotted #ccc; padding:5px 0; zoom:1;font-size:12px;"{//if/}>
+                            	<b style="padding-right:15px;">{/get_name language=$value['language_type']/}</b>{/if $value['skill_level']!=''/}<i style="margin-right:10px; padding-left:10px; border-left:1px solid #dadada;">{/get_name skill_level=$value['skill_level']/}</i>{//if/}{/section name=language loop=$value['certificates']/}<i style="margin-right:10px;padding-left:10px;border-left:1px solid #dadada;">{/$value['certificates'][language]['cert_name']/}</i>
+                               {//section/}
+                            </td>
+                        </tr>
+         {/if $value@last/}                
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        {//if/}
+       	{//foreach/}
+       	<!--语言能力end-->
+        <!--技能begin-->
+        {/foreach $resume_skills as $key=>$value/}
+        {/if $value@first/}
+        <tr>
+        	<td>
+            	<table width="100%" cellpadding="0" cellspacing="0" align="left" style="padding:0 0 5px 0; zoom:1; *margin:0 15px 10px 15px; display:inline;">
+                	<thead>
+                        <tr>
+                            <th align="left" style="border-bottom:2px solid #aaa;padding-bottom:5px;" colspan="2"><b style="font-size:16px; font-family:'微软雅黑'; font-weight:normal;">技能</b></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+        {//if/}
+                    	<tr>
+                        	<td width="145"></td>
+                            <td align="left" {/if $value@last/}style="padding:5px 0; zoom:1;font-size:12px;" {/else/}style="border-bottom:1px dotted #ccc; padding:5px 0; zoom:1;font-size:12px;"{//if/}>
+                            	<b style="font-weight:normal; color:#999; padding-right:15px;">{/get_name skill_level=$key/}</b>
+                                {/if $value!=''/}<i style="margin-right:10px; padding-left:10px; border-left:1px solid #dadada;">{/mb_substr($value,1,mb_strlen($value))/}</i>{//if/}
+                            </td>
+                        </tr>
+	   {/if $value@last/} 				
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+       	{//if/}
+       	{//foreach/} 
+       	<!--技能end-->
+        <!--证书begin-->
+        {/foreach $resume_certificates as $key=>$value/}
+        {/if $value@first/}
+        <tr>
+        	<td>
+            	<table width="100%" cellpadding="0" cellspacing="0" align="left" style="padding:0 0 5px 0; zoom:1; *margin:0 15px 10px 15px; display:inline;">
+                	<thead>
+                        <tr>
+                            <th align="left" style="border-bottom:2px solid #aaa;padding-bottom:5px;" colspan="2"><b style="font-size:16px; font-family:'微软雅黑'; font-weight:normal;">证书</b></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+          {//if/}         
+                    	<tr>
+                        	<td width="145">&nbsp;</td>
+                            <td align="left" {/if $value@last/}style="padding:5px 0; zoom:1;font-size:12px;" {/else/}style="border-bottom:1px dotted #ccc; padding:5px 0; zoom:1;font-size:12px;"{//if/}>
+                            	<b style="font-weight:normal; color:#999; padding-right:15px;">{/$value['certificate_name']/}</b>
+                                <i style="margin-right:10px; padding-left:10px; border-left:1px solid #dadada;">{/$value['gain_time']/}获得</i>
+                               {/if $value['score']!=''/} <i style="margin-right:10px; padding-left:10px; border-left:1px solid #dadada;">成绩：{/$value['score']/}</i>{//if/}
+                               {/if $value['certificate_no']!=''/}<i style="margin-right:10px; padding-left:10px; border-left:1px solid #dadada;">编号：{/$value['certificate_no']/}</i>{//if/}
+                            </td>
+                        </tr>
+		 {/if $value@last/}		
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        {//if/}
+        {//foreach/}
+        <!--证书end-->
+        <!--实践经验begin-->
+  		{/foreach $resume_practices as $key=>$value/}
+  		{/if $value@first/}
+        <tr>
+        	<td>
+            	<table width="100%" cellpadding="0" cellspacing="0" align="left" style="padding:0 0 5px 0; zoom:1; *margin:0 15px 10px 15px; display:inline;">
+                	<thead>
+                    	<tr>
+                        	<th align="left" style="border-bottom:2px solid #aaa;padding-bottom:5px;" colspan="2"><b style="font-size:16px; font-family:'微软雅黑'; font-weight:normal;">实践经验</b></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+         {//if/}             
+                    	<tr>
+                        	<td width="145" align="right" valign="top" style="color:#dadada;padding:5px 15px 5px 0; zoom:1;line-height:15px;font-size:12px;">{/if empty($value['start_time'])/}开始时间未填写{/else/} {/$value['start_time']|date_format:'%Y.%m'/}{//if/}-{/if empty($value['end_time'])/} 至今{/else/}{/$value['end_time']|date_format:'%Y.%m'/}{//if/}</td>
+                            <td align="left" valign="top" {/if $value@last/}style="padding:5px 0; zoom:1;font-size:12px;" {/else/}style="border-bottom:1px dotted #ccc; padding:5px 0; zoom:1;font-size:12px;"{//if/}>
+                            	<table>
+                                	<tbody>
+                                    	<tr>
+                                        	<td style="line-height:15px;"><b>{/$value['practice_name']/}</b></td>
+                                        </tr>
+                                        <tr>
+                                        	<td style="padding-top:5px;color:#999;">{/$value['practice_detail']/}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+ 			{/if $value@last/}			
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        {//if/}
+        {//foreach/}
+        <!--实践经验end-->
+        <!--亮点标签begin-->
+        {/if !empty($resume_highlights)||!empty($appraise)/}
+        <tr>
+        	<td>
+            	<table width="100%" cellpadding="0" cellspacing="0" align="left" style="padding:0 0 5px 0; zoom:1; *margin:0 15px 10px 15px; display:inline;">
+                	<thead>
+                    	<tr>
+                        	<th align="left" style="border-bottom:2px solid #aaa;padding-bottom:5px;" colspan="2"><b style="font-size:16px; font-family:'微软雅黑'; font-weight:normal;">亮点标签</b></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    	<tr>
+                        	<td width="145" align="left">&nbsp;</td>
+                            <td align="left" valign="top">
+                            	<table>
+                                	<tbody>
+                                	{/foreach $resume_highlights as $key=>$value/}
+                                	{/if $value@first/}
+                                    	<tr>
+                                        	<td align="left" style="padding:5px 0 0;">
+                                            	<table>
+                                                	<tbody>
+                                                    	<tr>
+                                                        	<td>{//if/}<span class="mark">{/$value['light_desc']/}</span>{/if $value@last/}</td> 
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                      {//if/}  
+                                    {//foreach/}  
+                                        <tr>
+                                        	<td align="left" style="padding-top:5px;zoom:1;font-size:12px; color:#666; line-height:20px;">
+                                            	<p>{/$appraise/}</p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        {//if/}
+        <!--亮点标签end-->
+        <!--附加信息begin-->
+         {/foreach $resume_appends as $key=>$value/}
+         {/if $value@first/}
+        <tr>
+        	<td>
+            	<table width="100%" cellpadding="0" cellspacing="0" align="left" style="padding:0 0 5px 0; zoom:1; *margin:0 15px 10px 15px; display:inline;">
+                	<thead>
+                    	<tr>
+                        	<th align="left" style="border-bottom:2px solid #aaa;padding-bottom:5px;" colspan="2"><b style="font-size:16px; font-family:'微软雅黑'; font-weight:normal;">附加信息</b></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+         {//if/}           
+                    	<tr>
+                        	<td width="145" align="left">{/$value['topic_desc']/}</td>
+                            <td align="left" {/if $value@last/}style="padding:5px 0; zoom:1;" {/else/}style="border-bottom:1px solid #aaa; padding:5px 0; zoom:1;"{//if/}><p>{/$value['content']/}</p></td>
+                        </tr>
+         {/if $value@last/}              
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        {//if/}
+       	{//foreach/}
+       
+        <!--联系方式begin-->
+		 {/if $show_linkway=='1'/}
+        <tr>
+        	<td>
+            	<table width="100%" align="center" cellpadding="0" cellspacing="0" style="background:#fafafa; padding-bottom:10px;">
+                	<thead>
+                    	<tr>
+                        	<th align="left" style="font-size:16px;color:#666;font-weight:normal;padding:15px 10px 20px 10px;zoom:1;font-family:'微软雅黑';border-bottom:2px solid #aaa;" colspan="2">联系方式</th>
+                        </tr>
+                    </thead>
+                	<tbody>
+                    	<tr>
+                            <td align="left" style="border-right:1px solid #eee; padding:0 0 0 10px;zoom:1;">
+                                <p style="font-size:20px;"><b>{/$mobile_phone/}</b></p>
+                                <p style="font-size:12px; color:#999;">（该手机号码归属地为<b>“重庆”</b>，外地座机拨打时请加拨<b>""0"</b>）</p>
+                            </td>
+                            <td align="left" style="font-size:12px; padding:0 0 0 20px;zoom:1;line-height:20px;">
+                                <p><em style="color:#999;">邮箱：</em>{/$email/}</p>
+                                <p><em style="color:#999;">Q Q：</em>{/$qq/}</p>
+                                <p><em style="color:#999;">座机：</em>{/$telephone/}</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        {//if/}
+        <!--联系方式end-->
+    </tbody>
+</table>
+
+</body>
+</html>

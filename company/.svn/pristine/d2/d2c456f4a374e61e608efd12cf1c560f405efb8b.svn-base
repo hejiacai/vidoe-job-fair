@@ -1,0 +1,37 @@
+{/if !empty($list)/}
+{/foreach $list as $val/}
+	<div class="companyStyle-item companyStyle-item-showText">
+		<div  id="edit_{/$val.id/}"></div>
+		<ul class="companyStyle-form-show clearfix" id="editul_{/$val.id/}">
+			<p class="companyStyle-form-play">
+				<a class="companyStyle-form-edit" onclick="introduce_edit('{/$val.id/}')">编辑</a>
+				<a class="companyStyle-form-del" onclick="introduce_del('{/$val.id/}')">删除</a>
+			</p>
+			<li class="clearfix">
+				<span class="companyStyle-form-tit">产品/项目名称</span>
+				<div class="companyStyle-form-text">
+					<p>{/$val['name']/}</p>
+				</div>
+			</li>
+			<li class="clearfix">
+				<span class="companyStyle-form-tit">产品/项目简介</span>
+				<div class="companyStyle-form-text">
+					<p>{/$val['details']/}</p>
+				</div>
+			</li>
+			<li class="clearfix">
+				<span class="companyStyle-form-tit">产品/项目图片</span>
+				<div class="companyStyle-form-text clearfix">
+					{/if !empty($val.imgs)/}
+					{/foreach $val.imgs as $v/}
+						<div class="companyStyle-form-imgs">
+							<img src="{/$img_path/}/{/$v/}" alt="">
+						</div>
+					{//foreach/}
+					{//if/}
+				</div>
+			</li>
+		</ul>
+	</div>
+{//foreach/}
+{//if/}

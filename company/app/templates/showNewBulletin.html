@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>升级维护公告</title>
+</head>
+<body>
+<div style="padding:15px; min-width:350px; max-width:600px; font-family:'Microsoft yahei';">
+    <h2 style="margin-bottom:10px;">{/$newBulletin['title']/}</h2>
+    <div style="margin-top:10px; max-height:450px; overflow-x: hidden;">
+        {/html_encode content=$newBulletin['content']/}
+    </div>
+    <p style="text-align: right; margin-top: 10px;">汇博网（huibo.com）</p>
+    <p style="text-align: right;">{/$newBulletin['create_time']/}</p>
+</div>
+</body>
+</html>

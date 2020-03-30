@@ -1,0 +1,1266 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+<title>{/$title/}</title>
+
+
+    <!--<link rel="stylesheet" type="text/css" href="{/version file='m_font_style.css'/}">-->
+    <!–[if lt IE9]>
+    <script type="text/javascript" language="javascript" src="{/version file='html5.js'/}"></script>
+    <![endif]–>
+    <link rel="stylesheet" type="text/css" href="//assets.huibo.com/css/m_font_style.css?v=20180532">
+    <link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='v2-reset.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='comback.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='tJob_style.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='partTime.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='kalendae.css'/}" />
+
+
+    <script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='common.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='dialog.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='kalendae.standalone.js'/}"></script>
+
+    <script type="text/javascript" src="{/version file='layer.js'/}"></script>
+    <script type="text/javascript" src="{/version file='WdatePicker.js'/}"></script>
+    <script type="text/javascript" src="{/version file='base_script.js'/}"></script>
+    {/$up_img_html.hand_html/}
+
+    <script type="text/javascript" src="{/version file='version.js'/}"></script>
+    <script type="text/javascript">
+    window.CONFIG = {
+        HOST: '{/$siteurl.style/}',
+        COMBOPATH: '/js/v2/'
+    }
+    </script>
+<script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+<script type="text/javascript" src="{/version file="global.js"/}"></script>
+<script type="text/javascript">
+hbjs.loadJS('{/$siteurl.style/}/js/v2/cqjob/common.js');
+</script>
+<script type="text/javascript" src="//api.map.baidu.com/api?v=2.0&ak=33f9256a1a1ba5a80eb40f8ed45bce3c"></script>
+<style>
+.all input {margin-right: 2px; vertical-align: middle;}
+input:disabled{background-color:#f0f0f0!important;}
+.contactWayLst{padding:5px;zoom:1;padding:10px;background:#f1f1f1;}
+.contactWayLst p{margin-bottom:10px}
+.contactWayLst p label{width:615px;margin-left:5px}
+
+    .addQualification{width:530px; overflow: hidden; background: #fff; border:6px solid #a3a3a3; display:none; position: fixed; top: 50%; left: 50%; margin: -300px 0 0 -250px}
+    .addQualTit{width:100%; height:40px; background: #f3f3f3;}
+.addQualTit a,.addQualTit span{display: block;
+    float: left;  line-height: 40px; font-size: 16px; color: #444;}
+.addQualTit span{padding-left: 20px;
+    }
+.addQualTit a{ display: block; float: right; padding-right: 20px}
+    .qualNx{ padding: 20px;}
+    .qualNz{width:100%; overflow: hidden;}
+    .qualNz span{ display: block; float: left; line-height: 36px; margin-right: 10px}
+    .qualNz input{ float: left; height: 34px; line-height: 34px; text-indent: 10px;width:220px; border: 1px solid #ebebeb}
+    .qualNr{
+        display: block; color: #444; line-height: 40px}
+    #msgDiv{ width:100%; overflow: hidden; line-height:20px; padding-bottom: 10px; font-size: 12px; color: #f00}
+.partjobAdd{ outline: none; border: none}
+    #saveQualification{display: block;width:120px; height: 38px; line-height: 38px; text-align: center; color: #fff; font-size: 16px; background: #ff8a00; border-radius: 4px; margin: 20px 0 0px 0px;}
+    .uploader2 .filelist li{ margin-bottom: 8px;}
+    .wdSelect033{ display: block; float: left; padding: 8px 5px; border: 1px solid #ebebeb;}
+    .qualNz{ margin-bottom:15px;}
+    .qualNz span.errorPart{ display: none; padding-top: 0px; margin-left: 8px;}
+    .kalendae .k-caption{ text-align: center;}
+</style>
+</head>
+<body style="margin-top: 0px;">
+{/include file="new_header.html" par="兼职招聘" cur="职位管理"/}
+
+<div id="exPocket" style="width:100%; height: 35px; line-height: 35px; text-align: center; font-size: 14px; overflow: hidden; background: #fffce9; color: #ff6204; margin-top: -20px; display: none;">
+	该页面不支持IE浏览器，请使用高版本浏览器发布职位（如：Chrome,Safari,360,Firefox等等）
+</div>
+<div class="parttimeFrom">
+    <form action="{/get_url rule='/partjob/JobV2' domain='company'/}" id="form1">
+    <div class="parttimeFromPad">
+        <p class="tjob_from_title"><strong>基本信息</strong></p>
+        <input type="hidden" name="is_agency" id="is_agency" value="{/$is_agency/}"/>
+        {/if empty($is_agency)/}
+        <div class="partMod clearfix">
+            <div class="partMod_lf" style="width:260px">
+                        <span class="partTit" id="partAgency">
+                            <font color="red" style="font-family: '微软雅黑';font-size: 14px;text-align: left;">招聘类型</font><i>*</i>
+                            <a href="javaScript:;" data-id="2" class="partAgency"  style="margin-right:
+                            30px;"><em class="icon-uniE6002"></em>直招</a>
+                            <a href="javaScript:;" data-id="1" class="partAgency"><em class="icon-uniE6002"></em>中介</a>
+                            <div class="clear"></div>
+                        </span>
+                <span class="errorPart" id="errorAgency">请选择招聘类型</span>
+            </div>
+        </div>
+        {//if/}
+        <div class="partMod clearfix">
+            <div class="partMod_lf">
+                <span class="partTit">兼职名称<i>*</i></span>
+                <input type="text" name="partName" id="partName" class="text" value="{/$job_info['station']/}" placeholder="兼职名称，6-20字内" />
+                <span class="errorPart"></span>
+            </div>
+            <div class="partMod_ct">
+                <span class="partTit">招聘人数<i>*</i></span>
+                <div class="partJobz">
+                    <input type="text" name="partGivex" id="partGivex" class="text" value="{/$job_info['apply_count']/}" placeholder="请输入1-999人" style="width: 135px;" />
+                    <b>人</b>
+                </div>
+
+                <span class="errorPart">请输入招聘人数</span>
+            </div>
+            <div class="partMod_rt">
+                <span class="partTit">所属职业<i>*</i></span>
+                <input type="text" name="partProfession" id="partProfession" class="text" value="{/$job_info['jobsort_name']/}" placeholder="请选择所属职位" style="width:220px" readonly="readonly" />
+                <span class="errorPart"></span>
+            </div>
+        </div>
+
+        <p class="tjob_from_title"><strong>工作地点</strong></p>
+        <div class="partMod clearfix">
+            <div class="partMod_lf">
+                <span class="partTit">展示城市<i>*</i></span>
+                <input type="text" name="partCity" class="text" value="{/$job_info['area_name']/}" placeholder="选择展示城市" id="partCity" readonly="readonly" />
+                <span class="errorPart">请选择展示城市</span>
+            </div>
+            <div class="partMod_rt" style="width:515px">
+                <span class="partTit">工作地址<i>*</i></span>
+                <div class="partAddx">
+                    <input  class="partjobAdd" id="editMapBtn" {/if $job_info['is_need_workaddress'] == 2/}disabled="disabled"{//if/}  value="添加工作地址">
+                    <!--未选中用icon-uniE6002选中用icon-uniE6012-->
+                    <a href="javaScript:;" class="partjobLimit {/if $job_info['is_need_workaddress'] == 2/}partjobLimit_cur{//if/}" id="partAddress"><i class="{/if $job_info['is_need_workaddress'] == 2/}icon-uniE6012{/else/}icon-uniE6002{//if/}"></i>不限工作地址</a>
+                </div>
+            </div>
+            <div class="clear"></div>
+
+            <div class="partAreabd" id="workAreas"
+                 {/if ($job_info['is_need_workaddress'] == 2 ||empty($job_info['job_id']))&&empty($huibo_job_id)/}
+                style="display:none"
+                 {/else/} style="display:block"
+                    {//if/}>
+                {/foreach $address_info  as $key=>$val/}
+                <div class="partArea" data-areainfo="{/$val['map_x']/}|{/$val['map_y']/}|{/$val['area_id']/}|{/$val['address_info']/}">
+                    <span>工作地址：{/$val['address_info']/}</span>
+                    <input type="hidden" name="add_info[]" value="{/$val['map_x']/}|{/$val['map_y']/}|{/$val['area_id']/}|{/$val['address_info']/}"/>
+                    <a href="#" class="partAreaEdit">编辑</a>
+                    <a href="#" class="partAreaDel">删除</a>
+                </div>
+                {//foreach/}
+            </div>
+        </div>
+
+        <p class="tjob_from_title"><strong>工作时间</strong></p>
+        <div class="partMod clearfix">
+            <div class="partMod_lf" style="width:260px">
+					<span class="partTit" id="partRestrictx">
+						工作日期<i>*</i>
+						<a href="javaScript:;" data-id="1" class="partRestrict {/if $job_info['long_recruit'] == 1/}partRestrict_cur{//if/}"  style="margin-right: 38px;"><em class="{/if $job_info['long_recruit'] == 1/}icon-uniE6012{/else/}icon-uniE6002{//if/}"></em>长期</a>
+						<a href="javaScript:;" data-id="0" class="partRestrict {/if $job_info['long_recruit'] == 0/}partRestrict_cur{//if/}"><em class="{/if $job_info['long_recruit'] == 0/}icon-uniE6012{/else/}icon-uniE6002{//if/}"></em>限定</a>
+						<div class="clear"></div>
+					</span>
+
+                <input type="text" id="partTotaldate" name="partTotaldate" class="text"  value="{/$job_info['work_time']/}" placeholder="选择总共工作日期" style="width:220px" readonly="readonly"/>
+                <span class="errorPart">请选择工作日期</span>
+            </div>
+            <div class="partMod_ct" style="width:260px">
+                <span class="partTit">上班时间<i>*</i></span>
+                <input type="text" name="partWorkday" id="partWorkday" value="添加上班时间" readonly="readonly">
+                <span class="errorPart">请选择上班时间</span>
+
+                <input type="hidden" name="partWorkdayTxt" id="partWorkdayTxt" value="{/if $worktime_info/}22222{//if/}" />
+            </div>
+            <div class="partMod_rt" style="width:260px">
+                <span class="partTit">报名截止时间<i>*</i></span>
+                <input type="text" name="weekDatetime" id="weekDatetime" class="text" value="{/$job_info['effect_time']/}" placeholder="选择每周上班时间" style="width:220px" readonly="readonly">
+
+                <span class="errorPart">请选择报名截止时间</span>
+            </div>
+            <div class="clear"></div>
+            <div class="partAreabd">
+                <span class="partJobtime">工作时间：{/$job_info['work_time']/}</span>
+                <div class="partJobtimeDlt">
+                    <em>上班时间：</em>
+                    {/foreach $worktime_info as $key=>$val/}
+                    <span>{/$worktime[$val['strat_time']]/}-{/$worktime[$val['end_time']]/}<input type="hidden" name="worktime_h[]" value="{/$val['strat_time']/}-{/$val['end_time']/}"><a href="javaScript:;">删除</a></span>
+                    {//foreach/}
+                </div>
+            </div>
+        </div>
+
+        <p class="tjob_from_title"><strong>薪资待遇</strong></p>
+        <div class="partMod clearfix">
+            <div class="partMod_lf">
+                <span class="partTit">薪资<i>*</i></span>
+                <div class="partPay">
+                    <input type="text" name="partPayx" id="partPayx" class="text" value="{/$job_info['salary']/}" placeholder="请输入薪资" style="width:135px; float: left;" />
+                    <b class="payTit">元</b>
+                    <div id="priceSelecter1" class="dropv2 select_ui_open" style="float:left;width:110px;margin-left:10px">
+                        <b class="hbFntWes dropIco"></b>
+                        <label style="color: rgb(204, 204, 204);">请选择</label>
+                    </div>
+                </div>
+                <div class="clear"></div>
+                <span class="errorPart" id="errorPay">请输入薪资</span>
+            </div>
+            <div class="partMod_rt" style="width:515px">
+                <span class="partTit">结算方式<i>*</i></span>
+                <div id="priceSelecter2" class="dropv2 select_ui_open" style="width:110px;">
+                    <b class="hbFntWes dropIco"></b>
+                    <label style="color: rgb(204, 204, 204);">请选择</label>
+                </div>
+                <div class="clear"></div>
+                <span class="errorPart" id="errorPay02">请输入薪资</span>
+            </div>
+            <div class="clear"></div>
+            <div class="partWeal">
+                <span class="partTit" style="padding-bottom: 11px;">福利待遇（选填）</span>
+                <input type="text" name="wealTextarea" class="wealTextarea" placeholder="可输入岗位相关的福利待遇，如工作餐、提成、交通补贴等" value="{/$job_info['welfare']/}" />
+            </div>
+        </div>
+
+        <p class="tjob_from_title"><strong>岗位要求</strong></p>
+        <div class="partWeal">
+            <span class="partTit" style="padding-bottom: 11px;">岗位要求<i>*</i></span>
+            <textarea name="partRequirements" id="partRequirements" class="partDemand" placeholder="请输入岗位要求">{/$job_info['position_require']/}</textarea>
+            <span class="errorPart"></span>
+        </div>
+		
+		<div class="partMentx">
+			<span class="tmendRtx1">人员要求：</span>
+			<span class="tmendRtx2">年龄要求：</span>
+			<span class="tmendRtx3">学历要求：</span>
+			<span class="tmendRtx4">健康要求：</span>
+		</div>
+        <div class="partStaffment">
+            <div id="partStaf01" class="dropv2" style="width:100px;">
+                <b class="hbFntWes dropIco"></b>
+                <label style="color: rgb(204, 204, 204);">请选择</label>
+            </div>
+            <div id="partStaf02" class="dropv2" style="width:100px; margin-left: 10px;">
+                <b class="hbFntWes dropIco"></b>
+                <label style="color: rgb(204, 204, 204);">请选择</label>
+            </div>
+            <div id="partStaf03" class="dropv2" style="width:100px;margin-left: 10px;">
+                <b class="hbFntWes dropIco"></b>
+                <label style="color: rgb(204, 204, 204);">请选择</label>
+            </div>
+            <div id="partStaf04" class="dropv2" style="width:100px;margin-left: 54px;">
+                <b class="hbFntWes dropIco"></b>
+                <label style="color: rgb(204, 204, 204);">请选择</label>
+            </div>
+            <div id="partStaf05" class="dropv2" style="width:125px; margin-left: 48px;">
+                <b class="hbFntWes dropIco"></b>
+                <label style="color: rgb(204, 204, 204);">请选择</label>
+            </div>
+            <div id="partStaf06" class="dropv2" style="width:125px;margin-left: 48px;">
+                <b class="hbFntWes dropIco"></b>
+                <label style="color: rgb(204, 204, 204);">请选择</label>
+            </div>
+        </div>
+		<div class="clear"></div>
+        <p class="tjob_from_title"><strong>联系方式</strong></p>
+        <div class="partMod clearfix">
+            <div class="partMod_lf" style="width:260px">
+                <span class="partTit">联系人<i>*</i></span>
+                <input type="text" name="partcontName" id="partcontName" class="text" value="{/if $job_info['job_id'] > 0/}{/$job_info['link_man']/}{/else/}{/$company_account_info[$jobdata['account_id']]['user_name']/}{//if/}" placeholder="请输入企业联系人姓名" style="width:220px" />
+                <span class="errorPart">请输入联系人姓名</span>
+            </div>
+            <div class="partMod_ct" style="width:260px">
+                <span class="partTit">联系电话<i>*</i></span>
+                <input type="text" name="partcontTel" id="partcontTel" class="text" value="{/if $job_info['job_id'] > 0/}{/$job_info['link_phone']/}{/else/}{/$company_account_info[$jobdata['account_id']]['mobile_phone']/}{//if/}" placeholder="请输入手机号或固定电话" style="width:220px" />
+                <span class="errorPart">请输入联系人电话</span>
+            </div>
+            <div class="partMod_rt" style="width:300px">
+                <span class="partTit">咨询方式<i>*</i></span>
+                <div class="partConTact" id="partConTact" style="border: none;">
+                    <a href="javaScript:;" class="partConTactx {/if $job_info['is_show_phone'] == 1/}partConTactx_cur{//if/}" id="partTelx01"><i class="{/if $job_info['is_show_phone'] == 1/}icon-uniE6012{/else/}icon-uniE6002{//if/}"></i>电话</a>
+                    <a href="javaScript:;" class="partConTactx {/if $job_info['is_show_weixin'] == 1/}partConTactx_cur{//if/}" id="partTelx02"><i class="{/if $job_info['is_show_weixin'] == 1/}icon-uniE6012{/else/}icon-uniE6002{//if/}"></i>微信</a>
+                    <a href="javaScript:;" class="partConTactx {/if $job_info['is_show_qq'] == 1/}partConTactx_cur{//if/}" id="partTelx03"><i class="{/if $job_info['is_show_qq'] == 1/}icon-uniE6012{/else/}icon-uniE6002{//if/}"></i>QQ</a>
+                </div>
+                <span class="errorPart">请选择咨询方式</span>
+            </div>
+            <div class="clear"></div>
+            <div class="partAreabd partAreabdWq" style="margin-top: 10px;{/if $job_info['is_show_qq'] == 1 || $job_info['is_show_weixin'] == 1/}display: block{//if/}">
+                <div class="partWeixin" {/if $job_info['is_show_weixin'] == 1/}style="display: block"{//if/}>
+                    <span>微信</span>
+                    <input type="text" name="partWeixinName" id="partWeixinName" class="text" value="{/$job_info['link_weixin']/}" placeholder="请输入微信号" style="width:150px; float: left;" />
+                </div>
+                <div class="partqq"  {/if $job_info['is_show_qq'] == 1/}style="display: block"{//if/}>
+                    <span>QQ</span>
+                    <input type="text" name="partqqName" id="partQQName" class="text" value="{/$job_info['link_qq']/}" placeholder="请输入QQ号" style="width:150px; float: left;" />
+                </div>
+            </div>
+        </div>
+
+        <p class="tjob_from_title"><strong style="color: #999;">资质认证（选填）</strong><span id="msg_span"></span></p>
+        <div class="partMod clearfix">
+            <div class="partProof">
+                <a href="javaScript:;" class="partProofAdd" id="addCertification">添加资质证明</a>
+            </div>
+
+            <div class="partAreabd" style="margin-top: 20px;{/if empty($job_qualification)/}display: none{//if/}">
+                <ul class="partLook">
+                    {/foreach $job_qualification as $key=>$val/}
+                    <li>
+                        <span>{/$val['name']/}</span>
+                        <input type="hidden" name="qualification[]" value="{/$val['img_str']/}">
+                        <a href="javaScript:;" data-id="{/$key/}" class="lookQualx" >查看</a>
+                        <a href="javaScript:;" class="delQualx">删除</a>
+                    </li>
+                    {//foreach/}
+                </ul>
+            </div>
+        </div>
+        <div class="partCommitment">
+            <i class="icon-uniE6002"></i>
+				<span>我承诺，同意平台<span>
+				<a href="{/get_url rule='/partjob/violations/'/}" target="_blank">《兼职处理规则》</a>
+				<span>，如有违规遵从且同意平台相应处理，包含且不限于关闭职位、冻结账号等</span>
+        </div>
+        <span class="errorPart" id="errorCom">请输入薪资</span>
+
+        <div id="area_html" style="display: none">
+            <div class="partCitySlt">
+                {/foreach $area as $val/}
+                <h2>{/$val['area_name']/}</h2>
+                <div class="clear"></div>
+                    {/foreach $val['findcity'] as $v/}
+                    <span data-city="{/$val['area_name']/}-{/$v['abbreviation']/}" data-areaid="{/$v['area_id']/}">{/$v['abbreviation']/}</span>
+                    {//foreach/}
+                <div class="clear"></div>
+                {//foreach/}
+
+                <b class="partCityOpen">其他城市正在开通中，敬请期待～</b></div>
+        </div>
+        <dir id="jobsort_count" style="display: none">
+            <div class="partCitySlt2">
+                {/foreach $partjobsorts as $val/}
+                    <h2>{/$val['name']/}</h2>
+                    <div class="clear"></div>
+                        {/foreach $val['parent'] as $v/}
+                            <span data-city="{/$v['name']/}" data-code="{/$v['code']/}" >{/$v['name']/}</span>
+                        {//foreach/}
+                    <div class="clear"></div>
+                {//foreach/}
+                <b class="partWarmPrompt ">温馨提示：仅能选择一项二级职位类别</b>
+            </div>
+        </dir>
+        <div id="mintime" style="display: none">
+            <div class="workdaySelect">
+                <select class="wdSelect01">
+                    <option value="0">请选择开始时间</option>
+                    {/foreach $worktime as $key=>$val/}
+                    <option value="{/$key/}-{/$val/}">{/$val/}</option>
+                    {//foreach/}
+
+                </select>
+                <span>至</span>
+                <select class="wdSelect02">
+                    <option value="0">请选择结束时间</option>
+                    {/foreach $worktime as $key=>$val/}
+                    <option value="{/$key/}-{/$val/}">{/$val/}</option>
+                    {//foreach/}
+                </select>
+                <div class="clear"></div>
+                <label class="workdayError"></label>
+                <a href="javaScript:;" class="workdayBtn">确定</a></div>
+        </div>
+
+        <div id="qualification" class="addQualification">
+            <div class="addQualTit">
+                <span>上传资质证明</span>
+                <a href="javascript:void(0);" class="delQualification">X</a>
+            </div>
+            <div class="qualNx">
+            <div id="msgDiv" style="display: none">
+                <span>消息提示:</span><span id="ajax_msg"></span>
+            </div>
+            <div class="qualNz">
+                <span>资质名称</span>
+                <input type="text" id="qualification_name" value=""/>
+                <span class="errorPart" id="partMater01"></span>
+            </div>
+            <div class="qualNz">
+                <span>资质类型</span>
+                <select class="wdSelect033" id="qualification_type">
+                    <option value="0">请选择资质类型</option>
+                    {/foreach $qualification as $key=>$val/}
+                    <option value="{/$key/}">{/$val['name']/}</option>
+                    {//foreach/}
+
+                </select>
+                <span class="errorPart" id="partMater02"></span>
+            </div>
+            <div >
+                <span class="qualNr">图片上传</span>
+                <div id="img_url_hidde" style="display: none">
+
+                </div>
+                {/$up_img_html.html/}
+            </div>
+            <span class="errorPart" id="partMater03"></span>
+            <div>
+                <a href="javascript:void(0)"  id="saveQualification">保存</a>
+            </div></div>
+        </div>
+        <div class="partFilter"></div>
+        <span class="partPopclose">X</span>
+        {/foreach $job_qualification as $key=>$val/}
+        <div class="partbannerPop" id="img_look_{/$key/}">
+            <div class="partBanner">
+
+                <div class="lst flexBanner">
+                    <ul class="slides">
+                        {/foreach $val['img_list'] as $k=>$v/}
+                        <li>
+                            <a href="#">
+                                <img src="{/$v['img_path']/}"/>
+
+                            </a>
+                        </li>
+                        {//foreach/}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {//foreach/}
+
+    </div>
+    <input type="hidden" name="area_id" id="area_id" value="{/$job_info['area_id']/}"/>
+    <input type="hidden" name="jobsort_id" id="jobsort_id" value="{/$job_info['jobsort_id']/}"/>
+    <input type="hidden" name="job_id" id="job_id" value="{/$job_info['job_id']/}"/>
+    <input type="hidden" name="is_need_workaddress" id="is_need_workaddress" value="{/$job_info['is_need_workaddress']/}"/>
+        <input type="hidden" name="is_show_phone" id="is_show_phone" value="{/$job_info['is_show_phone']/}"/>
+        <input type="hidden" name="is_show_weixin" id="is_show_weixin" value="{/$job_info['is_show_weixin']/}"/>
+        <input type="hidden" name="is_show_qq" id="is_show_qq" value="{/$job_info['is_show_qq']/}"/>
+        <input type="hidden" name="long_recruit" id="long_recruit" value="{/$job_info['long_recruit']/}"/>
+    <a href="javaScript:;" class="partPostjob">{/if $job_info['job_id'] > 0/}重新发布{/else/}发布职位{//if/}</a>
+    <div class="clear"></div>
+    </form>
+</div>
+
+<script type="text/javascript">
+    function calendarTool(inputName, disableMinTime, disableMaxTime, selectedTime = []) {
+        new Kalendae.Input(inputName, {
+            direction: 'any', //past过去   today-past过去（包括当天）  future未来   today-future未来（包括当天）   any任何
+            directionScrolling: true, //指定 direction设定的进行展示，其他不展示
+            months: 1, //展示几个月
+            mode: 'multiple', //模式 single 单选, multiple 多选, range 范围选择
+            blackout: function(date) {
+                if(Kalendae.moment(date).format("YYYY-MM-DD") < disableMinTime || Kalendae.moment(date).format("YYYY-MM-DD") > disableMaxTime) {
+                    return true
+                }
+
+            },
+            selected: selectedTime //默认选择日期
+        });
+    };
+    var disableTime = "{/$minTime/}";
+    var disableMaxTime = "{/$maxTime/}";
+    var selectedTime = [{/$defultWorkTime/}];
+
+    calendarTool('partTotaldate',disableTime,disableMaxTime,selectedTime);
+
+    var resume_achievements_default_file = $.parseJSON('{/json_encode($resume_achievements_default_file)/}');
+    var uploader_img, uploader1_file;
+    hbjs.use('@confirmBox', function(m) {
+
+        var	ConfirmBox      = m['widge.overlay.confirmBox'],
+            Dialog          = m['widge.overlay.hbDialog'];
+        var up_options_{/$up_img_html.id/} = {
+            up_id: '.{/$up_img_html.id/}',
+            auto: {/$up_img_html.config.auto/},
+            BASE_URL: "{/$up_img_html.config.BASE_URL/}",
+            fileNumLimit: {/$up_img_html.config.fileNumLimit/},//文件数量 默认5个 每张1M fileSingleSizeLimit: 1024 * 1024,
+            fileSingleSizeLimit: {/$up_img_html.config.fileSingleSizeLimit/},//每个文件大小
+            file_name: '{/$up_img_html.config.file_name/}',//返回接收上传的文件名称隐藏域
+            fileVal: '{/$up_img_html.config.fileVal/}',//上传接收name
+            defaults_files: {/$up_img_html.config.defaults_files/},//默认文件
+            accept: {/$up_img_html.config.accept/},//允许文件类型
+            formData: {/$up_img_html.config.form_data/},//上传删除携带参数
+            server: '{/get_url rule="/partjob/picture/"/}',
+            deleteServer: '{/get_url rule="/partjob/DelTempFile/"/}',
+            error_hint_fun: function (msg) {
+
+                ConfirmBox.timeBomb(msg, {
+                    name: 'fail',
+                    timeout: 2000,
+                    width: 18 * msg.length + 70
+                });
+        },
+        confirm_hint_fun: function (confirm_msg, deleteServerAjax) {
+            //询问框
+            ConfirmBox.confirm(confirm_msg,'删除图片',function(obj) {
+                var re = deleteServerAjax();
+                console.log(re);
+                if(re.file_id && re.file_id !== undefined ){
+                }else{
+                    var del_file_id = re.file.id;
+                    if(del_file_id && del_file_id != undefined){
+                        $('#add_img_'+del_file_id).remove();
+                    }
+                }
+                this.hide();
+            });
+
+
+
+
+        },
+        add_file_succeed_fun:function (file, ret) {
+            if(ret.data.status){
+                var name = ret.data.newname_path;
+                var input_id = "add_img_"+file.id;
+                var html = '<input id="'+input_id+'" name="add_img[]" data-url="'+ret.data.path+'" value="'+name+'">';
+
+                $('#img_url_hidde').append(html);
+            }
+
+
+
+        }
+    };
+//        uploader_img = $('.{/$up_img_html.id/}').powerWebUpload(up_options_{/$up_img_html.id/});
+        function show_uploader_img(id) {
+            if(resume_achievements_default_file && resume_achievements_default_file[id]){
+                up_options_{/$up_img_html.id/}.defaults_files = resume_achievements_default_file[id];
+            }else {
+                up_options_{/$up_img_html.id/}.defaults_files ={};
+            }
+
+            uploader_img = $('.{/$up_img_html.id/}').removeWebUpload(up_options_{/$up_img_html.id/}).powerWebUpload(up_options_{/$up_img_html.id/});
+        }
+
+        $('#addCertification').on('click', function(){
+            show_uploader_img('');
+            $("#img_url_hidde").html('');
+            $("#qualification_name").val('');
+            $("#qualification_type").val('0');
+            $('#qualification').show();
+
+        });
+    });
+
+    getmsg();
+    function getmsg() {
+        var jobsort_id = $("#jobsort_id").val();
+        if(jobsort_id == '' || jobsort_id == undefined){
+            return false;
+        }
+        $.ajax({
+            type: 'post',
+            url: '{/get_url rule="/partjob/GetJobsortMsg"/}',
+            data: {jobsort_id: jobsort_id},
+            dataType: 'json',
+            success: function (dataObj) {
+                if (dataObj.status) {
+                    $("#msgDiv").show();
+                    $("#ajax_msg").text(dataObj.msg);
+                    $("#msg_span").text(dataObj.msg);
+                }
+                else {
+                    $("#msgDiv").hide();
+                    $("#ajax_msg").text('');
+                    $("#msg_span").text('');
+                }
+            }
+        })
+    }
+</script>
+<!--展示城市弹窗-->
+<script type="text/javascript">
+    hbjs.use('@select,@calendar, @confirmBox,@jobFlexSlider, @areaMulitiple, @calling, @jobsort, @jobTooltip, @actions, @hbCommon, @dialog', function(m) {
+        var $ = m['jquery'],
+                Select = m['widge.select'],
+                Calendar = m['widge.calendar.calendar'],
+                ConfirmBox = m['widge.overlay.confirmBox'],
+                cookie = m['tools.cookie'],
+                Dialog = m['widge.overlay.hbDialog'],
+                flexSliderx = m['cqjob.jobFlexSlider'];
+        
+		//判断是否是IE浏览器
+		if (navigator.userAgent.indexOf('compatible') != -1 
+			    && navigator.userAgent.indexOf('MSIE') != -1
+			    && navigator.userAgent.indexOf('Opera') == -1) {
+			    $('#exPocket').show();
+			}
+		//预览资质证明
+        $('.partLook').on('click','.lookQualx', function(){
+            $('.flexBanner').flexslider({
+                animation:"slide",
+                itemWidth:600,
+                itemMargin:0,
+                prevText:'&#xf053;',
+                nextText:'&#xf054;',
+                pauseOnAction:false,
+                pauseOnHover:true,
+                slideshowSpeed:5000,
+                move:5
+            });
+            var dataId=$(this).attr('data-id');
+            console.log(dataId);
+            $('.partFilter,.partPopclose').show();
+            $('#img_look_'+dataId).css({width:600,height:350});
+        });
+        $('.partPopclose').click(function(){
+            $('.partFilter,.partPopclose').hide();
+            $('.partbannerPop').css({width:0,height:0});
+        });
+
+
+        $('input:text, textarea').placeHolder();
+//	所属职业
+        var partProfession = new Dialog({
+            close : 'X',
+            idName : 'partProfession_dialog',
+            title : '选择职位类别',
+            width : 750,
+            isOverflow : false,
+            isAjax : true
+        });
+        $('#partProfession').on('click', function(){
+            var jobsort_html = $("#jobsort_count").html();
+            partProfession.setContent(jobsort_html).show();
+            $('.partCitySlt2 span').on('click', function(){
+                $(this).addClass('cur').siblings().removeClass('cur');
+                var dataCity=$(this).attr('data-city');
+                var jobsort_id = $(this).attr('data-code');
+                $("#jobsort_id").val(jobsort_id);
+                $('#partProfession').val(dataCity);
+                partProfession.hide();
+
+                //获取每个职位类别对应的提示信息
+                $.ajax({
+                    type: 'post',
+                    url: '{/get_url rule="/partjob/GetJobsortMsg"/}',
+                    data: {jobsort_id:jobsort_id},
+                    dataType : 'json',
+                    success:function(dataObj){
+                        if(dataObj.status){
+                            $("#msgDiv").show();
+                            $("#ajax_msg").text(dataObj.msg);
+                            $("#msg_span").text(dataObj.msg);
+                        }
+                        else{
+                            $("#msgDiv").hide();
+                            $("#ajax_msg").text('');
+                            $("#msg_span").text('');
+                        }
+                    }
+                })
+
+            });
+        });
+
+//	选择展示城市
+        var partCity = new Dialog({
+            close : 'X',
+            idName : 'partCity_dialog',
+            title : '选择展示城市',
+            width : 750,
+            isOverflow : false,
+            isAjax : true
+        });
+        $('#partCity').on('click', function(){
+            var html = $("#area_html").html();
+            partCity.setContent(html).show();
+            $('.partCitySlt span').on('click', function(){
+                $(this).addClass('cur').siblings().removeClass('cur');
+                var dataCity=$(this).attr('data-city');
+                var area_id=$(this).attr('data-areaid');
+                $('#area_id').val(area_id);
+                $('#partCity').val(dataCity);
+                partCity.hide();
+            });
+        });
+        //不限工作地址
+        $('#partAddress').click(function(){
+            $(this).toggleClass('partjobLimit_cur');
+            if($(this).hasClass('partjobLimit_cur')){
+                $("#workAreas").hide();
+                $("#is_need_workaddress").val(2);
+                $("#editMapBtn").attr("disabled","disabled");
+                $(this).find('i').attr('class','icon-uniE6012');
+            }else{
+                $("#workAreas").show();
+                $("#editMapBtn").removeAttr("disabled");
+                $("#is_need_workaddress").val(1);
+                $(this).find('i').attr('class','icon-uniE6002');
+            }
+
+        });
+        //证件验证
+
+
+        var temp_id = 0;
+        $("#saveQualification").on('click',function(){
+            temp_id++;
+
+            var qualification_name = $("#qualification_name").val();
+            var numArr = [];
+            var imgList = [];
+            var txt = $('#img_url_hidde').find(':text');
+
+            for (var i = 0; i < txt.length; i++) {
+                numArr.push(txt.eq(i).val());
+                imgList.push(txt.eq(i).attr('data-url'));
+            }
+            var imgUrlStr = '';
+            for(var i=0;i < imgList.length ; i++){
+                imgUrlStr += '<li> <a href="#"> <img src="'+imgList[i]+'" alt=""/> </a> </li>';
+            }
+
+            if(qualification_name == '' || qualification_name == undefined){
+                $('#partMater01').text('请输入资质名称').css('display','block');
+                return false;
+            }else{
+            	$('#partMater01').text('').css('display','none');
+            }
+
+            var qualification_type = $("#qualification_type").val();
+            console.log("qualification_type="+qualification_type);
+            if(qualification_type == 0 || qualification_type == '' || qualification_type == undefined){
+                $('#partMater02').text('请选择资质类型').css('display','block');
+                return false;
+            }else{
+            	$('#partMater02').text('').css('display','none');
+            }
+
+            if(numArr.length < 1){
+                 $('#partMater03').text('请上传资质证明照片').css('display','block');
+                return false;
+            }else{
+            	$('#partMater03').text('').css('display','none');
+            }
+
+
+            var img_str = numArr.join('|');
+            var html = '<li> <span>'+qualification_name+'</span><input type="hidden" name="qualification[]" value="'+qualification_name+'|'+qualification_type+'|'+img_str+'"> <a href="javaScript:;" data-id="add_'+temp_id+'" class="lookQualx">查看</a> <a href="javaScript:;" data-id="add_'+temp_id+'" class="delQualx">删除</a> </li>';
+            $(".partLook").append(html);
+
+            var html_div = ' <div class="partbannerPop" id="img_look_add_'+temp_id+'"> <div class="partBanner"> <span class="partPopclose">X</span> <div class="lst flexBanner"> <ul class="slides">'+imgUrlStr+' </ul> </div> </div> </div>';
+
+            $(".partFilter").after(html_div);
+            $(".partAreabd").show();
+            $('#qualification').hide();
+
+        });
+        $('.delQualification').click(function(){
+            $('#qualification').hide();
+        });
+        $('.partLook').on('click','.delQualx', function(){
+           $(this).parent().remove();
+        });
+
+        $(".wdSelect03").change(function(){
+            wdStart = $(this).val();
+            wdstartText = $(".wdSelect03 option:selected").text();
+            console.log(wdstartText)
+        });
+//	每日上班时间
+        var partWorkday = new Dialog({
+            close : 'X',
+            idName : 'partWorkday_dialog',
+            title : '选择上班时间',
+            width : 590,
+            isOverflow : false,
+            isAjax : true
+        });
+
+        $('#partWorkday').on('click', function(){
+            var html = $("#mintime").html();
+            partWorkday.setContent(html).show();
+            var wdStart,wdEnd,wdstartText,wdendText;
+            $(".wdSelect01").change(function(){
+                var wdStart_temp = $(this).val().split("-");
+                wdStart = wdStart_temp[0];
+                wdstartText = wdStart_temp[1];
+            });
+            $(".wdSelect02").change(function(){
+                var wdEnd_temp = $(this).val().split("-");
+                wdEnd = wdEnd_temp[0];
+                wdendText = wdEnd_temp[1];
+            });
+            $('.workdayBtn').click(function(){
+                if(wdStart == null || wdStart == 0){
+                    $('.workdayError').css('display','block').text('请选择开始时间');
+                }else if(wdStart > wdEnd && wdEnd != null && wdEnd != 0){
+                    $('.workdayError').css('display','block').text('开始时间不能大于结束时间');
+                }else if(wdEnd == null || wdEnd == 0){
+                    $('.workdayError').css('display','block').text('请选择结束时间');
+                }else{
+                    //console.log(wdstartText+wdendText)
+                    var partTimehtml='<span>'+wdstartText+'-'+wdendText+'<input type="hidden" name="worktime_h[]" value="'+wdStart+'-'+wdEnd+'"><a href="javaScript:;">删除</a></span>';
+                    $('.partJobtimeDlt').append(partTimehtml);
+                    $('#partWorkdayTxt').val(wdstartText+'-'+wdendText);
+                    $('.workdayError').css('display','none').text('');
+                    partWorkday.hide();
+                }
+            });
+        });
+
+        //选择报名截止时间
+        var t1 = "{/$expect_complete_time/}";
+        var c1 = new Calendar({
+            trigger: $('#weekDatetime'),
+            range: [t1, null]
+        });
+        //联系电话
+        $('#partTelx01').click(function(){
+            $(this).toggleClass('partConTactx_cur');
+            if($(this).hasClass('partConTactx_cur')){
+                $("#is_show_phone").val(1);
+                $(this).find('i').attr('class','icon-uniE6012');
+                $('#partConTact').next('.errorPart').text('').css('display','none');
+            }else{
+                $("#is_show_phone").val(0);
+                $(this).find('i').attr('class','icon-uniE6002');
+            }
+        });
+        $('#partTelx02').click(function(){
+            $(this).toggleClass('partConTactx_cur');
+            if($(this).hasClass('partConTactx_cur')){
+                $(this).find('i').attr('class','icon-uniE6012');
+                $("#is_show_weixin").val(1);
+                $('.partAreabdWq,.partWeixin').css('display','block');
+                $('#partConTact').next('.errorPart').text('').css('display','none');
+            }else{
+                $(this).find('i').attr('class','icon-uniE6002');
+                $('.partWeixin').css('display','none');
+                $("#is_show_weixin").val(0);
+                if($('#partTelx03').hasClass('partConTactx_cur')){
+                    $('.partAreabdWq').css('display','block');
+                }else{
+                    $('.partAreabdWq').css('display','none');
+                }
+            }
+        });
+        $('#partTelx03').click(function(){
+            $(this).toggleClass('partConTactx_cur');
+            if($(this).hasClass('partConTactx_cur')){
+                $(this).find('i').attr('class','icon-uniE6012');
+                $("#is_show_qq").val(1);
+                $('.partAreabdWq,.partqq').css('display','block');
+                $('#partConTact').next('.errorPart').text('').css('display','none');
+            }else{
+                $(this).find('i').attr('class','icon-uniE6002');
+                $('.partqq').css('display','none');
+                $("#is_show_qq").val(0);
+                if($('#partTelx02').hasClass('partConTactx_cur')){
+                    $('.partAreabdWq').css('display','block');
+                }else{
+                    $('.partAreabdWq').css('display','none');
+                }
+            }
+        });
+        //承诺
+        $('.partCommitment').click(function(){
+            $(this).toggleClass('partCommitment_cur');
+            if($(this).hasClass('partCommitment_cur')){
+                $(this).find('i').attr('class','icon-uniE6012');
+                $('#errorCom').text('').css('display','none');
+            }else{
+                $(this).find('i').attr('class','icon-uniE6002');
+            }
+        });
+        //限定长期
+        $('#partRestrictx a').on('click', function(){
+            $(this).addClass('partRestrict_cur').siblings().removeClass('partRestrict_cur');
+            $('#partRestrictx a').find('em').attr('class','icon-uniE6002');
+            if($(this).hasClass('partRestrict_cur')){
+                $(this).find('em').attr('class','icon-uniE6012');
+            }else{
+                $(this).find('em').attr('class','icon-uniE6002');
+            }
+            var dataId = $(this).attr('data-id');
+            if(dataId != '' || dataId != undefined){
+                $("#long_recruit").val(dataId);
+            }
+            if(dataId == '1'){
+            	$('#partTotaldate').attr('disabled','disabled');
+            	$('#partTotaldate').removeClass('errorText').val('');
+                $("#partTotaldate").val('');
+                $(".partJobtime").text("工作时间：长期");
+				$('#partTotaldate').next('.errorPart').text('').css('display','none')
+
+            }else{
+            	$('#partTotaldate').removeAttr('disabled');
+                $(".partJobtime").text("工作时间：");
+            }
+        });
+
+        $('#partTotaldate').blur(function() {
+            var partTotaldateText = $('#partTotaldate').val();
+            $('.partJobtime').text('工作时间：'+partTotaldateText);
+        });
+
+        var priceSelecter1 = new Select({
+            trigger: $('#priceSelecter1'),
+            className: 'dropv2_select',
+            align: {baseXY: [0, '100%-1']},
+            selectName: 'salaryunit',
+            dataSource: [{label: '请选择', value: '0'}].concat({/$units/}),
+            selectedIndex: {/if empty($job_info['salary_unit'])/}''{/else/}{/$job_info['salary_unit']/}{//if/},
+            selectCallback: {
+                isDefault: true
+            }
+        });
+
+        var priceSelecter2 = new Select({
+            trigger: $('#priceSelecter2'),
+            className: 'dropv2_select',
+            align: {baseXY: [0, '100%-1']},
+            selectName: 'salarytypes',
+            dataSource: [{label: '请选择', value: ''}].concat({/$salarytypes/}),
+            selectedIndex: {/if empty($job_info['salary_type'])/}''{/else/}{/$job_info['salary_type']/}{//if/},
+            selectCallback: {
+                isDefault: true
+            }
+        });
+
+
+        var partStaf01 = new Select({
+            trigger: $('#partStaf01'),
+            className: 'dropv2_select',
+            align: {baseXY: [0, '100%-1']},
+            selectName: 'sex',
+            dataSource: [{label: '男女不限', value: '0'}].concat({/$sex/}),
+            selectedIndex: {/if empty($job_info['sex'])/}0{/else/}{/$job_info['sex']/}{//if/},
+            selectCallback: {
+                isDefault: true
+            }
+        });
+
+        var partStaf02 = new Select({
+            trigger: $('#partStaf02'),
+            className: 'dropv2_select',
+            align: {baseXY: [0, '100%-1']},
+            selectName: 'idcard_type',
+            dataSource: [{label: '身份不限', value: '0'}].concat([{"label":"仅限学生","value":1},{"label":"仅限社会人员","value":2}]),
+            selectedIndex: {/if empty($job_info['identity'])/}0{/else/}{/$job_info['identity']/}{//if/},
+            selectCallback: {
+                isDefault: true
+            }
+        });
+
+        var partStaf03 = new Select({
+            trigger: $('#partStaf03'),
+            className: 'dropv2_select',
+            align: {baseXY: [0, '100%-1']},
+            selectName: 'height',
+            dataSource: [{label: '身高不限', value: '0'}].concat({/$height/}),
+            selectedIndex: {/if empty($job_info['height'])/}0{/else/}{/$job_info['height']/}{//if/},
+            selectCallback: {
+                isDefault: true
+            }
+        });
+
+        var partStaf04 = new Select({
+            trigger: $('#partStaf04'),
+            className: 'dropv2_select',
+            align: {baseXY: [0, '100%-1']},
+            selectName: 'age',
+            dataSource: [{label: '年龄不限', value: '0'}].concat({/$age/}),
+            selectedIndex: {/if empty($job_info['age'])/}0{/else/}{/$job_info['age']/}{//if/},
+            selectCallback: {
+                isDefault: true
+            }
+        });
+
+        var partStaf05 = new Select({
+            trigger: $('#partStaf05'),
+            className: 'dropv2_select',
+            align: {baseXY: [0, '100%-1']},
+            selectName: 'degree',
+            dataSource: [{label: '学历不限', value: 0}].concat({/$degree/}),
+            selectedIndex: {/if empty($job_info['degree'])/}0{/else/}{/$job_info['degree']/}{//if/},
+            selectCallback: {
+                isDefault: true
+            }
+        });
+
+        var partStaf06 = new Select({
+            trigger: $('#partStaf06'),
+            className: 'dropv2_select',
+            align: {baseXY: [0, '100%-1']},
+            selectName: 'is_health',
+            dataSource: [{label: '不限', value: 0},{label: '不需要健康证', value: 1}].concat([{"label":"需要健康证","value":2}]),
+            selectedIndex: {/if empty($job_info['is_health'])/}0{/else/}{/$job_info['is_health']/}{//if/},
+            selectCallback: {
+                isDefault: true
+            }
+        });
+
+        $('.partPostjob').on('click', function(){
+            if(!chaked_input()){
+                return false;
+            }
+
+            url = "{/get_url rule='/partjob/AddJob'/}";
+            $.ajax({
+                type: 'post',
+                url: url,
+                data: $('#form1').serialize(),
+                dataType : 'json',
+                success:function(dataObj){
+                    if(dataObj.status){
+                        ConfirmBox.timeBomb(dataObj.msg, {
+                            name: 'success',
+                            timeout : 3000,
+                            width:dataObj.msg.length * 18 + 70
+                        });
+                        location.href="{/get_url rule='/partjob/updatecompany'/}";
+                        return false;
+                    }
+                    else{
+                        ConfirmBox.timeBomb(dataObj.msg, {
+                            name: 'fail',
+                            timeout : 3000,
+                            width:dataObj.msg.length * 18 + 70
+                        });
+                        return false;
+                    }
+                }
+            })
+        });
+        $('.partAreabd').on('click','a.partAreaDel', function(){
+            $(this).parent().remove();
+        })
+        $('.partJobtimeDlt').on('click','a', function(){
+            $(this).parent().remove();
+        })
+		$('#priceSelecter1').on('click', function(){
+			$('#errorPay').css('display','none').text('');
+		});
+		$('#priceSelecter2').on('click', function(){
+			$('#errorPay02').css('display','none').text('');
+		});
+
+
+
+    });
+    function chaked_input(){
+        var partName = $('#partName').val();
+        var partGivex = $('#partGivex').val();
+        var partProfession = $('#partProfession').val();
+        var partCity = $('#partCity').val();
+        var partTotaldate = $('#partTotaldate').val();
+        var partWorkday = $('#partWorkdayTxt').val();
+        var weekDatetime = $('#weekDatetime').val();
+        var partPayx = $('#partPayx').val();
+        var select_txtUnit = $('#select_txtUnit').val();
+        var select_txtType = $('#select_txtType').val();
+        var partRequirements = $('#partRequirements').val();
+        var partcontName = $('#partcontName').val();
+        var partcontTel = $('#partcontTel').val();
+        var select_salaryunit = $('#select_salaryunit').val();
+        var select_salarytypes = $('#select_salarytypes').val();
+
+        var is_show_phone = $('#is_show_phone').val();
+        var is_show_weixin = $('#is_show_weixin').val();
+        var is_show_qq = $('#is_show_qq').val();
+        var is_agency=$('#is_agency').val();
+        if(is_agency!=1 && is_agency!=2){
+            $('#errorAgency').text('请选择招聘类型').css('display','block');
+            status = false;
+        }else{
+            $('#errorAgency').text('').css('display','none');
+        }
+        var status = true;
+        if(partName == ''){
+            errorMsg($('#partName'),0,'请输入职位名称');
+            status = false;
+        }else if(partName.length < 6 || partName.length > 20){
+            errorMsg($('#partName'),0,'请输入6-20位兼职名称');
+            status = false;
+        }
+        if(partProfession == ''){
+            errorMsg($('#partProfession'),0,'请选择所属职业');
+            status = false;
+        }
+        if(partGivex == ''){
+        	$('.partJobz').next('.errorPart').text('请输入招聘人数').css('display','block');
+        	$('#partGivex').addClass('errorText');
+            status = false;
+        }else if(! /^[0-9]*[1-9][0-9]*$/.test(partGivex)){
+        	$('.partJobz').next('.errorPart').text('只能输入整数').css('display','block');
+        	$('#partGivex').addClass('errorText');
+            status = false;
+        }else if(partGivex.length > 999){
+        	$('.partJobz').next('.errorPart').text('最多只能招聘999人').css('display','block');
+        	$('#partGivex').addClass('errorText');
+            status = false;
+        }else{
+        	$('.partJobz').next('.errorPart').css('display','none');
+        	$('#partGivex').removeClass('errorText');
+        }
+        if(partCity == ''){
+            errorMsg($('#partCity'),0,'请选择展示城市');
+            status = false;
+        }
+        if($('.partRestrict_cur').attr('data-id') == '0'){
+	        if(partTotaldate == ''){
+	        	errorMsg($('#partTotaldate'),0,'请选择总共工作日期');
+	            status = false;
+	        }
+        }
+        
+          if(partWorkday == ''){
+              errorMsg($('#partWorkday'),0,'请选择上班时间');
+              status = false;
+          }
+        if(weekDatetime == ''){
+            errorMsg($('#weekDatetime'),0,'请选择报名截止时间');
+            status = false;
+        }
+		if(partPayx == ''){
+			$('#errorPay').text('请输入薪资').css('display','block');
+			$('#partPayx').addClass('errorText');
+            status = false;
+		}else if(! /^[0-9]*[1-9][0-9]*$/.test(partPayx)){
+			$('#errorPay').text('薪资只能输入整数').css('display','block');
+			$('#partPayx').addClass('errorText');
+            status = false;
+		}else if(select_salaryunit == '0'){
+			$('#errorPay').text('请选择薪资单位').css('display','block');
+            status = false;
+		}else{
+			$('#errorPay').text('').css('display','none');
+			$('#partPayx').removeClass('errorText');
+		}
+		
+		if(select_salarytypes == ''){
+			$('#errorPay02').text('请选择结算方式').css('display','block');
+            status = false;
+		}else{
+			$('#errorPay02').text('').css('display','none');
+		}
+		
+        if(partRequirements == ''){
+            errorMsg($('#partRequirements'),0,'请输入岗位要求');
+            status = false;
+        }else if(partRequirements.length < 20 || partRequirements.length > 500){
+        	errorMsg($('#partRequirements'),0,'请输入20-500个字符');
+            status = false;
+        }
+        
+        if(partcontName == ''){
+            errorMsg($('#partcontName'),0,'请输入企业联系人名字');
+            status = false;
+        }
+        if(partcontTel == ''){
+            errorMsg($('#partcontTel'),0,'请输入电话号码');
+            status = false;
+        }
+
+        if((is_show_phone == '' || is_show_phone == undefined || is_show_phone == 0) && (is_show_weixin == '' || is_show_weixin == undefined || is_show_weixin == 0) && (is_show_qq == '' || is_show_qq == undefined || is_show_qq == 0)){
+            errorMsg($('#partConTact'),0,'请选择咨询方式');
+            status = false;
+        }
+
+        if(!$('.partCommitment').hasClass('partCommitment_cur')){
+        	$('#errorCom').text('请承诺兼职处理规则').css('display','block');
+        	status = false;
+        }else{
+        	$('#errorCom').text('').css('display','none');
+        }
+
+        return status;
+    }
+    function errorMsg(thisx,status,msg){
+        if(status == 0){
+            thisx.next('.errorPart').css('display','block').text(msg);
+            thisx.addClass('errorText');
+            thisx.on('focus',function(){
+                thisx.next('.errorPart').css('display','none').text('');
+                thisx.removeClass('errorText');
+            });
+            $('#partGivex').on('focus',function(){
+                $('.partJobz').next('.errorPart').css('display','none').text('');
+                $('#partGivex').removeClass('errorText');
+            });
+            $('#partPayx').on('focus',function(){
+               $('#errorPay').css('display','none').text('');
+               $('#partPayx').removeClass('errorText');
+            });
+        }else{
+            thisx.next('.errorPart').css('display','none').text('');
+        }
+    }
+</script>
+
+<script type="text/javascript">
+    var jobAddValid,
+            mapDialog,
+            old_map_div,
+            o_mapDialog;
+    hbjs.use('@jobSorter, @dialog', function (m) {
+
+        var $ = m['jquery'],
+                jobSorter = m['product.jobSort.jobSorter'],
+                Dialog = m['widge.overlay.hbDialog'];
+
+        if(!mapDialog){
+            mapDialog = new Dialog({
+                close: '╳',
+                idName: 'map_dialog2',
+                width: 750,
+                //        content: '{/get_url rule="/job/SetJobAddress/"/}',
+                isAjax: true
+            });
+
+            mapDialog.on('closeX', function(e){
+                mapDialog.hide();
+                var id = $("input[name=selectAddress]:checked").parent().parent().parent().attr("data-id");
+            });
+            mapDialog.after('hide', function(){
+                if(areaDrop){
+                    areaDrop.destory();
+                }
+                if(baiduSearch){
+                    baiduSearch.dispose();
+                }
+            });
+        }
+
+        $('.partAreabd').on('click','a.partAreaEdit', function(){
+            old_map_div = $(this);
+            var info = $(this).parent().attr("data-areainfo");
+            mapDialog.setContent({
+                data:{info:info,is_edit:1},
+                content: '{/get_url rule="/partjob/setjobaddress/"/}'
+            }).show();
+        })
+
+        $('#editMapBtn').on('click', function(){
+            var area_code = $("#area_id").val();
+            $('#workAreas').show();
+            mapDialog.setContent({
+                data:{is_edit:0,area_code:area_code},
+                content: '{/get_url rule="/partjob/setjobaddress/"/}'
+            }).show();
+        });
+    });
+    //限定长期
+    $('#partAgency a').on('click', function(){
+        $(this).addClass('partAgency_cur').siblings().removeClass('partAgency_cur');
+        $('#partAgency a').find('em').attr('class','icon-uniE6002');
+        var is_agency=$(this).attr('data-id');
+        $('#is_agency').val(is_agency);
+        if($(this).hasClass('partAgency_cur')){
+            $(this).find('em').attr('class','icon-uniE6012');
+        }else{
+            $(this).find('em').attr('class','icon-uniE6002');
+        }
+    });
+</script>
+
+
+</body>
+</html>

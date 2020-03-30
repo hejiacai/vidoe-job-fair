@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="Keywords" content="" />
+        <meta name="Description" content="" />
+		<meta name="renderer" content="webkit">
+        <title>视频面试大厅</title>
+        <!–[if lt IE9]>
+        <script src="{/version file='html5.js'/}"></script>
+        <![endif]–>
+        <link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+        <link rel="stylesheet" type="text/css" href="{/version file='video_eng.css'/}" />
+        <link rel="stylesheet" type="text/css" href="{/version file='comback.css'/}" />
+        <link rel="stylesheet" type="text/css" href="{/version file='m_font_style.css'/}">
+        <link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}">
+		<script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.min.js'/}"></script>
+        
+        <script type="text/javascript" src="{/version file='version.js'/}"></script>
+        <script type="text/javascript">
+            window.CONFIG = {
+                HOST: '{/$siteurl.style/}',
+                COMBOPATH: '/js/v2/'
+            }
+        </script>
+        <script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+        <script type="text/javascript" src="{/version file='global.js'/}"></script>
+        <script type="text/javascript" language="javascript" src="{/version file='confirmBox.js'/}"></script>
+        <script type="text/javascript" language="javascript" src="{/version file='dialog.js'/}"></script>
+		<style type="text/css">
+			
+		</style>
+	</head>
+	<body style="background: #f6f7f8;">
+		<div class="phone_pop">
+			<img src="{/$siteurl.style/}/img/company/activity/phone_step_one.jpg" id="phone_pop_bg_img" data-step="one" alt="">
+			<button class="phone_next">下一步</button>
+		</div>
+		<div class="computer_pop">
+			<img src="{/$siteurl.style/}/img/company/activity/computer_step_one.jpg" id="computer_pop_bg_img" data-step="one" alt="">
+			<button class="computer_next">下一步</button>
+		</div>
+		<div class="kuaimi_pop">
+			<img src="{/$siteurl.style/}/img/company/activity/kuaimi_step_one.jpg" id="kuaimi_pop_bg_img" data-step="one" alt="">
+			<button class="kuaimi_next">下一步</button>
+		</div>
+		{/$head_data/}
+        {/$head_nav_data/}  
+        {/include 'videohall/hallheadnew.html' par='视频面试大厅' cur='初面'/}
+		<div class="videoIhalMain">
+			<div class="videointerviewTitle">
+				<p>
+					<i></i>
+					<span>即将面试</span>
+					<em>按申请顺序面试</em>
+				</p>
+                <a {/if !$company_interview_times/}style="display:none;"{//if/} href="javascript:void(0);" class='setInterviewTime'>修改面试时间</a>
+                {/if $today_interview_time/}
+                <p style="float: right">
+					<em class="color_999">今日面试申请时间：{/$today_interview_time/}（剩余可申请名额：{/$person_num_all/}人）</em>
+				</p>
+                {//if/}
+			</div>
+			<div class="interviewData firstInterviewData">
+                 {/if !empty($apply_list_top_one)/}
+				<ul>
+					<li>
+						<table border="" cellspacing="" cellpadding="">
+							<tr>
+								<td width="12%" class="firsttd">{/$apply_list_top_one['user_name']/}</td>
+								<td width="6%">{/$apply_list_top_one['sex']/}</td>
+								<td width="6%">{/$apply_list_top_one['age']/}</td>
+								<td width="8%">{/$apply_list_top_one['degree_name']/}</td>
+								<td width="20%">{/$apply_list_top_one['school']/}</td>
+								<td width="18%">{/$apply_list_top_one['major_desc']/}</td>
+								<td width="40%" class="inviteViewJob">面试职位: {/$apply_list_top_one['station']/}</td>
+								<!-- <td width="100" style="text-align: center;"><span class="status-daiding">待定</span><span class="statusdaiding-success">通过</span></td> -->
+							</tr>
+						</table>
+						<div class="personInfo">
+							<div class="personInfo-left">
+								<div class="person-left personIcon">
+									<img src="{/$apply_list_top_one['headphoto']/}" onerror="javascript:nofind('{/$apply_list_top_one['default_photo']/}')"/>
+									<!-- <img src="http://assets.hb.com/img/company/video/defaultMan.png" > -->
+								</div>
+								<div class="person-left personExperience">
+									{/if $apply_list_top_one['work_year_str']/}<h4>{/$apply_list_top_one['work_year_str']/}</h4>{//if/}
+									{/if $apply_list_top_one['work_list']/}
+										{/foreach $apply_list_top_one['work_list'] as $work/}
+										<p><span class="jobName">{/$work['station']/}</span><span class="jobCompanyName">{/$work['company_name']/}</span><span class="jobCompanyYear">{/$work['start_time']|date_format:'%Y.%m'/}-{/if $work['end_time']==null/}至今{/else/}{/$work['end_time']|date_format:'%Y.%m'/}{//if/}{/if $work['resume_work_year_desc']/}({/$work['resume_work_year_desc']/}){//if/}</span></p>
+										{//foreach/}
+									{//if/}
+									
+								</div>
+								<div class="person-left hopeJob">
+									{/if $apply_list_top_one['exp_station']/}<p class="hopeJobName">求职意向：<span>{/$apply_list_top_one['exp_station']/}</span></p>{//if/}
+									<p class="hopeMoney">期望薪资：<span>{/if $apply_list_top_one['is_salary_show'] == 0/}{/$apply_list_top_one['salary']/}{/else/}面议{//if/}</span></p>
+									{/if $apply_list_top_one['appraise']/}<p class="showMelf">自我评价: <span class="showMelf-info">{/$apply_list_top_one['appraise']/}</span></p>{//if/}
+								</div>
+							</div>
+                            <div class="personInfo-left">
+								<div class="inviteViewType" data-id="{/$apply_list_top_one['id']/}" data-resume-id="{/$apply_list_top_one['resume_id']/}" data-job-id="{/$apply_list_top_one['job_id']/}" data-person-id="{/$apply_list_top_one['person_id']/}"
+									data-status="0" data-base-job-id="{/$apply_list_top_one['base_job_id']/}" data-base-resume-id="{/$apply_list_top_one['base_resume_id']/}" data-base-person-id="{/$apply_list_top_one['base_person_id']/}">
+									{/if $apply_list_top_one['status'] == 0 || $apply_list_top_one['status'] == 1/}
+									<a href="javascript:void(0);" class="startVideoBtn" data-status='1' {/if $apply_list_top_one['person_source'] !=1 || $souece != 1/}style="display:none;"{//if/}>电脑面试</a>
+									<a href="javascript:void(0);" class="mobileVideoBtn">手机面试</a>
+									{/if $apply_list_top_one['status'] == 1/}
+									<a href="javascript:void(0);" class="waitDealBtn">待定</a>
+									<a href="javascript:void(0);" class="notPassBtn">不合适</a>
+									<a href="javascript:void(0);" class="passBtn">初面通过</a>
+									{//if/}
+									<a href="javascript:void(0);" class="skipBtn" {/if !$skip_num/}style="display:none;"{//if/}>跳过</a>
+									{//if/}
+								</div>
+							</div>
+						</div>
+					</li>
+				</ul>
+            {//if/}
+            <!--面试还未开始-->
+            <div class="activityNotStarted  invitViewNotStarted dataNone" {/if $shuang_xuan_time_class_name != 'videoActiveityStartAll'/}style="display:none;"{//if/}>
+               <h3>面试还未开始</h3>
+               <p>请于<span>{/$min_interview_time/}</span> 登录系统与求职者视频面试~</p>
+            </div>
+			</div>
+				<!--------->
+			<div class="firstInviteTipCon" {/if empty($apply_list)/}style="display:none;"{//if/}>初面最长10分钟，如需深入了解请复面</div>
+			<!-- <div class="videoCoupleBack" {/if empty($apply_list)/}style="display:none;"{//if/}><i></i>反馈面试结果后才能继续下一个面试</div> -->
+			<div class="videointerviewTitle" {/if empty($apply_list) &&  $shuang_xuan_time_class_name != 'videoActiveityStartAll'/}style="display:none;"{//if/}>
+				<p>
+					<i></i>
+					<span><em>{/$wait_apply_person_num/}</em>人排队中<span class="title_mark">···</span></span>
+				</p>
+			</div>
+            {/if !empty($apply_list)/}
+			<table class="interviewTab02">
+                {/foreach $apply_list as $v/}
+				<tr>
+					<td width="6%"><img src="{/$v['headphoto']/}" onerror="nofind('{/$v['default_photo']/}');" /></td>
+					<td width="10%">{/$v['user_name']/}</td>
+                    <td width="6%">{/$v['sex']/}</td>
+					<td width="6%">{/$v['age']/}</td>
+					<td width="8%">{/$v['degree_name']/}</td>
+					<td width="14%">{/$v['school']/}</td>
+					<td width="16%">{/$v['major_desc']/}</td>
+					<td width="18%">{/$v['station']/}</td>
+					<td width="16%">{/$v['base_wait_time_str']/}</td>
+				</tr>
+                {//foreach/}
+			</table>
+			
+            {//if/}
+            <!-- 活动未开始 -->
+        {/if $shuang_xuan_time_class_name == 'videoActiveityStart' || $shuang_xuan_time_class_name == 'videoActiveityStartAll'/}
+            <div class="activityNotStarted dataNone">
+                {/if empty($company_interview_times)/}
+                <img src="{/$siteurl.style/}/img/company/video/eng_icon11.png" >
+                <span>面试未开始，请在活动开始前设置面试时间</span>
+                <a href="javascript:void(0);" class='setInterviewTime'>设置面试时间</a>
+                <em>求职者只能在您设置的面试时间内申请视频面试</em>
+                {/else/}
+                <h3>面试还未开始</h3>
+			   <p>请于<span>{/$min_interview_time/}</span> 登录系统与求职者视频面试~</p>
+                {//if/}
+            </div>
+        {/else if $shuang_xuan_time_class_name == 'videoAunderway' && empty($apply_list) && empty($apply_list_top_one)/}
+            <div class="noApplyVideo">
+                <img src="{/$siteurl.style/}/img/company/video/eng_icon10.png" >
+                {/if !$today_interview_time/}
+                <span>请设置面试时间，求职者仅能在设置的面试时间内申请视频面试</span><p/>
+                <a href="javascript:void(0);" class='setInterviewTime'>设置面试时间</a>
+                {/else/}
+                当前无人申请，您可前往“求职者大厅”，主动与求职者沟通
+                {//if/}
+
+            </div>
+        {/else if $shuang_xuan_time_class_name == 'videoActivityEnd'/}
+             <div class="noApplyVideo">
+				 <img src="{/$siteurl.style/}/img/company/video/eng_icon10.png" >
+                <span>初面环节已结束，您可前去“复面”列表处理复面求职者</span><p/>
+            </div>
+        {//if/}
+			
+			<div class="videointerviewTitle">
+				<p>
+					<i></i>
+					<span>未接通申请</span>
+				</p>
+			</div>
+            {/if $over_apply_list/}
+			
+            
+			<table class="interviewTab02">
+                {/foreach $over_apply_list as $v/}
+				<tr>
+					<td width="6%"><img src="{/$v['headphoto']/}" onerror="nofind('{/$v['default_photo']/}');" /></td>
+					<td width="10%">{/$v['user_name']/}</td>
+			        <td width="6%">{/$v['sex']/}</td>
+					<td width="6%">{/$v['age']/}</td>
+					<td width="8%">{/$v['degree_name']/}</td>
+					<td width="14%">{/$v['school']/}</td>
+					<td width="16%">{/$v['major_desc']/}</td>
+					<td width="18%">{/$v['station']/}</td>
+					<td width="16%" data-resume-id="{/$v['resume_id']/}" data-person-id="{/$v['person_id']/}" data-job-id="{/$v['job_id']/}" data-apply-id="{/$v['id']/}">
+						<!--<a href="https:{/base_lib_Constant::COMPANY_URL_NO_HTTP/}/chat/?resume_id={/$v['resume_id']/}&job_id={/$v['job_id']/}&net_apply_id={/$v['id']/}&sid={/$v['sid']/}">立即沟通</a>{/$v['mobile_phone']/}-->
+						<a class="startInterviewBtn" href="javascript:;" {/if $v['person_source'] != 1 || $source != 1/}style="display:none;"{//if/}>立即沟通</a>
+                        <a href="javascript:;" class="see_mobile_btn">查看电话</a>
+					</td>
+				</tr>
+                {//foreach/}
+			</table>
+            {//if/}
+			<!--面试还未开始-->
+			<div class="activityNotStarted  invitViewNotStarted dataNone" {/if !empty($over_apply_list) || $shuang_xuan_time_class_name != 'videoActiveityStartAll'/}style="display:none;"{//if/}>
+			   <h3>面试还未开始</h3>
+			   <p>请于<span>{/$min_interview_time/}</span>登录系统与求职者视频面试~</p>
+			</div>
+			<!--------->
+        </div>
+			<div class="showPopType"  style="display:none;">
+				<div class="showPopType-box">
+					<span class="pc_apply">电脑面试</span>
+					<span class="phone_apply">手机面试</span>
+				</div>
+			</div>
+			<div class="procedurePop" style="display:none;">
+				<img src="{/$siteurl.style/}/img/company/video/eng_icon22.jpg" >
+			</div>
+			<div class="mobileVideoDialog" style="display:none;">
+				<div class="mobileVideoDialog-box">
+					<img id='rtcScanCodeImg' src="{/get_url rule='/video/RtcScanCode'/}?job_id=&resume_id=&net_apply_id=" >
+					<div class="saomaTip">汇博企业APP 扫一扫</div>
+					<div class="noHuiboAPP">没有汇博APP？<a href="javascript:void(0);" id="downloadErWeiMaBtn">点击下载</a></div>
+				</div>
+			</div>
+			<div class="rtcScanStatusDialog" style="display:none;">
+				<div class="rtcScanStatusDialog-box">
+					<div class="user-detail">
+						<img src="{/$apply_list_top_one['headphoto']/}" onerror="nofind('{/$apply_list_top_one['default_photo']/}');"/>
+						<div class="userInfo">
+							<!-- <h3>{/$apply_list_top_one['sex']/}</h3> -->
+							<h4>{/$apply_list_top_one['user_name']/}</h4>
+							<p>面试职位：{/$apply_list_top_one['station']/}</p>
+						</div>
+					</div>
+					<div class="inviteViewStatus-btn">
+						<a class="rtcScanStatusDialog_status" data-status="5" href="javascript:void(0);">未接通</a>
+						<a class="rtcScanStatusDialog_status" data-status="2" href="javascript:void(0);">初面通过</a>
+						<a class="rtcScanStatusDialog_status" data-status="4" href="javascript:void(0);">待定</a>
+						<a class="rtcScanStatusDialog_status" data-status="3" href="javascript:void(0);">不适合</a>
+					</div>
+					<a id='rtcScanStatusDialog_sure_btn' class="rtcScanStatusDialog_sure_btn" href="javascript:void(0);">确定</a>
+				</div>
+			</div>
+			<div class="skipInterviewDialog" style="display:none;">
+				<div class="skipInterviewDialog-box">
+					<p>是否主动跳过该求职者？您该场招聘会还剩<span class="jumpNum">5次</span>跳过机会。</p>
+					<div class="btn-ul">
+						<div class="skipInterview_sureBtn">跳过</div>
+						<div class="skipInterview_closeBtn">取消</div>
+					</div>
+				</div>
+			</div>
+			<div class="mobileCheckDialog-box" style="display: none;">
+				<img id='rtcScanCodeImg' src="{/get_url rule='/video/RtcScanCode'/}?job_id=&resume_id=&net_apply_id=" >
+				<div class="saomaTip">汇博企业APP 扫一扫</div>
+				<div class="noHuiboAPP">没有汇博APP？<a href="javascript:void(0);" id="downloadErWeiMaBtn">点击下载</a></div>
+			</div>
+			
+		<a href="javascript:void(0);" style="display: none;" class="moblielinkTo" target="_blank"></a>
+		<a href="javascript:void(0);" style="display: none;" class="PClinkTo" target="_blank"></a>
+    <script type="text/javascript">
+    var promptInterview;
+    hbjs.use('@confirmBox, @jobDialog', function (m) {
+        var ConfirmBox = m['widge.overlay.confirmBox'],
+            Dialog = m['widge.overlay.hbDialog'],
+            $ = m['jquery'].extend(m['cqjob.jobDialog']);
+
+        var close = '×';
+        var width = 600;
+        var zIndex = 9999;
+        var title = '面试时间设置';
+        var wait_apply_person_num = '{/$wait_apply_person_num/}';
+
+		var seleType = new Dialog({
+		    close: close,
+		    idName: 'showType',
+		    title: '面试方式',
+		    width: width,
+		    zIndex: zIndex,
+			content:$(".showPopType").html()
+		});
+		
+        var checkVideoDialog = new Dialog({
+            close: close,
+            idName: 'checkVideo_dialog',
+            title: '提示',
+            width: width,
+            zIndex: zIndex,
+            content:$("#videoCheckDiv").html()
+        });
+		
+		var checkVideoDialog02 = new Dialog({
+		    close: close,
+		    idName: 'checkVideo_dialog02',
+		    title: '电脑麦克风设置流程',
+		    width: width,
+		    zIndex: zIndex,
+		    content:$(".procedurePop").html()
+		});
+        
+        var mobileVideoDialog = new Dialog({
+		    close: close,
+		    idName: 'mobileVideoDialog',
+		    title: '手机面试',
+		    width: width,
+		    zIndex: zIndex,
+		    content:$(".mobileVideoDialog").html()
+		});
+        var rtcScanStatusDialog = new Dialog({
+		    close: close,
+		    idName: 'rtcScanStatusDialog',
+		    title: '面试结果设置',
+		    width: 520,
+		    zIndex: zIndex,
+		    content:$(".rtcScanStatusDialog").html()
+		});
+		var skipInterviewDialog = new Dialog({
+		    close: close,
+		    idName: 'skipInterviewDialog',
+		    title: '跳过求职者',
+		    width: 520,
+		    zIndex: zIndex,
+		    content:$(".skipInterviewDialog").html()
+		});
+		
+        $('.setInterviewTime').on('click', function(){
+            interviewTimeDialog.setContent('{/get_url rule="/videohall/InterviewTimeList"/}?sid={/$sid/}').show();
+        });
+        $(".rtcScanStatusDialog .ui_dialog_close,.mobileVideoDialog .ui_dialog_close,.informTraining_dialog .ui_dialog_close").click(function(){
+            window.location.reload();
+        });
+		$('.queryIcon').click(function(){
+			checkVideoDialog02.show();
+		});
+		$('.pc_apply').click(function(){
+			$('.computer_pop').show();
+			$('#computer_pop_bg_img').attr("src", "{/$siteurl.style/}/img/company/activity/computer_step_one.jpg");
+			seleType.hide()
+		});
+		$('.phone_apply').click(function(){
+			$('.phone_pop').show();
+			$('#phone_pop_bg_img').attr("src", "{/$siteurl.style/}/img/company/activity/phone_step_one.jpg");
+			seleType.hide()
+		});
+        $('#interviewps').click(function(){
+			var popType_t = '{/$souece/}'
+			if(popType_t == 1){
+				seleType.show()
+			}else{
+				$('.kuaimi_pop').show();
+				$('#kuaimi_pop_bg_img').attr("src", "{/$siteurl.style/}/img/company/activity/kuaimi_step_one.jpg");
+			}
+		});
+		$('#comproblem').click(function(){
+			
+		});
+		$('.computer_next').click(function(){
+			var step = $('#computer_pop_bg_img').attr('data-step')
+			switch(step) {
+			     case 'one':
+					$('#computer_pop_bg_img').attr('data-step','tow')
+					$('#computer_pop_bg_img').attr("src", "{/$siteurl.style/}/img/company/activity/computer_step_tow.jpg");
+			        $(this).css({'top':'77.2%','left':'59.4%'})	
+					break;
+			     case 'tow':
+					 $('#computer_pop_bg_img').attr('data-step','tree')
+					 $('#computer_pop_bg_img').attr("src", "{/$siteurl.style/}/img/company/activity/computer_step_tree.jpg");
+					 $(this).css({'top':'29%','left':'41.9%'})
+			        break;
+				case 'tree':
+					$('#computer_pop_bg_img').attr('data-step','four')
+					$('#computer_pop_bg_img').attr("src", "{/$siteurl.style/}/img/company/activity/computer_step_four.jpg");
+					$(this).css({'top':'46.1%','left':'42.5%'})
+					$(this).text('完成')
+				   break;
+			   case 'four':
+					SaveAction();
+					$('.computer_pop').hide()
+					$('#computer_pop_bg_img').attr('data-step','one')
+					$(this).css({'top':'52.2%','left':'42.4%'})
+					$(this).text('下一步')
+				  break;
+			     default:
+			        console.log('hao')
+			}
+		});
+		$('.kuaimi_next').click(function(){
+			var step = $('#kuaimi_pop_bg_img').attr('data-step')
+			switch(step) {
+			     case 'one':
+					$('#kuaimi_pop_bg_img').attr('data-step','tow')
+					$('#kuaimi_pop_bg_img').attr("src", "{/$siteurl.style/}/img/company/activity/kuaimi_step_tow.jpg");
+			        $(this).css({'top':'46.1%','left':'55%'})
+					break;
+			     case 'tow':
+					 $('#kuaimi_pop_bg_img').attr('data-step','tree')
+					 $('#kuaimi_pop_bg_img').attr("src", "{/$siteurl.style/}/img/company/activity/kuaimi_step_tree.jpg");
+					 $(this).css({'top':'79%','left':'59%'})
+			        break;
+				case 'tree':
+					$('#kuaimi_pop_bg_img').attr('data-step','four')
+					$('#kuaimi_pop_bg_img').attr("src", "{/$siteurl.style/}/img/company/activity/kuaimi_step_four.jpg");
+					$(this).css({'top':'56%','left':'64%'})
+				   break;
+				case 'four':
+					$('#kuaimi_pop_bg_img').attr('data-step','five')
+					$('#kuaimi_pop_bg_img').attr("src", "{/$siteurl.style/}/img/company/activity/kuaimi_step_five.jpg");
+					$(this).css({'top':'59%','left':'60%'})
+					$(this).text('完成')
+				   break;
+			   case 'five':
+					SaveAction();
+					$('.kuaimi_pop').hide()
+					$('#kuaimi_pop_bg_img').attr('data-step','one')
+					$(this).css({'top':'50%','left':'41%'})
+					$(this).text('下一步')
+				  break;
+			     default:
+			        console.log('hao')
+			}
+		});
+		$('.phone_next').click(function(){
+			var step = $('#phone_pop_bg_img').attr('data-step')
+			switch(step) {
+			     case 'one':
+					$('#phone_pop_bg_img').attr('data-step','tow')
+					$('#phone_pop_bg_img').attr("src", "{/$siteurl.style/}/img/company/activity/phone_step_tow.jpg");
+			        $(this).css({'top':'57%','left':'55%'})
+					break;
+			     case 'tow':
+					 $('#phone_pop_bg_img').attr('data-step','tree')
+					 $('#phone_pop_bg_img').attr("src", "{/$siteurl.style/}/img/company/activity/phone_step_tree.jpg");
+					 $(this).css({'top':'59%','left':'55%'})
+			        break;
+				case 'tree':
+					$('#phone_pop_bg_img').attr('data-step','four')
+					$('#phone_pop_bg_img').attr("src", "{/$siteurl.style/}/img/company/activity/phone_step_four.jpg");
+					$(this).css({'top':'79%','left':'60%'})
+				   break;
+			   case 'four':
+				   $('#phone_pop_bg_img').attr('data-step','five')
+				   $('#phone_pop_bg_img').attr("src", "{/$siteurl.style/}/img/company/activity/phone_step_five.jpg");
+				   $(this).css({'top':'42%','left':'61%'})
+					console.log('完成了')
+				  break;
+			    case 'five':
+				   $('#phone_pop_bg_img').attr('data-step','six')
+				   $('#phone_pop_bg_img').attr("src", "{/$siteurl.style/}/img/company/activity/phone_step_six.jpg");
+				   $(this).css({'top':'58%','left':'62%'})
+				   $(this).text('完成')
+					// console.log('完成了')
+				  break;
+              case 'six':
+                  SaveAction();
+				  $('.phone_pop').hide()
+				  $('#phone_pop_bg_img').attr('data-step','one')
+				  $(this).css({'top':'49%','left':'41%'})
+				  $(this).text('下一步')
+                break;
+			     default:
+			        console.log('hao')
+			}
+		});
+		// $(document).ready(function(){
+		// 	var isShow = '{/$has_read_guide_pic/}'
+		// 	var popType_t = '{/$souece/}'
+		// 	var chat_typ =  '{/$chat_type/}'
+		// 	if(isShow){
+		// 		if(popType_t == 1){ 
+		// 			if(chat_typ == 1){
+		// 				$('.computer_pop').show();
+		// 				$('#computer_pop_bg_img').attr("src", "{/$siteurl.style/}/img/company/activity/computer_step_one.jpg");
+		// 			}else{
+		// 				$('.phone_pop').show();
+		// 				$('#phone_pop_bg_img').attr("src", "{/$siteurl.style/}/img/company/activity/phone_step_one.jpg");
+		// 			}
+		// 		}else{
+		// 			$('.kuaimi_pop').show();
+		// 			$('#kuaimi_pop_bg_img').attr("src", "{/$siteurl.style/}/img/company/activity/kuaimi_step_one.jpg");
+		// 		}
+		// 	}
+		// }); 
+		$(document).ready(function(){
+			var check_in_type = Number('{/$check_in_type/}');
+			var isShow = '{/$has_read_guide_pic/}'
+			var popType_t = '{/$souece/}'
+			var chat_typ =  '{/$chat_type/}'
+			 // console.log('是否弹框',isShow)
+			// console.log('汇博还是快米',popType_t)
+			// console.log('是电脑还是手机',chat_typ)
+			console.log('活动类型',check_in_type)
+			console.log('是否显示下一步',isShow)
+			if(check_in_type== 0 && isShow){
+				if(popType_t == 1){
+					if(chat_typ == 1){
+						$('.computer_pop').show();
+						$('#computer_pop_bg_img').attr("src", "{/$siteurl.style/}/img/company/activity/computer_step_one.jpg");
+					}else{
+						$('.phone_pop').show();
+						$('#phone_pop_bg_img').attr("src", "{/$siteurl.style/}/img/company/activity/phone_step_one.jpg");
+					}
+				}else{
+					$('.kuaimi_pop').show();
+					$('#kuaimi_pop_bg_img').attr("src", "{/$siteurl.style/}/img/company/activity/kuaimi_step_one.jpg");
+				}
+			}
+		}); 
+		$(document).ready(function(){
+			console.log('页面初始化调用')
+			checkStyle(false);
+			var timeId = setInterval(function(){
+					var html = $('.title_mark').html() + '·'
+					if(html == '····') {
+							html = ''
+					}
+					$('.title_mark').html(html)
+			},800)
+		});
+        mobileVideoDialog.query("#downloadErWeiMaBtn").on("click", function(){
+            clearInterval(promptInterview);
+            mobileVideoDialog.hide();
+            downloadErWeiMaDialog.show();
+        });
+        
+        function SaveAction(){
+            {/if !$has_read_guide_pic/}
+            return false;
+            {//if/}
+            $.post("{/get_url rule='/videohall/SaveAction'/}", {sid: '{/$sid/}', has_read_guide_pic: 1}, function (e) {
+                 window.location.reload();
+             }, 'json');
+        }
+        function setStatus(id, status, person_id){
+            $.ajax({
+                type: 'post',
+                url: '{/get_url rule="/videohall/SetInterviewStatus"/}',
+                data: {id: id, status: status, person_id: person_id, need_send_msg: true},
+                dataType: 'json',
+                success: function (res) {
+                    if(res.isNeedLogin){
+                        window.location.reload();
+                        return;
+                    }
+                    if(!res.status){
+                        ConfirmBox.timeBomb(res.msg,{
+                            name: 'fail',
+                            width:'auto',
+                            timeout : 2000
+                        });
+                        return;
+                    }
+                    ConfirmBox.timeBomb(res.msg,{
+                        name: 'success',
+                        width:'auto',
+                        timeout : 2000
+                    });
+                    setTimeout("window.location.reload()",2000);
+                    return;
+                }
+            });
+        }
+        $(".waitDealBtn").on("click", function(){
+            var id = $(this).parent().attr('data-id');
+            var person_id = $(this).parent().attr('data-person-id');
+            $.confirm('确定要设置为待定吗？', '提示', function () {
+                setStatus(id, 4, person_id);
+            });
+        });
+        
+        $(".notPassBtn").on("click", function(){
+            var id = $(this).parent().attr('data-id');
+            var person_id = $(this).parent().attr('data-person-id');
+            $.confirm('确定要设置为不合适吗？', '提示', function () {
+                setStatus(id, 3, person_id);
+            });
+        });
+        
+        $(".passBtn").on("click", function(){
+            var id = $(this).parent().attr('data-id');
+            var person_id = $(this).parent().attr('data-person-id');
+            $.confirm('确定要设置为通过吗？', '提示', function () {
+                setStatus(id, 2, person_id);
+            });
+        });
+        
+       
+        $('.startVideoBtn').on('click', function(e){
+            var id = $(this).parent().attr('data-id'),
+                base_job_id = $(this).parent().attr('data-base-job-id'),
+                base_resume_id = $(this).parent().attr('data-base-resume-id'),
+                status = $(this).attr('data-status');
+            deviceCheckDialog.query("#rtcScanCodeImg").attr("src", "{/get_url rule='/video/RtcScanCode' domain='company'/}?job_id="+base_job_id+"&resume_id="+base_resume_id+"&net_apply_id="+id);
+			e.stopPropagation();
+			var isInviteView = checkStyle(true);
+			if(isInviteView){
+				
+				$.ajax({
+					type: 'post',
+					url: '{/get_url rule="/videohall/StartInterviewV1"/}',
+					data: {id: id,need_send_msg : status},
+					dataType: 'json',
+					success: function (res) {
+						if(res.isNeedLogin){
+							window.location.reload();
+							return;
+						}
+				
+						if(res.code == 1 && wait_apply_person_num > 0){
+							$.confirm('求职者正在面试中，您可先面试其他求职者（该求职者会自动移动至最后一名）', '提示', function () {
+								$.ajax({
+									type: 'post',
+									url: '{/get_url rule="/videohall/SetMaxNo"/}',
+									data: {id: id, sid: '{/$sid/}'},
+									dataType: 'json',
+									success: function (res1) {
+										if(!res1.status){
+											ConfirmBox.timeBomb(res1.msg,{
+												name: 'fail',
+												width:'auto',
+												timeout : 2000
+											});
+											return;
+										}
+										ConfirmBox.timeBomb(res1.msg,{
+											name: 'success',
+											width:'auto',
+											timeout : 2000
+										});
+										setTimeout("window.location.reload()",2000);
+										return;
+									}
+								});
+							});
+							return;
+						}
+						if(!res.status){
+							ConfirmBox.timeBomb(res.msg,{
+								name: 'fail',
+								width:'auto',
+								timeout : 2000
+							});
+							setTimeout("window.location.reload()",2000);
+							return;
+						}
+						window.location.href = "https:{/base_lib_Constant::COMPANY_URL_NO_HTTP/}/chat/?resume_id=" + res.data.resume_id + "&job_id=" + res.data.job_id + "&net_apply_id=" + res.data.id + "&sid=" + res.data.sid;
+					}
+				});
+			}
+        });
+        //跳过
+        $('.skipBtn').on('click', function(){
+            var id = $(this).parent().attr('data-id');
+			skipInterviewDialog.show();
+			skipInterviewDialog.query('.jumpNum').html("{/$skip_num/}次");
+			skipInterviewDialog.query('.skipInterview_sureBtn').on("click", function(){
+				$.ajax({
+				    type: 'post',
+				    url: '{/get_url rule="/videohall/SkipInterview"/}',
+				    data: {id: id, sid: '{/$sid/}', is_add_skip_num: true},
+				    dataType: 'json',
+				    success: function (res1) {
+				        if(!res1.status){
+				            ConfirmBox.timeBomb(res1.msg,{
+				                name: 'fail',
+				                width:'auto',
+				                timeout : 2000
+				            });
+				            return;
+				        }
+				        ConfirmBox.timeBomb(res1.msg,{
+				            name: 'success',
+				            width:'auto',
+				            timeout : 2000
+				        });
+				        setTimeout("window.location.reload()",2000);
+				        return;
+				    }
+				});
+			})
+			skipInterviewDialog.query('.skipInterview_closeBtn').on("click", function(){
+				skipInterviewDialog.hide();
+			})
+            // $.confirm("是否主动跳过该求职者？您该场招聘会还剩<span class="+"'jumpNum'"+">{/$skip_num/}次</span>跳过机会。", '跳过求职者', function () {
+                
+            // });
+		});
+        //立即沟通
+        $(".startInterviewBtn").on("click", function(){
+            var resume_id = $(this).parent().attr('data-resume-id');
+            var job_id = $(this).parent().attr('data-job-id');
+            var apply_id = $(this).parent().attr('data-apply-id');
+            var has_wait_deal_apply = {/!empty($apply_list) || !empty($apply_list_top_one)/}
+            $.ajax({
+                type: 'post',
+                url: '{/get_url rule="/videohall/GetLinkWay"/}',
+                data: {sid: '{/$sid/}', has_wait_deal_apply: has_wait_deal_apply, need_download: false},
+                dataType: 'json',
+                success: function (res) {
+                    if(!res.status){
+                        ConfirmBox.timeBomb(res.msg,{
+                            name: 'fail',
+                            width:'auto',
+                            timeout : 2000
+                        });
+                        return;
+                    }
+                    var newwindow = window.open('about:blank');
+                    newwindow.location.href = "{/get_url rule='/videohall/startInterviewV2'/}?resume_id="+resume_id+"&job_id="+job_id+"&net_apply_id="+apply_id+"&sid={/$sid/}";
+                }
+            });
+        });
+        //查看联系方式
+        $(".see_mobile_btn").on("click", function(){
+            var resume_id = $(this).parent().attr('data-resume-id');
+            var person_id = $(this).parent().attr('data-person-id');
+            var apply_id = $(this).parent().attr('data-apply-id');
+            var has_wait_deal_apply = {/!empty($apply_list) || !empty($apply_list_top_one)/}
+            $.ajax({
+                type: 'post',
+                url: '{/get_url rule="/videohall/GetLinkWay"/}',
+                data: {resume_id: resume_id, person_id: person_id, sid: '{/$sid/}', has_wait_deal_apply: has_wait_deal_apply},
+                dataType: 'json',
+                success: function (res) {
+                    if(!res.status){
+                        ConfirmBox.timeBomb(res.msg,{
+                            name: 'fail',
+                            width:'auto',
+                            timeout : 2000
+                        });
+                        return;
+                    }
+                    var newwindow = window.open('about:blank');
+                    newwindow.location.href = "{/get_url rule='/resume/index'/}?resume_id=" + resume_id + "&sid={/$sid/}&apply_id=" + apply_id;
+                }
+            });
+        });
+		
+        //手机面试
+        var rtcScanStatusDialog_status_value = 0,
+            rtcScanStatusDialog_apply_id = 0,
+            rtcScanStatusDialog_person_id = 0;
+        $(".mobileVideoBtn").on('click', function(e){
+			e.stopPropagation();
+            var apply_id = $(this).parent().attr('data-id');
+            var resume_id = $(this).parent().attr('data-resume-id');
+            var person_id = $(this).parent().attr('data-person-id');
+			// $('body').append('<a h>')
+            // var newwindow = window.open('about:blank');
+			$('.moblielinkTo').attr('href',"{/get_url rule='/resume/index'/}?resume_id=" + resume_id + "&sid={/$sid/}&apply_id=" + apply_id)
+			$('.moblielinkTo')[0].click();
+            // newwindow.location.href = "{/get_url rule='/resume/index'/}?resume_id=" + resume_id + "&sid={/$sid/}&apply_id=" + apply_id;
+            rtcScanStatusDialog_apply_id = apply_id;
+            rtcScanStatusDialog_person_id = person_id;
+            rtcScanStatusDialog_status_value = 0;
+            rtcScanStatusDialog.show();
+        });
+          
+        rtcScanStatusDialog.query('.rtcScanStatusDialog_status').on('click', function(){
+            rtcScanStatusDialog_status_value = $(this).attr('data-status');
+			$(this).addClass('statusActive').siblings().removeClass('statusActive');
+        });
+        rtcScanStatusDialog.query('#rtcScanStatusDialog_sure_btn').on('click', function(){
+            if(!rtcScanStatusDialog_status_value){
+                ConfirmBox.timeBomb('请设置面试结果',{
+                    name: 'fail',
+                    width:'auto',
+                    timeout : 2000
+                });
+                return;
+            }
+//            if(rtcScanStatusDialog_status_value == 99){
+//                window.location.reload();
+//                return;
+//            }
+                
+            setStatus(rtcScanStatusDialog_apply_id, rtcScanStatusDialog_status_value, rtcScanStatusDialog_person_id);
+        });
+
+    })
+    </script>
+
+	</body>
+</html>

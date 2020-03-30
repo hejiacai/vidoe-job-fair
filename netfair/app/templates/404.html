@@ -1,0 +1,63 @@
+<!doctype html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<meta name="Keywords" content=""/>
+	<meta name="Description" content=""/>
+	<title>404</title>
+	<!–[if lt IE9]>
+	<script src="{/version file='html5.js'/}"></script>
+	<![endif]–>
+	<link rel="stylesheet" type="text/css" href="{/version file='base.css'/}"/>
+	<link rel="stylesheet" type="text/css" href="{/version file='icons.css'/}"/>
+	<link rel="stylesheet" type="text/css" href="{/version file='front.css'/}"/>
+</head>
+<body>
+<header>
+	<div class="headerCon">
+		<div class="headL">
+			<h1><a href="{/$siteurl.main/}"></a></h1>
+		</div>
+		<div class="headR">
+
+		</div>
+		<div class="clear"></div>
+	</div>
+</header>
+<section class="wr404">
+	<dl>
+		<dt></dt>
+		<dd>
+			{/if $title/}
+			<p class="tit">{/$title/}</p>
+			{/else/}
+			<p class="tit">您所访问的页面太调皮&nbsp;&nbsp;跑丢了...</p>
+			{//if/}
+
+            {/if $error_msg/}
+				<p>错误信息: {/$error_msg/}</p>
+            {//if/}
+			<p>你可以<a href="{/$siteurl.main/}" class="font14">返回首页</a></p>
+			<p>或者你想去其他地方逛逛：<a href="{/$siteurl.main/}/qiuzhi/">找工作</a>|<a href="{/$siteurl.main/}/xiaoyuan/">校园招聘</a>|<a
+						href="{/$siteurl.main/}/zhaopinhui/">现场招聘会</a>|<a
+						href="{/$siteurl.main/}/hrcollege/">HR学院</a>|<a href="{/$siteurl.company/}/login">企业服务</a></p>
+		</dd>
+	</dl>
+</section>
+<footer style="position:fixed;bottom:0;left:0;width:100%;background:none;border:0;_position:absolute;">
+
+	<p>&copy;{/$smarty.now|date_format:'%Y'/}&nbsp;Huibo.com&nbsp;版权所有</p>
+</footer>
+</body>
+<script type="text/javascript">
+    (function () {
+        var ga = document.createElement('script');
+        ga.type = 'text/javascript';
+        ga.async = true;
+        var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+        ga.src = _bdhmProtocol + 'hm.baidu.com/h.js?2f28019f05c22eb44df412a051d35c52';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(ga, s);
+    })();
+</script>
+</html>

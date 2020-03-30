@@ -1,0 +1,337 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+<title>{/$title/}</title>
+<!–-[if lt IE9]> 
+<script src="{/version file='html5.js'/}"></script>   
+<![endif]-–>
+<link rel="stylesheet" type="text/css" href="{/version file="base.css"/}" />
+<link rel="stylesheet" type="text/css" href="{/version file="comback.css"/}" />
+
+<script type="text/javascript" language="javascript" src="{/version file="jquery-1.8.3.min.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="common.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="dialog.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="ui_inputFocus.js"/}"></script><!--输入框获取焦点-->
+<script type="text/javascript" language="javascript" src="{/version file="ui_hovchange.js"/}"></script><!--指向改变class-->
+<script type="text/javascript" language="javascript" src="{/version file="jquery.form.js"/}"></script><!--表单提交-->
+<script type="text/javascript" language="javascript" src="{/version file="ui_validate.js"/}"></script>
+
+</head>
+<body>
+<style type="text/css">
+.part{}
+.part .hd{border-bottom:1px solid #dadada;height:40px;}
+.part .hd .l{float:left;display:inline;}
+.part .hd .l a{height:38px;line-height:38px;font-size:14px;margin:0 10px;padding:0 10px;display:inline-block;float:left;display:inline;border:1px solid #dadada;border-top:2px solid #dadada;border-bottom:0;color:#666;}
+.part .hd .l a:hover{background:#f8f8f8;}
+.part .hd .l a.cu{font-weight:bold;border-top:2px solid #54728C;border-bottom:1px solid #fff;}
+.part .hd .l a.cu:hover{background:#fff;}
+.part .hd .l .tipLay{top:6px;left:-14px;}
+.part .hd .l .tipLayTxt{line-height:23px;background:#fffce3;border:1px solid #fad5a8;color:#d78727}
+.part .hd .l .tipLay .tipArr{top:9px;background:url({/$siteurl.style/}/img/common/contrl.gif) no-repeat 0 -5px;}
+
+
+.part .hd .r{float:right;display:inline;margin:5px 0 0;}
+.part .hd .r a i.hbIconMoon{font-size:12px;margin:0 5px 0 0;}
+
+.bd .lst{padding:10px 0;zoom:1; position:relative; z-index:1;}
+.bd .lst ul li{padding-left:20px;vertical-align:bottom;border:1px solid #fff;border-bottom:1px solid #ebebeb; position:relative; z-index:1;overflow:hidden;padding:10px 0;float:left;width:960px;}
+.bd .lst ul li.hov{background:#f4f4f4; z-index:2;}
+.bd .lst ul li .l{float:left;display:inline;width:555px;margin:0 0 0 10px;}
+.bd .lst ul li .r{float:right;display:inline;width:325px; text-align:right;font-size:12px;color:#999;padding:0 10px 0 0;}
+.bd .lst ul li.lstSdw{background:#fffae7;border:1px dashed #f8e7ad;}
+
+
+.bd .lst ul li .jobN a{font-size:14px;font-weight:bold;color:#404040;}
+.bd .lst ul li .jobN a:hover{color:#16a6f2;}
+.bd .lst ul li .jobN em{margin:0 0 0 10px;font-size:12px;}
+.bd .lst ul li .reason{color:#666;font-size:12px;line-height:25px;}
+
+.bd .lst ul li .r i{color:#999;margin:0 10px;}
+
+
+.bd .lst ul li .oth span.noChk,.bd .lst ul li .oth span.endTime{float:left;display:inline;border-right:1px solid #dadada;padding:0 10px 0 0;margin:0 10px 0 0; position:relative; z-index:1; cursor:text;color:#aaa}
+.bd .lst ul li .oth span.endTime em{color:#D64E12;margin:0 10px 0 0;}
+
+.bd .lst .noData{background:none;}
+
+.nPubBox{width:500px;}
+.nPubBox p.tit{margin-bottom:20px;}
+.nPubBox .formMod{}
+.nPubBox .formMod .l{width:48px;}
+.nPubBox .nPubBtn{ text-align:right;}
+</style>
+{/include file="nav.html" parent="网络招聘" cur="职位管理"/}
+<div class="content" id="content">
+	<section class="section">
+		<hgroup>
+        	<div class="part">
+            	<div class="hd">
+                	<div class="l"><a href="{/get_url rule="/job/index/" data="status=$use_job_status"/}">招聘中（<em id="jobListUseCount">{/$use_job_count/}</em>）</a><a href="{/get_url rule="/job/index/" data="status=$stop_job_status"/}" class="cu">已结束招聘（<em id="jobListStopCount">{/$stop_job_count/}</em>）</a>{/if $job_over_time_count>0/}<div class="tipPos"><div class="tipLay"><div class="tipLayTxt tipw100"><div class="tipArr"></div>{/$job_over_time_count/}个职位刚刚过期</div></div></div>{//if/}</div>
+                    <div class="r"><span class="btn"><a href="{/get_url rule="/job/add/"/}" class="btn1 btnsF12"><i class="hbIconMoon">&#xe102;</i>发布职位</a></span></div>
+                    <div class="clear"></div>
+                </div>
+                <div class="bd">
+                    <div class="lst" id="lst">
+                        <ul>
+                        {/section name=job loop=$job_list/}
+                            <li id="li{/$job_list[job].job_id/}">
+<!--                            	<div class="l" style="display:none;">-->
+<!--                                	<div class="jobN"><a href="{/get_url rule="/job/mod/" data="job_id={/$job_list[job].job_id/}"/}">{/$job_list[job].station/}</a></div>-->
+<!--                                    <div class="oth">-->
+<!--                                    {/if $status==$stop_job_status && $job_list[job].check_state==2/}-->
+<!--										<span class="noChk">审核未通过：<em>{/$job_list[job].audit_remark/}</em></span>-->
+<!--									{/else/}-->
+<!--	                                    {/if $status==$stop_job_status && strtotime($job_list[job].end_time)<=time()/}-->
+<!--											<span class="endTime">已过期 <em>{/if $job_list[job].hidden_end_time == false/}（{/$job_list[job].end_time_name/}）{//if/}</em><a class="nPub" href="javascript:void(0);" onclick="{/if strtotime($job_list[job].end_time)<=time()/}joblist.showRePubJob({/$job_list[job].job_id/}){/else/}joblist.rePubJob({/$job_list[job].job_id/}){//if/}">重新发布</a></span>-->
+<!--										{/else/}-->
+<!--											<span class="endTime">{/date('Y-m-d', strtotime($job_list[job].end_time))/}截止 </span>-->
+<!--										{//if/}-->
+<!--									{//if/}-->
+<!--                                    </div>-->
+<!--                                </div>-->
+                                <div class="l">
+                                	<div class="jobN"><a href="{/get_url rule="/job/mod/" data="job_id={/$job_list[job].job_id/}"/}">{/$job_list[job].station/}</a>
+                                		{/if $status==$stop_job_status && $job_list[job].check_state==2/}
+                                			<em class="red">审核未通过</em>
+                                		{/else/}
+                                			{/if $status==$stop_job_status && strtotime($job_list[job].end_time)<=time()/}
+                                				<em class="gray">已过期</em><em class="red">{/if $job_list[job].hidden_end_time == false/}（{/$job_list[job].end_time_name/}）{//if/}</em>
+                                			{/else/}
+                                				<em class="gray">{/date('Y-m-d', strtotime($job_list[job].end_time))/}</em>
+                                			{//if/}
+                                		{//if/}
+                               		</div>
+                               		{/if $status==$stop_job_status && $job_list[job].check_state==2/}
+                                    	<div class="reason">{/$job_list[job].audit_remark/}</div>
+                                   	{//if/}
+                                </div>
+                                <div class="r">
+                                	{/if $status==$stop_job_status && $job_list[job].check_state!=2/}
+                                		<a href="javascript:void(0);" onclick="{/if strtotime($job_list[job].end_time)<=time()/}joblist.showRePubJob({/$job_list[job].job_id/}){/else/}joblist.rePubJob({/$job_list[job].job_id/}){//if/}">重新发布</a><i>|</i>
+                                	{//if/}
+                                		<a href="{/get_url rule="/job/mod/" data="job_id={/$job_list[job].job_id/}"/}" class="editLnk">编辑</a><i>|</i><a onclick="joblist.deleteJob({/$job_list[job].job_id/})" href="javascript:void(0);" class="lnk">删除</a>
+                               	</div>
+                                <!-- 
+                                <div class="r">
+                                	<span class="rem remView"><p class="num">{/$job_list[job].job_visit_num/}</p><p>浏览量</p>
+									<div class="remTip" style="display:none;">
+										<div class="remTipBd">
+									    	<div class="remTipArr"></div>
+									        <div class="remTipTxt"><p>今日：{/$job_list[job].today_job_visit_num/}</p><p>昨日：{/$job_list[job].tomorrow_job_visit_num/}</p><p>近7天：{/$job_list[job].week_job_visit_num/}</p><p>近1个月：{/$job_list[job].month_job_visit_num/}</p></div>
+									    </div>
+									</div>
+                                    </span>
+                                    <span class="line">&nbsp;</span>
+                                    <span class="rem remGet"><p class="num">{/$job_list[job].job_apply_num/}</p><p>收到简历</p>
+									<div class="remTip" style="display:none;">
+										<div class="remTipBd">
+									    	<div class="remTipArr"></div>
+									        <div class="remTipTxt"><p>今日：{/$job_list[job].today_job_apply_num/}</p><p>昨日：{/$job_list[job].tomorrow_job_apply_num/}</p><p>近7天：{/$job_list[job].week_job_apply_num/}</p><p>近1个月：{/$job_list[job].month_job_apply_num/}</p></div>
+									    </div>
+									</div>
+                                    </span>
+                                    <span class="line">&nbsp;</span>
+                                    <span class="rem"><p class="num"><a href='{/get_url rule="/apply/index" data="status=0&jobid={/$job_list[job].job_id/}"/}' class="new">{/$job_list[job].job_apply_not_reply_num/}</a></p><p><a href='{/get_url rule="/apply/index" data="status=0&jobid={/$job_list[job].job_id/}"/}' class="new">未处理简历</a></p></span>
+                                    <span class="line">&nbsp;</span>
+                                    <span class="rem"><p class="num"><a href='{/get_url rule="/apply/index" data="status=2&jobid={/$job_list[job].job_id/}"/}'>{/$job_list[job].job_apply_not_read_num/}</a></p><p><a href='{/get_url rule="/apply/index" data="status=2&jobid={/$job_list[job].job_id/}"/}'>未读简历</a></p></span>
+                                </div>
+                                 -->
+                            </li>
+                            {/sectionelse/}
+								<div class="noData"><p>没有结束招聘的职位</p></div>
+							{//section/}
+                        </ul>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+            </div>
+        </hgroup>
+    </section>
+</div>
+{/include file="footer.html"/}
+<section class="floatRT"><a href="{/get_url rule='/about/message' domain='main'/}" target="_blank" class="serviceLink">我有问题要反馈</a><b></b></section>
+<div class="dgBox nPubBox" id="rePubJobDiv" style="display:none;">
+	<p class="tit">该职位已过期，需重新设置有效期方可重新发布！</p>
+    <form id="formReJobDiv" action="{/get_url rule="/job/repubjob/"/}" method="post">
+    <div class="formMod">
+        <div class="l">有效期</div>
+        <div class="r">
+            <span class="formText">
+            	<input type="hidden" id="hidJobID" name="job_id" />
+            	<input type="hidden" id="hidSetEndTime" name="hidSetEndTime" value="1" />
+                <input onkeyup="joblist.changeEndtime(this);" type="text" style="width:45px;" class="text" name="txtEndTime" id="txtEndTime" >
+            </span>
+            <span class="tipTxt font14">天</span>
+            <span id="endTimeSpan"  class="tipTxt font14" style="margin-left:20px;"></span>
+            <span class="tipPos">
+          		<span class="tipLay">
+          			<span class="tipLayErr tipw180" for="txtEndTime" generated="true" style="display: none;">
+					</span>
+          		</span>
+        	</span>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="nPubBtn"><a class="btn1 btnsF12" href="javascript:void(0)" id="btnRePubJob" onclick="joblist.rePubJobSetEndTime(this);">确&nbsp;定</a><a class="btn3 btnsF12" href="javascript:void(0)" onClick="$(this).closeDialog();">取&nbsp;消</a></div>
+    </form>
+</div>
+<script>
+$(document).ready(function(e) {
+	var $lst = $('#lst');
+
+	$.focusColor('input.text');
+	$.focusColor('textarea.textarea');
+	
+<!--	$lst.find('li').find('.edit').find('a.lnk').click(function(){-->
+<!--		$(this).parents('ul').find('.edit').css({'z-index':'1'});-->
+<!--		$(this).siblings('.edTip').css({'display':'block'});-->
+<!--		$(this).parents('li').find('.edit').css({'z-index':'2'});-->
+<!--	});-->
+	$lst.find('li').hover(function(){
+		$(this).addClass('hov');
+	},function(){
+		$(this).removeClass('hov');
+		$(this).find('.edTip').css({'display':'none'});
+	})
+	$lst.find('a.btn3').click(function(){
+		$(this).parents('.edTip').css({'display':'none'});
+		$(this).parents('.edTime').css({'z-index':'1'});
+	});
+	
+	
+	$lst.find('.rem').hover(function(){
+		var $remTip = $(this).find('.remTip')
+		$(this).css({'z-index':'2'});
+		if($remTip){
+			$remTip.css({'display':'block'});
+		}else{return false};
+	},function(){
+		var $remTip = $(this).find('.remTip')
+		$(this).css({'z-index':'1'});
+		if($remTip){
+			$remTip.css({'display':'none'});
+		}else{return false};
+	});
+});
+var changeBox = null;
+var joblist = {
+		initControls: function(){},
+		rePubJobSetEndTime:function(obj){
+ 			var theday = $.trim($(obj).closest('#rePubJobDiv').find('#txtEndTime').val());
+ 			var des = '';
+ 			if (theday == ''){
+ 				des = '请输入有效期<span class="tipArr"></span>';
+   			}else if (isNaN(theday)){
+   				des = '请输入1-90之间的整数<span class="tipArr"></span>';
+   			}else {
+       			if (theday<1){
+       				des = '请输入1-90之间的整数<span class="tipArr"></span>';
+       			}
+       			if (theday>90){
+       				des = '请输入1-90之间的整数<span class="tipArr"></span>';
+       			}
+   			}
+   			if (des == ''){
+   				$(obj).submitForm({success:joblist.rePubJobSuccess});
+   			} else {
+   				$(obj).closest('#rePubJobDiv').find('span.tipLayErr').html(des).attr('style','display:block;');
+   				$(obj).closest('#rePubJobDiv').find('#txtEndTime').addClass('error');
+   			}
+     	},
+		showRePubJob:function(job_id){
+     		$.getJSON('{/get_url rule="/job/checkcomlevelendtime/"/}',function(json){
+     			if(json.error){
+    	            $.message(json.error, { title: '系统提示', icon: 'fail' });
+    	            return;
+    	        }
+     			$('#hidJobID').val(job_id);
+    			changeBox = $.showModal('#rePubJobDiv', { contentType: 'selector', title: '重新发布职位' });
+			});
+		},
+		rePubJob:function(job_id){
+			$.getJSON('{/get_url rule="/job/repubjob/"/}',{job_id:job_id,hidSetEndTime:'0'},function(json){
+				joblist.rePubJobSuccess(json);
+			});
+		},
+		rePubJobSuccess:function(json){
+	        if(json.error){
+	            $.message(json.error, { title: '系统提示', icon: 'fail' });
+	            return;
+	        }
+	        if(json.success){
+	        	var jobListUseCount = parseInt($("#jobListUseCount").html());
+	            var jobListStopCount = parseInt($("#jobListStopCount").html());
+	            $("#jobListUseCount").html(jobListUseCount+1);
+	            $("#jobListStopCount").html(jobListStopCount-1);
+	        	$("#li"+json.job_id).remove();
+	        	$.anchorMsg('重新发布职位成功');
+	        	if(changeBox != null){
+		        	changeBox.close();
+	        	}
+	        	if($('#lst').find('li').length <=0){
+	        		$('#lst').find('ul').html('<div class="noData"><p>没有结束招聘的职位</p></div>');
+	        	}
+	        }
+		},
+		deleteJob:function(job_id){
+			$.confirm('删除后将不可恢复，确定要删除吗？', '操作提示', function() {
+				$.getJSON('{/get_url rule="/job/delete/"/}',{job_id:job_id}, function(json) {
+		            if(json.error){
+		                $.message(json.error, { title: '系统提示', icon: 'fail' });
+		                return;
+		            }
+		            if(json.success){
+		                var jobListStopCount = parseInt($("#jobListStopCount").html());
+		                $("#jobListStopCount").html(jobListStopCount-1);
+		                $("#li"+job_id).remove();
+		                $.anchorMsg('删除成功');
+		                if($('#lst').find('li').length <=0){
+			        		$('#lst').find('ul').html('<div class="noData"><p>您还未发布职位，求职者无法投递简历</p><p><a href="{/get_url rule="/job/add/"/}" class="btn1 btnsF14">立即发布职位</a></p></div>');
+			        	}
+		            }
+		        });
+			});
+		},
+		changeEndtime:function(obj){
+			var theValue = $.trim($(obj).val());
+			var des = '';
+			if (theValue == ''){
+ 				des = '请输入有效期<span class="tipArr"></span>';
+   			}else if(!isNaN(theValue)){
+				if(theValue >= 1 && theValue <= 90){
+					end = new Date();
+					end = new Date(end.valueOf() + theValue*24*60*60*1000);
+					//$(obj).closest('div.r').find('#endTimeSpan').html('有效期至' + end.toLocaleDateString());
+					$(obj).closest('div.r').find('#endTimeSpan').html('有效期至' + end.getFullYear() + '年' + (end.getMonth() + 1) + '月' + end.getDate() + '日');
+				}else{
+					if (theValue<1){
+	       				des = '请输入1-90之间的整数<span class="tipArr"></span>';
+	       			}
+	       			if (theValue>90){
+	       				des = '请输入1-90之间的整数<span class="tipArr"></span>';
+	       			}
+					$(obj).closest('div.r').find('#endTimeSpan').html('');
+				}
+			}
+			else{
+				des = '请输入1-90之间的整数<span class="tipArr"></span>';
+				$(obj).closest('div.r').find('#endTimeSpan').html('');
+			}
+			if (des == ''){
+				$(obj).closest('#rePubJobDiv').find('span.tipLayErr').html(des).attr('style','display:none;');
+				$(obj).removeClass('error');
+   			} else {
+   				$(obj).closest('#rePubJobDiv').find('span.tipLayErr').html(des).attr('style','display:block;');
+   				$(obj).addClass('error');
+   			}
+		}
+	}
+	joblist.initControls();
+</script>
+</body>
+</html>

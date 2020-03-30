@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="{/version file='base.css'/}">
+    <link rel="stylesheet" href="{/version file='feedback.css'/}">
+    <link rel="stylesheet" href="{/version file='m_font_style.css'/}">
+
+    <style type="text/css">
+        .companyGrade{ display: block;width:113px; height: 108px; background: url(img/grade_img01.png) no-repeat; position: fixed; top: 50%; left: 50%; margin: -54px 0 0 -551px;}
+        .companyGradePop{width:670px; height:400px; overflow-y: auto; padding:15px 0; background: #fff; text-align: left; margin-left:20px;}
+        .gradePopTit{ display: block; font-size: 14px; color: #999;}
+        .gradePopTit b{ color: #f00;}
+        .grade-list-bd{ padding-top: 30px; overflow: hidden;}
+        .grade-list{ overflow: hidden; padding-bottom: 10px;}
+        .grade-list em{ display: inline-block;width:130px; color: #666;}
+        .grade-list span.titDegree{ color: #ff9000; display: inline-block; padding-left: 10px;}
+        .grade-list span.tit{ display: none; color: #f00;}
+        .grade-textarea{width:500px; border: 1px solid #e4e4e4;}
+        .grade-textarea-tit{ display: block; font-size: 14px; color: #999;width:500px; text-align: right;}
+        .grade-textarea-tit em{ color: #333;}
+        .grade-textarea-tit em.error{ color: #f00;}
+        .gradeCheckbox{ overflow: hidden; padding-bottom: 10px; display: none; padding-left: 140px;}
+        .gradeCheckbox span{ display: block; float: left; color: #333; font-size: 14px;padding-bottom: 10px; margin-right: 38px; cursor: pointer;}
+        .gradeCheckbox span i{
+            height: 13px;
+            width: 13px;
+            border: 1px solid #ccc;
+            border-radius: 2px;
+            text-align: center;
+            text-indent: -9999em;
+            color: #e1e1e1;
+            margin-right: 10px;
+            display: inline-block;
+            vertical-align: -2px;
+        }
+        .gradeCheckbox span.cur i{
+            color: #2b6fad;
+            border: 1px solid #2b6fad;
+            text-indent: 0;
+        }
+    </style>
+    <script type="text/javascript" src="{/version file='jquery-1.8.3.min.js'/}"></script>
+    {/*<script type="text/javascript" language="javascript" src="{/version file='confirmBox.js'/}"></script>*/}
+    <script type="text/javascript" language="javascript" src="{/version file='dialog.js'/}"></script>
+</head>
+<body>
+<a href="javascript:void(0);" class="companyGrade"></a>
+<form id="form1">
+<div class="companyGradePop">
+    <span class="gradePopTit">为了提升我们平台的服务品质，请对我们进行评价，评价完成可<b>免费获赠50元</b>推广金。</span>
+    <ul class="grade-list-bd">
+        <div class="grade-list">
+            <em>产品功能满意度：</em>
+            <p class="public-star JS-star">
+                <span id="familiarity"></span>
+                <label>
+                    <i data-value="1"></i><i data-value="2"></i><i data-value="3"></i><i data-value="4"></i><i data-value="5"></i>
+                    <input value="0" name="match_grade_familiarity" type="hidden" id="match_grade_familiarity">
+                </label>
+            </p>
+            <span class="titDegree"></span>
+            <span class="tit">请对该项进行评分</span>
+        </div>
+        <div class="gradeCheckbox">
+            {/foreach $grade_a as $key=>$val/}
+            <span data-id="{/$key/}"><i class="icon-0523"></i>{/$val/}</span>
+            {//foreach/}
+            <input type="hidden" name="gradeCheckboxPut01" id="gradeCheckboxPut01" value="">
+        </div>
+        <div class="grade-list">
+            <em>招聘顾问服务体验：</em>
+            <p class="public-star JS-star">
+                <span id="problem"></span>
+                <label><i data-value="1"></i><i data-value="2"></i><i data-value="3"></i><i data-value="4"></i><i data-value="5"></i>
+                    <input value="0" name="match_grade_problem" type="hidden" id="match_level_problem">
+                </label>
+            </p>
+            <span class="titDegree"></span>
+            <span class="tit">请对该项进行评分</span>
+            <p style="line-height:18px; font-size: 12px; color: #999;">（当前顾问：{/get_user user_id=$heapinfo['own_man']/}）</p>
+            </div>
+        <div class="gradeCheckbox">
+            {/foreach $grade_b as $key=>$val/}
+            <span data-id="{/$key/}"><i class="icon-0523"></i>{/$val/}</span>
+            {//foreach/}
+            <input type="hidden" name="gradeCheckboxPut02" id="gradeCheckboxPut02" value="">
+        </div>
+        <div class="grade-list">
+            <em>招聘效果满意度：</em>
+            <p class="public-star JS-star">
+                <span id="service"></span>
+                <label><i data-value="1"></i><i data-value="2"></i><i data-value="3"></i><i data-value="4"></i><i data-value="5"></i>
+                    <input value="0" name="match_grade_service" id="match_grade_service" type="hidden">
+                </label>
+            </p>
+            <span class="titDegree"></span>
+            <span class="tit">请对该项进行评分</span>
+        </div>
+        <div class="gradeCheckbox">
+            {/foreach $grade_c as $key=>$val/}
+            <span data-id="{/$key/}"><i class="icon-0523"></i>{/$val/}</span>
+            {//foreach/}
+            <input type="hidden" name="gradeCheckboxPut03" id="gradeCheckboxPut03" value="">
+        </div>
+    </ul>
+    <div class="grade-textarea">
+        <textarea name="content" id="grade-suggest" cols="30" rows="6" placeholder="请留下你的建议，以便我们改进"></textarea>
+    </div>
+    <span class="grade-textarea-tit">
+				<em>0</em>/200
+			</span>
+    <a href="javascript:void(0);" class="consBtn btn3 btnsF14">取消</a>
+    <a href="javascript:void(0);" class="gradeBtn btn1 btnsF14">确定</a>
+</div>
+</form>
+<script type="text/javascript">
+    var confirmBox, Dialog;
+
+    $('.public-star label i').click(function(){
+        var thisId = $(this).attr('data-value');
+        var _tWidth = parseInt($(this).parents(".JS-star").children('span')[0].style.width);
+        var _tStar = $(this).parents(".JS-star");
+
+        if (parseInt(thisId) === 1 && _tWidth === 20) {
+            _tStar.find("input").val(0);
+            _tStar.find("span").css("width", "0%");
+        } else {
+            _tStar.find("span").css("width", thisId * 20 + "%");
+            _tStar.find("input").val(thisId);
+        }
+
+        var thisPutId = $(this).parent('label').find('input').val();
+        if(thisPutId <= 2){
+            $(this).parents('.grade-list').next('.gradeCheckbox').css('display','block');
+        }else{
+            $(this).parents('.grade-list').next('.gradeCheckbox').css('display','none');
+        }
+
+        if(_tStar.find("input").val() == 0){
+            $(this).parents('div').find('.titDegree').text('');
+            $(this).parents('.grade-list').next('.gradeCheckbox').css('display','none');
+        }
+
+        var thisTxtPut = $(this).parent('label').find('input').val();
+        console.log(thisTxtPut);
+        if(thisTxtPut > 0){
+            $(this).parents('.grade-list').find('.tit').css('display','none');
+        }
+
+
+    });
+
+    var chkAry = [];
+    $('.gradeCheckbox span').on('click', function(){
+        chkAry = [];
+        $(this).toggleClass('cur');
+        $(this).parent('div').find('span').each(function(i,n){
+            if($(n).hasClass('cur')){
+                chkAry.push($(n).attr('data-id'));
+            }
+        });
+        var chkStr = chkAry.join(',');
+        $(this).parent('div').find('input').val(chkStr);
+
+    });
+
+    $('#grade-suggest').keyup(function(){
+        var thisLength = $(this).val().length;
+        $('.grade-textarea-tit em').text(thisLength);
+        if(thisLength > 200){
+           /* $('.grade-textarea-tit em').addClass('error');*/
+            var grade = $(this).val().substring(0,200);
+            $(this).val(grade);
+            $('.grade-textarea-tit em').text(200);
+        }else{
+            $('.grade-textarea-tit em').removeClass('error');
+        }
+    });
+
+    $('.gradeBtn').click(function(){
+        var match_grade_familiarity = $('#match_grade_familiarity').val();
+        var match_level_problem = $('#match_level_problem').val();
+        var match_grade_service = $('#match_grade_service').val();
+        var gradeCheckboxPut01 = $('#gradeCheckboxPut01').val();
+        var gradeCheckboxPut02 = $('#gradeCheckboxPut02').val();
+        var gradeCheckboxPut03 = $('#gradeCheckboxPut03').val();
+
+
+        if(match_grade_familiarity == '' || match_grade_familiarity == '0'){
+            $('#match_grade_familiarity').parents('.grade-list').find('span.tit').show();
+            return false;
+        }else if(match_grade_familiarity <= 2 && gradeCheckboxPut01 == ''){
+            $('#match_grade_familiarity').parents('.grade-list').find('span.tit').show().text('请选择产品功能满意度具体原因');
+            return false;
+        }else{
+            $('#match_grade_familiarity').parents('.grade-list').find('span.tit').hide();
+        }
+        
+        if(match_level_problem == '' || match_level_problem == '0'){
+            $('#match_level_problem').parents('.grade-list').find('span.tit').show();
+            return false;
+        }else if(match_level_problem <= 2 && gradeCheckboxPut02 == ''){
+            $('#match_level_problem').parents('.grade-list').find('span.tit').show().text('请选择招聘顾问服务体验具体原因');
+            return false;
+        }else{
+            $('#match_level_problem').parents('.grade-list').find('span.tit').hide();
+        }
+        
+        if(match_grade_service == '' || match_grade_service == '0'){
+            $('#match_grade_service').parents('.grade-list').find('span.tit').show();
+            return false;
+        }else if(match_grade_service <= 2 && gradeCheckboxPut03 == ''){
+            $('#match_grade_service').parents('.grade-list').find('span.tit').show().text('请选择招聘效果满意度具体原因');
+            return false;
+        }else{
+            $('#match_grade_service').parents('.grade-list').find('span.tit').hide();
+        }
+
+       
+            $('#match_grade_familiarity').parents('.grade-list').find('span.tit').hide().text('');
+            $('#match_level_problem').parents('.grade-list').find('span.tit').hide().text('');
+            $('#match_grade_service').parents('.grade-list').find('span.tit').hide().text('');
+        
+        $.ajax({
+            type: 'post',
+            url: '{/get_url rule="/index/AddGrade/"/}',
+            data: $('#form1').serialize(),//只要将表单序列化就可以了
+            async: false,//false-同步请求
+            dataType: 'json',
+            success: function (data) {
+                if (data.status) {
+                    $.anchorMsg(data.msg, {icon: 'success'});
+                    setTimeout(function () {
+                        parent.location.reload();
+                        window.parent.Grade.hide();
+
+                    }, 1000);
+                } else {
+                    //提示错误
+                    if (data.isNeedLogin) {
+                        $.anchorMsg('离开太久了,请重新登录!', {icon: 'fail'});
+                    } else {
+                        $.anchorMsg(data.msg, {icon: 'fail'});
+                    }
+                }
+
+
+            },
+            error: function (request) {
+                $.anchorMsg("数据请求失败.请稍后重试", {icon: 'fail'});
+                re = false;
+            }
+        });
+
+    });
+   parent.$('.grade_dialog a.ui_dialog_close').click(function(){
+        parent.$('.hb_ui_ui-mask').hide();
+    });
+    $('.consBtn').click(function () {
+    	parent.$('.hb_ui_ui-mask').hide();
+        parent.Grade.hide();
+        
+        return false;
+    })
+</script>
+</body>
+</html>

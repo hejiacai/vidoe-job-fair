@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="Keywords" content="" />
+    <meta name="Description" content="" />
+    <style>
+        .cngPassBox{width:335px;font-size:12px;}
+        .cngPassBox .formMod .l{width:80px;}
+        .cngPassBox .formMod .r{width:230px;zoom:1;}
+        .cngPassBox .formBtn{margin:10px 0 0 110px;zoom:1;}
+        .cngPassBox .formBtn a{margin:0 10px 0 0;zoom:1;}
+    </style>
+</head>
+<body>
+<form id="formModPass" action="{/get_url rule="/spreadjob/modBidDo"/}" method="post">
+<input type="hidden" name="company_id" value="{/$company_id/}">
+<input type="hidden" name="job_id" value="{/$job_id/}">
+<input type="hidden" name="type" value="{/$type/}">
+<div class="dgBox cngPassBox">
+    <div class="cngIdForm">
+
+        <div class="formMod">
+            <div class="l">{/if $type=='bid'/}出价: {/else/}预算:{//if/}<i>&nbsp;</i></div>
+            <div class="r">
+            	<span class="formText">
+                    <input type="text" id="txtBid" name="txtBid" style="width:158px;display: block" {/if $type=='bid'/} placeholder="最低出价1元" {//if/} class="text" />
+                    {/if $type=='bid'/} <b class="gray gray_small" style="padding-top: 5px;display: block">{/if $avgbid > 0/}平均出价：{/$avgbid/}
+                        元，{//if/}首屏展示最低价{/$first_screen_bid/}元</b>{//if/}
+                </span>
+                <span class="tipPos">
+                    <span class="tipLay">
+                    </span>
+                </span>
+            </div>
+            <div class="clear"></div>
+        </div>
+
+
+        <div class="formBtn"><a href="javascript:void(0)" id="btnSure" class="btn1 btnsF14">确定</a><a href="javascript:void(0)" id="btnCancel" class="btn3 btnsF14">取消</a></div>
+    </div>
+</div>
+</form>
+<script type="text/javascript">
+    var spread_source = "{/$source/}";
+    $.validator.addMethod("inputRegValiPwd", function(value, element) {
+        var txtBid = $('#txtBid').val();
+        var txt_red =/^[1-9]\d*$/;
+        if(!txt_red.test(txtBid)){
+            errorMsg = "请输入正整数<span class='tipArr'></span>";
+            return false;
+        }
+        return true;
+    }, function() { return errorMsg; });
+
+    var formPassValid=$('#formModPass').validate({
+        rules:{
+            txtBid:{required:true,rangelength: [1, 18],inputRegValiPwd:true},
+        },
+        messages:
+        {
+            txtBid:{required:'请输入出价<span class="tipArr"></span>',rangelength: '正整数<span class="tipArr"></span>'},
+        },
+        errorClasses:{
+            txtBid:{required: 'tipLayErr tipw100',rangelength: 'tipLayErr tipw100',inputRegValiPwd:'tipLayErr tipw220'},
+        },
+        tipClasses:{
+            txtBid:'tipLayTxt tipw100',
+        },
+        tips: {
+            txtBid:'正整数<span class="tipArr"></span>',
+        },
+        errorElement: 'span',
+        errorPlacement: function(error, element)
+        {
+            element.parent().next().find('.tipLay').append(error);
+        },
+        success: function(label)
+        {
+            label.text(" ");
+            is_submit = false;
+        }
+    });
+    var is_submit = false;
+    var modPass={
+        intervalPwd: null,
+        init:function(){
+            modPass.submit();
+            modPass.cancel();
+        },
+        submit:function(){
+            $('#btnSure').click(function(){
+                if(is_submit == false){
+                    is_submit = true;
+                    $('#btnSure').submitForm({beforeSubmit: $.proxy(formPassValid.form,formPassValid), success: modPass.successCallback, clearForm: false });
+                    return false;
+                }
+
+            });
+        },
+        cancel:function(){
+            $('#btnCancel').click(function(){
+                $(this).closeDialog();
+            });
+        },
+
+
+        successCallback:function(json){
+            is_submit = false;
+            if (json && json.error){
+                $.message(json.error,{ icon: 'warning' });
+                return;
+            }
+            if(spread_source == 'job'){
+						{/if $type=='bid'/}
+						$('.submaktTab01').text($('#txtBid').val());
+						{/else/}
+                        $('.submaktTab02').text($('#txtBid').val());
+                {//if/}
+            }
+						
+						$('.marktOppen').attr('data-spread',json.spread_id);
+						
+            $('#btnSure').closeDialog();
+            $.anchorMsg(json.msg);
+						
+            if(spread_source != 'job'){
+                setTimeout("window.location.reload()",'2000');
+            }
+
+//             setTimeout(function(){
+//             	window.history.go(0)
+//             },2000)
+//            history.go(0);
+        }
+    }
+    modPass.init();
+</script>
+</body>
+</html>

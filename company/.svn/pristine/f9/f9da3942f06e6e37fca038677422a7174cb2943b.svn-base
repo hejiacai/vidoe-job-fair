@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>汇博人才网_招聘中心_简历搜索</title>
+<!–[if lt IE9]> 
+<script src='{/version file="html5.js"/}'></script>  
+<![endif]–>
+<link rel="stylesheet" type="text/css" href="{/version file="v2-reset.css"/}" />
+<link rel="stylesheet" type="text/css" href="{/version file="v2-widge.css"/}" />
+<link rel="stylesheet" type="text/css" href='{/version file="base.css"/}' />
+<link rel="stylesheet" type="text/css" href='{/version file="comback.css"/}' />
+<link rel="stylesheet" type="text/css" href='{/version file="prSearch.css"/}' />
+<script type="text/javascript" src="{/version file='version.js'/}"></script>
+<script type="text/javascript">
+window.CONFIG = {
+    HOST: '{/$siteurl.style/}',
+    COMBOPATH: '/js/v2/'
+}
+</script>
+<script type="text/javascript" language="javascript" src="{/version file="jquery-1.8.3.min.js"/}"></script>
+<script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+<script type="text/javascript" src="{/version file='global.js'/}"></script>
+<script type="text/javascript">
+    hbjs.loadJS('{/$siteurl.style/}/js/v2/cqjob/common.js');
+</script>
+<style type="text/css">
+.prSchTx {padding: 8px 0px}
+
+.prSchExpR{padding-left:275px}
+.prSchTabx dl {width: 552px}
+.prSchTabx .pBoxT {width: 347px;}
+.prSchTabx {color: #999;}
+.prSchTabx span.station{color: #333}
+.prSchTabx p{width: 450px; line-height: 24px;}
+.prSchTabx .pBoxT p {width: 347px;padding-bottom: 4px;}
+.prSchTabx p b, .prSchTabx .pBoxT p b {padding: 0; font-weight: bold; color: #333}
+.prSchTabx .pBoxT .prTabx3{color: #999}
+.prSchListBm.detail .pslBm4, #resumeDetailList .prSchTx .pslBm4 {width: 140px}
+.prSchListBm.detail .pslBm3, #resumeDetailList .prSchTx .pslBm3 {width: 250px}
+.prSchListBm.detail .pslBm6, #resumeDetailList .prSchTx .pslBm6 {width: 120px}
+
+#btnSeekerSave, #btnSeekerCancel {margin: 10px 0 0 40px;width: 50px;text-align: center;}
+
+.prSchList div div a.prSchIcon1 em {background:url({/$siteurl.style/}/img/company/detail.png) 0px center no-repeat; display: inline-block; width:19px; height: 20px; margin-top: -2px;}
+.prSchList div div a.prSchIcon1cut em, .prSchList div div a.prSchIcon1:hover em {background:url({/$siteurl.style/}/img/company/detail-clicked.png) 0px center no-repeat; display: inline-block; width:19px; height: 20px; margin-top: -2px;}
+.prSchList div div a.prSchIcon2 em {background:url({/$siteurl.style/}/img/company/simple.png) 0px center no-repeat; display: inline-block; width:19px; height: 20px; margin-top: -2px;}
+.prSchList div div a.prSchIcon2cut em, .prSchList div div a.prSchIcon2:hover em {background:url({/$siteurl.style/}/img/company/simple-clicked.png) 0px center no-repeat; display: inline-block; width:19px; height: 20px; margin-top: -2px;}
+
+.expTxt {position:relative; z-index:1; _margin:6px 0 0 5px;}
+.expTxt i.hbFntWes{color:#3d84b8; margin-left: 10px; font-size: 17px; position:absolute; right: -16px;}
+.expTxt .expBox {position:absolute; top:34px; left:-181px; background:#fffbe8;width: 386px; padding: 10px;} 
+.expTxt .expBox em { background: url({/$siteurl.style/}/img/common/common.gif) no-repeat -174px 0;width: 20px;height: 10px;display: inline-block;top: -10px;right: 206px;position: absolute;}
+.expTxt .expBox p {line-height:20px; zoom:1;}
+.inputTextBox {width: auto}
+span.divided {color: #d9d9d9; font-family: "宋体"; font-weight: normal; margin:0 4px;}
+
+#resumePart {padding: 20px 0px;}
+#resumePart .prSchTx p {padding: 0px 20px;}
+#resumePart .prSchTabx .prSchName {line-height: 18px;}
+#resumePart .prSchTabx .prSchName .prSchNametxt {font-weight: bold;margin-right: 10px;color:#00a6ae;}
+#resumePart .prSchTabx .prSchSchool {color: #333;padding: 5px 0px 4px 0;line-height: 14px;font-size: 13px;}
+
+.prSchLeftContent {background-color: #f7f7f7; border-radius: 2px;width: 1000px;margin: 0 auto;background-color: #f0f7fd;text-align: left;}
+.prSchLeftContent p span {color: #4477a4;font-weight: bold;margin-right: 20px;}
+.prSchLeftContent p a {font-weight: normal;color: #333;padding: 2px 10px;}
+.prSchLeftContent p a.cur {color: #fff;background-color: #00c0c7;border-radius: 3px;}
+.prSchLeft {padding: 10px;}
+.prSchBg {margin-top: 0px;}
+
+</style>
+</head> 
+<body>
+{/include file="new_header.html"/}
+<div>
+	<div class="prSchLeftContent">
+		<p style="padding:10px 21px;"><span>候选人适合职位</span><a class="{/if empty($jobsort)/}cur{//if/}" href="{/get_url rule="/nominate/index/" data="uniqid={/$uniqid/}"/}">全部</a>
+			{/foreach $nominate_jobsorts as $_jobsort/}
+			<a href="{/get_url rule="/nominate/index/" data="jobsort={/$_jobsort['jobsort']/}&uniqid={/$uniqid/}"/}" class="{/if $jobsort == $_jobsort['jobsort']/}cur{//if/}">{/$_jobsort['station']/}</a>
+			{//foreach/}
+		</p>
+	</div>
+	<div class="prSchBg" id="resumePart">
+		<div class="prSchTabBg" id="resumeDetailList">
+			{/foreach (array)$resumes as $resume/}
+			<div class='prSchTab' data-url="{/get_url rule="/resume/resumeshow/" data="type=network&src=search"/}-resumeid-{/$resume['resume_id']/}">
+		        <div class='prSchTx clearfix'>
+		           <p><b style="color:#666;font-weight: normal;font-size: 13px;">可能适合的职位：</b><b>{/$resume['nominate_station']/}</b></p>
+		        </div>
+		        <a target='_blank' href="{/get_url rule="/resume/resumeshow/" data="type=network&src=search"/}-resumeid-{/$resume['resume_id']/}">
+			        <div class='prSchTabx'>
+			            <dl>
+			                <dt>
+			                	<img src="{/$resume['small_photo']/}" width='88' height='88'>
+			                </dt>
+			                <dd>
+			                	<p class="prSchName">
+			                		<span class="prSchNametxt">{/$resume['user_name']/}</span>
+			                		<span style="font-size:13px;">{/$resume['sex_text']/} / {/$resume['start_work']/} / {/$resume['age']/} / {/$resume['cur_area_full']/}</span>
+			                	</p>
+			                	<p class="prSchSchool">{/if $resume['school']/}{/$resume['school']/}<span class='divided'>|</span>{//if/}{/if $resume['major_desc']/}{/$resume['major_desc']/}<span class='divided'>|</span>{//if/}{/$resume['degree_text']/}
+			                	</p>
+			                	{/foreach $resume['worklist'] as $work/}
+			                	<p>
+			                		<span class='station'>{/$work['station']/}</span>
+									<span class='divided'>|</span><em>{/$work['company_name']/}</em><span class='divided'>|</span><em>{/$work['start_time']/}-{/$work['end_time']/}({/$work['last']/})</em>
+								</p>
+								{//foreach/}
+							</dd>
+			            </dl>	
+			            <div class='pBoxT'>
+			                <p class='prTabx1'>求职意向：<span>{/$resume['station']/}</span></p>
+			                <p class='prTabx1'>求职状态：<span>{/$resume['job_state']/}{/if $resume['accession']/}，{/$resume['accession']/}{//if/}</span></p>
+			                <p class='prTabx3'>{/if $resume['appraise']/}自我评价：{/$resume['appraise']/}{//if/}</p>
+			            </div>
+			            <div class='clear'></div>
+			        </div>
+		    	</a>
+		    </div>
+		    {//foreach/}
+		</div>
+		<div style="padding-bottom:10px;">
+	    	{/$pager/}
+		</div>
+	</div>
+</div>
+{/include file="msgpop.html"/}
+{/include file="footer.html"/}
+</body>

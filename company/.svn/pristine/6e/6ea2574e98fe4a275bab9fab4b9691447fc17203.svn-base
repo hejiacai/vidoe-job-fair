@@ -1,0 +1,11 @@
+{/foreach $list as $key => $val/}
+<div class="requestSharingList">
+	<span class="sharingTit01">{/$val['title']/}</span>
+	<span class="sharingTit02">急需人才：{/$val['worker_require']/}</span>
+	<span class="sharingTit03">需要时长：{/$val['worker_day']/}天</span>
+	<a href='{/get_url rule="/workershar/SharInfo" data="id={/$val['id']/}"/}' class="sharingTit04" target="_blank">查看详情</a>
+	<div class="sharingTit05">
+		<img src="{/$val['logo_path']/}" >{/$val['company_name']/}
+	</div>
+</div>
+{//foreach/}

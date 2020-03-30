@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+	<style>
+	/*延长有效期*/
+	.length-time{padding:20px}
+	.length-time .tit{font-size:14px}
+	.length-time .tit span{color:#3F74C2}
+	.length-time li{margin-top: 12px;color:#666}
+	.length-time li strong{color:#FF6600;margin:0 3px}
+	.length-time li input{vertical-align:middle}	
+	</style>
+</head>
+<body>
+
+<form id="formjobdelay" method="post" action="{/get_url rule='/job/DelayMultiDo/'/}" style="width:400px">
+<!--延长有效期-->
+{/foreach $jobs as $job/}
+	<input type="hidden" name="hddjobID[]" value="{/$job['job_id']/}">
+ {//foreach/}
+	<div class="dialogCont length-time" style="padding:30px">
+		<p class="tit" style="margin-bottom:15px">需要将<span style="margin:0 2px">{/$showStation/}</span>的有效期延长多少天？</p>
+		<p class="clearfix formText">
+			<span style="float:left">延长<input type="text" name="txtValidDays" id="txtValidDays" class="text" style="width:50px;margin:0 3px" />天</span>
+			<span class="tipPos">
+		        <span class="tipLay" style="top:-1px">
+		        </span>
+		    </span>
+		</p>
+	</div>
+	<div class="dialogFooter">
+		<a class="btn1 btnsF12" href="javascript:void(0);"  id="btnDelaySave">确定</a><a class="btn3 btnsF12" href="javascript:void(0);" id="btnDelayCancel">取消</a>
+	</div>
+<!--/-->
+</form>
+<script>
+var jobDelayValid;
+var jobDelayMulti = {
+		initialize:function(){
+			$('#btnDelaySave').click(function(){
+				$(this).submitForm({beforeSubmit: $.proxy(jobDelayValid.form, jobDelayValid),success: jobDelayMulti.successCallBack, clearForm: false});
+			     return false;
+				
+			});
+			$('#btnDelayCancel').click(function(){
+				
+				 $(this).closeDialog();
+			});
+			//客户端验证表单数据
+			jobDelayValid = $("#formjobdelay").validate({
+			    
+			    rules: {
+					txtValidDays: { required: true, number: true, min: 1, max: 60, digits: true}
+			    },
+			    messages:{
+			    	txtValidDays: { required: '请输入有效期<span class="tipArr"></span>', number: '请输入1-60之间的整数<span class="tipArr"></span>', min: '请输入1-60之间的整数<span class="tipArr"></span>', max: '请输入1-60之间的整数<span class="tipArr"></span>', digits: '请输入1-60之间的整数<span class="tipArr"></span>'}
+				},
+			    errorElement: 'span',
+			    errorClasses: {
+			        txtValidDays: { required: 'tipLayErr tipw180', number: 'tipLayErr tipw180', min: 'tipLayErr tipw180', max: 'tipLayErr tipw180', digits: 'tipLayErr tipw180'}
+			    },
+			    tipClasses:{
+			    	txtStation: 'tipLayTxt tipw150'
+			    },
+			    errorPlacement: function(error, element) {
+			    	element.parent().nextAll().find('.tipLay').append(error);
+			    },
+			    success: function(label) {
+			    	label.text(" ");
+			    }
+			});
+		},
+		successCallBack:function(result){
+			if(result.success) {
+                $.anchorMsg("延期成功", { onclose: function() {
+                	{/if !base_lib_BaseUtils::nullOrEmpty($theObj) && !base_lib_BaseUtils::nullOrEmpty($theCallback)/}{/$theObj/}.{/$theCallback/}(result.job_id, result.end_time);{//if/}
+                    $('#btnDelaySave').closeDialog();
+                }});
+			}else{
+				$.anchorMsg(result.error);
+			}
+		}
+	};
+	jobDelayMulti.initialize();
+</script>
+</body>
+</html>

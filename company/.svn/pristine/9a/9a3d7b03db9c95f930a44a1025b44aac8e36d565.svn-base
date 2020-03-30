@@ -1,0 +1,982 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+<title>汇博网_招聘中心_我的账户</title>
+<!–[if lt IE9]> 
+<script src="{/version file='html5.js'/}"></script>  
+<![endif]–>
+<link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='comback.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='icons.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='account.css'/}" />
+	<script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.js'/}"></script>
+<!--
+<script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.min.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='common.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='jquery.form.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='dialog.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='ui_validate.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='ui_inputFocus.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='ui_hovchange.js'/}"></script>-->
+
+<script type="text/javascript" src="{/version file='version.js'/}"></script>
+<script type="text/javascript">
+window.CONFIG = {
+	HOST: '{/$siteurl.style/}',
+	COMBOPATH: '/js/v2/'
+}
+</script>
+<script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+<script type="text/javascript" src="{/version file='global.js'/}"></script>
+
+<style type="text/css">
+.part{border:1px solid #dadada; border-radius:5px;padding:15px;margin:0 0 20px;zoom:1;}
+.part dl{overflow:hidden;}
+.part dl dt{float:left;display:inline;width:175px; text-align:center;}
+.part dl dd{float:left;display:inline;width:745px;margin:5px 0 0;}
+.part dl dt .ico{height:80px;width:100px;margin:0 auto;background:url({/$siteurl.style/}/img/c/c.gif) no-repeat;}
+.part dl dt p{height:22px;line-height:22px;margin:5px 0 0;font-size:16px;}
+.part dl dd p{line-height:30px;}
+.part dl dd p a.btn3{margin:0 10px 0 0;}
+
+.part1 dl dt .ico{background-position:0 0;}
+.part2 dl dt .ico{background-position:-100px 0;}
+.part3 dl dt .ico{background-position:-200px 0;}
+.part4 dl dt .ico{background-position:-300px 0;}
+
+.part1 p a.lnk{margin:0 10px; }
+
+.part2 p.tit{height:45px;}
+.part2 p.tit i.hbFntWes{float:left;display:inline;margin:0 5px 0 0;font-size:45px;}
+.part2 p.tit span{float:left;font-size:12px;margin:8px 0 0 0;}
+.part2 p.tit span em{font-weight:bold;font-size:16px;line-height:28px;margin:0 0 0 5px;}
+.part2 p span.line{color:#cecece;margin:0 10px;}
+.part2 p a.lnk{margin:0 10px;}
+.part2 div.tip{line-height:30px;}
+.part2 div.tip span.lst{float:left;display:inline;padding:0 10px 0 0;border-right:1px solid #ccc;margin-right:10px;height:24px;line-height:24px;}
+.part2 div.tip span.last{border:0;}
+.part2 div.tip .tipLay{top:-36px;left:-196px;}
+.part2 div.tip .tipLayTxt{width:350px;font-size:12px;background:#fffce3;border:1px solid #fad5a8;}
+.part2 div.tip .tipLay .tipArr{background:url({/$siteurl.style/}/img/common/contrl.gif) no-repeat -8px 0;width:8px;height:5px;top:auto;bottom:-4px;left:115px; z-index:4}
+
+.part3 p.tit{font-weight:bold;}
+.part3 p b{float:left;display:inline;height:30px;line-height:30px;font-weight:normal;}
+.part3 p .bar{margin:7px 0 0;display:inline-block;}
+.part3 p a{margin:0 10px 0;}
+
+.part4 p.tit{height:45px;}
+.part4 p.tit i.hbFntWes{float:left;display:inline;margin:0 5px 0 0;font-size:45px;}
+.part4 p.tit span{float:left;display:inline;font-weight:bold;font-size:16px;line-height:28px;margin:8px 0 0 0;}
+.part4 p.tit span em{}
+.part4 dl dd.part4AttIng{margin:40px 0 0;}
+.part4 dl dd.part4AttS{margin:33px 0 0;}
+.part4 dl dd.part4AttS span a.btn3{margin:0 0 0 10px;font-weight:normal;}
+.part4 dl dd.part4AttErr{margin:17px 0 0;}
+.part4 dl dd.part4AttErr a.btn3{margin:0 0 0 10px;font-weight:normal;}
+.part4 dl dd.part4AttNo{margin:17px 0 0;}
+.part4 dl dd.part4AttNo a.btn3{margin:0 0 0 10px;font-weight:normal;}
+
+.part2 p.notmember {margin-top: 20px;}
+
+.firmMemberPge a{ float:left; display:block;width:160px; height:40px; line-height:40px; color:#fff; font-size:16px; background:#21a3df url({/$siteurl.style/}/img/c/new_index/firmicon16.png) 34px center no-repeat; border-radius:4px; text-indent:4.1em;#text-indent:4.8em;}
+.firmMemberPge img{ float:left; display:block; margin:7px 20px 0 0;}
+.firmMemberPge a:hover{ background:#107cae url({/$siteurl.style/}/img/c/new_index/firmicon16.png) 34px center no-repeat;}
+
+.playm{display: inline-block;width:72px;height: 30px;background: url({/$siteurl.style/}/img/c/icon.jpg) no-repeat;text-indent: -999px;overflow: hidden;vertical-align: middle;margin-left: 15px}
+
+.adduser-dialog span.formText{display:inline-block;}
+.adduser-dialog .updata-pwd-alert .input{position:static}
+.adduser-dialog .updata-pwd-alert .error-msg{position:static}
+
+
+.flowAPP-dialog .ui_dialog_container{overflow-y: scroll;height: 550px;}
+.manage-title{position: relative;}
+.morePerson{position: absolute;  right: 0;  font-size: 12px;  color: #999;  top: 116px;}
+
+/*绑定手机号*/
+.boundPhonePop{width:285px; overflow: hidden; padding: 20px; margin: 0 auto; text-align: left;}
+.boundx01,.boundx02{ display: block; padding-bottom: 3px;}
+.boundx01{ line-height: 18px; color: #444;}
+.boundx02{ color: #ff671c;}
+.boundFrom{width:100%; overflow: hidden; padding-top: 15px;}
+.putBound{ display:block; float: left; height: 29px; border: 1px solid #ccc; line-height: 29px; text-indent: 8px;width:282px}
+.noteCodex{width:100%; overflow: hidden; padding-top: 15px;}
+.boundGetCode{ cursor:pointer; display:block; float: right; width:104px; height: 30px; background: #66bce4; color: #fff; text-align: center; line-height: 30px; border-radius: 2px;}
+.noteCodex img{ display: block; float: left; margin-left:15px ; height: 30px;}
+.boundBtn{ display: block;width:282px; height: 32px; text-align: center; line-height: 32px; background: #66bce4; margin-top: 15px; border-radius: 2px; color: #fff;}
+.boundBtn:hover,.boundGetCode:hover{ background: #39ade3; color: #fff;}
+.cutDown,.getPhoneCode_new{ float: left; line-height: 32px; margin-left: 10px;color: #ccc;}
+.getPhoneCode_new{color: #2b6fad; cursor: pointer}
+</style>
+</head>
+<body id="body">
+{/include file="new_header.html" par="企业管理" cur="账号管理"/}
+<div class="content" id="content">
+  <div class="account-management">
+  	<div class="manage-title">
+  		<a id="addbtn" href="javascript:" class="addbtn" style="margin-top: 50px;margin-right:66px;font-size: 14px"><i></i>添加直聘账号</a>
+		<span class="morePerson">多人招聘可使用直聘账号（最多可添加{/$cq_point_sub_account/}个）</span>
+        <!--<form class="form-box" action="{/get_url rule='/account/accountManage'/}" method="post" style="background: #fff"><input type="text" class="text" placeholder="请输入用户名称" name="serach_user_id" id="serach_user_id" value="{/$serach_user_id/}" /><input type="submit" class="butn" value="查询" /></form>-->
+  		<div>
+  			<p style="color:#006699;font-size: 20px">用人部门直聘账号    +     汇博企业App      =     抢人成功！</p>
+  			<p style="font-size: 14px;color:#666;line-height: 26px;margin-top: 10px">
+				1.速度决定入职率，优秀的人才都在抢！<br />
+				2.用人部门负责人登录汇博参与招聘，能大大提高招聘成功率。<br />
+				3.登录汇博企业App，用人部门负责人与求职者直接聊工作，合适就入职。<br />
+				4.每个招聘账号都可单独绑定APP，及时收到简历提醒，第一时间处理回复。
+			</p>
+  		</div>
+  	</div>
+  	<div class="manage-content">
+  		<table id="manage-content">
+  			<tr>
+  				<th style="text-align: left;width:85px">用户名</th>
+                <th>微信绑定</th>
+                <th>APP绑定</th>
+  				<th>头像</th>
+  				<th style="width:80px;padding-left:2px">姓名</th>
+  				<th style="width:90px;padding-left:30px">职位/身份</th>
+  				<th style="width:120px">联系方式</th>
+  				<th  style="width:80px">最后登录时间</th>
+  				<th style="text-align:left;width:160px">操作</th>
+  			</tr>
+            {/foreach $account_list as $key=>$v/}
+  			<tr>
+  				<td style="text-align:left">{/$v['user_id']/}
+                    {/if $key==0/}
+                        <p style="color:#ed6800;font-size: 11px">管理员账号</p>
+                    {/else/}
+                        <p style="color:#2b6fad;font-size: 11px">普通账号
+                        {/if $v['forbid_state'] eq 1/}
+                        <span style="color: #dd100d; margin: 0px 5px;">(已禁用)</span><a href="javascript:;" style="background: #4bb6e7; color: #fff; display: inline-block; border-radius: 2px; padding: 2px 9px;" class="freeForbid" data-user-id="{/$v['user_id']/}">解禁</a>
+                        {//if/}
+                        </p>
+                    {//if/}
+                </td>
+                <td>
+                    {/if $v['bind_weixin']/}<a href='javascript:;' class='unbindWeixin' data-value='{/$v["open_id"]/}'><i style="background:url({/$siteurl.style/}/img/company/company_icon_v2_261.jpg) no-repeat scroll 0 0;display: block;height: 16px;margin: 0 auto 5px;overflow: hidden;vertical-align: middle;width: 19px;"></i>解绑</a>
+					{/else/}<span style="color:#999"><a href="{/get_url rule='/account/weixin/'/}" target="_blank"><i style="background:url({/$siteurl.style/}/img/company/company_icon_v2_26.jpg) 0 0;display: block;height: 16px;margin: 0 auto 5px;overflow: hidden;vertical-align: middle;width: 18px;"></i>点击绑定</a></span>{//if/}
+                </td>
+                <td>
+                    {/if !empty($related_list[$v['account_id']])/}<a href='javascript:;' data-account='{/$v["account_id"]/}' class='unRelatedPerson' data-value='{/$related_list[$v["account_id"]]["person_id"]/}'><i style="background:url({/$siteurl.style/}/img/company/company_icon_v2.jpg) no-repeat scroll 0 -82px;display: block;height: 16px;margin: 0 auto 5px;overflow: hidden;vertical-align: middle;width: 19px;"></i>解绑</a>
+					{/else/}<span style="color:#999"><a class="appbind" href="javascript:;" data-id="{/$v['account_id']/}"><i style="background:url({/$siteurl.style/}/img/company/app_v2.jpg) no-repeat 2px 0;display: block;height: 16px;margin: 0 auto 5px;overflow: hidden;vertical-align: middle;width: 19px;"></i>点击绑定</a></span>{//if/}
+                </td>
+                <td>{/if $v['has_head_photo']/}<img width="40px" height="40px" style="border-radius:40px" src="{/$siteurl.style/}{/$v['head_photo']/}" />{/else/}<span class="header-img">{/$v['head_photo']/}</span>{//if/}</td>
+  				<td style="padding-left:2px">{/$v['user_name']/}</td>
+  				<td style="padding-left:30px;color:#999">{/$v['station']/}</td>
+  				<td>{/$v['mobile_phone']/}<p>{/$v['link_tel']/}</p></td>
+  				<td>{/$v['last_login_time']/}</td>
+  				<td data-id="{/$v['account_id']/}" style="text-align:left">
+                    <a class="edit" href="{/get_url rule='/account/editAccount/' data="account_id={/$v['account_id']/}"/}">编辑</a>
+                    {/if !$v['is_main']/}
+                    <a class="stop" href="javascript:">{/if $v['state']/}停用{/else/}启用{//if/}</a>
+                    <a class="delete" href="javascript:">删除</a>
+                    {//if/}
+                    <a class="log" href="{/get_url rule='/account/AccountLogList' data="account_id={/$v['account_id']/}"/}">查看日志</a>
+                </td>
+  			</tr>
+            {//foreach/}
+  		</table>
+  	</div>
+  </div>'
+</div>
+<div id="childUserFormDiv" style="display:none;">
+<form id="childUserForm">
+   <table class="updata-pwd-alert">
+    <tbody>
+     <tr>
+      <th><span>用户名</span></th>
+      <td>
+       <div class="input">
+        <span class="formText" style="float:none"><input id="user_id" type="text" name="user_id" placeholder="建议使用公司名+岗位名的首字母"/></span>
+        <p class="error-msg" data-for="user_id"></p>
+       </div></td>
+     </tr>
+     <tr class="borderbottom">
+      <th><span>密　码</span></th>
+      <td>
+       <div class="input">
+        <span class="formText" style="float:none"><input type="password" placeholder="请输入密码6-18位英文和数字" name="password" /></span>
+        <p class="error-msg" data-for="password"></p>
+       </div></td>
+     </tr>
+
+     <tr>
+      <th><span>姓　名</span></th>
+      <td>
+       <div class="input">
+        <span class="formText" style="float:none"><input type="text" name="user_name" placeholder="2-6个汉字"/></span>
+        <p class="error-msg" data-for="user_name"></p>
+       </div></td>
+     </tr>
+     <tr>
+      <th><span>职　位</span></th>
+      <td>
+       <div class="input">
+        <span class="formText" style="float:none"><input type="text" name="station" placeholder="例如：技术部经理/策划部主管/人事总监/销售经理"/></span>
+        <p class="error-msg" data-for="station"></p>
+
+       </div></td>
+     </tr>
+     <tr>
+      <th><span>手机号</span></th>
+      <td>
+       <div class="input">
+		   <input type="hidden" id="is_phoneCode" name="is_phoneCode" value="0">
+        <span class="formText" style="float:none"><input type="text" name="mobile_phone"  id="mobilephone"/></span>
+        <p class="error-msg" data-for="mobile_phone"></p>
+		   <font color="red">下载企业APP，使用该手机号登录即可招聘</font>
+       </div></td>
+     </tr>
+	 <tr class="PhoneCode" style="display: none">
+		 <th><span>验证码</span></th>
+		 <td>
+			 <div class="input" style="overflow:hidden;">
+				 <input type="text" name="chatCodex" id="chatCodex" value="" style="width: 100px;float: left" placeholder="请输入验证码" />
+				 <span class="getPhoneCode_new" style="display: block;">获取验证码</span>
+				 <span class="cutDown" style="display:none"><i>60</i>秒后重新获取</span>
+			 </div>
+		 </td>
+	 </tr>
+     <tr class="borderbottom">
+      <th><span>电　话</span></th>
+      <td class="tele">
+       <div class="input">
+        <div>
+         <span class="formText"><input type="text" placeholder="区号" style="width:80px" name="link_tel1" />&nbsp;~&nbsp;</span>
+         <span class="formText"><input type="text" placeholder="电话号码" style="width:122px" name="link_tel2" />&nbsp;~&nbsp;</span>
+         <span class="formText"><input type="text" placeholder="分机号" style="width:80px" name="link_tel3" /></span>
+        </div>
+        <p style="clear:both" class="error-msg" data-for="tel"></p>
+       </div></td>
+     </tr>
+     <tr>
+        <th>&nbsp;&nbsp;</th>
+            <td>
+                <div class="button">
+                    <a href="javascript:void(0);" class="blue-butn">保存</a>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+  </form>
+</div>
+{/include file="./footer.html"/}
+<section class="floatRT"><a href="//www.huibo.com/about/message" target="_blank" class="serviceLink">我有问题要反馈</a><b></b></section>
+<!--<script language="javascript" type="text/javascript" src="http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js&ip={/$ip/}"></script>
+-->
+<script type="text/javascript">
+var release_point_sub_account = '{/$release_point_sub_account/}';
+
+hbjs.use('@validator, @fileUploader, @confirmBox, @hbCommon', function(m){
+
+	var validator = m['widge.validator.form'];
+	var fileUploader = m['widge.fileUploader'];
+	var ConfirmBox = m['widge.overlay.confirmBox'];
+	var Dialog = m['widge.overlay.hbDialog'];
+	var $ = m['product.hbCommon'];
+	var fontSize = 18,
+			pWidth = 70;
+	
+    $(".freeForbid").on('click',function(){
+        var login_id = $(this).attr("data-user-id");
+        ConfirmBox.confirm("确定要解禁该帐号吗？", "提示", function() {
+            $.post('{/get_url rule="/account/FreeForbid/"/}',{"login_id":login_id},function(json){
+                if(json.isNeedLogin){
+                    window.location.reload();
+                    return;
+                }
+				if(json && json.error)
+				{
+					alert(json.error);
+					return false;
+				}
+				alert("解除禁用成功！");
+				window.location.href=window.location.href;
+			},"json");
+        }, {
+            width : 300,
+            close : 'x'
+        });
+    });
+	$('#manage-content').on('click', 'a', function(e){
+		var target = $(e.currentTarget),
+			id = target.parent().attr('data-id');
+			
+		if(target.hasClass('stop')){
+			$.ajax({
+				url: "{/get_url rule='/account/SetAccountState/'/}",
+				type: "post",
+				dataType: "json",
+				data: {account_id:id},
+				success:function(json){
+                    if(json.isNeedLogin){
+                        window.location.reload();
+                        return;
+                    }
+					if(json.status){
+						window.location.reload();
+						return;
+					}
+					alert(json.msg);
+				}
+			});
+		} else if(target.hasClass('delete')){
+            ConfirmBox.confirm("确定要删除该帐号吗？", "提示", function() {
+                $.ajax({
+                    url:"{/get_url rule='/account/DelAccount/'/}",
+                    type:"post",
+                    dataType: "json",
+                    data: {account_id:id},
+                    success:function(json){
+                        if(json.isNeedLogin){
+                            window.location.reload();
+                            return;
+                        }
+                        if(json.status){
+                            window.location.reload();
+                            return;
+                        }
+                        alert(json.msg);
+                    }
+                });
+            }, {
+                width : 300,
+                close : 'x'
+            });
+		}
+	});
+		
+//	var childUserHTML = [
+
+//        '<p style="padding-bottom: 15px"><font color="#dc143c">温馨提示：姓名、职位、手机号（或办公电话）、头像等信息随发布职位信息展示至求职端，请真实填写。</font></p>',
+//		'<style type="text/css">',
+//		'.adduser-dialog{text-align:left}',
+//		'.adduser-dialog .updata-pwd-alert td #fileBtn input{width:100%;}',
+//		'</style>',
+//
+//		'<form id="childUserForm">',
+//		'<table class="updata-pwd-alert">',
+//		'<tr><th>用户名</th><td><div class="input">',
+//		'<span class="formText" style="float:none"><input id="user_id" type="text" name="user_id" /></span>',
+//		'<p class="error-msg" data-for="user_id">用户名建议使用公司名+岗位名的首字母。例如『汇博网技术总监』-- hbrcjszj</p>',
+//		'</div></td></tr>',
+//		'<tr><th>密码</th><td><div class="input">',
+//		'<span class="formText" style="float:none"><input type="password" placeholder="请输入密码6-18位英文和数字" name="password" /></span>',
+//		'<p class="error-msg" data-for="password"></p>',
+//		'</div></td></tr>',
+//		'<tr><th>姓名</th><td><div class="input">',
+//		'<span class="formText" style="float:none"><input type="text" name="user_name" /></span>',
+//		'<p class="error-msg" data-for="user_name"></p>',
+//		'</div></td></tr>',
+//		'<tr><th style="width:62px">职位/身份</th><td><div class="input">',
+//		'<span class="formText" style="float:none"><input type="text" name="station" /></span>',
+//		'<p class="error-msg" data-for="station"></p>',
+//		'<p style="color:#666;font-size:12px;margin-top:5px">例如：技术部经理/策划部主管/人事总监/销售经理</p>',
+//		'</div></td></tr>',
+//		'<tr><th>手机号</th><td><div class="input">',
+//		'<span class="formText" style="float:none"><input type="text" name="mobile_phone" /></span>',
+//		'<p class="error-msg" data-for="mobile_phone"></p>',
+//		'</div></td></tr>',
+//		'<tr><th>办公电话</th><td><div class="input"><div style="height:40px;">',
+//		'<span class="formText"><input type="text" placeholder="区号" style="width:80px" name="link_tel1" />&nbsp;~&nbsp;</span>',
+//		'<span class="formText"><input type="text" placeholder="电话号码" style="width:102px" name="link_tel2" />&nbsp;~&nbsp;</span>',
+//		'<span class="formText"><input type="text" placeholder="分机号" style="width:80px" name="link_tel3" /></span>',
+//		'</div>',
+//		'<p style="clear:both" class="error-msg" data-for="tel"></p>',
+//		'</div></td></tr>',		
+//		'<tr><th>头像</th><td>',
+//		'<input type="hidden" name="head_photo" />',
+//		'<dl class="clearfix head-img" style="display:none;">',
+//		'<dt><img class="head_photo"/></dt>',
+//		'<dd><a href="javascript:void(0);" class="delImg">删除头像</a></dd>',
+//		'</dl>',
+//		'<dl class="head-upload-img">',
+//		'<dt>',
+//		'<label id="fileBtn" style="width:92px;height:30px;background:url(\'{/$siteurl.style/}/img/account/upload-btn.jpg\') no-repeat" for="imageFile"></label>',
+//		'</dt><dd>支持图片格式：jpg png<br />图片大小不超过 1 M</dd></dl>',
+//		'</td></tr>',
+//		'<tr><th>&nbsp;&nbsp;</th>',
+//		'<td><div class="button"><a href="javascript:void(0);" class="blue-butn">保存</a></div></td>',
+//		'</tr></table>',
+//		'</form>'
+//	].join('');
+	
+	var childUserDialog = new Dialog({
+		idName: 'adduser-dialog',
+		title: '添加账号',
+//		content: childUserHTML,
+		content: $("#childUserFormDiv").html(),
+		close: '╳',
+		width: 460
+	});
+	
+	childUserDialog.query('input[type=text], input[type=password]').placeHolder();
+	
+	var avaterFile = new fileUploader({
+		trigger: childUserDialog.query('#fileBtn'),
+		uploadURL: "{/get_url rule='/account/saveAcccountImages/'/}", //上传文件地址
+		//imageURL: 'http://upload.abc.com/CompanyImages/TempTemplateImage/',
+		max: 1,
+		fileExt: '.jpg,.png',
+		param: 'url'
+	});
+	
+	var img_head_photo = childUserDialog.query('.head_photo'),
+		head_photo = childUserDialog.query("input[name=head_photo]"),
+		head_img = childUserDialog.query('.head-img');
+	
+	var loadingDialog,
+		pWidth = 70,
+		fontWidth = 18;
+		
+	avaterFile.on('startUpload', function(e){
+		var msg = '正在上传中..';
+		loadingDialog = ConfirmBox.timeBomb(msg, {
+			name: 'normal',
+			width: pWidth + msg.length * fontWidth,
+			timeout: 0,
+			hasMask: true
+		});
+	});
+	avaterFile.on('progressError', function(e){
+        var json = e.data;
+		loadingDialog && loadingDialog.hide();
+		alert(json.errorMsg);
+        return;
+	});
+	avaterFile.on('progresed', function(e){
+        var json = e.data;
+        var path = json.url;
+        var name = json.name;
+        img_head_photo.attr('src', path);
+        head_photo.val(name);
+        head_img.show();
+        $('.head-upload-img').hide();
+		loadingDialog && loadingDialog.hide();
+	});
+	
+	childUserDialog.query('.delImg').click(function(){
+		var imgname = head_photo.val();
+		$.ajax({
+			url:"{/get_url rule='/account/delAcccountImage/'/}",
+			type:"post",
+			dataType: "json",
+			data: {imgname:imgname},
+			success:function(json){
+				if(json != null && json != undefined && json != ''){
+					if(json.status){
+						head_photo.val("");
+						img_head_photo.attr('src', '');
+						head_img.hide();
+                        $('.head-upload-img').show();
+						alert("删除成功");
+						return;
+					}
+				}
+				alert("删除头像失败，请稍后再试");
+			}
+		});
+	});
+	
+	$('#addbtn').on('click', function(){
+		if(release_point_sub_account > 0){
+			childUserDialog.show();
+		}else{
+			$.message("添加失败！直聘账号已达到最大数量。", {title: '系统提示', icon: 'fail'});
+			return;
+		}
+
+	});
+
+	var blindAppHtml =
+		'<style>\n' +
+        '        .app-flow{padding: 34px 0 70px 60px;text-align: left;}\n' +
+        '        .app-flow-tit{color: #444;font-size: 16px;padding-bottom: 20px;}\n' +
+        '        .app-flow-tit span{color: #ff5400;}\n' +
+        '    </style>\n' +
+        '<div class="app-flow">\n' +
+        '    <p class="app-flow-tit">1、添加子账号，如已添加略过此步骤<span>（可直接绑定管理员账号）</span></p>\n' +
+        '    <img src="{/$siteurl.style/}/img/account/flow_01.jpg" alt="" width="178" height="40" style="margin-bottom: 30px;">\n' +
+        '    <p class="app-flow-tit">2、打开app，用<span>汇博求职者账号</span>登陆,没有则右上角注册即可</p>\n' +
+        '    <img src="{/$siteurl.style/}/img/account/flow_02.jpg" alt="" width="810" height="358">\n' +
+        '    <p class="app-flow-tit">3、进入“我的”，点击“请绑定”，输入添加的直聘子账号或企业主账号，即绑定成功！</p>\n' +
+        '    <img src="{/$siteurl.style/}/img/account/flow_03.jpg" alt="" width="810" height="350">\n' +
+        '</div>';
+    var blindAppDialog = new Dialog({
+            idName: 'flowAPP-dialog',
+            title: '绑定app操作流程说明',
+            content: blindAppHtml,
+            close: '╳',
+            width: 900,
+            height:600
+        });
+	var blindAppDialogNew = new Dialog({
+		idName: 'flowAPP-dialog',
+		title: '绑定手机号',
+		content: "",
+		close: '╳',
+		width: 600,
+		initHeight:350
+	});
+    $('.appbind').on('click', function(){
+       /* blindAppDialog.show();*/
+		var account_id = $(this).attr('data-id');
+		blindAppDialogNew.setContent({content:"{/get_url rule='/account/AccountBind/'/}?account_id="+account_id}).show();
+    });
+//    var seed   = "{/$chat_seed/}";
+//    var chatinterval;
+//    var blindAppHtml =  '<div class="boundPhonePop" id="chatBindPhoen">'
+//                       + '<span class="boundx01">绑定手机号后，才能使用聊一聊功能与求职者进行在线沟通。</span>'
+//                        +'<span class="boundx02">注：手机号不会展示给求职者。</span>'
+//                        +'<div class="boundFrom">'
+//                                +'<input type="text" name="boundPhone" id="boundPhone" class="putBound" value="" placeholder="请输入手机号" />'
+//                                +'<div class="noteCodex">'
+//                                    +'<input type="text" name="boundImgCode" id="boundImgCode" class="putBound" style="width:158px" value="" placeholder="图片验证码" />'
+//                                    +'<img id="chatImgCode" src="{/$siteurl.company/}/chat/Verify/seed-'+seed+'">'
+//                                +'</div>'
+//                               +'<div class="noteCodex">'
+//                                    +'<input type="text" name="boundNoteCode" id="boundNoteCode" class="putBound" style="width:158px" value="" placeholder="短信验证码" />'
+//                                    +'<span class="boundGetCode getPhoneCode" >获取验证码</span>'
+//                                    +'<span class="boundGetCode chatloading" style="display:none"><img src="{/$siteurl.style/}/img/common/loading.gif"/>发送中...</span>'
+//                                    +'<span class="boundGetCode cutDown" style="display:none"><i>60</i>秒后重新获</span>'
+//                                +'</div>'
+//                                +'<a href="javascript:void(0);" class="boundBtn bindSubmit">立即绑定</a>'
+//                        +'</div>'
+//		+'</div>';
+//    var chatBindPhond = function(){  //绑定手机
+//         //绑定APP
+//        var bindDialog = new Dialog({
+//                idName: 'bind_dialog',
+//                title: '绑定手机',
+//                content: blindAppHtml,
+//                close: '╳',
+//                width: 370
+//        });
+//        var bindObj = bindDialog.query("#chatBindPhoen");//弹窗 jquey 对象
+//        //图片验证码添加
+//        bindObj.on("click","#chatImgCode",function(){
+//            $(this).attr('src',"{/$siteurl.company/}/chat/verify/?seed="+seed+"&rand="+Math.random());
+//        });
+//        //获取短信验证码
+//        var countdown = function(){
+//            var seconds = bindObj.find('.cutDown i').html();
+//            seconds = parseInt(seconds);
+//            if(seconds>0){
+//                seconds--;
+//                bindObj.find('.cutDown i').html(seconds);
+//            }else{
+//                window.clearInterval(chatinterval);
+//                bindObj.find("#chatImgCode").click();
+//                bindObj.find(".getPhoneCode").show();
+//		bindObj.find(".cutDown").html("<i>60</i>秒后重新获").hide();
+//            }
+//        };
+//        bindObj.on("click",".getPhoneCode",function(){
+//            window.clearInterval(chatinterval);//清除倒计时
+//            bindObj.find(".getPhoneCode").show();
+//            bindObj.find(".cutDown").html("<i>60</i>秒后重新获").hide();
+//            var vild_code = bindObj.find("#boundImgCode").val();
+//            //发送短信
+//           var phone = bindObj.find('#boundPhone').val();
+//            if(phone==''){
+//                $.anchorMsg("请填写手机号码",{ icon: 'warning' });
+//                return;
+//            }
+//            if(vild_code == ""){
+//                $.anchorMsg("请输入图片验证码",{ icon: 'warning' });
+//                return;
+//            }
+//            var pattern = /^[1]\d{10}$/;
+//            if(!pattern.exec(phone)){
+//                    $.anchorMsg("手机号码格式不正确",{ icon: 'warning' });
+//                    return;
+//            }
+//            var data = {phone:phone,seed:seed,vild_code:vild_code};
+//            var sendMsgUrl = "{/$mobile_url/}/chat/sendmobilecode/";
+//            bindObj.find(".getPhoneCode").hide();
+//            bindObj.find(".chatloading").show();
+//            $.getJSON(sendMsgUrl,data,function(result){
+//                bindObj.find(".chatloading").hide();
+//		if(result && result.error){
+//                    bindObj.find("#chatImgCode").click();
+//                    bindObj.find(".getPhoneCode").show();
+//                    $.anchorMsg(result.error,{ icon: 'warning' });
+//                    return;
+//		}
+//                //显示倒计时
+//		bindObj.find(".cutDown").html("<i>60</i>秒后重新获").show();
+//                $.anchorMsg("已发送验证码短信到您的手机");
+//                
+//		bindObj.find("#boundNoteCode").focus();
+//		chatinterval = window.setInterval(countdown,1000);
+//            });
+//        });
+//        
+//        //绑定
+//         bindObj.on("click",".bindSubmit",function(){
+//            var _this = $(this);
+//            if(_this.hasClass("isLock")){
+//                return;
+//            }
+//            //发送短信
+//           var phone = bindObj.find('#boundPhone').val();
+//            console.log(phone);
+//            if(phone == ''){
+//                $.anchorMsg("请填写手机号码",{ icon: 'warning' });
+//                return;
+//            }
+//            var pattern = /^[1]\d{10}$/;
+//            if(!pattern.exec(phone)){
+//                $.anchorMsg("手机号码格式不正确",{ icon: 'warning' });
+//                return;
+//            }
+//            var msg_code = bindObj.find("#boundNoteCode").val();
+//            if(msg_code == ""){
+//                $.anchorMsg("请输入短信验证码",{ icon: 'warning' });
+//                return;
+//            }
+//            
+//            var data = {phone:phone,msg_code:msg_code};
+//            var bindUrl = "{/$mobile_url/}/chat/bindPerson/";
+//
+//            _this.addClass("isLock");
+//            _this.html("绑定中，请稍后...");
+//           
+//            $.getJSON(bindUrl,data,function(result){
+//		_this.removeClass("isLock");
+//                _this.html("立即绑定");
+//                if(result && result.error){
+//                    $.anchorMsg(result.error,{ icon: 'warning' });
+//                    return;
+//		}
+//              //  $.anchorMsg("绑定成功，现在可以随时随地与求职者在线沟通了！");
+//                $.anchorMsg("绑定成功，现在可以随时随地与求职者在线沟通了！",{onclose:function(){
+//                    //刷新页面
+//                    bindDialog.hide();
+//                    window.location.reload();
+//                }});
+//                
+//              
+//            });
+//            
+//         });
+//        bindDialog.show();
+//    };
+
+	var validRules = {
+		user_id: {
+			required:true,
+			range: [3, 20],
+			match:/^[A-Za-z0-9_]*$/,
+			remote: {
+				url: "{/get_url rule='/account/checkUserId/'/}",
+				type: 'post',
+				dataType: 'json',
+				data: { txtUserID: function(){
+					return childUserDialog.query("#user_id").val()
+				}},
+				callback: function(json) {
+					return json && json.state;
+				}
+			}
+		},
+		password: {
+			required: true,
+			range:[6, 18],
+			inputRegValiPwd: {
+				user: childUserDialog.query('#user_id')
+			}
+		},
+		user_name:{
+			required: true,
+			inputValiUserName: true/*,
+			match: /^[A-Za-z0-9_\u4e00-\u9fa5]+$/i,
+			range: [2, 20]*/
+		},
+		mobile_phone: {
+			mobile: true
+		},
+        link_tel1: {
+            match: /^([0-9]{3}[0-9]?)?$/
+		},
+		link_tel2: {
+			match: /^([0-9]{6,8}?)?$/
+		},
+		link_tel3: {
+			match: /^[0-9]{0,5}$/
+		}
+	};
+	
+	var errMsgs = {
+		user_id: {
+			required: '请填写用户名',
+			range: '用户名3-20位字符',
+			match: '用户名为字母、数字、下划线组成',
+			remote: '该用户名已被注册，请更换'
+		},
+		password: {
+			required: '请填写密码',
+			range: '密码6-18位字符'
+		},
+		user_name:{
+			required: '请填写姓名' /*,
+			match: '姓名为中文、字母、数字、下划线组成',
+			range: '姓名2-20位字符'*/
+		},
+		mobile_phone: {
+			mobile: '请填写正确的手机号码'
+		},
+        link_tel1: {
+			match: '请输入正确的区号'
+		},
+		link_tel2: {
+			match: '请输入6-8位的数字'
+		},
+		link_tel3: '请输入正确的办公电话'
+	};
+	
+	var telGroup = {tel: 'link_tel1 link_tel2 link_tel3'};
+	var childUserValidator = new validator({
+		element: childUserDialog.query('#childUserForm'),
+		rules: validRules,
+		errorMessages: errMsgs,
+		groups: telGroup,
+		keepKey: true,
+		errorElement: 'p'
+	});
+
+	//密码验证规则
+	var regErrMessage;
+	function inputRegValiPwd(element, param){
+		var value = element.val(),
+			userName = (param['user'] && param['user'].val()) || '',
+			patten = new RegExp('^[0-9]+$'),
+			numReg = /^(\d)\1+$/;
+			
+                var pwd_reg_length = /^\w{6,18}$/; 
+                var pwd_reg_1      = /[0-9]+/;
+                var pwd_reg_2      = /[a-zA-Z]+/;
+                var pwd_reg_3      = /([\w])\1{3,}/;
+                var pwd_reg_4      = /[^\w]/;
+                if(!pwd_reg_length.test(value) || pwd_reg_4.test(value)){
+                    regErrMessage = "密码为6-18位数字+字母组合<span class='tipArr'></span>";
+                    return false;
+                }
+                if(!pwd_reg_1.test(value) || !pwd_reg_2.test(value)){
+                    regErrMessage = "密码为数字+字母组合<span class='tipArr'></span>";
+                    return false; //密码为数字、字母、下划线组合 
+                }
+                if(pwd_reg_3.test(value)){
+                    regErrMessage = "单个字符不能连续输入4次及以上<span class='tipArr'></span>";
+                    return false;//密码不能重复4个或以上字符
+                }
+		return true;
+	}
+	
+	childUserValidator.addMethod('inputRegValiPwd', inputRegValiPwd, function(){
+		return regErrMessage;
+	});
+	
+	//姓名验证
+	var userNameErrMessage;
+	function inputValiUserName(element){
+		var value = element.val();
+		var language = 	/^[A-Za-z0-9\u4e00-\u9fa5]+$/i;
+		
+		if(!language.test(value)){
+			userNameErrMessage = '姓名为中文或字母';
+			return false;
+		}
+		
+		language = /^[A-Za-z0-9]+$/i;
+		if(language.test(value)){
+			if(value.length < 2 || value.length > 20){
+				userNameErrMessage = '2-20位英文（1-10个汉字）';
+				return false;
+			}
+		}
+		
+		language = /[\u4e00-\u9fa5]+/;
+		if(language.test(value)){
+			if(value.length < 1 || value.length > 10){
+				userNameErrMessage = '2-20位英文（1-10个汉字）';
+				return false;
+			}
+		}
+		
+		return true;
+	}
+	
+	childUserValidator.addMethod('inputValiUserName', inputValiUserName, function(){
+		return userNameErrMessage;
+	});
+	
+	/*
+	childUserValidator.addRules(
+		'password', {
+			inputRegValiPwd: {
+				user: childUserDialog.query('#user_id')
+			}
+		}
+	);
+	*/
+	
+	
+	childUserDialog.query('.blue-butn').on('click', function(){
+		if(release_point_sub_account < 1){
+			$.message("添加失败！直聘账号已达到最大数量。", {title: '系统提示', icon: 'fail'});
+			return;
+		}
+		childUserValidator.submit(function(){
+			$.ajax({
+				url:"{/get_url rule='/account/AddAccount/'/}",
+				type: "post",
+				dataType: "json",
+				data: childUserValidator.get('element').serialize(),
+				success:function(json){
+                    if(json.isNeedLogin){
+                        window.location.reload();
+                        return;
+                    }
+					if(json.status){
+//						alert('添加成功');
+					  ConfirmBox.timeBomb('添加成功',{
+							name: 'success',
+							timeout : 1000
+						  });
+						  setTimeout(function () {
+							window.location.reload();
+						  },1200)
+//						window.location.reload();
+						return;
+					}
+					$.message(json.msg, {title: '系统提示', icon: 'fail'});
+					if(json.data.is_bind){
+						childUserDialog.query('#childUserForm').find('.PhoneCode').show();
+						childUserDialog.query('#childUserForm').find('#is_phoneCode').val(1);
+						$('#old_mobile_phone').val(childUserDialog.query('#childUserForm').find('#mobilephone').val());
+					}
+					return;
+				}
+			});
+		});
+	});
+	
+    $(".unbindWeixin").on("click",function(){
+        var openid = $(this).attr('data-value');
+
+        ConfirmBox.confirm('确定解除绑定吗？', '解绑微信', function() {
+            $.getJSON('{/get_url rule="/account/unbindweixin/"/}', {openid:openid}, function(result) {
+                if(result.isNeedLogin){
+                    window.location.reload();
+                    return;
+                }
+                if(!result.status) {
+                    alert(result.msg); 
+                }
+                window.location.reload();
+            });
+        }, {
+            width : 300,
+            close : 'x'
+        });
+    });
+    
+    //解除绑定
+    $(".unRelatedPerson").on("click",function(){
+        var person_id = $(this).attr('data-value');
+        var account_id = $(this).attr("data-account");
+        ConfirmBox.confirm('确定解除绑定吗？', '解绑app', function() {
+            $.getJSON('{/get_url rule="/account/delRelatedPerson/"/}', {person_id:person_id,account_id:account_id}, function(result) {
+                if(result.isNeedLogin){
+                    window.location.reload();
+                    return;
+                }
+                if(result.error) {
+                    alert(result.error); 
+                }
+                window.location.reload();
+            });
+        }, {
+            width : 300,
+            close : 'x'
+        });
+    });
+	$(document).on('blur','#mobilephone', function(){
+		showphonecode();
+	});
+	function showphonecode(){
+		var old_mobile_phone=$('#old_mobile_phone').val();
+		var mobile_phone = childUserDialog.query('#childUserForm').find('#mobilephone').val();
+		if(old_mobile_phone!=mobile_phone){
+			childUserDialog.query('#childUserForm').find('#is_phoneCode').val(0);
+			childUserDialog.query('#childUserForm').find('.PhoneCode').hide();
+		}
+	}
+	var chatinterval;
+	var countdown = function(){
+
+		var seconds = childUserDialog.query('#childUserForm').find('.cutDown i').html();
+		seconds = parseInt(seconds);
+		if(seconds>0){
+			seconds--;
+			childUserDialog.query('#childUserForm').find('.cutDown i').html(seconds);
+			childUserDialog.query('#childUserForm').find('.getPhoneCode_new').hide();
+			childUserDialog.query('#childUserForm').find('.cutDown').show();
+		}else{
+			clearInterval(chatinterval);
+			childUserDialog.query('#childUserForm').find('.getPhoneCode_new').show();
+			childUserDialog.query('#childUserForm').find('.cutDown').hide();
+			childUserDialog.query('#childUserForm').find('.cutDown i').text("60");
+		}
+	}
+	$(document).on('click','.getPhoneCode_new', function(){
+		var chatPhonex = childUserDialog.query('#childUserForm').find('#mobilephone').val();
+		var pattern = /^[1]\d{10}$/;
+		if(chatPhonex == ''){
+			ConfirmBox.timeBomb("请输入手机号",{name: 'fail', timeout : 1000, width:230});
+		}else if(!pattern.test(chatPhonex)){
+			ConfirmBox.timeBomb("手机号码格式不正确",{name: 'fail', timeout : 1000, width:230});
+		}else{
+			$.ajax({
+				url:"{/get_url rule='/account/SendMobileCode/'/}",
+				type: "post",
+				dataType: "json",
+				data: {mobile_phone:chatPhonex},
+				success:function(json){
+                    if(json.isNeedLogin){
+                        window.location.reload();
+                        return;
+                    }
+					if(json.status){
+						ConfirmBox.timeBomb(json.msg,{
+							name: 'success',
+							timeout : 1000,
+							width:fontSize * json.msg.length + pWidth
+						});
+						return;
+					}
+					console.log(23423);
+					ConfirmBox.timeBomb(json.msg,{
+						name: 'fail',
+						timeout : 1000,
+						width:fontSize * json.msg.length + pWidth
+					});
+					return;
+				}
+			});
+			chatinterval = setInterval(countdown,1000);
+		}
+	});
+});
+
+</script>
+</body>
+</html>

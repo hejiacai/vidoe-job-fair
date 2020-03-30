@@ -1,0 +1,201 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+<title>{/$title/}</title>
+<!–[if lt IE9]> 
+<script src="{/version file='html5.js'/}"></script>  
+<![endif]–>
+<link rel="stylesheet" type="text/css" href="{/version file="base.css"/}" />
+<link rel="stylesheet" type="text/css" href="{/version file="comback.css"/}" />
+
+<script type="text/javascript" language="javascript" src="{/version file="jquery-1.8.3.min.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="dialog.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="ui_inputFocus.js"/}"></script><!--输入框获取焦点-->
+<script type="text/javascript" language="javascript" src="{/version file="ui_hovchange.js"/}"></script><!--指向改变class-->
+<script type="text/javascript" language="javascript" src="{/version file="common.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="ui_validate.js"/}"></script><!--验证-->
+<script type="text/javascript" language="javascript" src="{/version file="jquery.form.js"/}"></script><!--表单提交-->
+
+</head>
+<body id="body">
+<style type="text/css">
+.section{ overflow:hidden;}
+.section hgroup{padding:20px 30px;zoom:1;}
+.hd{}
+.hd .fairInfo{margin-bottom:20px;}
+.hd .fairInfo h2{font-size:24px;font-family:'微软雅黑','SimHei';color:#333;margin-bottom:5px;}
+.hd .fairInfo .txt p{color:#999;line-height:25px;font-size:12px;}
+.hd .diss{background:url({/$siteurl.style/}/img/c/dissbg.jpg) repeat-x;padding-left:5px;zoom:1;margin-bottom:15px;height:135px;}
+.hd .diss ul li{width:180px;height:135px;float:left;display:inline;background:url({/$siteurl.style/}/img/c/dissno.jpg) no-repeat;padding-left:70px;}
+.hd .diss ul li .txt{}
+.hd .diss ul li .txt dl dt{font-size:14px;font-weight:bold;color:#427399;height:25px;line-height:25px;}
+.hd .diss ul li .txt dl dd{font-size:12px;color:#427399;line-height:20px;}
+.hd .diss ul li.lst1{ background-position:0 0;}
+.hd .diss ul li.lst2{ background-position:0 -135px;}
+.hd .diss ul li.lst3{ background-position:0 -270px;width:140px;}
+.hd .diss ul li.lst4{ background-position:0 -405px;width:155px;}
+.hd .diss ul li.lst3 .txt{margin:17px 0 0;}
+.hd .diss ul li.lst4 .txt{margin:0}
+
+.bd{}
+.bd h2{font-size:14px;font-weight:bold;height:30px;line-height:30px;margin-bottom:5px;}
+.bd .now{background:#fffcf0;border:1px solid #fad7a8;padding:10px 10px 10px 13px;zoom:1; position:relative; z-index:1;}
+.bd .now b.arr{ position:absolute;width:10px;height:5px;font-size:0;line-height:0;background:url({/$siteurl.style/}/img/c/c.gif) no-repeat -445px 0;top:-5px;left:30px;}
+.bd .now .tit{float:left;display:inline;width:84px;color:#d84e12;line-height:32px;}
+.bd .now .txt{float:left;display:inline;width:625px;line-height:32px;}
+.bd .now .txt a{color:#666;}
+.bd .now .txt a:hover{color:#333;}
+.bd .now .btn{float:right;display:inline;margin:2px 0 0;}
+
+.bd .lst{}
+.bd .lst ul li{border-bottom:1px dashed #dadada;padding:15px 0 15px 15px;zoom:1; vertical-align:bottom;}
+.bd .lst ul li.hov{background:#f5f5f5;}
+.bd .lst ul li .l{float:left;display:inline;width:65px;font-size:12px; text-align:center;margin:4px 0 0 0;}
+.bd .lst ul li .l p.week{background:#3e7097;height:20px;line-height:20px;color:#fff;}
+.bd .lst ul li .l p.data{border:1px solid #dadada;border-top:0;height:20px;line-height:20px;}
+.bd .lst ul li .c{float:left;display:inline;width:700px;margin:0 0 0 20px;}
+.bd .lst ul li .c .tit{line-height:24px;}
+.bd .lst ul li .c p.gray{font-size:12px;height:20px;line-height:20px;}
+.bd .lst ul li .c p.gray .time{margin:0 40px 0 0;}
+.bd .lst ul li .r{float:right;display:inline;width:100px;height:40px; text-align:center;}
+.bd .lst ul li .r a.btn3{margin:0;}
+.bd .lst ul li .r .txt{height:20px;line-height:20px;margin:10px 0 0 0;}
+.bd .lst ul li .r .btn{margin:5px 0 0;}
+</style>
+{/include 'new_header.html' cur="现场招聘"/}
+<div class="content" id="content">
+	<section class="section">
+            <!-- <div class="postSchListBg">
+                <div class="postSchList">
+                    <div class="zList">
+                        <a href="{/get_url rule='/fair'/}"  class="cut" ><span>我的招聘会</span></a>
+                        <a href="{/get_url rule='/fairjob'/}" style="display:none"><span>现场职位管理</span></a>
+                        <a href="{/get_url rule='/fairsceneinvite'/}" style="display:none"><span>发出的邀请</span></a>
+                        <a class="last" href="{/get_url rule='/faironline'/}" style="display:none"><span>邀请网站求职者</span></a>
+                    </div>
+                </div>
+            </div> -->
+		<hgroup>
+
+        	<div class="hd">
+            	<div class="fairInfo">
+                	<h2>重庆固定招聘会，每周二、四、六（8:30~12:00）定期举办招聘会</h2>
+                    <div class="txt">
+                    	<p>地点:重庆两江新区龙头寺火车站华宇广场5号楼，轻轨三号线狮子坪站下车即到。</p>
+                        <p>公交:288、461、119、841、611、168、323、419、245、818、138、820、419、421、354等30条线路。</p>
+                    </div>
+                </div>
+                <div class="diss">
+                	<ul>
+                    <li class="lst1">
+                    	<div class="txt">
+                        	<dl>
+                            <dt>主流媒体&nbsp;&nbsp;强势宣传</dt>
+                            <dd><p>电视台、移动电视、晨报、商报、时报、晚报、都市热报强力宣传，汇博人才网、大渝网、华龙网等主流网站大力推广</p></dd>
+                            </dl>
+                        </div>
+                    </li>
+                    <li class="lst2">
+                    	<div class="txt">
+                        	<dl>
+                            <dt>精准定位&nbsp;&nbsp;邀请人才</dt>
+                            <dd>
+                            	<p>汇博人才网{/$config->ShowResumeNum/}求职者全面覆盖，每周{/$config->HuiBoFairCompanyNumWeek/}多家企业参会。</p>
+                            </dd>
+                            </dl>
+                        </div>
+                    </li>
+                    <li class="lst3">
+                    	<div class="txt">
+                        	<dl>
+                            <dt>规模大&nbsp;&nbsp;人气旺</dt>
+                            <dd>
+                            	<p>常设{/$config->HuiBoFairShowRoom/}个标准展位。</p>
+                                <p>每周进场{/$config->HuiBoFairPersonNumWeek/}个求职者。</p>
+                            </dd>
+                            </dl>
+                        </div>
+                    </li>
+                    <li class="lst4">
+                    	<div class="txt">
+                        	<dl>
+                            <dt>特殊宣传&nbsp;&nbsp;直达目标</dt>
+                            <dd>
+                            	<p>3号轻轨线语音广告日覆盖{/$config->HuiBoFairRailwayAdv/}人次。</p>
+                            </dd>
+                            </dl>
+                        </div>
+                    </li>
+                    </ul>
+                    <div class="clear"></div>
+                </div>
+            </div>
+            <div class="bd">
+            	<h2>最近招聘会</h2>
+            	{/if !empty($one_scene) && count($one_scene) > 0/}
+                <div class="now">
+                    <p class="tit">[正在进行]</p>
+                    <p class="txt"><a href='{/rewrite type="fairScene" date="{/date("Ymd", strtotime($one_scene.date))/}"/}' target="_blank">{/$one_scene['subject']/}</a></p>
+                    <p class="btn">{/if $one_scene['isjoin'] == 1/}<a href='{/get_url rule="/fairentermanage"/}' class="btn4 btnsF12" id="invPer">邀请入场求职者</a>{//if/}</p>
+                    <div class="clear"></div>
+                    <b class="arr"></b>
+                </div>
+                {//if/}
+                <div class="lst" id="lst">
+                	<ul>
+                	{/section name=scene loop=$scenelist/}
+                	<li>
+                    	<div class="l"><p class="week">{/$scenelist[scene].theweekday/}</p><p class="data">{/$scenelist[scene].thesimpledate/}</p></div>
+                        <div class="c">
+                        	<p class="tit"><a href='{/rewrite type="fairScene" date="{/date("Ymd", strtotime($scenelist[scene].date))/}"/}' target="_blank">{/$scenelist[scene].subject/}</a></p>
+                            <p class="gray"><span class="time">时间：{/$scenelist[scene].thedate/}（{/$scenelist[scene].theweekday/}） {/$scenelist[scene].thebegintime/}-{/$scenelist[scene].theendtime/}</span><span class="type">预计规模：{/$scenelist[scene].predict_extent/}企业  {/$scenelist[scene].predict_jobcount/}岗位</span></p>
+                        </div>
+                        <div class="r">
+                        	{/if $scenelist[scene].isjoin == 1/}<p class="txt green">已参会</p>{/elseif $scenelist[scene].isjoin == 2/}<p class="txt orange">申请参会中</p>{/elseif $scenelist[scene].isjoin == 3/}<p class="btn"><a href="javascript:void(0);" class="btn3 btnsF12" name="perAtt">我要参会</a></p>{//if/}
+                        	<input type="hidden" name="hidsceneid" value="{/$scenelist[scene].scene_id/}" />
+                        </div>
+                        <div class="clear"></div>
+                    </li>
+                    {/sectionelse/}
+                    {//section/}
+                    </ul>
+                </div>
+            </div>
+        </hgroup>
+    </section>
+</div>
+{/include file="footer.html"/}
+<section class="floatRT"><a href="{/get_url rule='/about/message' domain='main'/}" target="_blank" class="serviceLink">我有问题要反馈</a><b></b></section>
+<script>
+var fairIndex={
+	initialize:function(){
+		//初始化控件
+		this._initControl();
+	},
+	_initControl:function(){
+		$('a[name="perAtt"]').click(function() {
+			sceneid = $(this).closest('div.r').find(':input[name="hidsceneid"]').val();
+			$.showModal('{/get_url rule="/fair/fairapplyshow" data="sceneid='+sceneid+'&obj=fairIndex&callback=applyCallback&v='+Math.random()+'"/}',{title:'在线订展'});
+		});
+	},
+	applyCallback:function(obj){
+		$('div#lst').find(':input[value='+obj+']').closest('li').find('div.r').empty().html('<p class="txt orange">申请参会中</p>');
+	}
+};
+fairIndex.initialize();
+
+$(document).ready(function() {
+	$('#lst').find('li').hover(function(){
+		$(this).addClass('hov');
+	},function(){
+		$(this).removeClass('hov');
+	});
+});
+
+</script>
+</body>
+</html>

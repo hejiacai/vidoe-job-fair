@@ -1,0 +1,619 @@
+<!doctype html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+<title>{/$title/}</title>
+<!–[if lt IE9]> 
+<script src="{/version file='html5.js'/}"></script>
+<![endif]–>
+<link rel="stylesheet" type="text/css" href="{/version file="base.css"/}" />
+<link rel="stylesheet" type="text/css" href="{/version file="comback.css"/}" />
+<script type="text/javascript" language="javascript" src="{/version file="jquery-1.8.3.min.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="common.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="dialog.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="ui_inputFocus.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="ui_tooltip.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="ui_validate.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="jquery.form.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="ui_dropdownlist.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="ui_autocomplete.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="jquery.email.tip.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="jquery.metadata.js"/}"></script>
+
+</head>
+<body id="body">
+<style type="text/css">
+hgroup{padding:0;}
+.part{padding:10px 20px;zoom:1;}
+.part2{padding:0 20px 20px 20px;zoom:1;}
+.part .tipTxt{font-size:16px; height:40px; line-height:40px;}
+.part .tipTxt em{color:#ff9900; margin:0 5px;}
+.part .tipTxt i.hbFntWes{font-size:14px; margin-right:5px;}
+.part .tipTxt .del{font-size:12px; margin-left:15px;}
+
+.recHd{background:#f9f9f9; border:1px solid #e6e6e6; padding:17px 15px 0 15px; zoom:1; height:45px; font-size:12px;}
+.recHd .tipTxt{float:left; display:inline; line-height:26px; color:#999; font-size:12px;}
+.recHd .recHdL{float:left; display:inline; width:240px;}
+.recHd .recHdL .conBox{float:left; display:inline;}
+.recHd .recHdL .conBox .job{float:left; display:inline; margin-right:10px;}
+.recHd .recHdL .conBox .time{float:left; display:inline; margin-right:10px;}
+.recHd .recHdL .conBox .sta{float:left; display:inline;}
+.recHd .recHdL .conBox .tipTxt i.hbFntWes{font-size:14px; margin-left:5px; position:absolute; right:10px; top:5px; cursor:pointer;}
+
+.recHd .recHdM{float:left; display:inline; width:275px;}
+.recHd .recHdM .formMod .l{width:50px; font-size:12px; margin-right:2px; color:#999;}
+.recHd .recHdM .formMod .r{width:215px;}
+.recHd .recHdM .checkMod .drop{width:378px;}
+
+.recHd .recHdR{float:right; display:inline; width:140px;}
+.recHd .recHdR .btns{float:left; display:inline; line-height:26px;}
+.recHd .recHdR .btns a{display:inline-block;padding:0 6px;height:22px;line-height:22px;font-size:12px; border-radius:3px;}
+.recHd .recHdR .btns a.cu{color:#333;font-weight:bold;background:#d1d1d1; cursor:text;}
+
+.recBd .lstBox{padding:20px 0 0 0; zoom:1;}
+.recBd .lst .table{}
+.recBd .lst .table tr th{border-bottom:1px solid #dadada;font-weight:normal; color:#999; padding:8px 5px; zoom:1;}
+.recBd .lst .formChb input.chb{margin:2px 0 0 0;}
+.table tr th,.table tr td{text-align:left;font-size:12px;}
+.table .lstBox tr td{border-bottom:1px solid #f1f1f1; padding:8px 5px; zoom:1; color:#666;}
+.table  .wid220{width:220px;}
+.table  .wid185{width:185px;}
+.table  .wid150{width:150px;}
+.table  .wid120{width:120px;}
+.table  .wid110{width:110px;}
+.table  .wid100{width:100px;}
+.table  .wid80{width:80px;}
+.table  .wid50{width:50px;}
+.table  .wid40{width:40px;}
+.table  .wid20{width:10px;}
+.table .lstBox .time{color:#999;}
+.table .lstBox b.name{line-height:44px; margin-left:10px;}
+.table .lstBox a.name{line-height:44px; font-weight:bold; margin-left:10px;}
+.table .lstBox a.name:link{color:#3d84b8;}
+.table .lstBox a.name:visited{color:#800080;}
+.table .lstBox a.name:hover,.table .lstBox a.name:active{color:#0af;}
+.table .lstBox .Un{color:#999; font-weight:bold;margin-left:5px;}
+.table .lstBox p.job{color:#444; font-weight:bold; width:110px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis; height:44px; line-height:44px;}
+.table .lstBox .photo{background:url({/$siteurl.style/}/img/common/user35_44.jpg) no-repeat; width:35px; height:44px; border:0; display:block; float:left;}
+.table .lstBox .photo a{width:35px; height:44px; display:block;}
+.table .lstBox .photo img{width:35px; height:44px; border:0;}
+.table .lstBox .mark a.hbFntWes{font-size:14px; color:#999; margin-left:10px;}
+.table .lstBox .markIn a.hbFntWes{font-size:14px; color:#ed3136; margin-left:10px;}
+.table .lstBox  p.lateJob{width:110px; line-height:44px; height:44px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+.table .lstBox .tips{position:relative; display:block;}
+.table .lstBox .tips i.hbFntWes{font-size:16px; margin-left:5px;}
+.table .lstBox .tipBox{position:absolute;left:-32px;*left:40px; top:21px;*top:4px; color:#444;background:#fff; border:1px solid #dadada; padding:5px 0;zoom:1; line-height:22px;}
+.table .lstBox .tipBox ul li a{color:#444; width:85px; display:block; padding:0 10px;}
+.table .lstBox .tipBox ul li a:hover{color:#00aaff; background:#f5f5f5;}
+.table .lstBox .tipBox ul li.rLnk{position:relative; z-index:1;}
+.table .lstBox .tipBox ul li.rLnk .downCmt{position:absolute; left:-28px; top:23px; background:#fff; border:1px solid #dadada; width:160px; font-size:12px;padding:10px; zoom:1;}
+.table .lstBox .tipBox ul li.rLnk .downCmt i.hbIconMoon{font-size:14px; margin-right:5px;}
+.table .lstBox .tipBox ul li.rLnk a.Un{cursor:text; color:#999;}
+.table .lstBox .tipBox ul li.rLnk a.Un:hover{color:#999;}
+.table .lstBox tr.hov{background:#fffdf3;}
+
+.recBd .lst2 ul li{border:1px solid #dadada; font-size:12px; margin-bottom:13px;}
+.recBd .lst2 ul li .sumBd{padding:10px 5px; zoom:1;}
+.recBd .lst2 ul li .sumBd .photoB{width:80px; height:100px; display:inline; float:left; margin-left:10px;background:url({/$siteurl.style/}/img/common/user80_100.jpg) no-repeat;}
+.recBd .lst2 ul li .sumBd .photoB a{width:80px; height:100px; display:block;}
+.recBd .lst2 ul li .sumBd .photoB img{width:80px; height:100px; border:0;}
+.recBd .lst2 ul li .sumBd .sumCon{float:left; display:inline; margin-left:15px; width:810px;}
+.recBd .lst2 ul li .sumBd .sumCon .basInfo{color:#999; display:block; height:24px;}
+.recBd .lst2 ul li .sumBd .sumCon .basInfo .basL{float:left; display:inline;}
+.recBd .lst2 ul li .sumBd .sumCon .basInfo .basL a{}
+.recBd .lst2 ul li .sumBd .sumCon .basInfo .basL a:link{color:#3d84b8;}
+.recBd .lst2 ul li .sumBd .sumCon .basInfo .basL a:visited{color:#800080;}
+.recBd .lst2 ul li .sumBd .sumCon .basInfo .basL a:hover,.recBd .lst2 ul li .sumBd .sumCon .basInfo .basL a:active{color:#0af;}
+.recBd .lst2 ul li .sumBd .sumCon .basInfo .basL b{font-size:14px; margin-right:10px;}
+.recBd .lst2 ul li .sumBd .sumCon .basInfo .basR i.unRead{background:#ff6600; color:#fff; padding:0 6px; margin:0 12px 0 10px;}
+.recBd .lst2 ul li .sumBd .sumCon .basInfo .basR i.inRead{background:#009900; color:#fff; padding:0 6px; margin:0 12px 0 10px;}
+.recBd .lst2 ul li .sumBd .sumCon .basInfo .basR i.inv{background:#009900; color:#fff; padding:0 6px; margin:0 12px 0 10px;}
+.recBd .lst2 ul li .sumBd .sumCon .basInfo .basR i.other{background:#999; color:#fff; padding:0 6px; margin:0 12px 0 10px;}
+.recBd .lst2 ul li .sumBd .sumCon .basInfo .basR{float:right; display:inline;}
+.recBd .lst2 ul li .sumBd .sumCon .basInfo .basL .mark a.hbFntWes{font-size:14px; width:26px; line-height:20px; color:#999; margin-left:10px;}
+.recBd .lst2 ul li .sumBd .sumCon .basInfo .basL .mark a.hbFntWes:hover{color:#00aaff;}
+.recBd .lst2 ul li .sumBd .sumCon .basInfo .basL .markIn a.hbFntWes{font-size:14px; color:#ed3136; margin-left:10px;}
+
+.recBd .lst2 ul li .sumBd .sumCon .basInfo .basL a.red{color:#d66564;}
+.recBd .lst2 ul li .sumBd .sumCon .infoCon{margin-top:3px;color:#666; display:block;}
+.recBd .lst2 ul li .sumBd .sumCon .infoCon dl{padding:3px 0;zoom:1; overflow:hidden;}
+.recBd .lst2 ul li .sumBd .sumCon .infoCon dl dt{float:left; display:inline; color:#999;}
+.recBd .lst2 ul li .sumBd .sumCon .infoCon dl dd{float:left; display:inline;}
+.recBd .lst2 ul li .sumBd .sumCon .infoCon dl dd em{padding:0 8px; zoom:1; color:#999;}
+.recBd .lst2 ul li .sumBd .sumCon .infoCon dl dd p{width:740px;}
+.recBd .lst2 ul li .sumFt{background:#f9f9f9; height:30px; position:relative; z-index:1;}
+.recBd .lst2 ul li .sumFt .btns{position:absolute; left:128px; top:04px;}
+.recBd .lst2 ul li .sumFt .btns a.btnsF12{height:20px; line-height:20px;}
+.recBd .lst2 ul li .sumFt .btns a.btn3Unclick:link,.recBd .lst2 ul li .sumFt .btns a.btn3Unclick:visited,.recBd .lst2 ul li .sumFt .btns a.btn3Unclick:hover{border:1px solid #dadada;}
+.recBd .lst2 ul li .sumFt .btns .btn{margin:0 7px;}
+.recBd .lst2 ul li .sumFt .btns a.btn3{}
+.recBd .lst ul li.hov{border:1px solid #ffe0bb; background:#fffdf3;}
+.recBd .lst ul li.hov .sumFt{background:#ffe0bb;}
+
+.recBd .recBtn{padding:10px 5px; zoom:1; height:50px; line-height:50px; font-size:12px;}
+.recBd .recBtn .formChb label{margin-top:9px;*margin-top:10px;}
+.recBd .recBtn .formChb input.chb{margin-top:19px; _margin-top:0;#margin-top:14px;}
+.recBd .recBtn .btns{display:block; float:left; _margin-top:8px;}
+.recBd .recBtn .rec{margin:0 10px;}
+.recBd .recBtn .ref{margin:0 10px;}
+
+.noData a.btn1{ margin-top:30px;}
+.noData a.btn{font-size:14px;}
+.noData i.hbFntWes{font-size:14px; margin-right:5px;}
+</style>
+{/include 'new_header.html' par="全职招聘" cur='简历管理'/}
+<div class="content" id="content">
+	<section class="section">
+		<hgroup>
+                  <div class="postSchListBg">
+                    <div class="postSchList">
+                        <div class="zList">
+                            <a href="{/get_url rule='/apply'/}"><span>收到的简历</span></a>
+                            <a href="{/get_url rule='/download'/}" ><span>下载的简历</span></a>
+                            <a href="{/get_url rule='/fav'/}"  class="cut"><span>我的收藏</span></a>
+                            <a href="{/get_url rule='/recommend'/}"><span>推荐简历</span></a>
+                            <a class="last" href="{/get_url rule='/recycle'/}"><span>回收站</span></a>
+                        </div>
+                    </div>
+                </div>
+			{/if $hasFav==false/}
+				<div class="noData"><p>您还没有感兴趣的求职者！</p><p>当您在预览简历时，点击简历右侧的“<span class="blue hbFntWes">&#xf005;</span>”，便可将TA标记为感兴趣了</p></div>
+			{/else/}
+        	<div class="part part1">
+            	<div class="tipTxt">
+                	<span class="num">共收到<em>{/$favTotal/}</em>份简历</span>
+                    {/if $showfilter/}<span class="del"><a href="#" id="btnClearFilter"><i class="hbFntWes">&#xf014;</i>清空筛选/搜索条件</a></span>{//if/}
+                </div>
+                <div class="recHd">
+                <form id="frmfav" method="get" action='{/get_url rule="/fav/Index/"/}'>
+                	<input type="hidden" name="search_model" value="{/$search_model/}"  id="hddSeachModel"/>
+                    <div class="recHdL">
+                        <div class="tipTxt">筛选：</div>
+                        <div class="conBox">
+                        	<div class="job"><span id="tstDropJob" class="drop zindex"></span></div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="recHdM">
+                        <div class="formMod">
+                            <div class="l">搜索：</div>
+                            <div class="r">
+                                 <span class="formText"><input type="text" style="width:135px; font-size:12px;" class="text textGray" value="{/$keyword/}" name="keyword" id="txtKeyWord"></span>
+                                 <span class="seaBtn"><a href="#" class="{/if $keyword==''/}btn3{/else/}btn1{//if/} btnsF12" id="btnResumeSearch">搜索</a></span>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                </div>
+               </form>
+            </div>
+            <div class="part part2">
+            	{/if $hasFilterfav==false/}
+            	<div class="noData"><p>未找到相关简历，请更换筛选条件、关键词再试！</p>{/if $showfilter/}<p><a class="btn" href="#" id="btnClearFilterSearch"><i class="hbFntWes">&#xf014;</i>清空筛选/搜索条件</a></p>{//if/}</div>
+                {/else/}
+                <div class="recBd">
+                    <div class="lstC">
+                    	<div class="lstCon">
+                            <div class="lst lst1" id="lst1">
+                                <table class="table" cellpadding="0" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                        	<th class="wid20"><span class="formChb"><input type="checkbox"  id="reverseallSelect" class="chb"></span></th>
+                                            <th class="wid150">照片/姓名</th>
+                                            <th class="wid40">备注</th>
+                                            <th class="wid110">适合职位</th>
+                                            <th class="wid50">性别</th>
+                                            <th class="wid50">年龄</th>
+                                            <th class="wid50">学历</th>
+                                            <th class="wid100">工作年限</th>
+                                            <th class="wid110">最近工作</th>
+                                            <th class="wid100">下载时间</th>
+                                            <th class="wid110">状态</th>
+                                            <th class="wid80">操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="lstBox" id="lstContent">
+                                    {/foreach $favs as $fav/} 
+                                        <tr fav="{/$fav['fav_id']/}" resume="{/$fav['resume_id']/}">
+                                        	<td class="wid20"><span class="formChb"><input type="checkbox" name="chkfav" value="{/$fav['fav_id']/}" class="chb" {/if isset($fav['notopen'])||isset($fav['isdelete'])/}disabled="disabled"{//if/}></span></td>
+                                            <td class="wid150">
+                                            {/if isset($fav['notopen'])||isset($fav['isdelete'])/}
+                                                <span class="photo">{/if isset($fav['photo'])/}<img src="{/$fav['photo']/}"/>{//if/}</span>
+                                                <span class="name"><b class="name user_name" name="{/$fav['user_name']/}">{/$fav['user_name']/}</b></span>
+                                            {/else/}
+                                                <span class="photo"><a href="{/get_url rule="/resume/resumeshow/"/}type-network-resumeid-{/$fav['resume_id']/}" target="_blank" class="uname">{/if isset($fav['photo'])/}<img src="{/$fav['photo']/}"/>{//if/}</a></span>
+                                                <span class="name"><a href="{/get_url rule="/resume/resumeshow/"/}type-network-resumeid-{/$fav['resume_id']/}" target="_blank" class="name user_name uname" name="{/$fav['user_name']/}">{/$fav['user_name']/}</a></span>                                            
+                                            {//if/}
+                                            </td>
+                                            <td class="wid40">{/if !isset($fav['notopen'])&&!isset($fav['isdelete'])/}<span class="hbTip mark {/if $fav['remark']/}markIn{//if/}"><a href="#" class="hbFntWes" {/if $fav['remark']/} data-toggle="tooltip" data-placement="right" title="{/$fav['remark']/}" {/else/} data-placement="right"{//if/}>&#xf024;</a></span>{//if/}</td>
+                                            <td class="wid110"><p class="job">{/$fav['tagname']/}</p></td>
+                                            <td class="wid50">{/$fav['sex']/}</td>
+                                            <td class="wid50">{/$fav['age']/}</td>
+                                            <td class="wid50">{/$fav['degree']/}</td>
+                                            <td class="wid100">{/$fav['start_work']/}</td>
+                                            <td class="wid110"><p class="lateJob">{/$fav['work']/}</p></td>
+                                            <td class="wid100">{/$fav['down_time']/}</td>
+                                            <td class="wid110"><em class="status sta {/if isset($fav['notopen'])||isset($fav['isdelete'])/}gray{/elseif isset($fav['isinvite'])||isset($fav['isdown'])/}green{//if/}">
+                                            {/if isset($fav['isdelete'])/}简历已删除{/elseif isset($fav['notopen'])/}简历未公开{/elseif isset($fav['isinvite'])/}已邀请 {/elseif isset($fav['isdown'])/}已下载{//if/}
+                                         	</em></td>
+                                            <td class="wid80">
+                                              <span class="tips">
+                                               {/if isset($fav['notopen'])||isset($fav['isdelete'])/}
+                                               	 	<a href="#" class="oprecycle">删除</a>
+                                               {/else/}
+                                                    <a href="#" class="btnOperate">操作<i class="hbFntWes">&#xf0dd;</i></a>
+                                                    <span class="tipBox zindex" style="display:none">
+                                                        <ul>
+                                                            <li><a href="#" class="opinvite">邀请面试</a></li>
+                                                            <li><a href="#" class="opremark">备注</a></li>
+                                                            <li><a href="#" class="opdown">保存到电脑</a></li>
+                                                            <li><a href="#" class="opsendmail">转发到邮箱</a></li>
+                                                            <li><a href="#" class="oprecycle">放入回收站</a></li>
+                                                        </ul>
+                                                    </span>
+                                                {//if/}   
+                                                </span>
+                                            </td>
+                                        </tr>
+                                     {//foreach/}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div> 
+                        <div class="recBtn">
+                            <span class="formChb"><input type="checkbox" name="deg" id="allSelect" class="chb"><label for="allSelect">全选</label></span>
+                            <span class="btns">
+                                <a href="#" class="btn3 btnsF12" id="btnOpInvite">邀请面试</a>
+                                <a href="#" class="btn3 btnsF12" id="btnSaveComputer">保存到电脑</a>
+                                <a href="#" class="btn3 btnsF12" id="btnSendEmail">转发到邮箱</a>
+                                <a href="#" class="rec" id="btnOprecycle">放入回收站</a>
+                            </span>
+                        </div>
+                     {/$pager/}   
+                     </div>
+                </div> 
+           		{//if/}
+            </div>
+            {//if/}
+        </hgroup>
+    </section>
+</div>
+{/include file="footer.html"/}
+<div class="dgBox downCmtBox" id="downContainer" style="display:none">
+	<div class="downCmtTxt">
+    	<p><a href="#"><i class="hbIconMoon">&#xe1b4;</i>Word文件</a></p>
+        <p><a href="#"><i class="hbIconMoon">&#xe1b6;</i>Html文件</a></p>
+        <p><a class="un"><i class="hbIconMoon">&#xe1b5;</i>Excel文件（暂未开放）</a></p>
+    </div>
+</div>
+
+<script>
+$.setIndex("zindex");//为需要赋层级设置的元素设置class为zindex
+$('#tstDropJob').droplist({
+	defaultTitle:'按适合的职位查看',
+	style:'width:200px;',
+    noSelectClass:'gray',
+    inputWidth:170,
+    width:128,
+    hddName:'tag_id',
+    items:{/$companytags/},
+    selectValue:'{/$tag_id/}',
+    maxScroll:10,
+    onSelect:function(i,name) {
+	   	//选中后的事件
+	   fav.submit(null,0);	
+}});
+
+$(document).ready(function() {
+	$('#lst1').find('tr').hover(function(){
+		$(this).addClass('hov');
+	},function(){
+		$(this).removeClass('hov');
+	});
+});
+$(document).ready(function() {
+	$('#lst2').find('li').hover(function(){
+		$(this).addClass('hov');
+	},function(){
+		$(this).removeClass('hov');
+	});
+});
+
+/**
+ *  下载的简历
+ */
+var fav = {
+	init:function() {
+		this._initEvent();
+	},
+	_initEvent:function(){
+		// 列表操作菜单
+		$('#lstContent .btnOperate').click(function(e){
+			$(this).closest('[fav]').siblings().find('.tipBox').hide();
+			if($(this).next('.tipBox').is(':visible')) {
+				$(this).next('.tipBox').hide();	
+			}else {
+				$(this).next('.tipBox').show();
+			}
+			e.stopPropagation();
+			e.preventDefault();
+		});
+		$('body').click(function(){
+			$('#lstContent .tipBox').hide();
+		});		
+		// 全选/反选
+		$('#allSelect').bindCheckBox('chkfav','#lstContent');
+		$('#reverseallSelect').bindCheckBox('chkfav','#lstContent');
+		// 全选
+		$('#allSelect').click(function(){
+			if($(this).is(':checked')) {
+				$('#reverseallSelect').attr('checked','checked');	
+			}else {
+				$('#reverseallSelect').removeAttr('checked');
+			}
+		});
+		$('#reverseallSelect').click(function(){
+			if($(this).is(':checked')) {
+				$('#allSelect').attr('checked','checked');	
+			}else {
+				$('#allSelect').removeAttr('checked');
+			}
+		});	
+
+		// 水印 
+		$('#txtKeyWord').watermark('输入姓名或简历编号');
+		
+		var a = function() {
+			var v = $('#txtKeyWord').val();
+			if(v==''||v=="输入姓名或简历编号") {
+				$('#btnResumeSearch').removeClass('btn1').addClass('btn3');
+			}else{
+				$('#btnResumeSearch').removeClass('btn3').addClass('btn1');
+			}
+			setTimeout(a,500);
+		};
+		setTimeout(a,500);
+		
+		// 清空筛选条件
+		$('#btnClearFilter,#btnClearFilterSearch').click(function(e){
+			$('#tstDropJob').initContent();
+			$('#txtKeyWord').val('').watermark('输入姓名或简历编号');
+			fav.submit(null,0);				
+			e.preventDefault();
+		});
+
+		$('#lstContent').tooltip({
+			 selector: "a[data-toggle=tooltip]",html:true
+	    });  	
+
+		$('#lstContent .mark a').click(function(e){
+			 var resume_id = $(this).closest('[resume]').attr('resume');
+			 fav._updateRemark(resume_id);
+			 e.preventDefault();
+		});	
+
+		// 单个邀请
+		$('#lstContent .opinvite').click(function(e){
+			 var resume_id = $(this).closest('[fav]').attr('resume');
+			 fav._invitesingle(resume_id);
+			 e.preventDefault();
+		});
+
+		// 单个备注
+		$('#lstContent .opremark').click(function(e){
+			 var resume_id = $(this).closest('[resume]').attr('resume');
+			 fav._updateRemark(resume_id);
+			 e.preventDefault();
+		});
+		
+		// 保存到电脑
+		$('#lstContent .opdown').click(function(e){
+			 var element = $(this).closest('[resume]'),
+			 	 resume_id = element.attr('resume');
+			 fav._downresume(resume_id);
+			 e.preventDefault();
+		});
+
+		// 转发到邮箱
+		$('#lstContent .opsendmail').click(function(e){
+			 var element = $(this).closest('[resume]'),
+			 	 resume_id = element.attr('resume');
+			 fav._sendEmail(resume_id);
+			 e.preventDefault();
+		});		
+		// 放入到回收站
+		$('#lstContent .oprecycle').click(function(e){
+			 var element = $(this).closest('[resume]'),
+			 	 fav_id = element.attr('fav'),
+			 	 name = element.find('.user_name').attr('name'),
+				 val = cookieutility.get('deletefav');
+			 if(val == 'true'){
+				 fav._deletefav(fav_id);
+			 }else {
+				 $.showModal(encodeURI('{/get_url rule="/fav/DeleteFavs/" data="names='+name+'&ids='+fav_id+'&v='+Math.random()+'"/}'),{title:'删除'});
+	   	     }
+			 e.preventDefault();
+		});	
+
+
+
+		//批量邀请 
+		$('#btnOpInvite').click(function(e){
+			e.preventDefault();
+			var resumes = fav.selectresume();
+			if(resumes.length<=0) {
+				$.anchor('请选择收到的简历',{icon:'info'});
+				return;
+			}
+			if(resumes.length==1) {
+				fav._invitesingle(resumes[0]);
+			}else {
+				fav._invitemulti(resumes);
+			}
+		});	
+
+		// 批量保存到电脑
+		$('#btnSaveComputer').click(function(e){
+			e.preventDefault();
+			var resumeids = fav.selectresume();
+			if(resumeids.length<=0) {
+				$.anchor('请选择需要保存的简历',{icon:'info'});
+				return;
+			}
+			fav._downresume(resumeids.join(','));
+		});	
+		
+		// 批量转发到邮箱
+		$('#btnSendEmail').click(function(e){
+			e.preventDefault();
+			var resumeids = fav.selectresume();
+			if(resumeids.length<=0) {
+				$.anchor('请选择需要转发的简历',{icon:'info'});
+				return;
+			}
+			fav._sendEmail(resumeids.join(','));			
+		});	
+
+		// 批量放入到回收站 
+		$('#btnOprecycle').click(function(e){
+			e.preventDefault();
+			var favs = fav.selectfav();
+			if(favs.length<=0) {
+				$.anchor('请选择收到的简历',{icon:'info'});
+				return;
+			}
+			var names =[],
+				val = cookieutility.get('deletefav');
+			for(var i = 0,len = favs.length;i < len; i+=1 ) {
+				names.push($('#lstContent').find('[fav="'+favs[i]+'"]').find('.user_name').attr('name'));
+			} 
+			 if(val == 'true'){
+				 fav._deletefav(favs.join(','));
+			 }else {
+				 $.showModal(encodeURI('{/get_url rule="/fav/DeleteFavs/" data="names='+names.join(',')+'&ids='+favs.join(',')+'&v='+Math.random()+'"/}'),{title:'删除'});
+	   	     }
+		});	
+
+		// 按姓名/简历编号搜索
+		$('#btnResumeSearch').click(function(){
+			 fav.submit(null,1);
+		});
+
+		$("#txtKeyWord").keydown(function(e){
+	    	if(e.keyCode == 13){
+	            $("#btnResumeSearch").click();
+	        }
+	    });
+	},
+	_invitesingle:function(resumeid) {
+		$.showModal('{/get_url rule="/invite/invitesingleshow/" data="resumeID='+resumeid+'"/}-v-'+Math.random(),{title:'同意面试',onclose:function(){
+			fav._invitCallback(resumeid);
+		}});	
+	},
+	_invitemulti:function(resumeids) {
+		$.showModal('{/get_url rule="/invite/InviteMultiShow/"/}resumeids-'+resumeids.join('-resumeids-'),{title:'同意面试',onclose:function(){
+			fav._invitCallback(resumeids.join(','));
+		}});
+	},
+	_invitCallback:function(resumeids) {
+		var resumeids = resumeids.split(',');
+		if(resumeids.length<=0) {
+			return;
+		}
+		$.getJSON("{/get_url rule="/fav/GetStatus/"/}"+'resumeid-'+resumeids.join(',')+'-v-'+Math.random(),function(result){
+			if(!result.error) {
+				$.each(result,function(i,n){
+					 $('#lstContent').find('[resume="'+n.resume_id+'"]')
+					 .find('.status').removeClass().addClass('status sta green').html('已邀请');
+				});
+			}
+		});
+	},
+	_deletefav:function(ids) {
+	   // 删除下载的简历	
+	   $.getJSON('{/get_url rule="/fav/DeleteFavs/"/}'+'op-del-ids-'+ids+'-v-'+Math.random(),function(result){
+			if(result.success) {
+				var arr = ids.split(',');
+				$.each(arr,function(i,n){
+					//更新页面
+					var element = $('#lstContent').find('[fav="'+n+'"]');
+					element.remove();
+				});
+				$.anchorMsg('已放入回收站');
+			}else {
+				$.anchorMsg(result.error, { icon: 'fail' }); 
+			}
+	    });
+    },
+	_updateRemark:function(resumeid) {
+		// 更新备注
+		$.showModal('{/get_url rule="/resumeremark/index/"/}resume_id-'+resumeid+'-v-'+Math.random(),{title:'备注',onclose:function(){
+			// 更新备注
+			$.getJSON("{/get_url rule="/resumeremark/ResumeRemark/"/}"+'-resumeid-'+resumeid+'-v-'+Math.random(),function(result){
+			    var element = $('#lstContent').find('[resume="'+resumeid+'"]');
+				element.find('span.mark a').unTooltip();
+				if(result.remark ==''||result.remark == null) {
+					element.find('span.mark').removeClass('markIn').find('a').removeAttr('data-toggle').removeAttr('title');				
+				}else {
+					element.find('span.mark').addClass('markIn').find('a').attr('data-toggle','tooltip').attr('title',result.remark+'&nbsp;'+result.updatetime);
+				}			    
+			});
+		}});
+    },
+    _downresume:function(resumeid) {
+        var url = '{/get_url rule="/fav/down" data="resumeid='+resumeid+'"/}';
+    	$.showModal(url,{title:'请选择保存的文件格式'});
+    },
+    _downresumeword:function(ids,favids){
+    	var url = '{/get_url rule="/resume/worddown" data="resumeid='+ids+'"/}';
+		$(this).attr('href',url).attr('target','_blank');
+    },
+    _downresumehtml:function(ids) {
+    	var url = '{/get_url rule="/resume/htmldown" data="resumeid='+ids+'"/}';
+		$(this).attr('href',url).attr('target','_blank');
+    },
+    _downresumeExcel:function(ids) {
+    	var url = '{/get_url rule="/excel/index/" data="resumeid='+ids+'"/}';
+    	$(this).attr('href',url).attr('target','_blank');
+    },
+    _downresumePdf:function(ids) {
+    	var url = '{/get_url rule="/resume/pdfdown/" data="resumeid='+ids+'"/}';
+    	$(this).attr('href',url).attr('target','_blank');
+    },
+    _sendEmail:function(resumeid) {
+    	$.showModal('{/get_url rule="/resume/wordsend" data="resumeid='+resumeid+'"/}',{title:'转发到邮箱'});
+    },
+    selectfav:function(){
+       var checkboxs = $('#lstContent').find('input[name="chkfav"]:checked'),
+       	   favids = [];
+   	   for(var i=0,len=checkboxs.length;i<len;i+=1) {
+   			favids.push($(checkboxs[i]).val());
+   	   } 	
+       return favids;
+   },
+   selectresume:function(){
+       var checkboxs = $('#lstContent').find('input[name="chkfav"]:checked'),
+       	   resumeids = [];
+   	   for(var i=0,len=checkboxs.length;i<len;i+=1) {
+   		   resumeids.push($(checkboxs[i]).closest('tr').attr('resume'));
+   	   } 	
+       return resumeids;
+   },
+   submit:function(showmodel,searchmodel) {
+		if(showmodel!=null) {
+			$('#hddShowModel').val(showmodel);
+		}
+		if(searchmodel!=null) {
+			$('#hddSeachModel').val(searchmodel);
+		}
+		//清空水印 
+		$('#frmfav').clearWatermark();	
+		$('#frmfav').get(0).submit();	
+   }    
+};
+fav.init();
+</script>
+</body>
+</html>

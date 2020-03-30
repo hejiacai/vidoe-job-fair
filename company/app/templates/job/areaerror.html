@@ -1,0 +1,28 @@
+<style type="text/css">
+    .not-member {padding: 10px;width: 400px;}
+</style>
+<div class="not-member">
+    <p style="margin-bottom: 10px;">您还不是会员，只能免费发布当地的职位，如果想在其他区域进行招聘，请联系客服开通会员。</p>
+    {/if $hrManager['user_name']/}
+    <p class="lt">招聘顾问：{/$hrManager["user_name"]/}</p>
+    {//if/}
+
+    {/if $hrManager['tel']/}
+    <p class="lt">联系电话：{/$tel_head/}转{/$hrManager["tel"]/} [9：00-18：00]</p>
+    {/else/}
+    <p>联系电话：{/$huibo400/}</p>
+    {//if/}
+
+    {/if $hrManager['mobile']/}<p class="lt">手机号码：{/$hrManager["mobile"]/}</p>{//if/}
+    <p style="margin-top:15px">
+        {/if !empty($hrManager["qq"])/}
+        <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin={/trim($hrManager["qq"])/}&site=qq&menu=yes">
+            <img src="{/$siteurl.style/}/img/newindex/qq.jpg" />
+        </a>
+        {/else/}
+        <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=2851501279&site=qq&menu=yes">
+            <img src="{/$siteurl.style/}/img/newindex/qq.jpg" />
+        </a>
+        {//if/}
+    </p>
+</div>

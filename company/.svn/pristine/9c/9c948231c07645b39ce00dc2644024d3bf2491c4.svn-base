@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
+<head>
+    <title>公司注册</title>
+</head>
+
+<body>
+
+<form method="POST" aciton="/register/post">
+
+    <p>公司名称:<input type="text" name="company"></p>
+    <p>联系人:<input type="text" name="contact"></p>
+    <p>
+        区号:<input type="text" name="ac">&nbsp;
+        固定电话:<input type="text" name="phone">&nbsp;
+        分机号:<input type="text" name="ext">
+    </p>
+    <p>手机号码:<input type="text" name="mobile"></p>
+    <p>用户名:<input type="text" name="name"></p>
+    <p>密码:<input type="text" name="pass"></p>
+    <p><input type="submit"></p>
+
+</form>
+
+</body>
+</html>

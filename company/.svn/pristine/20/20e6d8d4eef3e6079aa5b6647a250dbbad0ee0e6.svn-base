@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>咨询详情_汇博网</title>
+    <!–[if lt IE9]>
+    <script src="//hm.baidu.com/hm.js?fb51309e47424acd6e31c0bd2a65a5a1"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='html5.js'/}"></script>
+    <![endif]–>
+    <link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+	<link rel="stylesheet" type="text/css" href="{/version file='m_font_style.css'/}">
+    <link rel="stylesheet" type="text/css" href="{/version file='comback.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='resument2015.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='layer.css'/}" />
+	<link rel="stylesheet" type="text/css" href="{/version file='consultation.css'/}" />
+    <link rel="stylesheet" href="{/version file='invite_v1.css'/}">
+    <script type="text/javascript">
+        window.CONFIG = {
+            HOST: '{/$isteurl.style/}',
+            COMBOPATH: '/js/v2/'
+        }
+    </script>
+    <script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.min.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='layer.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='common.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='dialog.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='ui_inputFocus.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='ui_tooltip.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='ui_validate.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='jquery.form.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='ui_dropdownlist.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='ui_autocomplete.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='jquery.email.tip.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='jquery.metadata.js'/}"></script>
+    <script type="text/javascript" src="{/version file='WdatePicker.js'/}"></script>
+    <link rel="stylesheet" type="text/css" href="{/version file='offer.css'/}" />
+    <script type="text/javascript">
+        hbjs.loadJS('{/$siteurl.style/}/js/v2/cqjob/common.js');
+    </script>
+</head>
+
+<body id="body" style="position: relative;">
+{/include file="new_header.html" cur="人才共享"/}
+<div class="resumentNbg resumentNbg-new" style="background-color: #fff;">
+	<div class="consultation" style="background-color: #fff;">
+		<p class="con_top">{/$wshare_info['title']/}</p>
+		<p class="con_bot">可共享员工：{/$wshare_info['worker_require']/}</p>
+		<p class="con_bot">可雇用时长：{/(int)$wshare_info['worker_day']/}天</p>
+	</div>
+	<div class="mine" style="background-color: #fff;">
+		<div class="temp">
+			<span class="mine_xian"></span>
+			<span class="mine_title">咨询详情</span>
+		</div>
+        {/if !empty($list)/}
+		{/foreach $list as $v/}
+		<div class="mine_content">
+			<div class="mine_top">
+				<span class="mine_name">{/$v['company_name']/}</span>
+				<span class="mine_time">{/$v['create_time']/}</span>
+				<span class="mine_phone"><span class="icon-video-phone iphone"></span>{/$v['phone']/}</span>
+			</div>
+			<div class="mine_bot">
+				<div>
+					<span class="mine_bot_title">需要员工：</span>
+					<span class="mine_bot_title_temp">{/$v['worker_require']/}</span>
+				</div>
+				<span class="mine_bot_content">说明：{/$v['worker_introdece']/}</span>
+			</div>
+		</div>
+		{//foreach/}
+		{/$pager/}
+        {/else/}
+        <div style="text-align: center;color: #999999;margin-top: 70px;font-size: 16px;">目前还没有人咨询，请耐心等待</div>
+        {//if/}
+	</div>
+
+</div>
+{/include file="msgpop.html"/}
+{/include file="footer.html"/}
+{/include file="chat/chat.html"/}
+</body>
+</html>

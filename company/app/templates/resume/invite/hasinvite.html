@@ -1,0 +1,202 @@
+<style>
+.contentInvite{width:500px;padding:20px;}
+.contentInvite #ttt{margin-bottom: 10px;text-align:left; font-family:"微软雅黑";}
+#job_id{ padding: 5px; border: 1px solid #eee; margin-top: 10px;}
+#job_list_span{ display: block;}
+.drop{z-index: 2;}
+</style>
+<div class="contentInvite">
+    {/if !$is_download/}
+    <div style=""><span style="color:red;font-size:15px;"> 此操作只会给求职者发送站内信息！会将求职者简历归档到【已邀请简历】</span></div>
+    {//if/}
+    <div id="ttt" style="font-size:16px;margin-bottom:10px;">
+        若联系求职者存在异常，请【发面试邀请】
+    </div>
+    <div class="formMod" style="">
+        <div class="l">面试时间<i style='display:none'>*</i></div>
+        <div class="r">
+            <span id="dateDrop" class="drop zindex"></span>
+            <span class="tipTxt">&nbsp;</span>
+            <span id="timeDrop" class="drop zindex"></span>
+            <span id="spanCustomTime" class="formText" style="display:none;">
+                <input disabled="disabled" id="txtCustomTime" name="txtCustomTime" type="text" class="text watermark" watermark="输入面试时间，如“明天”" style="width:162px;">
+            </span>
+            <span class="tipPos">
+                <span class="tipLay">
+                    <span for="datetime" generated="true" class="tipLayErr tipw150" style="display:none;" id="errorMsgL"><span class="tipArr"></span>请设置面试时间</span>
+                </span>
+            </span>
+			<div class="clear"></div>
+			<span id="job_list_span" class="formText" style="{/if $is_download/}display:back;{/else/}display:none;{//if/}">
+			    <select name="job_id" id="job_id">
+			        {/foreach $job_list as $key => $val/}
+			            <option value="{/$val['job_id']/}">{/$val['station']/}</option>
+			        {//foreach/}
+			    </select>
+			</span>
+        </div>
+        <input type="hidden" value="{/$download_id/}" id="download_id" name="download_id">
+        <div class="clear"></div>
+    </div>
+    <div id="inviteFormBtn" class="formBtn" style="text-align: center;margin-top: 5px;">
+        <a href="javascript:void(0);" id="btnSendInvite" class="btn1 btnsF14">确认</a>
+        <a id="btnCancelInvite" href="javascript:void(0);" class="btn3 btnsF14">取消</a>
+    </div>
+</div>
+
+<script>
+var applyid = "{/$apply_id/}";
+var is_download = "{/$is_download/}";
+var resume_id = "{/$resume_id/}";
+var hasInvite = {
+	initialize : function() {
+        //初始化控件		
+        this._initControl();
+	},
+    _initControl : function() {
+        //初始化面试日期下拉控件
+        $('#dateDrop').droplist({
+            defaultTitle : '请选择',
+            noSelectClass : 'gray',
+            inputWidth : 155,
+            style : 'width:163px;*width:167px;',
+            hddName : 'hddDate',
+            items : {/$date_json/},
+            onSelect : function(i, name) {
+                hasInvite._hideError();
+                if (i == 99) {
+                    $('#timeDrop').hide();
+                    $('#spanCustomTime').show();
+                    $('#txtCustomTime').removeAttr('disabled');
+                    $(':input[name="hddtime"]').attr('disabled', 'disabled');
+                    $('#txtCustomTime').val('');
+                } else {
+                    $('#timeDrop').show();
+                    $('#spanCustomTime').hide();
+                    $('#txtCustomTime').attr('disabled', 'disabled');
+                    $(':input[name="hddtime"]').removeAttr('disabled');
+                    $('#timeDrop').setDropListValue('');
+                }
+            }
+        });
+
+        //初始化面试时间下拉控件
+        $('#timeDrop').droplist({
+            defaultTitle : '请选择',
+            maxScroll : 10,
+            noSelectClass : 'gray',
+            inputWidth : 80,
+            style : 'width:88px;*width:95px;',
+            hddName : 'hddtime',
+            items : [
+                {id:"8:00", name:"8:00"},
+                {id:"8:30", name:"8:30"},
+                {id:"9:00", name:"9:00"},
+                {id:"9:30", name:"9:30"},
+                {id:"10:00", name:"10:00"},
+                {id:"10:30", name:"10:30"},
+                {id:"11:00", name:"11:00"},
+                {id:"11:30", name:"11:30"},
+                {id:"12:00", name:"12:00"},
+                {id:"12:30", name:"12:30"},
+                {id:"13:00", name:"13:00"},
+                {id:"13:30", name:"13:30"},
+                {id:"14:00", name:"14:00"},
+                {id:"14:30", name:"14:30"},
+                {id:"15:00", name:"15:00"},
+                {id:"15:30", name:"15:30"},
+                {id:"16:00", name:"16:00"},
+                {id:"16:30", name:"16:30"},
+                {id:"17:00", name:"17:00"},
+                {id:"17:30", name:"17:30"},
+                {id:"18:00", name:"18:00"},
+                {id:"18:30", name:"18:30"},
+                {id:"19:00", name:"19:00"},
+                {id:"19:30", name:"19:30"},
+                {id:"20:00", name:"20:00"}
+            ],
+            onSelect : function(i,name) {
+            }
+        });
+
+        //取消
+        $("#btnCancelInvite").click(function() {
+            $(this).closeDialog();
+        });
+
+        $("#txtCustomTime").focus(function() {
+             hasInvite._hideError();
+        });
+        
+        //确定
+        $("#btnSendInvite").click(function() {
+            var _this = $(this);
+            var hddDate       = $("#hddDate").val();
+            var audition_time = $("#txtCustomTime").val();
+            var hddtime       = $("#hddtime").val();
+            var job_id = 0;
+            var download_id = $("#download_id").val();
+
+            if (hddDate == 99 && audition_time == '') {
+                hasInvite._showError();
+                return false;
+            }
+
+            if (hddDate != 99 && hddDate != "" && hddtime == '') {
+                hasInvite._showError();
+                return false;
+            }
+
+            if (hddtime != "" && hddDate == "") {
+                hasInvite._showError();
+                return false;
+            }
+            if(is_download == 1){
+                job_id = $("#job_id").val();
+                if(job_id < 1 || job_id == '' || job_id == undefined){
+                    alert("请选择职位");
+                    return false;
+                }
+            }
+//            if (hddtime == "" || hddDate == "") {
+//                hasInvite._showError();
+//                return false;
+//            }
+            if(_this.hasClass("_lock")){
+                return;
+            }
+            _this.addClass("_lock");
+            $.getJSON('{/get_url rule="/apply/setInviteDo/"/}', {
+                applyid : applyid,
+                hddDate : hddDate,
+                is_download : is_download,
+                resume_id : resume_id,
+                job_id : job_id,
+                download_id : download_id,
+                audition_time : audition_time,
+                hddtime : hddtime
+            }, function (json) {
+                if (json.status) {  
+                    $.anchorMsg("设置已邀请面试成功");
+                    if(is_download == 1){
+                        download.refresh();
+                    }else{
+                        apply.refresh();
+                    }
+                } else {
+                    _this.removeClass("_lock");
+                    $.anchorMsg(json.error, {icon: 'fail'});
+                }
+            });
+        })
+    },
+    _showError : function() {
+       $("#errorMsgL").show();
+    },
+    _hideError : function() {
+       $("#errorMsgL").hide();
+    }
+}
+hasInvite.initialize();
+
+</script>

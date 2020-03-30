@@ -1,0 +1,119 @@
+<style>
+	.formMod .l{width:135px;font-size:14px;color:#666}
+	.formMod .r{width:auto}
+	.formText input.text{font-size:12px}
+</style>
+
+
+<div style="padding:30px 30px 20px 30px">
+	<div style="padding-bottom:10px">
+	    需要将&nbsp;<a href='javascript:;' style='cursor:default'>{/$station/}</a>&nbsp;的有效期延长多少天？
+	</div>
+<form id="modJobExpire">	
+	<div class="formMod mgt10">
+	    <div class="l" style="padding-left:20px">
+	        <span class="formText">
+	            延长&nbsp;<input type="text" name="valid_days" style='width:50px;height:30px'/>&nbsp;天
+	        </span>
+	        <span class="tipPos">
+	            <span class="tipLay">
+	            <span data-for="valid_days" generated="true" class="tipBar tipw120"></span></span>
+	        </span>
+	    </div>
+	    <div class="clear"></div>
+	</div>
+	<!-- <div style="padding:0px 20px;text-align: left">
+	    <label>延长&nbsp;<input type="text" name="valid_days" style='width:50px;height:30px'/>&nbsp;天</label>
+	</div> -->
+    <p style="margin-top:30px;text-align:center;padding:7px;">
+    	<a href="javascript:;" id="subButton" class="btnsF16 btn1" style="text-decoration: none">确定</a>
+    	<a href="javascript:;" id="canButton" class="btnsF16 btn3" style="text-decoration: none">取消</a>
+    </p>
+</form>
+</div>
+<script type="text/javascript">
+hbjs.use('widge.overlay.confirmBox, widge.validator.form, product.hbCommon', function(ConfirmBox, ValidatorForm, $){
+	var pWidth = 70,fontWidth = 18;
+	var form = $('#modJobExpire');	
+	
+	var rules = {
+			valid_days: {
+				required: true,
+				match: /^(0|[1-9]\d*)$/,
+				number: true,
+				rangeNum: [1, 10]
+			}
+		},
+		errorMsgs = {
+			valid_days: {
+				required: '请输入有效期<span class="tipArr"></span>',
+				match: '请输入正确的数字<span class="tipArr"></span>',
+				number: '请输入数字<span class="tipArr"></span>',
+				rangeNum: '请输入1-10<span class="tipArr"></span>'
+			}
+		}
+		
+	var validator = new ValidatorForm({
+		element: form,
+		rules: rules,
+		errorMessages: errorMsgs,
+		errorElement: 'span.tipBar',
+		groups: {
+			jobTime: 'date hours minute'
+		},
+		keepKey: true
+	});
+	
+	var tipLayErrClass = 'tipLayErr';
+	validator.on('invalid', function(e){
+		e.label.addClass(tipLayErrClass);
+	});
+	validator.on('pass', function(e){
+		e.label.removeClass(tipLayErrClass);
+	});
+	
+	form.find('#subButton').on('click', function(e){
+		submitResult();
+	});
+	form.find('#canButton').on('click', function(e){
+		modJobExpire && modJobExpire.hide();
+	});
+	
+	if(modJobExpire){
+		modJobExpire.after('hide', function(){
+			validator.destory();
+		});
+	}
+	function submitResult(){
+		validator.submit(function(e){
+			$.ajax({
+	            url:"/partjob/ModJobExpiredo/job_id-{/$jobid/}",
+	            type:"post",
+	            dataType: "json",
+	            contentType: "application/x-www-form-urlencoded; charset=utf-8",
+	            data: form.serialize(),
+	            success:function(json){	            	
+	                if(!(json.success||false)){
+						ConfirmBox.alert(json.error, null, { title: '发送失败' });
+	                    return false;
+	                }
+					modJobExpire && modJobExpire.hide();
+					var msg = json.success;
+					ConfirmBox.timeBomb(msg, {
+						name: 'success',
+						width: pWidth + msg.length * fontWidth,
+						timeout: 1000,
+						callback: function(){
+							window.location.reload();
+						}
+					});
+	                return false;
+	            }
+	        });
+	        return false;
+		});
+	}
+});
+</script>
+    
+

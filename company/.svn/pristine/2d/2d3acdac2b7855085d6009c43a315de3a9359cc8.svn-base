@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+</head>
+<body class="job">
+<form id="formjob" method="post" action="{/get_url rule='/job/JobSortDo/'/}">
+	<div class="dialogCont batch-sort" style="width:480px;">
+		<table>
+			<tr>
+				<th align="center" style="width:50px">序号</th>
+				<th align="left">职位名称</th>
+			</tr>
+		    {/foreach $joblist as $key=>$job/}
+			<tr>
+				<td align="center"><input type="text" class="text" name="txtOrderNo{/$job['job_id']/}" value="{/$key+1/}"/><input type="hidden" name="hddjobID[]" value="{/$job['job_id']/}" /></td>
+				<td align="left">{/$job['station']/}</td>
+			</tr>
+			{//foreach/}
+		</table>
+	</div>
+	<div class="dialogFooter">
+		<a class="btn1 btnsF12" href="javascript:void(0);" id="btnSortSave">保存排序</a><a class="btn3 btnsF12" href="javascript:void(0);" id="btnSortCancel">取消</a>
+	</div>
+</form>
+<script>
+var jobSort = {
+		initialize:function(){
+			// 类别保存 
+			$('#btnSortSave').click(function(){
+				 $(this).submitForm({success: jobSort.successCallBack, clearForm: false});
+			});
+			// 类别取消
+			$('#btnSortCancel').click(function(){
+				 $(this).closeDialog();
+			});
+			$("#formjob input[type='text']").live("click",function(){
+				$(this).select();
+				$(this).addClass("focus");
+			}).live("blur",function(){
+				$(this).removeClass("focus");
+			});
+		},
+		successCallBack:function(result){
+			if(result.success) {
+                $.anchorMsg("排序成功", { onclose: function() {
+                    $('#btnSortSave').closeDialog();
+                    window.location.reload();
+                }});
+			}else{
+				 $.anchorMsg("排序失败",{icon:'fail'});
+			}
+		}
+	};
+	jobSort.initialize();
+</script>
+</body>
+</html>

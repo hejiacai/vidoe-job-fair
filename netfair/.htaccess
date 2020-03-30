@@ -1,0 +1,14 @@
+RewriteEngine   On
+
+#视频招聘会
+RewriteRule ^fairList/sid-(\d{0,})$ index/JobFairList/sid-$1 [L]
+
+#RewriteRule ^xiaozhao/shuangxuanhui/sid-(\d{0,})$ schoolnet/JobFairList/sid-$1 [L]
+#RewriteRule ^xiaozhao/shuangxuanhui/center/sid-(\d{0,})$ schoolnet/JobFairList/sid-$1 [L]
+#RewriteRule ^xiaozhao/shuangxuanhui/job/jobflag-([^/]+)/sid-(\d{0,})/$	index.php/controller/job/detail/jobflag-$1-sid-$2 [L]
+
+
+RewriteCond     %{REQUEST_FILENAME}     !-f
+RewriteCond     %{REQUEST_FILENAME}     !-d
+RewriteCond     %{THE_REQUEST}          !^(.*)/assets(.*)$
+RewriteRule     ^(.*)$                  index.php/controller/$1 [L]

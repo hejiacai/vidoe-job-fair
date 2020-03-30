@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>广告都能免费，这好事能忍</title>
+<style>
+*{ padding:0px; margin:0px; font-family:"微软雅黑"; font-size:14px; list-style:none;}
+a{ text-decoration:none;}
+img{ border:none;}
+.lobbyPage01{width:auto; height:700px; background:url({/$siteurl.style/}/img/c/mustreply/lobbyPage01.jpg?t=2) center top no-repeat; overflow:hidden;}
+.lobMag{width:1000px; overflow:hidden; margin:0 auto;}
+.logo{ display:block;width:180px; height:40px; margin-top:40px;}
+.lobbyPage02{width:auto; background:url({/$siteurl.style/}/img/c/mustreply/lobbyPage02.jpg?t=2) center top no-repeat; height:163px; overflow:hidden;}
+.txt01{ font-size:16px; color:#333; line-height:26px; padding:50px 0 0 130px;}
+.navPop{width:115px;  height:265px; background:url({/$siteurl.style/}/img/c/mustreply/lobbyPagenav.png?t=2) no-repeat; overflow:hidden; position:fixed; top:225px; right:50%; margin-right:-570px;}
+.navPop a{ display:block; text-align:center; line-height:66px;height:58px; color:#fff; font-size:16px;}
+.navPop a.num{ height:42px; margin-top:28px; line-height:42px;}
+.navPop a:hover{ color:#9f8cff;}
+.lobbyPage03{width:auto; background:url({/$siteurl.style/}/img/c/mustreply/lobbyPage03.jpg) center top no-repeat; height:500px; overflow:hidden;}
+.tit{ padding:140px 0 30px 155px; color:#fff; font-size:36px;}
+.txt02{ color:#fff; line-height:32px; font-size:20px; padding-left:155px;}
+.lobbyPage04{width:auto; background:url({/$siteurl.style/}/img/c/mustreply/lobbyPage04.jpg?t=2) center top no-repeat; height:500px; overflow:hidden;}
+.lobbyPage05{width:auto; background:url({/$siteurl.style/}/img/c/mustreply/lobbyPage05.jpg?t=2) center top no-repeat; height:500px; overflow:hidden;}
+.lobbyPage06{width:auto; background:url({/$siteurl.style/}/img/c/mustreply/lobbyPage06.jpg?t=3) center top no-repeat; height:792px; overflow:hidden;}
+.tit03{ padding-top:290px; overflow:hidden;}
+.tit03 span{display:block; float:left; color:#fff; margin-left:70px;width:160px; text-align:center;}
+.txt03{ display:block; color:#fff; line-height:24px; padding:30px 0 0 86px;}
+.lobbyPage07{width:auto; background:url({/$siteurl.style/}/img/c/mustreply/lobbyPage07.jpg?t=2) center top no-repeat; height:604px; overflow:hidden;}
+
+
+.footer{width:100%; overflow:hidden; padding:20px 0px; text-align:center; line-height:24px; color:#bdb1f6;  font-size:12px; background:#59508c;}
+.lobbyPage07 div{width:806px; overflow:hidden; margin:0 auto; text-align:center;}
+.lobbyPage07 div h2{ color:#fff; color:#fff; font-size:30px; padding:40px 0 20px 0;}
+.lobbyPage07 div p{ color:#fff; line-height:24px; text-align:left; padding-bottom:5px;}
+</style>
+</head>
+
+<body>
+<div class="lobbyPage01">
+	<div class="lobMag">
+    	<a href="{/get_url rule='/' domain='main'/}" class="logo" target="_blank"></a>
+    </div>
+</div>
+<div class="navPop">
+    <a href="#a1" class="num">活动介绍</a>
+    <a href="#a2">我要参与</a>
+    <a href="#a3">相关规则</a>
+    <a href="#a4">注意事项</a>
+</div>
+<div class="lobbyPage02">
+        <a name="a1"></a>
+	<div class="lobMag">
+    	<p class="txt01">在发布（修改）职位时，承诺2个工作日内回复处理求职者投递来的简历，并按承诺及时回复求职者
+<br />即可免费获得以下特权，为职位提供曝光，提高招聘效果。</p>
+    </div>
+</div>
+<!--
+<div class="lobbyPage03">
+	<div class="lobMag">
+    	<h2 class="tit">网站首页,主屏广告位
+<br />专属专题职位推广</h2>
+        <p class="txt02">专门开辟专题页面
+<br />展示所有公司承诺简历回复的职位</p>
+    </div>
+</div>-->
+<div class="lobbyPage04">
+	<div class="lobMag">
+    	<h2 class="tit" style="padding:190px 0 30px 662px;">专属职位标识<br />职位脱颖而出</h2>
+        <p class="txt02" style="padding-left:662px;">专属职位图标,更多吸引求职者</p>
+    </div>
+</div>
+<div class="lobbyPage05">
+	<div class="lobMag">
+    	<h2 class="tit" style="padding-left:194px;">搜索职位新开分类列表
+<br />让职位脱颖而出</h2>
+        <p class="txt02" style="padding-left:194px;">求职使用最多的搜索页面
+<br />醒目位置新开职位分类
+<br />助求职者快速定位锁定承诺职位</p>
+    </div>
+</div>
+<div class="lobbyPage06">
+      <a name="a2"></a>
+	<div class="lobMag">
+        <div class="tit03">
+            <span>登录企业招聘中心</span>
+            <span>发布(修改)职位</span>
+            <span>选择承诺简历回复时间</span>
+            <span>按时回复求职者简历</span>
+        </div>
+        <div class="txt03">
+        1.登录汇博人才网企业招聘中心<br />
+        2.发布职位或修改当前职位<br />
+        3.在发布职位资料填写页面,最后简历承诺项,根据贵公司情况选择2个(5个)工作日回复求职者简历<br />
+        4.按承诺时间及时回复求职者简历，回复包括(不合适、发面试通知、已电话邀请面试)
+        </div>
+    </div>
+</div>
+<div class="lobbyPage07">
+	<div>
+             <a name="a3"></a>
+    	<h2>相关规则</h2>
+        <p>职位一旦做出承诺后，收到的简历就必须按承诺时间进行回复。</p>
+        <p>职位到期或中途停招，也需要将未回复的简历进行按时回复，逾期回复会被取消已获得特权。</p>
+        <p>针对电话面试通知求职者，请在处理时，选择“已电话邀请面试”，请如实记录，若有求职者举报到期没收到过面试通知将视为逾期简历未回复处理。</p>
+        <p>未按承诺及时回复求职者简历将会被限制20天内将不能使用简历承诺功能，多次到期未回限制时间加重。</p>
+        <p>简历回复时间：若当天16:00前收到的简历，回复时间是从当天开始计算回复时间，若当天16：00以后收到简历，第二天开始计算回复时间，按2个工作收到简历回复为例，9月1日16：00前收到简历回复截至时间为9月2日 23：59，16：00点后收到简历回复截至时间9月3日23：59</p>
+        <h2>注意事项</h2>
+        <a name="a4"></a>
+        <p>本次活动将长期进行，所有付费会员企业都能参与。</p>
+        <p>首页专题职位页面，会根据各个大行业展示承诺职位，每个职位大类将展示最新跟新或发布的职位，每个大类企业展示上限为30家，企业可以通过刷新职位将公司展示提前。</p>
+    </div>
+</div>
+<div class="footer">©{/date("Y")/} 汇博人才网 版权所有<br />招聘单位无权收取任何费用，请求职人员加强自我保护意识，按劳动法规保护自身权益，警惕虚假招聘，避免上当受骗! </div>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?fb51309e47424acd6e31c0bd2a65a5a1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<script type="text/javascript" language="javascript" src="{/version file="track.js"/}"></script>
+</body>
+</html>

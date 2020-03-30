@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<meta name="Keywords" content=""/>
+	<meta name="Description" content=""/>
+	<title>老板高管介绍</title>
+	<link rel="stylesheet" type="text/css" href="{/version file='base.css'/}"/>
+	<link rel="stylesheet" type="text/css" href="{/version file='comback.css'/}"/>
+	<link rel="stylesheet" type="text/css" href="{/version file='wechat.css'/}"/>
+        <link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}" />
+	<link rel="stylesheet" type="text/css" href="{/version file="v2-widge.css"/}"/>
+	<link rel="stylesheet" type="text/css" href="{/version file='companyStyle.css'/}"/>
+	<!–[if lt IE9]>
+	<script src="{/version file="html5.js"/}"></script>
+	<![endif]–>
+	<script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.min.js'/}"></script>
+	<script type="text/javascript" language="javascript" src="{/version file='ui_uploadify.js'/}"></script>
+	<script type="text/javascript" language="javascript" src="{/version file='dialog.js'/}"></script>
+	{/$up_img_html.hand_html/}
+
+
+	<script type="text/javascript" src="{/version file='version.js'/}"></script>
+	<script type="text/javascript">
+		window.CONFIG = {
+			HOST: '{/$siteurl.style/}',
+			COMBOPATH: '/js/v2/'
+		}
+	</script>
+	<script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+
+	<script type="text/javascript" src="{/version file='global.js'/}"></script>
+    <style>
+        a{
+            cursor: pointer;
+        }
+		input::-webkit-input-placeholder {
+			color: #aab2bd;
+		}
+		textarea::-webkit-input-placeholder {
+			color: #aab2bd;
+		}
+		body{
+			margin-top: 0px !important;
+		}
+		.my_border {padding: 20px 10px 0 10px;}
+		.step-tit {background-color: #fff;}
+		.my_but {float: right;}
+		#just_go_next {margin-right: 10px; background-color: #27a8e3;color: #fff;border: none;padding: 0 15px;height: 25px;border-radius: 2px;font-weight: bold}
+		#go_next {background-color: #27a8e3;color: #fff;border: none;height: 25px;border-radius: 2px;font-weight: bold;padding: 0 15px;}
+	</style>
+	<link rel="stylesheet" type="text/css" href="{/version file='new_step.css'/}" />
+</head>
+<body>
+
+{/if $step==3/}
+{/include file='register/register_head.html' head_step=3/}
+{/else/}
+{/*include 'new_header.html' cur='企业管理'*/}
+{/include file="new_header.html" par="企业管理" cur="企业环境"/}
+{//if/}
+<div class="companyStyleAll">
+	{/if $step==3/}
+	<div class="my_border">
+		<div class="step-tit">
+			<i class="icon-face"></i>请完善企业风采，让求职者更了解您的企业，增加简历投递量
+			<div class="my_but">
+				<button id="just_go_next">暂不完善企业风采</button>
+				<button id="go_next">下一步</button>
+			</div>
+		</div>
+	</div>
+	
+	{//if/}
+	<div class="companyStyle-mgent-title clearfix" style="position: relative">
+		<div class="companyStyle-title">
+			<a href="{/get_url rule='/environment/index'/}?step={/$step/}" class="appeal-title-item appeal-title-item1">企业图片展示</a>
+			<a href="{/get_url rule='/introduceProject/index'/}?step={/$step/}" class="appeal-title-item appeal-title-item2">产品/项目介绍</a>
+			<a href="{/get_url rule='/introduceManage/index'/}?step={/$step/}" class="appeal-title-item appeal-title-item3 cur">老板/高管介绍</a>
+		</div>
+	</div>
+	<div class="companyStyle-cont" id="appealMgent" style="padding-bottom: 30px;">
+
+		<div class="companyStyle-cont-lit clearfix">
+			<span>最多可添加5人</span>
+			<a class="addProject" onclick="addProject()" {/if $introduceAmount>=5||$introduceAmount<1/} style="display:none"{//if/}>添加</a>
+		</div>
+
+        <div id="introduce_list">
+		{/$introduce_list/}
+        </div>
+		<div id="addintroduce_edit">
+
+		</div>
+	</div>
+</div>
+{/include file="footer.html"/}
+{/include file="chat/chat.html"/}
+</body>
+</html>
+<script>
+	var confirmBox, Dialog;
+	hbjs.use('@dialog,@confirmBox', function (m) {
+
+		var $ = m['jquery'];
+		confirmBox = m['widge.overlay.confirmBox'];
+		Dialog = m['widge.overlay.hbDialog'];
+	});
+
+	//错误提示 success-成功 fail-错误 warning-警告 question-疑问  info-信息 normal-正常
+	function msg_error_box(msg) {
+		confirmBox.timeBomb(msg ? msg : "参数错误!", {
+			name: 'fail',
+			timeout: 2000,
+			width: 70 + msg.length * 18
+		});
+		return false;
+	}
+
+	//成功提示 success-成功 fail-错误 warning-警告 question-疑问  info-信息 normal-正常
+	function msg_success_box(msg) {
+		confirmBox.timeBomb(msg ? msg : "成功!", {
+			name: 'success',
+			timeout: 1000,
+			width: 70 + msg.length * 18
+		});
+		return true;
+	}
+	function ajax_function(url, data, success_c, async, type) {
+		success_c = success_c ? success_c : {
+			success: function (data) {
+
+			},
+			error: function (data) {
+
+			}
+		};
+		type = type ? type : 'POST';
+		async = async ? async : false;//是否同步请求  //false-同步请求
+		if (!url || !success_c) {
+			layer.msg('参数错误', {icon: 5});
+		}
+		var re = false;
+		$.ajax({
+			type: type,
+			url: url,
+			data: data,//只要将表单序列化就可以了
+			async: async,//false-同步请求
+			dataType: 'json',
+			success: function (data) {
+				re = success_c.success(data);
+			},
+			error: function (request) {
+				layer.msg("数据请求失败.请稍后重试", {icon: 7});
+				re = success_c.error(request);
+				re = false;
+			}
+		});
+		return re;
+	}
+</script>
+<script>
+    $(function(){
+        var introduceAmount = '{/$introduceAmount/}';
+        var id = 0;
+        if (introduceAmount==0){
+            var url = "{/get_url rule='/introduceManage/IntroduceManageEdit'/}",
+                data = {id: id};
+            is_layer_index = false;
+            ajax_function(url, data, {
+                success: function (data) {
+                    if (data.status) {
+                        /*is_addProject = true;*/
+                        $('#addintroduce_edit').html(data.re_html);
+                    }else{
+                        $.anchorMsg(data.msg, {icon: 'fail'});
+                    }
+                }
+            });
+        }
+    })
+</script>
+<script>
+	//添加/编辑
+	var is_addProject = false;
+	function addProject(id) {
+		if (is_addProject) {
+			$("html,body").animate({scrollTop: $("#introdice_name").offset().top}, 1500)
+			return false;
+		}
+		var url = "{/get_url rule="/introduceManage/IntroduceManageEdit"/}",
+				data = {id: id};
+		is_layer_index = false;
+		ajax_function(url, data, {
+			success: function (data) {
+				if (data.status) {
+					$('#addintroduce_edit').html(data.re_html);
+//					$('#introdice_name').focus();
+					$("html,body").animate({scrollTop: $("#addintroduce_edit #introdice_name").offset().top}, 1500)
+                    /*confirmBox.timeBomb("添加成功", {
+                        timeout : 1000,
+                        name : "success",
+                    })*/
+
+
+				}else{
+                    if (data.isNeedLogin) {
+                        $.anchorMsg('离开太久了,请重新登录!', {icon: 'fail'});
+                    }else{
+                        $.anchorMsg(data.msg, {icon: 'fail'});
+                    }
+				}
+			}
+		});
+	}
+	//修改
+	function introduce_edit(id){
+        var url = "{/get_url rule="/introduceManage/IntroduceManageEdit"/}",
+            data = {id: id};
+        is_layer_index = false;
+        ajax_function(url, data, {
+            success: function (data) {
+                if (data.status) {
+                    is_addProject = false;
+                    $('#editul_'+id).hide();
+                    $('#edit_'+id).html(data.re_html);
+                }else{
+                    if (data.isNeedLogin) {
+                        $.anchorMsg('离开太久了,请重新登录!', {icon: 'fail'});
+                    }else{
+                        $.anchorMsg(data.msg, {icon: 'fail'});
+                    }
+				}
+            }
+        });
+	}
+
+	//删除
+	function introduce_del(id) {
+       confirmBox.confirm("确定要删除此团队人员的介绍？", "提示", function (obj) {
+            this.hide();
+           var url = "{/get_url rule="/introduceManage/DelIntroduceManage"/}",
+               data = {id: id};
+           is_layer_index = false;
+           ajax_function(url, data, {
+               success: function (data) {
+                   if (data.status) {
+					  /* $('#introduce_list').html(data.introduce_list);
+                       if (data.count>=5){
+                           $('.addProject').hide();
+                       }else if(data.count==0){
+                           $('.addProject').hide();
+                           $('#addintroduce_edit').html(data.re_html);
+                       }else{
+                           $('.addProject').show();
+                       }*/
+                       $.anchorMsg(data.msg, {icon: 'success'});
+                       window.location.reload();
+                   }else{
+                       if (data.isNeedLogin) {
+                           $.anchorMsg('离开太久了,请重新登录!', {icon: 'fail'});
+                       }else{
+                           $.anchorMsg(data.msg, {icon: 'fail'});
+                       }
+				   }
+               }
+           });
+        }, {width: 300});
+
+	}
+    $("#just_go_next").click(function () {
+        //todo 增加弹框确认
+
+        setTimeout('window.location.href = "{/$siteurl.company|replace:"http:":""/}/register/add";',1000);
+        return false;
+    })
+
+    $("#go_next").click(function () {
+        setTimeout('window.location.href = "{/$siteurl.company|replace:"http:":""/}/register/add";',1000);
+        return false;
+    })
+</script>

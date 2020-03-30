@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="47b877da-86cf-489f-ae52-6059858f87fd" name="默认的" comment="企业资料-发布优化" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution>
+      <executable />
+    </execution>
+  </component>
+  <component name="ProjectId" id="1SoOjPuQAGM9Gfx5Np4uVZq3WWK" />
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration" cleanupOnStartRun="true">
+    <configuration>C:\Users\Administrator\AppData\Roaming\Subversion</configuration>
+    <supportedVersion>125</supportedVersion>
+    <option name="FORCE_UPDATE" value="true" />
+  </component>
+  <component name="SvnFileUrlMappingImpl">
+    <option name="myMappingRoots">
+      <list>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="E:\company" />
+          <option name="myCopyRoot" value="E:\company" />
+        </SvnCopyRootSimple>
+      </list>
+    </option>
+    <option name="myMoreRealMappingRoots">
+      <list>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="E:\company" />
+          <option name="myCopyRoot" value="E:\company" />
+        </SvnCopyRootSimple>
+      </list>
+    </option>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="47b877da-86cf-489f-ae52-6059858f87fd" name="默认的" comment="" />
+      <created>1572226616413</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1572226616413</updated>
+      <workItem from="1572226617669" duration="1217000" />
+      <workItem from="1572229630672" duration="2000" />
+      <workItem from="1572313195938" duration="22633000" />
+      <workItem from="1572485904389" duration="9054000" />
+      <workItem from="1572587371250" duration="2636000" />
+      <workItem from="1572834138070" duration="908000" />
+      <workItem from="1573195608037" duration="11691000" />
+      <workItem from="1573434377016" duration="29644000" />
+      <workItem from="1573520850189" duration="35460000" />
+      <workItem from="1573713426122" duration="7895000" />
+    </task>
+    <task id="LOCAL-00189" summary="企业资料-发布优化">
+      <created>1573522058161</created>
+      <option name="number" value="00189" />
+      <option name="presentableId" value="LOCAL-00189" />
+      <option name="project" value="LOCAL" />
+      <updated>1573522058161</updated>
+    </task>
+    <task id="LOCAL-00190" summary="企业资料-发布优化">
+      <created>1573522128169</created>
+      <option name="number" value="00190" />
+      <option name="presentableId" value="LOCAL-00190" />
+      <option name="project" value="LOCAL" />
+      <updated>1573522128169</updated>
+    </task>
+    <task id="LOCAL-00191" summary="企业资料-发布优化">
+      <created>1573522262181</created>
+      <option name="number" value="00191" />
+      <option name="presentableId" value="LOCAL-00191" />
+      <option name="project" value="LOCAL" />
+      <updated>1573522262181</updated>
+    </task>
+    <task id="LOCAL-00192" summary="企业资料-发布优化">
+      <created>1573522746225</created>
+      <option name="number" value="00192" />
+      <option name="presentableId" value="LOCAL-00192" />
+      <option name="project" value="LOCAL" />
+      <updated>1573522746225</updated>
+    </task>
+    <task id="LOCAL-00193" summary="企业资料-发布优化">
+      <created>1573527897600</created>
+      <option name="number" value="00193" />
+      <option name="presentableId" value="LOCAL-00193" />
+      <option name="project" value="LOCAL" />
+      <updated>1573527897600</updated>
+    </task>
+    <task id="LOCAL-00194" summary="企业资料-发布优化">
+      <created>1573527975598</created>
+      <option name="number" value="00194" />
+      <option name="presentableId" value="LOCAL-00194" />
+      <option name="project" value="LOCAL" />
+      <updated>1573527975598</updated>
+    </task>
+    <task id="LOCAL-00195" summary="企业资料-发布优化">
+      <created>1573528279619</created>
+      <option name="number" value="00195" />
+      <option name="presentableId" value="LOCAL-00195" />
+      <option name="project" value="LOCAL" />
+      <updated>1573528279619</updated>
+    </task>
+    <task id="LOCAL-00196" summary="企业资料-发布优化">
+      <created>1573528584666</created>
+      <option name="number" value="00196" />
+      <option name="presentableId" value="LOCAL-00196" />
+      <option name="project" value="LOCAL" />
+      <updated>1573528584666</updated>
+    </task>
+    <task id="LOCAL-00197" summary="企业资料-发布优化">
+      <created>1573528806683</created>
+      <option name="number" value="00197" />
+      <option name="presentableId" value="LOCAL-00197" />
+      <option name="project" value="LOCAL" />
+      <updated>1573528806683</updated>
+    </task>
+    <task id="LOCAL-00198" summary="企业资料-发布优化">
+      <created>1573530045763</created>
+      <option name="number" value="00198" />
+      <option name="presentableId" value="LOCAL-00198" />
+      <option name="project" value="LOCAL" />
+      <updated>1573530045764</updated>
+    </task>
+    <task id="LOCAL-00199" summary="企业资料-发布优化">
+      <created>1573530238756</created>
+      <option name="number" value="00199" />
+      <option name="presentableId" value="LOCAL-00199" />
+      <option name="project" value="LOCAL" />
+      <updated>1573530238756</updated>
+    </task>
+    <task id="LOCAL-00200" summary="企业资料-发布优化">
+      <created>1573530683793</created>
+      <option name="number" value="00200" />
+      <option name="presentableId" value="LOCAL-00200" />
+      <option name="project" value="LOCAL" />
+      <updated>1573530683793</updated>
+    </task>
+    <task id="LOCAL-00201" summary="企业资料-发布优化">
+      <created>1573530861824</created>
+      <option name="number" value="00201" />
+      <option name="presentableId" value="LOCAL-00201" />
+      <option name="project" value="LOCAL" />
+      <updated>1573530861824</updated>
+    </task>
+    <task id="LOCAL-00202" summary="企业资料-发布优化">
+      <created>1573531101825</created>
+      <option name="number" value="00202" />
+      <option name="presentableId" value="LOCAL-00202" />
+      <option name="project" value="LOCAL" />
+      <updated>1573531101825</updated>
+    </task>
+    <task id="LOCAL-00203" summary="企业资料-发布优化">
+      <created>1573531362836</created>
+      <option name="number" value="00203" />
+      <option name="presentableId" value="LOCAL-00203" />
+      <option name="project" value="LOCAL" />
+      <updated>1573531362837</updated>
+    </task>
+    <task id="LOCAL-00204" summary="企业资料-发布优化">
+      <created>1573535665257</created>
+      <option name="number" value="00204" />
+      <option name="presentableId" value="LOCAL-00204" />
+      <option name="project" value="LOCAL" />
+      <updated>1573535665257</updated>
+    </task>
+    <task id="LOCAL-00205" summary="企业资料-发布优化">
+      <created>1573537026322</created>
+      <option name="number" value="00205" />
+      <option name="presentableId" value="LOCAL-00205" />
+      <option name="project" value="LOCAL" />
+      <updated>1573537026323</updated>
+    </task>
+    <task id="LOCAL-00206" summary="企业资料-发布优化">
+      <created>1573537618358</created>
+      <option name="number" value="00206" />
+      <option name="presentableId" value="LOCAL-00206" />
+      <option name="project" value="LOCAL" />
+      <updated>1573537618358</updated>
+    </task>
+    <task id="LOCAL-00207" summary="企业资料-发布优化">
+      <created>1573537641338</created>
+      <option name="number" value="00207" />
+      <option name="presentableId" value="LOCAL-00207" />
+      <option name="project" value="LOCAL" />
+      <updated>1573537641339</updated>
+    </task>
+    <task id="LOCAL-00208" summary="企业资料-发布优化">
+      <created>1573537752333</created>
+      <option name="number" value="00208" />
+      <option name="presentableId" value="LOCAL-00208" />
+      <option name="project" value="LOCAL" />
+      <updated>1573537752333</updated>
+    </task>
+    <task id="LOCAL-00209" summary="企业资料-发布优化">
+      <created>1573538372412</created>
+      <option name="number" value="00209" />
+      <option name="presentableId" value="LOCAL-00209" />
+      <option name="project" value="LOCAL" />
+      <updated>1573538372412</updated>
+    </task>
+    <task id="LOCAL-00210" summary="企业资料-发布优化">
+      <created>1573538621442</created>
+      <option name="number" value="00210" />
+      <option name="presentableId" value="LOCAL-00210" />
+      <option name="project" value="LOCAL" />
+      <updated>1573538621442</updated>
+    </task>
+    <task id="LOCAL-00211" summary="企业资料-发布优化">
+      <created>1573538823470</created>
+      <option name="number" value="00211" />
+      <option name="presentableId" value="LOCAL-00211" />
+      <option name="project" value="LOCAL" />
+      <updated>1573538823470</updated>
+    </task>
+    <task id="LOCAL-00212" summary="企业资料-发布优化">
+      <created>1573538866465</created>
+      <option name="number" value="00212" />
+      <option name="presentableId" value="LOCAL-00212" />
+      <option name="project" value="LOCAL" />
+      <updated>1573538866465</updated>
+    </task>
+    <task id="LOCAL-00213" summary="企业资料-发布优化">
+      <created>1573538937451</created>
+      <option name="number" value="00213" />
+      <option name="presentableId" value="LOCAL-00213" />
+      <option name="project" value="LOCAL" />
+      <updated>1573538937451</updated>
+    </task>
+    <task id="LOCAL-00214" summary="企业资料-发布优化">
+      <created>1573539481511</created>
+      <option name="number" value="00214" />
+      <option name="presentableId" value="LOCAL-00214" />
+      <option name="project" value="LOCAL" />
+      <updated>1573539481511</updated>
+    </task>
+    <task id="LOCAL-00215" summary="企业资料-发布优化">
+      <created>1573539565518</created>
+      <option name="number" value="00215" />
+      <option name="presentableId" value="LOCAL-00215" />
+      <option name="project" value="LOCAL" />
+      <updated>1573539565518</updated>
+    </task>
+    <task id="LOCAL-00216" summary="企业资料-发布优化">
+      <created>1573539731513</created>
+      <option name="number" value="00216" />
+      <option name="presentableId" value="LOCAL-00216" />
+      <option name="project" value="LOCAL" />
+      <updated>1573539731513</updated>
+    </task>
+    <task id="LOCAL-00217" summary="企业资料-发布优化">
+      <created>1573541255641</created>
+      <option name="number" value="00217" />
+      <option name="presentableId" value="LOCAL-00217" />
+      <option name="project" value="LOCAL" />
+      <updated>1573541255641</updated>
+    </task>
+    <task id="LOCAL-00218" summary="企业资料-发布优化">
+      <created>1573541380659</created>
+      <option name="number" value="00218" />
+      <option name="presentableId" value="LOCAL-00218" />
+      <option name="project" value="LOCAL" />
+      <updated>1573541380659</updated>
+    </task>
+    <task id="LOCAL-00219" summary="企业资料-发布优化">
+      <created>1573541481640</created>
+      <option name="number" value="00219" />
+      <option name="presentableId" value="LOCAL-00219" />
+      <option name="project" value="LOCAL" />
+      <updated>1573541481640</updated>
+    </task>
+    <task id="LOCAL-00220" summary="企业资料-发布优化">
+      <created>1573544139861</created>
+      <option name="number" value="00220" />
+      <option name="presentableId" value="LOCAL-00220" />
+      <option name="project" value="LOCAL" />
+      <updated>1573544139861</updated>
+    </task>
+    <task id="LOCAL-00221" summary="企业资料-发布优化">
+      <created>1573544293941</created>
+      <option name="number" value="00221" />
+      <option name="presentableId" value="LOCAL-00221" />
+      <option name="project" value="LOCAL" />
+      <updated>1573544293941</updated>
+    </task>
+    <task id="LOCAL-00222" summary="企业资料-发布优化">
+      <created>1573544335874</created>
+      <option name="number" value="00222" />
+      <option name="presentableId" value="LOCAL-00222" />
+      <option name="project" value="LOCAL" />
+      <updated>1573544335874</updated>
+    </task>
+    <task id="LOCAL-00223" summary="企业资料-发布优化">
+      <created>1573544660894</created>
+      <option name="number" value="00223" />
+      <option name="presentableId" value="LOCAL-00223" />
+      <option name="project" value="LOCAL" />
+      <updated>1573544660894</updated>
+    </task>
+    <task id="LOCAL-00224" summary="企业资料-发布优化">
+      <created>1573552883509</created>
+      <option name="number" value="00224" />
+      <option name="presentableId" value="LOCAL-00224" />
+      <option name="project" value="LOCAL" />
+      <updated>1573552883509</updated>
+    </task>
+    <task id="LOCAL-00225" summary="企业资料-发布优化">
+      <created>1573616645061</created>
+      <option name="number" value="00225" />
+      <option name="presentableId" value="LOCAL-00225" />
+      <option name="project" value="LOCAL" />
+      <updated>1573616645061</updated>
+    </task>
+    <task id="LOCAL-00226" summary="企业资料-发布优化">
+      <created>1573616803044</created>
+      <option name="number" value="00226" />
+      <option name="presentableId" value="LOCAL-00226" />
+      <option name="project" value="LOCAL" />
+      <updated>1573616803044</updated>
+    </task>
+    <task id="LOCAL-00227" summary="企业资料-发布优化">
+      <created>1573625471774</created>
+      <option name="number" value="00227" />
+      <option name="presentableId" value="LOCAL-00227" />
+      <option name="project" value="LOCAL" />
+      <updated>1573625471774</updated>
+    </task>
+    <task id="LOCAL-00228" summary="企业资料-发布优化">
+      <created>1573630549170</created>
+      <option name="number" value="00228" />
+      <option name="presentableId" value="LOCAL-00228" />
+      <option name="project" value="LOCAL" />
+      <updated>1573630549170</updated>
+    </task>
+    <task id="LOCAL-00229" summary="企业资料-发布优化">
+      <created>1573630640181</created>
+      <option name="number" value="00229" />
+      <option name="presentableId" value="LOCAL-00229" />
+      <option name="project" value="LOCAL" />
+      <updated>1573630640181</updated>
+    </task>
+    <task id="LOCAL-00230" summary="企业资料-发布优化">
+      <created>1573632707298</created>
+      <option name="number" value="00230" />
+      <option name="presentableId" value="LOCAL-00230" />
+      <option name="project" value="LOCAL" />
+      <updated>1573632707298</updated>
+    </task>
+    <task id="LOCAL-00231" summary="企业资料-发布优化">
+      <created>1573633695402</created>
+      <option name="number" value="00231" />
+      <option name="presentableId" value="LOCAL-00231" />
+      <option name="project" value="LOCAL" />
+      <updated>1573633695402</updated>
+    </task>
+    <task id="LOCAL-00232" summary="企业资料-发布优化">
+      <created>1573643326153</created>
+      <option name="number" value="00232" />
+      <option name="presentableId" value="LOCAL-00232" />
+      <option name="project" value="LOCAL" />
+      <updated>1573643326153</updated>
+    </task>
+    <task id="LOCAL-00233" summary="企业资料-发布优化">
+      <created>1573643430149</created>
+      <option name="number" value="00233" />
+      <option name="presentableId" value="LOCAL-00233" />
+      <option name="project" value="LOCAL" />
+      <updated>1573643430149</updated>
+    </task>
+    <task id="LOCAL-00234" summary="企业资料-发布优化">
+      <created>1573644908238</created>
+      <option name="number" value="00234" />
+      <option name="presentableId" value="LOCAL-00234" />
+      <option name="project" value="LOCAL" />
+      <updated>1573644908238</updated>
+    </task>
+    <task id="LOCAL-00235" summary="企业资料-发布优化">
+      <created>1573644977279</created>
+      <option name="number" value="00235" />
+      <option name="presentableId" value="LOCAL-00235" />
+      <option name="project" value="LOCAL" />
+      <updated>1573644977279</updated>
+    </task>
+    <task id="LOCAL-00236" summary="企业资料-发布优化">
+      <created>1573645515306</created>
+      <option name="number" value="00236" />
+      <option name="presentableId" value="LOCAL-00236" />
+      <option name="project" value="LOCAL" />
+      <updated>1573645515306</updated>
+    </task>
+    <task id="LOCAL-00237" summary="企业资料-发布优化">
+      <created>1573714993583</created>
+      <option name="number" value="00237" />
+      <option name="presentableId" value="LOCAL-00237" />
+      <option name="project" value="LOCAL" />
+      <updated>1573714993584</updated>
+    </task>
+    <option name="localTasksCounter" value="238" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="转发到邮箱功能优化" />
+    <MESSAGE value="面试爽约优化" />
+    <MESSAGE value="转发邮箱重复弹窗" />
+    <MESSAGE value="转发邮箱重复提示" />
+    <MESSAGE value="样式更改" />
+    <MESSAGE value="企业资料-发布优化" />
+    <option name="LAST_COMMIT_MESSAGE" value="企业资料-发布优化" />
+  </component>
+</project>

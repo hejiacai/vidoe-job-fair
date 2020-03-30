@@ -1,0 +1,990 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+<title>{/$title/}</title>
+<!–[if lt IE9]>
+<script src="{/version file='html5.js'/}"></script>
+<![endif]–>
+<link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='comback.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}" />
+
+
+<script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.min.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='common.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='dialog.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='jquery.form.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='ui_inputFocus.js'/}"></script>
+
+<script type="text/javascript" language="javascript" src="{/version file='ui_dropdownlist.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='ui_validate.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='ui_area.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='ui_uploadify.js'/}"></script>
+<script type="text/javascript" src="//api.map.baidu.com/api?v=2.0&ak=33f9256a1a1ba5a80eb40f8ed45bce3c"></script>
+
+
+<script type="text/javascript" src="{/version file='version.js'/}"></script>
+<script type="text/javascript">
+window.CONFIG = {
+	HOST: '{/$siteurl.style/}',
+	COMBOPATH: '/js/v2/'
+}
+</script>
+<script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+<script type="text/javascript" src="{/version file='global.js'/}"></script>
+
+
+<style type="text/css">
+.section .mod{}
+.section .mod h2{font-size:18px;height:35px;line-height:35px;border-bottom:1px solid #dadada;padding:0 0 0 20px;}
+.mod #floagMap { display:none;}
+.mod .formMod .l{width:195px;}
+.mod .formMod .r{width:755px;}
+.mod .form{padding:20px 0 15px;}
+
+#fstNav hgroup{padding:10px 40px; z-index:1}
+.rate{overflow:hidden;line-height:30px;}
+.rate b{float:left;display:inline;width:85px;}
+.rate .bar{float:left;display:inline;margin:7px 10px 0;width:175px;}
+.rate .rateNav{float:left;display:inline;margin:0 0 0 23px;width:610px;}
+.rate .rateNav a{margin:0 5px;font-size:12px;}
+
+section.sectionFix{position:fixed;top:0;left:50%;z-index:1002;margin-left:-500px;*margin-left:-501px;_margin-left:auto;width:1000px;border-bottom:1px solid #dadada;filter:alpha(opacity=90);-moz-opacity:0.9;-khtml-opacity: 0.9;opacity:0.9;}
+.fstBack{height:65px;display:none;}
+.fstBackShow{display:block;_display:none;}
+
+.comNTxt{ z-index:2;}
+.comNTxt .tipLay{top:31px;left:-85px;}
+.comNTxt .tipLay .tipArr{top:-4px;left:36px;width:8px;height:5px;background:url({/$siteurl.style/}/img/common/contrl.gif) no-repeat 0 0; z-index:2}
+.comNTxt .tipLay .tipLayTxt{background:#fffce3;border:1px solid #fad5a8;width:390px;padding:0 5px 5px; position:relative; z-index:1;line-height:22px;}
+.comNTxt .tipLay .tipLayTxt .closeThis{ position:absolute;font-size:12px;right:7px;top:4px;}
+.comNTxt .tipLay .tipLayTxt p img{ vertical-align:middle;}
+
+.logoImg{clear:both;width:100%;float:left; position:relative; z-index:1;width:185px;margin:10px 0 0;border:1px solid #dadada;height:70px;background:url({/$siteurl.style/}/img/common/loadBox.gif) no-repeat center center;}
+.logoImg img{width:185px;height:70px;}
+.logoImg a.del{ position:absolute;right:-10px;top:-10px;font-size:22px;color:#D84D14;background:#fff;}
+.logoImg a.del:hover{color:#cb4647;}
+
+.touPeo{ z-index:2;}
+.touPeo .tipLay{display:none;}
+
+.formBtn{margin:25px 0 0 120px;}
+
+.imgLst{clear:both;width:730px;float:left;margin:15px 0 0;display:inline;}
+.imgLst ul li{float:left;display:inline; position:relative; z-index:1;width:122px;height:125px;margin:0 24px 5px 0;}
+.imgLst ul li .pic{height:82px;}
+.imgLst ul li .pic img{width:120px;height:80px;border:1px solid #dadada;}
+.imgLst ul li a.del{position:absolute;right:-10px;top:-10px;font-size:22px;color:#D84D14;background:#fff; border-radius:15px;}
+.imgLst ul li a.del:hover{color:#cb4647;}
+.imgLst ul li .imgInp{margin:5px 0 0;}
+.imgLst ul li .imgInp input.imgTxt{height:22px;line-height:22px;border:1px solid #fff;font-size:12px;width:120px; text-align:center; cursor:pointer;}
+.imgLst ul li .imgInp input.imgTxtHov{border:1px solid #dadada;}
+.imgLst ul li .load{display:none;width:120px;height:80px;border:1px solid #eaeaea;background:url({/$siteurl.style/}/img/common/loadBox.gif) no-repeat center center;}
+.imgLst ul li .loadTxt{ text-align:center;font-size:12px;display:none;height:24px;line-height:24px;margin-top:5px;}
+
+.imgLst ul li.hov .imgInp input.imgTxt{border:1px solid #aaa;}
+.imgLst ul li.hov .pic img{border:1px solid #cbcbcb}
+.imgLst ul li.imgLoading .load{display:block;}
+.imgLst ul li.imgLoading .loadTxt{display:block;}
+.imgLst ul li.imgLoading .pic,.imgLst ul li.imgLoading .imgInp,.imgLst ul li.imgLoading a.del{display:none;}
+
+
+.comVd .tipTxt i.hbFntWes{font-size:18px;margin:0 5px 0 0; vertical-align:middle;}
+
+.mod .formMod .r .formFile{ position:relative; z-index:1;}
+.mod .formMod .r .formFile .swfUploadBtn{ position:absolute;left:0;top:0;}
+.formTextarea textarea.textarea{width:500px;}
+
+.flitem{display: inline-block;padding: 2px 10px;margin-right:10px;margin-top: 2px;color:#666;border:1px solid #ececec;line-height: 22px;border-radius: 2px;font-size:12px}
+/*#selectedReward a{margin-top: 7px;display: inline-block;font-size:12px}*/
+.upLOGO{display: inline-block;width:103px;height: 103px;overflow: hidden;position: relative}
+.upLOGO span{display: none}
+.upLOGO:hover span{display: block;position: absolute;bottom:0px;left:0px;width:103px;text-align: center;height: 25px;background-color: #000;color:#fff;z-index: 2;font-size:12px;line-height: 25px;}
+#addr:hover{ text-decoration:underline;}
+.mapClose{width:24px; height:24px; display:block; text-align:center; line-height:24px; color:#fff; background:#333; font-family:Arial, Helvetica, sans-serif; float:left;}
+.mapClose:hover{ background:#0cf; color:#fff;}
+/*浮动地图*/
+
+.formMod .icon-square{
+	margin: 0 0 7px 5px;
+}
+.icon-square{
+	background-color:#f2f2f2;color:#666;
+	display:inline-block;padding:3px 10px;font-family:"微软雅黑";
+}
+.icon-square:hover {
+    background-color:#eaffcc;color:#666;
+}
+.icon-square .hbIconMoon{
+	font-size:14px;color:#cacaca;margin-left:5px;
+}
+.icon-checked-square, .icon-checked-square:hover{
+	background-color:#599403;color:#fff;
+}
+.icon-checked-square .hbIconMoon{
+	color:#fff;
+}
+.editComapnyShort{
+	color: red;
+    display: block;
+    padding-left: 205px;
+    padding-top: 10px;
+}
+#sid{
+	height: 35px;
+	line-height: 35px;
+	border: 1px solid #cfcfcf;
+	width: 430px;
+	display: block;
+}
+.signPositionTab{width:410px; border: 1px solid #cfcfcf; margin:20px 0 0 125px;}
+.signPositionTab tr td,.signPositionTab tr th{border: 1px solid #cfcfcf; padding: 10px;}
+.signPositionTab tr th{ background: #f6f7f8;}
+
+#hidRightSpot {height: 60px;}
+.showTip {margin-left: 205px;margin-right: 248px;position: relative;}
+.showTip .tip {display: none;padding: 10px;box-sizing: border-box;color: #666;font-size: 14px;background:rgba(244,247,249,1);box-shadow:0px 2px 5px 0px rgba(239,239,239,0.75);position: absolute;z-index: 9999;top: 28px;}
+.showTip .example {color: #2B6FAC;font-weight: 400;width: 28px;cursor: default;}
+.showTip .example:hover {color: #0af;}
+.showTip .example:hover + .tip {display: block;}
+.showTip .tip::before {content: '';position: absolute;border-width: 10px;border-color: transparent transparent rgba(244,247,249,1) transparent;border-style: solid;top: -14px;left: 6px;}
+</style>
+</head>
+<body id="body">
+{/include 'new_header.html' cur="视频校招"/}
+<div class="content" id="content">
+    <div class="fstBack" id="fstBack"></div>
+    <section class="section">
+        <h1 style="text-align: center;padding-top: 20px"><b>视频招聘会（校招）报名表</b></h1>
+        <hgroup>
+            <div class="mod">
+                <h2 id="jbzl" class="yahei">基本资料</h2>
+                <div class="form">
+                <form id="baseInforForm">
+
+                    <div class="formMod">
+                        <div class="l" style="line-height: 35px;">报名场次<i>*</i></div>
+                        <div class="r">
+                            <select   name="sid" id="sid">
+                                {/foreach $shuangxuannet as $val/}
+                                    <option value="{/$val['id']/}" {/if $sid==$val['id']/}selected="selected"{//if/}>{/$val['title']/}</option>
+                                {//foreach/}
+                            </select>
+                            <span class="tipPos">
+                                <span class="tipLay">
+                                </span>
+                            </span>
+                        </div>
+                        <div class="formMod">
+                            <a id="logo"></a>
+                            <input id="hidLogo" name="hidden_logo" type="hidden" value="{/$company['company_logo_path']/}"/>
+                            <input id="hidDeleteLogo" name="hidden_del_logo" type="hidden" value="{/$company['company_logo_path']/}"/>
+                            <div class="l">logo图片</div>
+                            <div class="r">
+                                <style>
+                                    .upLOGO{display: inline-block;width:103px;height: 103px;overflow: hidden;position: relative; float: left;}
+                                    .upLOGO span{display: none}
+                                    .upLOGO:hover span{display: block;position: absolute;bottom:0px;left:0px;width:103px;text-align: center;height: 25px;background-color: #000;color:#fff;z-index: 2;font-size:12px;line-height: 25px}
+                                    .upLOGO_label{width:415px; float: left; height:40px; line-height: 20px;padding: 30px 0px; color:#ccc;}
+                                </style>
+                                <a href="javascript:;" id="upLOGO" class="upLOGO">
+                                    <img src="{/$logo/}" width="103px" height="103px" />
+                                    <span>上传LOGO</span>
+                                </a>
+                                <p class="upLOGO_label">（注：上传图片后便于求职者能快速认识您的企业，如果您的Logo不利于求职者快速识别您的企业，请在图片上加上公司简称）</p>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="formMod">
+                         <a id="shortname" name="shortname"></a>
+                        <div class="l">公司简称<i>*</i></div>
+                        <div class="r">
+                            <span class="formText">
+                                <input type="text" id='hidCompanyShortName' value="{/$company['company_shortname']/}" class="text" style="width:425px;" name='hidCompanyShortName' />
+                            </span>
+                            <span class="tipPos">
+                                <span class="tipLay">
+                                </span>
+                            </span>
+                        </div>
+                        <div class="clear"></div>
+                        {/if $need_audit_shortname/}<em class="editComapnyShort">简称修改审核中，审核完毕可对外展示</em>{//if/}
+                    </div>
+                    <div class="formMod">
+                        <a id="property" name="pro"></a>
+                        <div class="l">公司性质<i>*</i></div>
+                        <div class="r">
+                            <span class="drop zIndex" id="company_property"></span>
+                            <span class="tipPos">
+                                <span class="tipLay">
+                                </span>
+                            </span>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="formMod">
+                        <a id="size" name="size"></a>
+                        <div class="l">公司规模<i>*</i></div>
+                        <div class="r">
+                            <span class="drop zIndex" id="company_size"></span>
+                            <span class="tipPos">
+                                <span class="tipLay">
+                                </span>
+                            </span>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="formMod" style="margin-bottom: 5px;">
+                        <a id="spot" name="spot"></a>
+                        <div class="l">公司优势<i>*</i></div>
+                        <div class="r">
+                            <span class="formTextarea">
+                                <textarea class="textarea" id='hidRightSpot' name="hidRightSpot" placeholder="描述公司优势/亮点/特色，如：行业地位、奖项/成就、资质/专利、经营愿景等，最多50字">{/$company['company_bright_spot']/}</textarea>
+                            </span>
+                            <span class="tipPos">
+                                <span class="tipLay" data-for="hidRightSpot"></span>
+                            </span>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="formMod showTip">
+                        <span class="example">示例</span>
+                        <div class="tip">
+                            <span id="spot_detail">{/$spots/}</span>
+                        </div>
+                    </div>
+                    <div class="formMod">
+                        <a id="info" name="info"></a>
+                        <div class="l">公司简介<i>*</i></div>
+                        <div class="r">
+                            <span class="formTextarea">
+                                <textarea class="textarea" name="info">{/$company["info"]/}</textarea>
+                            </span>
+                            <span class="tipPos">
+                                <span class="tipLay">
+                                </span>
+                            </span>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="formMod addressMod">
+                        <a id="area" name="area"></a>
+                        <div class="l">所在地区<i>*</i></div>
+                        <div class="r">
+                            	 <span class="formText" id="curarea">
+    						     </span>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="formMod">
+                        <a id="addr" name="address"></a>
+                        <div class="l">详细地址<i>*</i></div>
+                        <div class="r">
+                                <span class="formText" >
+                                    <input type="text" style="width:425px;" class="text" id="txtAddress" name="txtAddress" value="{/$company['address']/}" />
+
+                                </span>
+                                <span class="tipPos">
+    	                        	<span class="tipLay ">
+    	                            </span>
+    	                        </span>
+                            <a id="addr"  onclick="return findMap()" style="font-size: 12px;margin-top: 5px;display: inline-block;color:#3D84B8; cursor:pointer;display:none"><i class="hbFntWes" style="font-size: 14px">&#xf041;</i> 在地图中标记</a>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <!-- 地图标记 -->
+                    <div class="formMod">
+                        <a id="map"></a>
+                        <div class="l"></div>
+                        <div class="r">
+                                <span id="mapCon" class="formMap" style="width:650px;height:290px;">
+
+                                </span>
+                            <input type="hidden" id="hidMapX" name="hidMapX" value="{/$map['map_x']/}" />
+                            <input type="hidden" id="hidMapY" name="hidMapY" value="{/$map['map_y']/}" />
+                            <input type="hidden" id="hidMapZoom" name="hidMapZoom" value="{/$map['map_zoom']/}" />
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="formMod">
+                        <a id="linkman" name="linkm"></a>
+                        <div class="l">参会联系人<i>*</i></div>
+                        <div class="r">
+                            <span class="formText">
+                                <input type="text" class="text" style="width:125px;" name="linkman" value="">
+                            </span>
+                            <span class="tipPos">
+                                <span class="tipLay">
+                                </span>
+                            </span>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="formMod">
+                        <a id="mobile"></a>
+                        <div class="l">联系电话<i>*</i></div>
+                        <div class="r">
+                            <span class="formText">
+                                <input type="text" style="width:125px;" class="text" id="link_mobile" name="link_mobile" value="">
+                            </span>
+                            <span class="tipPos">
+                                <span class="tipLay">
+                                </span>
+                            </span>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                   {/* <div class="formBtn" style="display: none">
+                        <a href="javascript:void(0);" class="btnsF16 btn1" id="baseinfo_btn">保存</a>
+                    </div>*/}
+                    <h2 id="dlwz" class="yahei">报名职位</h2>
+                    <table border="" class="signPositionTab" cellspacing="" cellpadding="">
+                        <tr>
+                            <th>职位名称</th>
+                            <th align="center">勾选</th>
+                        </tr>
+                        {/foreach $job_list as $job/}
+                            <tr>
+                                <td>{/$job['station']/}</td>
+                                <td align="center">
+                                    <input type="checkbox" class="spCheck" name="job_id[]"  value="{/$job['job_id']/}" />
+                                </td>
+                            </tr>
+                        {//foreach/}
+                    </table>
+                </form>
+                </div>
+                <div class="formBtn"><a href="javascript:void(0);" id="btnSaveAddress1" class="btnsF16 btn1" style="padding: 0 45px;">提交报名</a></div>
+            </div>
+        </hgroup>
+    </section>
+</div>
+<div class="sus" id="sus"><a href="javascript:void(0);" class="backTop hbFntWes">&#xf0d8;</a></div>
+{/include file="footer.html"/}
+<section class="floatRT"><a href="//www.huibo.com/about/message" target="_blank" class="serviceLink">我有问题要反馈</a><b></b></section>
+<script type="text/javascript">
+//解决IE8报console未定义
+	window.console = window.console || (function () {
+	    var c = {}; c.log = c.warn = c.debug = c.info = c.error = c.time = c.dir = c.profile
+	    = c.clear = c.exception = c.trace = c.assert = function () { };
+	    return c;
+	})();
+
+
+hbjs.use('@imageEditor, @confirmBox, @checkBoxer, @jobDialog, @hbCommon, @actions', function(m){
+
+	var imageEditor = m['widge.imageEditor'],
+		ConfirmBox = m['widge.overlay.confirmBox'],
+		checkBoxer = m['widge.checkBoxer'],
+		Dialog = m['widge.overlay.hbDialog'],
+		util = m['base.util'],
+		$ = m['product.hbCommon'].extend(m['cqjob.actions'], m['cqjob.jobDialog']),
+		uploadDialog = new Dialog({
+			close: 'x',
+			idName: 'ui_company_dialog',
+			title: '请上传有识别性的logo图片',
+			width: 700,
+			content: '{/$siteurl.company|replace:"http:":""/}/company/uploadCompanyLogo/',
+			isAjax: true
+		}),
+		fontSize = 18,
+		pWidth = 70,
+		imgEditor;
+
+	$('#upLOGO').on('click', function(e){
+		uploadDialog.show();
+	});
+	uploadDialog.after('hide', function(){
+		this.query('#newPopQuit').off('click');
+		imgEditor.destory();
+	});
+	uploadDialog.on('loadComplete', function(){
+		var uploadPanel = this.query('#uplogo1'),
+			editPanel = this.query('#dropImageContainer'),
+			dropImage = this.query('#dropImage'),
+			uploadingDialog;
+
+		imgEditor = new imageEditor({
+			imageCroperConfig: {
+				element: dropImage,//目标
+				handle: '#dragDiv',
+				color: '#f1f1f1',
+				width: dropImage.width(),
+				height: dropImage.height()
+			},
+			fileUploaderConfig: {
+				imageURL: '{/$logo_virt_path/}'
+			},
+			trigger: this.query('#newPopSave')
+		});
+		imgEditor.on('startUpload', function(e){
+			var msg = "正在上传...";
+			uploadingDialog = ConfirmBox.timeBomb(msg, {
+				name : "warning",
+				timeout : 100000,
+				width: fontSize * msg.length + pWidth
+			});
+		}).on('progresed', function(e){
+			this._imgFileName = e.data.name;
+			this._imgType = e.data.thumb_type;
+			this._imgRatio = e.data.thumb_ratio;
+			this.loadImage(e.url);
+
+			uploadingDialog.hide();
+			uploadPanel.hide();
+			editPanel.show();
+
+			var preview1 = editPanel.find('#preview120'),
+				preview2 = editPanel.find('#preview160');
+
+			this.addPreview(preview1, 120, 120);
+			this.addPreview(preview2, 160, 160);
+		}).on('progressError', function(e){
+            if(e.errorMsg != undefined){
+                ConfirmBox.timeBomb(e.errorMsg, {
+                    name : "fail",
+                    timeout : 3000,
+                    width: fontSize * e.errorMsg.length + pWidth
+                });
+                return;
+            }
+
+            if(e.data.status == 0){
+                ConfirmBox.timeBomb(e.data.errorMsg, {
+                    name : "fail",
+                    timeout : 3000,
+                    width: fontSize * e.data.errorMsg.length + pWidth
+                });
+            }
+		}).on('save', function(e){
+			var self = this;
+			$.ajax({
+				url: '{/$siteurl.company|replace:"http:":""/}/company/saveLogo',
+				data: {
+					cropX: e.cropX,
+					cropY: e.cropY,
+					cropH: e.cropH,
+					cropW: e.cropW,
+					cropPH: e.cropPH,
+					cropPW: e.cropPW,
+					url: e.url,
+					name: this._imgFileName,
+					thumb_type: this._imgType,
+					thumb_ratio: this._imgRatio
+				},
+				success: function(e){
+					e = util.json(e);
+					if(e.state){
+						$('#hidLogo').val(e.image_path);
+						$('#upLOGO > img').attr('src', e.image_url);
+						uploadDialog.hide();
+						delete self._imgFileName;
+						delete self._imgType;
+						delete self._imgRatio;
+					}
+				}
+			});
+		});
+
+		imgEditor.imageCroper.on('loadSuccess', function(){
+			uploadPanel.hide();
+			editPanel.show();
+		}).on('loadError', function(){
+			delete this._imgFileName;
+			delete this._imgType;
+			delete this._imgRatio;
+			uploadPanel.show();
+			editPanel.hide();
+			var msg = '加载图片失败';
+			ConfirmBox.timeBomb(msg, {
+				name : "fail",
+				timeout : 1000,
+				width: fontSize * msg.length + pWidth
+			});
+		});
+
+		this.query('#newPopQuit').on('click', function(){
+			uploadDialog.hide();
+		});
+
+	});
+
+	var rewardCheckBox = new checkBoxer({
+		element: $('.icon_reward'),
+		className: 'icon-checked-square'
+	});
+
+	$.focusblur('#addInfo');
+    $.focusColor('input.text');
+    $.focusColor('textarea.textarea');
+    $.focusblur('input.conPeople');
+    $.focusblur('input.conPhone');
+    $.focusblur('input.newMail');
+    $.focusblur('#zoneNo');
+    $.focusblur('#phoNo');
+    $.focusblur('#extNo');
+    $.focusblur('#vdNam');
+    $.focusblur('#vdSrc');
+
+	$('input').placeHolder();
+
+	$('.mapClose').click(function(){
+		$('#floagMap,#_mask').hide();
+	})
+    $(window).scroll(function(){
+        if ($(document).scrollTop() > 120){
+            $('#sus').find('a.backTop').css({'display':'inline-block'});
+        }else{
+            $('#sus').find('a.backTop').css({'display':'none'});
+        }
+    });
+
+
+    $('#sus').find('a.backTop').click(function(){
+        $('html,body').animate({ scrollTop: 0 });
+    });
+    $('#jbzlLnk').click(function(){
+        $('html,body').animate({scrollTop:$jbzl-50});
+    });
+    $('#dlwzLnk').click(function(){
+        $('html,body').animate({scrollTop:$dlwz-50});
+    });
+
+    $('#comNLnk,#callingNLnk').click(function(){
+        $(this).parents('.tipTxt').siblings('.comNTxt').find('.tipLay').css({'display':'block'});
+    });
+
+    $('.closeThis').click(function(){
+        $(this).parents('.tipLay').css({'display':'none'});
+    });
+
+    $('#touPeoDrop').hover(function(){
+        $(this).siblings('.tipPos').find('.tipLay').css({'display':'block'});
+    },function(){
+        $(this).siblings('.tipPos').find('.tipLay').css({'display':'none'});
+    });
+
+    $('#imgLst').find('li').find('.imgTxt').bind('focus',function(){
+        $(this).parents('li').addClass('hov');
+    });
+
+    $('#imgLst').find('li').find('.imgTxt').bind('blur',function(){
+        $(this).parents('li').removeClass('hov');
+    });
+
+    $('#imgLst').find('li').find('.imgTxt').hover(function(){
+        $(this).addClass('imgTxtHov');
+    },function(){
+        $(this).removeClass('imgTxtHov');
+    });
+
+	$.setIndex('zIndex');
+});
+
+//在地图中标识
+function setWelfare(defaultReward,otherReward){
+	$.showModal('/reward/index/defaultReward-'+defaultReward+'-otherReward-'+otherReward,{title:'福利待遇'});//福利亮点mijing
+}
+
+$(function(){
+
+    //删除LOGO
+    $('#btnDelLogo').live('click',function(){
+    	$('#imgView').attr('src','');
+    	$('#hidLogo').val('');
+		//标记为删除
+        $('#operate').val('delLogo');
+        $('.logoImg').hide();
+    });
+    //上传LOGO
+    $('#upload_logo').uploadify({
+		auto:true,
+		multi:false,
+		swf:'/swf/uploadify.swf',
+		uploader : '/company/saveTempLogo/',
+		formData: {
+			'upload_cookie_userid': '{/$upload_cookie_userid/}',
+			'upload_cookie_nickname':'{/$upload_cookie_nickname/}',
+			'upload_cookie_usertype':'{/$upload_cookie_usertype/}',
+			'upload_cookie_userkey':'{/$upload_cookie_userkey/}',
+			'upload_cookie_tick':'{/$upload_cookie_tick/}'
+		},
+		queueID:'showImage',
+		fileSizeLimit:'350kb',
+		fileTypeExts:'*.jpg;*.bmp;*.gif;*.jpeg;*.png',
+		buttonImage:'{/$siteurl.style/}/uploadify/submit.png',
+		fileTypeDesc:'All Files',
+		method:'post',
+		cancelImage: '{/$siteurl.style/}/uploadify/cancel.png',
+		width:85,
+		height:27,
+		itemTemplate:'<a href="javascript:void(0);" id="btnDelLogo" class="del hbFntWes">&#xf057;</a>'+
+						'<img src="" id="imgView" />',
+		onSelect:function(){
+			$('.logoImg').show();
+		},
+		onUploadSuccess:function(file,data,response){
+			if(data!=null&&data!=undefined&&data!=''){
+				 var json = eval("("+data+")");
+				 if(json.error==100){
+	                 $.anchorMsg("请选择您要上传的文件", { icon: "warning" });
+	             }else if(json.error==101){
+	                 $.anchorMsg("文件超过最大限制", { icon: "warning" });
+	             }else if(json.error==102){
+	                 $.anchorMsg("您上传的文件格式有误", { icon: "warning" });
+	             }else if (json.error==104) {
+	                 $.anchorMsg("文件上传失败", { icon: "warning" });
+	             } else {
+					var path = json.path;
+					$('#imgView').attr('src',path+'?'+Math.random().toString().replace('.','0'));
+					$('#hidLogo').val(json.name);
+					$('#delLogo').val(json.name);
+					$('#operate').val('');//清空删除LOGO操作
+	             }
+			}
+		},
+		onSelectError:function(file,errorCode,errorMsg){
+			var settings = this.settings;
+			switch(errorCode) {
+				case SWFUpload.QUEUE_ERROR.FILE_EXCEEDS_SIZE_LIMIT:
+					$.anchorMsg('抱歉 "' + file.name + '" 文件查过了大小限制 (' + settings.fileSizeLimit + ').',{icon:'warning'});
+					break;
+				case SWFUpload.QUEUE_ERROR.ZERO_BYTE_FILE:
+					$.anchorMsg('文件 "' + file.name + '" 为空.',{icon:'warning'});
+					break;
+				case SWFUpload.QUEUE_ERROR.INVALID_FILETYPE:
+					$.anchorMsg('文件 "' + file.name + '" 类型不支持 (' + settings.fileTypeDesc + ').',{icon:'warning'});
+					break;
+			}
+		}
+	});
+});
+
+hbjs.use('@areaDrop, @form, @jobDialog, @jobDropList', function(m){
+
+	var $ = m['cqjob.jobValidate'].extend(m['cqjob.jobForm'], m['cqjob.jobDialog'], m['cqjob.jobDropList']);
+	var baseInforForm = $('#baseInforForm').validate({
+		rules:{
+            sid:{required:true},
+			hddComProperty:{required:true},
+			hddComsize:{required:true},
+			hidCompanyShortName:{required:true,rangelength:[2,15]},
+			hidRightSpot:{required:true,rangelength:[5,50]},
+			info    :{required:true,rangelength: [2, 4000]},
+			linkman :{required:true,rangelength: [1, 10]},
+            link_mobile:{required:true},
+            del_logo:{required:true},
+            txtAddress:{required:true},
+            hidArea:{required:true}
+		},
+		messages:{
+            sid:{
+                required:'请选择报名场次<span class="tipArr"></span>'
+            },
+			hddComProperty:{required:'请选择公司性质<span class="tipArr"></span>'},
+			hddComsize:{required:'请选择公司规模<span class="tipArr"></span>'},
+			hidCompanyShortName:{required:'请输入公司简称<span class="tipArr"></span>',
+									rangelength:'公司简称请输入1-15个字<span ckass="tipArr"></span>'
+								},
+			hidRightSpot:{required:'请输入公司优势<span class="tipArr"></span>',
+									rangelength:'请输入公司优势5-50个字<span class="tipArr"></span>'
+				},
+			info    :{
+				required    :'请输入公司简介<span class="tipArr"></span>',
+				rangelength : '公司简介请输入2-4000个字<span class="tipArr"></span>'
+			},
+			linkman :{
+				required    :'请输入参会联系人<span class="tipArr"></span>',
+				rangelength :'参会联系人不能超过10字<span class="tipArr"></span>'
+			},
+			link_mobile:{
+                required:'请输入联系电话<span class="tipArr"></span>'
+            },
+            txtAddress:{required:'请输入公司地址<span class="tipArr"></span>'},
+            hidArea:{required:'请选择公司地区<span class="tipArr"></span>'}
+		},
+		errorClasses:{
+            sid:{required:'tipLayErr tipw120'},
+			hddComProperty:{required:'tipLayErr tipw120'},
+			hddComsize:{required:'tipLayErr tipw120'},
+			hidCompanyShortName:{required:'tipLayErr tipw120',rangelength:'tipLayErr tipw120'},
+			hidRightSpot:{required:'tipLayErr tipw120',rangelength:'tipLayErr tipw150'},
+			info    :{required:'tipLayErr tipw120',rangelength:'tipLayErr tipw120'},
+			linkman :{required:'tipLayErr tipw120',rangelength:'tipLayErr tipw120'},
+			link_mobile :{required:'tipLayErr tipw120'},
+            txtAddress:{required:"tipLayErr tipw120"},
+            hidArea:{required:'tipLayErr tipw120'}
+		},
+		errorElement:'span',
+		errorPlacement:function(error,element){
+			element.parent().nextAll(".tipPos").find('.tipLay').append(error);
+		},
+		success:function(label){
+			label.text(" ");
+		}
+	});
+
+	$("#company_property").droplist({
+		isCanWrite:false,
+		inputWidth:125,
+		style:'width:133px',
+		hddName:'hddComProperty',
+		items:[
+			{/$i=1/}
+			{/foreach from=$properties item=property key=id/}
+			{id:'{/$id/}',name:'{/$property/}'}
+			{/if $i++<count($properties)/}
+			,
+			{//if/}
+			{//foreach/}
+		],
+		onSelect:function(i,name){
+			baseInforForm.element($('#hddComProperty'));
+		}
+	});
+	$("#company_property").setDropListValue({/$company["property_id"]/});
+	$("#company_size").droplist({
+		isCanWrite:false,
+		inputWidth:125,
+		style:'width:133px',
+		hddName:'hddComsize',
+		items:[
+			{/$i=1/}
+			{/foreach from=$comsizes item=property key=id/}
+			{id:'{/$id/}',name:'{/$property/}'}
+			{/if $i++<count($comsizes)/}
+			,
+			{//if/}
+			{//foreach/}
+		],
+		onSelect:function(i,name){
+			baseInforForm.element($('#hddComsize'));
+		}
+	});
+
+	$("#company_size").setDropListValue({/$company["size_id"]/});
+
+    function submitBaseInfo(){
+        var baseInfo = getBaseInfor();
+        console.log(baseInfo);
+        $.ajax({
+            url:"/shuangxuannet/AddCompanyNetDo",
+            type:"post",
+            dataType:"json",
+            contentType: "application/x-www-form-urlencoded; charset=utf-8",
+            data:baseInfo,
+            success:function(json){
+                if(!(json.success||false)){
+                    $.message(json.error,{title:'操作失败！'});
+                    return false;
+                }
+                $.anchorMsg("报名成功！");
+                setTimeout(function () {
+                    window.location.href="/shuangxuannet/index";
+                }, 800);
+            }
+        });
+    }
+    //统一提交 标识
+    var is_baseinfo_btn=false,
+    company_shortname = "{/$company['company_shortname']/}";
+	$("#btnSaveAddress1").click(function(){
+        if(!baseInforForm.form()) return false;
+        var hidCompanyShortName = $.trim($("#baseInforForm").find("input[name=hidCompanyShortName]").val());
+        if(hidCompanyShortName != "{/$base_company_shortname/}" && hidCompanyShortName != company_shortname){
+            $.message("您修改的“公司简称”需在审核后对外展示", function(){
+                submitBaseInfo();
+            });
+            return false;
+        }
+        submitBaseInfo();
+        return false;
+    });
+
+	function getBaseInfor(){
+		var baseInfor = {};
+        var job_ids="";
+		var $_baseInforForm = $("#baseInforForm");
+        baseInfor.sid  = $_baseInforForm.find("select[name=sid]").val();
+		baseInfor.company_property  = $_baseInforForm.find("input[name=hddComProperty]").val();
+		baseInfor.company_size      = $_baseInforForm.find("input[name=hddComsize]").val();
+		baseInfor.company_info      = $_baseInforForm.find("textarea[name=info]").val();
+		baseInfor.link_man           = $_baseInforForm.find("input[name=linkman]").val();
+		baseInfor.link_mobile       = $_baseInforForm.find("input[name=link_mobile]").val();
+
+		baseInfor.logo              = $_baseInforForm.find("input[name=hidden_logo]").val();
+		baseInfor.del_logo			= $_baseInforForm.find("input[name=hidden_del_logo]").val();
+		baseInfor.operate			= $_baseInforForm.find("input[name=operate]").val();
+		baseInfor.hidCompanyShortName			= $_baseInforForm.find("input[name=hidCompanyShortName]").val()
+		//baseInfor.hidRightSpot			= $_baseInforForm.find("input[name=hidRightSpot]").val();
+        baseInfor.hidRightSpot			= $_baseInforForm.find("#hidRightSpot").val()
+        //获取地址信息
+        baseInfor.txtAddress			= $_baseInforForm.find("input[name=txtAddress]").val()
+        baseInfor.hidArea			= $_baseInforForm.find("input[name=hidArea]").val();
+        baseInfor.hidMapX			= $_baseInforForm.find("input[name=hidMapX]").val();
+        baseInfor.hidMapY			= $_baseInforForm.find("input[name=hidMapY]").val();
+        baseInfor.hidMapZoom			= $_baseInforForm.find("input[name=hidMapZoom]").val();
+
+        $_baseInforForm.find("input[name=job_id\\[\\]]").each(function () {
+            if ($(this).prop("checked") == true) {
+                if(!job_ids){
+                    job_ids=$(this).val();
+                }else{
+                    job_ids=job_ids+','+$(this).val();
+                }
+            }
+        });
+        baseInfor.job_ids			= job_ids;
+		return baseInfor;
+	}
+
+
+
+	var initPt;
+	var initArea;
+	var map,marker;
+	var myValue;
+	var AreaDrop = m['product.areaDrop'];
+
+	var areaDrop = new AreaDrop({
+		hidName: 'hidArea',
+		container: $('#curarea'),
+		selectedValue: '{/$company["area_id"]/}'
+	});
+
+	areaDrop.on('selectedItem', function(e){
+		var label = this.getLabel();
+		if(myValue != label){
+			$("#txtAddress").val(label);
+			myValue = label;
+
+			var geo = new BMap.Geocoder();
+			geo.getPoint(label, relocateCallback, '');
+		}
+	});
+
+	initMap();
+
+	$('#txtAddress').focusin(function(){
+		var addr = $(this).val();
+		if(addr == ''){
+			var label = areaDrop.getLabel();
+			$(this).val(label);
+			addr = label;
+		}
+		if(addr != ''){
+			var geo = new BMap.Geocoder();
+			geo.getPoint(addr, relocateCallback, '');
+		}
+	});
+
+	$('#txtAddress').focusout(function(){
+		var addr = $(this).val();
+		if(addr != ''){
+			var geo = new BMap.Geocoder();
+			geo.getPoint(addr, relocateCallback, '');   //缺一个城市名
+		}
+	});
+
+	function relocateCallback(point){
+		if(point == null){
+			var geo = new BMap.Geocoder();
+			geo.getPoint(areaDrop.getLabel(), relocateCallback, '');
+		} else {
+			map.setCenter(point);
+			marker.setPosition(point);
+
+			$('#hidMapX').val(marker.getPosition().lng);
+			$('#hidMapY').val(marker.getPosition().lat);
+			$('#hidMapZoom').val(map.getZoom());
+		}
+	}
+
+	function initMap(){
+		var mapX = $('#hidMapX').val();
+		var mapY = $('#hidMapY').val();
+		var mapZoom = $('#hidMapZoom').val();
+		if(typeof mapZoom =='undefined' || mapZoom == ''){
+			mapZoom = 15;
+		}
+
+		var initPt = null;
+		if(typeof mapX != 'undefined' && mapX!='' && typeof(mapY) != 'undefined' && mapY!=''){
+			initPt = new BMap.Point(mapX,mapY);
+		}
+
+		var address = $('#txtAddress').val();
+
+		//这个逻辑由于单选地区控件是异步加载的，所以这里可能始终取的是空值，暂时保留吧
+		var areaDesc = areaDrop.getLabel();
+
+		var defaultPt = new BMap.Point(106.553057,29.565468);
+
+
+		map = new BMap.Map("mapCon");
+
+
+		//在加载完成，确定中心点后，设置标注点
+		map.addEventListener('load',function(){
+			var pt = null;
+			if(initPt!=null){
+				pt = initPt;
+			}
+			else{
+				pt = new BMap.Point(map.getCenter().lng,map.getCenter().lat);
+			}
+
+			var myIcon = new BMap.Icon("{/$siteurl.style/}/img/common/maplabel.png", new BMap.Size(33,50));
+			marker = new BMap.Marker(pt,{icon:myIcon});  // 创建标注
+			map.addOverlay(marker);              // 将标注添加到地图中
+			marker.enableDragging();
+			marker.setTitle('请拖动至您公司所在位置');
+
+			var label = new BMap.Label("请拖动至您公司所在位置",{offset:new BMap.Size(35,5)});
+			marker.setLabel(label);
+
+			//添加事件，在拖动时去掉文字提示
+			marker.addEventListener('dragstart',function(){
+				label.setStyle({display:'none'});
+			});
+			marker.addEventListener('dragend',function(){
+				$('#hidMapX').val(marker.getPosition().lng);
+				$('#hidMapY').val(marker.getPosition().lat);
+				$('#hidMapZoom').val(map.getZoom());
+			});
+		});
+		if(initPt != null){
+			map.centerAndZoom(new BMap.Point(mapX,mapY), mapZoom);
+		} else if(address != ''){
+			map.centerAndZoom(defaultPt,mapZoom);
+			var geo = new BMap.Geocoder();
+			geo.getPoint(address, relocateCallback, '');
+		} else if(areaDesc != ''){
+			map.centerAndZoom(defaultPt,mapZoom);
+			var geo = new BMap.Geocoder();
+			geo.getPoint(areaDesc, relocateCallback, '');
+		}
+		else{
+			map.centerAndZoom(defaultPt, mapZoom);
+		}
+
+		map.addControl(new BMap.NavigationControl());               // 添加平移缩放控件
+		map.addControl(new BMap.MapTypeControl());          //添加地图类型控件
+		map.addControl(new BMap.OverviewMapControl());              //添加默认缩略地图控件
+		map.enableScrollWheelZoom();                            //启用滚轮放大缩小
+
+		map.addEventListener('zoomend',function(){
+			$('#hidMapZoom').val(map.getZoom());
+		});
+	}
+});
+
+</script>
+</body>
+</html>

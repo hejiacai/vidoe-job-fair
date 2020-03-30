@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<style>
+.getVdBox{width:500px;font-size:12px;}
+.getVdBox dl dt{font-weight:bold;margin:10px 0 3px 0;}
+.getVdBox .getVdBoxBtn{margin:10px 0 0; text-align:right;}
+</style>
+</head>
+<body>
+<div class="dgBox getVdBox">
+	<dl>
+    <dd>首先需要将贵公司的宣传视频分享到优酷或土豆</dt>
+    <dt>获取优酷视频地址：</dd>
+    <dd>打开您所分享的到优酷的视频的网页，视频的下方会有一排按钮：“顶、踩、收藏、分享、转发、下载”等，点击“分享”，就可以看到“FLASH”的链接地址和“HTML”的链接代码了。</dd>
+    <dt>获取土豆视频地址：</dt>
+    <dd>点土豆视频下面的“转贴到博客或BBS”，即可看到flash的链接地址，复制flash地址粘贴到文本框保存即可。</dd>
+    </dl>
+    <div class="getVdBoxBtn"><a href="javascript:void(0);" class="btn3 btnsF12" id="vdClose">我知道了</a></div>
+</div>
+<script>
+$('#vdClose').click(function(){
+	$(this).closeDialog();
+});
+</script>
+</body>
+</html>

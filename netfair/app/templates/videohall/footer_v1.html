@@ -1,0 +1,62 @@
+{/include_php file='app/controller/footer.php'/}
+<div id="sus" class="sus"><a class="backTop hbFntWes" title="返回顶部" href="javascript:void(0);" style="display: none;">&#xf0d8;</a></div>
+<footer>
+    <div class="footerNav">
+        <a target="_blank" href="{/get_url rule="/about" domain="main"/}">关于汇博</a>|<a target="_blank" href="{/get_url rule="/about/contact" domain="main"/}">联系我们</a>
+        <!--|<a target="_blank" href="{/get_url rule="/about/fee" domain="main"/}">招聘服务</a>|<a target="_blank" href="">帮助中心</a>-->
+        |<a target="_blank" href="{/get_url rule="/qiye/ent49no58.html" domain="main"/}">诚聘英才</a>|<a target="_blank" href="{/get_url rule="/about/brand" domain="main"/}">品牌合作</a>|<a target="_blank" href="{/get_url rule="/about/links" domain="main"/}">友情链接</a>
+        <!--|<a target="_blank" href="{/get_url rule="/about/sitemap/" domain="main"/}">网站地图</a>-->
+        |<a target="_blank" href="{/get_url rule="/about/law/" domain="main"/}">法律声明</a>|<a target="_blank" href="{/get_url rule="/about/privacy/" domain="main"/}">隐私政策</a>|<a target="_blank" href="{/get_url rule="/about/useagreement/" domain="main"/}">使用协议</a>
+    </div>
+    <div class="copyright">
+        <p>&copy;{/$year/}&nbsp;{/$huibo_title/}&nbsp;版权所有&nbsp;&nbsp;|&nbsp;&nbsp;增值电信业务经营许可证：渝B2-20060063&nbsp;&nbsp;|&nbsp;&nbsp;人才中介服务许可证：渝新委发[2012] 124号&nbsp;&nbsp;|&nbsp;&nbsp;<a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=50010502001182" rel="nofollow" style="color:#666666;">渝公网安备
+            50010502001182号</a>
+        </p>
+    </div>
+    <a rel="nofollow" key="549264da3b05a3da0fbd60db" logo_size="124x47" logo_type="realname" href="//www.anquan.org">
+        <script src="//static.anquan.org/static/outer/js/aq_auth.js"></script>
+    </a>
+</footer>
+
+<link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}"/>
+{/*<link rel="stylesheet" type="text/css" href="{/version file='base.css'/}"/>*/}
+<script type="text/javascript" src="{/version file='version.js'/}"></script>
+<script type="text/javascript">
+    window.CONFIG = {
+        HOST: '{/$siteurl.style/}',
+        COMBOPATH: '/js/v2/'
+    }
+</script>
+<script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='global.js'/}"></script>
+
+
+<script type="text/javascript">
+
+    try {
+        hbjs.use(factory);
+    } catch (e) {
+        factory($);
+    }
+    if (typeof window.console.log === "undefined") {
+        window.console.log = function (str) {
+        };
+    }
+
+    function factory($) {
+        $(window).scroll(function () {
+            if ($(document).scrollTop() > 120) {
+                $('#sus').find('a.backTop').css({'display': 'inline-block'});
+            } else {
+                $('#sus').find('a.backTop').css({'display': 'none'});
+            }
+        });
+        $('#sus').find('a.backTop').click(function () {
+            $('html,body').animate({scrollTop: 0});
+        });
+    }
+</script>
+
+
+
+{/include file="./videohall/statistics.html"/}

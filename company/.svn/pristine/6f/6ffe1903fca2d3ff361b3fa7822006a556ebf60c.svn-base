@@ -1,0 +1,321 @@
+<!doctype html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+<title>{/$title/}</title>
+<!–[if lt IE9]> 
+<script src="{/version file='html5.js'/}"></script>
+<![endif]–>
+<link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='comback.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='resument2015.css'/}" />
+<script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.min.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='common.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='dialog.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='ui_inputFocus.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='ui_validate.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='jquery.form.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='ui_dropdownlist.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='ui_tooltip.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='ui_autocomplete.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='jquery.email.tip.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='jquery.metadata.js'/}"></script><!--指向改变class-->
+</head>
+<body id="body">
+{/include 'new_header.html' parent="全职招聘" cur='面试管理'/}
+
+<div class="resumentNbg">
+    <div class="rMentLt">
+            <dl class="rMentDl">
+            <dt><em></em>收到的简历</dt>
+            <dd class="cut">
+                <a href="{/get_url rule='/apply'/}" ><em></em><span>待处理简历</span><i>18</i></a>
+            </dd>
+            <dd >
+                    <a href="{/get_url rule='/apply' data='status=1' /}"><em></em><span>已邀请简历</span><i>21</i></a>
+            </dd>
+            <dd>
+                    <a href="{/get_url rule='/apply' data='status=3' /}"><em></em><span>不合适的简历</span><i>37</i></a>
+            </dd>
+            <dd>
+                    <a href="#"><em></em><span>自动过滤简历</span><i>69</i></a>
+            </dd>
+        </dl>
+        <ul class="rMentUl">
+            <li><a href="#"><em class="mentIcon01"></em>下载的简历</a></li>
+            <li><a href="#" class="cut"><em class="mentIcon02"></em>推荐的简历</a></li>
+            <li><a href="#"><em class="mentIcon03"></em>收藏的简历</a></li>
+            <li><a href="#"><em class="mentIcon04"></em>回收站</a></li>
+        </ul>
+    </div>
+<div class="rMentRt">
+    <div class="rMenTit"><span>共<b>{/$totalSize/}</b>份简历</span></div>
+    <div class="rMetSelt">
+    	<div class="subMetx" style="{/if !$is_hr/}display:none{//if/}">
+            <span>招聘职位：</span>
+            <div class="job"><span id="tstDropJob" class="drop zindex" style="{/if !$is_hr/}display:none{//if/}"></span></div>
+        </div>
+        <div class="subMetz">
+        	<span>简历状态：</span>
+            <a href="{/get_url rule='/apply/'/}" {/if base_lib_BaseUtils::nullOrEmpty($child_status)/}class="cut"{//if/}>不限</a>
+            <a href="{/get_url rule='/apply/index/child_status-2'/}" {/if $child_status ==2/} class="cut"{//if/}>未读</a>
+            <a href="{/get_url rule='/apply/index/child_status-1'/}" {/if $child_status ==1/} class="cut"{//if/}>待处理(已读)</a>
+        </div>
+    </div>
+    <div class="rMentBtn">
+    	<label>
+        	<input name="c" class="resuemSelectAll" type="checkbox" value="" /><span>全选</span>
+        </label>
+        <p>
+        	<a href="javascript:;" class="setRead">标记为待处理</a>
+            <a href="javascript:;" class="savePc">保存到电脑</a>
+            <a href="javascript:;" class="sendEmail">转发到邮箱</a>
+            <a href="javascript:;">不合适</a>
+        </p>
+        <div class="rMentSech">
+            <input type="text" name="t" class="rMenText" value="姓名或简历编号" />
+            <input type="button" name="b" value="" class="rMentBtnx" />
+        </div>
+    </div>
+    <div class="rMentLitBg">
+        {/if $totalSize>0/}
+        {/foreach $applylist as $apply/}
+            <div class="rMentLit" >
+                    <div class="rMentLx {/if $apply['status']==5 || $apply['status']==6/}rMentLxgray{//if/}">
+                    <label>
+                        <input name="chkapply" type="checkbox" value="{/$apply['apply_id']/}" data-resumeid="{/$apply['resume_id']/}" /><b>{/$apply['station']/}</b>
+                        <span>{/date("Y-m-d H:i",strtotime($apply['create_time']))/}</span>
+                    </label>
+                    <em class="{/if $apply['status'] ==5 || $apply['status']==6/}hue4{/else if $apply['status']==2/}hue1{/else if $apply['status']==4/}hue2{//if/}">{/$apply['statusName']/}</em>
+                </div>
+                <div class="rMentLv" data-applyid ="{/$apply['apply_id']/}" data-resumeid ="{/$apply['resume_id']/}" data-personid="{/$apply['person_id']/}">
+                    <a href="{/get_url rule="/resume/resumeshow/"/}type-network-resumeid-{/$apply['resume_id']/}-src-apply-applyid-{/$apply['apply_id']/}" target="_blank" class="rMentLink">
+                            <div class="mImgBg"><p> <img class="mImg" src="{/if $apply['small_photo']/}{/$apply['small_photo']/}{/else/}{/$siteurl.style/}/img/c/new_resume/headportrait.png{//if/}"/>
+                             </p></div>
+                        <div>
+                            <p class="mTit1"><b>{/$apply['user_name']/}</b>{/$apply['sex']/}/{/$apply['start_work']/}/{/$apply['age']/}/{/$apply['cur_area']/}<i></i></p>
+                             {/if !empty({/$apply['school']/})/}<p class="mTit3">{/$apply['school']/}<span>|</span>{/$apply['major_desc']/}<span>|</span>{/$apply['school_degree']/}</p>{//if/}
+                             {/if !empty($apply['worklist'])/}
+                                <p class="mTit2"><b>{/$apply['worklist'][0]['station']/}</b><span>|</span>{/$apply['worklist'][0]['company_name']/}<span>|</span>{/$apply['worklist'][0]['start_time']/}-{/$apply['worklist'][0]['end_time']/}</p>
+                              {//if/}
+                        </div>
+                    </a>
+                    {/if $apply['status']==5 || $apply['status']==6/}
+                        <div class="rMentLinkv">
+                            <a href="javascript:;">&nbsp;</a>
+                            <a href="javascript:;" class="mTit4">删除</a>
+                            <a href="javascript:;">&nbsp;</a>
+                        </div>
+                    {/else/}
+                        <div class="rMentLinkv">
+                            <a href="javascript:;" class="hasInvite">已通知面试</a>
+                            <a href="javascript:;" class="mTit4 inviteResume" >发面试邀请</a>
+                            <a href="javascript:;">不合适</a>
+                        </div>
+                    {//if/}
+                </div>
+            </div>
+        {//foreach/}
+        {/else/}
+        <div>无数据</div>
+        {//if/}
+    </div>
+        
+    <div class="rMentBtn">
+    	<label>
+        	<input name="c" class="resuemSelectAll" type="checkbox" value="" /><span>全选</span>
+        </label>
+        <p>
+            <a href="javascript:;" class="setRead">标记为待处理</a>
+            <a href="javascript:;" class="savePc">保存到电脑</a>
+            <a href="javascript:;" class="sendEmail">转发到邮箱</a>
+            <a href="javascript:;">不合适</a>
+        </p>
+    </div>
+        {/$pager/}
+</div>
+<div class="clear"></div>
+</div>
+<!--弹窗职位不匹配提示开始-->
+<div class="popReN" style='display:none'>
+    <span>职位不匹配的简历现在都在这里了哦</span>
+    <a href="javascript:;" id='notComplain'></a>
+</div>
+
+<!--弹窗职位不匹配提示结束-->
+{/include file="footer.html"/}
+<script>
+ $.setIndex("zindex");//为需要赋层级设置的元素设置class为zindex
+$('#tstDropJob').droplist({
+    defaultTitle:'全部职位',
+    style:'width:178px;',
+    noSelectClass:'gray',
+    inputWidth:170,
+    width:128,
+    hddName:'job_id',
+    items:{/$jobs/},
+    selectValue:'{/$job_id/}',
+    maxScroll:10,
+    onSelect:function(i,name) {
+	   	//选中后的事件
+	   apply.submit(null,0);	
+}}); 
+var apply ={
+    init:function() {
+         //回车事件
+       $("#keyword").keydown(function(e){
+            if(e.keyCode == 13){
+                $("#onSubmit").click();
+            }
+        });
+       $("#notComplain").click(function(){
+           apply.setNotComplainCookie();
+       });
+       var r = cookieutility.get("notComplainCookie");
+       if(!r){
+           $(".popReN").show();
+       }
+       //单个邀请面试
+       $(".rMentLitBg .inviteResume").click(function(e){
+            var apply_id = $(this).parents(".rMentLv").attr("data-applyid");
+            apply._invitesingle(apply_id);
+            e.preventDefault();
+       });
+       //批量保存到电脑
+       $('.savePc').click(function(e){
+            e.preventDefault();
+            var applys = apply.selectApply();
+            if(applys.length<=0) {
+                    $.anchor('请选择收到的简历',{icon:'info'});
+                    return;
+            }
+            var resumeids = apply.selectResume();
+            apply._downresume(resumeids.join(','),applys.join(','));
+        });
+        //全选 反选
+        $(".resuemSelectAll").click(function(){
+            if($(this).is(':checked')) {
+                $('.rMentLit label input[name="chkapply"]').attr('checked','checked');	
+            }else {
+                $('.rMentLit label input[name="chkapply"]:checked').removeAttr('checked');
+            }
+        });
+        //批量转发到邮箱
+        $('.sendEmail').click(function(e){
+            e.preventDefault();
+            var applys = apply.selectApply();
+            if(applys.length<=0) {
+                    $.anchor('请选择收到的简历',{icon:'info'});
+                    return;
+            }
+            var resumeids = apply.selectResume();
+            apply._sendEmail(resumeids.join(','),applys.join(','));			
+        });	
+        //设为待处理
+        $(".setRead").click(function(e){
+            e.preventDefault();
+            var applys = apply.selectApply();
+            if(applys.length<=0) {
+                    $.anchor('请选择收到的简历',{icon:'info'});
+                    return;
+            }
+            apply._setRead(applys.join(','));
+        });
+        //设为已邀请面试
+        $(".hasInvite").click(function(e){
+             e.preventDefault();
+             var apply_id = $(this).parents(".rMentLv").attr("data-applyid");
+             apply.hasInvite(apply_id);
+        });
+    },
+    setNotComplainCookie:function(){
+        $(".popReN").hide();
+       cookieutility.set('notComplainCookie',true,1);
+       
+    },
+    _invitesingle:function(applyid) { //单个邀请
+        $.showModal('{/get_url rule="/invite/invitesingleshow/" data="applyID='+applyid+'"/}-v-'+Math.random(),{title:'同意面试',onclose:function(){
+            apply._invitCallback(applyid);
+        }});	
+    },
+    _invitCallback:function(applyids) { 
+        window.location.reload();
+    },
+     _printresume:function(resumeid) {
+		var url = '{/get_url rule="/resume/htmlprint" data="resumeid='+resumeId+'"/}';
+		$('#printIframe').attr("src", url);
+    },
+    _downresume:function(resumeid,applyid) {
+        var url = '{/get_url rule="/apply/DownLoad" data="resumeid='+resumeid+'&applyid='+applyid+'"/}';
+    	$.showModal(url,{title:'请选择保存的文件格式'});
+    },
+    _downresumeword:function(ids,applyids){
+    	var url = '{/get_url rule="/resume/worddown" data="resumeid='+ids+'&applyid='+applyids+'&src=apply"/}';
+		$(this).attr('href',url).attr('target','_blank');
+    },
+    _downresumehtml:function(ids,applyids) {
+    	var url = '{/get_url rule="/resume/htmldown" data="resumeid='+ids+'&applyid='+applyids+'&src=apply"/}';
+        $(this).attr('href',url).attr('target','_blank');
+    },
+    _downresumeExcel:function(ids) {
+    	var url = '{/get_url rule="/excel/index/" data="resumeid='+ids+'"/}';
+    	$(this).attr('href',url).attr('target','_blank');
+    },
+    _downresumePdf:function(ids) {
+    	var url = '{/get_url rule="/resume/pdfdown/" data="resumeid='+ids+'"/}';
+    	$(this).attr('href',url).attr('target','_blank');
+    },
+    selectApply:function(){
+        var checkboxs = $('.rMentLitBg').find('input[name="chkapply"]:checked'),
+        applyids = [];
+        for(var i=0,len=checkboxs.length;i<len;i+=1) {
+            applyids.push($(checkboxs[i]).val());
+        } 	
+        return applyids;
+    },
+    //转发到邮箱
+    _sendEmail:function(resumeid,applyid){
+    	$.showModal('{/get_url rule="/resume/wordsend" data="resumeid='+resumeid+'&applyid='+applyid+'&src=apply"/}',{title:'转发到邮箱'});
+    },
+    selectResume:function(){
+        var checkboxs = $('.rMentLitBg').find('input[name="chkapply"]:checked'),
+        applyids = [];
+        for(var i=0,len=checkboxs.length;i<len;i+=1) {
+            applyids.push($(checkboxs[i]).attr('data-resumeid'));
+        } 	
+        return applyids;
+    },
+    //设置为已读
+    _setRead:function(applyids){
+            // 设置已读
+            $.getJSON('{/get_url rule="/apply/SetRead/"/}'+'applyid-'+applyids+'-v-'+Math.random(),function(result){
+                if(result.success) {
+                        $(".rMentLitBg input[name='chkapply']:checked").each(function(){
+                            var ban = $(this).parent().next("em");
+                            ban.html("待处理").removeClass("hue1").addClass("hue2");
+                        });
+                }else {
+                        // 设置失败
+                        $.anchorMsg(result.error, { icon: 'fail' });
+                }
+            });
+    },
+    submit:function(){
+        
+    },
+    refresh:function(){
+        window.location.reload();
+    },
+    //已通知面试 添加面试记录
+    hasInvite:function(applyid){
+        var url = '{/get_url rule="/apply/hasInvite/" data="applyid='+applyid+'"/}';
+        $.showModal(url,{title:'标记为“已邀请面试”'});
+    }
+}
+    
+apply.init();
+</script>
+</body>
+</html>

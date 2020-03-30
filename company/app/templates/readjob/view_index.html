@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>职位诊断_汇博网</title>
+    <!–[if lt IE9]>
+    <script src="//hm.baidu.com/hm.js?fb51309e47424acd6e31c0bd2a65a5a1"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='html5.js'/}"></script>
+    <![endif]–>
+    <link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+	<link rel="stylesheet" type="text/css" href="{/version file='m_font_style.css'/}">
+    <link rel="stylesheet" type="text/css" href="{/version file='comback.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='resument2015.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='layer.css'/}" />
+    <link rel="stylesheet" href="{/version file='invite_v1.css'/}">
+
+    <script type="text/javascript">
+        window.CONFIG = {
+            HOST: '{/$isteurl.style/}',
+            COMBOPATH: '/js/v2/'
+        }
+    </script>
+    <script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.min.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='layer.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='common.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='dialog.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='ui_inputFocus.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='ui_tooltip.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='ui_validate.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='jquery.form.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='ui_dropdownlist.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='ui_autocomplete.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='jquery.email.tip.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='jquery.metadata.js'/}"></script>
+
+    <script type="text/javascript" src="{/version file='WdatePicker.js'/}"></script>
+    <!-- <link rel="stylesheet" type="text/css" href="{/version file='WdatePicker.css'/}" /> -->
+    <link rel="stylesheet" type="text/css" href="{/version file='offer.css'/}" />
+    <script type="text/javascript">
+        hbjs.loadJS('{/$siteurl.style/}/js/v2/cqjob/common.js');
+    </script>
+    <style type="text/css">
+        .rMentRt .offerSearch{padding:21px 0;}
+        .rMentRt .partPadding{padding: 24px 30px;}
+        .offerDatas tbody tr .name { padding-left: 10px;padding-right: 10px; line-height: 25px;max-width: 200px;}
+        .overtext{white-space: normal; text-overflow: clip;overflow: visible;}
+        .offerDatas,.filterOptions-last{ padding: 0;}
+        .offerDatas{padding-bottom: 20px;}
+		.filterOptions-first{ padding: 10px 0px 20px 0px;}
+        .curp{cursor: pointer;}
+
+        
+		/*列表的颜色表*/
+		.fontColorthead{color: #444444;}
+		.fontColordefault {color: #666666;}
+		.fontColorBlue {color: #2b6fad;}
+		.fontColorOrange {color: #ff7f51;}
+		.fontColorRed {color: #ed0c1a;}
+		.fontColorGreen {color: #3fdbb1;}
+        #sanjiao {
+            position:absolute;
+            top: -5px;
+            left: 9px;
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-bottom: 5px solid #d3d3d3;
+        }
+        .sanjiaoNei{
+            position:absolute;
+            top: 2px;
+            left: -3px;
+            width: 0;
+            height: 0;
+            border-left: 3px solid transparent;
+            border-right: 3px solid transparent;
+            border-bottom: 3px solid #ffffff;
+        }
+		.qq_newsz{ margin-left: 262px!important;}
+		.textone {color: #59a7ff;}
+		.xiajiang {background: url({/$siteurl.style/}/img/company/down_x.png)no-repeat 0 0;display: inline-block;width: 10px;height: 10px;margin-left: 5px;}
+		.shangsheng {background: url({/$siteurl.style/}/img/company/up_x.png)no-repeat 0 0;display: inline-block;width: 10px;height: 10px;margin-left: 5px;}}
+		
+	</style>
+</head>
+
+<body id="body" style="position: relative;">
+{/if $left_type==1/}
+{/include 'new_header.html' par="全职招聘" cur='数据报表'/}
+{/else/}
+{/include 'new_header.html' par="全职招聘" cur='数据报表'/}
+{//if/}
+
+
+<div class="resumentNbg resumentNbg-new">
+    {/if $left_type==2/}
+    {/include 'resume/apply/nav.html' cur="offer管理"/}
+    {/else/}
+    <div class="rMentLt">
+        <dl class="rMentDl">
+            <dd  class="cut">
+                <a class="jobdiagnosis" href="{/get_url rule='/readjob/CompanyVisit'/}" >
+                    <i class="icon-menu-work"></i><span>职位诊断</span>
+                </a>
+            </dd>
+            <dd>
+                <a class="recruitment" href="{/get_url rule='/readjob/recruitmenteffect'/}">
+                    <i class="icon-svg28"></i><span>投递简历报表</span>
+                </a>
+            </dd>
+			<dd>
+			    <a class="recruitment" href="{/get_url rule='/readjob/GetResemeRecruitmentEffect'/}">
+			        <i class="icon-svg40"></i><span>获取简历报表</span>
+			    </a>
+			</dd>
+        </dl>
+    </div>
+    {//if/}
+
+    <!-- 右侧内容 -->
+    <div class="rMentRt" style="background: #fff;">
+        <div class="content">
+            <hgroup>
+                <div class="part part1 partPadding">
+                    <form id="frmInvite" method="get" action="{/get_url rule='/readjob/CompanyVisit/'/}" class="offerSearch">
+                        <input type="hidden" name="left_type" value="{/$left_type/}">
+                        <!-- 筛选条件 -->
+                        <div class="filterOptions">
+                            <div class="filterOptions-first clearfix" style="padding-top: 0;">
+                                <span>时间：</span>
+                                <div class="xkTabSelect inB"><span id="timeYear" class="drop zindex" style="z-index: 5;width: 230px;"></span></div>
+								<div style="display: inline-block; {/if !$is_hr/}display:none{//if/}">
+                                    <span>公司：</span>
+								    <div class="xkTabSelect inB"><span id="jobCompany" class="drop zindex" style="width: 230px;"></span></div>
+                                </div>
+							</div>
+
+                            <div class="filterOptions-last clearfix">
+                            <div class="clearfix">
+								  <span>职位：</span>
+								  <div class="xkTabSelect inB"><span id="tstDropJob" class="drop zindex" style="width: 230px;"></span></div>
+                                <!--<label style="padding-top:6px; margin-right: 15px;">-->
+                                    <!--<input class="md_stopjob curp" type="checkbox" {/if $qusition_job == 1/}checked="checked"{//if/} id="qusition_job1" style="display:inline-block; vertical-align:-1px;">&nbsp;问题职位-->
+                                <!--</label>-->
+                                <!--<input class="md_stopjob curp" type="hidden" id="qusition_job" name="qusition_job" value="{/$qusition_job/}">-->
+                                <label style="padding-top:6px; margin-right: 15px;">
+                                    <input class="md_stopjob curp" type="checkbox" {/if $is_stop == 1/}checked="checked"{//if/} id="showStopJob" name="is_stop" value="1" style="display:inline-block; vertical-align:-1px;">&nbsp;包含停招职位
+                                </label>
+                                <input type="hidden" name="detail_job_id" id="detail_job_id" value="all">
+                                <input type="hidden" name="execl" id="execl" value="">
+                                <!-- 搜索按钮 -->
+                                <input type="button" id="searchSubmit" value="确定" class="mianshiSearchBtn curp">
+                                
+                                <!-- <div class="question"></div> -->
+                            </div>
+
+                        </div>
+                    </form>
+                    {/if $visit_data && $detail_job_id/}
+                    <div class="more—right">
+                        <input type="button" value="导出Excel" id="download_excel" class="mianshiSearchBtn" style="background: #00bab1; margin-left: 5px;width:100px">
+                    </div>
+                    <div class="offerDatas" style="position: relative;">
+						<span class="tr-item">
+							<em class="wh-orang">职位在列表中展示过的次数</em>
+							<em class="wh-orang">职位详情被点击次数</em>
+							<em class="wh-orang">点击量除以曝光量</em>
+						</span>
+                        <table class="offerTable">
+                            <thead class="offerTbHead fontColorthead">
+                            <tr class="mouseMove">
+                                <th width="200" class="name">职位</th>
+                                <th width="150" class="hoverShow">曝光量</th>
+                                <th width="158" class="hoverShow">点击量</th>
+                                <th width="162" class="hoverShow">点击率</th>
+                                <th width="163">接收简历</th>
+                                <th width="150">邀请面试</th>
+                                <th width="163">投递率</th>
+                                <th width="150">邀请率</th>
+                            </tr>
+                            </thead>
+                            <tbody class="offerTbBody fontColordefault">
+                            {/foreach $list as $key => $val/}
+                            <tr>
+                                <td class="name overtext jobstation textone"><a href="{/get_url rule='/readjob/jobVisit'/}?startDay={/$start_time/}&company_id={/$val['company_id']/}&job_id={/$val['job_id']/}">{/$val['station']/}</a></td>
+                                {/if $val['exposes_status'] == 3 && $val['job_is_stop'] != 1/}
+                                    <td class="overtext pos1 fontColordefault fontColorOrange" data-work_year="{/$val['work_year']/}" data-refresh_times="{/$val['refresh_times']/}" data-is_spread="{/$val['is_spread']/}"
+			 data-re_apply="{/$val['re_apply_flag']/}">{/$val['exposes_count']/}<span class="xiajiang"></span></td>
+                                {/elseif $val['exposes_status'] == 2 && $val['job_is_stop'] != 1/}
+                                    <td class="overtext pos1 fontColordefault fontColorGreen" data-work_year="{/$val['work_year']/}" data-refresh_times="{/$val['refresh_times']/}" data-is_spread="{/$val['is_spread']/}"
+			 data-re_apply="{/$val['re_apply_flag']/}">{/$val['exposes_count']/}<span class="shangsheng"></span></td>
+                                {/else/}
+                                    <td class="overtext pos1 fontColordefault">{/$val['exposes_count']/}</td>
+                                {//if/}
+                                <td class="overtext fontColordefault ">{/$val['visit_count']/}</td>
+                                {/if $val['click_status'] == 3 && $val['job_is_stop'] != 1/}
+                                <td class="overtext pos2 fontColordefault fontColorOrange" data-show_tip="{/$val['is_show_salary_tip']/}" data-min_salary="{/$val['job_min_salary']/}" data-max_salary="{/$val['job_max_salary']/}">{/$val['click_rate']/}%<span class="xiajiang"></span></td>
+                                {/elseif $val['click_status'] == 2 && $val['job_is_stop'] != 1/}
+                                <td class="overtext pos2 fontColordefault fontColorGreen" data-show_tip="{/$val['is_show_salary_tip']/}" data-min_salary="{/$val['job_min_salary']/}" data-max_salary="{/$val['job_max_salary']/}">{/$val['click_rate']/}%<span class="shangsheng"></span></td>
+                                {/else/}
+                                <td class="overtext pos2 fontColordefault">{/$val['click_rate']/}%</td>
+                                {//if/}
+                                <td class="overtext fontColordefault">{/$val['apply_count']/}</td>
+                                <td class="overtext fontColordefault">{/$val['invite_count']/}</td>
+                                {/if $val['apply_status'] == 3 && $val['job_is_stop'] != 1/}
+                                <td class="overtext pos3 fontColordefault fontColorOrange" data-reply_rate="{/$val['reply_rate']/}" data-avg_time="{/$val['avg_time']/}" data-companyphoto="{/$companyphoto/}"
+			 data-managelist="{/$managelist/}" data-projectlist="{/$projectlist/}" data-reward="{/$val['job_reward']/}"
+			 data-open_chat="{/$val['is_open_chat']/}" data-appraise="{/$appraise_flag/}">{/$val['delivery_rate']/}%<span class="xiajiang"></span></td>
+                                {/elseif $val['apply_status'] == 2 && $val['job_is_stop'] != 1/}
+                                <td class="overtext pos3 fontColordefault fontColorGreen" data-reply_rate="{/$val['reply_rate']/}" data-avg_time="{/$val['avg_time']/}" data-companyphoto="{/$companyphoto/}"
+			 data-managelist="{/$managelist/}" data-projectlist="{/$projectlist/}" data-reward="{/$val['job_reward']/}"
+			 data-open_chat="{/$val['is_open_chat']/}" data-appraise="{/$appraise_flag/}">{/$val['delivery_rate']/}%<span class="shangsheng"></span></td>
+                                {/else/}
+                                <td class="overtext pos3 fontColordefault">{/$val['delivery_rate']/}%</td>
+                                {//if/}
+                                <td class="overtext fontColordefault">{/$val['invitation_rate']/}%</td>
+                            </tr>
+                            {//foreach/}
+                            </tbody>
+                        </table>
+                        <div class="noData fontColorBlue" {/if $list/}style="display:none"{//if/}>
+                            <p>未找到数据，请更换筛选条件再试！</p>
+                            <!-- <a class="btn" href="javascript:void(0);" id="btnClearFilterSearch"><i class="hbFntWes">&#xf014;</i>清空筛选/搜索条件</a></p> -->
+                        </div>
+                    </div>
+                {//if/}
+                </div>
+            </hgroup>
+        </div>
+    </div>
+    <div class="j_time_search_btn" data-explain="do not delete!" style="display: none"></div>
+    <div class="excel_down" data-explain="do not delete!" style="display: none"></div>
+    <div class="j_username_search_btn" data-explain="do not delete!" style="display: none"></div>
+
+    <script>
+    $('.pos1').mouseenter(function(e){
+            $(this).addClass('curp');
+            $('#bottombox').show();
+			if($(this).hasClass('fontColorOrange')){
+				$('.tsBox').show();
+				$('.tsBox').addClass('posTsBox');
+				// console.log($(this).offset().left);
+				var thisTr = parseInt($(this).parent('tr').height())+2;
+				$('.tsBox').css({'left':($(this).offset().left +20) +'px', "top": ($(this).offset().top+thisTr) + 'px'});
+				$('.tsBox h3').eq(0).show().siblings('h3').hide();
+				$('.tsBox .tsBox-list1 ').show();
+				var tsBox_list1_box = $('.tsBox .tsBox-list1 .tsBox-list-box');
+				if(parseInt($(this).attr('data-refresh_times')) > 4){
+				    tsBox_list1_box.eq(0).hide();
+				    tsBox_list1_box.eq(1).show();
+					tsBox_list1_box.eq(2).show();
+				}
+				else{
+				    tsBox_list1_box.eq(0).show();
+					tsBox_list1_box.eq(1).hide();
+					tsBox_list1_box.eq(2).hide();
+				};
+				if($(this).attr('data-is_spread') == '1'){
+				    tsBox_list1_box.eq(3).show();
+				}else{
+					tsBox_list1_box.eq(3).hide();
+				}
+				if($(this).attr('data-re_apply') == '1'){
+				    tsBox_list1_box.eq(4).show();
+				}else{
+					tsBox_list1_box.eq(4).hide();
+				}
+				if($(this).attr('data-work_year') == '0'){
+					tsBox_list1_box.eq(5).hide();
+				}else{
+				    tsBox_list1_box.eq(5).show();
+				}
+				$('.tsBox .tsBox-list2').hide();
+				$('.tsBox .tsBox-list3').hide();
+			}else if($(this).hasClass('fontColorGreen')) {
+				$('.tsBox').show();
+				$('.tsBox').addClass('posTsBox');
+				var thisTr = parseInt($(this).parent('tr').height())+2;
+				$('.tsBox').css({'left':($(this).offset().left +20) +'px', "top": ($(this).offset().top+thisTr) + 'px','width':'119px'});
+				$('.tsBox h3').hide()
+				$('.tsBox-list').hide()
+				$('.lianghao').show()
+			}
+            
+        }).mouseleave(function(){
+			$(this).removeClass('curp');
+            $('.tsBox').hide();
+			$('.tsBox').css('width','325px')
+            $('.tsBox').removeClass('posTsBox');
+            $('#bottombox').hide();
+        })
+	$('.offerTbBody .pos2').mouseenter(function(e){
+		$('#bottombox').show();
+		$(this).addClass('curp');
+		if($(this).hasClass('fontColorOrange')){
+			$('.tsBox').show();
+			$('.tsBox').addClass('posTsBox');
+			var thisTr = parseInt($(this).parent('tr').height())+2;
+			$('.tsBox').css({'left':($(this).offset().left +20) +'px', "top": ($(this).offset().top+thisTr) + 'px'});
+			$('.tsBox h3').eq(1).show().siblings('h3').hide();
+			$('.tsBox .tsBox-list3').show();
+			var tsBox_list3_box = $('.tsBox .tsBox-list3 .tsBox-list-box');
+			if($(this).attr('data-show_tip') == '0' ){
+			    tsBox_list3_box.eq(0).hide();
+			    tsBox_list3_box.eq(1).show();
+			}else{
+			    tsBox_list3_box.eq(0).show();
+				tsBox_list3_box.eq(1).hide();
+				$('.tsBox-list3 .tsBox-list-box p').eq(0).html("设置合理的薪资区间，职位"+$(this).siblings('.jobstation').html()+"的薪资区间低于平均薪资区间，平均薪资"+$(this).attr('data-min_salary')+"元至"+$(this).attr('data-max_salary')+"元。最低薪资和最高薪资幅度差异不要过大，以免被认为虚假薪资");
+			}
+			$('.tsBox .tsBox-list2').hide();
+			$('.tsBox .tsBox-list1').hide();
+		}else if($(this).hasClass('fontColorGreen')){
+			$('.tsBox').show();
+			$('.tsBox').addClass('posTsBox');
+			var thisTr = parseInt($(this).parent('tr').height())+2;
+			$('.tsBox').css({'left':($(this).offset().left +20) +'px', "top": ($(this).offset().top+thisTr) + 'px', 'width':'119px'});
+			$('.tsBox h3').hide()
+			$('.tsBox-list').hide()
+			$('.lianghao').show()
+		}
+	}).mouseleave(function(){
+        $('.tsBox').hide();
+		$('.tsBox').css('width','325px')
+        $('#bottombox').hide();
+		$(this).removeClass('curp');
+		$('.tsBox').removeClass('posTsBox');
+	})
+	$('.pos3').mouseenter(function(e){
+		$(this).addClass('curp');
+		if($(this).hasClass('fontColorOrange')){
+			$('#bottombox').show();
+			$('.tsBox').show();
+			$('.tsBox').addClass('posTsBox');
+			var thisTr = parseInt($(this).parent('tr').height())+2;
+			$('.tsBox').css({'left':($(this).offset().left +20) +'px', "top": ($(this).offset().top+thisTr) + 'px'});
+			$('.tsBox h3').eq(2).show().siblings('h3').hide();
+			$('.tsBox .tsBox-list2').show();
+			//平均回复率大于60% && 平均回复时长<72
+			var tsBox_list2_boList = $('.tsBox .tsBox-list2 .tsBox-list-box');
+			if(parseInt($(this).attr('data-reply_rate')) < 60 || parseInt($(this).attr('data-avg_time')) > 72 ){
+			    tsBox_list2_boList.eq(0).show();
+			}else{
+				tsBox_list2_boList.eq(0).hide();
+			}
+			if(parseInt($(this).attr('data-reply_rate')) > 60 ){
+				$('.tsBox .tsBox-list2 .data-showcon').eq(0).hide();
+			}else{
+			    $('.tsBox .tsBox-list2 .data-showcon').eq(0).show();
+			}
+			if(parseInt($(this).attr('data-avg_time')) < 72 ){
+				$('.tsBox .tsBox-list2 .data-showcon').eq(1).hide();
+			}else{
+			    $('.tsBox .tsBox-list2 .data-showcon').eq(1).show();
+			}
+			if($(this).attr('data-appraise') == '0'){
+				tsBox_list2_boList.eq(2).hide();
+			}else{
+			    tsBox_list2_boList.eq(2).show();
+			}
+			var companyphoto = $(this).attr('data-companyphoto');
+			var projectlist = $(this).attr('data-projectlist');
+			var managelist = $(this).attr('data-managelist');
+			
+			if( companyphoto == '1' && managelist  == '1' && projectlist  == '1' ){
+				tsBox_list2_boList.eq(3).hide();
+			}else{
+			    tsBox_list2_boList.eq(3).show();
+			}
+			if(companyphoto == '1'){
+				tsBox_list2_boList.eq(3).find('.aboutCompany').eq(0).hide();
+			}else{
+			    tsBox_list2_boList.eq(3).find('.aboutCompany').eq(0).show();
+			}
+			if(projectlist == '1'){
+				tsBox_list2_boList.eq(3).find('.aboutCompany').eq(1).hide();
+			}else{
+			    tsBox_list2_boList.eq(3).find('.aboutCompany').eq(1).show();
+			}
+			if(managelist == '1'){
+				tsBox_list2_boList.eq(3).find('.aboutCompany').eq(2).hide();
+			    if(companyphoto == '0' && projectlist == '1'){
+			        tsBox_list2_boList.eq(3).html("<p>完善<span class='aboutCompany'>公司照片</span>，展示良好企业形象</p>");
+			    }
+			    if(companyphoto == '1' && projectlist == '0'){
+			        tsBox_list2_boList.eq(3).html("<p>完善<span class='aboutCompany'>产品和项目</span>，展示良好企业形象</p>");
+			    }
+			    if(companyphoto == '0' && projectlist == '0'){
+			        tsBox_list2_boList.eq(3).html("<p>完善<span class='aboutCompany'>企业照片、</span><span class='aboutCompany'>产品和项目</span>，展示良好企业形象</p>");
+			    }
+			}else{
+			    tsBox_list2_boList.eq(3).find('.aboutCompany').eq(2).show();
+			}
+			if($(this).attr('data-reward') == '0'){
+				tsBox_list2_boList.eq(4).hide();
+			}else{
+			    tsBox_list2_boList.eq(4).show();
+			}
+			if($(this).attr('data-open_chat') == '1'){
+				tsBox_list2_boList.eq(5).hide();
+			}else{
+			    tsBox_list2_boList.eq(5).show();
+			}
+			$('.tsBox .tsBox-list3').hide();
+			$('.tsBox .tsBox-list1').hide();
+		}else if($(this).hasClass('fontColorGreen')){
+			$('.tsBox').show();
+			$('.tsBox').addClass('posTsBox');
+			var thisTr = parseInt($(this).parent('tr').height())+2;
+			$('.tsBox').css({'left':($(this).offset().left +20) +'px', "top": ($(this).offset().top+thisTr) + 'px','width':'119px'});
+			$('.tsBox h3').hide()
+			$('.tsBox-list').hide()
+			$('.lianghao').show()
+		}
+	}).mouseleave(function(){
+        $('#bottombox').hide();
+		$(this).removeClass('curp');
+		$('.tsBox').hide();
+		$('.tsBox').css('width','325px')
+		$('.tsBox').removeClass('posTsBox');
+    })
+    $('.tsBox').mouseenter(function(e){
+        e.stopPropagation();
+        return false;
+    })
+    
+    // $('.moveHover .hoverShowTh').hover(function(){
+    // 	$(this).addClass('curp');
+    // 	var index = $(this).index();
+    // 	$('.offerDatas-item-pos').eq(0).show();
+    // 	$('.offerDatas .offerDatas-item-pos em').eq(index-1).show().siblings().hide();
+    // 	if(index==1){
+    // 		$('.offerDatas-item-pos').css('left', ($('.moveHover .name').width())+"px")
+    // 	}
+    // 	if(index==2){
+    // 		$('.offerDatas-item-pos').css('left', ($('.moveHover .name').width()+$('.moveHover .hoverShowTh').eq(1).width())+"px")
+    // 	}
+    // },function(){
+    // 	$(this).removeClass('curp');
+    // 	$('.offerDatas .offerDatas-item-pos').hide();
+    // })
+	$('.hoverShow').hover(function(){
+		$(this).addClass('curp');
+		var index = $(this).index();
+		$('.offerDatas .tr-item').eq(0).show();
+		$('.tr-item .wh-orang').eq(index-1).show().siblings().hide();
+		if(index==1){
+			$('.tr-item').css('left', ($('.mouseMove .name').width())+"px")
+		}
+		if(index==2){
+			$('.tr-item').css('left', ($('.mouseMove .name').width()+$('.hoverShow').eq(1).width())+"px")
+		}
+		if(index==3){
+			$('.tr-item').css('left', ($('.mouseMove .name').width()+$('.hoverShow').eq(1).width()+$('.hoverShow').eq(2).width())+"px")
+		}
+	},function(){
+		$(this).removeClass('curp');
+		$('.offerDatas .tr-item').hide();
+	})
+
+    
+    </script>
+    <script  type="text/javascript">
+        var action_url = '{/$siteurl.style/}';
+        action_dom = [
+            ['#tstDropJob', 393],
+            ['.j_time_search_btn', 394],
+            ['.j_username_search_btn', 395],
+            ['.j_resume_detail_btn', 396],
+            ['.j_send_offer_btn', 397],
+            ['.j_see_btn', 398],
+            ['.getInfoData1', 425],
+            ['.getMoreData', 426],
+            ['.excel_down', 427],
+            ['.jobstation1', 428],
+            ['.recruitment',421],
+            ['.jobdiagnosis',420]
+        ];
+    </script>
+    <script type="text/javascript" language="javascript" src="{/version file='action.js'/}"></script>
+
+    <script type="text/javascript">
+        //时间
+        $('#timeYear').droplist({
+            defaultTitle : '{/$time_value/}',
+            style : 'width:220px;',
+            noSelectClass : '#444',
+            inputWidth : 220,
+            width : 220,
+            hddName : 'time_id',
+//            items : [{"id":"01","name":"2019"}],
+            items : {/$time_data/},
+            selectValue : '{/$time_id/}',
+            maxScroll : 10,
+            onSelect : function(i, name) {
+                //选中后的事件
+                $('#frmInvite').submit()
+            }
+        });
+
+        $('#timeMonth').droplist({
+            defaultTitle : '10月',
+            style : 'width:220px;',
+            noSelectClass : '#444',
+            inputWidth : 220,
+            width : 220,
+            hddName : 'station',
+            items : [{"id":"01","name":"10月"}],
+            selectValue : '{/$re_con["station"]/}',
+            maxScroll : 10,
+            onSelect : function(i, name) {
+                //选中后的事件
+                $('#frmInvite').submit()
+            }
+        });
+        //招聘负责人recruitmentManager
+        $('#recruitmentManager').droplist({
+            defaultTitle : '',
+            style : 'width:220px;',
+            noSelectClass : '#444',
+            inputWidth : 220,
+            width : 220,
+            hddName : 'station',
+            items : [{"id":"01","name":"10月"}],
+            selectValue : '{/$re_con["station"]/}',
+            maxScroll : 10,
+            onSelect : function(i, name) {
+                //选中后的事件
+                $('#frmInvite').submit()
+            }
+        });
+
+        //职位
+        $('#tstDropJob').droplist({
+            defaultTitle : '全部职位',
+            style : 'width:220px;',
+            noSelectClass : '#444',
+            inputWidth : 220,
+            width : 220,
+            hddName : 'job_id',
+            items : {/$jobs/},
+            selectValue : '{/$job_id/}',
+            maxScroll : 10,
+            onSelect : function(i, name) {
+                //选中后的事件
+                $('#frmInvite').submit()
+            }
+        });
+        //公司
+        $('#jobCompany').droplist({
+            defaultTitle : '所有公司',
+            style : 'width:220px;',
+            noSelectClass : '#444',
+            inputWidth : 220,
+            width : 220,
+            hddName : 'company_id',
+            items : {/$accounts_json/},
+            selectValue : '{/$company_id/}',
+            maxScroll : 10,
+            onSelect : function(i, name) {
+                //选中后的事件
+                $('#frmInvite').submit()
+            }
+        });
+        $("#searchSubmit").click(function(){
+            $("#execl").val(0);
+            $('#frmInvite').submit();
+        });
+
+
+        $("#showStopJob").click(function(){
+            $("#execl").val(0);
+            $('#frmInvite').submit();
+        });
+
+
+        $(".getInfoData").click(function(){
+            var job_id = $(this).attr("data-job_id");
+            $("#detail_job_id").val(job_id);
+            $("#execl").val(0);
+            $("#frmInvite").submit();
+        });
+        $("#download_excel").click(function(){
+            $("#execl").val(1);
+            $("#frmInvite").submit();
+            $(".excel_down").click();
+        });
+
+    </script>
+</div>
+</div>
+{/include file="msgpop.html"/}
+{/include file="footer.html"/}
+{/include file="chat/chat.html"/}
+<div class='tsBox'>
+        <div id="sanjiao">
+            <div class="sanjiaoNei"></div>
+        </div>
+        <h3>曝光量低于同行业同职位，建议您：</h3>
+        <h3>点击率低于同行业同职位，建议您：</h3>
+        <h3>平均投递率低于同行业同职位，建议您：</h3>
+        <div class='tsBox-list1 tsBox-list'>
+            <div class='tsBox-list-box' style="background:#f5f6f8 url({/$siteurl.style/}/img/c/new_index/baoguang1.png) no-repeat;background-position: 5px 50%;"><p>每天刷新职位，排名更靠前</p></div>
+            <div class='tsBox-list-box' style="background:#f5f6f8 url({/$siteurl.style/}/img/c/new_index/baoguang2.png) no-repeat;background-position: 5px 50%;"><p>正确设置职位名称，便于搜索<br/>例如招聘销售，不要只写“五险一金高提成”，标题应含“销售”关键词</p></div>
+            <div class='tsBox-list-box' style="background:#f5f6f8 url({/$siteurl.style/}/img/c/new_index/baoguang3.png) no-repeat;background-position: 5px 50%;"><p>正确设置职位类别，以免求职者按职位类别筛选时无法找到您职位</p></div>
+            <div class='tsBox-list-box' style="background:#f5f6f8 url({/$siteurl.style/}/img/c/new_index/baoguang4.png) no-repeat;background-position: 5px 50%;"><p>可按需求“置顶”、“急聘”、“精准推广”职位</p></div>
+            <div class='tsBox-list-box' style="background:#f5f6f8 url({/$siteurl.style/}/img/c/new_index/baoguang5.png) no-repeat;background-position: 5px 50%;"><p>设置“简历必回”</p></div>
+            <div class='tsBox-list-box' style="background:#f5f6f8 url({/$siteurl.style/}/img/c/new_index/baoguang6.png) no-repeat;background-position: 5px 50%;"><p>可接受应届生的职位，发布时勾选“可接受应届生”，会将职位推荐应届生频道，增加曝光量。</p></div>
+        </div>
+        <div class='tsBox-list2 tsBox-list'>
+            <div class='tsBox-list-box' style="background:#f5f6f8 url({/$siteurl.style/}/img/c/new_index/toudilv1.png) no-repeat;background-position: 5px 50%;"><p>简历<span class="data-showcon">平均回复率过低，</span><span class="data-showcon">回复时长过高，</span>影响投递</p></div>
+            <div class='tsBox-list-box' style="background:#f5f6f8 url({/$siteurl.style/}/img/c/new_index/toudilv2.png) no-repeat;background-position: 5px 50%;"><p>职位名称符合实际工作内容及职位类别，职责清晰明确，清晰说明涉及领域、工作职责、工作范围、个人能力要求</p></div>
+            <div class='tsBox-list-box' style="background:#f5f6f8 url({/$siteurl.style/}/img/c/new_index/toudilv3.png) no-repeat;background-position: 5px 50%;"><p>岗位职责相符度低，求职者差评及时申诉</p></div>
+            <div class='tsBox-list-box' style="background:#f5f6f8 url({/$siteurl.style/}/img/c/new_index/toudilv4.png) no-repeat;background-position: 5px 50%;"><p>完善<span class="aboutCompany">企业照片、</span><span class="aboutCompany">产品和项目、</span><span class="aboutCompany">高管团队</span>,展示良好企业形象</p></div>
+            <div class='tsBox-list-box' style="background:#f5f6f8 url({/$siteurl.style/}/img/c/new_index/toudilv5.png) no-repeat;background-position: 5px 50%;"><p>完善职位福利</p></div>
+            <div class='tsBox-list-box' style="background:#f5f6f8 url({/$siteurl.style/}/img/c/new_index/toudilv6.png) no-repeat;background-position: 5px 50%;"><p>发布职位时打开“聊一聊” </p></div>
+        </div>
+        <div class='tsBox-list3 tsBox-list'>
+            <div class='tsBox-list-box' style="background:#f5f6f8 url({/$siteurl.style/}/img/c/new_index/dianjilv2.png) no-repeat;background-position: 5px 50%;"><p>设置合理的薪资区间，职位产品经理的薪资区间低于平均薪资区间，平均薪资X元至X元。
+                最低薪资和最高薪资幅度差异不要过大，以免被认为虚假薪资</p></div>
+            <div class='tsBox-list-box' style="background:#f5f6f8 url({/$siteurl.style/}/img/c/new_index/dianjilv1.png) no-repeat;background-position: 5px 50%;"><p>职位名称与职位类别相符</p></div>
+        </div>
+		<h3 class="lianghao" style="font-size: 13px;margin-bottom: 5px;">数据良好继续保持</h3>
+    </div>
+</body>
+</html>

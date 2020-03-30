@@ -1,0 +1,123 @@
+<style>
+    .import_dialog{padding: 20px;width:650px;height: 400px;overflow-y: auto; font-family: "Microsoft YaHei", "微软雅黑"}
+    .import_dialog th{height: 30px;line-height: 30px;text-align: center;font-size: 12px;color: #444;padding: 3px 5px;background: #e6e6e6;}
+    .import_dialog td{border-bottom: 1px dashed #dddddd;padding: 8px 10px;text-align: center;font-size: 12px;color: #999}
+    .import_dialog .input{width:13px}
+    .import_dialog .name{text-align: left}
+    .import_dialog .time{text-align: right; padding-right:30px;}
+    .import_dialog .name a{color: #3d84b8;text-decoration: none}
+    .import_dialog .name a:hover{text-decoration: underline}
+    .import_dialog_button{text-align: center;padding-bottom: 20px}
+    .import_dialog_button .submit_but, .import_dialog_button .cancel_but{display: inline-block;width:80px;height: 30px;line-height: 30px;font-size: 14px;text-align: center;text-decoration: none;margin: 0 10px; cursor:pointer;}
+    .import_dialog_button .submit_but{background: #3d86bc;color: #fff}
+    .import_dialog_button .cancel_but{background: #f0f0f0;color: #666}
+    .import_dialog_button .submit_but:hover{background: #2e7eb9}
+    .import_dialog_button .cancel_but:hover{background: #d8d8d8}
+    .Buttom_refresh{background: #66bce4;  border-radius: 2px;  color: #fff;  font-size: 14px;  font-weight: normal;  height: 30px;  line-height: 28px;  margin-top: 15px;  padding: 0;  text-align: center;  width: 60px;display: inline-block; cursor: pointer; }
+    .Buttom_refresh:hover{color:#fff;}
+</style>
+<div class="import_dialog">
+    <p id="checkedNullMsg" style="display:none; text-align: left; color:red;">(您确定不导入任何职位吗？)</p>
+    <p style="text-align:left; color:#999; padding-bottom:8px;">最多可导入{/intval($companyresources['default_job_num']-$companyresources['has_pub_job_num'])/}个职位</p>
+    <table style="width: 100%" id="importJobs">
+        <tr>
+            <th class="input"><input type="checkbox" checked="checked" id="allCheckBox" /></th>
+            <th class="name">职位名称</th>
+            <th class="company">招聘站点</th>
+            <th class="time">招聘截止日期</th>
+        </tr>
+        {/foreach $data as $val/}
+        <tr>
+            <td class="input"><input type="checkbox" value="{/$val['job_id']/}" checked="checked" /></td>
+            <td class="name"><a href="{/$val['job_link']/}" target="_blank">{/$val['station']/}</a></td>
+            <td class="company">{/$val['origin']/}</td>
+            <td class="time">{/$val['end_time']/}</td>
+        </tr>
+        {//foreach/}
+
+    </table>
+</div>
+<div class="import_dialog_button"><a class="submit_but" id="importSubmit">确定</a><a id="importClose" class="cancel_but">取消</a></div>
+
+<script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.min.js'/}"></script>
+
+<script type="text/javascript" language="javascript" src="{/version file='dialog.js'/}"></script>
+<script type="text/javascript">
+    window.CONFIG = {
+        HOST: '{/$siteurl.style/}',
+        COMBOPATH: '/js/v2/'
+    }
+</script>
+<script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,cookie.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='global.js'/}"></script>
+
+
+<script type="text/javascript">
+    var importDialogMsg;
+    hbjs.use('@css3, @jobFlexSlider,@imageEditor, @confirmBox, @jobsort, @orderActions', function(m) {
+        var Dialog = m['widge.overlay.hbDialog'];
+
+    $('#importSubmit').on("click",function(){
+        var checkboxlist = $('#importJobs tr td input:checkbox');
+        var checkboxlistChecked = $('#importJobs tr td input:checkbox:checked').size();
+        var checkboxLength = checkboxlist.size();
+        var strdata = '';
+        var max_insert_job_number = {/intval($companyresources['default_job_num']-$companyresources['has_pub_job_num'])/};
+        if(checkboxlistChecked == 0){
+            $('#checkedNullMsg').show();
+        }
+        if(checkboxlistChecked > max_insert_job_number){
+            showMsg("最多可导入"+max_insert_job_number+"个职位",false);return;
+        }
+        checkboxlist.each(function(index,element){
+            var temp = $(this).is(':checked') ? 1 : 0 ;
+            var tempval = $(this).val();
+            var temp_pre = index==checkboxLength-1? '': ',';
+            strdata += tempval+":"+temp+temp_pre;
+        });
+
+//        alert(strdata);return;
+        $.post('{/get_url rule="/index/importJobDo"/}',{data:strdata},function(rdata){
+            showMsg(rdata.msg,true);
+        },'json');
+    });
+
+    function showMsg(msg,is_refresh){
+        var html = '<div style="padding:35px 15px; ">'+msg+'</div><a onclick="Buttom_refresh()" class="Buttom_refresh" target="_blank">确定</a>';
+        if(!is_refresh){
+            html = '<div style="padding:35px 15px; ">'+msg+'</div><a onclick="Buttom_close()" class="Buttom_refresh" target="_blank">确定</a>';
+        }
+
+        importDialogMsg = new Dialog({
+            idName: 'click_import_dialog',
+            title: '系统提示',
+            width: 300,
+            content: html,
+            isAjax: true
+        });
+        importDialogMsg.show();
+    }
+    $('#allCheckBox').click(function(){
+        $('#importJobs tr td input:checkbox').prop('checked',$(this).prop('checked'))
+        if($('#importJobs tr td input:checkbox:checked').size()>0){
+            $('#checkedNullMsg').hide();
+        }else{
+            $('#checkedNullMsg').show();
+        }
+    });
+    $('#importJobs tr td input:checkbox').click(function(){
+        $('#allCheckBox').prop('checked',$('#importJobs tr td input:checkbox').size()==$('#importJobs tr td input:checkbox:checked').size() ? true:false);
+        if($('#importJobs tr td input:checkbox:checked').size()>0){
+            $('#checkedNullMsg').hide();
+        }else{
+            $('#checkedNullMsg').show();
+        }
+    });
+    });
+    function Buttom_refresh(){
+        window.parent.document.location.reload();
+    }
+    function Buttom_close(){
+        importDialogMsg.hide();
+    }
+</script>

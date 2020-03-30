@@ -1,0 +1,284 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0" /> -->
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+<title>{/$title/}</title>
+<!–[if lt IE9]> 
+<script src="{/version file='html5.js'/}"></script>  
+<![endif]–>
+<link rel="stylesheet" type="text/css" href="{/version file="base.css"/}" />
+<link rel="stylesheet" type="text/css" href="{/version file="comback.css"/}" />
+<link rel="stylesheet" type="text/css" href="{/version file="tJob_style.css"/}" />
+<link rel="stylesheet" type="text/css" href="{/version file="v2-widge.css"/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='m_font_style.css'/}">
+
+<link rel="stylesheet" type="text/css" href="{/version file='main.css'/}"/>
+<link rel="stylesheet" type="text/css" href="{/version file='mainPhoto.css'/}"/>
+<script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='jquery.cookie.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='jquery.prettyPhoto.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='lrtkmain.js'/}"></script>
+
+	<script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.js'/}"></script>
+	<script type="text/javascript" language="javascript" src="{/version file='ui_dropdownlist.js'/}"></script>
+<script type="text/javascript" src="{/version file='version.js'/}"></script>
+<script type="text/javascript">
+window.CONFIG = {
+	HOST: '{/$siteurl.style/}',
+	COMBOPATH: '/js/v2/'
+}
+</script>
+<script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+<script type="text/javascript" src='{/version file="global.js"/}'></script>
+<style>
+.tjob_manager {background-color: #ffffff;width: 1200px;}
+.laberBar {width: 210px;float: left;}
+.topContent {height: 80px;width: 980px;float: right;border-bottom: 10px solid #f5f6f9;border-left: 10px solid #f5f6f9;}
+.bottomContent {width: 940px;float: right;padding: 25px 20px 20px 20px;border-left: 10px solid #f5f6f9;}
+.left_ul {padding: 15px 0 0 13px;}
+.left_ul li {width: 180px;height: 36px;background-color: #ffffff;margin-bottom: 10px;border-radius: 4px;color: #444444;font-size: 16px;line-height: 36px;}
+.left_ul li a {position: relative;padding-left: 40px;display: block; background-color: #ffffff;margin-bottom: 10px;border-radius: 4px;color: #444444;font-size: 16px;line-height: 36px;}
+.left_ul li a:hover {text-decoration: none; width: 140px;height: 36px;background-color: #3388ff;margin-bottom: 10px;border-radius: 4px;color: #fff;font-size: 16px;line-height: 36px;}
+.top_time {width: 980px;height: 80px; padding: 25px 0 25px 20px;box-sizing: border-box;vertical-align:middle;display:table-cell;}
+.top_span {font-size: 14px;color: #999999;}
+.bot_content {width: 100%;border: 1px solid #f7f8fd;border-radius: 4px;padding-bottom: 20px;}
+.bot_top {width: 100%;height: 45px;background-color: #fcfdff;padding-top: 12px;padding-left: 15px;padding-right: 15px; box-sizing: border-box;border-bottom: 1px solid #f8f9fd;}
+.bot_top .sp1 {font-size: 14px;color: #999999;}
+.sp3 {font-size: 14px;color: #999999;float: right;}
+.bot_bot {width: 100%;}
+.bot_bot_l {height: 100%;width: 115px;float: left;padding-top: 25px;padding-left: 10px;box-sizing: border-box;position: relative;}
+.bot_bot_r {height: 100%;width: 820px;float: right;box-sizing: border-box;padding-top: 25px;}
+.name {font-size: 18px;color: #0084ff;font-weight: bold;}
+.age,.height,.address {font-size: 14px;color: #999999;}
+.age {margin-left: 15px;}
+.bot_bot_r_title {margin-top: 18px;font-size: 16px;font-weight: bold;margin-bottom: 10px;}
+.bot_bot_r_tb {width: 800px;border: 1px solid #eeeeee;}
+.bot_bot_r_tb th,.bot_bot_r_tb td {text-align: center;}
+.bot_bot_r_tb th {height: 30px;background-color: #fdfeff;border-bottom: 1px solid #eeeeee;border-right: 1px solid #eeeeee;font-size: 14px;}
+.bot_bot_r_tb td {height: 40px;border-bottom: 1px solid #eeeeee;border-right: 1px solid #eeeeee;font-size: 14px;color: #999;}
+.water {color: #0084ff;}
+.water:hover {color: #0084ff;text-decoration: none!important;}
+.ing {color: #0084ff;}
+/* .bot_bot_l_two ,.bot_bot_r_two{height: 280px;} */
+.jiedan_ing {color: #ff571c;}
+.top_time_int {color: #444; width: 100px;height: 30px;border-radius: 4px;border: 1px solid #eeeeee;box-sizing: border-box;padding-left: 5px;}
+.separate {margin-left: 5px;margin-right: 5px;}
+.top_span_two {margin-left: 35px;}
+.top_time_int_two {width: 160px;padding-left: 5px;}
+.a_serch {display: inline-block;height: 30px;width: 45px;background-color: #3388ff;color: #fff;line-height: 30px;text-align: center;margin-left: 195px;border-radius: 4px;}
+.dropLst {display: none;}
+#top_zhiwei {line-height: 30px; position: absolute; display: inline-block;width: 160px;height: 30px;border: 1px solid #eeeeee;box-sizing: border-box;border-radius: 4px;padding-left: 5px;}
+.dropShow .dropLst {position: absolute;}
+.hbFntWes {position: absolute;right: 5px;top: 7px;font-size: 14px;color: #ccc;cursor: pointer;}
+.dropLstCon ul {border: 1px solid #ccc;background-color: #fff;}
+.sp4 {float: right;color: #4da1ff;}
+.left_ul .i {margin-right: 9px;font-size: 21px;margin-left: 9px;position: absolute;top: 8px;left: 0;}
+.left_ul li a.cur{position: relative; padding-left: 40px; text-decoration: none; width: 140px;height: 36px;background-color: #3388ff;margin-bottom: 10px;border-radius: 4px;color: #fff;font-size: 16px;line-height: 36px;}
+#resumename_cancell {position: absolute;bottom: 20px;left: 290px;}
+.none_person {margin-left: 315px;display: inline-block;}
+.none_person span {display: block;text-align: center;}
+
+.dropShow .dropSeld {box-shadow: none;}
+.dropLst {left: 0;top: 28px;}
+/* .dropLst .dropLstCon {width: 99px;} */
+.dropLst .dropLstCon ul {padding-left: 5px;}
+.ui_dialog_container {height: 545px !important;}
+.feedback {margin-left: 615px !important;}
+#fullResImage {margin-bottom: 75px;margin-left: 60px;}
+</style>
+</head>
+<body class="tjob_main">
+{/include file="new_header.html" par="兼职招聘" cur="用工管理"/}
+    <!--new-->
+    <div class="tjob_manager clearfix">
+    	<div class="laberBar">
+			<ul class="left_ul">
+				<li><a href="{/get_url rule='/parttallage/index/'/}" {/if !$task_status/}class="cur"{//if/}><span class="icon-management-all i" style="font-size: 19px;"></span>全部</a></li>
+                <li><a href="{/get_url rule='/parttallage/index/'/}?task_status=1" {/if $task_status == 1/}class="cur"{//if/}><span class="icon-management-ongoing i"></span>进行中</a></li>
+				<li><a href="{/get_url rule='/parttallage/index/'/}?task_status=2" {/if $task_status == 2/}class="cur"{//if/}><span class="icon-management-settlement i"></span>已结算</a></li>
+			</ul>
+		</div>
+        <form action="{/get_url rule='/parttallage/index/'/}" method="get" id="search_form">
+            <input type="hidden" name="task_status" value="{/$task_status/}"/>
+            <div class="topContent">
+                <div class="top_time">
+                    <span class="top_span">任务时间：</span>
+                    <input type="text" id="stime" class="top_time_int" name="work_start_time" readonly="readonly" autocomplete="off" value="{/$work_start_time/}"/>
+                    <span class="separate">-</span>
+                    <input type="text" id="etime" class="top_time_int" name="work_end_time" readonly="readonly" autocomplete="off" value="{/$work_end_time/}"/>
+                    <span class="top_span top_span_two">兼职人员：</span>
+                    <input type="text" class="top_time_int top_time_int_two" placeholder="输入姓名" name="user_name" value="{/$user_name/}"/>
+                    <span class="top_span top_span_two">招聘职位：</span>
+                    <span id="top_zhiwei"></span>
+                    <a href="javascript:;" class="a_serch">搜索</a>
+                </div>
+            </div>
+        </form>
+		<div class="bottomContent">
+            {/foreach $list as $k=>$v/}
+			<div class="bot_content clearfix" {/if $k/}style=" margin-top: 20px;"{//if/}>
+				<div class="bot_top">
+					<span class="sp1">兼职时间：</span>
+					<span style="font-weight: bold;">{/$v['work_time_str']/}</span>
+					<span class="{/if $v['is_end_task']/}sp3{/else/}sp4{//if/}">{/if $v['is_end_task']/}已结算{/else/}进行中{//if/}</span>
+				</div>
+				<div class="bot_bot">
+					<div class="bot_bot_l {/if $k/}bot_bot_l_two{//if/}">
+						<img src="{/$v['photo_url']/}" alt="" style="width: 88px;height: 88px; border-radius: 50%;">
+						<img src="{/$siteurl.style/}/img/company/video/schoolnet{/if $v['sex'] == 1/}Man{/else/}Woman{//if/}Icon.png" alt="" style="position: absolute;top: 93px;right: 22px;z-index: 99;">
+					</div>
+					<div class="bot_bot_r {/if $k/}bot_bot_r_two{//if/}">
+						<span class="name">{/$v['user_name']/}</span>
+						<span class="age">{/$v['age']/}岁/</span>
+						<span class="height" {/if !$v['stature']/}style="display:none;"{//if/}>{/$v['stature']/}cm/</span>
+						<span class="address" {/if !$v['cur_area']/}style="display:none;"{//if/}>{/$v['cur_area']/}</span>
+						<p class="bot_bot_r_title">兼职信息</p>
+						<table class="bot_bot_r_tb" {/if empty($v['task_items'])/}style="display:none;"{//if/}>
+							<tr>
+								<th>职位/薪酬</th>
+								<th>工作时间</th>
+								<th>上班时间</th>
+								<th>工作地点</th>
+							</tr>
+                            {/foreach $v['task_items'] as $v1/}
+							<tr>
+								<td>{/$v1['station']/}（{/$v1['salary']/}元{/$v1['salary_unit_name']/} {/$v1['salary_type_name']/}）</td>
+								<td>{/$v1['work_time']/}</td>
+								<td>{/$v1['work_time_h']/}</td>
+								<td>{/$v1['address']/}</td>
+							</tr>
+                            {//foreach/}
+						</table>
+						<p class="bot_bot_r_title">结算信息</p>
+						<table class="bot_bot_r_tb">
+							<tr>
+								<th>实际工作天数</th>
+								<th>基本薪资</th>
+								<th>扣款</th>
+								<th>津贴</th>
+								<th>实发薪资</th>
+								<th>银行流水</th>
+							</tr>
+							<tr>
+								<td>{/$v['task_work_day']/}天</td>
+								<td>¥{/$v['base_salary']/}</td>
+								<td>¥{/$v['reduce_salary']/}</td>
+								<td>¥{/$v['allowance']/}</td>
+								<td>¥{/$v['actually_salary']/}</td>
+								<td><a href="javascript:;" class="water" data-import-task-id="{/$v['import_task_id']/}" {/if !$v['account_statement_imgs']/}style="display:none;"{//if/}>银行流水</a></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+            {//foreach/}
+			
+			<!-- 暂无数据时 -->
+			<div class="none_person" {/if !empty($list)/}style="display:none;"{//if/}>
+				<img src="{/$siteurl.style/}/img/common/nodata.png" alt="">
+				<span>暂无数据</span>
+			</div>
+			
+		</div>
+        <!--{/$pager/}-->
+    </div>
+    <!--new end-->
+   {/include file="footer.html"/}
+</body>
+<script type="text/javascript">
+	$('#top_zhiwei').droplist({
+	    defaultTitle : '全部职位',
+	    style : 'width:99px;',
+	    noSelectClass : '#444',
+	    inputWidth : 99,
+	    width : 99,
+	    hddName : 'position_name',
+		items : {/$position_arr/},
+	    selectValue : '{/$position_name/}',
+	    maxScroll : 10,
+	    onSelect : function(i, name) {
+			//选中后的事件
+			console.log('ddd')
+	    }
+	});
+	
+	hbjs.use('@jobPrettyPhoto,@select, @calendar, @dateFormat, @dialog', function(m){
+		
+		var dataFormat = m['tools.dateFormat'],
+            Dialog = m['widge.overlay.hbDialog'];
+		
+		function getDate(day){
+			var zdate = new Date();
+			var sdate = zdate.getTime() - (1 * 24 * 60 * 60 * 1000);
+			var edate = new dataFormat(new Date(sdate - (day * 24 * 60 * 60 * 1000)));
+			return edate.toString('yyyy-MM-dd');
+		}
+		
+		var $ = m['jquery'],
+			Select = m['widge.select'];
+			Calendar = m['widge.calendar.calendar'];
+			
+	    var a_selectedValue=-1;	
+		
+		var daySelecter = $('#daySelecter');
+		var dayItems = daySelecter.children('a');
+		var hidDay = daySelecter.children('input');
+		
+		var t1 = "{/$pathdata['stime']/}" || null;
+		var t2 = "{/$pathdata['etime']/}" || null;
+		var c1 = new Calendar({
+			trigger: $('#stime'), 
+			range: [null, t2]
+		})
+		var c2 = new Calendar({
+			trigger: $('#etime'),
+			range: [t1, null]
+		})
+		
+		c1.on('selectDate', function(date){
+			c2.range([date.value, null]);
+		});
+		c2.on('selectDate', function(date){
+			c1.range([null, date.value]);
+		});
+		
+		daySelecter.on('click', 'a', function(e){
+			var target = $(e.currentTarget);
+			dayItems.removeClass('cur');
+			target.addClass('cur');
+			hidDay.val(target.attr('data-value'));
+			t1 = getDate(hidDay.val()-1);
+			t2 = getDate(0);
+			$("#stime").val(t1);
+			$("#etime").val(t2);
+			c1.range([null, t2]);
+			c2.range([t1, null]);
+		});
+        
+		var informTraining2 = new Dialog({
+            close : true,
+            idName : 'informTraining_dialog',
+            title : '银行流水',
+            width : 700,
+            height: 600,
+            isOverflow : false,
+            isAjax : true
+        });
+        $('.water').click(function(){
+            var import_task_id = $(this).attr('data-import-task-id');
+            informTraining2.setContent('{/get_url rule="/parttallage/statementImgs/"/}?import_task_id='+import_task_id).show();
+        });
+		
+		$('body').on('click','.gallery',function(){
+			$("area[rel^='prettyPhoto']").prettyPhoto();
+			$(".gallery a[rel^='prettyPhoto']").prettyPhoto({animation_speed:'fast',slideshow:10000, hideflash: true});
+		})
+	});
+    $('.a_serch').on('click', function(){
+        $("#search_form").submit();
+    });
+</script>
+</html>

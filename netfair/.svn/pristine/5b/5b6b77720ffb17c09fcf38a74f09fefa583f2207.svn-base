@@ -1,0 +1,117 @@
+{/*js*/}
+<link rel="stylesheet" type="text/css" href="{/version file='newHeader2019.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='v2-reset.css,v2-widge.css,v2-header.css,newindex2018.css'/}" />
+<script type="text/javascript" src="{/version file='version.js'/}"></script>
+<script type="text/javascript">
+    window.CONFIG = {
+        HOST: '{/$siteurl.style/}',
+        COMBOPATH: '/js/v2/',
+    };
+</script>
+<script type="text/javascript"
+		src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+<script type="text/javascript" src="{/version file='global.js'/}"></script>
+<script type="text/javascript">
+    hbjs.config({
+        combos: {
+            '@homeSideSortMenu': [
+                'product.homeSideSortMenu', 'product.sideMenu.sideSortMenuGroup', 'product.sideMenu.sideSortMenu',
+                'product.sideMenu.sideSortMenuData', '@popup',
+            ],
+        },
+    });
+    hbjs.loadJS('{/$siteurl.style/}/js/v2/cqjob/common.js');
+
+    //{/$siteurl.main/}www.huibo.com
+    var homeLink = '{/$siteurl.main/}';
+    //{/$siteurl.style/}样式目录
+    var homeStyle = '{/$siteurl.style/}';
+    //{/$siteurl.person/}跳转到个人
+    var personLink = '{/$siteurl.person/}';
+    //{/$siteurl.company/}跳转到企业
+    var companyLink = '{/$siteurl.company/}';
+
+    var feedBackLink = '{/$siteurl.main/}/personplan/GetFeedBackData/';
+    var feedBackSetLink = '{/$siteurl.main/}/personplan/setFeedBackData/';
+</script>
+
+{/*css*/}
+<style type="text/css">
+	.huiboJob { overflow : hidden;}
+	.huiboJob a { display : block;width : 100%; height : 60px; background : url({/$siteurl.style/}/img/zhaopinhui2020.jpg) center top no-repeat;}
+
+	a.enterprise_qiye i {background : url({/$siteurl.style/}/img/newindex/enterCompany.png) no-repeat;display : inline-block;width : 18px;height : 17px;vertical-align : -4px;vertical-align : -2px \9;margin-right : 5px;}
+	.newHeadtop .newheadMage .log_new a.enterprise_qiye:link {color : #999;cursor : pointer;}
+	#userEnterBox .reg_new .jobWanted {margin-right : 0;}
+	.jobWanted i {background : url({/$siteurl.style/}/img/newindex/login_register.png) no-repeat;display : inline-block;width : 14px;height : 16px;vertical-align : -4px;vertical-align : -2px \9;margin-right : 5px;}
+</style>
+
+{/*头部主体*/}
+<div class="newHeadtop clearfix">
+	<div class="newheadMage">
+		<div id="userEnterBox" class="login_reg">
+            {/if $isLogin/}
+				<div class="log_new">
+					<a class="{/if $type=='p'/}jobWanted{/else/}enterprise_qiye{//if/}" href="javascript:;">
+						<i></i>{/$username/}
+					</a>
+					<a href="/login/Logout" class="login_out" title="">退出</a>
+				</div>
+            {/else/}
+				<div class="log_new">
+					<a class="enterprise_qiye" href="{/$company_login_url/}" target="_blank">
+						<i></i>企业入口
+					</a>
+				</div>
+				<u>|</u>
+				<div class="reg_new">
+					<a href="javascript:" class="jobWanted netfair_person_login"><i></i>求职登录</a>
+				</div>
+            {//if/}
+		</div>
+	</div>
+</div>
+
+<script>
+    var person_login_url = '{/$person_login_url/}';
+    var company_login_url = '{/$company_login_url/}';
+    var login_dialog, Dialog;
+
+    hbjs.use('@confirmBox', function (m) {
+
+        var ConfirmBox = m['widge.overlay.confirmBox'],
+            cookie = m['tools.cookie'],
+            fontSize = 18,
+            pWidth = 70;
+        Dialog = m['widge.overlay.hbDialog'];
+
+        var clientWidth = document.body.clientWidth;
+        if (clientWidth < 1400) {
+            $('.businessHallWindow').addClass('businessHallWindow1400');
+        }
+        login_dialog = new Dialog({
+            close: '×',
+            idName: 'ui_login_dialog',
+            title: '求职者登录',
+            width: 330,
+            content: person_login_url,
+            isAjax: true,
+        });
+
+        //求职者登录
+        $('.netfair_person_login').on('click', function () {
+            login_dialog.setContent({content: person_login_url, 'title': '求职者登录'});
+            login_dialog._addLoading();
+            login_dialog.on('loadComplete', function () {
+                login_dialog._removeLoading();
+            });
+            login_dialog.show();
+            return false;
+        });
+
+        //企业登录
+        $('.netfair_company_login').on('click', function () {
+            window.location.href = company_login_url;
+        });
+    });
+</script>

@@ -1,0 +1,800 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+<title>汇博人才网_招聘中心_简历搜索</title>
+<!–[if lt IE9]> 
+<script src='{/version file="html5.js"/}'></script>  
+<![endif]–>
+<link rel="stylesheet" type="text/css" href='{/version file="base.css"/}' />
+<link rel="stylesheet" type="text/css" href='{/version file="comback.css"/}' />
+<link rel="stylesheet" type="text/css" href='{/version file="icons.css"/}' />
+
+<script type="text/javascript" language="javascript" src='{/version file="jquery-1.8.3.min.js"/}'></script>
+<script type="text/javascript" language="javascript" src='{/version file="common.js"/}'></script>
+<script type="text/javascript" language="javascript" src='{/version file="dialog.js"/}'></script>
+<script type="text/javascript" language="javascript" src="{/version file="jquery.form.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='ui_validate.js'/}"></script>
+<script type="text/javascript" language="javascript" src='{/version file="ui_tooltip.js"/}'></script><!--行业插件-->
+<script type="text/javascript" language="javascript" src='{/version file="ui_area_mulitiple.js"/}'></script><!--地区多选-->
+<script type="text/javascript" language="javascript" src='{/version file="ui_jobsort.js"/}'></script><!--职位类别-->
+<script type="text/javascript" language="javascript" src='{/version file="ui_inputFocus.js"/}'></script><!--输入框获取焦点-->
+<script type="text/javascript" language="javascript" src='{/version file="ui_dropdownlist.js"/}'></script><!--下拉控件-->
+<script type="text/javascript" language="javascript" src='{/version file="ui_calling.js"/}'></script><!--行业插件-->
+<script type="text/javascript" language="javascript" src='{/version file="ui_inputFocus.js"/}'></script><!--输入框获取焦点-->
+
+</head>
+<body id="body">
+<style type="text/css">
+hgroup{padding:0;}
+.part{padding:20px;zoom:1;}
+.seaHd {background:#f3f3f3; border:1px solid #e6e6e6; padding:20px 15px 0 15px; zoom:1; height:70px;}
+.seaHd .seaHdL{float:left; display:inline; width:610px;}
+.seaHd .seaHdL .forKeyword{margin:0;}
+.seaHd .seaHdL .forKeyword .l{width:45px;}
+.seaHd .seaHdL .forKeyword .r{width:530px;}
+.seaHd .seaHdL .r .formKeyword{position:relative; z-index:1001;}
+.seaHd .seaHdL .r .formKeyword .formKeyChb{position:absolute; top:1px;*top:2px; right:5px;height:26px; line-height:26px; padding-right:10px; zoom:1;}
+.seaHd .seaHdL .r .formKeyword input.chb{margin-top:9px;margin-top:7px \9;*margin-top:4px;}
+.seaHd .seaHdL .r .formKeyword label{margin-right:0; height:28px; line-height:28px;}
+.seaHd .seaHdL .r .formKeyword .expTxt i.hbFntWes{font-size:14px; color:#3d84b8; position:absolute; right:-11px; top:7px;}
+.seaHd .seaHdL .r .formKeyword .expTxt{position:relative; z-index:1; _margin:6px 0 0 5px;}
+.seaHd .seaHdL .r .formKeyword .expTxt .expBox{position:absolute; top:34px; left:-106px; background:#fffbe8; 
+border:1px solid #ffe6bb; width:375px; padding:5px 15px; zoom:1; line-height:26px; z-index:999;}
+.seaHd .seaHdL .r .formKeyword .expTxt .expBox em{ background:url({/$siteurl.style/}/img/common/common.gif) no-repeat -174px 0; 
+height:10px; width:19px; font-size:0; position:absolute; left:100px; top:-10px;}
+.seaHd .seaHdL .r .formKeyword .expTxt .expBox b{margin:0 3px;}
+.seaHd .seaHdL .r .formKeyword .expTxt .expBox p{line-height:22px; padding:5px 0; zoom:1;}
+.seaHd .seaHdL .formMod .keyWordTxt{color:#999; width:500px;}
+.seaHd .seaHdL .formMod .keyWordTxt a{margin:0 5px;}
+.seaHd .seaHdL .formMod .seaBtn{height:28px; line-height:28px;margin-left:15px;}
+.seaHd .seaHdL .formMod .seaBtn a.btnsF12{height:28px; line-height:28px;}
+.seaHd .seaHdR{float:left; display:inline; margin-left:50px;*margin-left:30px;}
+.seaHd .seaHdR .formMod .seaBtn{height:28px; line-height:28px;}
+.seaHd .seaHdR .formMod .seaBtn a.btnsF12{height:28px; line-height:28px;}
+
+.seaBd{padding:30px 0 0 0; zoom:1;}
+.seaBd .seaBdR{float:right; display:inline; width:420px;}
+.seaBd .seaBdR .formMod .l{width:61px;}
+.seaBd .seaBdR .formMod .r{width:340px;}
+.seaBd .seaBdR .degMod .r{width:312px;}
+.seaBd .seaBdR .formMod .r .formChb{margin:0;}
+.seaBd .seaBdR .formMod .r .formChb label{*margin:0 10px 0 0;}
+.seaBd .seaBdR .forBtn{margin-left:66px;}
+
+.seaBd .seaBdL{float:left; display:inline; width:450px; border-right:1px solid #f1f1f1; padding:0 50px 0 1px;zoom:1;}
+.seaBd .seaBdL .formMod .l{width:60px;}
+.seaBd .seaBdL .formMod .r{width:380px;}
+.seaBd .seaBdL .checkMod .drop{width:378px;}
+.seaBd .seaBdL .forBtn{padding:15px 0 0 70px;}
+.seaBd .seaBdL .forBtn a.btnsF16{margin:0 10px 0 0;}
+.seaBd .seaBdL .forBtn a.searchBtn{padding:0 50px;}
+
+/* 简历搜索结果 */
+.part2{padding:10px 0 0 0; zoom:1;}
+.resHd{height:54px; background:#f5f5f5; line-height:54px; padding:0 20px;zoom:1; border-top:2px solid #749ec2;}
+.resHd .btns{
+	position:relative; z-index:1;
+	*display:inline-block;*width:100%;
+}
+.resHd .btns a{display:inline-block;padding:0 5px;height:24px;line-height:24px;font-size:14px; _margin-top:15px;}
+.resHd .btns .intent{position:relative; z-index:1;}
+.resHd .btns .intent b{background:url({/$siteurl.style/}/img/common/common.gif) no-repeat -174px 0; left:30px; top:-10px; height:10px; width:19px; 
+font-size:0; position:absolute;}
+.resHd .btns .intent .intentBox{position:absolute; width:450px; left:0; top:36px; background:#fffbe8; border:1px solid #ffe6bb; 
+padding:20px; zoom:1; font-size:12px;}
+.resHd .btns .intent .intentBox p{line-height:20px; margin-left:30px;}
+.resHd .btns .intent .intentBox p.intTit{font-family:"微软雅黑"; font-size:20px; margin:0 0 5px 0;}
+.resHd .btns .intent .intentBox i.hbFntWes{font-size:36px; margin-right:10px;}
+.resHd .btns .intent .intentBox p.btn{margin:10px 0 0 27px;}
+.resHd .btns em{color:#999; font-size:12px;}
+.resHd .btns a.cu{color:#333;background:#749ec2; cursor:text; color:#fff; border-radius:6px;}
+.resHd .btns a.cu em{color:#fff;}
+.resHd .btns .hov{position:absolute; box-shadow:1px 1px 1px #999; left:57px; top:65px; line-height:24px;border:1px solid #ffe6bb; padding:5px 15px;zoom:1;background:#fffbe8;}
+.resHd .btns .hov b{background:url({/$siteurl.style/}/img/common/common.gif) no-repeat -174px 0; left:80px; top:-9px; height:10px; width:19px; 
+font-size:0; position:absolute;}
+.resHd .btns .hov p{width:390px; font-size:12px;color:#444;}
+.resHd .btns .hov p i.hbFntWes{font-size:28px; margin-right:5px;}
+.resHd .btns .hov i.clo{position:absolute; right:0; top:0; color:#999; cursor:pointer; width:20px;}
+.resHd .btns .hov i.clo:hover{color:#444;}
+
+.resBd{padding:20px; zoom:1;}
+.resBd .resTit{text-align:right; font-size:14px;}
+.resBd .resTit .titL{float:right; display:inline;  margin:2px 10px 0 0; width:170px;}	
+.resBd .resTit .titM{float:right; display:inline;zoom:1; margin:2px 6px 0 0; width:160px;}
+.resBd .resTit .btnTab{height:30px; line-height:30px;}
+.resBd .resTit .btnTab a.btns{line-height:30px; height:30px; padding:0 10px;zoom:1; display:inline-block; color:#666;}
+.resBd .btns{margin:0 0 10px; float:left; display:inline;}
+.resBd .btns a{display:inline-block;padding:0 7px;height:24px;line-height:24px;font-size:14px; border-radius:3px;}
+.resBd .btns a.cu{color:#333;font-weight:bold;background:#f1f1f1; cursor:text;}
+.resBd .resTit .titTxt{color:#999; float:left; display:inline; margin-right:10px; line-height:24px;}
+.resBd .resTit .titR{float:right; display:inline; width:125px; zoom:1;}
+.resBd .resTit .titR i.hbIconMoon{font-size:14px; margin-right:5px; line-height:24px; float:left; display:inline;}
+.resBd .resTit .titR a.btnsF12{border-radius:0;}
+
+.resBd .lstBox{padding:10px 0 0 0; zoom:1;}
+.resBd .lstBox .table{width:100%;}
+.resBd .lstBox .table tr th{border-bottom:1px solid #dadada;font-weight:bold; padding:8px;}
+.table tr th,.table tr td{text-align:left;font-size:12px;}
+.table .lst tr td{border-bottom:1px solid #f1f1f1;padding:8px;}
+.table .wid220{width:220px;}
+.table .wid185{width:170px;}
+.table .wid120{width:120px;}
+.table .wid100{width:100px;}
+.table .wid65{width:80px;}
+.table .lst .time{color:#999;}
+.table .lst .name{
+	font-size:14px;margin-left:45px;line-height:44px; height:44px;
+	display:block;overflow:hidden;
+}
+.table .lst .name a:link{color:#424242;}
+.table .lst .name a:visited{color:#800080;}
+.table .lst .name a:hover,.table .lst .name a:active{color:#0af;}
+.table .lst1 .photo{background:url({/$siteurl.style/}/img/common/user35_44.jpg) no-repeat; width:35px; height:44px; border:0; display:block; float:left;}
+.table .lst1 .photo a{display:block;width:35px;height:44px;}
+.table .lst1 .photo img{width:35px; height:44px; border:0;}
+.table .lst1 .mark{margin-top:5px;display:inline-block;}
+.table .lst1 .mark i.hbFntWes{font-size:14px; color:#ed3136; margin-left:10px;}
+.table .lst1  p.lateJob{
+	width:100%;line-height:44px;height:44px;overflow:hidden;display:block;
+}
+
+.table .lst2 tr td{border-bottom:0;}
+.table .lst2 .lstOne{background:#f5f5f5; padding:5px;}
+.table .lst2 .lstOne td{padding:0 8px; zoom:1;}
+.table .lst2 .name{line-height:35px; margin:0;}
+.table .lst2 .mark i.hbFntWes{font-size:14px; color:#ed3136; margin-left:10px;}
+.table .lst2 .lstOne td{line-height:30px;}
+.table .lst2 .pics{width:80px; height:100px; background:url({/$siteurl.style/}/img/common/user80_100.jpg) no-repeat; float:left; display:inline; margin-top:5px;}
+.table .lst2 .pics a{display:block;width:80px;height:100px;}
+.table .lst2 .pics img{width:80px; height:100px; border:0;}
+.table .lst2 .info{width:810px; float:left; display:inline; margin:0 0 0 20px;}
+.table .lst2 .info ul li{ line-height:22px;}
+.table .lst2 .info ul li .l{float:left; display:inline; color:#999;}
+.table .lst2 .info ul li .r{float:left; display:inline;}
+.table .lst2 .info ul li .r i{border-right:1px solid #dadada; margin-right:10px; padding-right:10px;}
+.table .lst2 .info ul li .r i.noLine{border:0;}
+.table .lst2 .info ul li .r em{padding-right:5px; margin-right:5px;}
+.table .lst2 .info ul li .r b{padding:0 10px; zoom:1; border-left:1px solid #dadada;border-right:1px solid #dadada; margin:0 10px;}
+.table .lst tr.hov{background:#fffcea;}
+.table .lst tr.hov2{background:#f9f4d7;}
+.resBd .lstBox .hbTip .tooltip-inner{_width:65px;}
+</style>
+{/include file="nav.html" parent="网络招聘" cur="简历搜索"/}
+
+<div class="content" id="content">
+	<section class="section">
+		<hgroup>
+			<input type="hidden" id="hddbuildseeker" name="hddbuildseeker" value="{/$postvar['buildseeker']/}">
+			<input type="hidden" id="hddqueryString" name="hddqueryString" value="{/$postvar['queryString']/}">
+			<form id="frmResumeSearch" method="get" action="{/get_url rule='/resumesearch/solr'/}" >
+			<input type="hidden" id="hddKeytype" name="hddKeytype" value="{/$postvar['keyword_type']/}" >
+			<input type="hidden" id="hddPageSize" name="hddPageSize" value="{/$postvar['pagesize']/}">
+			<input type="hidden" id="hddIsList" name="hddIsList" value="{/$postvar['islistorsummary']/}">
+			<input type="hidden" id="hddGroupJson" name="hddGroupJson" value="{/$postvar['group_json']/}">
+			<input type="hidden" id="hddpostvar" name="hddpostvar" value="{/$postvar['newpostvar']/}">
+			<input type="hidden" id="hddIsfirstPost" name="hddIsfirstPost" value="{/$postvar['hddIsfirstPost']/}">
+			
+        	<div class="part part1">        	
+            	<div class="seaHd">
+                    <div class="seaHdL">
+                        <div class="formMod forKeyword">
+                            <div class="l">关键字</div>
+                            <div class="r">
+                                 <span class="formText formKeyword">
+                                     <input type="text" id="txtKeyword" name="txtKeyword" style="width:400px;" value="{/$postvar['keyword']/}" class="text">
+                                     <span class="formKeyChb">
+                                         <span class="formChb">
+                                            <input type="checkbox" name="chkIsSplitKeyword" id="chkIsSplitKeyword" value="1" {/if $postvar['word_slipt']/} checked="checked" {//if/} class="chb"><label for="chkIsSplitKeyword">包含任一关键词</label>
+                                         </span>
+                                         <span class="tipTxt expTxt zindex">
+                                            <i class="hbFntWes"><a id="btnTip" href="javascript:void(0);" data-toggle="tooltip" data-placement="bottom" >&#xf059;</a></i>
+                                            <div class="expBox" id="expBox" style="display:none;">
+                                            	<em></em>
+                                                <div class="expBoxC">
+                                                    <p>勾选此选项后，只要简历中包含了其中一个关键词就会出现在结果中。</p>
+                                                    <p>例如搜索<b>销售主管</b>勾选此项后<br/>1、包括<b>销售</b>的简历会出现在结果中<br/>
+                                                    2、包括<b>主管</b>的简历会出现在结果中</p>
+                                                    <p>否则只有既包含<b>销售</b>又包含<b>主管</b>的简历才会出现在结果中</p>
+                                                </div>
+                                            </div>
+                                         </span>
+                                     </span>
+                                 </span>
+                                <span class="tipTxt seaBtn"><a href="javascript:void(0);" id="btnSeeker">我的搜索器</a></span>
+                                <span class="tipTxt keyWordTxt" id="spanSearchCondition"></span>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                    <div class="seaHdR">
+                        <div class="formMod">
+                            <div class="l">搜索简历编号</div>
+                            <div class="r">                            	
+                                 <span class="formText"><input type="text" id="txtResumeID"  style="width:95px;*width:102px;" class="text"></span>
+                                 <span class="tipTxt seaBtn" ><a href="javascript:void(0);" class="btn1 btnsF12" style="display:none;" id="btnSearchResumeID">搜索</a></span>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                
+                <div class="seaBd">                
+                	<div class="seaBdL">
+                        <div class="formMod jobAddMod checkMod">
+                            <div class="l">现居住地</div>
+                            <div class="r">
+                                <span class="drop formText jobAddDrop zindex" id="txtCurrArea"></span>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="formMod jobAddMod checkMod">
+                            <div class="l">期望地区</div>
+                            <div class="r">
+                                <span class="drop formText jobAddDrop zindex" id="txtExpArea"></span>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="formMod JobCayMod checkMod">
+                            <div class="l">职位类别</div>
+                            <div class="r">
+                                <span style="width:378px;" class="drop formText JobCayDrop zindex" id="txtJobsort"></span>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="formMod JobIndDrop checkMod">
+                            <div class="l">行业类别</div>
+                            <div class="r">
+                                <span class="drop formText JobIndDrop zindex" style="width:378px;" id="txtCalling"></span>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="formMod jobAddMod checkMod">
+                            <div class="l">户籍</div>
+                            <div class="r">
+                                <span class="drop formText jobAddDrop zindex" id="txtNativeArea"></span>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="forBtn"><a href="javascript:void(0);" id="btnSearch" class="btn1 btnsF16 searchBtn">搜&nbsp;&nbsp;索</a>{/if $postvar['hddIsfirstPost']/}<a href="javascript:void(0)" class="btn3 btnsF16" id="btnSavaSeeker">保存为搜索器</a>{//if/}</div>
+                    </div>
+                    <div class="seaBdR">
+                        <div class="formMod">
+                            <div class="l">工作年限</div>
+                            <div class="r">
+                                <span class="drop zindex" id="ddlMinWrokYear"></span><span class="tipTxt font12" style="margin:0 10px;">至</span><span class="drop zindex" id="ddlMaxWrokYear"></span>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="formMod">
+                            <div class="l">年龄</div>
+                            <div class="r">
+                                 <span class="formText"><input type="text" id="txtAgeLower" name="txtAgeLower" value="{/$postvar['age_lower']/}" style="width:95px;" class="text"></span>
+                                <span class="tipTxt font12" style="margin:0 10px;">至</span>
+                                 <span class="formText"><input type="text" id="txtAgeUpper" name="txtAgeUpper" value="{/$postvar['age_upper']/}" style="width:95px;" class="text"></span>
+                                <span class="tipTxt font12">岁</span>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="formMod degMod">
+                            <div class="l">学历</div>
+                            <div class="r">                            	
+                                <span class="formChb" id="spanDegree">                                                            
+                                {/foreach $degree as $key => $value/}                          	                           	
+                                	<input type="checkbox" name="chkDegree[]" id="chkDegree{/$key/}" {/if in_array($key,$postvar["degree_ids"])/}checked="checked"{//if/} value="{/$key/}" class="chb"><label for="chkDegree{/$key/}">{/$value/}</label>                                    
+                                {//foreach/}
+                                </span>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="formMod">
+                            <div class="l">性别</div>
+                            <div class="r">
+                                <span class="formRad">
+                                {/foreach $sex as $key => $value/}
+                                	<input type="radio" class="radio" id="radSex{/$key/}" {/if $postvar["sex"] == $key/}checked="checked"{//if/} name="radSex" value="{/$key/}"/><label for="radSex{/$key/}">{/$value/}</label>
+                                {//foreach/}
+                                </span>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="formMod">
+                            <div class="l">婚姻状况</div>
+                            <div class="r">
+                                <span class="formRad">
+	                                {/foreach $marriage as $key => $value/}
+	                                	<input type="radio" class="radio" id="radMarriage{/$key/}" value="{/$key/}" {/if $postvar["marriage"] == $key/}checked="checked"{//if/} name="radMarriage" /><label for="radMarriage{/$key/}">{/$value/}</label>
+	                                {//foreach/}
+                                </span>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="formMod">
+                            <div class="l">身高</div>
+                            <div class="r">
+                                 <span class="formText"><input type="text" id="txtMinStature" name="txtMinStature" style="width:95px;" class="text" value="{/$postvar['stature_min']/}"></span>
+                                <span class="tipTxt font12" style="margin:0 10px;">至</span>
+                                 <span class="formText"><input type="text" id="txtMaxStature" name="txtMaxStature" style="width:95px;" class="text" value="{/$postvar['stature_max']/}"></span>
+                                <span class="tipTxt font12">厘米</span>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    
+
+                    </div>
+                    <div class="clear"></div>
+                </div>
+               
+            </div>
+            </form>
+            {/if $postvar['hddIsfirstPost']/}
+            <div class="part part2" >
+            	
+            	<div class="resHd">
+            	{/if count($resumedata)/}
+                    <div class="btns" id="btnSearchKey">
+                    
+                    	<span class="hov" id="tipTxt" {/if $postvar['keyword_type'] == "0" && !empty($postvar['keyword'])/}style="""{/else/}style="display:none" {//if/}>
+                            <b></b>
+                            <p class="txt"><i class="hbFntWes">&#xf0eb;</i>切换到不同选项，搜索简历的不同部分，能帮您更精准的找到人才。</p>
+                            <i class="clo" id="clo">×</i>
+                        </span>
+                        <a href="javascript:void(0);" theValue='0' {/if $postvar['keyword_type']=='0'/} class="cu" {//if/} >所有<em>({/$group['all']/})</em>
+                        </a>
+                        {/if $group['resumeWorkExp']!='0'&&!empty($group['resumeWorkExp'])/}
+                        <a href="javascript:void(0);" theValue='4' {/if $postvar['keyword_type']=='4'/} class="cu" {//if/} >意向+经验<em>({/$group['resumeWorkExp']/})</em></a> 
+                        {//if/}        
+                        {/if $group['resumeWorkwork']!='0'&&!empty($group['resumeWorkwork'])/}
+                        <a href="javascript:void(0);" theValue='1' {/if $postvar['keyword_type']=='1'/} class="cu" {//if/}>工作经历<em>({/$group['resumeWorkwork']/})</em></a>
+                        {//if/}                        
+                        {/if $group['sumeproject']!='0'&&!empty($group['resumeproject'])/} 
+                        <a href="javascript:void(0);" theValue='3' {/if $postvar['keyword_type']=='3'/} class="cu" {//if/}>项目经验<em>({/$group['resumeproject']/})</em></a>
+                        {//if/}
+                        {/if $group['resumeExp']!='0'&&!empty($group['resumeExp'])/}                        
+                        <a href="javascript:void(0);" theValue='2' {/if $postvar['keyword_type']=='2'/} class="cu" {//if/}>求职意向<em>({/$group['resumeExp']/})</em></a>
+                        {//if/}
+                        {/if $group['resumeSkill']!='0'&&!empty($group['resumeSkill'])/} 
+                        <a href="javascript:void(0);" theValue='5' {/if $postvar['keyword_type']=='5'/} class="cu" {//if/}>技能<em>({/$group['resumeSkill']/})</em></a>
+                        {//if/}
+                        {/if $group['resumeCertificate']!='0'&&!empty($group['resumeCertificate'])/} 
+                        <a href="javascript:void(0);" theValue='6' {/if $postvar['keyword_type']=='6'/} class="cu" {//if/}>证书<em>({/$group['resumeCertificate']/})</em></a>
+                        {//if/}
+                        {/if $group['resumeEduTrain']!='0'&&!empty($group['resumeEduTrain'])/} 
+                        <a href="javascript:void(0);" theValue='7' {/if $postvar['keyword_type']=='7'/} class="cu" {//if/}>教育培训<em>({/$group['resumeEduTrain']/})</em></a>
+                        {//if/}
+                        {/if $group['resumeSuit']!='0'&&!empty($group['resumeSuit'])/}
+                        <a href="javascript:void(0);" theValue='8' {/if $postvar['keyword_type']=='8'/} class="cu" {//if/}>自我评价<em>({/$group['resumeSuit']/})</em></a>
+                    	{//if/}
+                    </div>
+                 {//if/}
+                </div>
+               
+                <div class="resBd">
+                    <div class="resTit">
+                    	{/if count($resumedata)/}
+                    	<div class="titR" style="display:none;"><a href="javascript:void(0);" class="btn3 btnsF12" id="btnUpdateField"><i class="hbIconMoon">&#xe090;</i>修改显示字段</a></div>
+                        <div class="titM">
+                            <div class="titTxt">显示方式</div>
+                            <div class="btns" id="btnListOrSummary"><a href="javascript:void(0)" theValue='1' {/if $postvar['islistorsummary']==1/} class="cu" {//if/}>列表</a><a href="javascript:void(0);" theValue="2" {/if $postvar['islistorsummary']==2/} class="cu" {//if/}>摘要</a></div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="titL">
+                        	<div class="titTxt">每页显示</div>
+                            <div class="btns" id="btnPageSize"><a {/if $postvar['pagesize']==20/}class="cu"{//if/} href="javascript:void(0);" theValue="20">20</a><a href="javascript:void(0);" {/if $postvar['pagesize']==40/}class="cu"{//if/} theValue="40">40</a><a href="javascript:void(0);" {/if $postvar['pagesize']==60/}class="cu"{//if/} theValue="60">60</a></div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="clear"></div>
+                        {//if/}
+                    </div>
+                    <div class="lstC">
+                    	<div class="lstCon">
+                    		{/if count($resumedata)/}
+                            <div class="lstBox">
+                                <table class="table">
+                                
+                                	<colgroup>
+                                    
+                                    	<col class="wid185" />
+                                        <col class="wid65" />
+                                        <col class="wid65" />
+                                        <col class="wid65" />
+                                        <col class="wid65" />
+                                        <col class="wid100" />
+                                        <col />
+                                        <col class="wid65" />
+                                    
+                                    </colgroup>
+                                
+                                    <thead>
+                                        <tr>
+                                            <th>姓名</th>
+                                            <th>性别</th>
+                                            <th>年龄</th>
+                                            <th>学历</th>
+                                            <th>现居地</th>
+                                            <th>工作年限</th>
+                                            <th>最近工作</th>
+                                            <th>最近登录</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="lst" class="lst {/if $issummary/}lst2{/else/}lst1{//if/}">                                    	
+                                        {/section name=resume loop=$resumedata/}
+                                        <tr {/if $issummary/}class="lstOne"{//if/}>
+                                            <td>
+                                                {/if !$issummary/}<span class="photo"><a href="{/get_url rule="/resume/resumeshow/" data="type=network&resumeid={/$resumedata[resume].resume_id/}&redKeyword={/$redKeyword/}"/}" target="_blank">{/if $resumedata[resume].small_photo/}<img src="{/$resumedata[resume].small_photo/}"/>{//if/}</a></span>{//if/}
+                                                <span class="name"><a href="{/get_url rule="/resume/resumeshow/" data="type=network&resumeid={/$resumedata[resume].resume_id/}&redKeyword={/$redKeyword/}"/}" target="_blank">{/$resumedata[resume].user_name/}</a></span>
+                                                {/if $resumedata[resume].remark/}
+                                                <span class="mark hbTip"><i class="hbFntWes" data-toggle="tooltip" data-placement="right" href="javascript:void(0);" title="{/$resumedata[resume].remark/}">&#xf024;</i></span>
+                                                {//if/}
+                                            </td>
+                                            <!--<td class="wid120"><em class="green">已获取联系方式</em></td>-->
+                                            <td>{/get_name sex=$resumedata[resume].sex/}</td>
+                                            <td>{/$resumedata[resume].age/}</td>
+                                            <td>{/get_name degree=$resumedata[resume].degree/}</td>
+                                            <td>{/get_name area=$resumedata[resume].cur_area/}</td>
+                                            <td>{/$resumedata[resume].start_work/}</td>
+                                            <td><p class="lateJob">{/if $words!=''/}{/highlight key="{/$words/}" content="{/$resumedata[resume].work/}"/}{/else/}{/$resumedata[resume].work/}{//if/}</p></td>
+                                            <td class="time">{/$resumedata[resume].refresh_time/}</td>
+                                        </tr>
+                                        {/if $issummary/}
+                                        <tr class="lstTwo">
+                                        	<td colspan="8" class="lstTwo">
+                                            	<div class="pics"><a href="{/get_url rule="/resume/resumeshow/" data="type=network&resumeid={/$resumedata[resume].resume_id/}&redKeyword={/$redKeyword/}"/}" target="_blank">{/if $resumedata[resume].small_photo/}<img src="{/$resumedata[resume].photo/}"/>{//if/}</a></div>
+                                                <div class="info">
+                                                	<ul>
+                                                		{/if !empty($resumedata[resume].school)/}
+                                                    	<li>
+                                                        	<div class="l">毕业院校：</div>
+                                                            <div class="r">{/if $resumedata[resume].school/}<i>{/if $words!=''/}{/highlight key="{/$words/}" content="{/$resumedata[resume].school/}"/}{/else/}{/$resumedata[resume].school/}{//if/}</i>{//if/}{/if $resumedata[resume].major_desc/}<i>{/if $words!=''/}{/highlight key="{/$words/}" content="{/$resumedata[resume].major_desc/}"/}{/else/}{/$resumedata[resume].major_desc/}{//if/}</i>{//if/}{/if $resumedata[resume].degree/}<i class="noLine">{/get_name degree=$resumedata[resume].degree/}</i>{//if/}</div>
+                                                            <div class="clear"></div>
+                                                        </li>
+                                                        {//if/}
+                                                        {/if !empty($resumedata[resume].station)/}
+                                                        <li>
+                                                        	<div class="l">求职意向：</div>
+                                                            <div class="r"><em>{/if $words!=''/}{/highlight key="{/$words/}" content="{/$resumedata[resume].station/}"/}{/else/}{/$resumedata[resume].station/}{//if/}</div>
+                                                            <div class="clear"></div>
+                                                        </li>
+                                                        {//if/}
+                                                        {/if count($resumedata[resume].worklist)/}
+                                                        <li>
+                                                        	<div class="l">工作经验：</div>
+                                                            <div class="r">
+                                                            	{/foreach $resumedata[resume].worklist as $key=>$value/}
+                                                            		<p><span>{/$value.start_time/}-{/$value.end_time/}</span><b>{/if $words!=''/}{/highlight key="{/$words/}" content="{/$value.station/}"/}{/else/}{/$value.station/}{//if/}</b><span>{/if $words!=''/}{/highlight key="{/$words/}" content="{/$value.company_name/}"/}{/else/}{/$value.company_name/}{//if/}</span></p>
+                                                            	{//foreach/}
+                                                            </div>
+                                                            <div class="clear"></div>
+                                                        </li>
+                                                        {//if/}
+                                                    </ul>
+                                                </div>
+                                                <div class="clear"></div>
+
+                                            </td>
+                                        </tr>
+                                        {//if/}
+                                        {//section/}
+                                       </tbody>
+                                </table>
+                            </div>
+                            <div class="page">
+                            	{/$pager/}
+                            </div>
+                            {/else/}
+                            <div class="noData">没有数据</div>
+                            {//if/}
+                        </div>
+                     </div>
+                </div> 
+            </div>
+        	{//if/}
+        </hgroup>
+    </section>
+</div>
+{/include file="footer.html"/}
+
+<section class="floatRT"><a href="{/get_url rule='/about/message' domain='main'/}" target="_blank" class="serviceLink">我有问题要反馈</a><b></b></section>
+
+<script>
+
+
+
+var resumesearch = {
+	init:function(){	
+		$.setIndex("zindex");//为需要赋层级设置的元素设置class为zindex
+		
+		$('#txtCurrArea').multiplearea({max:5,hddName:'currArea',isLimit:true,selectItems:[{/$postvar['curarea']/}]});
+		$('#txtExpArea').multiplearea({max:5,hddName:'expArea',isLimit:true,selectItems:[{/$postvar['expArea']/}]});
+		$('#txtNativeArea').multiplearea({max:5,hddName:'nativeArea',isLimit:true,selectItems:[{/$postvar['nativeArea']/}]});
+		$('#txtJobsort').jobsort({max:5,type:'multiple',isLimit:true,hddName:'jobsort',selectItems:[{/$postvar['jobsort']/}]});
+		$('#txtCalling').calling({max:5,type:'multiple',isLimit:true,hddName:'calling',selectItems:[{/$postvar['calling']/}]});
+	
+		$('#ddlMinWrokYear').droplist({selectValue:{/$postvar['workyear_min']/},isCanWrite:false,inputWidth:95,style:'width:103px;',hddName:'ddlMinWrokYear',items:[{id:'0',name:'不限'},{id:'99',name:'应届毕业生'},{id:'1',name:'1年'},{id:'2',name:'2年'},{id:'3',name:'3年'},{id:'4',name:'4年'},{id:'5',name:'5年'},{id:'6',name:'6年'},{id:'7',name:'7年'},{id:'8',name:'8年'},{id:'9',name:'9年'},{id:'10',name:'10年以上'}]});
+		$('#ddlMaxWrokYear').droplist({selectValue:{/$postvar['workyear_max']/},isCanWrite:false,inputWidth:95,style:'width:103px;',hddName:'ddlMaxWrokYear',items:[{id:'0',name:'不限'},{id:'99',name:'应届毕业生'},{id:'1',name:'1年'},{id:'2',name:'2年'},{id:'3',name:'3年'},{id:'4',name:'4年'},{id:'5',name:'5年'},{id:'6',name:'6年'},{id:'7',name:'7年'},{id:'8',name:'8年'},{id:'9',name:'9年'},{id:'10',name:'10年以上'}]});
+		
+		
+		$('#btnUpdateField').click(function(){
+			$.showModal('{/get_url rule="/resumesearch/field/"/}',{title:'设置显示字段（最多7项）'});
+		});
+
+		$('#btnSavaSeeker').click(function() {
+			$.getJSON('{/get_url rule="/resumesearch/canaddseeker/"/}', function(data) {
+                if (data.status != 'succeed') {
+                    $.message(data.msg, { icon: 'warning' });
+                }
+                else {
+                    
+                    var keyword = $('#txtKeyword').val();
+                    
+                    if (keyword == $('#txtKeyword').attr('watermark')) {
+                        keyword = '';
+                    }                   
+                    $.showModal('{/get_url rule="/resumesearch/seekeradd/?keyword='+keyword+'"/}',{title:'保存为搜索器'});
+                    //$.showModal('SetResumeSeekerName.aspx?success=resumeSearchResult.saveResumeSeeker&seekerName=' + encodeURIComponent($('#hddSeekerName').val()) + '&isAdded=' + $('#txtIsAddResumeSeeker').val() + '&seekerID=' + $('#hddSeekerID').val() + '&keyword=' + encodeURIComponent(keyword), { title: '保存搜索器' });
+                }
+            });
+			
+		});
+
+		$('#btnTip').hover(function(){
+			$('#expBox').show();
+		},function(){
+			$('#expBox').hide();
+		});
+
+		$('#btnSeeker').click(function(){
+			$.showModal('/resumesearch/seeker/',{title:'我的搜索器'});
+		});
+
+		$('#txtKeyword').change(function(){
+			$('#hddKeytype').val('0');
+		});
+		
+		$('#btnSearch').click(function(){
+			var queryCondition = resumesearch.getQueryCondition();
+	        var queryString = resumesearch.getQueryString();
+	        if (queryCondition != ''){
+	        	resumesearch.writeRecentSeearchCriteria(queryCondition, queryString);
+	        }
+	        $("#hddIsfirstPost").val('1');
+			$("#frmResumeSearch").submit();
+			return false;			
+		});
+
+		$('#txtResumeID').focus(function(){
+			$('#btnSearchResumeID').show();
+		});
+
+		if ($("#hddIsfirstPost").val() == 1) {
+	        $('html,body').animate({ scrollTop: 567 });
+	  	}
+		
+		
+		$('#txtResumeID').blur(function(){
+			if($(this).val()==''){
+				$('#btnSearchResumeID').hide();
+			}			
+		});
+
+		$('#btnSearchResumeID').click(function(){
+			$('#btnSearchResumeID').attr('href', 'javascript:void(0)');
+            $('#btnSearchResumeID').removeAttr('target');
+            var resumeID = $('#txtResumeID').val();
+            if (/^[0-9]{1,9}$/.test(resumeID) == false){
+                $.anchorMsg('请输入正确的简历编号', { icon: 'warning' });
+                return false;
+            }
+            var parms = {'resume_id': resumeID };
+            $.ajax({ url:'{/get_url rule="/resumesearch/searchid/"/}', async: false, type: 'GET', dataType: 'json', data: parms, success: function(data){
+			
+				if (data.status != 'succeed' || data.resumeid == undefined){
+	                    $.anchorMsg('对不起，该简历不存在或未向您公开', { icon: 'warning' });
+                }
+                else{
+                    $('#btnSearchResumeID').attr('href', '/resume/resumeshow/type-network-resumeid-' + data.resumeid +'.html').attr('target', '_blank');
+                }
+            }
+            });
+		});
+		
+		//搜索结果统计
+		$('#btnSearchKey a').click(function(){
+			$('#hddKeytype').val($(this).attr('theValue'));
+			$('#btnSearch').click();
+			return false;
+		});
+
+		//每页显示多少条记录
+		$('#btnPageSize a').click(function(){
+			$('#hddPageSize').val($(this).attr('theValue'));
+			$('#btnSearch').click();
+			return false;
+		});
+
+		//显示方式
+		$('#btnListOrSummary a').click(function(){
+			$('#hddIsList').val($(this).attr('theValue'));
+			$('#btnSearch').click();
+			return false;
+		});
+
+		$('.hbTip').tooltip({
+			 selector: "i[data-toggle=tooltip]",html:true
+		});
+
+		$('#spanDegree').find(':input').click(function(){
+			if($(this).val()==0 && $(this).attr('checked')){
+				$('input[type="checkbox"][name="chkDegree[]"]').prop('checked',false);
+				$(this).prop('checked','true');
+			}
+			else if($(this).attr('checked')){
+				$('#chkDegree0').prop('checked',false);
+			}
+		});
+
+		$("#txtKeyword,#txtAgeLower,#txtAgeUpper,#txtMinStature,#txtMaxStature").keydown(function(e){
+        	if(e.keyCode == 13){
+                $("#btnSearch").click();
+            }
+        });
+
+		$("#txtResumeID").keydown(function(e){
+        	if(e.keyCode == 13){
+                $("#btnSearchResumeID").click();
+            }
+        });
+
+	},
+	addResumeSeeker:function(seekerName){
+		var parms = {seekerName:seekerName,seekerconter:$('#hddbuildseeker').val()};
+		$.getJSON('{/get_url rule="/resumesearch/seekeradddo/"/}', parms, function(data) {			
+			if(data&&data.error){
+				$.message(data.error, { title: '系统提示', icon: 'fail' });
+				return;
+			}
+			
+			$.anchorMsg('保存简历搜索器成功');$('#frmSetResumeSeekerName').closeDialog();
+           
+        });
+	},
+	getQueryString:function(){
+		var keyword = $('#txtKeyword').val();
+		if(keyword == '请输入关键词'|| keyword ==''){
+			return '';
+		}
+		var currarea=$('input[name=currArea]').val();
+		var exparea = $('input[name=expArea]').val();
+		var nativearea = $('input[name=nativeArea]').val();
+		var calling = $('input[name=calling]').val();
+		var jobsort = $('input[name=jobsort]').val();
+		var workYear1 = $('input[name=ddlMinWrokYear]').val();
+		var workYear2 = $('input[name=ddlMaxWrokYear]').val();		
+		var ageLower = $('#txtAgeLower').val();
+		var ageUpper = $('#txtAgeUpper').val();
+		var degree_ids = $(':input[name=chkDegree][checked]').val();
+		var sex = $(':input[name=radSex][checked]').val();
+		var marriage = $(':input[name=radMarriage][checked]').val();
+		var statureMin=$('#txtMinStature').val();
+		var statureMax=$('#txtMaxStature').val();
+		
+		var str = "&txtKeyword="+keyword+"&ddlMinWrokYear="+workYear1+"&ddlMaxWrokYear="+workYear2
+			  +"&txtAgeLower="+ageLower+"&ageUpper="+ageUpper+"&radSex="+sex+"&radMarriage="+marriage
+		      +"&txtMinStature="+statureMin+"&txtMaxStature="+statureMax+"&currArea="+currarea+"&expArea="+exparea
+		      +"&jobsort="+jobsort+"&calling="+calling+"&nativeArea="+nativearea;
+		return str;
+	},
+	getQueryCondition:function(){
+		var keyword = $('#txtKeyword').val();
+		if(keyword == '请输入关键词'|| keyword ==''){
+			return '';
+		}
+		return keyword;
+	},
+	writeRecentSeearchCriteria:function(queryCondition, queryString){
+		var cookieValue = readCookie('resumeQueryCondition');
+        var queryCookie = readCookie('resumeQueryString');
+        
+        var conditionArray = new Array();
+        var queryStringArray = new Array();
+        if (cookieValue.length > 0)
+        {
+            conditionArray = cookieValue.split(';');
+            queryStringArray = queryCookie.split(';');
+        }
+        if (conditionArray != undefined && conditionArray != null)
+        {
+            var same = false;
+            for (var i = 0; i < queryStringArray.length; i++)
+            {
+                if (queryString == queryStringArray[i])
+                {
+                    conditionArray.splice(i, 1);
+                    queryStringArray.splice(i, 1);
+                    same = true;
+                }
+            }
+
+            if (same == false && conditionArray.length >= 4)
+            {
+                conditionArray.splice(0, 1);
+                queryStringArray.splice(0, 1);
+            }
+            conditionArray.push(queryCondition)
+            queryStringArray.push(queryString);
+        }
+        writeCookie('resumeQueryCondition', conditionArray.join(';'));
+        writeCookie('resumeQueryString', queryStringArray.join(';'));		
+	},
+	readRecentSearchCriteria:function(){
+		var cookieValue = readCookie('resumeQueryCondition');
+        var queryCookie = readCookie('resumeQueryString');
+        var conditionArray = new Array();
+        var queryStringArray = new Array();
+        if (cookieValue.length > 0){
+            conditionArray = cookieValue.split(';');
+            queryStringArray = queryCookie.split(';');
+        }
+        if (conditionArray != undefined && conditionArray != null){
+            var len = conditionArray.length;
+            var span = $('#spanSearchCondition');
+            span.html('');
+            if(len>0){
+            	span.html('最近搜索');
+            }
+            for (var i = len - 1; i >= 0; i--){                
+                span.append('<a href="/resumesearch/index?hddIsfirstPost=1'+queryStringArray[i]+'">'+conditionArray[i]+'</a>');
+            }
+        }
+	}
+	
+}
+
+resumesearch .init();
+
+
+$(document).ready(function() {
+	window.onload = function(){
+		resumesearch.readRecentSearchCriteria();      
+    }
+
+	$('#lst').find('tr').hover(function(){
+		$(this).addClass('hov');
+	},function(){
+		$(this).removeClass('hov');
+	});
+
+	$('#lst').find('tr.lstOne').bind('mouseenter',function(){
+		$(this).addClass('hov2');
+		$(this).next('tr.lstTwo').addClass('hov');
+	});
+	$('#lst').find('tr.lstOne').bind('mouseleave',function(){
+		$(this).removeClass('hov2');
+		$(this).next('tr.lstTwo').removeClass('hov');
+	});
+	
+	$('#lst').find('tr.lstTwo').bind('mouseenter',function(){
+		$(this).addClass('hov');
+		$(this).prev('tr.lstOne').addClass('hov2');
+	});
+	$('#lst').find('tr.lstTwo').bind('mouseleave',function(){
+		$(this).removeClass('hov');
+		$(this).prev('tr.lstOne').removeClass('hov2');
+	});
+
+	//获取焦点时加上样式
+	$.focusblur(':text');
+	
+	$('#clo').click(function(e){
+	  e.stopPropagation();
+      $('#tipTxt').hide();
+     });
+});
+
+</script>
+</body>
+</html>

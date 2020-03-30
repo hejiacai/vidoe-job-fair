@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="Keywords" content="" />
+    <meta name="Description" content="" />
+    <title>汇博人才网_招聘中心</title>
+    <!–[if lt IE9]>
+    <script type="text/javascript" language="javascript" src="{/version file='html5.js'/}"></script>
+    <![endif]–>
+    <link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='comback.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='icons.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='repcalendar.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='video_eng.css'/}" />
+    <script type="text/javascript" language="javascript" src="{/version file='version.js'/}"></script>
+    <script type="text/javascript">
+        window.CONFIG = {
+            HOST: '{/$siteurl.style/}',
+            COMBOPATH: '/js/v2/'
+        }
+    </script>
+    <script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+    <script type="text/javascript" src="{/version file='global.js'/}"></script>
+</head>
+<body style="background: #f6f7f8;">
+{/include 'new_header.html' cur="视频校招"/}
+
+<div class="videoEngMain">
+    <div class="videoEngTab">
+        <a href="javascript:void (0);" class="cut">视频招聘会列表(校招)<i></i></a>
+    </div>
+    <ul class="videoEngList">
+         {/foreach $list as $key=>$val/}
+        <li>
+            {/if 1==$val['activity_ing_status']/}
+            <span class="engList1 engListCut1"><i></i>共有{/$val['count_num']/}家企业正进行视频面试</span>
+            {/else/}
+            <span class="engList1"><i></i>已有{/$val['count_num']/}家企业报名本次招聘会</span>
+            {//if/}
+            {/if !empty($val['logo'])/}
+            <img src="{/$val['logo']/}" class="engList2" >
+             {/else/}
+             <img src="{/$siteurl.style/}/img/school/shuangxuan/shuangxuan_default_logo.jpg" class="engList2" >
+            {//if/}
+            <p class="engList3">
+                <span class="subEng1">{/$val['title']/}</span>
+                <span class="subEng2">{/if 0==$val['activity_ing_status']/}{/$val['date_text']/}{/else/}时间：<em>{/$val['date_text']/}</em>{//if/}</span>
+                <span class="subEng3">{/$val['superiority_info']/}</span>
+            </p>
+            {/if 0==$val['activity_ing_status']/}
+                {/if '-1'==$val['company_status']/}
+                   {/if 200==$check_company_info['code']/}
+                    <a href="{/get_url rule='/shuangxuannet/addcompanynet'/}?sid={/$val['id']/}" class="enterHall">立即报名</a>
+                   {/else/}
+                    <a href="javascript:void (0);"   class="enterHall no_check">立即报名</a>
+                   {//if/}
+                {/else if 0==$val['company_status']/}
+                    <a href="javascript:void (0);" class="enterHall auditEnterHall">报名审核中</a>
+                 {/else if 1==$val['company_status']/}
+                     <a href="{/get_url rule='/videohall/VideoInterviewHall'/}?sid={/$val['id']/}" class="enterHall">进入会场</a>
+                 {/else/}
+                    <!-- <a href="{/get_url rule='/shuangxuannet/addcompanynet'/}" class="enterHall editEnterHall">修改资料</a>-->
+                    <span class="engList4" >审核未通过({/$val['company_remark']/})</span>
+                 {//if/}
+            {/else if 1==$val['activity_ing_status']/}
+                    {/if 0==$val['company_status']/}
+                    <a href="javascript:void (0);" class="enterHall auditEnterHall">报名审核中</a>
+                    {//if/}
+                    {/if 1==$val['company_status']/}
+                      <a href="{/get_url rule='/videohall/VideoInterviewHall'/}?sid={/$val['id']/}" class="enterHall">进入会场</a>
+                    {//if/}
+                    {/if 2==$val['company_status']/}
+                        <span class="engList4" >审核未通过({/$val['company_remark']/})</span>
+                    {//if/}
+            {/else/}
+                    {/if 0==$val['company_status']/}
+                        <a href="javascript:void (0);" class="enterHall auditEnterHall">报名审核中</a>
+                    {//if/}
+                    {/if 1==$val['company_status']/}
+                         <a href="{/get_url rule='/videohall/VideoInterviewHall'/}?sid={/$val['id']/}" class="enterHall">进入会场</a>
+                    {//if/}
+                    {/if 2==$val['company_status']/}
+                        <span class="engList4" >审核未通过({/$val['company_remark']/})</span>
+                    {//if/}
+            {//if/}
+        </li>
+        {//foreach/}
+        <li class="last"></li>
+       </ul>
+</div>
+<!-- 浮窗 -->
+<div class="engRightPop">
+    <img src="{/$siteurl.style/}/img/company/video/eng_code.png" >
+    <span>语音<em>无法听清</em><br />或需<em>发送语音</em><br />请用企业APP</span>
+</div>
+<script>
+    hbjs.use(' @form, @jobDialog, @jobDropList', function(m){
+        var $ = m['cqjob.jobValidate'].extend(m['cqjob.jobForm'], m['cqjob.jobDialog'], m['cqjob.jobDropList']);
+       $('.no_check').on('click',function () {
+           $.message("{/$check_company_info['msg']/}",{title:'提示'});
+       })
+    });
+</script>
+</body>
+</html>

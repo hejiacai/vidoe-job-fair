@@ -1,0 +1,800 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Administrator
+ * Date: 2018/9/6 0006
+ * Time: 14:18
+ */
+class controller_readjob extends components_cbasepage {
+
+    function __construct() {
+        parent::__construct();
+    }
+
+    /*
+     * 谁看过我的职位 tw 2018-09-06
+     * */
+    public function pageindex($inPath){
+
+        $pathData   = base_lib_BaseUtils::saddslashes($this->getUrlParams($inPath));
+
+        $xml = SXML::load('../config/config.xml');
+        $this->_aParams['ShowResumeNum'] = $xml->ShowResumeNum;
+        $this->_aParams['title']         = "谁看过我的职位 简历管理_{$xml->HuiBoSiteName}";
+
+        $cur_page       = base_lib_BaseUtils::getStr($pathData['page'], 'int', 1);
+        $search_job_id  = base_lib_BaseUtils::getStr($pathData['search_job_id'], 'int', 0);
+        $page_size      = base_lib_Constant::PAGE_SIZE;  //每页显示多少条
+
+        $companyService = new base_service_company_company();
+        
+        $company_resources = base_service_company_resources_resources::getInstance($this->_userid);
+        $accounts_company_ids = $company_resources->all_accounts;
+
+        $visitList = new base_service_company_job_jobvisitdetail();
+
+        $list = $visitList->getJobGroupList($accounts_company_ids , $cur_page , $page_size,"id,company_id,person_id,job_id,create_time,visit_time,visit_date,max(visit_time) visit_time,read_time",$search_job_id);
+
+
+        if(!empty($list->items)){
+
+
+
+            $job_ids = array_unique(base_lib_BaseUtils::getProperty($list->items,'job_id'));
+            $job_service = new base_service_company_job_job();
+            $job_List = $job_service->getJobs($job_ids,'job_id,station,job_flag');
+            $job_List = base_lib_BaseUtils::array_key_assoc($job_List,'job_id');
+
+            $person_ids = array_unique(base_lib_BaseUtils::getProperty($list->items,'person_id'));
+            $person_service = new base_service_person_person();
+            $resume_service = new base_service_person_resume_resume();
+
+            $resume_list = $resume_service->getDefaultResumes($person_ids , 'person_id,resume_id,resume_name,degree_id,current_station,current_station_start_time,current_station_end_time,is_effect,mobile_phone')->items;
+            $resume_list = base_lib_BaseUtils::array_key_assoc($resume_list,'person_id');
+
+            $person_list = $person_service->GetPersonListByIDs($person_ids, 'person_id,user_name,name_open,photo_open,sex,birthday2,cur_area_id,start_work,photo,small_photo,mobile_phone,open_mode')->items;
+            $person_list = base_lib_BaseUtils::array_key_assoc($person_list,'person_id');
+            
+            //最近投递职位
+            $service_apply  = new base_service_company_resume_apply();
+            $apply_list     = $service_apply->getNearApplyJobs($this->_userid, $person_ids, "job_id,person_id,company_id,create_time");
+        
+            $apply_job_ids  = base_lib_BaseUtils::getProperty($apply_list, "job_id");
+            $apply_job_list = $job_service->getJobs($apply_job_ids,'job_id,station,job_flag');
+            $apply_job_list = base_lib_BaseUtils::array_key_assoc($apply_job_list,'job_id');
+            $resume_ids = array_unique(base_lib_BaseUtils::getProperty($resume_list,'resume_id'));
+            //毕业院校
+            $service_edu = new base_service_person_resume_edu();
+            $edu_data = $service_edu->getResumeEdus(implode(',',$resume_ids),'resume_id,school,major_desc,degree')->items;
+            $edu_data = base_lib_BaseUtils::array_key_assoc($edu_data,'resume_id');
+
+            //工作经验
+            $service_resume_work   = new base_service_person_resume_work();
+            $work_datas = $service_resume_work->getResumeWorks(implode(',',$resume_ids), 'work_id,resume_id,start_time,end_time,station,company_name,work_content');
+            $workslist = array();
+            foreach ($work_datas->items as $workskey => $worksvalue) {
+                $workslist[$worksvalue["resume_id"]][$workskey]['start_time']   = date('Y/m', strtotime($worksvalue['start_time']));
+                $workslist[$worksvalue["resume_id"]][$workskey]['end_time']     = empty($worksvalue['end_time']) ? "至今" : date('Y/m', strtotime($worksvalue['end_time']));
+                $workslist[$worksvalue["resume_id"]][$workskey]['station']      = $worksvalue['station'];
+                $workslist[$worksvalue["resume_id"]][$workskey]['company_name'] = $worksvalue['company_name'];
+                $workslist[$worksvalue["resume_id"]][$workskey]['work_content'] = base_lib_BaseUtils::cutstr($worksvalue['work_content'], 180, 'utf-8', '','...');
+            }
+
+            //求职者一周内是否登录过app
+            $sercie_loginlog= new base_service_person_loginlog();
+            $login_status = $sercie_loginlog->getLoginAppData($person_ids,7);
+            if(!empty($login_status))
+                $login_status = base_lib_BaseUtils::array_key_assoc($login_status,'person_id');
+            $service_chat = new company_service_chat(0,0);
+            //$service_wangyiaction = new base_service_app_wangyiaction();
+
+
+
+            foreach($list->items as &$item){
+                if(empty($item['read_time'])){
+                    //设置为已读
+                    $visitList->setHasRed($item['job_id'],$item['company_id'],$item['person_id'],$item['visit_date']);
+                }
+
+                $person_info = $person_list[$item['person_id']];
+                $resume_info = $resume_list[$item['person_id']];
+                $_apply_list  = base_lib_BaseUtils::arrayFindAll($apply_list, "person_id", $item['person_id']);
+                $item["apply_list"]     = [];
+                $item["is_apply_job"]   = false;
+                if(!empty($_apply_list)){
+                    foreach($_apply_list as $_apk => $_apv){
+                        $_apply_list[$_apk]["create_date"] = date("Y-m-d",strtotime($_apv["create_time"]));
+                        $_apply_list[$_apk]["station"]     = !empty($apply_job_list[$_apv["job_id"]]["station"]) ? $apply_job_list[$_apv["job_id"]]["station"] : ""; 
+                        if($_apv["job_id"] == $item["job_id"]){
+                            $item["is_apply_job"] = true;
+                        }
+                    }
+                    $_apply_list = base_lib_BaseUtils::array_key_assoc($_apply_list, "job_id"); //根据职位编号去重
+                    $item["apply_list"] = $_apply_list;
+                }
+                $item['exist_resume'] = empty($resume_info)? 0 : 1;
+
+                $item['station'] = $job_List[$item['job_id']]['station'];
+                $item['job_flag'] = $job_List[$item['job_id']]['job_flag'];
+                $item['open_mode'] = $person_info['open_mode'];
+                //访问时间
+                $item['visit_time'] = $this->get_day($item['visit_time']);
+                // 姓名
+                $item['user_name'] = empty($person_info['user_name']) ? "&nbsp;" : $person_info['user_name'];
+
+                if ($person_info['name_open'] == 0) {
+                    $sex_name = $person_info['sex'] == 1 ? '先生' : '女士';
+                    $item['user_name'] = mb_substr($person_info['user_name'], 0, 1, 'utf-8') . $sex_name;
+                }
+                $item['full_user_name'] = base_lib_BaseUtils::htmlEncode($person_info['user_name']);
+
+
+                //头像性别、年龄、学历、当前所在地
+
+                if ($person_info['photo_open'] === '0') {//允许null,和1一样，默认可以公开
+                    $person_info['photo']       = false;
+                    $person_info['small_photo'] = false;
+                } else {
+                    if (base_lib_BaseUtils::nullOrEmpty($person_info['small_photo'])) {
+                        $person_info['small_photo'] = base_lib_Constant::YUN_ASSETS_URL_NO_HTTP . $person_info['photo'];
+                    } else {
+                        $person_info['small_photo'] = base_lib_Constant::YUN_ASSETS_URL_NO_HTTP . $person_info['small_photo'];
+                    }
+                    //兼容判断
+                    if(base_lib_BaseUtils::nullOrEmpty($person_info['photo']))
+                        $person_info['photo'] = false;
+                    else
+                        $person_info['photo'] = base_lib_Constant::YUN_ASSETS_URL_NO_HTTP . $person_info['photo'];
+                }
+
+                $item['photo']       = $person_info['photo'];
+                $item['small_photo'] = $person_info['photo'];//改版后头像用原始头像
+                $item['sex']         = $this->getSex($person_info['sex']);
+                $item['age']         = base_lib_TimeUtil::ceil_diff_year($person_info['birthday2']) . '岁';
+
+                $item['cur_area']    = $this->getArea($person_info['cur_area_id']);
+
+                //工作年限
+                $basic_start_work_year = base_lib_TimeUtil::date_diff_month($person_info['start_work']);
+                $workY = floor($basic_start_work_year / 12);
+                $workM = intval($basic_start_work_year % 12);
+
+                if ($workY <= 0 && $workM <=6 && $workM >= -6) {
+                    $basic_start_work_year = '应届毕业生';
+                } else if ($workY == 0 && $workM > 6) {
+                    $basic_start_work_year = $workM . '个月工作经验';
+                } else if ($basic_start_work_year < -6) {
+                    $basic_start_work_year = '目前在读';
+                } else {
+                    $basic_start_work_year = $workY . '年工作经验';
+                }
+
+                $item['start_work'] = $basic_start_work_year;
+                if (base_lib_BaseUtils::nullOrEmpty($item['start_work'])) {
+                    $item['start_work'] = "应届毕业生";
+                }
+                ###
+                if(!empty($resume_info)){
+
+                    $item['resume_id'] = $resume_info['resume_id'];
+                    //学历
+                    $item['degree']      = $this->getDegree($resume_info['degree_id']);
+                    //最近工作经验
+                    if ($resume_info['current_station'] == '') {
+                        $item['work'] = '无';
+                    } else {
+                        if (base_lib_BaseUtils::nullOrEmpty($resume_info['current_station_start_time'])) {
+                            $item['work'] = $resume_info['current_station'];
+                        } else {
+                            $item['work'] = $resume_info['current_station'] . '('
+                                . base_lib_TimeUtil::date_diff_year3($resume_info['current_station_start_time'], $resume_info['current_station_end_time'])
+                                . ')';
+                        }
+                    }
+
+                    //毕业院校
+                    $edu_info = $edu_data[$resume_info['resume_id']];
+                    $item['school']        = $edu_info['school'];
+                    $item['major_desc']    = $edu_info['major_desc'];
+                    $item['school_degree'] = $this->getDegree($edu_info['degree']) ;
+                    //var_dump($workslist["$resume_id"]);
+                    $count = count($workslist[$resume_info['resume_id']]);
+                    if ($count > 0) {
+                        $item['worklist'] = array_slice($workslist[$resume_info['resume_id']], 0, ($count >= 3 ? 3 : $count));
+                    } else {
+                        $item['worklist'] = array();
+                    }
+                }
+                ###
+                // 是否为代招
+                $item['generation_binding'] = $item['company_id'] == $this->_userid ? false : true;
+
+
+                //聊一聊状态 ，提示等级 1：(未登录)提示 2：（未登录）提示 + 提示消耗 3：提示消耗
+                $chat_params['resume_id'] = $resume_info['resume_id'];
+                $chat_params['person_id'] = $item['person_id'];
+                $chat_params['company_id'] = $this->_userid;
+                $item['chat_status'] = $service_chat->getChatNoticeStatus($this->_userid,base_lib_BaseUtils::getCookie('accountid'),null,$chat_params, $item['person_id']);
+                //$item['chat_status'] = $service_wangyiaction->checkPersonIsOnline($item['person_id']);
+
+            }
+
+        }
+
+        /* 页码 */
+        $pager = $this->pageBarFullPath($list->totalSize, $page_size, $cur_page, $inPath);
+
+        $this->_aParams['page'] = $pager;
+        $this->_aParams['list'] = $list->items;
+
+        $job                   = new base_service_company_job_job();
+        $status                = new base_service_common_jobstatus();
+        
+        $_job_list = [];
+        $_job_list[] = ["id" => 0,"name" => "全部职位"];
+        $job_list   = $job->getJobList($this->_userid, null, $status->pub, 'job_id,station');
+        if(!empty($job_list)){
+            foreach($job_list as $value){
+                $_job_list[] = ["id"=>$value['job_id'],"name"=>$value['station']];
+            }
+        }
+		$this->_aParams['pub_job_list']     = json_encode($_job_list);
+        $this->_aParams["search_job_id"]    = $search_job_id;
+        
+        return $this->render('readjob/index.html',$this->_aParams);
+    }
+
+
+    public function pageCompanyVisit($inPath){
+        $pathData   = base_lib_BaseUtils::saddslashes($this->getUrlParams($inPath));
+
+        $xml = SXML::load('../config/config.xml');
+        $this->_aParams['ShowResumeNum'] = $xml->ShowResumeNum;
+        $this->_aParams['title'] = $title = "企业职位浏览统计_{$xml->HuiBoSiteName}";
+
+        $execl = base_lib_BaseUtils::getStr($pathData['execl'], 'string', '');
+        $cur_page = base_lib_BaseUtils::getStr($pathData['page'], 'int', 1);
+        $page_size = base_lib_BaseUtils::getStr($pathData['page_size'], 'int',  base_lib_Constant::PAGE_SIZE);  //每页显示多少条
+
+        $date_id = base_lib_BaseUtils::getStr($pathData['date_id'],'int',1);
+        $company_id = base_lib_BaseUtils::getStr($pathData['company_id'],'int','');
+        $job_id = base_lib_BaseUtils::getStr($pathData['job_id'],'int','');
+
+        $company_resources = base_service_company_resources_resources::getInstance($this->_userid);
+        $account_ids = $company_resources->all_accounts;
+
+        $companyService = new base_service_company_company();
+        $accounts = $companyService->getCompanys($account_ids, "company_id,company_name,company_shortname,company_flag");
+        $accounts_data = array();
+        $accounts_company_ids = base_lib_BaseUtils::getProperty($accounts,'company_id');
+
+        if(!in_array($company_id,$accounts_company_ids) && !empty($company_id)){
+            $this->_aParams['message'] = '该企业编号不是本公司编号，请勿非法操作';
+            return $this->render('showerror.html', $this->_aParams);
+        }
+
+        foreach($accounts as $item){
+            $accounts_data[] = array('id'=>  $item['company_id'] , 'name'=> $item['company_name']);
+        }
+        $this_accounts_temp = base_lib_BaseUtils::array_key_assoc($accounts_data,'id');
+        $this->_aParams['first_account'] = empty($company_id) ? $accounts_data[0] : $this_accounts_temp[$company_id];
+        $this->_aParams['accounts'] = json_encode($accounts_data);
+
+        $company_ids = empty($company_id) ? $accounts_company_ids : $company_id;
+        //获取近30天的访问职位ids
+        $jobvisit_service = new base_service_company_job_companyjobvisit();
+        $job_ids = $jobvisit_service->getJobIdsByCompany_id($company_ids);
+
+        $job_ids = empty($job_ids['job_ids']) ? array() : explode(',',$job_ids['job_ids']);
+        $job_first = array('id'=>0 , 'name'=>'全部职位');
+        $job_data = array();
+        $job_list = array();
+        if(!empty($job_ids)){
+
+            $job_service = new base_service_company_job_job();
+            $job_list = $job_service->getJobs($job_ids,'job_id,station,is_effect,status,check_state,end_time');
+            //if(status=1 and check_state<=1 and is_effect=1 and end_time >="2018-08-27",1,0)
+            $job_list = base_lib_BaseUtils::array_key_assoc($job_list,'job_id');
+            $this_time = strtotime(date('Y-m-d'));
+            foreach($job_list as &$job_item){
+                $temp_array = array();
+                $temp_array['id'] = $job_item['job_id'];
+                if($job_item['status'] == 1 && $job_item['check_state'] <=1 && $job_item['is_effect'] =1  && strtotime($job_item['end_time']) >= $this_time ){
+                    $temp_array['name'] = $job_item['station'];
+                }else{
+                    $temp_array['name'] = $job_item['station'].'(停招)';
+                    $job_item['station'] = $job_item['station'].'(停招)';
+                }
+                $job_data[] = $temp_array;
+            }
+            array_unshift($job_data,$job_first);
+
+            $this->_aParams['jobListJson'] = json_encode($job_data);
+        }
+        $job_data_temp = base_lib_BaseUtils::array_key_assoc($job_data,'id');
+        $this_job_temp = empty($job_data_temp[$job_id]) ? $job_first : $job_data_temp[$job_id];
+        $this->_aParams['jobFirst'] = empty($job_id) ? $job_first : $this_job_temp;
+
+        $job_id = empty($this->_aParams['jobFirst']['id']) ? '' : $this->_aParams['jobFirst']['id'];
+
+        //获取访问数据
+        $list = $jobvisit_service->getList($company_ids,$job_id , $date_id , $cur_page , $page_size ,$execl);
+
+        if(!empty($list->items)){
+            $this->_aParams['pager'] = $this->pageBarFullPath($list->totalSize, $page_size, $cur_page, $inPath);
+
+            foreach($list->items as &$visit_item){
+                $visit_item['station'] = $job_list[$visit_item['job_id']]['station'];
+                $visit_item['click_rate'] = round($visit_item['visit_count'] / $visit_item['exposes_count'] * 100,2);
+                $visit_item['delivery_rate'] = round($visit_item['apply_count'] / $visit_item['visit_count'] * 100,2);
+                $visit_item['invitation_rate'] = round($visit_item['invite_count'] / $visit_item['apply_count'] * 100,2);
+            }
+        }
+
+
+
+
+        $this->_aParams['dateID'] = $date_id;
+        $this->_aParams['jobListJson'] = json_encode($job_data);
+        $this->_aParams['list'] = $list->items;
+        $this->_aParams['execl'] = $execl;
+        if(empty($execl)){
+            //获取该公司所有职位
+            $q_job_ids = empty($job_id) ? $job_ids : $job_id;
+
+            $list_rate = $jobvisit_service->getVisitRateData($company_ids , $q_job_ids , $date_id);
+            $this->_aParams['this_visit_data'] = $list_rate;
+
+            $this->_aParams['Total_visit_data'] = self::getListRate($company_ids,$q_job_ids,$date_id , $list_rate);
+        }
+
+        if(!empty($execl)){
+            $html = $this->render('readjob/view_table.html',$this->_aParams);
+            $this->createExcel($html, null, $title, true);
+        }
+        return $this->render('readjob/view_index.html',$this->_aParams);
+    }
+    public function pageJobVisit($inPath){
+        $pathData   = base_lib_BaseUtils::saddslashes($this->getUrlParams($inPath));
+
+        $xml = SXML::load('../config/config.xml');
+        $this->_aParams['ShowResumeNum'] = $xml->ShowResumeNum;
+        $this->_aParams['title'] = $title = "职位详情浏览统计_{$xml->HuiBoSiteName}";
+
+        $execl = base_lib_BaseUtils::getStr($pathData['execl'], 'string', '');
+        $cur_page = base_lib_BaseUtils::getStr($pathData['page'], 'int', 1);
+        $page_size = base_lib_BaseUtils::getStr($pathData['page_size'], 'int',  base_lib_Constant::PAGE_SIZE);  //每页显示多少条
+
+        $company_id = base_lib_BaseUtils::getStr($pathData['company_id'],'int','');
+        $job_id = base_lib_BaseUtils::getStr($pathData['job_id'],'int','');
+
+        $startDay = base_lib_BaseUtils::getStr($pathData['startDay'],'int','');
+        $endDay = base_lib_BaseUtils::getStr($pathData['endDay'],'int','');
+
+        if(empty($job_id) || empty($company_id)){
+            $this->_aParams['message'] = '参数错误！';
+            return $this->render('showerror.html', $this->_aParams);
+        }
+
+        $this->_aParams['startDay'] = $startDay = base_lib_BaseUtils::getStr($pathData['startDay'],'string',date('Y-m-d',strtotime('-7 day')));
+        $this->_aParams['endDay'] = $endDay = base_lib_BaseUtils::getStr($pathData['endDay'],'string',date('Y-m-d'));
+
+        $companyService = new base_service_company_company();
+        $accounts = $companyService->getCompanys($this->_userid, "company_id,company_name,company_shortname,company_flag");
+        $accounts_data = array();
+        $accounts_company_ids = base_lib_BaseUtils::getProperty($accounts,'company_id');
+
+        if(!in_array($company_id,$accounts_company_ids) && !empty($company_id)){
+            $this->_aParams['message'] = '该企业编号不是本公司编号，请勿非法操作';
+            return $this->render('showerror.html', $this->_aParams);
+        }
+
+        foreach($accounts as $item){
+            $accounts_data[] = array('id'=>  $item['company_id'] , 'name'=> $item['company_name']);
+        }
+        $this->_aParams['first_account'] = $accounts_data[0];
+        $this->_aParams['accounts'] = json_encode($accounts_data);
+        $company_ids = empty($company_id) ? $accounts_company_ids : $company_id;
+        //获取近30天的访问职位ids
+        $jobvisit_service = new base_service_company_job_companyjobvisit();
+        $job_ids = $jobvisit_service->getJobIdsByCompany_id($company_ids);
+
+        $job_ids = explode(',',$job_ids['job_ids']);
+//        $job_first = array('id'=>0 , 'name'=>'全部职位');
+
+        $job_data = array();
+        $job_list = array();
+        if(!empty($job_ids)){
+
+            $job_service = new base_service_company_job_job();
+            $job_list = $job_service->getJobs($job_ids,'job_id,station,is_effect,status,check_state,end_time');
+            //if(status=1 and check_state<=1 and is_effect=1 and end_time >="2018-08-27",1,0)
+            $job_list = base_lib_BaseUtils::array_key_assoc($job_list,'job_id');
+            $this_time = strtotime(date('Y-m-d'));
+            foreach($job_list as &$job_item){
+                $temp_array = array();
+                $temp_array['id'] = $job_item['job_id'];
+                if($job_item['status'] == 1 && $job_item['check_state'] <=1 && $job_item['is_effect'] =1  && strtotime($job_item['end_time']) >= $this_time ){
+                    $temp_array['name'] = $job_item['station'];
+                }else{
+                    $temp_array['name'] = $job_item['station'].'(停招)';
+                }
+                $job_data[] = $temp_array;
+            }
+
+            $this->_aParams['jobFirst'] = $job_data[0];
+            $this->_aParams['jobListJson'] = json_encode($job_data);
+        }
+
+        if(!empty($job_id)){
+            $job_first['id']=$job_id;
+        }
+
+        $this->_aParams['jobFirst'] = $job_first;
+        $this->_aParams['jobListJson'] = json_encode($job_data);
+
+        //查询数据职位数据访问数据
+        $companyjobvisit_service = new base_service_company_job_companyjobvisit();
+
+        $list = $companyjobvisit_service->getJobVisitList($accounts_company_ids , $job_id , $startDay , $endDay , $cur_page , $page_size ,$execl);
+        if(!empty($list->items)){
+            $this->_aParams['pager'] = $this->pageBarFullPath($list->totalSize, $page_size, $cur_page, $inPath);
+            foreach($list->items as &$visit_item){
+                $visit_item['station'] = $job_list[$visit_item['job_id']]['station'];
+                $visit_item['click_rate'] = round($visit_item['visit_count'] / $visit_item['exposes_count'] * 100,2);
+                $visit_item['delivery_rate'] = round($visit_item['apply_count'] / $visit_item['visit_count'] * 100,2);
+                $visit_item['invitation_rate'] = round($visit_item['invite_count'] / $visit_item['apply_count'] * 100,2);
+            }
+        }
+        $this->_aParams['list'] = $list->items;
+        $this->_aParams['execl'] = $execl;
+        $this->_aParams['first_time'] = date('Y-m-d',strtotime('-30 day'));
+        if(!empty($execl)){
+            $this->_aParams['job_name'] = $job_list[$job_id]['station'];
+            $html = $this->render('readjob/view_table1.html',$this->_aParams);
+            $this->createExcel($html, null, $title, true);
+        }
+        return $this->render('readjob/view_job.html',$this->_aParams);
+    }
+
+    /**
+     * 获取居住地
+     * 默认 如果是填写的重庆下的地区，不显示重庆，只显示详细地址，非重庆的 只显示一级城市和二级地区
+     */
+    private function getArea($area_id,$default='',$isShowAll=false) {
+        if(base_lib_BaseUtils::nullOrEmpty($area_id)) {
+            return $default;
+        }
+        $service_area = new base_service_common_area();
+        $areas = $service_area->getTopAreaByAreaID($area_id);
+        $areas = array_reverse($areas);
+        $count  = count($areas);
+        if($count<=0) {
+            return $default;
+        }
+        $names  = array();
+        if($isShowAll) {
+            for($i= 0;$i<$count;$i++) {
+                $area = $areas[$i];
+                array_push($names, $area['area_name']);
+            }
+        }else {
+            $isChongqing = false;
+            for($i= 0;$i<$count;$i++) {
+                $area = $areas[$i];
+                if($i==0) {
+                    if($count==1) {
+                        array_push($names, $area['area_name']);
+                        continue;
+                    }
+                    if($area['area_id']=='0300') {
+                        $isChongqing = true;
+                        continue;
+                    }
+                }
+                if(!$isChongqing&&$i>=2) {
+                    break;
+                }
+                array_push($names, $area['area_name']);
+            }
+        }
+        return implode('-', $names);
+    }
+    /**
+     * 获取学历
+     */
+    private function getDegree($degree_id,$default='') {
+        if(empty($degree_id)) {
+            return $default;
+        }
+        $service_degree = new base_service_common_degree();
+        return $service_degree->getDegree($degree_id);
+    }
+
+    /**
+     * 获取性别
+     */
+    private function getSex($sex,$default='') {
+        if(base_lib_BaseUtils::nullOrEmpty($sex)||$sex=='0') {
+            return  $default;
+        }
+        $enum_sex = new base_service_common_sex();
+        return $enum_sex->getName($sex);
+    }
+    /**
+     * 获取几天前    hujian 2018/8/24 14:13:01
+     */
+    function get_day($date){
+        if(empty($date)){
+            return '';
+        }
+        $day=(strtotime(date('Y-m-d'))-strtotime(date('Y-m-d',strtotime($date))))/86400;
+        if($day<0){
+            $day=-1;
+        }
+
+        $return_str=date('Y-m-d',strtotime($date));
+        switch($day){
+            case 0:
+                $return_str='今天';
+                break;
+            case 1:
+                $return_str='昨天';
+                break;
+            case 2:
+                $return_str='前天';
+                break;
+                break;
+            case -1:
+                $return_str='';
+                break;
+        }
+        return $return_str;
+    }
+
+
+    /*
+     * 获取同行业同职位类别的点击率、投递率、邀请率
+     * */
+    private function getListRate($company_id = '' , $job_id='' , $date_id = 1 , $this_rate){
+        if(empty($company_id) && empty($job_id)){
+            return array();
+        }
+        $type_name = "同行业同职位";
+        $visit_data = array();
+        //只有企业id 则查询同行业数据
+        if(!empty($company_id) && empty($job_id)){
+            $type_name = "同行业";
+            $visit_service = new base_service_company_job_callingvisit();
+            $visit_data = $visit_service->getVisitRateData($company_id  , $date_id);
+        }
+        //只有职位类别id 则查询同职位类别数据
+        if(empty($company_id) && !empty($job_id)){
+            $type_name = "同职位";
+            $visit_service = new base_service_company_job_jobsortvisit();
+            $visit_data = $visit_service->getVisitRateData($job_id  , $date_id);
+        }
+        //有企业id 职位类别id 则查询同行业同职位类别数据
+        if(!empty($company_id) && !empty($job_id)){
+            $type_name = "同行业同职位";
+            $visit_service = new base_service_company_job_callingandjobsortvisit();
+            $visit_data = $visit_service->getVisitRateData($company_id , $job_id , $date_id);
+        }
+        $visit_data['exposes_count'] = empty($visit_data['exposes_count']) ? 0 : (int)$visit_data['exposes_count'];
+        $visit_data['visit_count'] = empty($visit_data['visit_count']) ? 0 : (int)$visit_data['visit_count'];
+        $visit_data['apply_count'] = empty($visit_data['apply_count']) ? 0 : (int)$visit_data['apply_count'];
+        $visit_data['invite_count'] = empty($visit_data['invite_count']) ? 0 : (int)$visit_data['invite_count'];
+
+        $visit_data['click_rate'] = round($visit_data['visit_count'] / $visit_data['exposes_count'] * 100,2);
+        $visit_data['delivery_rate'] = round($visit_data['apply_count'] / $visit_data['visit_count'] * 100,2);
+        $visit_data['invitation_rate'] = round($visit_data['invite_count'] / $visit_data['apply_count'] * 100,2);
+        $visit_data['visit_rate_type'] = $type_name;
+
+        $visit_data['click_rate_contrast'] = $this_rate['click_rate'] >= $visit_data['click_rate'] ? 1 : 0;
+        $visit_data['delivery_rate_contrast'] = $this_rate['delivery_rate'] >= $visit_data['delivery_rate'] ? 1 : 0;
+        $visit_data['invitation_rate_contrast'] = $this_rate['invitation_rate'] >= $visit_data['invitation_rate'] ? 1 : 0;
+
+        return $visit_data;
+    }
+
+    /**
+     * 导出excel    zhouwenjun 2016/12/29 14:58 copy
+     * @param array|string $table_data      数据 array|html(table格式)
+     * @param          $rows                array('user'=>"用户",'name'=>"用户名")
+     * @param string $title                 标题
+     * @param bool $excel_table             直接使用excel table输出
+     */
+    function createExcel($table_data, $rows, $title = '导出excel', $excel_table = false) {
+        $title = iconv("utf-8", "gb2312", $title);
+        if ($excel_table) {
+            $this->SetExcelHeader($title, $title);
+            die($table_data);
+        }
+        //数据太大了不建议使用 phpExcel导出数据,耗时太长
+        if (count($table_data) > 2000) {
+            $this->SetExcelHeader($title, $title);
+            $this->SetExcelBody($table_data, $rows);
+        } else {
+//			$this->load->library("PHPExcel/Classes/PHPExcel.php");
+//			new PHPExcel();
+            //		$this->load->library("PHPExcel/Classes/PHPExcel/Writer/Excel5.php");
+            $objexcel = SPHPExcel::CreatePHPExcel();
+            $info_size = count($table_data);
+            for ($i = 0; $i < count($rows); $i++) {
+                $rows_value = array_values($rows);
+                $rows_key = array_keys($rows);
+                $pos = 0;
+
+                //chr(65)==A Aasc码
+                $objexcel->setActiveSheetIndex(0)->setCellValue(chr(65 + $i) . '1', strip_tags($rows_value[ $i ]));
+                $objexcel->setActiveSheetIndex(0)->getColumnDimension(chr(65 + $i))->setWidth(15);
+                $objexcel->getActiveSheet()->getStyle(chr(65 + $i) . '1')
+                    ->applyFromArray(array (
+                        'font'      => array ('bold' => true),
+                        'alignment' => array (
+                            'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER
+                        ),
+                        'borders'   => array (
+//							                 'allborders' => true,
+                            'outline' => array (
+                                'style' => PHPExcel_Style_Border::BORDER_THIN,   //设置border样式
+//								                 'style' => PHPExcel_Style_Border::BORDER_THICK,  //另一种样式
+                                'color' => array ('argb' => 'FF000000'),          //设置border颜色
+                            ),
+                        ),
+                    ));
+                if (!empty($table_data)) {
+                    $table_data = array_values($table_data);
+                    for ($j = 2; $j <= ($info_size + 1); $j++) {
+//						$objexcel->getActiveSheet()->getStyle(chr(65 + $i))
+//							->applyFromArray(array (
+//								                 'alignment' => array (
+//									                 'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_LEFT
+//								                 ),
+//							                 ));
+                        $objexcel->getActiveSheet()->getStyle(chr(65 + $i) . $j)
+                            ->applyFromArray(array (
+                                'alignment' => array (
+                                    'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_LEFT
+                                ),
+                                'borders'   => array (
+//							                 'allborders' => true,
+                                    'outline' => array (
+                                        'style' => PHPExcel_Style_Border::BORDER_THIN,   //设置border样式
+//								                 'style' => PHPExcel_Style_Border::BORDER_THICK,  //另一种样式
+                                        'color' => array ('argb' => 'FF000000'),          //设置border颜色
+                                    ),
+                                ),
+                            ));
+                        $objexcel->setActiveSheetIndex(0)->setCellValue(chr(65 + $i) . $j, strip_tags($table_data[ $pos ][ $rows_key[ $i ] ]));
+                        if ($pos < $info_size - 1) {
+                            $pos++;
+                        }
+                    }
+
+                }
+            }
+
+            header("content-type:application/vnd.ms-excel");
+            header("Content-Transfer-Encoding: binary");
+            header("content-disposition:attachment;filename={$title}.xls");
+            header("Pragma: no-cache");
+            $objwrite = new PHPExcel_Writer_Excel5($objexcel);
+            $objwrite->save('php://output');
+            exit;
+        }
+    }
+
+
+
+    public function pageRecruitmentEffect($inPath){
+        $pathData   = base_lib_BaseUtils::saddslashes($this->getUrlParams($inPath));
+
+        $xml = SXML::load('../config/config.xml');
+        $this->_aParams['ShowResumeNum'] = $xml->ShowResumeNum;
+        $this->_aParams['title'] = $title = "招聘效果报表";
+
+        $execl = base_lib_BaseUtils::getStr($pathData['execl'], 'string', '');
+        $cur_page = base_lib_BaseUtils::getStr($pathData['page'], 'int', 1);
+        $page_size = base_lib_BaseUtils::getStr($pathData['page_size'], 'int',  base_lib_Constant::PAGE_SIZE);  //每页显示多少条
+
+        $date_id = base_lib_BaseUtils::getStr($pathData['date_id'],'int',1);
+        $company_id = base_lib_BaseUtils::getStr($pathData['company_id'],'int','');
+        $job_id = base_lib_BaseUtils::getStr($pathData['job_id'],'int','');
+
+        $company_resources = base_service_company_resources_resources::getInstance($this->_userid);
+        $account_ids = $company_resources->all_accounts;
+
+        $companyService = new base_service_company_company();
+        $accounts = $companyService->getCompanys($account_ids, "company_id,company_name,company_shortname,company_flag");
+        $accounts_data = array();
+        $accounts_company_ids = base_lib_BaseUtils::getProperty($accounts,'company_id');
+
+        if(!in_array($company_id,$accounts_company_ids) && !empty($company_id)){
+            $this->_aParams['message'] = '该企业编号不是本公司编号，请勿非法操作';
+            return $this->render('showerror.html', $this->_aParams);
+        }
+
+        foreach($accounts as $item){
+            $accounts_data[] = array('id'=>  $item['company_id'] , 'name'=> $item['company_name']);
+        }
+        $this_accounts_temp = base_lib_BaseUtils::array_key_assoc($accounts_data,'id');
+        $this->_aParams['first_account'] = empty($company_id) ? $accounts_data[0] : $this_accounts_temp[$company_id];
+        $this->_aParams['accounts'] = json_encode($accounts_data);
+
+        $company_ids = empty($company_id) ? $accounts_company_ids : $company_id;
+        //获取近30天的访问职位ids
+        $jobvisit_service = new base_service_company_job_companyjobvisit();
+        $job_ids = $jobvisit_service->getJobIdsByCompany_id($company_ids);
+
+        $job_ids = empty($job_ids['job_ids']) ? array() : explode(',',$job_ids['job_ids']);
+        $job_first = array('id'=>0 , 'name'=>'全部职位');
+        $job_data = array();
+        $job_list = array();
+        if(!empty($job_ids)){
+
+            $job_service = new base_service_company_job_job();
+            $job_list = $job_service->getJobs($job_ids,'job_id,station,is_effect,status,check_state,end_time');
+            //if(status=1 and check_state<=1 and is_effect=1 and end_time >="2018-08-27",1,0)
+            $job_list = base_lib_BaseUtils::array_key_assoc($job_list,'job_id');
+            $this_time = strtotime(date('Y-m-d'));
+            foreach($job_list as &$job_item){
+                $temp_array = array();
+                $temp_array['id'] = $job_item['job_id'];
+                if($job_item['status'] == 1 && $job_item['check_state'] <=1 && $job_item['is_effect'] =1  && strtotime($job_item['end_time']) >= $this_time ){
+                    $temp_array['name'] = $job_item['station'];
+                }else{
+                    $temp_array['name'] = $job_item['station'].'(停招)';
+                    $job_item['station'] = $job_item['station'].'(停招)';
+                }
+                $job_data[] = $temp_array;
+            }
+            array_unshift($job_data,$job_first);
+
+            $this->_aParams['jobListJson'] = json_encode($job_data);
+        }
+        $job_data_temp = base_lib_BaseUtils::array_key_assoc($job_data,'id');
+        $this_job_temp = empty($job_data_temp[$job_id]) ? $job_first : $job_data_temp[$job_id];
+        $this->_aParams['jobFirst'] = empty($job_id) ? $job_first : $this_job_temp;
+
+        $job_id = empty($this->_aParams['jobFirst']['id']) ? '' : $this->_aParams['jobFirst']['id'];
+
+        //获取访问数据
+        $list = $jobvisit_service->getList($company_ids,$job_id , $date_id , $cur_page , $page_size ,$execl);
+
+        if(!empty($list->items)){
+            $this->_aParams['pager'] = $this->pageBarFullPath($list->totalSize, $page_size, $cur_page, $inPath);
+
+            foreach($list->items as &$visit_item){
+                $visit_item['station'] = $job_list[$visit_item['job_id']]['station'];
+                $visit_item['click_rate'] = round($visit_item['visit_count'] / $visit_item['exposes_count'] * 100,2);
+                $visit_item['delivery_rate'] = round($visit_item['apply_count'] / $visit_item['visit_count'] * 100,2);
+                $visit_item['invitation_rate'] = round($visit_item['invite_count'] / $visit_item['apply_count'] * 100,2);
+            }
+        }
+
+
+
+
+        $this->_aParams['dateID'] = $date_id;
+        $this->_aParams['jobListJson'] = json_encode($job_data);
+        $this->_aParams['list'] = $list->items;
+        $this->_aParams['execl'] = $execl;
+        if(empty($execl)){
+            //获取该公司所有职位
+            $q_job_ids = empty($job_id) ? $job_ids : $job_id;
+
+            $list_rate = $jobvisit_service->getVisitRateData($company_ids , $q_job_ids , $date_id);
+            $this->_aParams['this_visit_data'] = $list_rate;
+
+            $this->_aParams['Total_visit_data'] = self::getListRate($company_ids,$q_job_ids,$date_id , $list_rate);
+        }
+
+        if(!empty($execl)){
+            $html = $this->render('readjob/view_table.html',$this->_aParams);
+            $this->createExcel($html, null, $title, true);
+        }
+        return $this->render('readjob/recruitmenteffect.html',$this->_aParams);
+    }
+
+}

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>余额不足</title>
+    <link rel="stylesheet" type="text/css" href="{/version file="m_font_style.css"/}">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .need-money {
+            width: 470px;
+            box-sizing: border-box;
+            padding: 50px 20px 20px;
+            text-align: center;
+        }
+        .need-money .title {margin-bottom: 20px;}
+        .need-money .title i {font-size: 54px;color: #ccc;}
+        .need-money .txt1 {font-size: 18px;font-weight: bold;margin-bottom: 40px;}
+        .need-money .txt2 {font-size: 14px;margin-bottom: 20px;}
+        .need-money .recharge {display: inline-block;width: 184px;height: 40px;line-height: 40px;background: #ff5400;color: #fff;border-radius: 4px;margin-bottom: 7px;}
+        .need-money .contact {color: #ff5400;}
+    </style>
+</head>
+<body>
+<div class="need-money">
+    <div class="title">
+        <i class="icon-120"></i>
+    </div>
+    {/if $type=='default'/}
+    <div class="txt1">
+        哎呀，余额不足了！
+    </div>
+    <p class="txt2">与求职者聊天需要消耗聊一聊次数/推广金，您的余额不足</p>
+    <a class="recharge" target="_blank" href="{/get_url rule='/pay/index/'/}">
+        在线充值
+    </a>
+    <p class="contact">{/if $companyresources['resource_type']==1/}联系招聘顾问购买更优惠{/else/}联系主账号分配资源{//if/}</p>
+    {/elseif $type==1/}
+    <div class="txt1">
+        哎呀，余额不足了！
+    </div>
+    <p class="txt2">当前账号余额：{/sprintf("%.2f", $account_overage)/}元，当前账号剩余简历点：{/if $companyresources['cq_resume_num_release']/}{/$companyresources['cq_resume_num_release']/}{/else/}0{//if/}</p>
+    <a class="recharge" target="_blank" href="{/get_url rule='/pay/index/'/}">
+        立即充值
+    </a>
+    <p class="contact">联系招聘顾问购买简历包可享受更多优惠</p>
+    {/elseif $type==2/}
+    <div class="txt1">
+        哎呀，余额不足了！
+    </div>
+    <p class="txt2">发送面试邀请需要消耗短信/推广金，您的余额不足</p>
+    <a class="recharge" target="_blank" href="{/get_url rule='/pay/index/'/}">
+        立即充值
+    </a>
+    <p class="contact">{/if $companyresources['resource_type']==1/}联系招聘顾问购买更优惠{/else/}联系主账号分配资源{//if/}</p>
+    {//if/}
+</div>
+</body>
+</html>

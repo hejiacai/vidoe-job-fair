@@ -1,0 +1,148 @@
+<link rel="stylesheet" type="text/css" href="{/version file='partTime.css'/}"/>
+<style>
+	.ui-calendar {
+		z-index: 100000 !important;
+	}
+
+	.addLearn {
+		width: 555px;
+	}
+
+	.uploader2 .filelist li {
+		margin-bottom: 8px !important;
+	}
+</style>
+<form action="{/get_url rule="/hrlicence/AddHrLicenceInfoPost"/}" method="post" id="AddHrLicenceInfoPost">
+	<input type="hidden" name="licence_id" value="{/$licence_id/}">
+	<input type="hidden" name="licence_type" id="licence_type" value="{/$licence_type/}">
+	<div class="addLearn">
+		<span class="errorMsg"></span>
+		<div class="formMod">
+			<div class="l">资质类型</div>
+			<div class="r">
+			<span class="tipTxt font14" style="margin:0 20px 0 0;">
+				{/$licence_type_name/}
+			</span>
+			</div>
+			<div class="clear"></div>
+		</div>
+		{/if $licence_type != 4/}
+		<div class="formMod">
+			<a id="shortname" name="shortname"></a>
+			<div class="l certificate_code_title">
+				{/if $licence_type==3/}
+					协议名称
+				{/else/}
+					证书编号
+				{//if/}
+			</div>
+			<div class="r">
+			<span class="formText">
+				<input type="text" name="certificate_code" value="{/$licence_data.certificate_code/}"
+					   class="text" placeholder="最多30个字符" maxlength="30" style="width:300px;">
+			</span>
+			</div>
+			<div class="clear"></div>
+		</div>
+
+		<div class="formMod">
+			<a id="shortname" name="shortname"></a>
+			<div class="l">有效期限</div>
+			<div class="r">
+			<span class="formText">
+				<input type="text" name="maturity_time" class="text"
+					   value="{/if strtotime($licence_data.maturity_time)/}{/$licence_data.maturity_time/}{//if/}"
+					   placeholder="选择证书到期时间" style="width:220px"
+					   readonly="readonly">
+			</span>
+			</div>
+			<div class="clear"></div>
+		</div>
+		{//if/}
+
+		<div class="formMod">
+			<a id="shortname" name="shortname"></a>
+			<div class="l">资质图片</div>
+			<div class="r" style="width: 487px">
+				{/$up_img_html.html/}
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div class="formBtn" style="margin: 25px 0 0 65px;">
+			<input type="submit" id="btnSaveAddress" class="btnsF16 btn1" value="去认证">
+			<input type="button" id="btnSaveAddress" class="btnsF16 btn3" value="取消"
+				   onclick="add_info.destory();">
+		</div>
+	</div>
+</form>
+<script type="text/javascript">
+	hbjs.use('@select,@calendar, @confirmBox,@jobFlexSlider, @areaMulitiple, @calling, @jobsort, @jobTooltip, @actions, @hbCommon, @dialog', function (m) {
+		var $ = m['jquery'],
+				Calendar = m['widge.calendar.calendar'],
+				ConfirmBox = m['widge.overlay.confirmBox'];
+		//选择报名截止时间
+		var t1 = "{/date("Y-m-d")/}";
+		var c1 = new Calendar({
+			trigger: $('[name=maturity_time]'),
+			range: [t1, null]
+		});
+	});
+
+	$('#AddHrLicenceInfoPost').submit(function (e) {
+		e.preventDefault();//阻止默认提交
+		var licence_type = $("#licence_type").val();
+		var certificate_code_title = $('.certificate_code_title').html();
+		var certificate_code = $('[name=certificate_code]').val();
+		var maturity_time = $('[name=maturity_time]').val();
+		var picurl_end = $('[name=picurl_end\\[\\]]').val();
+		if (!certificate_code && licence_type != 4) {
+			return msg_error_box('请输入' + certificate_code_title.trim());
+		}
+		if (!maturity_time && licence_type != 4) {
+			return msg_error_box('请选择证书到期时间!');
+		}
+		if (!picurl_end && licence_type != 4) {
+			return msg_error_box('请选择资质图片!');
+		}
+		ajax_form_function(this, {
+			success: function (data) {
+				msg_success_box(data.msg);
+				setTimeout(function () {
+					window.parent.location.reload();
+					//window.parent.document.location.reload();
+				}, 800);
+			}
+		});
+	});
+
+	var uploader_img;
+	$(function () {
+		var up_options_{/$up_img_html.id/} = {
+			up_id: '.{/$up_img_html.id/}',
+			auto: {/$up_img_html.config.auto/},
+			BASE_URL: "{/$up_img_html.config.BASE_URL/}",
+			fileNumLimit: {/$up_img_html.config.fileNumLimit/},//文件数量 默认5个 每张1M fileSingleSizeLimit: 1024 * 1024,
+			fileSingleSizeLimit: {/$up_img_html.config.fileSingleSizeLimit/},//每个文件大小
+			file_name: '{/$up_img_html.config.file_name/}',//返回接收上传的文件名称隐藏域
+			fileVal: '{/$up_img_html.config.fileVal/}',//上传接收name
+			defaults_files: {/$up_img_html.config.defaults_files/},//默认文件
+			accept: {/$up_img_html.config.accept/},//允许文件类型
+			formData: {/$up_img_html.config.form_data/},//上传删除携带参数
+			headers: {'X-Requested-With': 'XMLHttpRequest'},//模拟ajax
+			server: '{/get_url rule="/hrlicence/Picture/"/}',
+			deleteServer: '{/get_url rule="/hrlicence/DelTempFile/"/}',
+			error_hint_fun: function (msg) {
+				msg_error_box(msg);
+			},
+			confirm_hint_fun: function (confirm_msg, deleteServerAjax) {
+				//询问框
+				confirm_box(confirm_msg, {
+					success: function (data) {
+						deleteServerAjax();
+					}
+				});
+			},
+		};
+		uploader_img = $('.{/$up_img_html.id/}').powerWebUpload(up_options_{/$up_img_html.id/});
+	});
+</script>

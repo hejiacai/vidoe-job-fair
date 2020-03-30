@@ -1,0 +1,135 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+<title>汇博人才网_招聘中心</title>
+<!–[if lt IE9]> 
+<script type="text/javascript" language="javascript" src="{/version file='html5.js'/}"></script>
+<![endif]–>
+<link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='comback.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='icons.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='repcalendar.css'/}" />
+
+<link rel="stylesheet" type="text/css" href="{/version file='account.css'/}" />
+
+<script type="text/javascript" language="javascript" src="{/version file='version.js'/}"></script>
+<script type="text/javascript">
+window.CONFIG = {
+	HOST: '{/$siteurl.style/}',
+	COMBOPATH: '/js/v2/'
+}
+</script>
+<script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+<script type="text/javascript" src="{/version file='global.js'/}"></script>
+
+</head>
+<body>
+{/include 'new_header.html' cur="免费建站"/}
+ <!--new 20160818--->
+ <style>
+ 	.comsite-body{width:940px;background: #fff;margin:20px auto;padding:30px;text-align: left;font-family:"Microsoft YaHei","微软雅黑"}
+ 	.comsite-title{padding-bottom:20px;font-size:23px;color:#333}
+ 	.comsite-title a{float:right;display: inline-block;height:40px;line-height: 38px;background: #00bab1;padding:0 10px;color:#fff;font-size:16px;border-radius: 5px}
+ 	.comsite-title a:hover{background: #01c7bd}
+ 	.comsite-cont{color:#666;font-size:16px;line-height: 30px;padding-bottom: 50px}
+ 	.comsite-cont strong{display: block;font-size:20px;color:#333;margin-bottom: 10px}
+ 	.comsite-cont li{float:left;width:415px;height:100px;background: #f7f7f7;padding:25px;margin:10px 10px 0 0;overflow: hidden}
+ 	.comsite-case{padding-top: 30px}
+ 	.comsite-case img{margin-right:14px}
+ </style>
+ <div class="comsite-body">
+ 	<div class="comsite-title">
+        <a href="javascript:;" id="comsite_btn">{/$comsite_str/}</a>
+ 		汇博自助建站服务
+ 	</div>
+ 	<div class="comsite-cont">
+ 		<ul class="clearfix">
+ 			<li>
+ 				<strong>展示形象</strong>
+				每个企业都需要有自己的网站，专业、美观的企业网站能大大提升企业形象；
+ 			</li>
+ 			<li style="margin-right: 0px">
+ 				<strong>业务宣传</strong>
+				现在的用户都在互联网上搜索自己需要的服务，企业网站可以帮您24小时拓展业务；
+ 			</li>
+ 			<li style="padding-top: 20px;height: 120px">
+ 				<strong>操作简单</strong>		
+				汇博企业网站操作非常简单，就像搭积木，不需要任何技术知识，只要5分钟，会打字就会自己建站；
+ 			</li>
+ 			<li style="margin-right: 0px;padding-top: 20px;height: 120px">
+ 				<strong>多终端覆盖</strong>
+				同时提供电脑版和手机版；
+ 			</li>
+ 			<li style="height: auto;width: 890px;">
+ 				<strong>功能强大</strong>可自由定义网站的菜单，产品介绍、业务介绍、公司环境、产品图片、代理商招募、网站留言......<br />
+				图片的文字的，您能想到的，这里都能展示；
+ 			</li>
+ 			<li style="margin-right: 0px; display: none;">
+ 				<strong style="color:#da241c;margin-top: 15px">完全免费！</strong>不捆绑其他服务，验证执照即可开通；
+ 			</li>
+ 		</ul>
+ 	</div>
+ 	<div class="comsite-title" style="border-bottom: 1px dashed #e9e9e9">
+ 		案例展示
+ 	</div>
+ 	<div class="comsite-case">
+ 		<img src="{/$siteurl.style/}/img/comsite/welcome_img1.jpg" />
+ 		<a href="http://cqrlf.huibo.cn/info" target="_blank"><img src="{/$siteurl.style/}/img/comsite/welcome_img2.jpg" style="border:0px" /></a>
+ 		<a href="http://jyyhhotel.huibo.cn" target="_blank"><img src="{/$siteurl.style/}/img/comsite/welcome_img3.jpg" style="border:0px" /></a>
+ 		<a href="http://cqspzp.huibo.cn/ablum" target="_blank"><img src="{/$siteurl.style/}/img/comsite/welcome_img4.jpg" style="margin-right: 0;border:0px" /></a>
+ 	</div>
+ </div>
+ <!--/-->
+<div id="body_content" style="font-family:'微软雅黑'">    
+
+<script type="text/javascript">
+
+	try{
+		hbjs.use(factory);	
+	} catch (e){
+		factory($);
+	}
+
+	function factory($){
+		$(".btnCancel, .btnResume").on("click", function (e) {
+			$(".msg-pop,.msg-icon,.msg-tip img").fadeOut();
+			$.post("/nominate/hide/");
+		});
+		var count_msg=0;
+        
+    }
+    hbjs.use('@confirmBox, @jobsort', function(m) {
+        var $ = m['cqjob.jobsort'];
+        $("#comsite_btn").click(function(){
+            if('{/$is_free_wordpress/}' == '0'){
+                $.message("您尚未开通免费企业网站功能，请联系工作人员进行咨询");
+                return;
+            }
+            var is_audit = "{/$is_audit/}";
+                
+            if(is_audit != 1){
+                $.message("您好！<br/>您的企业还没有通过营业执照审核，暂时不能使用企业网站功能");
+            }else{
+                var newwindow = window.open('about:blank');
+                newwindow.location.href = "{/base_lib_Constant::CS_URL/}";
+                //$(this).attr("id","comsite_btn");
+                //window.open("{/base_lib_Constant::CS_URL/}");
+            }
+        });
+    });
+    
+</script>
+<div id="sus" class="sus"><a class="backTop hbFntWes" title="返回顶部" href="javascript:void(0);" style="display: none;">&#xf0d8;</a></div>
+{/include file="./footer.html"/}
+<!-- End Piwik Code --><section class="floatRT">
+	<a href="{/base_lib_Constant::MAIN_URL_NO_HTTP/}/about/message" target="_blank" class="serviceLink">我有问题要反馈</a><b></b>
+</section>
+</body>
+
+</html>

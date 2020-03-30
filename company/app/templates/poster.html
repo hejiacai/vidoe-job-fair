@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="{/version file='base.css'/}">
+        <link rel="stylesheet" type="text/css" href="{/version file='ratePoster.css'/}" />
+	<script type="text/javascript" src="{/version file='jquery-1.8.3.js'/}"></script>
+		<style>
+			.rateImgList div {
+				position: relative;
+				width: 9999px;
+			}
+			.ratePosterMain{
+				padding-bottom: 0;
+			}
+			.ratePosterLeft{
+				overflow: visible;
+			}
+			.rateImgMain{
+				overflow: visible;
+			}
+			.rateImgz{
+				overflow: visible;
+			}
+			.rateImgList{
+	            width: 870px;
+	            overflow: visible;
+	            background: #f1f1f1;
+	            margin-left: 0;
+	           	padding:16px 65px;
+	            position: relative;
+	    		left: -40px;
+        	}
+        	.rateImgLeft,.rateImgRight{display: none;}
+        	.ratePosterTips{ display: block;width:435px; text-align: center; position: absolute; top: 20px; left: 0; color: #ff5400; font-size: 16px; font-weight: bold;}
+        	
+		</style> 
+	</head>
+	<body>
+	<div class="gpHeader">
+			<div>
+				<span><a href="{/get_url rule='/mrecruit/'/}">企业微招聘</a></span>
+				<span class="cur"><a href="javascript:void(0);">招聘海报</a></span>
+				<a href="{/base_lib_Constant::COMPANY_URL_NO_HTTP/}">返回首页</a>
+			</div>
+		</div>
+		<div class="ratePosterMain ratePosterMainLine" style="position: relative;">
+			{/if $job_num > 3/}
+			<span class="ratePosterTips">已选3个以上职位，请扫码查看完整效果</span>
+			{//if/}
+			<div class="ratePosterLeft">
+				
+				<div class="clear"></div>
+				<div class="rateImgMain">
+					<div class="rateImgx">
+						<a href="{/$img_arr[$cur-1]['url']/}" target="_blank" title="点击放大">
+						<img src="{/$img_arr[$cur-1]['url']/}" /></a>
+					</div>
+					<div class="rateImgz">
+						<div class="rateImgList">
+							<div>
+                                {/foreach $img_arr as $k=>$v/}
+								<span {/if $v['key']==$cur/}class="cut"{//if/} data-key="{/$v['key']/}">
+									<i></i>
+									<img src="{/$v['url']/}" />
+                                </span>
+								{//foreach/}
+							</div>
+						</div>
+						<a href="javascript:void(0);" class="rateImgLeft"></a>
+						<a href="javascript:void(0);" class="rateImgRight"></a>
+					</div>
+				</div>
+                <input type="hidden" id="imgKey" value="{/if empty($cur)/}{/$img_arr[0]['key']/}{/else/}{/$cur/}{//if/}" name="imgKey"/>
+			</div>
+			<div class="ratePosterRight">
+				<a href="javascript:void(0);" class="editRatex"><i class="editIcon"></i>编辑海报内容</a>
+				<div class="rateCodex">
+					<span class="rtCode01"><i></i>使用微信扫码生成招聘海报</span>
+					<div class="rtCode02">
+						<img src="{/$code_arr[$cur-1]['url']/}" />
+					</div>
+					<span class="rtCode03">分享招聘海报让更多同事朋友<br />
+<b>帮你转发、为你推荐人才</b>吧！</span>
+					<span class="rtCode04"><i></i>下载图片</span>
+					<a href="javascript:void(0);" class="saveComputer" id="download_btn">保存到电脑</a>
+					
+				</div>
+			</div>	
+		</div>
+	</body>
+	
+<script  type="text/javascript">
+    var action_url = '{/$siteurl.style/}';
+    if(typeof action_dom == 'object'){
+        action_dom.push( ['#download_btn', 44]);
+    }else{
+        action_dom = [
+            ['#download_btn', 44]
+        ];
+    }
+</script>
+<script type="text/javascript" language="javascript" src="{/version file='action.js'/}"></script>
+	<script>
+		$(function () {
+			if($('.rateImgList span').length<=3) {
+                $('.rateImgLeft,.rateImgRight').hide();
+			}
+        })
+
+
+//此版本不需要，以后海报样式多起来了需要计算宽度改变位置
+//跳转时海报的位置
+//	$('.rateImgList div span').ready(function(){
+//		if($('.rateImgList div span').length<=3){
+//	            return
+//	        }else {
+//	            if($('#imgKey').val()-1<2){
+//	                $('.rateImgList div').css({'left':0+'px'})
+//	                return;
+//	            }
+//	            if($('#imgKey').val()-1<=$('.rateImgList div span').length-1 && $('#imgKey').val()-1>$('.rateImgList div span').length-3) {
+//	                $('.rateImgList div').css({'left':-(($('.rateImgList div span').eq($('#imgKey').val()-1).outerWidth(true))*($('.rateImgList div span').length-3))+'px'});
+//	                return;
+//	            }
+//	        }
+//      $('.rateImgList div').css({'left':-(($('#imgKey').val()-1)*($('.rateImgList div span').eq($('#imgKey').val()-1).outerWidth(true)))+'px'})
+//   });
+
+	//选择分享海报
+	$('.rateImgList span').click(function(){
+		$(this).addClass('cut').siblings().removeClass('cut');
+		var thisIndex = $(this).index();
+        var thisId = $(this).attr('data-key');
+         $('#imgKey').val(thisId);
+		switch(thisIndex){
+            {/foreach $img_arr as $k=>$v/}
+            case {/$k/}:
+                $('.rateImgx img').attr('src',"{/$v['url']/}");
+                $('.rateImgx a').attr("href","{/$v['url']/}");
+                $('.rtCode02 img').attr('src',"{/$code_arr[$k]['url']/}");
+                break;
+            {//foreach/}
+
+        }
+//此版本不需要，以后海报样式多起来了需要计算宽度改变数字
+//      if($('.rateImgList div span').length<=3){
+//          return
+//      }else {
+//          if(thisIndex<2){
+//              $('.rateImgList div').animate({'left':0+'px'})
+//              return;
+//          }
+//          if(thisIndex<=$('.rateImgList div span').length-1 && thisIndex>$('.rateImgList div span').length-3) {
+//              $('.rateImgList div').animate({'left':-(($(this).outerWidth(true))*($('.rateImgList div span').length-3))+'px'});
+//              return;
+//          }
+//      }
+//      $('.rateImgList div').animate({'left':-((thisIndex-1)*($(this).outerWidth(true)))+'px'})
+	});
+        $('.saveComputer').on("click",function(){
+            var type = $('#imgKey').val();
+            {/if !empty($id)/}
+            window.location.href = "{/get_url rule='/createposter/down'/}id-"+{/$id/}+"-poster_type-"+type+"-company_flag-"+'{/$company_flag/}';
+            {/else/}
+            window.location.href = "{/get_url rule='/createposter/companyposter'/}poster_type-"+type+"-down-1-company_flag-"+'{/$company_flag/}';
+            {//if/}
+
+        });
+
+
+//左右按钮选择海报
+    $('.rateImgLeft').on('click',function () {
+		console.log( $('.rateImgList div span.cut').index(),$('.rateImgList div span').length);
+		if($('.rateImgList div span.cut').index()<=0){
+			$('.rateImgList div span').eq($('.rateImgList div span').length-1)[0].click()
+		}else{
+        	$('.rateImgList div span').eq($('.rateImgList div span.cut').index()-1)[0].click()
+        }
+    })
+    $('.rateImgRight').on('click',function () {
+		if($('.rateImgList div span.cut').index()>=$('.rateImgList div span').length-1){
+			$('.rateImgList div span').eq(0)[0].click()
+		}else{
+        	$('.rateImgList div span').eq($('.rateImgList div span.cut').index()+1)[0].click()
+        }
+    })
+    
+    //编辑海报传值
+        $('.editRatex').click(function(){
+            var type = $('#imgKey').val();
+            if('{/$id/}' != ''){
+                window.location.href = "{/get_url rule='/createposter/editposter'/}id-{/$id/}-poster_type-"+type;
+            }else{
+                window.location.href = "{/get_url rule='/createposter/editposter'/}poster_type-"+type;
+            }
+
+        })
+	</script>
+</html>

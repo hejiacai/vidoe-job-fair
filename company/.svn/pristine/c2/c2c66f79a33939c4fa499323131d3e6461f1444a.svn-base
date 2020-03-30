@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>{/$title/}</title>
+    <!--[if lt IE9] -->
+    <script src="{/version file='html5.js'/}"></script>
+    <!-- [endif] -->
+    <link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+    <script type="text/javascript" language="javascript" src="{/version file='common.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='dialog.js'/}"></script>
+
+    <style>
+        body{text-align: left;font-family: "Microsoft YaHei";}
+        .buy-resumePoint{text-align: left;margin: 30px;}
+        .buy-resumePoint h5{color: #444;font-size: 14px;}
+        .buy-resumePoint p{color: #666;font-size: 14px;}
+        .buy-resumePoint h4{font-size: 16px;font-weight: bold;margin-top: 15px;margin-bottom: 10px;}
+        .buy-resumePoint h4 span{font-size: 14px;color: #999;font-weight: normal;}
+        .qq img{vertical-align: top;}
+        .qq {margin-top: 10px;margin-bottom: 5px;}
+    </style>
+</head>
+<body >
+<div class="buy-resumePoint">
+    <h5>{/$msg/}</h5>
+    {/if $hr_info['user_name']/}
+        <h4> <span>您的招聘顾问:</span>{/$hr_info['user_name']/}</h4>
+        <p>手机：{/$hr_info['mobile']/}(微信同号) </p>
+        {/if $hr_info['qq']/}
+            <p class="qq">
+                QQ： {/$hr_info['qq']/}
+                <a target="_blank" href="//wpa.qq.com/msgrd?v=3&amp;uin={/trim($hr_info['qq'])/}&amp;site=qq&amp;menu=yes">
+                    <img src="//wpa.qq.com/pa?p=2:{/trim($hr_info['qq'])/}:51" alt="点击这里给我发消息" title="点击这里给我发消息" width="79" height="25" border="0">
+                </a>
+            </p>
+        {//if/}
+    {//if/}
+    <p>客服热线：{/$huibo400/}</p>
+    <div class="formBtn" style="margin: 20px 0 0 0;text-align: center;">
+        <a href="javascript:void(0);" id="btnSendInvite11" class="btn1 btnsF14">我知道了</a>
+    </div>
+</div>
+
+
+<script>
+    $(function(){
+        $('#btnSendInvite11').click(function () {
+            parent.dialog_msg.hide();
+            //parent.dialog_msg.destory();
+            //quality_dialog.hide();
+        });
+    })
+</script>
+</body>
+</html>

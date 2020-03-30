@@ -1,0 +1,1402 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="Keywords" content="" />
+    <meta name="Description" content="" />
+    <meta name="renderer"  content="webkit|ie-comp|ie-stand"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+    <title>{/$title/}</title>
+    <!–[if lt IE9]>
+    <script type="text/javascript" src="{/version file='html5.js'/}"></script>
+    <![endif]–>
+
+    <link rel="stylesheet" type="text/css" href="{/version file='comback.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='firmcss.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='m_font_style.css'/}" />
+
+    <link rel="stylesheet" type="text/css" href="{/version file="v2-reset.css"/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file="v2-widge.css"/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file="perback.css"/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file="v2-resume.css"/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file="base.css"/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file="resumeTate.css"/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file="resumePoint.css"/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='jobTags.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='videjobfair.css'/}" />
+
+    <script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.min.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='jplayer.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='layer.js'/}"></script>
+    {/$up_img_html.hand_html/}
+    <script type="text/javascript" language="javascript" src="{/version file='layer.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='common.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='dialog.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='ui_inputFocus.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='ui_validate.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='jquery.form.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='ui_dropdownlist.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='ui_tooltip.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='ui_autocomplete.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='jquery.email.tip.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='jquery.metadata.js'/}"></script>
+    <script type="text/javascript" src="{/version file='jquery.rotate.min.js'/}"></script>
+
+    <link rel="stylesheet" type="text/css" href="{/version file='jplayer.blue.monday.css'/}" />
+    <script type="text/javascript" src="{/version file='version.js'/}"></script>
+    <script type="text/javascript">
+        window.CONFIG = {
+            HOST: '{/$siteurl.style/}',
+            COMBOPATH: '/js/v2/'
+        }
+        var fancboxid = [];
+    </script>
+    <script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+    <script type="text/javascript" src="{/version file='global.js'/}"></script>
+    <script type="text/javascript">
+        hbjs.loadJS('{/$siteurl.style/}/js/v2/cqjob/common.js');
+    </script>
+	<style type="text/css">
+		{/if $from =="email"/}
+		/*搜索*/
+		.new_search{width:960px;margin: 0 auto;padding:10px 20px;background-color: #fff;height: 42px;overflow: hidden}
+		.new_search .text{width:820px;height: 40px;border:1px solid #4bb6e7;padding:0 10px;line-height: 40px;float:left}
+		.new_search .sub_mit{font-family: "Microsoft YaHei";width:118px;height: 42px;background: #4bb6e7 url(/img/newindex/hbcompany05.png) 13px center no-repeat;border:0px; text-indent: 20px;color:#fff;font-size:16px;float:left;cursor: pointer}
+		.new_search .sub_mit:hover{background: #31a2d6 url(/img/newindex/hbcompany05.png) 13px center no-repeat}
+		 /*微信二维码*/
+		.weiCodeTop{ text-align:center;width:138px; border:1px solid #dadada; background:#fff; padding-bottom:10px; position: absolute;top:130px; right:50%; margin-right:-650px;}
+		.weiCodeTop img{ display:block; padding:4px; border:1px solid #e8e8e8; margin:10px auto 5px auto;}
+		.weiCodeTop span{ line-height:20px; color:#444;}
+		.navLst{ padding:0px;}
+		header{margin-bottom:0px; height:auto;}
+		.resumeMain{margin-top:15px;}
+		.compNavbg{margin-bottom:15px!important;}
+		{//if/}
+	</style>
+</head>
+
+<body style="padding-bottom: 55px;background-color: #f6f7f8;">
+
+<!-- <div class="resumeThead">
+    <div class="resumeTop">
+        <div>
+            <a href="{/$homePage/}"></a>
+            <span></span>
+        </div>
+    </div>
+</div> -->
+<div class="videoJobFairTop videoJobFairTop-resume">
+    <div>
+        <a>简历</a>
+    </div>
+</div>
+<div class="resumeMain clearfix">
+    <div class="sumeMainLeft">
+        <input type="hidden" id="hddCurrResumeId" value="{/$resume_id/}" />
+        <input type="hidden" id="hddapplyid" value="{/$applyid/}" />
+        <input type="hidden" id="hddsrc" value="{/$src/}" />
+		
+        {/if $is_in_wait_rewait || ($is_not_call && $has_get_linkway)/}
+        {/if $company_site==1/}
+        <div class="netfair-RQcode clearfix">
+            <img class="netfair-RQcode-img" src="{/get_url rule='/video/RtcScanCode' domain='company'/}?job_id={/$base_job_id/}&resume_id={/$base_resume_id/}&net_apply_id={/$apply_id/}"/>
+            <p class="RQcode-title">汇博企业app扫码发起视频面试<span class="tipdownLoad">没有汇博APP？<a href="javascript:;" class="downLoadAppHb">点击下载</a></span></p>
+        </div>
+        {/elseif $company_site==2/}
+        <div class="netfair-RQcode clearfix">
+            <img class="netfair-RQcode-img" src="{/get_url rule='/videohall/RtcScanCode'/}?job_id={/$base_job_id/}&person_id={/$base_person_id/}&net_apply_id={/$apply_id/}"/>
+            <p class="RQcode-title">快米企业app扫码发起视频面试<span class="tipdownLoad">没有快米APP？<a href="javascript:;" class="downLoadAppKm">点击下载</a></span></p>
+        </div>
+        {//if/}
+        {//if/}
+
+
+        {/if $remark_count > 0/}
+        <!-- 展开操作记录 -->
+        <div id="historyContainer" class="smNumberUp netfair-smNumberUp" style='display:block'>
+            <a {/if $remark_count <= 0/}data-status="0"{/else/}data-status="1"{//if/} href="javascript:;" class="sberUp">收起操作记录<i class="icon-svg132"></i></a>
+            <ul>
+                {/foreach $remark_list as $key => $value/}
+                <li class="remark_li" {/if $key>5/}style="display: none" {//if/}>
+                <span>{/$value['update_time']/}</span>
+                <em style="width: auto;">添加备注：{/$value['remark']/}</em>
+                </li>
+                {//foreach/}
+                {/if count($remark_list)>6/}
+                <li id="moreHistory" class="fot"><a href="javascript:" id="btnMoreHistory">查看更早记录</a></li>
+                {//if/}
+            </ul>
+        </div>
+        {//if/}
+
+
+
+        <div class="smNumber">
+            <span>简历编号：{/if $resume_site==1/}{/$base_resume_id/}(汇博){/else/}{/$base_person_id/}(快米){//if/}</span>{/if $is_from_not_read_list && $is_new_resume/}<img src="{/$siteurl.style/}/img/xiaoyuan/resume/resumeHot.png" >{//if/}
+            <a style="display: none;" href="javascript:;">展开操作记录<i class="icon-svg122"></i></a>
+            <span class="sberRt">最近登录：{/$last_login_time|date_format:'%Y.%m.%d'/}</span>
+        </div>
+
+
+
+        <!--/mj new end-->
+        <div class="numberName" style="margin-bottom: 20px;">
+            {/if !empty($avatar)/}
+            <img class='nberImg' id="avatarImgBox" width="140" height="140" src="{/$avatar|replace:'http:':''/}" alt="" />
+            {/else/}
+            <img class='nberImg' width="140" height="140" src="{/$siteurl.style/}/img/v2/resumeM/head-defects.jpg" />
+            {//if/}
+
+            <div class="numberNx">
+                <div class="nberN01">
+                    <span style="height:37px;">{/$user_name/}</span>
+                </div>
+
+                <div class="nberN02" style='padding-top:0px;'>
+                    {/if $sex!=''/}<span>{/get_name sex=$sex/}</span>{//if/}
+                    {/if $age!=''/}<em>|</em>
+                    <span>{/$age/}</span>{//if/}
+                    {/if $degree!=''/}<em>|</em>
+                    <span>{/get_name degree=$degree/}</span>{//if/}
+                    {/if $work_year!=''/}<em>|</em>
+                    <span>{/$work_year/}</span>{//if/}
+                    {/if $stature!=''/}<em>|</em>
+                    <span>{/$stature/}cm</span>{//if/}
+                    {/if $avoirdupois!=''/}<em>|</em>
+                    <span>{/$avoirdupois/}kg</span>{//if/}
+                    {/*{/if $marriage!=''/}<em>|</em>*/}
+                    {/*<span>{/get_name marriage=$marriage/}{/if $fertility!=''/}{/get_name fertility=$fertility/}{//if/}</span>{//if/}*/}
+                    {/if $political_status!=''/}<em>|</em><span>{/get_name political=$political_status/}</span>{//if/}
+                    <!-- @update 新增贫困地区 2019-5-16-->
+                    {/if $_person_exp['is_poor_family']/}
+                    <!--是贫困家庭-->
+                    <em>|</em><span class="poor">贫困建档家庭</span>
+                    {/else/}
+                    <!--不是贫困家庭-->
+                    {//if/}
+
+                </div>
+
+                <div class="nberN03">
+                    {/if $native_place_name!=''/}<span>户籍：</span>{/$native_place_name/}{//if/}
+                    <!-- @update 新增贫困地区 2019-5-16-->
+                    {/if $_person_exp['is_poor_family']/}
+                    <!--是贫困家庭-->
+                    (<span class="poor-place">{/$_person_exp['family_address']/}</span>)&nbsp;&nbsp;&nbsp;&nbsp;
+                    {/else/}
+                    <!--不是贫困家庭-->
+                    {//if/}
+                    {/if $cur_area_name!=''/}<span>现居：</span>{/$cur_area_name/}{/else/}&nbsp;{//if/}
+                </div>
+
+                <div id="linkwayContainer" class="nberN04">
+                    {/if $show_linkway/}
+                    {/if !empty($mobile_phone)/}
+                    <em></em><span id="spnBasicMobilePhone" data-phone="{/$mobile_phone/}">{/if $has_get_linkway/}{/$mobile_phone/}{/else/}{/$hid_mobile_phone/}{//if/}</span><span id="phoneAddr"></span>{//if/}
+
+                    {/if !empty($email)/}<i></i><span class="show_email" data-email="{/$email/}">{/if $has_get_linkway/}{/$email/}{/else/}{/$hid_email/}{//if/}</span>{//if/}
+
+                    {/if !$has_get_linkway/}
+                    {/if !empty($qq)/}<b style="display:none" class="hidQQ"></b><span class="hidQQ" style="display:none">{/$qq/}</span>{//if/}
+                    <!-- <div id="see_mobile">免费查看联系方式</div> -->
+                    {/else/}
+                    {/if !empty($qq)/}<b></b><span>{/$qq/}</span>{//if/}
+                    {//if/}
+
+                    {/else/}
+
+                    {/if !$has_get_linkway/}
+                    {/if $is_wait_interview/}
+                    <p style="color: red">（面试完视频大厅待面试求职者后，可查看联系方式）</p>
+                    {/else/}
+                    <!--<p id="linkWayBar"   class="nolink"><a href="javascript:void(0);" id="btnGetLinkway">立即获取联系方式</a></p>-->
+                    {//if/}
+                    {//if/}
+
+                    {/if !empty($mobile_phone)/}<em></em>
+                    <span id="spnBasicMobilePhone" {/if $mobile_phone==''/}style="display:none"{//if/}>{/$mobile_phone/}</span><span id="phoneAddr"  {/if !$has_get_linkway/}style="display:none"{//if/}></span>{//if/}
+                    {/if !empty($email)/}<i></i><span>{/$email/}</span>{//if/}
+                    {/if !empty($qq)/}<b></b><span>{/$qq/}</span>{//if/}
+                    {//if/}
+                </div>
+
+
+            </div>
+        </div>
+
+
+        {/if count($video_list)>0/}
+        <div class="resumeVideoTit">
+            <span>该求职者精心准备了<b>短视频简历</b>，如果对其感兴趣可滑到简历底部观看 !</span>
+        </div>
+        {//if/}
+
+        {/if $exp_job || $exp_area_names || $str_expect_callings || $str_expect_jobsorts || $job_state_text/}
+        <div class="sumeNtit">
+            <em class="titIcon01"></em>
+            求职意向
+        </div>
+        <ul class="nberN05">
+            {/if $exp_job/}
+            <li>
+                <b>希望从事：</b>
+                <p>{/$exp_job/}
+                    <em>{/if $job_type==1&&$is_accept_parttime==1/}（可以接受兼职）{/elseif $job_type==2/}（兼职）{/elseif $job_type==3/}（实习）{//if/}</em>
+                    {/if $exp_job_level!=''/}<i>|</i>{/get_name job_level=$exp_job_level/}{//if/}
+                    {/if $exp_salary/}<i>|</i>
+                    {/if $exp_salary=='negotiable'/}面议{/else/}{/$exp_salary/} 元/月{//if/}
+                    {/else/}<i>|</i>面议{//if/}
+                    {/if $is_not_accept_lower_salary==1&&$exp_salary!='negotiable'&&$exp_salary!='01'/}<em>（不低于此薪资）</em>
+                    {//if/}
+                </p>
+            </li>
+            {//if/}
+
+            {/if $exp_area_names/}
+            <li>
+                <b>工作地点：</b>
+                <p>{/$exp_area_names/}</p>
+            </li>
+            {//if/}
+
+            {/if $str_expect_callings/}
+            <li>
+                <b>期望行业：</b>
+                <p>{/$str_expect_callings/}</p>
+            </li>
+            {//if/}
+
+            {/if $str_expect_jobsorts/}
+            <li>
+                <b>期望类别：</b>
+                <p>{/$str_expect_jobsorts/}</p>
+            </li>
+            {//if/}
+
+            {/if $job_state_text/}
+            <li>
+                <b>求职状态：</b>
+                <p>{/get_name apply_status=$job_state_id/}{/if $accession_time/}<i>|</i>{/get_name accession_time=$accession_time/}{//if/}</p>
+            </li>
+            {//if/}
+        </ul>
+        {//if/}
+
+
+
+        {/if !base_lib_BaseUtils::nullOrEmpty($appraise)/}
+        <style>
+            .nberN06 p{text-indent:30px}
+        </style>
+        <div class="sumeNtit appraiseContent">
+            <em class="titIcon02"></em>
+            自我评价
+        </div>
+        <div class="nberN06"  style="overflow: hidden; text-indent:30px">{/html_encode content=$appraise/}</div>
+        {//if/}
+
+        {/if count($resume_works) > 0/}
+        <div class="sumeNtit">
+            <em class="titIcon03"></em>
+            工作/实习经历
+        </div>
+        {/foreach $resume_works as $key => $value/}
+        <div class="nberN07 nberN11 {/if $value@last/}nberN11last{//if/}">
+            <p class="nberTit1">{/$value['start_time']/}-{/$value['end_time']/}<span>{/if $value['work_time']/}[{/$value['work_time']/}]{//if/} {/get_name job_type=$value['job_type']/} {/if $value['is_creator']=='1'/}[创始人]{//if/}</span></p>
+            <p class="nberTit2"><b>{/$value['station']/}</b>
+                {/if $value['department']/}<span>({/$value['department']/})</span>{//if/}
+                {/if !empty($value['job_level'])/}<span> {/get_name job_level=$value['job_level']/}</span>{//if/}
+                {/if $value['is_salary_show'] != '1' && $value['salary_month']/}<i>|</i><span>{/$value['salary_month']/}元/月</span>{//if/}
+            </p>
+
+            <p class="nberTit3"><b>{/$value['company_name']/}</b>
+                {/if (!empty($value['calling_id']))/}
+                <span>{/get_name calling=$value['calling_id']/}</span>
+                {//if/}
+                {/if (!empty($value['com_property']))/}
+                <i>|</i><span>{/get_name com_property=$value['com_property']/}</span>
+                {//if/}
+                {/if (!empty($value['rewards']))/}<i>|</i><span>$value['rewards']</span>{//if/}
+                {/if (!empty($value['com_size']))/}<i>|</i><span>{/get_name com_size=$value['com_size']/}</span></p>{//if/}
+
+            {/if $value['tag_names']/}
+            <div class="jobTags">
+                {/foreach $value['tag_names'] as $tag_name/}
+                <em>{/$tag_name/}</em>
+                {//foreach/}
+            </div>
+            {//if/}
+            <ul class="nberN05 nberN05x" style="margin:0;">
+                {/if !empty($value['work_content'])/}
+                <li>
+                    <b>工作职责：</b>
+                    <div>
+                        <p>{/html_encode content=$value['work_content']/}</p>
+                    </div>
+                </li>
+                {//if/}
+
+            </ul>
+        </div>
+        {//foreach/}
+        {//if/}
+
+
+
+        {/if count($resume_edus) > 0 || count($resume_trains) > 0/}
+        <div class="sumeNtit" style="margin-top:20px;">
+            <em class="titIcon04"></em>
+            教育/培训经历
+        </div>
+        <div class="nberN08" style="margin-bottom:20px">
+            {/foreach $resume_edus as $key=>$value/}
+            <div class="nber8bg {/if $value@last && empty($resume_trains)/}nber8Last{//if/}" style=" padding:10px 0;">
+                {/if !empty($value['start_time']) || !empty($value['end_time'])/}<p class="nberTit1">{/if empty($value['start_time'])/}开始时间未填写{/else/} {/$value['start_time']|date_format:'%Y.%m'/}{//if/}-{/if empty($value['end_time'])/}至今{/else/}{/$value['end_time']|date_format:'%Y.%m'/}{//if/}</p>{//if/}
+                <p class="nberTit2">{/if $value['degree']!=''/}<b>{/get_name degree=$value['degree']/}</b>{//if/}{/if $value['school']!=''/}<i>|</i><span>{/$value['school']/}</span>{//if/}{/if $value['major_desc']!=''/}<i>|</i><span>{/$value['major_desc']/}</span>{//if/}</p>
+                <ul class="nberN05 nberN05x" style="margin:0;">
+                    {/if $value['school_score']!=''/}
+                    <li>
+                        <b>在校成绩：</b>
+                        <div>
+                            <p>{/$value['school_score']/}</p>
+                        </div>
+                    </li>
+                    {//if/}
+                    {/if $value['duty']!=''/}
+                    <li>
+                        <b>校内职务：</b>
+                        <div>
+                            <p>{/$value['duty']/}</p>
+                        </div>
+                    </li>
+                    {//if/}
+                    {/if $value['edu_detail']!=''/}<li>
+                    <b>专业课程：</b>
+                    <div>
+                        <p>{/html_encode content=$value['edu_detail']/}</p>
+                    </div>
+                </li>
+                    {//if/}
+                </ul>
+            </div>
+            {//foreach/}
+            {/foreach $resume_trains as $key=>$value/}
+            <div class="nber8bg {/if $value@last/}nber8Last{//if/}">
+                {/if !empty($value['start_time']) || !empty($value['end_time'])/}<p class="nberTit1">{/if empty($value['start_time'])/}开始时间未填写{/else/} {/$value['start_time']|date_format:'%Y.%m'/}{//if/}-{/if empty($value['end_time'])/}至今{/else/}{/$value['end_time']|date_format:'%Y.%m'/}{//if/}<span>培训</span></p>{//if/}
+                <p class="nberTit2">{/if $value['course']!=''/}<b>{/$value['course']/} </b>{//if/}{/if $value['institution']!=''/}<span>{/$value['institution']/}</span>{//if/}{/if $value['certificate']!=''/}<i>|</i><span>{/$value['certificate']/}</span>{//if/}</p>
+            </div>
+            {//foreach/}
+        </div>
+        {//if/}
+
+        {/if count($resume_winningrecord) > 0/}
+        <div class="sumeNtit">
+            <em class="titIcon14"></em>
+            获奖经历
+        </div>
+        <div class="nberN07">
+            <ul class="nberN05 nberN05x" style="margin:0;">
+                {/foreach $resume_winningrecord as $key => $value/}
+                <li>
+                    <b>{/$value['winning_time']/} </b>
+                    <div>
+                        <p>{/$value['winning_name']/}
+                            {/if $value['winning_desc']/}
+                            ({/$value['winning_desc']/})
+                            {//if/}
+                        </p>
+                    </div>
+                </li>
+                {//foreach/}
+            </ul>
+        </div>
+        {//if/}
+
+        {/if $isshowresumeinfo/}
+        {/if count($resume_projects) > 0/}
+        <div class="sumeNtit" style="width: 180px">
+            <em class="titIcon05"></em>
+            校内外项目经验
+        </div>
+        <div class="nberN08" style="margin-bottom:20px">
+            {/foreach $resume_projects as $key => $value/}
+            <div class="nber8bg{/if $value@last/} nber8Last{//if/}" style=" padding:10px 0;">
+                {/if !empty({/$value['start_time']/}) || !empty({/$value['end_time']/})/}<p class="nberTit1">{/if empty($value['start_time'])/}开始时间未填写{/else/} {/$value['start_time']/}{//if/}-{/if empty($value['end_time'])/}至今{/else/}{/$value['end_time']/}{//if/}</p>{//if/}
+                <p class="nberTit2">{/if $value['project_name']!=''/}<b>{/$value['project_name']/}</b>{//if/}{/if $value['duty']!=''/}<span class="orange">担任：{/$value['duty']/}</span>{//if/}</p>
+                <ul class="nberN05 nberN05x" style="margin:0;">
+                    {/if $value['project_detail'] != ''/}
+                    <li>
+                        <b>项目介绍：</b>
+                        <div>
+                            <p>{/$value['project_detail']/}</p>
+                        </div>
+                    </li>
+                    {//if/}
+                    {/if $value['main_duty'] != ''/}
+                    <li>
+                        <b>项目经历：</b>
+                        <div>
+                            <p>{/html_encode content=$value['main_duty']/}</p>
+                        </div>
+                    </li>
+                    {//if/}
+                </ul>
+            </div>
+            {//foreach/}
+        </div>
+        {//if/}
+        {/else/}
+        <!--项目经验-->
+        <div class="sumeNtit">
+            <em class="titIcon05"></em>
+            项目经验
+        </div>
+        <div class="nberN08">
+            <div class="nber8bg nber8Last">
+                <!--没数据时显示-->
+                <p class="nberTit2"><b>你暂未通过企业认证，认证后即可查看完整简历</b></p>
+            </div>
+        </div>
+        <!--/-->
+        {//if/}
+        {/if count($resume_languages)>0/}
+        <div class="sumeNtit">
+            <em class="titIcon06"></em>
+            语言能力
+        </div>
+        <div class="nberN07">
+            {/foreach $resume_languages as $key => $value/}
+            <p class="nberTit2 nberTit2x"><b>{/get_name language=$value['language_type']/}</b>
+                {/if $value['skill_level'] != ''/}<span>{/get_name skill_level=$value['skill_level']/}</span>{//if/}
+                {/if $value['certificates'][0]['cert_name'] != ''/}
+                <i>|</i>
+                <span>
+                    {/section name=language loop=$value['certificates']/}
+                    {/if $smarty.section.language.last/}
+                    {/$value['certificates'][language]['cert_name']/}
+                    {/else/}
+                    {/$value['certificates'][language]['cert_name']/}，
+                    {//if/}
+                    {//section/}
+                    </span>
+                {//if/}
+            </p>
+            {//foreach/}
+        </div>
+        {//if/}
+
+        {/if count($resume_skills) > 0/}
+        <div class="sumeNtit">
+            <em class="titIcon07"></em>
+            技能专长
+        </div>
+        <div class="nberN07">
+            {/foreach $resume_skills as $key => $value/}
+            <p class="nberTit2 nberTit2x">
+                <b>{/$value['skill_name']/}</b><span>{/get_name skill_level=$value['skill_level']/}</span>
+            </p>
+            {//foreach/}
+        </div>
+        {//if/}
+
+        {/if count($resume_certificates) > 0/}
+        <div class="sumeNtit">
+            <em class="titIcon08"></em>
+            证书
+        </div>
+        <div class="nberN07">
+            {/foreach $resume_certificates as $key => $value/}
+            <p class="nberTit2 nberTit2x">
+                <b>{/$value['certificate_name']/}</b><span>{/$value['gain_time']/}获得</span>
+            </p>
+            {//foreach/}
+        </div>
+        {//if/}
+
+        {/if count($resume_appends) > 0/}
+        <div class="sumeNtit">
+            <em class="titIcon09"></em>
+            其他信息
+        </div>
+        <div class="nberN07">
+            <ul class="nberN05 nberN05x" style="margin:0;">
+                {/foreach $resume_appends as $key => $value/}
+                {/if $value['topic_desc'] != '' || $value['content'] != ''/}
+                <li>
+                    {/if $value['topic_desc'] != ''/}<b>{/$value['topic_desc']/}：</b>{//if/}
+                    <div>
+                        {/if $value['content'] != ''/}<p>{/html_encode content=$value['content']/}</p>{//if/}
+                    </div>
+                </li>
+                {//if/}
+                {//foreach/}
+            </ul>
+        </div>
+        {//if/}
+
+        {/if $isshowresumeinfo/}
+        {/if !empty($resume_albums)/}
+        <div class="sumeNtit">
+            <em class="titIcon10"></em>
+            照片展示
+        </div>
+        <ul class="nberN09">
+            {/foreach $resume_albums as $key => $value/}
+            <li><img src="{/base_lib_Constant::YUN_ASSETS_URL_NO_HTTP/}{/$value['photo']/}" style="width:230px;height:230px"/></li>
+            {//foreach/}
+        </ul>
+        {//if/}
+        {/else/}
+        <div class="sumeNtit">
+            <em class="titIcon10"></em>
+            照片展示
+        </div>
+        <div class="nberN08">
+            <div class="nber8bg nber8Last">
+                <!--没数据时显示-->
+                <p class="nberTit2"><b>你暂未通过企业认证，认证后即可查看完整简历</b></p>
+            </div>
+        </div>
+        {//if/}
+
+        {/if count($resume_achievements)>0/}
+        <div class="sumeNtit">
+            <em class="titIcon11"></em>
+            作品展示
+        </div>
+        <ul class="nberN10">
+            {/foreach $resume_achievements as $key_resume_achievement => $value_resume_achievement/}
+            <li data-achievementid="{/$value_resume_achievement['achievement_id']/}" data-des="{/$value_resume_achievement['achievement_description']/}" data-name="{/$value_resume_achievement['achievement_name']/}">
+                <span href="javascript:" data-achievementid="{/$value_resume_achievement['achievement_id']/}">
+                    {/section name=attachment loop = $value_resume_achievement['attachments']/}
+                    {/if $smarty.section.attachment.first/}
+                    {/if $value_resume_achievement['attachments'][attachment].achievement_extension == 'jpg' || $value_resume_achievement['attachments'][attachment].achievement_extension == 'bmp' || $value_resume_achievement['attachments'][attachment].achievement_extension == 'gif'
+                                || $value_resume_achievement['attachments'][attachment].achievement_extension == 'jpeg' || $value_resume_achievement['attachments'][attachment].achievement_extension == 'png'/}
+                    <img src="{/$value_resume_achievement['attachments'][attachment].achievement_thumb_path/}" />
+                    {/else if ($value_resume_achievement['attachments'][attachment].achievement_extension == 'doc' || $value_resume_achievement['attachments'][attachment].achievement_extension == 'docx')/}
+                    <img class="defimg" src="{/$siteurl.style/}/img/v2/resumeM/doc.jpg" />
+                    {/else if ($value_resume_achievement['attachments'][attachment].achievement_extension == 'ppt' || $value_resume_achievement['attachments'][attachment].achievement_extension == 'pptx')/}
+                    <img class="defimg" src="{/$siteurl.style/}/img/v2/resumeM/ppt.jpg" />
+                    {/else if ($value_resume_achievement['attachments'][attachment].achievement_extension == 'xls' || $value_resume_achievement['attachments'][attachment].achievement_extension == 'xlsx')/}
+                    <img class="defimg" src="{/$siteurl.style/}/img/v2/resumeM/xls.jpg" />
+                    {/else if ($value_resume_achievement['attachments'][attachment].achievement_extension == 'pdf')/}
+                    <img class="defimg" src="{/$siteurl.style/}/img/v2/resumeM/pdf.jpg" />
+                    {/else if ($value_resume_achievement['attachments'][attachment].achievement_extension == 'txt')/}
+                    <img class="defimg" src="{/$siteurl.style/}/img/v2/resumeM/txt.jpg" />
+                    {//if/}
+                    {//if/}
+                    {//section/}
+                </span>
+                <a href="javascript:">{/$value_resume_achievement['achievement_name']/}</a>
+                {/foreach $value_resume_achievement['attachments'] as $key_resume_attachment => $value_resume_attachment/}
+                <a class="fancybox-thumbs{/$value_resume_attachment['achievement_id']/}"  data-fancybox-group="thumb" style="display:none" extension="{/$value_resume_attachment['achievement_extension']/}" onclick="return false;"
+                   {/if $value_resume_attachment['achievement_extension'] == 'jpg' || $value_resume_attachment['achievement_extension'] == 'bmp' || $value_resume_attachment['achievement_extension'] == 'gif' || $value_resume_attachment['achievement_extension'] == 'jpeg' || $value_resume_attachment['achievement_extension'] == 'png'/}
+                href="{/$attachment_virt_path/}{/$value_resume_attachment['achievement_path']/}"
+                {/elseif ($value_resume_attachment['achievement_extension'] == 'doc' || $value_resume_attachment['achievement_extension'] == 'docx')/}
+                href="{/$siteurl.style/}/img/v2/resumeM/doc_big.jpg" real_heaf="{/$attachment_virt_path/}{/$value_resume_attachment['achievement_path']/}"
+                {/elseif ($value_resume_attachment['achievement_extension'] == 'ppt' || $value_resume_attachment['achievement_extension'] == 'pptx')/}
+                href="{/$siteurl.style/}/img/v2/resumeM/ppt_big.jpg" real_heaf="{/$attachment_virt_path/}{/$value_resume_attachment['achievement_path']/}"
+                {/elseif ($value_resume_attachment['achievement_extension'] == 'xls' || $value_resume_attachment['achievement_extension'] == 'xlsx')/}
+                href="{/$siteurl.style/}/img/v2/resumeM/xls_big.jpg" real_heaf="{/$attachment_virt_path/}{/$value_resume_attachment['achievement_path']/}"
+                {/elseif ($value_resume_attachment['achievement_extension'] == 'pdf')/}
+                href="{/$siteurl.style/}/img/v2/resumeM/pdf_big.jpg" real_heaf="{/$attachment_virt_path/}{/$value_resume_attachment['achievement_path']/}"
+                {/elseif ($value_resume_attachment['achievement_extension'] == 'txt')/}
+                href="{/$siteurl.style/}/img/v2/resumeM/txt_big.jpg" real_heaf="{/$attachment_virt_path/}{/$value_resume_attachment['achievement_path']/}"
+                {//if/}
+                >
+                </a>
+                {//foreach/}
+                <script type="text/javascript">fancboxid.push({/$value_resume_achievement['achievement_id']/});</script>
+            </li>
+            {//foreach/}
+        </ul>
+        {//if/}
+
+        {/if $isshowresumeinfo/}
+        {/if count($resume_practices) > 0/}
+        <div class="sumeNtit">
+            <em class="titIcon12"></em>
+            实践经验
+        </div>
+        <div class="nberN08">
+            {/foreach $resume_practices as $key=>$value/}
+            <div class="nber8bg {/if $value@last/}nber8Last{//if/}">
+                {/if $value['start_time'] || $value['end_time']/}
+                <p class="nberTit1">
+                    {/if empty($value['start_time'])/}开始时间未填写{/else/} {/$value['start_time']/}{//if/}-{/if empty($value['end_time'])/}至今{/else/}{/$value['end_time']/}
+                    {//if/}
+                </p>
+                {//if/}
+                {/if $value['practice_name']!=''/}<p class="nberTit2"><b>{/$value['practice_name']/}</b></p>{//if/}
+                <ul class="nberN05 nberN05x" style="margin:0;">
+                    {/if $value['practice_detail'] != ''/}
+                    <li>
+                        <b>实践经历：</b>
+                        <div>
+                            <p>{/html_encode content=$value['practice_detail']/}</p>
+                        </div>
+                    </li>
+                    {//if/}
+                </ul>
+            </div>
+            {//foreach/}
+        </div>
+        {//if/}
+        {/else/}
+        <div class="sumeNtit">
+            <em class="titIcon12"></em>
+            实践经验
+        </div>
+        <div class="nberN08">
+            <div class="nber8bg nber8Last">
+                <!--没数据时显示-->
+                <p class="nberTit2"><b>你暂未通过企业认证，认证后即可查看完整简历</b></p>
+            </div>
+        </div>
+        {//if/}
+        {/if $isshowresumeinfo/}
+        {/if count($video_list)>0/}
+        <div class="sumeNtit">
+            <em class="titIcon13"></em>
+            视频简历
+        </div>
+        <div class="video_list">
+            <span class="resumeVideoTx">建议使用谷歌或IE9及以上版本浏览器观看或直接使用企业APP<em id="scanSeeVideo">扫码观看</em></span>
+            <ul class="nberN09" style="margin-top: 20px;">
+                {/foreach $video_list as $video/}
+                <li data-video='{/$video.video_id/}'>
+                    <img src="{/$video.video_image_url/}" style="width:230px;height:230px">
+                    <i class="play"></i>
+                    <u></u>
+                </li>
+                {//foreach/}
+            </ul>
+        </div>
+
+        {//if/}
+        {/else/}
+        <div class="sumeNtit">
+            <em class="titIcon12"></em>
+            视频简历
+        </div>
+        <div class="nberN08">
+            <div class="nber8bg nber8Last">
+                <!--没数据时显示-->
+                <p class="nberTit2"><b>你暂未通过企业认证，认证后即可查看完整简历</b></p>
+            </div>
+        </div>
+        {//if/}
+
+
+        {/if $src=='apply' && !empty($resume_image_list)/}
+        <div class="sumeNtit">
+            <em class="titIcon15"></em>
+            图片简历
+        </div>
+        <div class="photoList">
+            {/foreach $resume_image_list as $value/}
+            <li>
+                <a href="{/$value.full_image_url/}" target="_blank" title="点击查看原图">
+                    <img src="{/$value.full_image_url/}" />
+                </a>
+            </li>
+            {//foreach/}
+        </div>
+        {//if/}
+        {/if !empty($annex)/}
+        <div class="sumeNtit" style="position: relative">
+            <em class="titIconNew16"></em>
+            附件简历
+            {/if $annex['file_type']==1/}
+            <span style="position: absolute; width: 500px; right: -520px; font-size: 12px; color: #999; font-weight: 300;">如无法在线查看，请点击下载： <a href="{/base_lib_Constant::STYLE_URL/}{/$annex['file_list'][0][1]/}">{/$user_name/}的附件.doc</a></span>
+            {//if/}
+        </div>
+        <div class="photoList"  style="position: relative; margin-bottom: 30px; height:{/if $annex['file_type']==2/}auto{/else/}730px{//if/}; overflow: hidden;">
+
+            {/foreach $annex['file_list'] as $value/}
+            {/if $annex['file_type']==2/}
+            <li>
+                <a href="{/base_lib_Constant::STYLE_URL/}{/$value[1]/}" target="_blank" title="点击查看原图">
+                    <img src="{/base_lib_Constant::STYLE_URL/}{/$value[1]/}" />
+                </a>
+            </li>
+            {/else/}
+            <iframe src='https://view.officeapps.live.com/op/view.aspx?src={/base_lib_Constant::STYLE_URL/}{/$value[1]/}' width='100%' height='842' style="position: absolute; top: -88px; bottom:0px; border: none;" frameborder='1'></iframe>
+            {//if/}
+            {//foreach/}
+
+        </div>
+        {//if/}
+
+
+
+    </div>
+
+    {/if $isshowresumeinfo/}
+    <div id="right-operat" class="sumeMainRight">
+        <ul>
+
+            <li {/if $remark_count>0/}class="cur"{//if/}><a  href="javascript:;" class="subMlist03" id="btnRemark"><em class="smIcon04"></em>备注{/if $remark_count>0/}({/$remark_count/}){//if/}</a></li>
+            <li><a  href="javascript:;" class="subMlist03" id="btnSaveComputer"><em class="smIcon06"></em>保存到电脑</a></li>
+
+        </ul>
+    </div>
+    {//if/}
+</div>
+<!---->
+{/if $isshowresumeinfo && (($company_site==1 && $resume_site==1 && !$is_wait_interview) || (!$is_in_wait_rewait && !($is_not_call && $has_get_linkway)) || (!$has_get_linkway && !$is_wait_interview && !$is_in_wait_rewait) )/}
+<div id="bottom_operat" class="fiexd_link">
+    <div class="opacity"></div>
+    <div class="w1000" style="width: 1000px;padding-right: 0">
+
+        {/if $company_site==1 && $resume_site==1 && !$is_wait_interview/}
+
+        <!--网络招聘会的聊一聊-->
+        <!--<a  href="javascript:;"data-resumeprice="{/$resume_price/}" data-videopointlast="{/$video_point_last/}" data-notice-status="{/(int)$chat_status/}" data-apply-id="" class="subMlist04 chatOneChat" data-job-id="{/$base_job_id/}" data-job-effect="1" data-resume-id="{/$base_resume_id/}" data-sid="{/$sid/}" data-netapplyid="{/$apply_id/}" data-need-download = "{/if $has_get_linkway || $show_linkway/}1{/else/}0{//if/}" data-phone="{/$link_by/}"   style="background: #289ad5"><em style="background: url({/$siteurl.style/}/img/account/add_lyl.png);width:21px;height: 21px;margin-left: 14px;"></em>聊一聊-->
+        <!--</a>-->
+
+        <!--汇博那边的聊一聊-->
+        <a  href="javascript:;" data-notice-status="{/(int)$chat_status/}"  class="subMlist04 chatOneChat" data-job-id="{/$base_job_id/}" data-job-effect="1" data-resume-id="{/$base_resume_id/}" data-need-download = "{/if $huibo_show_linkway/}0{/else/}1{//if/}" data-arealimit-id = "{/if $not_area_limit/}1{/else/}0{//if/}"  style="background: #289ad5"><em style="background: url({/$siteurl.style/}/img/account/add_lyl_netfair.png);width:23px;height: 23px;margin-left: 14px;"></em>聊一聊<i class="newVideo_icon"></i></a>
+
+        {//if/}
+
+        {/if !$is_in_wait_rewait && !($is_not_call && $has_get_linkway)/}
+        <a  href="javascript:;" id="videoinvite" class="videoinviteBtn"><em></em>视频面试</a>
+        {//if/}
+
+
+        {/if !$has_get_linkway && !$is_wait_interview && !$is_in_wait_rewait/}
+        <a id="btnGetLinkway22" href="javascript:;" class="subMlist01" style="width: 170px;"><em class="smIcon01" style="background: url({/$siteurl.style/}/img/resumetate/resumetateGetPhoneNum.png) no-repeat;margin-left: -5px;"></em>获取联系方式</a>
+        {//if/}
+
+    </div>
+</div>
+{//if/}
+
+<!---->
+<iframe id="printIframe"  height="0" width="0" frameborder="0"></iframe>
+
+<div class="footer">©{/date("Y")/} 汇博网 版权所有</div>
+<input type="hidden" id="have_download_resume" name="have_download_resume" value="{/$downloaded/}" />
+
+{/if $company_site==1 && $resume_site==1 && !$is_wait_interview/}
+    {/if $pricing_resource_data['isCqNewService']/}
+    {/include file="huibo_chat/chatV2.html"/}
+    {/else/}
+    {/include file="huibo_chat/chat.html"/}
+    {//if/}
+{//if/}
+
+
+<!--图片旋转 -->
+<div class="photo_m_master"></div>
+<div class="photoMagnify">
+    <p>
+        <!--<span id="imgleft"></span>-->
+        <a href="javascript:;" class="closePhoto"></a>
+
+    </p>
+    <div id='RouteDataImg'></div>
+    <p class="rotaeTop">
+        <span id="imgright" title="旋转图片"></span>
+    </p>
+</div>
+<div id="public_dialog_kmAPP" style="display: none;">
+	<ul class="public_dialog_kmAPP_ul">
+		<li>
+			<div class="lyldialog_app-box clearfix">
+				<img src="{/$siteurl.style/}/img/blue/company/RQ_km.jpg" />
+				<p style="font-size: 14px;color: #333"></p><p class="wxTip">微信扫码下载APP</p>
+				<span style="font-size: 12px;color: #666"></span>
+			</div>
+		</li>
+		<li>
+			<img src="{/$siteurl.style/}/img/blue/netfair/km_rq_help_right.jpg" >
+		</li>
+		<li>
+			<img src="{/$siteurl.style/}/img/blue/netfair/km_rq_help.jpg" >
+		</li>
+	</ul>
+</div>
+
+
+
+<div class="remain_resume"  data-explain="do not delete!" style="display: none"></div>
+<script type="text/javascript">
+    var high_lightStr = '{/$high_light/}';
+    var hightLightList=high_lightStr.split(",");
+    for(var i= 0;i < hightLightList.length;i++){
+        if(hightLightList[i] !=''){
+            var regExp = new RegExp(hightLightList[i]+'(?!([^<]+)?>)', 'ig');//正则表达式匹配
+            $('.sumeMainLeft').html($('.sumeMainLeft').html().replace(regExp, "<span class='result_keyWord'>" + hightLightList[i] + "</span>")); // 高亮操作)
+        }
+    }
+    // $("body").html($("body").html().replace(regExp, "<span id='result" + index + "' cla/ss='result'>" + str + "</span>")); // 高亮操作
+
+    window.console = window.console || (function () {
+        var c = {}; c.log = c.warn = c.debug = c.info = c.error = c.time = c.dir = c.profile
+            = c.clear = c.exception = c.trace = c.assert = function () { };
+        return c;
+    })();
+    var isDownLoad     = false,
+        resume_id      = "{/$resume_id/}",
+        apply_id       = "{/$applyid/}",
+        person_id      = "{/$person_id/}",
+        src            = "{/$src/}"
+
+    var ConfirmBox,dialog_msg_liao,dialog,eventName;
+    hbjs.use('tools.cookie, widge.overlay.hbDialog, widge.overlay.confirmBox, product.hbCommon', function(cookie, Dialog, confirmBox, hbCommon, $, util) {
+        var isIE = !window.XMLHttpRequest,
+            isIE6 = !-[1,] && isIE;
+        $ = $.extend(hbCommon);
+
+        ConfirmBox = confirmBox;
+
+        var historyContainer     = $('#historyContainer'),
+            historyList          = historyContainer.children('ul'),
+            historyItem          = historyList.children('li'),
+            historyMore          = historyItem.last(),
+            historyShowMsg       = '隐藏历史记录<i class="hbFntWes">&#xf106;</i>',
+            historyHidMsg        = '显示历史记录<i class="hbFntWes">&#xf107;</i>';
+
+
+        var lyldialog_app = new Dialog({
+            idName: 'public_dialog_kmAPP',
+            title: 'APP下载',
+            width: 600,
+            close: 'x',
+            isAjax: true
+        });
+		var public_dialog_kmAPP = new Dialog({
+            idName: 'public_dialog_kmAPP',
+            title: 'APP下载',
+            width: 700,
+            close: 'x',
+            isAjax: true
+        });
+        $(".downLoadAppHb").click(function () {
+            lyldialog_app.setContent('<div class="lyldialog_app-box clearfix"><img src="{/$siteurl.style/}img/company/company_code.jpg" /><p style="font-size: 14px;color: #333"></p><p class="wxTip">微信扫一扫</p><span style="font-size: 12px;color: #666"></span></div>');
+            lyldialog_app.show();
+        })
+        $(".downLoadAppKm").click(function () {
+            public_dialog_kmAPP.setContent($('#public_dialog_kmAPP').html());
+            public_dialog_kmAPP.show();
+        })
+		
+        var lyldialog_pay = new Dialog({
+            idName: 'save-comp',
+            title: '获取联系方式',
+            width: 562,
+            close: 'x',
+            isAjax: true
+        });
+		var noBalance_box = new Dialog({
+		    idName: 'save-comp',
+		    title: '余额不足',
+		    width: 600,
+		    close: 'x',
+		    isAjax: true,
+			content:"<p class='noBalance_box'>您的视频点<span style='color:#ff2100'>余额不足</span>，请联系工作人员充值: <span style='color: #296df6'>{/$link_by/}</span></p>"
+		});
+		
+        lyldialog_pay.setContent("<div class='getTel-dialog'><p class='videoNumCon'>确认花费<em class='videoNum'>{/$resume_price/}视频点</em>下载联系方式？</p>"+
+            "<p>（您的余额：{/$video_point_last/}视频点，充值视频点可联系工作人员: {/$link_by/}）</p>"+
+            "<div id='getNow' class='getTelBtn'>立即获取联系方式</div>"+
+            "<p>（下载过联系方式的简历，我们会为您保存3个月，若想长期查看使用，请记得导出保存到本机上）</p></div>"
+        );
+		// var lyldialog_pay = new Dialog({
+		// 			idName: 'save-comp',
+		// 			title: '获取联系方式',
+		// 			width: 400,
+		// 			close: 'x',
+		// 			isAjax: true
+		// 		});
+		var clicked= false;
+        function getnetfairLink(type){
+			if(clicked){
+				return;
+			}
+			clicked=true;
+            $.post('/resume/NeedPay',{resume_id:'{/$resume_id/}',sid:'{/$sid/}',type:type,applyid:'{/$apply_id/}',need_down:true},function (e) {
+                console.log(e);
+				if(e.is_need_pay){
+					clicked=false;
+					
+                    if(e.resource.video_point < (e.resource.video_point_use+ e.price)){
+
+                        // showModel('fail', '您的视频点余额不足，请联系工作人员充值{/$link_by/}');
+						noBalance_box.show();
+                    }else{
+
+                        lyldialog_pay.show();
+                        lyldialog_pay.query("#getNow").on("click",function(){
+                            $.post('/resume/PayResumDo',{resume_id:'{/$resume_id/}',sid:'{/$sid/}',type:type,applyid:'{/$apply_id/}'},function (data) {
+							clicked=false;
+                                if(!data.status){
+                                    showModel('fail', data.msg);
+                                }else{
+
+                                    switch (type){
+                                        case 'getlink':
+                                            showModel('success', data.msg);
+                                            $('#spnBasicMobilePhone').text(data.phone);
+                                            lyldialog_pay.hide();
+                                            window.location.reload()
+                                            break;
+                                        case 'video':
+
+                                            showModel('success', data.msg);
+                                            lyldialog_pay.hide();
+                                            window.location.reload();
+                                            break;
+                                        default:
+                                            break;
+                                    }
+
+                                }
+                            },'json')
+                        });
+                    }
+
+                }else{
+
+                    switch (type){
+                        case 'getlink':
+                            window.location.reload();
+                            break;
+                        case 'video':
+                            window.location.reload();
+                            break;
+                        default:
+                            break;
+                    }
+
+
+                }
+            },'json')
+        }
+
+		
+        $("#see_mobile").click(function () {
+            getnetfairLink('getlink');
+        })
+
+        $('#videoinvite,#btnGetLinkway22').click(function () {
+			
+            getnetfairLink('video');
+        })
+
+
+        {/if !empty($avatar_big)/}
+        $('#avatarImgBox').on('mouseover', function (e) {
+            $.showPhotoHD(this, null, '{/base_lib_Constant::YUN_ASSETS_URL_NO_HTTP/}{/$avatar_big/}');
+        });
+        {//if/}
+
+            {/if !$has_get_linkway && $show_linkway/}
+            {/else/}
+            searchAttribution('{/$mobile_phone/}');
+            {//if/}
+
+
+
+                //保存到电脑
+                dialog = new Dialog({
+                    idName: 'save-comp',
+                    title: '保存到电脑',
+                    close: 'x',
+                    isAjax: true
+                }),
+
+
+                    eventName = [
+                        '#btnSaveComputer',
+                        '#btnNetWorkSuccessInvite',
+                        '#btnNetWorkInvite',
+                        '#btnFairInvite',
+                        '#btnJeject',
+                        '#btnGetLinkway2',
+                        '#btnRemark',
+                        '#btnFav',
+                        '#relLnk',
+                        '#btnPrint',
+                        '#btnDelete',
+                        '#btnReport'
+                    ],
+                    saveComputerHTML = [
+                        '<div class="save-comp-box"><span class="gray9">文件另存为：</span>',
+                        '<ul class="clearfix"><li class="doc">',
+                        '<a href="{/get_url rule="/resume/worddown/"/}resumeid-' + resume_id + '-src-'+ src +'">.doc</a>',
+                        '</li><li class="html">',
+                        '<a href="{/get_url rule="/resume/htmldown/"/}resumeid-' + resume_id + '-src-'+ src +'">.html</a>',
+                        '</li><li class="pdf">',
+                        '<a href="{/get_url rule="/resume/pdfdown/"/}resumeid-' + resume_id + '-src-'+ src +'">.pdf</a>',
+                        '</li></ul><font style="color: red">{/if $has_get_linkway != true/}温馨提示：简历未获取联系方式，如需获取请点击页面下方“获取联系方式”按钮。{//if/}</font></div>',
+
+                    ].join(''),
+                    linkwayHTML = [
+                        '<p class="link">',
+                        '<span {phoneDisplay}><i class="{phoneStatus}"></i><strong>{phone}</strong><em id="phoneAddr"></em></span>',
+                        '<span {mailDisplay}><i class="{mailStatus}"></i><strong>{mail}</strong></span>',
+                        '<span {qqDisaplay} class="last"><i class="{qqStatus}"></i><strong>{qq}</strong></span></p>'
+                    ].join('');
+                dialog_msg_liao = new Dialog({
+                    close: '╳',
+                    idName: 'liaoyiliao',
+                    width: 'auto',
+                    title: '提示',
+                    isAjax: true,
+                    isOverflow : false
+                });
+
+
+
+
+
+
+                function showModel(icon, msg) {
+                    confirmBox.timeBomb(msg, {
+                        name: icon,
+                        width: pWidth + msg.length * fontWidth
+                    });
+                }
+
+
+
+                function searchAttribution(tel) {
+                    //获取号码归属地
+                    var regex     = /^1[3|4|5|8][0-9]\d{4,8}$/,
+                        phoneAddr = $('#phoneAddr');
+                    console.log(tel);
+                    if (!phoneAddr.length) return;
+                    if (tel && !regex.test(tel)) {
+                        phoneAddr.html('（未知）');
+                    } else {
+                        var url = '//tcc.taobao.com/cc/json/mobile_tel_segment.htm?tel=' + (tel || '');
+                        if (isIE6) {
+                            url = 'https://www.baifubao.com/callback?cmd=1059&callback=phone&phone=' + (tel || '');
+                        }
+
+                        $.ajax({
+                            async : false,
+                            type : "post",
+                            url : url,
+                            dataType : "jsonp",
+                            contentType : "application/x-www-form-urlencoded; charset =utf-8",
+                            jsonp : "callback",
+                            success : function(json) {
+                                console.log(json)
+                                if (isIE6) {
+                                    if (json.data.area == '' || json.data.area == undefined) {
+                                        phoneAddr.html('（未知）');
+                                    } else {
+                                        phoneAddr.html('（' + json.data.area + '）');
+                                    }
+                                } else {
+                                    if (json.province == ''|| json.province == undefined) {
+                                        phoneAddr.html('（未知）');
+                                    } else {
+                                        phoneAddr.html('（'+json.province+'）');
+                                    }
+                                }
+                            },
+                            error : function () {
+                                phoneAddr.html('（未知）');
+                            }
+                        });
+                    }
+                }
+
+
+
+                $(".save-comp").on("click", ".charge", function() {
+                    dialog.hide();
+                })
+
+
+
+
+
+
+                $("body").on("click", "#closeClick", function() {
+                    dialog.hide();
+                });
+
+                $('#btnReport2').on('click',function(){
+                    report2();
+                });
+
+                function report2(){}
+
+                $(".save-comp").on("click", '.close', function() {
+                    dialog.hide();
+                });
+
+
+                $('#btnJeject1').on('click', function(){
+                    $('#btnJeject').trigger('click');
+                });
+
+
+
+                //视频弹窗
+                var lyldialog111 = new Dialog({
+                    idName: 'save-comp',
+                    title: '视频简历',
+                    width: 400,
+                    close: 'x',
+                    isAjax: true
+                });
+                lyldialog111.setContent('<div class="clearfix" style="padding: 20px 0 20px 20px"><img src="{/get_url rule='/apply/SendToWorkMatePng/'/}?src={/$src/}&resume_id={/$resume_id/}&src_id={/$src_id/}" style="float:left;margin-right: 18px" /><p style="font-size: 14px;color: #333">视频简历</p><p style="font-size: 14px;color: #333;padding-top:5px;margin-bottom: 15px">用汇博企业APP，扫码进入聊天</p><span style="font-size: 12px;color: #666">没有企业APP？<a href="javascript:;" id="downLoadApp">点击下载</a></span></div>');
+                $("#scanSeeVideo").on("click",function(e){
+                    lyldialog111.show();
+                    lyldialog111.query("#downLoadApp").on("click",function(){
+                        lyldialog111.hide();
+                        lyldialog.show();
+                    });
+                    return false;
+                });
+
+                $(".video_list").on("click","li",function(e){
+                    var video_id = $(this).attr("data-video");
+                    dialog.resetSize("auto").setContent({
+                        isOverflow : true,
+                        title : '查看视频',
+                        content : '{/get_url rule="/resume/ShowVideo/" data="resume_id={/$resume_id/}&video_id=' + video_id + '"/}'
+                    }).off('loadComplete').on('loadComplete', function() {
+
+                    }).show();
+                });
+
+                $('#right-operat').on('click', eventName.join(','), function(e) {
+                    var target = $(e.currentTarget),
+                        idName = target.attr('id');
+                    switch (idName) {
+                        case getDomID(eventName[0]):
+                            dialog.resetSize(500).setContent(saveComputerHTML).show();
+                            break;
+                    }
+
+                })
+
+
+            });
+
+
+    function dialog_msg_liao_reload(){window.location.reload();}
+    function getDomID(name) {return name.replace('#', '');}
+    function openRemark(idName) {}
+
+
+    hbjs.use('cqjob.fancybox-thumbs', function($) {
+        $.each(fancboxid, function (index, val) {
+            $('.fancybox-thumbs' + val).fancybox({
+                closeBtn  : true,
+                arrows    : true,
+                title : function(current) {
+                    if ($(this).attr('extension') == 'jpg'
+                        || $(this).attr('extension') == 'bmp'
+                        || $(this).attr('extension') == 'gif'
+                        || $(this).attr('extension') == 'jpeg'
+                        || $(this).attr('extension') == 'png') {
+
+                        return "<a href='" + $(this).attr('href') + "' target='_blank'>查看原图</a>";
+                    } else {
+                        return "<a href='" + $(this).attr('real_heaf') + "' target='_blank'>下载文件</a>";
+                    }
+                },
+                maxWidth : 1000,
+                maxHeight : 600,
+                helpers : {
+                    title : {
+                        type : 'float'
+                    }
+                }
+            });
+        });
+
+        $('.nberN10').on('click', 'li span', function (e) {
+            var item = $(e.currentTarget),
+                attrid = item.attr('data-achievementid');
+            $('.fancybox-thumbs' + attrid).eq(0).trigger('click');
+        });
+    });
+
+
+
+    hbjs.use('@confirmBox', function(m) {
+
+        var ConfirmBox = m['widge.overlay.confirmBox'],
+            Dialog = m['widge.overlay.hbDialog'],
+            cookie = m['tools.cookie'],
+            fontSize = 18,
+            pWidth = 70;
+
+        infoNoComplete = new Dialog({
+            close: '╳',
+            idName: 'buyPoints',
+            width: 400,
+            title: '简历不详细',
+            content: $('.notCompletePop')
+        });
+
+
+        $('.remindUser').on('click',function(){
+            $('input[name="notCompleteReason"]').attr('checked',false)
+            infoNoComplete.show()
+        })
+
+
+        $('.cancelComplete').on('click',function(){
+            infoNoComplete.hide()
+        })
+
+        $('.confirmComplete').on('click',function(){
+            var selectReasons = [];
+            var selectBox = $('input[name="notCompleteReason"]:checked')
+            for(var i=0; i<selectBox.length; i++){
+                var box = $(selectBox[i])
+                var value = box.val()
+                selectReasons.push(value)
+            }
+
+            if(selectReasons.length == 0){
+
+                ConfirmBox.timeBomb('请选择不详细原因', {
+                    name: 'fail',
+                    width: 200,
+                    timeout: 2000
+                });
+            }else{
+                $.post('/resume/ResumeAlertRemind',{resume_id:'{/$resume_id/}',remind_tpl:selectReasons.join(',')},function (e) {
+                    log_data.remain_tpl = selectReasons.join(',');
+                    action_dom = [
+                        ['.remain_resume', 68, log_data],//对应码表参数
+                    ];
+                    $('.remain_resume').click();
+                    infoNoComplete.hide()
+
+                    ConfirmBox.timeBomb('反馈成功', {
+                        name: 'success',
+                        width: 150,
+                        timeout: 2000
+                    });
+
+
+                },'json')
+            }
+        })
+    });
+</script>
+
+
+<script  type="text/javascript">
+    var action_url = '{/$siteurl.style/}';
+    log_data={company_name:'{/$company_name/}',resume_id:'{/$resume_id/}',remain_tpl:''};
+    action_dom = [
+        ['.remain_resume', 68, log_data],//对应码表参数
+    ];
+
+</script>
+<script type="text/javascript" language="javascript" src="{/version file='action.js'/}"></script>
+<script  type="text/javascript">
+    ConfirmBox;
+    pWidth = 70, fontWidth = 18;
+    hbjs.use('@orderActions,@confirmBox',function(m){
+        ConfirmBox = m['widge.overlay.confirmBox'];
+        var Dialog = m['widge.overlay.hbDialog'];
+
+        var _dialog = {
+            params: {},//自定义传递参数 titel:弹框标题 width:弹框宽度 getHtml:弹框主体内容 request:点击确定的请求 其他自定义
+            alert: null,
+            init: function () {
+                if (!_dialog.alert) {
+                    _dialog.alert = new Dialog({
+                        close: 'X',
+                        idName: 'stop_job_dialog',
+                        title: _dialog.params.titel,
+                        width: _dialog.params.width || 400,
+                        isOverflow: false,
+                        isAjax: true
+                    });
+                }
+                _dialog.alert.on('closeX', function () {
+                    _dialog.alert.hide();
+                });
+                _dialog.alert.setContent(_dialog.params.getHtml);
+                _dialog.alert.query('#ok').off('click');
+                _dialog.alert.query('#cancel').off('click');
+                _dialog.alert.query('#cancel').on('click', function (e) {
+                    _dialog.alert.hide();
+                });
+                _dialog.alert.query('#ok').on('click', function (e) {
+                    _dialog.params.request();
+                });
+                _dialog.alert.query('#jump').off('click');
+                _dialog.alert.query('#jump').on('click', function (e) {
+//                    window.location.href="{/get_url rule='/licencevalidate/index/'/}";
+                    window.open("{/get_url rule='/licencevalidate/index/'/}");
+                    _dialog.alert.hide();
+                });
+                _dialog.alert.show();
+            }
+        };
+        var dialog = new Dialog({
+            idName: 'save-comp',
+            title: '保存到电脑',
+            close: 'x',
+            isAjax: true
+        });
+        var resume_id = parseInt('{/$resume_id/}')
+
+        //备注
+        $("#btnRemark").click(function(){
+            if (resume_id != undefined && resume_id > 0) {
+                dialog.resetSize('auto').setContent({
+                    title:'备注',
+                    content:'{/get_url rule="/resume/remarkhtml/"/}resume_id-' + resume_id
+                }).off('loadComplete').on('loadComplete',function () {
+                    this.oneCloseEvent('#btnCancel');
+                }).show();
+
+            } else {
+                showModel('fail', '请选择一个简历后再进行备注');
+            }
+        });
+
+        //备注
+        $('.smNumber a').click(function(){
+            $('.smNumberUp').slideDown();
+            $(this).hide();
+        });
+        //超过6个隐藏
+        $('.smNumberUp ul li.remark_li:gt(5)').hide();
+        //查看更早记录
+        $('.smNumberUp #moreHistory').on('click',function () {
+            $('.smNumberUp ul li.remark_li:gt(5)').slideDown();
+            $(this).hide();
+        });
+
+        $('.sberUp').click(function(){
+            $('.smNumberUp').slideUp(300);
+            setTimeout(function () {
+                $('#historyContainer').find('li[isMore="1"]').hide();
+                $('#moreHistory').show();
+                $('.smNumber a').slideDown(100);
+                $('.smNumberUp ul li.remark_li:gt(5)').hide();
+            },100);
+
+        })
+    });
+
+    function showModel(icon, msg) {
+        ConfirmBox.timeBomb(msg, {
+            name: icon,
+            width: pWidth + msg.length * fontWidth
+        });
+    }
+</script>
+</body>
+
+</html>

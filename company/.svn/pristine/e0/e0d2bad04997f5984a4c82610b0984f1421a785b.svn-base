@@ -1,0 +1,245 @@
+<style>
+	.formMod .l{width:135px;font-size:14px;color:#666}
+	.formMod .r{width:auto}
+	.formText input.text{font-size:12px}
+</style>
+<form id="resultJobForm">
+<div class="formMod mgt10" style="margin-bottom: 0px">
+    <div class="l">面试人：</div>
+    <div class="r">
+    	<p class="mgt5">{/$invite['user_name']/}</p>
+    </div>
+    <div class="clear"></div>
+</div>
+<div class="formMod mgt10" style="margin-bottom: 0px">
+    <div class="l">面试时间：</div>
+    <div class="r">
+    	<p class="mgt5">{/$invite['attention_time']/}</p>
+    </div>
+    <div class="clear"></div>
+</div>
+<div class="formMod mgt10" style="margin-bottom: 0px">
+    <div class="l">面试职位：</div>
+    <div class="r">
+    	<p class="mgt5">{/$invite['station']/}</p>
+    </div>
+    <div class="clear"></div>
+</div> 
+<div class="formMod mgt10" style="margin-bottom: 0px">
+    <div class="l">请设置面试结果：</div>
+    <div class="r">
+    	<p class="mgt5"><label><input type="radio" name='resultType' value='1'/>通过 </label><label style="margin-left: 30px"><input type="radio" name='resultType' value='2'/>不合适</label></p>
+    </div>
+    <div class="clear"></div>
+</div>
+<input type='hidden' value='invite' name='txtType'>
+<span data-ifshow='1' id='ifshow'></span>
+<div id='content'>
+<div class="formMod mgt10">
+    <div class="l">报到时间：</div>
+    <div class="r">
+    	<span class="formText">
+       		<input class="text" type="text" readonly="readonly" id="dateInput" name="date" style="width:227px" />
+       </span>
+       <div id="timeDeltaSelecter" class="dropv2" style="float:left;width:120px;margin-left:10px">
+            <b class="hbFntWes dropIco">&#xf0d7;</b>
+            <label></label>
+       </div>
+       <span class="tipPos">
+            <span class="tipLay">
+            <span data-for="date" generated="true" class="tipBar tipw120"></span></span>
+       </span>
+    	<!--
+    	<select style="padding:5px;float:left"><option>2015</option></select>
+        <select style="padding:5px;margin:0 5px;float:left"><option>08</option></select>                       
+        <select style="padding:5px;float:left;margin-right:5px"><option>19</option></select>
+        <span class="formText">
+            <input type="text" value="" name="timedetail" class="text">
+        </span>
+        -->
+    </div>
+    <div class="clear"></div>
+</div>
+<div class="formMod mgt10">
+    <div class="l">报到地点：</div>
+    <div class="r">
+        <span class="formText">
+            <input type="text" value="{/$invite['attention_address']/}" name="txtAddress" class="text">
+        </span>
+        <span class="tipPos">
+            <span class="tipLay">
+            <span data-for="txtAddress" generated="true" class="tipBar tipw120"></span></span>
+       </span>
+    </div>
+    <div class="clear"></div>
+</div>  
+<div class="formMod mgt10">
+    <div class="l">联系人：</div>
+    <div class="r">
+        <span class="formText">
+            <input type="text" {/if $invite['link_man']/}value="{/$invite['link_man']/}"{/else/}placeholder="请输入联系人名字"{//if/} name="linkman" class="text">
+        </span>
+        <span class="tipPos">
+            <span class="tipLay">
+            <span data-for="linkman" generated="true" class="tipBar tipw120"></span></span>
+        </span>
+    </div>
+    <div class="clear"></div>
+</div> 
+<div class="formMod mgt10">
+    <div class="l">联系电话：</div>
+    <div class="r">
+        <span class="formText">
+            <input type="text" {/if $invite['link_tel']/}value="{/$invite['link_tel']/}"{/else/}placeholder="请输入联系人电话，以便求职者咨询了解"{//if/} name="linkway" class="text" />
+        </span>
+        <span class="tipPos">
+            <span class="tipLay">
+            <span data-for="linkway" generated="true" class="tipBar tipw120"></span></span>
+        </span>
+    </div>
+    <div class="clear"></div>
+</div>           
+<div class="formMod mgt10">
+    <div class="l">其他描述：</div>
+    <div class="r">
+    	<span class="formTextarea">
+            <textarea name="description" class="textarea" placeholder="有其他事项可以在此处输入，非必填" style="width: 300px;height: 120px">{/$invite['description']/}</textarea>
+        </span>
+        <span class="tipPos">
+            <span class="tipLay">
+            <span data-for="description" generated="true" class="tipBar tipw120"></span></span>
+        </span>
+    </div>
+    <div class="clear"></div>
+</div>
+</div>               
+<div class="formBtn" style="margin-left: 140px;"><a class="btnsF16 btn1" id="btnSaveAddress" href="javascript:void(0);" style="padding:0 40px;text-decoration: none">提交</a></div>
+</form>
+<script type="text/javascript">
+
+hbjs.use('widge.calendar.calendar, widge.select, widge.validator.form, widge.overlay.confirmBox, product.hbCommon', function(Calendar, Select, ValidatorForm, ConfirmBox, $){
+	var pWidth = 70,fontWidth = 18,apply_id,tourl,title;
+	var form = $('#resultJobForm');
+	$('#resultJobForm input:text, #resultJobForm textarea').placeHolder();
+	
+	var t1 = new Date();
+	var c1 = new Calendar({
+		trigger: $('#dateInput'),
+		range: [t1, null],
+		zIndex: 99999
+	});
+	
+	var timeDeltaSelecter = new Select({
+		trigger: $('#timeDeltaSelecter'),
+		className: 'dropv2_select',
+		align: {baseXY: [0, '100%-2']},
+		selectName: 'timeDelta',
+		dataSource: ['08:00','08:30','09:00','09:30','10:00','10:30','11:00','11:30','12:00','12:30','13:00','13:30','14:00','14:30','15:00','15:30','16:00','16:30','17:00','17:30','18:00','18:30','19:00','19:30','20:00'],
+		selectedIndex: 0,
+		maxHeight:200,
+		zIndex: 99999
+	});
+	
+	var rules = {
+			date: 'required',
+			txtAddress: {required: true, range: [5, 50]},
+			linkman: {
+				//required: true,
+				range: [2, 10]
+			},
+			linkway: 'required phone',
+			description: {max: 500}
+		},
+		rulesName = 'date hours minute txtAddress linkman linkway description';
+		errorMsgs = {
+			date: '请选择日历<span class="tipArr"></span>',
+			txtAddress: {
+				required: '请输入报到地点<span class="tipArr"></span>',
+				range: '请输入5-50字<span class="tipArr"></span>'
+			},
+			linkman: {
+				//required: '请输入联系人<span class="tipArr"></span>',
+				range: '请输入2-10字<span class="tipArr"></span>'
+			},
+			linkway: {
+				required: '请输入联系电话<span class="tipArr"></span>',
+				phone: '请输入正确的电话号码<span class="tipArr"></span>'
+			},
+			description: '最多输入500字<span class="tipArr"></span>'
+		}
+		
+	var validator = new ValidatorForm({
+		element: form,
+		rules: rules,
+		errorMessages: errorMsgs,
+		errorElement: 'span.tipBar',
+		keepKey: true
+	});
+	
+	var tipLayErrClass = 'tipLayErr';
+	validator.on('invalid', function(e){
+		e.label.addClass(tipLayErrClass);
+	});
+	validator.on('pass', function(e){
+		e.label.removeClass(tipLayErrClass);
+	});
+	validator.on('clear', function(e){
+		e.hideElements.removeClass(tipLayErrClass);
+		e.showElements.removeClass(tipLayErrClass);
+	});
+	
+	var resultType = form.find('input[name="resultType"]');
+	resultType.eq(0).click();
+	resultType.click(function(){
+		var ifshow = resultType.index($(this)) == '0';
+		form.find('#ifshow').attr('data-ifshow', ifshow ? 1 : 0);
+		if(ifshow){
+			validator.addRules(rules);
+			validator.addErrorMessages(errorMsgs);
+		} else {
+			validator.resetForm();
+			validator.removeRules(rulesName);
+		}
+		form.find('#content').toggle(ifshow);
+	});
+	if(jobDialog){
+		jobDialog.after('hide', function(){
+			validator.destory();
+			c1.destory();
+		});
+	}
+	
+	form.find('#btnSaveAddress').on('click', function(e){
+		ifvalid = $('#ifshow').attr('data-ifshow');
+		validator.submit(function(e){
+			$.ajax({
+	            url:"/partjobapply/modinvitedo/inviteid-{/$invite['invite_id']/}",
+	            type:"post",
+	            dataType: "json",
+	            contentType: "application/x-www-form-urlencoded; charset=utf-8",
+	            data: form.serialize(),
+	            success:function(json){
+	                if(!(json.success||false)){
+						ConfirmBox.alert(json.error, null, { title: '发送失败' });
+	                    return false;
+	                }
+					jobDialog && jobDialog.hide();
+					var msg = json.success;
+					ConfirmBox.timeBomb(msg, {
+						name: 'success',
+						width: pWidth + msg.length * fontWidth,
+						timeout: 1000,
+						callback: function(){
+							window.location.reload();
+						}
+					});
+	                return false;
+	            }
+	        });
+	        return false;
+		});
+	});
+	
+});
+
+</script>

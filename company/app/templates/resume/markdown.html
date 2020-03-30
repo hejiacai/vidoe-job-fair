@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+</head>
+<body>
+<style>
+.downBox{width:360px;font-size:12px;}
+.downBox .downType{font-size:14px;font-weight:bold;height:60px;border-bottom:1px dashed #dadada;margin-bottom:5px;}
+.downBox .downType .hbFntWes{font-size:23px; vertical-align:middle;font-weight:normal;float:left;display:inline;width:25px;}
+.downBox .downType span{float:left;display:inline;width:335px;}
+.downBox .downTit{font-size:14px;line-height:30px;margin-bottom:5px;}
+.downBox .downTxt{color:#999;line-height:24px;margin-bottom:10px;}
+.downBox .downForm{height:35px;}
+.downBox .downLst{}
+.downBox .downLst a{margin:0 10px 0 0;display:inline-block;width:110px;height:22px;line-height:22px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;-o-text-overflow:ellipsis;}
+.downBox .downLst a:hover{ color: #2b6fad; text-decoration: underline;}
+.downBox .downBtn{padding:15px 0 0 0; text-align:right;}
+.downBox .downBtn a.btnsF14{margin:0 0 0 10px;}
+</style>
+<div class="dgBox downBox">
+	<div class="downType green"><i class="hbFntWes">&#xf058;</i><span>获取联系方式成功，您可以在“下载的简历”中管理已获取联系方式的简历</span></div>
+	<div class="downTit"><b>{/$user_name/}</b>适合您公司的什么岗位？</div>
+    <div class="downForm"><span class="formText">
+    <input type="hidden" id="hidResumeID" value="{/$resume_id/}">
+    <input type="hidden" id="hidTagId">
+    <input type="text" id="txtTagName" style="width:275px;" class="text" value="{/$tag_name/}"></span></div>
+    <div class="downTxt">当您下次查看时，能清楚知道为什么下载该简历，请认真填写！</div>
+    <div class="downLst" {/if $is_scroll/}style="height:80px;overflow-y:scroll;"{//if/}>{/foreach $tag_items as $key=>$value/}<a href="javascript:void(0);" theValue="{/$value['tag_id']/}">{/$value['tag_name']/}</a>{//foreach/}</div>
+    <div class="downBtn"><a href="javascript:void(0);" id="btnSava" class="btn1 btnsF14">确定</a></div>
+</div>
+<script type="text/javascript">
+
+try{
+	hbjs.use('cqjob.jobDialog', function($){
+		factory($);
+	});
+} catch (ex) {
+	factory($);
+}
+
+
+function factory($){
+	$('div.downLst').find("a").click(function(){
+		$("#hidTagId").val($(this).attr("theValue")).next().val($(this).html());
+	});
+
+	$('#txtTagName').change(function(){
+		$("#hidTagId").val('');
+	});
+
+	$('#btnSava').click(function(){
+		var tagID    = $("#hidTagId").val();
+		var tagName  = $("#txtTagName").val();
+		var resumeID = $('#hidResumeID').val();
+		var target   = this;
+
+		if (tagName == '') {
+			if (target.trigger) {
+				target.trigger('close');
+			} else {
+				$(target).closeDialog();
+			}
+
+			return; 
+		}
+		
+		$.getJSON("{/get_url rule='/mark/markdo/'/}", {tagID : tagID, tagName : tagName, resumeID : resumeID}, function (json) {
+			if (json && json.isempty) {
+				if (target.trigger) {
+					target.trigger('close');
+				} else {
+					$(target).closeDialog();
+				}
+			}
+
+			if (json && json.error) {
+				$.anchorMsg(json.error, {icon : 'fail'}); 
+				return;
+			}
+
+			if (json && json.success) {
+				$.anchorMsg(json.success, {icon : 'success', onclose : function() {
+					if (target.trigger) {
+						target.trigger('close');
+					} else {
+						$(target).closeDialog();
+					}
+				}});
+				return;
+			}
+		});
+	});	
+}
+
+</script>
+</body>
+</html>

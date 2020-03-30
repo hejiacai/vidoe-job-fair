@@ -1,0 +1,185 @@
+<style>
+    /*=====弹窗样式====*/
+  .iconStrawPop{width:520px; margin:10px auto; overflow:hidden; background:#fff; text-align:left; padding:30px 20px;}
+  .iconStxt{ overflow:hidden; color:#323232; line-height:20px;}
+  .iconStxt b{ font-weight:normal; color:#d73937;}
+  .iconStxt p{ padding:20px 0 35px 0;}
+  .icoSbtn label{ color:#3d86bd; font-family:"宋体"; font-size:12px; display:block; float:left;}
+  .icoSbtn label input{ display:inline-block; vertical-align:-3px; margin-right:5px;}
+  .icoSbtn a,.icoSbtn2 a{ display:block; float:right; padding:0 44px; height:30px; line-height:30px; font-size:12px; font-family:"宋体"; color:#fff; background:#66bce4; border-radius:4px;}
+  .icoSbtn a:hover,.icoSbtn2 a:hover{  background:#51add8;}
+  .iconStrawPop2{width:355px; overflow:hidden; background:#fff; margin:10px auto;padding:20px 15px;}
+  .iconStxt2{ overflow:hidden;}
+  .iconStxt2 i{ color:#ff9c00; margin-bottom:5px; display:block; float:left; font-size:50px; font-weight:normal;padding-top:8px}
+  .iconStxt2 span{ display:block; float:left; color:#d73937; font-size:16px; padding-left:10px;width:280px;}
+  .iconStxt2 span b{ display:block; font-size:14px; color:#444; font-weight:normal; text-align:left; padding-top:8px;}
+  .icoSbtn2{ overflow:hidden; width:100%; padding:30px 0 0 0;}
+  .icoSbtn2 a{ float:left;}
+  .icoSbtn2 a.gray{ background:#f0f0f0; color:#898989; float:right;}
+  .icoSbtn2 a.gray:hover{ background:#d7d2d2}
+   .icoSbtn a.gray{ background:#f0f0f0; color:#898989; float:right;}
+   .warning_dialog{padding:0px}
+</style>
+{/if $jobid>0 && $no_reply_num >0/}
+    <div class="iconStrawPop2">
+        <div class="warning_dialog">
+	    	<dl>
+	    		<dt style="margin-top:5px"></dt>
+	    		<dd>
+	           	 	<span><b>该职位尚有<em style="color:red">{/$no_reply_num/}</em>个简历待处理，简历回复完成后才能开启该功能</b></span>
+	           	 	<div class="icoSbtn2">
+			            <a href="javascript:;" id="refuseApply">一键回绝</a>
+			            <a href="{/$siteurl.company|replace:'http:':''/}/apply/Index/job_id-{/$jobid/}" class="gray" id="goToDo" target="_blank">马上处理</a>
+			        </div>
+	           	</dd>
+	        </dl>
+        </div>        
+    </div>
+{/elseif $mustreply_job_status ==1/}
+<div class="iconStrawPop">      
+    <div class="iconStxt">
+    	投递来的简历，需进行<b>"不合适"、"发起面试邀请"、"已电话邀请面试"</b>
+            操作来回复求职者，到期未回复求职者会有以下限制:
+	<p>1. 自动回绝到期未回复简历，并删除投递记录无法再查看；<br />
+            2. 限制20天内（多次将加重处罚）将不能使用简历承诺功能；</p>
+    </div>
+    <div class="icoSbtn">
+    	<label>
+        	<input name="hasRead" type="checkbox" value="1" id="hasReadCheck"/>我已阅读并同意以上事项
+        </label>
+        <a href="javascript:;" id="sureButton" class="gray">确认</a>
+    </div>
+</div>
+{/elseif $mustreply_job_status==2/}
+<div class="iconStrawPop2">
+     <div class="warning_dialog">
+    	<dl>
+    		<dt style="margin-top:5px"></dt>
+    		<dd>
+        		<span>尚未开通会员,还不能使用该特权<b>开通会员,立即获取各种免费福利</b></span>
+        		<div class="icoSbtn2">
+			    	<a href="{/$siteurl.company|replace:'http:':''/}/index/memberdetail/" target="_blank" id="openVip">开通会员</a>
+			    </div>
+        	</dd>
+        </dl>
+    </div>
+    
+</div>
+{/elseif $mustreply_job_status ==3/}
+<div class="iconStrawPop2">
+	<div class="warning_dialog">
+    	<dl>
+    		<dt style="margin-top:5px"></dt>
+    		<dd>
+    			<span><b>因未按承诺及时回复求职者简历，{/if $last_banned_day==0/}<em style="color:red">今天</em>过后{/else/}<em style="color:red">{/$last_banned_day/}</em>天后{//if/}才能再次承诺。</b></span>
+    			 <div class="icoSbtn2">
+			    	<a href="javascript:;" class="iKnow">我知道了</a>
+			    </div>
+    		</dd>
+    	</dl>
+    </div>   
+</div>
+{/elseif $mustreply_job_status==4/}
+<div class="iconStrawPop2">
+    <div class="warning_dialog">
+    	<dl>
+    		<dt style="margin-top:5px"></dt>
+    		<dd>
+        		<span><b>承诺职位不够了。{/if $mustreply_job_count==1/}连续<em style="color:red">3</em>天按时回复求职者简历即可再获得<em style="color:red">2</em>个承诺职位{/elseif $mustreply_job_count==3/}您最多允许<em style="color:red">3</em>个承诺职位同时使用，等其他承诺职位结束后，再使用吧{//if/}</b></span>
+    			<div class="icoSbtn2">
+			    	<a href="javascript:;" class="iKnow">我知道了</a>
+			    </div>
+    		</dd>
+    	</dl>
+    </div>    
+</div>
+{//if/}
+
+<script>
+    var v = {/$txtReApplyType/};
+    var baseReApplyType = $("input[name='txtBaseReApplyType']").val(); 
+    var mustreply = {
+        init:function(){
+            //非会员默认选择不承诺
+            {/if $mustreply_job_status==2/}
+                  mustreply.selectValue(0);
+            {//if/}
+            //清除已勾选项
+            $(".iKnow").click(function(){
+               mustreply.selectValue(0);
+                $(this).closeDialog();
+            });
+            $("#sureButton").click(function(){
+                var chkSave = $("#hasReadCheck").is(':checked')?true:false;
+                if(!chkSave){
+                   mustreply.selectValue(0);
+                }else{
+                    $(this).closeDialog();
+                }
+            });
+            //马上处理
+            $("#goToDo").click(function(){
+                //mustreply.selectValue(0);
+                $(this).closeDialog();
+            });
+            //开通会员
+            $("#openVip").click(function(){
+                mustreply.selectValue(0);
+                $(this).closeDialog();
+            });
+            $("#hasReadCheck").click(function(){
+                var chkSave = $("#hasReadCheck").is(':checked')?true:false;
+                if(chkSave){
+                    $("#sureButton").removeClass("gray");
+                    $("#txtReApplyTypeTip .tipLay .tipLayErr").remove();
+                }else{
+                    $("#sureButton").addClass("gray");
+                }
+                
+               $(".txtReApplyType").each(function(){
+                   if(v==$(this).val()){
+                       if(chkSave){
+                            $(this).prop({"checked":true});
+                        }else{
+                            $(this).prop({"checked":false});
+                        }
+                   }
+               });
+            });
+            {/if $jobid>0 && $no_reply_num >0/}
+            //一键回绝所有简历
+            $("#refuseApply").click(function(){
+                if($(this).hasClass("hasClock")){
+                    return;
+                }
+                var _this = $(this);
+                var jobid = {/$jobid/};
+                $(this).addClass("hasClock");
+                 $.post('{/get_url rule="/job/refuseAllNotReplyByJob/"/}',{'jobid':jobid},function(result){
+                     $(this).removeClass("hasClock");
+                    if(result.success){
+                        $.anchorMsg(result.success,{icon:'success'});
+                        {/if $mustreply_job_status ==1/}
+                            jobAdd.hasRefuse = 1; //父页面不进行弹窗
+                        {//if/}
+                        _this.closeDialog();
+                        return;
+                     }else{
+                          $.anchorMsg(result.error,{icon:'fail'});
+                     }
+                 })
+            });
+           {//if/}
+        },
+        selectValue:function(v){
+             $(".txtReApplyType").each(function(){
+                if($(this).val()==v){
+                     $(this).prop({"checked":true});
+                     //去掉错误提示
+                    $("#txtReApplyTypeTip .tipLay").html("");
+                }
+            });
+        }
+    }
+    mustreply.init();
+</script>

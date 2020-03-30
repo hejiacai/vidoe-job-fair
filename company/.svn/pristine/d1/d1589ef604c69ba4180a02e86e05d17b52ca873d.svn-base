@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+<title>{/$title/}</title>
+<!–[if lt IE9]>
+<script src="{/version file='html5.js'/}"></script>  
+<![endif]–>
+<link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='comback.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file="tJob_style.css"/}" />
+
+<script type="text/javascript" language="javascript" src="{/version file="jquery-1.8.3.min.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="common.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="dialog.js"/}"></script>
+<script type="text/javascript" src="{/version file='version.js'/}"></script>
+<script type="text/javascript">
+window.CONFIG = {
+	HOST: '{/$siteurl.style/}',
+	COMBOPATH: '/js/v2/'
+}
+</script>
+<script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+<script type="text/javascript" src="{/version file="global.js"/}"></script>
+<script>
+</script>	
+</head>
+<body class="tjob_main">
+{/include file="new_header.html" par="兼职招聘"/} 
+    <!--new-->
+    
+    
+    <div class="tjob_from tjob_bzj">
+    	<p class="title">缴纳保证金有什么用？</p>  
+    	<p class="desc">为了让求职者放心求职，我们推出了被骗赔付服务，缴纳保证金后，我们将会认定为放心企业推荐给求职者，并且在排序上优先展示。</p>	
+    	<dl class="clearfix">
+    		<dd>
+    			<img src="{/$siteurl.style/}/img/part/tpart_bzj1.jpg" />
+    			<span>在职位页面显示放心企业标识</span>
+    		</dd>
+    		<dd>
+    			<img src="{/$siteurl.style/}/img/part/tpart_bzj2.jpg" />
+    			<span>求职者浏览职位，优先展示</span>
+    		</dd>
+    	</dl>
+    	<p class="title">缴纳保证金会退吗？</p>  
+    	<p class="desc">我们收取1000元保证金只是为了防止出现欺诈求职者后找不到人的情况，如果出现违规（如没有不正当理由拒不支付求职者工资）等
+情况，我们将会用保证金对求职者进行赔付，如果没有出现纠纷，企业可以随时退款，退款将在十天内到账。</p>
+		<p class="desc1">保证金需要支付1000元人民币</p>	
+		{/if $is_insure_fee/}
+		<p class="desc1" style="color: rgb(114, 162, 30);">您已缴纳保证金{/$insure_fee/}元，无需重复缴纳</p>
+		{/else/}
+		<p><a href="{/get_url rule='/pay/index' data='src=insurefee'/}" class="link_orange2">通过网银缴纳</a></p>
+		{//if/}
+    </div>
+    <!--new end-->
+    
+    
+    
+{/include file="footer.html"/}
+</body>
+</html>

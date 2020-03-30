@@ -1,0 +1,86 @@
+{/include_php file='app/controller/head.php'/}
+<header id="header" class="header_nav">
+    <div class="hdCon">
+        <div class="hdL">
+            <span class="logo"><a href="{/$siteurl.main/}"></a></span>
+            <nav>
+            	<ul>              
+                <li class="navLst"><a href="{/get_url rule='/'/}" class="{/if $parent=="网络招聘"/} cu {//if/} navLnk">网络招聘</a></li>
+                <li class="navLst"><a href="{/get_url rule='/fair/'/}" class="{/if $parent=="现场招聘"/} cu {//if/}navLnk">现场招聘</a></li>
+                <li class="navLst"><a href="{/get_url rule='/account/'/}" class="{/if $parent=="账户"/} cu {//if/} navLnk">账户</a></li>
+                <li class="navLst" id="msgBox">
+                	<a href="{/get_url rule="/message/"/}" class="{/if $parent=="消息"/} cu {//if/} navLnk" id="btnMsg">消息{/if $companyInfo['messgecount']>0/} <em class="num">{/$companyInfo['messgecount']/}</em>{//if/}</a>
+                </li>
+                </ul>
+                <div class="clear"></div>
+            </nav>
+        </div>
+        <div class="hdR" id="hdR">
+            <ul>
+            <li class="thelpInfo" id="helpBox">
+            	<a href="{/get_url rule='/login/dologout'/}" class="lnk">退出登录</a>
+            </li>
+            <li class="line">&nbsp;</li>
+            <li class="tcomInfo" id="boxCompanyInfo">
+            	<a href="{/$companyInfo['company_url']/}" target="_blank" class="lnk" title='{/$companyInfo["company_name"]/}' >{/base_lib_BaseUtils::cutstr($companyInfo['company_name'],17, 'utf-8','','...')/}</a>
+            </li>
+            <li class="wemChatlist wemChatlistx  {/if $cur=='微信助手'/}wemChatlistcut{//if/}"><a href="{/get_url rule='/account/weixin/'/}">微信招聘助手</a></li>
+            <li class="line">&nbsp;</li>
+            <li class="addJobLnk"><a href="{/get_url rule='/job/add/'/}" class="lnk"><i class="hbFntWes">&#xf067;</i>发布职位</a></li>
+            </ul>
+        </div>
+    </div>
+</header>
+{/if $cur!="微信助手"/}
+    <aside class="header_nav">
+    	<div class="sbN">
+            <ul {/if $parent!="网络招聘"/} style="display:none" {//if/}>
+            	<li{/if $cur=="首页"/} class="cu" {//if/}><a href="{/get_url rule='/index/'/}">首页</a></li>
+            	<li{/if $cur=="职位管理"/} class="cu" {//if/}><a href="{/get_url rule='/index/joblist'/}">职位管理</a></li>
+                <li{/if $cur=="收到的简历"/} class="cu" {//if/}><a href="{/get_url rule='/apply'/}">收到的简历</a></li>
+                <li {/if $cur=="简历搜索"/} class="cu" {//if/}><a href="{/get_url rule='/resumesearch'/}">简历搜索</a></li>
+                <li{/if $cur=="下载的简历"/} class="cu" {//if/}><a href="{/get_url rule='/download'/}">下载的简历</a></li>            
+                <li{/if $cur=="面试邀请"/} class="cu" {//if/}><a href="{/get_url rule='/invite'/}">面试邀请</a></li>
+                <li{/if $cur=="我感兴趣的"/} class="cu" {//if/}><a href="{/get_url rule='/fav'/}">我感兴趣的(收藏)</a></li> 
+                <li{/if $cur=="推荐的简历"/} class="cu" {//if/}><a href="{/get_url rule='/recommend'/}">推荐的简历</a></li>            
+                <li{/if $cur=="回收站"/} class="cu" {//if/}><a href="{/get_url rule='/recycle'/}">回收站</a></li>
+            </ul>
+            <ul {/if $parent!="现场招聘"/} style="display:none"{/else/}style="padding-left:115px" {//if/}>
+            	<li{/if $cur=="我的招聘会"/} class="cu" {//if/}><a href="{/get_url rule='/fair'/}">我的招聘会</a></li>
+                <li{/if $cur=="现场职位管理"/} class="cu" {//if/}><a href="{/get_url rule='/fairjob'/}">现场职位管理</a></li>
+                <li{/if $cur=="发出的邀请"/} class="cu" {//if/}><a href="{/get_url rule='/fairsceneinvite'/}">发出的邀请</a></li>
+                <li{/if $cur=="邀请网站求职者"/} class="cu" {//if/}><a href="{/get_url rule='/faironline'/}">邀请网站求职者</a></li>
+            </ul>        
+            <ul {/if $parent!="账户"/} style="display:none"{/else/}style="padding-left:220px" {//if/} >
+            	<li{/if $cur=="我的账户"/} class="cu" {//if/}><a href="{/get_url rule='/account/'/}">我的账户</a></li>
+                <li{/if $cur=="企业资料"/} class="cu" {//if/}><a href="{/get_url rule='/company/modify'/}">企业资料</a></li>
+                <li{/if $cur=="企业环境"/} class="cu" {//if/}><a href="{/get_url rule='/environment'/}">企业环境</a></li>
+                <li{/if $cur=="企业认证"/} class="cu" {//if/}><a href="{/get_url rule='/licencevalidate'/}">企业认证</a></li>
+                <!--  <li{/if $cur=="开通会员"/} class="cu" {//if/}><a href="{/get_url rule='/vipapply/'/}">开通会员</a></li>-->
+                <li{/if $cur=="账户充值"/} class="cu" {//if/}><a href="{/get_url rule='/pay'/}">账户充值</a></li>
+            </ul>
+        </div>
+    </aside>
+{//if/}
+{/if $cur=="首页"/}
+<link rel="stylesheet" type="text/css" href="{/version file='wechat.css'/}" />
+<div class="weChatip" id="weixinhelpcontainer">
+    <div class="subWtip01">
+        <div class="subWtip02">微信招聘助手上线了！用微信就能玩转招聘，
+就是这么任性！<a href="{/get_url rule='/account/weixin/'/}">点击了解</a></div>
+        <a href="javascript:void(0);" class="wChatBtn" id="btnWeixin"></a>
+    </div>
+</div>
+{//if/}
+<script type="text/javascript">
+    $('#btnWeixin').click(function() {
+        cookieutility .set('showweixinhelp', true);  
+        $('#weixinhelpcontainer').hide(); 
+		$('#hdR ul li').removeClass('wemChatlistx');
+    });
+    var isShow = cookieutility .get('showweixinhelp');
+    if(isShow) {
+        $('#weixinhelpcontainer').hide();
+		$('#hdR ul li').removeClass('wemChatlistx');
+    }
+</script>

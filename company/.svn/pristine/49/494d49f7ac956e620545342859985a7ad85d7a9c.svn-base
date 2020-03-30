@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.min.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='common.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='jquery.form.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='dialog.js'/}"></script>
+    <style type="text/css">
+        * {padding: 0px;  margin: 0px;  font-family: "微软雅黑";  font-size: 14px;  list-style: none; color: #444;}
+        body{background:url({/$siteurl.style/}/img/company/code_img01.jpg);font-family: "Microsoft YaHei";}
+        a {  text-decoration: none;}
+        img {  border: none;  }
+        .codeMain{width:430px; margin:90px auto 0 auto; overflow: hidden;}
+        .huiboLogo{ display: block;width:206px; height: 49px; background: url({/$siteurl.style/}/img/company/huiboLogo.png) no-repeat; margin: 0 auto 50px auto;}
+        .codeBgk{width:430px; background: #fff; overflow: hidden; border-radius: 4px; text-align: center;}
+        .codeBgk img,.codeBgk span{ display: block; margin: 0 auto;}
+		.codeBgk span.codeTitx{ padding: 60px 0 25px 0; font-size: 18px;}
+		.codeBgk span.codeTitz{ padding: 40px 0 20px 0; color: #666;}
+		.codeBgk span.codeTitm{ padding: 0px 0 45px 0; font-size: 16px;}
+		.codeBgk span.codeNext{ padding: 0px 25px 30px 0; font-size: 12px; color: #ccc; text-align: right;}
+		.codeBgk span.codeNext:hover{ color: #999; text-decoration: underline;}
+    </style>
+</head>
+<body>
+<div class="codeMain">
+    <a href="//www.huibo.com/" class="huiboLogo"></a>
+    <div class="codeBgk">
+        <span class="codeTitx">登录验证</span>
+        <img id="codeimg" src=""/>
+        <span class="codeTitz">需验证你的登陆信息</span>
+        <span class="codeTitm">用手机微信扫码关注公众号 • 绑定微信身份</span>
+        <span class="codeNext" style="cursor:pointer">下次验证</span>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        var loadcodeurl = function() {
+            $('#codeimg').removeAttr('width').removeAttr('height').attr('src',"{/$siteurl.style/}/img/c/indicator_medium.gif");
+            $.getJSON('{/get_url rule="/account/twodimensioncode/"/}',function(result){
+                if(result&&result.status) {
+                    $('#codeimg').removeAttr('src').attr({width:234,height:234,src:result.data.codeurl});
+                }else {
+                    $('#codeimg').attr({title:'加载失败，请刷新页面',src:''});
+                }
+            });
+        };
+
+        var t = "";
+        function checkBindWX() {
+            clearTimeout(t);
+            $.ajax({
+                url: "{/$siteurl.company|replace:'http:':''/}/login/CheckBindWX",
+                data: {},
+                dataType: "json",
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    t = setTimeout(function(){
+                        checkBindWX();
+                    },1500);
+                },
+                success: function (json, textStatus) {
+                    if(json.status){
+                        if(json["data"].isbind == false){
+                            t = setTimeout(function(){
+                                checkBindWX();
+                            },1500);
+                        }else{
+                            {/if $part/}
+                            window.location.href = "/part";
+                            {/else if (!empty($redirect))/}
+                            window.location.href = "{/get_url rule="{/$redirect/}"/}";
+                            {/else/}
+                            window.location.href = "/";
+                            {//if/}
+                        }
+                    }else{
+                        $.message(json.msg, {title: '操作失败！',onok:function(){
+                            window.location.reload();
+                        }});
+                    }
+                }
+            });
+    }
+
+
+        $('#codeimg').click(function(){
+            loadcodeurl();
+        });
+
+        $(".codeNext").click(function(){
+            {/if $part/}
+            window.location.href = "/part";
+            {/else if (!empty($redirect))/}
+            window.location.href = "{/get_url rule="{/$redirect/}"/}";
+            {/else/}
+            window.location.href = "{/$siteurl.company|replace:'http:':''/}";
+            {//if/}
+
+        });
+        loadcodeurl();
+        checkBindWX();
+    });
+</script>
+</body>
+</html>

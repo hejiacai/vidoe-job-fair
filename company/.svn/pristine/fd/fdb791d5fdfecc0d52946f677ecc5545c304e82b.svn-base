@@ -1,0 +1,287 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Administrator
+ * Date: 2019/7/3
+ * Time: 15:37
+ */
+class controller_autorefresh extends components_cbasepage {
+
+    function __construct() {
+        parent::__construct(true);
+    }
+
+
+    public function pageIndex($inPath){
+        $pathdata = base_lib_BaseUtils::sstripslashes($this->getUrlParams($inPath));
+        $in_data['station']  = base_lib_BaseUtils::getStr($pathdata["station"],'string','');
+
+        if(empty($this->_userid) || $this->_usertype != 'c'){
+            header('Location:'.base_lib_Constant::COMPANY_URL);
+            return;
+        }
+        $account_id              = base_lib_BaseUtils::getCookie('accountid');
+        $service_job             = new base_service_company_job_job();
+        $service_company         = new base_service_company_company();
+        $service_autorefresh     = new base_service_company_job_autorefresh();
+        $job_status              = new base_service_common_jobstatus();
+        $servcie_auditjobcompany = new base_service_company_auditjobcompany();
+        $servcie_recruittype     = new base_service_company_recruittype();
+        $service_accountservice  = new base_service_company_account();
+
+        $account = $service_accountservice->getAccount($account_id,'is_main,resource_type');
+        $company_resources = base_service_company_resources_resources::getInstance($this->_userid, true, $account_id);
+        $company_info_resources = $company_resources->getCompanyServiceSource();
+        if(!$company_info_resources['cq_is_batch_refresh']){
+            header('Location:'.base_lib_Constant::COMPANY_URL);
+            return;
+        }
+        $in_data['resource_type'] = $company_info_resources['resource_type'];
+        $in_data['cq_release_point_job_refresh'] = $company_info_resources['cq_release_point_job_refresh'];
+        if(!$company_info_resources['isCqNewService']){
+            header('Location:'.base_lib_Constant::COMPANY_URL);
+            return;
+        }
+        $company = $service_company->getCompany($this->_userid,1,'recruit_type');
+        if($company['recruit_type'] == $servcie_recruittype->intermediary
+            || $company['recruit_type'] == $servcie_recruittype->train
+            || $company['recruit_type'] == $servcie_recruittype->proxy
+            || $servcie_auditjobcompany->isInAuditJobCompany($this->_userid)){   //代招人力资源、中介、职位预审名单企业最多选择1个时段
+
+            $in_data['time_count'] = 1;
+        }else{
+            $in_data['time_count'] = 3;
+        }
+
+        $_account_id = '';
+        if($account['resource_type'] == 2){
+            $_account_id = $account_id;
+        }
+        $job_list = $service_job->getJobList($company_resources->all_accounts, $in_data['station'], $job_status->pub, 'id,job_id,company_id,job_flag,station,check_state,end_time,status,create_time,account_id,refresh_time', 0, 0, null, $_account_id);
+
+        $job_ids     = base_lib_BaseUtils::getProperty($job_list,'job_id');
+        $account_ids = base_lib_BaseUtils::getProperty($job_list,'account_id');
+
+        $refresh_jobs = $service_autorefresh->getJobs($job_ids,$company_resources->all_accounts,'job_id,GROUP_CONCAT(plan_refresh_date) as plan_refresh_date,plan_refresh_times');
+        $refresh_jobs = base_lib_BaseUtils::array_key_assoc($refresh_jobs,'job_id');
+
+        //查看职位发布人资源模式
+        $accounts = $service_accountservice->getAccounts(array_unique($account_ids),'account_id,resource_type');
+        $accounts = base_lib_BaseUtils::array_key_assoc($accounts,'account_id');
+        foreach($job_list as $key=>$val){
+            $job_list[$key]['can_refresh'] = true;
+            $job_list[$key]['has_refresh']  = false;
+            if($val['check_state'] == 4 ){   //审核中
+                $job_list[$key]['can_refresh'] = false;
+            }
+            if($in_data['resource_type'] == 2 && $account_id != $val['account_id']){   //子帐号模式判断
+                $job_list[$key]['can_refresh'] = false;
+            }
+//            if($in_data['resource_type'] == 1 && $accounts[$val['account_id']]['resource_type'] == 2 && !$account['is_main']){
+//                $job_list[$key]['can_refresh'] = false;
+//            }
+            if($refresh_jobs[$val['job_id']]['plan_refresh_date']){
+                $plan_refresh_date = explode(',',$refresh_jobs[$val['job_id']]['plan_refresh_date']);
+                $date_count = count($plan_refresh_date);
+                if($date_count>1){
+                    $job_list[$key]['plan_refresh_date_str'] = date("Y年m月d日",strtotime(min($plan_refresh_date))).' - '.date("Y年m月d日",strtotime(max($plan_refresh_date)));
+                }else{
+                    $job_list[$key]['plan_refresh_date_str'] = date("Y年m月d日",strtotime($plan_refresh_date[0]));
+                }
+
+                $job_list[$key]['plan_refresh_date'] = $refresh_jobs[$val['job_id']]['plan_refresh_date'];
+            }else{
+                $job_list[$key]['plan_refresh_date_str'] = '未设置';
+            }
+
+            if($refresh_jobs[$val['job_id']]['plan_refresh_times']){
+                $job_list[$key]['plan_refresh_times'] = $refresh_jobs[$val['job_id']]['plan_refresh_times'];
+                $plan_refresh_times = explode(',',$refresh_jobs[$val['job_id']]['plan_refresh_times']);
+                $plan_refresh_times_str = '';
+                for($i=0;$i<count($plan_refresh_times);$i++){
+                    $plan_refresh_times_str .= base_service_company_job_autorefresh::$time[$plan_refresh_times[$i]].',';
+                }
+                $job_list[$key]['plan_refresh_times_str'] = rtrim($plan_refresh_times_str,',');
+                $job_list[$key]['need_refresh_point']     = count($plan_refresh_times) * $date_count;
+            }else{
+                $job_list[$key]['plan_refresh_times_str'] = '未设置';
+            }
+
+            if($refresh_jobs[$val['job_id']]){
+                $job_list[$key]['has_refresh']  = true;
+            }
+
+        }
+        $in_data['list'] = $job_list;
+        $in_data['time'] = base_service_company_job_autorefresh::$time;
+        $in_data['start_time'] = date("Y-m-d");
+        $in_data['end_time']   = date("Y-m-d",strtotime("+6 days"));
+        //var_dump($job_list);exit;
+
+        return $this->render('jobautorefresh.html',$in_data);
+    }
+
+    /**
+     * 取消刷新
+     */
+    public function pageCancelRefresh($inPath){
+        $pathdata = base_lib_BaseUtils::sstripslashes($this->getUrlParams($inPath));
+        $job_ids       = base_lib_BaseUtils::getStr($pathdata["job_ids"],'string','');
+
+
+        if(empty($this->_userid) || $this->_usertype != 'c'){
+            echo json_encode(['status'=>false,'msg'=>"帐号在别处登录，请重新登录"]);
+            return;
+//            header('Location:'.base_lib_Constant::COMPANY_URL);
+//            return;
+        }
+
+        if(empty($job_ids)){
+            echo json_encode(['status'=>false,'msg'=>'缺少必要参数，请刷新后再试']);
+            return;
+        }
+        $service_autorefresh = new base_service_company_job_autorefresh();
+        $job_ids = explode(',',$job_ids);
+        $res = $service_autorefresh->delete(['job_id'=>['in'=>$job_ids]]);
+        //$res = $service_autorefresh->update(['job_id'=>['in'=>$job_ids]],['is_effect'=>0]);
+
+        if($res){
+            echo json_encode(['status'=>true,'msg'=>'取消成功']);
+            return;
+        }
+
+        echo json_encode(['status'=>false,'msg'=>'该职位未自动刷新，无需取消']);
+        return;
+    }
+
+
+    /**
+     *
+     * 添加自动刷新
+     */
+    public function pageAddAutoRefresh($inPath){
+        $pathdata = base_lib_BaseUtils::sstripslashes($this->getUrlParams($inPath));
+        $job_ids           = base_lib_BaseUtils::getStr($pathdata["job_ids"],'string','');
+        if(empty($job_ids)){
+            echo json_encode(['status'=>false,'msg'=>'缺少必要参数，请刷新后重试']);
+            return;
+        }
+        $job_ids = explode(',',$job_ids);
+        $plan_refresh_date  = base_lib_BaseUtils::getStr($pathdata["plan_refresh_date"],'string','');
+        $in_data['plan_refresh_times'] = base_lib_BaseUtils::getStr($pathdata["plan_refresh_times"],'string','');
+        $plan_refresh_date = explode(', ',$plan_refresh_date);
+
+        //判断最大时间
+        $max_plan_time = max(explode(',',$in_data['plan_refresh_times']));
+        $max_plan_time = base_service_company_job_autorefresh::$time[$max_plan_time];
+        $max_plan_time = date("H:i:s",strtotime(substr($max_plan_time,6,5)));
+        $max_plan_date = max($plan_refresh_date);
+        $max_date_time = $max_plan_date.' '.$max_plan_time;
+
+        if(empty($this->_userid) || $this->_usertype != 'c'){
+            echo json_encode(['status'=>false,'msg'=>"请先登录"]);
+            return;
+        }
+
+        $account_id              = base_lib_BaseUtils::getCookie('accountid');
+        $service_job             = new base_service_company_job_job();
+        $service_company         = new base_service_company_company();
+        $service_autorefresh     = new base_service_company_job_autorefresh();
+        $job_status              = new base_service_common_jobstatus();
+        $servcie_auditjobcompany = new base_service_company_auditjobcompany();
+        $servcie_recruittype     = new base_service_company_recruittype();
+        $apply_service           = new base_service_company_resume_apply();
+        $company_resources       = base_service_company_resources_resources::getInstance($this->_userid, true, $account_id);
+        $company = $service_company->getCompany($this->_userid,1,'recruit_type');
+        if($company['recruit_type'] == $servcie_recruittype->intermediary
+            || $company['recruit_type'] == $servcie_recruittype->train
+            || $company['recruit_type'] == $servcie_recruittype->proxy
+            || $servcie_auditjobcompany->isInAuditJobCompany($this->_userid)){   //代招人力资源、中介、职位预审名单企业最多选择1个时段
+
+            $time_count = 1;
+        }else{
+            $time_count = 3;
+        }
+
+        if(count(explode(',',$in_data['plan_refresh_times'])) > $time_count){
+            echo json_encode(['status'=>false,'msg'=>"最多选择{$time_count}个时间段"]);
+            return;
+        }
+        //查询出含有超过2天未处理简历的职位
+        $apply_jobs = $apply_service->getNotReplyJobIds($company_resources->all_accounts, 2);
+        $jobs = $service_job->getJobs($job_ids,'job_id,company_id,station,end_time,check_state');
+
+        $refresh_jobs = $service_autorefresh->getJobs($job_ids,$this->_userid,'job_id,plan_refresh_date,refresh_times');
+        $refresh_job_ids = base_lib_BaseUtils::getProperty($refresh_jobs,'job_id');
+        $service_autorefresh->delete(['job_id'=>['in'=>$job_ids]]);//删除就数据
+        $not_reply_jobs = array();
+        $end_time_jobs  = array();
+        $not_check_jobs = array();
+
+        foreach($plan_refresh_date as $k=>$v){
+            foreach($jobs as $key=>$val){
+                $refresh_times  = 0;
+                if(in_array($val['job_id'],$refresh_job_ids)){
+                    foreach($refresh_jobs as $ref=>$value){
+                        if($val['job_id'] == $value['job_id'] && $v == $value['plan_refresh_date']){
+                            $refresh_times = $value['refresh_times'];
+                        }
+                    }
+                }
+
+                if($val['end_time'] < $max_date_time){
+                    array_push($end_time_jobs,$val['station']);
+                }
+                if($apply_jobs[$val['job_id']]['no_reply_num']>0){
+                    array_push($not_reply_jobs,$val['station']);
+                }
+                //$val['check_state'] =1;/*******************调试*******************/
+                if($val['check_state'] == 4){
+                    array_push($not_check_jobs,$val['station']);
+                }else{
+                    $in_data['job_id']      = $val['job_id'];
+                    $in_data['company_id']  = $val['company_id'];
+                    $in_data['create_time'] = date("Y-m-d H:i:s");
+                    $in_data['plan_refresh_date'] = $v;
+                    $in_data['account_id'] = $account_id;
+                    $in_data['refresh_times'] = $refresh_times;
+                    $res = $service_autorefresh->insert($in_data);
+                }
+            }
+        }
+
+
+        $msg = '';
+        if($not_reply_jobs){
+            $msg = "您的职位{$this->getStationMsg($not_reply_jobs)}超过48小时未查看投递简历，查看投递简历后自动刷新生效";
+        }
+        if($end_time_jobs && !$not_reply_jobs){
+            $msg = "您的职位{$this->getStationMsg($end_time_jobs)}下架时间早于本次设置的刷新时间，职位下架后将不会刷新。";
+        }
+        if($end_time_jobs && $not_reply_jobs){
+            $msg = $msg."<br/>{$this->getStationMsg($end_time_jobs)}下架时间早于本次设置的刷新时间，职位下架后将不会刷新。";
+        }
+        if($not_check_jobs){
+            if($msg){
+                $msg = $msg."<br/>{$this->getStationMsg($not_check_jobs)}暂未通过审核，请通过审核后再设置自动刷新";
+            }else{
+                $msg = "您的职位{$this->getStationMsg($not_check_jobs)}暂未通过审核，请通过审核后再设置自动刷新";
+            }
+        }
+
+        if(!$msg){
+            $msg = "设置成功";
+        }
+
+        echo json_encode(['status'=>true,'msg'=>$msg]);
+    }
+
+    function getStationMsg($station_arr = array()){
+        $station = '';
+        $station_arr = array_unique($station_arr);
+        for($i=0;$i<count($station_arr);$i++){
+            $station .= "【$station_arr[$i]】";
+        }
+        return $station;
+    }
+}

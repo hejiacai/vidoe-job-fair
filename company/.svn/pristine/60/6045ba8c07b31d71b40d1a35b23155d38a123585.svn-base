@@ -1,0 +1,45 @@
+{/include_php file='app/controller/economicnav.php'/}
+<div class="rMentLt">
+    <ul class="rMentUl" data-src="{/$is_show_consume_static/}">
+        {/if $is_show_consume_static/}
+            <li>
+                <a href="{/get_url rule='/consumelog/ConsumeStatic'/}" class="{/if $par == '资源消耗统计'/}cut{//if/}">
+                    <em class="mentIcon01"></em>资源消耗统计
+                </a>
+            </li>
+        {//if/}
+        <li>
+            <a href="{/get_url rule='/pay'/}" class="{/if $par == '账户充值'/}cut{//if/}">
+                <em class="mentIcon03"></em>账户充值
+            </a>
+        </li>
+        <li>
+            <a href="{/get_url rule='/commoncoupon'/}" class="{/if $par == '优惠券'/}cut{//if/}">
+                <em class="mentIcon02"></em>优惠券
+            </a>
+        </li>
+        <li>
+            <a href="{/get_url rule='/pay/paylist/'/}" class="{/if $par == '消费记录'/}cut{//if/}">
+                <em class="mentIcon04"></em>消费记录
+            </a>
+        </li>
+    </ul>
+</div>
+<style>
+  .resumentNbg{width:1000px; height:auto; min-height:800px; background:url({/$siteurl.style/}/img/c/new_resume/resumentbg.png) repeat-y #fff;  box-shadow: 0 0 3px #ddd; margin:15px auto; text-align:left; position:relative;}
+.rMentLt{width:204px; float:left;}
+.rMentRt{width:756px!important; float:left!important; margin:20px 0 0 20px!important;}
+.rMentUl{width:204px;}
+.rMentUl li a{ display:block;width:204px; height:47px; background:url({/$siteurl.style/}/img/c/new_resume/bmline.png) 0 bottom no-repeat; line-height:47px; color:#c2e2ff; font-size:16px;}
+.rMentUl li a em{ display:inline-block; vertical-align:-4px;#vertical-align:0px;width:20px; height:20px; margin:0 10px 0 18px; _margin-top:12px;}
+.rMentUl li a em.mentIcon01{ background:url({/$siteurl.style/}/img/c/new_resume/resource1.png) no-repeat;}
+.rMentUl li a.cut em.mentIcon01{ background:url({/$siteurl.style/}/img/c/new_resume/resource2.png) no-repeat;}
+.rMentUl li a em.mentIcon02{ background:url({/$siteurl.style/}/img/c/new_resume/coupon1.png) no-repeat;}
+.rMentUl li a.cut em.mentIcon02{ background:url({/$siteurl.style/}/img/c/new_resume/coupon2.png) no-repeat;}
+.rMentUl li a em.mentIcon03{ background:url({/$siteurl.style/}/img/c/new_resume/pay1.png) no-repeat;}
+.rMentUl li a.cut em.mentIcon03{ background:url({/$siteurl.style/}/img/c/new_resume/pay2.png) no-repeat;}
+.rMentUl li a em.mentIcon04{ background:url({/$siteurl.style/}/img/c/new_resume/record1.png) no-repeat;}
+.rMentUl li a.cut em.mentIcon04{ background:url({/$siteurl.style/}/img/c/new_resume/record2.png) no-repeat;}
+.rMentUl li a:hover{background:url({/$siteurl.style/}/img/c/new_resume/bmline.png) 0 bottom no-repeat #6da7db;}
+.rMentUl li a.cut{ background:#00c0c7; color:#fff;}
+</style>

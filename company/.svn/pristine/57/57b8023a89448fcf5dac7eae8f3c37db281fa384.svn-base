@@ -1,0 +1,24 @@
+<style>
+.yaoqing-alert{margin:30px;color:#999;font-size:14px;line-height: 22px}
+.yaoqing-alert dt{float: left;width:121px;height: 121px;margin-right: 20px}
+.yaoqing-alert .t1{color:#0ea5a0;font-size:24px;font-family: '微软雅黑';margin-bottom: 15px}
+.yaoqing-alert .t2{margin-bottom: 15px}
+.yaoqing-alert .t2 span{color:#ff6563}
+.yaoqing-alert .link2{color:#3f74c2;font-size:14px;margin-left: 10px}
+</style>
+<div style="width:510px;">
+	<dl id="yaoqing-alert" class="yaoqing-alert clearfix">
+		<dt><img src="{/$siteurl.style/}/img/company/cjl.jpg" /></dt>
+		<dd>
+			<p class="t1">哎呀，余额不足了！</p>
+			<p class="t2">当前帐号余额：<span>￥{/$account/}</span><br />简历需花费：
+			<span>￥{/$consume/}</span></p>
+			<p><a href="{/get_url rule="/pay/"/}" target="_blank" class="btn1 btnsF14 close">立即充值</a><a href="{/get_url rule="/index/memberdetail/"/}" class="link2" target="_blank">成为会员，下载简历低至2元</a></p>
+		</dd>
+	</dl>
+</div>
+<script>
+	$(".close").on("click", function (e) {
+		$(this).closeDialog();
+	});
+</script>

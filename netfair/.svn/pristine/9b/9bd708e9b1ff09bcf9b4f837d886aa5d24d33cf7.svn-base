@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="Keywords" content="" />
+	<meta name="Description" content="" />
+	<meta name="renderer" content="webkit">
+    <title>视频招聘会</title>
+    <script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.min.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='mobile.swiper.js'/}"></script>
+    <script type="text/javascript" src="{/version file='jquery.cookie.js'/}"></script>
+    <script type="text/javascript" src="{/version file='layer.js'/}"></script>
+    <link type="text/css" href="{/version file='layer.css'/}">
+	<link rel="stylesheet" type="text/css" href="{/version file='netfarJobList.css'/}"/>
+	<link rel="stylesheet" type="text/css" href="{/version file='m_font_style.css'/}">
+	<link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}">
+    <script type="text/javascript" src="{/version file='base_script.js'/}"></script>
+    <script type="text/javascript" src="{/version file='version.js'/}"></script>
+    <script type="text/javascript">
+        window.CONFIG = {
+            HOST: '{/$siteurl.style/}',
+            COMBOPATH: '/js/v2/',
+        };
+    </script>
+    <script type="text/javascript"
+            src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+    <script type="text/javascript" src="{/version file='global.js'/}"></script>
+    <script type="text/javascript">
+        hbjs.config({
+            combos: {
+                '@homeSideSortMenu': [
+                    'product.homeSideSortMenu', 'product.sideMenu.sideSortMenuGroup', 'product.sideMenu.sideSortMenu',
+                    'product.sideMenu.sideSortMenuData', '@popup'
+                ]
+            }
+        });
+        hbjs.loadJS('{/$siteurl.style/}/js/v2/cqjob/common.js');
+    </script>
+    <style>
+		.formShow .formText input{
+			border: 1px solid #cfcfcf!important;
+		}
+		.box-active{
+		  position: fixed;
+		  top: 0;
+		  z-index: 999;
+		}
+		{/if empty($list.signup_in) &&  empty($list.go_on) && empty($list.over)&& empty($list.interview_in)/}
+			body{height: 100vh;}
+		{//if/}
+    </style>
+</head>
+<body>
+{/$head_data/}
+<div class="videoJobFairTop">
+    <div>
+        <a>视频招聘会</a>
+    </div>
+</div>
+<div class="nav_content">
+<div class="serach_v">
+<div class="serach">
+    <form action="{/get_url rule="/index/index"/}" method="get" id="form">
+        <input type="text" placeholder="搜索招聘会、心仪公司或职位" name="content" value="{/$content/}">
+        <input type="hidden">
+    </form>
+    <div id="submit">
+    <img src="{/$siteurl.style/}/img/company/video/serach_bot_03.jpg"  style="cursor: pointer">
+	<span class="icon-home_navigation_search2x searchIcon"></span>
+	<span class="searchBut" style="cursor: pointer">搜索</span></div>
+</div>
+</div>
+{/if $list.signup_in ||  $list.go_on || $list.over|| $list.interview_in/}
+{/if $list.interview_in/}
+<div class="search_box">
+    <div class="apply">
+        <div class="apply_title">
+            <!-- <img src="{/$siteurl.style/}/img/company/video/vidoe_03.jpg" class="top_img"> -->
+			<span class="icon-video_icon img_icon"></span>
+            <span class="title_mark">视频面试中<em></em></span>
+            <span class="apply_td">今日申请,今日面试</span>
+        </div>
+        <div class="apply_items">
+                {/foreach $list.interview_in as $key=>$val/}
+            <a href="{/get_url rule='/fairList/'/}sid-{/$val.id/}" target="_blank">
+                    <div class="apply_item_c">
+                        {/if $val.list_poster/} <img src="{/$val.list_poster_info/}" class="apply_item_img">{/else/}<img src="{/$siteurl.style/}/img/mobile/moren_pic.png" class="apply_item_img" />{//if/}
+                    <div class="apply_item_c_box">
+                        <div class="apply_item_c_content">
+                            <!-- <img src="{/$siteurl.style/}/img/company/video/vidoe_03.jpg" > -->
+							<span class="icon-video_icon img_icon"></span>
+                            <span class="top_img_c">{/$val.title/}</span>
+                        </div>
+                        <div class="baom_scri">
+                            <span>企业 <em>{/$val.count_data.company_num/}</em> 家</span>
+                            <span>岗位 <em>{/$val.count_data.job_num/}</em> 个</span>
+                            <span>参与 <em>{/$val.count_data.person_num/}</em> 人</span>
+                        </div>
+                        <div class="end_time">
+                            {/if date('H:i',time())<date('H:i',strtotime($val.interview_end_time))/}{/$val.interview_end_time|date_format:'H:i'/}结束{//if/}  {/if $val.number/}剩余{/$val.number/}个名额{//if/}
+                        </div>
+                        {/if $val.station/}
+                        <div class="tuijian">
+                            <!-- <img src="{/$siteurl.style/}/img/company/video/03.jpg" alt=""> -->
+							<span class="img_spn">推荐</span>
+                            <span class="jobName">{/$val.station/}</span>
+                            <span>等{/$val.station_count/}个在招</span>
+                        </div>
+                        {//if/}
+                    </div>
+                </div>
+            </a>
+                {//foreach/}
+
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>
+{//if/}
+</div>
+{/if $list.signup_in ||  $list.go_on || $list.over/}
+<div class="activi_box">
+    {/if $list.signup_in ||  $list.go_on/}
+    <div class="box_ms">
+        <div class="list_items">
+            <div class="list_item_title list_item_title_c">报名中<em></em></div>
+            {/if $list.signup_in/}
+            {/foreach $list.signup_in as $key=>$val/}
+            <a href="{/get_url rule='/fairList/'/}sid-{/$val.id/}" target="_blank">
+            <div class="list_item_c">
+                <div class="list_item_cc">
+                    {/if $val.list_poster/} <img src="{/$val.list_poster_info/}" class="nav_img">{/else/}<img src="{/$siteurl.style/}/img/mobile/moren_pic.png" class="nav_img" />{//if/}
+                    <div class="list_item_c_conte">
+                        <div class="apply_item_c_content_t">
+                            <!-- <img src="{/$siteurl.style/}/img/company/video/vidoe_03.jpg" > -->
+							<span class="icon-video_icon img_icon"></span>
+                            <span class="wza">{/$val.title/}</span>
+                        </div>
+                        <div class="baom_scri_c">
+                            <span>企业 <em>{/$val.count_data.company_num/}</em> 家</span>
+                            <span>岗位 <em>{/$val.count_data.job_num/}</em> 个</span>
+                            <span>参与 <em>{/$val.count_data.person_num/}</em> 人</span>
+                        </div>
+                        <div class="baom">
+                            <span>面试：</span>
+                            <span class="jttime">{/$val.interview_start_time|date_format:'m.d H:i'/}  - {/$val.interview_end_time|date_format:'m.d H:i'/}</span>
+                        </div>
+                        <div class="end_time_c">
+                            {/$val.day/}
+                        </div>
+                        {/if $val.station/}
+                        <div class="tuijian">
+                            <!-- <img src="{/$siteurl.style/}/img/company/video/03.jpg" alt=""> -->
+							<span class="img_spn">推荐</span>
+                            <span class="jobName">{/$val.station/}</span>
+                            <span>等{/$val.station_count/}个在招</span>
+                        </div>
+                        {//if/}
+                    </div>
+                </div>
+            </div>
+            </a>
+            {//foreach/}
+            {//if/}
+            {/if $list.go_on/}
+            {/foreach $list.go_on as $key=>$val/}
+            <a href="{/get_url rule='/fairList/'/}sid-{/$val.id/}" target="_blank">
+                <div class="list_item_c">
+                    <div class="list_item_cc">
+                        {/if $val.list_poster/} <img src="{/$val.list_poster_info/}" class="nav_img">{/else/}<img src="{/$siteurl.style/}/img/mobile/moren_pic.png" class="nav_img" />{//if/}
+                        <div class="list_item_c_conte">
+                            <div class="apply_item_c_content_t">
+                                <!-- <img src="{/$siteurl.style/}/img/company/video/vidoe_03.jpg" > -->
+								<span class="icon-video_icon img_icon"></span>
+                                <span class="wza">{/$val.title/}</span>
+                            </div>
+                            <div class="baom_scri_c">
+                                <span>企业 <em>{/$val.count_data.company_num/}</em> 家</span>
+                                <span>岗位 <em>{/$val.count_data.job_num/}</em> 个</span>
+                                <span>参与 <em>{/$val.count_data.person_num/}</em> 人</span>
+                            </div>
+                            <div class="baom">
+                                <span>活动时间：</span>
+                                <span class="jttime">{/$val.start_time|date_format:'m.d H:i'/}  - {/$val.end_time|date_format:'m.d H:i'/}</span>
+                            </div>
+                            {/if $val.station/}
+                            <div class="tuijian">
+                                <!-- <img src="{/$siteurl.style/}/img/company/video/03.jpg" alt=""> -->
+								<span class="img_spn">推荐</span>
+                                <span class="jobName">{/$val.station/}</span>
+                                <span>等{/$val.station_count/}个在招</span>
+                            </div>
+                            {//if/}
+                        </div>
+                    </div>
+                </div>
+            </a>
+            {//foreach/}
+            {//if/}
+            <div class="clear"></div>
+        </div>
+    </div>
+    {//if/}
+    {/if $list.over/}
+    <div class="box_ms box_end">
+        <div class="list_items">
+            <div class="list_item_title">已结束</div>
+            {/if $list.over/}
+            {/foreach $list.over as $key=>$val/}
+            <a href="{/get_url rule='/fairList/'/}sid-{/$val.id/}" target="_blank">
+            <div class="list_item_c list_item_end">
+                <div class="list_item_cc">
+                    {/if $val.list_poster/} <img src="{/$val.list_poster_info/}" class="nav_img">{/else/}<img src="{/$siteurl.style/}/img/mobile/moren_pic.png" class="nav_img" />{//if/}
+                    <div class="list_item_c_conte">
+                        <div class="apply_item_c_content_t">
+                            <!-- <img src="{/$siteurl.style/}/img/company/video/vidoe_03.jpg" > -->
+							<span class="icon-video_icon img_icon"></span>
+                            <span class="wza">{/$val.title/}</span>
+                        </div>
+                        <div class="baom_scri_c">
+                            <span>企业 <em>{/$val.count_data.company_num/}</em> 家</span>
+                            <span>岗位 <em>{/$val.count_data.job_num/}</em> 个</span>
+                            <span>参与 <em>{/$val.count_data.person_num/}</em> 人</span>
+                        </div>
+                        <div class="baom">
+                            <span>活动时间：</span>
+                            <span class="jttime">{/$val.start_time|date_format:'m.d H:i'/}  - {/$val.end_time|date_format:'m.d H:i'/}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </a>
+            {//foreach/}
+            {//if/}
+            <div class="clear"></div>
+        </div>
+    </div>
+    {//if/}
+</div>
+{//if/}
+{/else/}
+<!-- <p style="">暂无搜索结果，您可浏览其他视频招聘会</p> -->
+<div class="noDatabox">
+		<img src="{/$siteurl.style/}/img/company/video/eng_icon10.png" >
+		<p>{/if $serach_warn/}{/$serach_warn/}{/else/}暂无搜索结果，您可浏览其他视频招聘会{//if/}</p>
+</div>
+{//if/}
+<div class="footer_box">
+	{/include file="./public/shuanxuan/footer.html"/}
+</div>
+</body>
+<script>
+    $('#submit').click(function () {
+        $('#form').submit();
+    })
+	$(document).ready(function(){
+		var timeId = setInterval(function(){
+				var html = $('.title_mark em').html() + '·'
+				if(html == '····') {
+						html = ''
+				}
+				$('.title_mark em').html(html)
+		},1000)
+		var timeI = setInterval(function(){
+				var html = $('.list_item_title_c em').html() + '·'
+				if(html == '····') {
+						html = ''
+				}
+				$('.list_item_title_c em').html(html)
+		},1000)
+	})
+	$(document).scroll(function() {
+	        var scroH = $(document).scrollTop();  //滚动高度
+	        var viewH = $(window).height();  //可见高度 
+	        var contentH = $(document).height();  //内容高度
+			// console.log('页面滚动高度',scroH)
+	        if(scroH >126){  //距离顶部大于100px时
+				$('.serach_v').addClass('box-active')
+	        }else{
+				$('.serach_v').removeClass('box-active')
+			}
+	})
+</script>
+</html>

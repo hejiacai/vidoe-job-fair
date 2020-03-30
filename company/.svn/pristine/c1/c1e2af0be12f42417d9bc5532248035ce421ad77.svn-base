@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="Keywords" content="" />
+        <meta name="Description" content="" />
+        <title>汇博人才网-视频面试大厅</title>
+        <!–[if lt IE9]>
+        <script src="{/version file='html5.js'/}"></script>
+        <![endif]–>
+        <link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+        <link rel="stylesheet" type="text/css" href="{/version file='video_eng.css'/}" />
+        <link rel="stylesheet" type="text/css" href="{/version file='comback.css'/}" />
+        <link rel="stylesheet" type="text/css" href="{/version file='m_font_style.css'/}">
+        <link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}">
+		<script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.min.js'/}"></script>
+        
+        <script type="text/javascript" src="{/version file='version.js'/}"></script>
+        <script type="text/javascript">
+            window.CONFIG = {
+                HOST: '{/$siteurl.style/}',
+                COMBOPATH: '/js/v2/'
+            }
+        </script>
+        <script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+        <script type="text/javascript" src="{/version file='global.js'/}"></script>
+        <script type="text/javascript" language="javascript" src="{/version file='confirmBox.js'/}"></script>
+        <script type="text/javascript" language="javascript" src="{/version file='dialog.js'/}"></script>
+    </head>
+	<body style="background: #f6f7f8;">
+		{/include 'schoolnet/hallhead.html' par='视频面试大厅'/} 
+		<div class="videoIhalMain">
+			<div class="videoImproveEquipment" id="videoCheckTopDiv" style="display:none;">
+				<img src="{/$siteurl.style/}/img/company/video/eng_icon04.png" >
+				<em class="red">完善设备后可视频面试：</em>
+				<img class="videoDevice" src="{/$siteurl.style/}/img/company/video/eng_icon05.png" >
+				<em class="videoDevice">摄像头</em>
+				<img class="audioDevice" src="{/$siteurl.style/}/img/company/video/eng_icon06.png" >
+				<em class="audioDevice">麦克风</em>
+				<img class="audioDevice" src="{/$siteurl.style/}/img/company/video/eng_icon07.png" >
+				<em class="audioDevice">音频设备</em>
+				<img class="browserDevice" src="{/$siteurl.style/}/img/company/video/eng_icon08.png" >
+				<em class="browserDevice">浏览器检测</em>
+			</div>
+			<div class="videointerviewTitle">
+				<p>
+					<i></i>
+					<span>即将面试</span>
+					<em>（按面试申请顺序依次面试，不能跳过）</em>
+				</p>
+				<a {/if !$company_interview_times/}style="display:none;"{//if/} href="javascript:void(0);" class='setInterviewTime'>设置面试时间</a>
+			</div>
+			<table class="interviewTab" {/if !$apply_list_top_one/}style="display:none;"{//if/}>
+				<tr>
+					<th width="8%">序号</th>
+					<th width="8%">姓名</th>
+					<th width="8%">性别</th>
+					<th width="8%">年龄</th>
+					<th width="8%">学历</th>
+					<th width="15%">学校</th>
+					<th width="15%">专业</th>
+					<th width="15%">面试职位</th>
+					<th width="15%">操作</th>
+				</tr>
+				<tr>
+					<td>{/$apply_list_top_one['show_order_no']/}</td>
+					<td>{/$apply_list_top_one['user_name']/}</td>
+                    <td>{/$apply_list_top_one['sex']/}</td>
+					<td>{/$apply_list_top_one['age']/}</td>
+					<td>{/$apply_list_top_one['degree_name']/}</td>
+					<td>{/$apply_list_top_one['school']/}</td>
+					<td>{/$apply_list_top_one['major_desc']/}</td>
+					<td>{/$apply_list_top_one['station']/}</td>
+					<td width="15%" data-id="{/$apply_list_top_one['id']/}">
+                        {/if $apply_list_top_one['status'] == 0/}
+                        <a href="javascript:;" class="startVideoBtn">开始面试</a>
+                        {/else if $apply_list_top_one['status'] == 1/}
+                        <a href="javascript:;" class="waitDealBtn">待定</a>
+						<a href="javascript:;" class="notPassBtn">不合适</a>
+						<a href="javascript:;" class="passBtn">初面通过</a>
+						<a href="javascript:;" class="startVideoBtn">继续面试</a>
+                        {//if/}
+                    </td>
+				</tr>
+			</table>
+			<div class="videoCoupleBack" {/if empty($apply_list)/}style="display:none;"{//if/}><i></i>反馈面试结果后才能继续下一个面试</div> 
+			<div class="videointerviewTitle" {/if empty($apply_list)/}style="display:none;"{//if/}>
+				<p>
+					<i></i>
+					<span>还有<em>{/count($apply_list)/}</em>个求职者待面试</span>
+				</p>
+			</div>
+			<table class="interviewTab02" {/if empty($apply_list)/}style="display:none;"{//if/}>
+                {/foreach $apply_list as $v/}
+				<tr>
+					<td width="8%">{/$v['show_order_no']/}</td>
+					<td width="8%">{/$v['user_name']/}</td>
+                    <td width="8%">{/$v['sex']/}</td>
+					<td width="8%">{/$v['age']/}</td>
+					<td width="8%">{/$v['degree_name']/}</td>
+					<td width="15%">{/$v['school']/}</td>
+					<td width="15%">{/$v['major_desc']/}</td>
+					<td width="15%">{/$v['station']/}</td>
+					<td width="15%">&nbsp;</td>
+				</tr>
+                {//foreach/}
+			</table>
+            
+        <!-- 活动未开始 -->
+        {/if $shuang_xuan_time_class_name == 'videoActiveityStart'/}
+            <div class="activityNotStarted">
+                <img src="{/$siteurl.style/}/img/company/video/eng_icon11.png" >
+                {/if empty($company_interview_times)/}
+                <span>活动未开始，请在活动开始前设置面试时间</span>
+                <a href="javascript:void(0);" class='setInterviewTime'>设置面试时间</a>
+                <em>学生只能在您设置的面试时间内申请视频面试</em>
+                {/else/}
+                <span>面试时间设置成功，如有问题可修改。</span>
+                {//if/}
+            </div>
+        {/else if $shuang_xuan_time_class_name == 'videoAunderway' && empty($apply_list) && empty($apply_list_top_one)/}
+            <div class="noApplyVideo">
+                <img src="{/$siteurl.style/}/img/company/video/eng_icon10.png" >
+                {/if !$today_interview_time/}
+                <span>请设置面试时间，学生仅能在设置的面试时间内申请视频面试</span><p/>
+                <a href="javascript:void(0);" class='setInterviewTime'>设置面试时间</a>
+                {/else/}
+                暂无人申请，您今日面试时间：{/$today_interview_time/}
+                {//if/}
+                
+            </div>
+        {//if/}
+        </div>
+    <script type="text/javascript" language="javascript"  src='{/version file="aliyun-webrtc-sdk-1.9.0.min.js"/}'></script>
+    <script type="text/javascript">
+    var interviewTimeDialog;
+    hbjs.use('@confirmBox, @jobDialog', function (m) {
+        var ConfirmBox = m['widge.overlay.confirmBox'],
+            Dialog = m['widge.overlay.hbDialog'],
+            $ = m['jquery'].extend(m['cqjob.jobDialog']);
+
+        var close = '×';
+        var width = 600;
+        var zIndex = 9999;
+        var title = '面试时间设置';
+
+        interviewTimeDialog = new Dialog({
+            close: close,
+            idName: 'informTraining_dialog',
+            title: title,
+            width: width,
+            zIndex: zIndex
+        });
+        var checkVideoDialog = new Dialog({
+            close: close,
+            idName: 'checkVideo_dialog',
+            title: '提示',
+            width: width,
+            zIndex: zIndex,
+            content:$("#videoCheckDiv").html()
+        });
+        
+        $('.setInterviewTime').on('click', function(){
+            interviewTimeDialog.setContent('{/get_url rule="/videohall/InterviewTimeList"/}?sid={/$sid/}').show(); 
+        });
+        $(".informTraining_dialog .ui_dialog_close").click(function(){
+            window.location.reload();
+        });
+        
+        function setStatus(id, status){
+            $.ajax({
+                type: 'post',
+                url: '{/get_url rule="/videohall/SetInterviewStatus"/}',
+                data: {id: id, status: status},
+                dataType: 'json',
+                success: function (res) {
+                    if(!res.status){
+                        ConfirmBox.timeBomb(res.msg,{
+                            name: 'fail',
+                            width:'auto',
+                            timeout : 2000
+                        });
+                        return;
+                    }
+                    ConfirmBox.timeBomb(res.msg,{
+                        name: 'success',
+                        width:'auto',
+                        timeout : 2000
+                    });
+                    window.location.reload();
+                }
+            });
+        }
+        $(".waitDealBtn").on("click", function(){
+            var id = $(this).parent().attr('data-id');
+            $.confirm('确定要设置为待定吗？', '提示', function () {
+                setStatus(id, 4);
+            });
+        });
+        
+        $(".notPassBtn").on("click", function(){
+            var id = $(this).parent().attr('data-id');
+            $.confirm('确定要设置为不合适吗？', '提示', function () {
+                setStatus(id, 3);
+            });
+        });
+        
+        $(".passBtn").on("click", function(){
+            var id = $(this).parent().attr('data-id');
+            $.confirm('确定要设置为通过吗？', '提示', function () {
+                setStatus(id, 2);
+            });
+        });
+        
+        checkVideoDialog.query('#hideVideoCheckDiv').on('click', function(){
+            checkVideoDialog.hide();
+        });
+        
+        $('.startVideoBtn').on('click', function(){
+            var id = $(this).parent().attr('data-id');
+            AliRtcEngine.isSupport().then(re => {
+                checkVideo(re,id);
+            }).catch(err => {
+                checkVideo(err,id);
+            });
+        });
+        
+        function checkVideo(msg,id){
+            if(!msg.isSupported){
+                if(!msg.audioDevice){
+                    $('.audioDevice').show();
+                }else{
+                    $('.audioDevice').hide();
+                }
+
+                if(!msg.videoDevice){
+                    $('.videoDevice').show();
+                }else{
+                    $('.videoDevice').hide();
+                }
+
+                if(msg.browser.toLowerCase() != 'chrome'){
+                    $('.browserDevice').show();
+                }else{
+                    $('.browserDevice').hide();
+                }
+
+                $("#videoCheckTopDiv").show();
+            }else{
+                $("#videoCheckTopDiv").hide();
+            }
+
+            if(id){
+                if(!msg.isSupported){
+                    checkVideoDialog.show();
+                    return;
+                }
+
+                $.ajax({
+                    type: 'post',
+                    url: '{/get_url rule="/videohall/StartInterview"/}',
+                    data: {id: id},
+                    dataType: 'json',
+                    success: function (res) {
+                        if(!res.status){
+                            ConfirmBox.timeBomb(res.msg,{
+                                name: 'fail',
+                                width:'auto',
+                                timeout : 2000
+                            });
+							setTimeout("window.location.reload()",2000);
+                            return;
+                        }
+//                        window.open("https:{/base_lib_Constant::COMPANY_URL_NO_HTTP/}/chat/?resume_id=" + res.data.resume_id + "&job_id=" + res.data.job_id + "&net_apply_id=" + res.data.id + "&sid=" + res.data.sid,"_blank");
+//                        setTimeout(function(){ window.location.reload(); }, 3000);
+                        window.location.href = "https:{/base_lib_Constant::COMPANY_URL_NO_HTTP/}/chat/?resume_id=" + res.data.resume_id + "&job_id=" + res.data.job_id + "&net_apply_id=" + res.data.id + "&sid=" + res.data.sid;
+                    }
+                });
+            }
+        }
+        
+        AliRtcEngine.isSupport().then(re => {
+            checkVideo(re,false);
+        }).catch(err => {
+            checkVideo(err,false);
+        });
+    })
+    </script>
+    <div class="failureCheckingPop"  id="videoCheckDiv" style="display:none;">
+        <ul class="failureCheckingx">
+            <li class="videoDevice">
+                <img src="{/$siteurl.style/}/img/company/video/eng_icon16.png" >
+                <span>
+                    摄像头
+                    <em>未检测到摄像头设备，请接入设备后重新检测</em>
+                </span>
+                <img src="{/$siteurl.style/}/img/company/video/eng_icon14.png" class="right" >
+            </li>
+            <li class="audioDevice">
+                <img src="{/$siteurl.style/}/img/company/video/eng_icon17.png" >
+                <span>
+                    麦克风
+                    <em>未检测到麦克风设备，请接入设备后重新检测</em>
+                </span>
+                <img src="{/$siteurl.style/}/img/company/video/eng_icon14.png"  class="right">
+            </li>
+            <li class="audioDevice">
+                <img src="{/$siteurl.style/}/img/company/video/eng_icon18.png" >
+                <span>
+                    音频设备
+                    <em>未检测到音频设备，请接入设备后重新检测</em>
+                </span>
+                <img src="{/$siteurl.style/}/img/company/video/eng_icon14.png"  class="right">
+            </li>
+            <li class="browserDevice">
+                <img src="{/$siteurl.style/}/img/company/video/eng_icon19.png" >
+                <span>
+                    浏览器检测
+                    <em>建议安装推荐浏览器</em>
+                </span>
+                <img src="{/$siteurl.style/}/img/company/video/eng_icon14.png"  class="right">
+            </li>
+        </ul>
+        <div class="chromeDown browserDevice">
+            <img src="{/$siteurl.style/}/img/company/video/eng_icon15.png" >
+            <span>chrome</span>
+            <a href="https://www.google.cn/intl/zh-CN/chrome/" target="_blank">下载</a>
+        </div>
+        <div class="videoPopBtn">
+            <a href="javascript:;" id="hideVideoCheckDiv">关闭</a>
+        </div>
+    </div>
+	</body>
+</html>

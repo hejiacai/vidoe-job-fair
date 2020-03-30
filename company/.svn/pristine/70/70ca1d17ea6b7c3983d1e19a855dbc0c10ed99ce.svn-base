@@ -1,0 +1,195 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />	
+</head>
+<style>
+	.err_box{
+		text-align: left;
+		padding: 15px;
+	}
+</style>
+<body>
+<form id="formjob" method="post" action="{/get_url rule='/job/UpdateLinkwayDo/'/}">
+	<div class="dialogCont set-contact clearfix" style="width:750px;">
+		<div class="list">
+			<p class="all"><label><input type="checkbox" id="allSelect" checked="checked"/>全选</label></p>
+			<ul id="linkwayContainer">	
+				{/foreach $joblist as $key=>$job/}			
+				<li>
+					<a href="javascript:void(0)"><label for="hddjobID{/$job['job_id']/}"><input type="checkbox" id="hddjobID{/$job['job_id']/}" name="hddjobID[]" value="{/$job['job_id']/}" checked="checked"/>{/$job['station']/}</label></a>
+					<p>
+					{/if $job['open_linkway']==0/}
+		           	  不展示
+		            {/else/}
+		            	{/if $job['self_linkway'] == 0/}
+		            		{/$curcompany['linkman']/}（{/$curcompany['link_tel']/}）
+		            	{/else/}
+		            		{/if !empty($job['linkways'])/}
+			            		{/foreach $job['linkways'] as $link/}
+			            		  {/$link['link_man']/}（{/$link['linkman_tel']/}）{/if !($link@last)/}|{//if/}
+			            		{//foreach/}
+		            		{//if/}
+		            	{//if/}
+		            {//if/}
+					</p>
+				</li>
+				{//foreach/}
+			</ul>
+		</div>
+		<div class="setting" id="setting">
+			<h3 class="tit">联系方式设置</h3>
+			<label class="select"><input type="radio" name="showLinkway" id="conW1" value="0" checked="checked" />不向求职者展示联系方式（不想受到骚扰）</label>
+			<label class="select"><input type="radio" name="showLinkway" id="conW2" value="1" />展示联系方式（愿意接受求职者咨询）</label>
+			<div class="twoset" style="display:none;padding:5px 10px 10px 10px">
+				<!--<label class="newMode"><input type="radio" name="newLinkway" id="way1" value="0" checked="checked" />使用企业联系方式</label>-->
+				<!--<p>{/$curcompany['linkman']/}（{/$curcompany['link_tel']/}）</p>-->
+
+				<p class="newMode clearfix" style="margin:0px"><span style="float:left;margin-top:10px;color:#333">发布人选择：</span>
+					<select name="param_account_id" style="float:left;margin-top: 4px;min-width: 120px;height:30px">
+						<!--<option value=""> 请选择发布人</option>-->
+						{/foreach $company_account_info as $v/}
+						<option id="account_info_{/$v['account_id']/}" data-mobile="{/$v['mobile_phone']/}" data-link="{/$v['link_tel']/}" value="{/$v['account_id']/}" {/if $count_id == $v['account_id']/}selected{//if/}  > {/$v['user_id']/}</option>
+						{//foreach/}
+					</select>
+				</p>
+				<p style="margin:0px;text-align: center"></p>
+				<div class="clearfix">
+					<p id="pa_moblie" style="float: right;margin-top:0px">{/$company_account_info[$count_id]['mobile_phone']/}</p>
+					<label class="newMode"><input type="radio" name="newLinkway" id="way1" value="4"  style="vertical-align:middle;margin-right: 3px" />发布人手机号 </label>
+				</div>
+				<div class="clearfix" style="margin:5px 0">
+					<p id="pa_telphone" style="float: right;margin-top:0px">{/$company_account_info[$count_id]['link_tel']/}</p>
+				<label class="newMode"><input type="radio" name="newLinkway" id="way3" value="5" checked="checked" style="vertical-align:middle;margin-right: 3px" />发布人办公电话 </label>
+				</div>
+				<div class="clearfix">
+				<label class="newMode"><input type="radio" name="newLinkway" id="way2" value="1" style="vertical-align:middle;margin-right: 3px"/>其他电话</label>
+				<ul class="modeBox" style="display: none">
+					<li class="clearfix"><p><span>联系电话</span><input id="txtLinkMan1"  name="txtLinkMan1" type="text" watermark="联系电话"  class="text tel conPeople watermark" />
+						</p><p><span>分机号</span><input id="txtLinkTel1"  name="txtLinkTel1" type="text" watermark="分机号" class="text name conPhone watermark" /></p></li>
+					<!--<li class="clearfix"><p><span>联系人2</span><input id="txtLinkMan2"  name="txtLinkMan2" type="text" watermark="联系人"  class="text name conPeople watermark" />-->
+						<!--</p><p><span>联系电话2</span><input id="txtLinkTel2"  name="txtLinkTel2" type="text" watermark="联系电话" class="text tel conPhone watermark" /></p></li>-->
+					<!--<li class="clearfix"><p><span>联系人3</span><input id="txtLinkMan1"  name="txtLinkMan3" type="text" watermark="联系人"  class="text name conPeople watermark" />-->
+						<!--</p><p><span>联系电话3</span><input id="txtLinkTel1"  name="txtLinkTel3" type="text" watermark="联系电话" class="text tel conPhone watermark" /></p></li>-->
+				</ul>
+				</div>
+				<input type="hidden" name="newLinkWayCount" value="3" />
+			</div>
+			<p align="right" class="mgt15"><a class="btn1 btnsF12" href="javascript:;" id="btnSortSave">保存设置</a><a class="btn3 btnsF12" href="javascript:void(0);" id="btnSortCancel">取消</a></p>
+		</div>
+	</div>
+</form>
+
+
+<script>
+var joblinkway = {
+		initialize:function(){
+			// 类别保存 
+			$('#btnSortSave').click(function(){
+				 var len = $('#linkwayContainer').find('input[type="checkbox"]:checked').length;
+				 if(len<=0) {
+					 $.anchorMsg("请选择需要修改的职位",{icon:'info'});
+					 return;
+				 }
+
+				//验证判断
+				if($("input[name='showLinkway']:checked").val() == 1 && ($("input[name='newLinkway']:checked").val() == 4 || $("input[name='newLinkway']:checked").val() == 5)){
+
+					if($('select[name=param_account_id]').val() == ''){
+						alert('请先选择职位发布人');
+						return false;
+					}
+				}
+
+				 $(this).submitForm({success: joblinkway.successCallBack, clearForm: false});
+
+			});
+			// 类别取消
+			$('#btnSortCancel').click(function(){
+				 $(this).closeDialog();
+			});
+
+			$(':input[name="showLinkway"]').click(function(){
+				if($(this).val() == '0')
+				{
+					$('div.twoset').hide();
+				}
+				else if($(this).val() == '1')
+				{
+					$('div.twoset').show();
+				}
+			});
+			$(':input[name="newLinkway"]').click(function(){
+				if($(this).val() == '0')
+				{
+					$('ul.modeBox').hide();
+					$('ul.modeBox').find(':input').attr('disabled','disabled');
+				}
+				else if($(this).val() == '1')
+				{
+					$('ul.modeBox').show();
+					$('ul.modeBox').find(':input').attr('disabled',false);
+				}else{
+
+					if($(this).val() == '4'){
+						if(!$('#pa_moblie').html()){
+							$.message("该发布人没有填写手机号哟", {title: "操作提示", icon: "fail"});
+						}
+					}
+				}
+			});
+			$('#allSelect').bindCheckBox('hddjobID[]','#formjob');
+		},	
+		successCallBack:function(result){
+			if(result.success) {
+                $.anchorMsg("批量修改联系方式成功 ", { onclose: function() {
+                    $('#btnSortSave').closeDialog();
+                }});
+			}else{
+				
+				
+				$('.err_dialog').remove()
+				var errtext=new Dialog({
+					close : 'X',
+		            idName : 'err_dialog',
+		            title : '职位停招',
+		            width : 400,
+		            isOverflow : false,
+		            isAjax : true,
+		            content:"<div class='err_box'>"+result.error+"<br></div>",
+		            zIndex:99999,
+				});
+				errtext.show();
+				//$.showModal(result.error,{title:'提示'}
+				//$.anchorMsg(result.error,{icon:'fail'});
+			}
+		}
+	};
+	joblinkway.initialize();
+	
+	$("#setting .modeBox p").each(function(){
+		var _this = $(this),
+			_dText = _this.find("span"),
+			_input = _this.find("input[type='text']");
+		_this.click(function(){
+			_dText.hide();
+			_input.focus();
+		});
+		_input.blur(function(){
+			if(/^[　\s]*$/.test($(this).val())){
+				_dText.show();
+			}
+		});
+	});
+
+	$('select[name=param_account_id]').change(function(){
+		$('#pa_moblie').html($('#account_info_'+$(this).val()).attr('data-mobile'));
+		$('#pa_telphone').html($('#account_info_'+$(this).val()).attr('data-link'));
+	});
+
+
+</script>
+
+</body>
+</html>

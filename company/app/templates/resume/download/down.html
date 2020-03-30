@@ -1,0 +1,43 @@
+<!doctype html>
+<head>
+</head>
+<body>
+<style>
+.downCmtBox{width:335px;font-size:14px;}
+.downCmtTxt{margin-bottom:10px;}
+.downCmtTxt p{font-size:14px; line-height:30px; font-weight:bold;}
+.downCmtTxt a.un{color:#999; cursor:text;font-weight:normal;}
+.downCmtTxt a.un:hover{color:#999;}
+.downCmtTxt i.hbIconMoon{font-size:20px; margin-right:5px;}
+
+</style>
+<div class="dgBox downCmtBox">
+	<div class="downCmtTxt">
+    	<p><a href="#" id="btnDownWord"><img src="{/$siteurl.style/}/img/v2/icons/doc.jpg" /> Word文件</a></p>
+        <p><a href="#" id="btnDownHtml"><img src="{/$siteurl.style/}/img/v2/icons/html.jpg" /> Html文件</a></p>
+        <p><a href="#" id="btnExcelHtml"><img src="{/$siteurl.style/}/img/v2/icons/xls.jpg" /> Excel文件</a></p>
+        <p><a href="#" id="btnDownPdf"><img src="{/$siteurl.style/}/img/v2/icons/pdf.jpg" /> PDF文件</a></p>
+    </div>
+</div>
+<script type="text/javascript">
+	$('#btnDownWord').click(function(){
+		download._downresumeword.call($(this),'{/$resumeids/}');
+		$(this).closeDialog();
+	});
+	$('#btnDownHtml').click(function(){
+		download._downresumehtml.call($(this),'{/$resumeids/}');	
+		$(this).closeDialog();
+	});
+	// excel下载
+	$('#btnExcelHtml').click(function(){
+		download._downresumeExcel.call($(this),'{/$resumeids/}');	
+		$(this).closeDialog();
+	});	
+	// PDF下载
+	$('#btnDownPdf').click(function(){
+		download._downresumePdf.call($(this),'{/$resumeids/}');	
+		$(this).closeDialog();
+	});	
+</script>
+</body>
+</html>

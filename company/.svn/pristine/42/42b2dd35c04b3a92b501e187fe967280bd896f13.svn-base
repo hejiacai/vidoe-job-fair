@@ -1,0 +1,303 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+<title>汇博网_招聘中心_我的账户</title>
+<!–[if lt IE9]> 
+<script src="{/version file='html5.js'/}"></script>  
+<![endif]–>
+<link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='comback.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='icons.css'/}" />
+
+<script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.min.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='common.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='jquery.form.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='dialog.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='ui_validate.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='ui_inputFocus.js'/}"></script><!--输入框获取焦点-->
+<script type="text/javascript" language="javascript" src="{/version file='ui_hovchange.js'/}"></script><!--指向改变class-->
+<style type="text/css">
+.part{border:1px solid #dadada; border-radius:5px;padding:15px;margin:0 0 20px;zoom:1;}
+.part dl{overflow:hidden;}
+.part dl dt{float:left;display:inline;width:175px; text-align:center;}
+.part dl dd{float:left;display:inline;width:745px;margin:5px 0 0;}
+.part dl dt .ico{height:80px;width:100px;margin:0 auto;background:url({/$siteurl.style/}/img/c/c.gif) no-repeat;}
+.part dl dt p{height:22px;line-height:22px;margin:5px 0 0;font-size:16px;}
+.part dl dd p{line-height:30px;}
+.part dl dd p a.btn3{margin:0 10px 0 0;}
+
+.part1 dl dt .ico{background-position:0 0;}
+.part2 dl dt .ico{background-position:-100px 0;}
+.part3 dl dt .ico{background-position:-200px 0;}
+.part4 dl dt .ico{background-position:-300px 0;}
+
+.part1 p a.lnk{margin:0 10px; }
+
+.part2 p.tit{height:45px;}
+.part2 p.tit i.hbFntWes{float:left;display:inline;margin:0 5px 0 0;font-size:45px;}
+.part2 p.tit span{float:left;font-size:12px;margin:8px 0 0 0;}
+.part2 p.tit span em{font-weight:bold;font-size:16px;line-height:28px;margin:0 0 0 5px;    display: inline-block;vertical-align: -1px;}
+.part2 p span.line{color:#cecece;margin:0 10px;}
+.part2 p a.lnk{margin:0 10px;}
+.part2 div.tip{line-height:30px;}
+.part2 div.tip span.lst{float:left;display:inline;padding:0 10px 0 0;border-right:1px solid #ccc;margin-right:10px;height:24px;line-height:24px;}
+.part2 div.tip span.last{border:0;}
+.part2 div.tip .tipLay{top:-36px;left:-196px;}
+.part2 div.tip .tipLayTxt{width:350px;font-size:12px;background:#fffce3;border:1px solid #fad5a8;}
+.part2 div.tip .tipLay .tipArr{background:url({/$siteurl.style/}/img/common/contrl.gif) no-repeat -8px 0;width:8px;height:5px;top:auto;bottom:-4px;left:115px; z-index:4}
+
+.part3 p.tit{font-weight:bold;}
+.part3 p b{float:left;display:inline;height:30px;line-height:30px;font-weight:normal;}
+.part3 p .bar{margin:7px 0 0;display:inline-block;}
+.part3 p a{margin:0 10px 0;}
+
+.part4 p.tit{height:45px;}
+.part4 p.tit i.hbFntWes{float:left;display:inline;margin:0 5px 0 0;font-size:45px;}
+.part4 p.tit span{float:left;display:inline;font-weight:bold;font-size:16px;line-height:28px;margin:8px 0 0 0;}
+.part4 p.tit span em{}
+.part4 dl dd.part4AttIng{margin:40px 0 0;}
+.part4 dl dd.part4AttS{margin:33px 0 0;}
+.part4 dl dd.part4AttS span a.btn3{margin:0 0 0 10px;font-weight:normal;}
+.part4 dl dd.part4AttErr{margin:17px 0 0;}
+.part4 dl dd.part4AttErr a.btn3{margin:0 0 0 10px;font-weight:normal;}
+.part4 dl dd.part4AttNo{margin:17px 0 0;}
+.part4 dl dd.part4AttNo a.btn3{margin:0 0 0 10px;font-weight:normal;}
+
+.part2 p.notmember {margin-top: 20px;}
+
+.firmMemberPge a{ float:left; display:block;width:160px; height:40px; line-height:40px; color:#fff; font-size:16px; background:#21a3df url({/$siteurl.style/}/img/c/new_index/firmicon16.png) 34px center no-repeat; border-radius:4px; text-indent:4.1em;#text-indent:4.8em;}
+.firmMemberPge img{ float:left; display:block; margin:7px 20px 0 0;}
+.firmMemberPge a:hover{ background:#107cae url({/$siteurl.style/}/img/c/new_index/firmicon16.png) 34px center no-repeat;}
+
+.playm{display: inline-block;width:72px;height: 30px;background: url({/$siteurl.style/}/img/c/icon.jpg) no-repeat;text-indent: -999px;overflow: hidden;vertical-align: middle;margin-left: 15px}
+/*cd改版 wh 2018-11-23*/
+    .cd-tip p em{color: #3d84b8;margin-right: 10px;}
+    .cd-tip p span{color: #999;font-size: 12px;margin-right: -20px;}
+</style>
+</head>
+<body id="body">
+{/include file="new_header.html" par="企业管理" cur="我的账户"/}
+<div class="content" id="content">
+    <section class="section" style="overflow:hidden;">
+        <hgroup>
+            <div class="part part1">
+                <dl style="overflow: visible">
+                <dt><div class="ico"></div><p>企业管理</p></dt>
+                <dd>
+                    <p>登录用户名：<b id="pUserName">{/$user_id/}</b></p>
+                    <p>账户余额：<em>{/$account_overage|default:'0.00'/}</em>&nbsp; &nbsp;推广金：{/$spread_overage|default:'0.00'/} <a href="{/get_url rule="/spread"/}">详情</a>
+                    </p>
+                    <p style="position: relative">
+                        <a href="{/get_url rule="/pay/"/}" class="lnk" style="margin-left: 0px">充值</a>
+                        <a href="{/get_url rule="/pay/list/"/}" class="lnk">充值记录</a>
+                        <a href="javascript:void(0);" class="lnk" id="consWord" style="height:33px;line-height: 33px;display: inline-block">消费记录<i style="display:inline-block; vertical-align: middle;font-size: 12px;font-family: 'Times New Roman'">▼</i></a>
+                        <style>
+                            #consBox{width:104px;border:1px solid #ddd;background: #fff;font-size:12px;position: absolute;top:27px;left:133px;display: block;z-index: 3;display: none;}
+                            #consBox a{display: block;color:#666;padding:2px 10px;height: 19px;line-height: 19px;}
+                            #consBox a:hover{background: #efefef}
+                        </style>
+                        <span id="consBox">
+                            <a href="{/get_url rule="/pay/paylist/"/}">余额消费记录</a>
+                            <a href="{/get_url rule="/spread/history/"/}">推广金消费记录</a>
+                            <a href="{/get_url rule="/part/partlist/"/}">兼职消费记录</a>
+                            <a href="{/get_url rule="/consumelog/history/"/}">其他消费记录</a>
+                        </span>
+                    </p>
+                    {/if $is_main/}
+                    <p>
+                        <!--<a href="javascript:void(0)" class="btn3 btnsF12" id="btnModUsername">修改用户名</a>-->
+                        <a href="javascript:void(0)" class="btn3 btnsF12" id="btnModPassword">修改登录密码</a>
+                    </p>
+                    {//if/}
+                </dd>
+                </dl>
+                <div class="clear"></div>
+            </div>
+
+            <div class="part part2">
+                <dl>
+                <dt><div class="ico" style="background: url({/$siteurl.style/}/img/company/juan-icon1.jpg) center center no-repeat"></div><p>优惠券</p></dt>
+                <dd>
+                    <div class="tip" style="margin-top: 25px">
+                        <span class="lst">可用（<a href="{/get_url rule='/commoncoupon/index' data='state=1'/}">{/$can_use_count/}</a>）</span>
+                        <span class="lst">已用（<a href="{/get_url rule='/commoncoupon/index' data='state=2'/}">{/$used_count/}</a>）</span>
+                        <span class="lst last">已失效（<a href="/commoncoupon/index/?state=-1">{/$expire_count/}</a>）</span>                                                <div class="clear"></div>
+                    </div>
+                                    </dd>
+                </dl>
+                <div class="clear"></div>
+            </div>
+
+            <div class="part part2">
+                <dl>
+                <dt><div class="ico"></div><p>会员信息</p></dt>
+                    <dd>
+                        <!-- 企业使用新套餐-->
+                        {/if $company_resource_info['isNewService']/}
+                            <div class="cd-tip">
+                                <p>可发布职位：<em>{/$company_resource_info['job_release_num']+$company_resource_info['job_boutique_release']/}</em>个 <span>（免费职位：{/if $company_resource_info['job_release_num']<0/}0{/else/}{/$company_resource_info['job_release_num']/}{//if/}/{/$company_resource_info['pricing_free_job_num']/}
+                                    精品职位：{/if $company_resource_info['job_boutique_release']<0/}0{/else/}{/$company_resource_info['job_boutique_release']/}{//if/}/{/$company_resource_info['pricing_job_boutique']/}）</span> </p>
+                                <p>剩余精品点：<em>{/$company_resource_info['point_job_boutique_last']/}</em>
+                                    剩余刷新点：<em>{/$company_resource_info['point_job_refresh_last']/}</em>
+                                    剩余简历点：<em>{/$resume_down_num/}</em>
+                                </p>
+                                {/if $company_resource_info['end_time'] != ''/}<span class="lst last">过期时间：<em>{/date("Y-m-d",strtotime($company_resource_info['end_time']))/}</em></span>{//if/}
+                                {/if $timeout_countdown != ''/}
+                                    <span class="tipPos">
+                                        <span class="tipLay">
+                                            <span class="tipArr"></span>
+                                            <span class="tipLayTxt">
+                                                <p>会员将于<em class="orange strong">{/$timeout_countdown/}天后</em>过期，为了不影响您的招聘，不要忘了续费哟！</p>
+                                            </span>
+                                        </span>
+                                    </span>
+                                {//if/}
+                                <div class="clear"></div>
+                            </div>
+                        {/elseif $company_resource_info['isCqNewService']/}
+                        {/if $member_info == "member"/}
+                        <p class="tit">
+                            <span class="firmMemberPge">
+                                已开通{/if $merber_level_name != ''/}<em>{/$merber_level_name/}</em>{//if/}
+                            </span>
+                        </p>
+                        <div class="cd-tip">
+                            <p>可发布职位：<em>{/$company_resource_info['cq_relese_job_num']|default:'0'/}/{/$company_resource_info['cq_job_num']|default:'0'/}</em>
+                                可添加直聘账号： <em>{/$company_resource_info['cq_release_point_sub_account']|default:'0'/}/{/$company_resource_info['cq_point_sub_account']|default:'0'/}</em>
+                                剩余简历点：<em>{/$company_resource_info['cq_resume_num_release']|default:'0'/}</em>
+                                剩余推广金：<em>{/$spread_overage|default:'0.00'/}</em>
+                            </p>
+                            <p>
+                                剩余刷新点：<em>{/$company_resource_info['cq_release_point_job_refresh']|default:'0'/}</em>
+                                剩余短信数：<em>{/$company_resource_info['cq_release_point_message']|default:'0'/}</em>
+                                剩余聊一聊次数：<em>{/$company_resource_info['cq_release_point_chat']|default:'0'/}</em>
+								剩余视频时长：<em>{/$company_resource_info['cq_release_video_num_use_desc']/}</em>
+                            </p>
+                            <div class="clear"></div>
+                        </div>
+                        {/else/}
+                        <p class="tit notmember" style="display: block">
+                            <span class="firmMemberPge">
+                                <img src="{/$siteurl.style/}/img/c/new_index/firmicon15.png" />
+                                <a href="{/get_url rule="/index/memberdetail/"/}" target="_blank">开通会员</a>
+                            </span>
+                        </p>
+                        {//if/}
+
+                        {/else/}
+                            {/if $member_info == "member"/}
+                                <p class="tit">
+                                    <span class="firmMemberPge">
+                                        已开通{/if $merber_level_name != ''/}<em>{/$merber_level_name/}</em>{//if/}
+                                    </span>
+                                </p>
+                                <div class="tip">
+                                    <span class="lst">可发布职位：<em>{/$job_release_num/}</em>个</span>
+                                    <span class="lst">可使用下载点：<em>{/$resume_down_num/}</em></span>
+                                    {/if $merber_timeout != ''/}<span class="lst last">过期时间：<em>{/$merber_timeout/}</em></span>{//if/}
+                                    {/if $timeout_countdown != ''/}
+                                    <span class="tipPos">
+                                            <span class="tipLay">
+                                                <span class="tipArr"></span>
+                                                <span class="tipLayTxt">
+                                                    <p>会员将于<em class="orange strong">{/$timeout_countdown/}天后</em>过期，为了不影响您的招聘，不要忘了续费哟！</p>
+                                                </span>
+                                            </span>
+                                        </span>
+                                    {//if/}
+                                    <div class="clear"></div>
+                                </div>
+                            {/else/}
+                                <p class="tit notmember" style="display: block">
+                                        <span class="firmMemberPge">
+                                            <img src="{/$siteurl.style/}/img/c/new_index/firmicon15.png" />
+                                            <a href="{/get_url rule="/index/memberdetail/"/}" target="_blank">开通会员</a>
+                                        </span>
+                                </p>
+                            {//if/}
+                        {//if/}
+                    </dd>
+                </dl>
+                <div class="clear"></div>
+            </div>
+            
+            <div class="part part3">
+                <dl>
+                <dt><div class="ico"></div><p>企业资料</p></dt>
+                <dd>
+                    <p class="tit">{/$company_name/}</p>
+                    <p><b>企业招聘主页：</b>{/if $is_audit == 1 || $is_audit == 4/}<a target="_blank" href="{/$company_link/}">{/$company_link/}</a>{/else/}<span>营业执照尚未通过审核，暂无法预览主页</span>{//if/}</p>
+                    <p><b>资料完善度：</b><span class="bar"><span class="barBd"><i style="width:{/$precent/}"></i></span><em><i></i>{/$precent/}</em></span><div class="clear"></div></p>
+                    {/if $no_complete!=''/}<p>待完善项：{/$no_complete/}</p>{/else/}<p><a href="{/get_url rule='/company/modify/'/}" class="btn3 btnsF12">修改企业资料</a></p>{//if/}
+                </dd>
+                </dl>
+                <div class="clear"></div>
+            </div>
+            <div class="part part4">
+                <dl>
+                <dt><div class="ico"></div><p>企业认证</p></dt>
+                    
+                {/if $audit_msg=='认证通过'/}
+                    <dd class="part4AttS">
+                        <p class="tit green"><img src="{/$siteurl.style/}/img/newindex/suc.jpg" style="float: left; margin-right: 15px;"><span>您已通过企业认证<a href="{/get_url rule='/licencevalidate/'/}" class="btn3 btnsF12">查看</a></span></p>
+                    </dd>
+                {/elseif $audit_msg=='认证中'/}
+                    <dd class="part4AttIng">
+                        <p class="tit orange"><i class="hbFntWes">&#xf06a;</i><span>已提交认证，审核中</span></p>
+                    </dd>
+                {/elseif $audit_msg=='认证失败'/}
+                    <dd class="part4AttErr">
+                        <p class="tit red"><i class="hbFntWes">&#xf057;</i><span>认证未通过</span></p>
+                        <p>{/if $audit_reply!=''/}原因：{/$audit_reply/}{//if/}<a href="{/get_url rule='/licencevalidate/index/action-againUpload'/}" class="btn1 btnsF12">重新提交</a></p>
+                    </dd>
+                {/else/}
+                    <dd class="part4AttNo">
+                         <p class="tit orange"><i class="hbFntWes">&#xf06a;</i><span>未认证</span></p>
+                         <p>求职者更信任认证过的企业，同时完成认证后，才能开通会员。<a href="{/get_url rule='/licencevalidate/'/}" class="btn1 btnsF12">立即认证</a></p>
+                     </dd>
+                {//if/}
+                </dl>
+                <div class="clear"></div>
+            </div>
+        </hgroup>
+    </section>
+</div>
+{/include file="./footer.html"/}
+<section class="floatRT"><a href="{/get_url rule='/about/message' domain='main'/}" target="_blank" class="serviceLink">我有问题要反馈</a><b></b></section>
+<!--<script language="javascript" type="text/javascript" src="http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js&ip={/$ip/}"></script>
+-->
+<script type="text/javascript">
+var account={
+    init:function(){
+        $('#btnModUsername').click(function(){
+            $.showModal('{/get_url rule="/account/ModifyName/" data="success=usernameSuccess"/}',{title:'用户名修改'});
+        });
+        $('#btnModPassword').click(function(){
+            $.showModal('{/get_url rule="/account/ModifyPassword/" data="success=passwordSuccess"/}',{title:'密码修改'});
+        });
+        //$('#ipCity').html(remote_ip_info.city);
+    },
+    usernameSuccess:function(json){
+        $('#pUserName').text(json.user_id);
+    },
+    applyVip:function(isOpen){
+        var title = '开通会员';
+        if(isOpen){
+            title = '续费会员';
+        }
+        $.showModal('{/get_url rule="/account/showApplyVipTips/"/}',{title:title});
+    }
+}
+account.init();
+$("#consWord,#consBox").hover(function(){
+        $("#consBox").show();
+    },function(){
+        $("#consBox").hide();
+    });
+</script>
+</body>
+</html>

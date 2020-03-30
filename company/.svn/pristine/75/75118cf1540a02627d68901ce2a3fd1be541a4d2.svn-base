@@ -1,0 +1,144 @@
+
+<link rel="stylesheet" type="text/css" href="//assets.huibo.com/css/mobile/mobile.swiper.css?v=20160123">
+<script type="text/javascript" language="javascript" src="//assets.huibo.com/js/m/mobile.swiper.js?v=20160123"></script>
+<style>
+    .subcompNavbg{display:none;}
+	.imgs{width:100%; position: absolute; top: 30px; left: 0;}
+	.swiper-container{width:100%}
+	.swiper-container-free-mode > .swiper-wrapper {
+	    -webkit-transition-timing-function: linear;    /*之前是ease-out*/
+	    -moz-transition-timing-function: linear;
+	    -ms-transition-timing-function: linear;
+	    -o-transition-timing-function: linear;
+	    transition-timing-function: linear;
+	    margin: 0 auto;
+	}
+	.swiper-container {margin: 0 auto;position: relative;overflow: hidden;z-index: 1;  }
+	.imgs .swiper-slide{ margin-right: 30px;}
+	.imgs .swiper-slide span{
+		display: inline-block;
+		height: 26px;
+		background: #99725c;
+		border-radius: 25px;
+		margin-bottom: 26px;
+		text-align: left;
+		padding-right: 12px;
+	}
+	.imgs .swiper-slide span.odd{ margin-left: 50px;}
+	.imgs .swiper-slide span img,.imgs .swiper-slide span em{ display: inline-block; vertical-align: middle;}
+	.imgs .swiper-slide span img{width:26px; height: 26px; border-radius: 50%;}
+	.imgs .swiper-slide span em{font-size: 14px; color: #fff; font-style: inherit;}
+	.scaleMorePop{width:500px; position: absolute; left: 50%; margin-left: -390px;  display: none; z-index: 50;}
+	.msgIcon{ 
+		display: none;
+		width: 0;
+	    height: 0;
+	     border-width: 0 10px 10px;
+		border-style: solid;
+		border-color: transparent transparent #fffbf6;
+		margin-left: 16px;
+		position: absolute;
+	}
+	.scaleMorePop div{background: #fffbf6; padding:10px;margin: 0 auto; font-size: 14px; line-height: 24px; text-align: left; overflow-y: auto; max-height: 300px;}
+	.compNavbg{ margin-bottom: 0!important;}
+</style>
+{/include 'new_header.html' cur="视频校招"  no_video_notice="1"/}
+
+<div class="videoTopJobFair">
+	<div class="imgs">
+		<div class="swiper-container swiper-container-company">
+			<div class="swiper-wrapper">
+			{/foreach $person_action_history as $items/}
+				<div class="swiper-slide">
+					{/foreach $items as $v/}
+					<span>
+						<img src="{/$v['headphoto']/}" onerror="javascript:this.src='{/$v['default_photo']/}'"/>
+						<em>{/$v['str_lable']/}</em>
+					</span>
+					{//foreach/}
+				</div>
+			{//foreach/}
+			</div>
+		</div>
+	</div>
+	
+    <div class="videoTopJobFairMain">
+        <img src="{/$s_logo/}" class="video_top_img" {/if !$s_logo/}style="display:none;"{//if/}/>
+        <div class="videonewTopRt">
+			<h2>{/$s_title/}</h2>
+			<p>主办：{/$sponsor/}</p>
+			<p>时间：{/$shuang_xuan_time_str/}</p>
+			<p>规模：已报名{/$company_num/}家企业    {/$job_num/}个岗位     {/$apply_num/}人报名<a href="javascript:;" class="scaleMore">详情</a></p>
+		</div>
+    </div>
+</div>
+<div class="videoNav">
+    <div class="videoNavMain">
+		<div class="videoNavlf">
+			<a href="{/get_url rule='/videohall/VideoInterviewHall'/}?sid={/$sid/}" {/if $par == '视频面试大厅'/}class="cur"{//if/}>视频面试大厅</a>
+			<a href="{/get_url rule='/videohall/JobWanters'/}?sid={/$sid/}" {/if $par == '求职者大厅'/}class="cur"{//if/}>求职者大厅</a>
+			<a href="{/get_url rule='/videohall/InterviewList'/}?sid={/$sid/}" {/if $par == '面试结果'/}class="cur"{//if/}>面试结果</a>
+			<a href="{/get_url rule='/videohall/Jobs'/}?sid={/$sid/}" {/if $par == '招聘职位'/}class="cur"{//if/}>招聘职位</a>
+		</div>
+		<div class="videoNavrt">
+			<p>
+			</p>
+			<span>名学生已入场</span>
+		</div>
+    </div>
+</div>
+<div style="position: relative;width: 100%;">	
+	<img class="bg-cloud1" src="{/$siteurl.style/}/img/company/video/bg-cloud_01.png" alt="背景图">
+	<img class="bg-cloud2" src="{/$siteurl.style/}/img/company/video/bg-cloud_02.png" alt="背景图">
+	<img class="bg-cloud3" src="{/$siteurl.style/}/img/company/video/bg-cloud_03.png" alt="背景图">
+</div>
+<!-- 详情浮层 -->
+<span class="msgIcon"></span>
+<div class="scaleMorePop">
+	<div>{/$s_content/}</div>
+</div>
+<script type="text/javascript">
+	var mySwiperCompany = new Swiper('.swiper-container-company', {
+	    autoplay : true,
+	    autoplayDisableOnInteraction : false,
+	    speed:5000,
+	    loop : true,
+	    freeMode:true,
+	    slidesPerView : 5,
+	    slidesPerGroup : 1
+	});
+	
+	var studentStr = '{/$entry_num/}';
+	var studentHtml ='';
+//	 var studentTime = setInterval(student,10000);
+    student();
+	function student(){
+		studentHtml = '';
+		for(var i=0;i<studentStr.length;i++){
+			studentHtml += '<em>'+studentStr[i]+'</em>';
+		}
+		$('.videoNavrt p').html(studentHtml);
+	}
+	
+	
+	$('.imgs .swiper-slide span:odd').addClass('odd');
+	$('.videoSchoolIntro a').click(function(){
+		$(this).toggleClass('cur');
+		if($(this).hasClass('cur')){
+			$('.videoSchoolIntro span').css('height','auto');
+			$('.videoSchoolIntro a').text('收起更多');
+		}else{
+			$('.videoSchoolIntro span').css('height','20px');
+			$('.videoSchoolIntro a').text('查看更多');
+		}
+	});
+    $('.scaleMore').on('click', function(){
+        var thisTop = $(this).offset().top;
+        var thisLeft = $(this).offset().left;
+		$('.msgIcon').slideToggle().css({
+			top:thisTop+22,
+			left:thisLeft
+		});
+		$('.scaleMorePop').slideToggle().css('top',thisTop+32);
+    });
+</script>

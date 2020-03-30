@@ -1,0 +1,943 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Administrator
+ * Date: 2019/9/20
+ * Time: 15:48
+ */
+
+class controller_index extends components_cbasepage {
+	private static $_areaidDefault = '0300';
+	
+	function __construct() {
+		parent::__construct(false);
+		session_start();
+		$this->isLogin();
+	}
+	
+	private $filter_sids = [64, 65, 66, 67];//需要过滤的招聘会id
+	
+	/**
+	 *活动列表
+	 */
+	public function pageindex($inPath) {
+		$params = base_lib_BaseUtils::saddslashes($this->getUrlParams($inPath));
+		$page = base_lib_BaseUtils::getStr($params['page'], 'int', 1);
+		//$page_size = base_lib_Constant::PAGE_SIZE;
+		$in_data['content'] = base_lib_BaseUtils::getStr($params['content'], 'string');
+		
+		$detect = new SMobiledetect();
+		$mobile_base_url = $mobile_base_url = 'Location: ' . base_lib_Constant::MNETFAIR_URL . '/';
+		trim($_SERVER["QUERY_STRING"], '/') and $mobile_base_url .= "?" . trim($_SERVER["QUERY_STRING"], '/');
+		if($detect->isMobile() || $detect->isTablet()) {
+			header($mobile_base_url);
+			
+			return;
+		}
+		
+		if(!$_SESSION['reg_source']) {
+			$this->SetRegisterPersonRegSource('netfair_list_pc');
+		}
+		
+		$this->GetHeadData();
+		
+		//如果登录了的，就自动报名
+		if($this->isLogin() && $this->_usertype == 'p' ) {
+			$user_id = $this->_netfair_userid;
+			//检测是否已报名
+			$service_person = new base_service_netfair_person();
+			$person_info = $service_person->GetPersonDataByIds(array ($user_id), 'netfair_resume_id');
+			if($person_info) {
+				$base_service_netfair_resume = new base_service_netfair_resume();
+				$resume_info = $base_service_netfair_resume->GetResumeDataByIds(array ($person_info[ $user_id ]['netfair_resume_id']), 'station,jobsort_exp_data');
+				$in_data['exp_jobsort'] = $resume_info[ $person_info[ $user_id ]['netfair_resume_id'] ]['jobsort_exp_data'];
+				$in_data['station'] = $resume_info[ $person_info[ $user_id ]['netfair_resume_id'] ]['station'];
+			}
+		}
+		
+		//$page_size = 20;
+		$service_netfair = new base_service_netfair_net();
+		$in_data['state'] = 1;
+        $that_time = date('Y-m-d H:i:s', strtotime('+2 years', time()));
+        if ($in_data['content']){
+            $activity_fields = 'a.id,a.title,a.sponsor,a.start_time,a.end_time,a.enter_end_time,a.list_poster,a.is_effect,a.state,a.superiority_info,a.enter_phone_desc,a.school_type,a.is_company_signup,
+		IF(a.is_top_sort=1 and a.top_sort_end_time>=NOW(),a.top_sort,0) top_sort';
+            $in_data['order_by'] = "order by IF(a.end_time>NOW(),a.start_time,'{$that_time}') asc,IF(a.end_time<NOW(),a.start_time,'{$that_time}') asc";
+        }else{
+            $activity_fields = 'id,title,sponsor,start_time,end_time,enter_end_time,list_poster,is_effect,state,superiority_info,enter_phone_desc,school_type,is_company_signup,
+		IF(is_top_sort=1 and top_sort_end_time>=NOW(),top_sort,0) top_sort';
+            $in_data['order_by'] = "order by IF(end_time>NOW(),start_time,'{$that_time}') asc,IF(end_time<NOW(),start_time,'{$that_time}') asc";
+        }
+
+		
+		$xml = SXML::load('../config/cp/config.xml');
+		$in_data['path'] = base_lib_Constant::UPLOAD_FILE_URL . '/' . $xml->VirtualName . '/' . $xml->netFairListPosterImgImageFilePath;
+		$in_data['type'] = 'pc';
+		$list = $service_netfair->getVideoList($in_data, $page, $page_size, $activity_fields, $this->filter_sids);
+		$in_data['list'] = $list;
+		
+		
+		return $this->render('./shuangxuannet/netfair_list.html', $in_data);
+	}
+	
+	/**
+	 * 校园网络双选会招聘大厅
+	 * @param $inPath
+	 * @return mixed
+	 */
+	public function pageJobFairList($inPath) {
+		$path_data = base_lib_BaseUtils::saddslashes($this->getUrlParams($inPath));
+		$page = base_lib_BaseUtils::getStr($path_data['page'], 'int', 1);
+		$sid = base_lib_BaseUtils::getStr($path_data['sid'], 'int', '');
+		//如果没有传递双选会场次ID，就跳转到报错页面
+		if(!$sid) {
+			return $this->render('404.html', array ('error_msg' => '双选会场次ID错误'));
+		}
+		$detect = new SMobiledetect();
+		if($detect->isMobile() || $detect->isTablet()) {
+			$this->redirect_url2(base_lib_Constant::MNETFAIR_URL_NOT_HTTP . '/fairList/sid-' . $sid);
+		}
+		
+		if(!$_SESSION['reg_source']) {
+			$this->SetRegisterPersonRegSource('netfair_index_pc');
+		}
+		
+		$this->GetHeadData($sid);
+		
+		$in_data['sid'] = $sid;
+		
+		$service_shuangxuan_net = new base_service_netfair_net();
+		$shaungxuan_net_info = $service_shuangxuan_net->getShuangXuanNetByID($sid, '');
+		if(empty($shaungxuan_net_info)) {
+			return $this->render('404.html', array ('error_msg' => '该场次双选会不存在'));
+		}
+		
+		#region 双选会 活动数据处理
+		//banner 路径
+		$ser_upload = new base_service_upload_upload();
+		$ser_upload->GetUpConfig($app_post_path, $file_max_size, $ext, $photo_max_count, 'img', 'netFairAppPosterImg', '/cp/config.xml');
+		$ser_upload->GetUpConfig($pc_post_path, $file_max_size, $ext, $photo_max_count, 'img', 'netFairPcPosterImg', '/cp/config.xml');
+		$shaungxuan_net_info['app_post_path'] = base_lib_Constant::UPLOAD_FILE_URL . '/' . $app_post_path;
+		$shaungxuan_net_info['pc_post_path'] = base_lib_Constant::UPLOAD_FILE_URL . '/' . $pc_post_path;
+		
+		//招聘会 简介
+		$shaungxuan_net_info['content'] = str_replace(PHP_EOL, '', $shaungxuan_net_info['content']);
+		
+		//是否活动进行中 状态 0-未开始 1-已开始 2-已结束
+		$shaungxuan_net_info['activity_school_state'] = 0;
+		if(strtotime($shaungxuan_net_info['start_time'])) {
+			if(strtotime($shaungxuan_net_info['start_time']) <= time()) {
+				$shaungxuan_net_info['activity_school_state'] = 1;
+			}
+			if(strtotime($shaungxuan_net_info['end_time']) <= time()) {
+				$shaungxuan_net_info['activity_school_state'] = 2;
+			}
+		}
+		#endregion
+		$in_data['shaungxuan_net_info'] = $shaungxuan_net_info;
+		
+		#region 视频面试 面试时间
+		$ser_interviewtimenet = new base_service_netfair_interviewtimenet();
+		$interviewtimenet_data = $ser_interviewtimenet->GetBeAboutNetfairNetBySid($sid, 'sid,start_time,end_time')->items;
+		if($interviewtimenet_data) {
+			foreach ($interviewtimenet_data as &$_tmp_li) {
+				$_tmp_li['start_time_desc'] = date('n月j日', strtotime($_tmp_li['start_time'])) . "(" .
+					base_lib_TimeUtil::date_of_chinese_week(date('w', strtotime($_tmp_li['start_time']))) . ")";
+			}
+			$in_data['interviewtimenet_data'] = $interviewtimenet_data;
+			
+			//剩余报名时间
+			$time_diff_day = base_lib_TimeUtil::time_diff_day(null, $interviewtimenet_data[0]['start_time']);
+			switch ($time_diff_day) {
+				case 0:
+					$time_diff_day = '今天';
+					break;
+				case 1:
+					$time_diff_day = '明天';
+					break;
+				default:
+					$time_diff_day = '';
+			}
+			$in_data['interviewtimenet_beabout'] = $time_diff_day . date('n月j日H:i', strtotime($interviewtimenet_data[0]['start_time']));
+			$timediff = strtotime($interviewtimenet_data[0]['start_time']) - time();
+			$in_data['interviewtimenet_beabout_time'] = array (
+				'day'    => intval($timediff / 3600 / 24),
+				'hour'   => intval($timediff / 3600 % 24),
+				'minute' => intval($timediff / 60 % 60),
+				'second' => intval($timediff % 60),
+			);
+			array_walk($in_data['interviewtimenet_beabout_time'], function (&$value) {
+				$value = str_pad($value, 2, "0", STR_PAD_LEFT);
+			});
+			//未开始-报名进行中 0-报名中 1-已开始 2-已结束
+			$in_data['interviewtimenet_beabout_state'] = 0;
+			if(strtotime($interviewtimenet_data[0]['start_time']) <= time()) {
+				$in_data['interviewtimenet_beabout_state'] = 1;
+			}
+			if(strtotime($interviewtimenet_data[0]['end_time']) <= time()) {
+				$in_data['interviewtimenet_beabout_state'] = 2;
+			}
+		}
+		#endregion
+		
+		$user_id = 0;
+		if($this->isLogin() && $this->_usertype == 'p') {
+			$user_id = $this->_netfair_userid;
+		}
+		$in_data['user_id'] = $user_id;
+		
+		$ser_netfair_visitlog = new base_service_netfair_visitlog();
+		$ser_netfair_visitlog->addVisitLog($sid, 1, $user_id);
+		
+		//招聘会 访问 记录
+		$ser_shuangxuanpersonenter = new base_service_netfair_personenternet();
+		$ser_shuangxuanpersonenter->SetSchoolNetVisitor(1, $sid, $user_id, 1);
+		
+		#region 是否强制报名 报名该场招聘会（不管起有没有简历） -- 活动开始前提醒我
+		if($shaungxuan_net_info['is_signup'] == 1) {
+			//验证当前用户否已经登录，如果没有登录，就跳转去登录
+			if(!$user_id) {
+				// $this->redirect('/indx/center/sid-' . $sid);
+			}
+			$service_enter = new base_service_netfair_personenternet();
+			//验证当前用户是否已经报名,如果没有报名，就跳转去报名
+			$person_enter_info = $service_enter->getRecord(['sid' => $sid, 'person_id' => $user_id], 'id,person_id');
+			if(empty($person_enter_info)) {
+				// $this->redirect('/indx/center/sid-' . $sid);
+			}
+		}
+		else {
+			//如果登录了的，就自动报名
+			if(base_lib_BaseUtils::getCookie("IndexAutoAddEnter:{$sid}") && $user_id) {
+				base_lib_BaseUtils::ssetcookie(array ("IndexAutoAddEnter:{$sid}" => ''), time() - 1, '/', base_lib_Constant::COOKIE_DOMAIN);
+				$user_id = $this->_netfair_userid;
+				$service_person_enter = new base_service_netfair_personenternet();
+				$re = $service_person_enter->IndexAutoAddEnter($sid, $user_id);
+				$in_data['is_IndexAutoAddEnter'] = true;
+				//是否已报名
+				$in_data['is_person_enter_data'] = ($re === false);
+			}
+		}
+		
+		if($user_id) {
+			//检测是否已报名
+			$service_enter = new base_service_netfair_personenternet();
+			//验证当前用户是否已经报名,如果没有报名，就跳转去报名
+			$person_enter_info = $service_enter->getRecord([
+				'sid'       => $sid,
+				'person_id' => $user_id,
+			], 'id,person_id');
+			
+			if($person_enter_info && $person_enter_info['id']) {
+				$in_data['person_enter_data'] = $person_enter_info;
+			}
+		}
+		
+		if(base_lib_BaseUtils::getCookie("businessHallListx:{$sid}") && $user_id) {
+			$in_data['is_businessHallListx'] = true;
+			base_lib_BaseUtils::ssetcookie(array ("businessHallListx:{$sid}" => ''), time() - 1, '/', base_lib_Constant::COOKIE_DOMAIN);
+		}
+		
+		//自动 添加到点提醒
+		if($user_id) {
+			$is_AddShuangXuanNetRemind = base_lib_BaseUtils::getCookie("AddShuangXuanNetRemind:{$sid}");
+			if($is_AddShuangXuanNetRemind) {
+				$is_AddShuangXuanNetRemind = explode(':', $is_AddShuangXuanNetRemind);
+				$_tmp_cookie_sid = $is_AddShuangXuanNetRemind[0];
+				$_tmp_cookie_company_net_id = $is_AddShuangXuanNetRemind[1];
+				if($_tmp_cookie_sid == $sid) {
+					$ser_shuangXuanNetRemind = new base_service_netfair_remindnet();
+					$_tmp_add_re = $ser_shuangXuanNetRemind->AddShuangXuanNetRemind($sid, $user_id, $_tmp_cookie_company_net_id);
+					$in_data['login_auto_AddShuangXuanNetRemind'] = $_tmp_add_re;
+				}
+				base_lib_BaseUtils::ssetcookie(array ("AddShuangXuanNetRemind:{$sid}" => ''), time() - 1, '/', base_lib_Constant::COOKIE_DOMAIN);
+			}
+		}
+		
+		$in_data['cookie_domain'] = base_lib_Constant::COOKIE_DOMAIN;
+		#endregion
+		
+		
+		#region  hujian 参会企业 招聘岗位 参与求职者
+		//参会企业 招聘岗位 参与求职者
+		$SchoolNetAttendTipData = $ser_shuangxuanpersonenter->GetSchoolNetAttendTipData($sid);
+		$in_data['school_tip_data'] = $SchoolNetAttendTipData;
+		//已经报名的登录记录
+		$service_rtc_action = new base_service_netfair_personactionnet();
+		$person_id = $user_id;
+		if($_SESSION['shuangxuan_history'] != $sid && $shaungxuan_net_info['activity_school_state'] < 2) {
+			$_rtc_action_re = $service_rtc_action->addType($sid, $person_id, base_service_schoolnet_shuangxuanpersonaction::TYPE_ENTER_NET);
+			$_rtc_action_re and $_SESSION['shuangxuan_history'] = $sid;
+		}
+		//求职者动态
+		$person_action_history = $service_rtc_action->_PersonActionHistory($sid, $shaungxuan_net_info['activity_school_state'], $shaungxuan_net_info['end_time']);
+		$in_data['person_action_history'] = $person_action_history;
+		#endregion
+		
+		$in_data['default_photo'] = base_lib_Constant::STYLE_URL . "/img/m/new_person/headportrait.png";
+		
+		// $JobFairList_type = base_lib_BaseUtils::getCookie('JobFairList_type') ?: "company";
+		$JobFairList_type = "company";
+		if($JobFairList_type == 'company') {
+			if(base_lib_BaseUtils::getCookie('JobFairList_type') == 'person') {
+				$in_data['scrollTop'] = 1;
+			}
+			base_lib_BaseUtils::ssetcookie(array ("JobFairList_type" => 'company'), time() - 1, '/');
+			$list_html = $this->GetShuangXuanNetCompanyList($sid, $page);
+		}
+		else {
+			$list_html = $this->GetShuangXuanNetPersonList($sid, $page);
+		}
+		$in_data['JobFairList_type'] = $JobFairList_type;
+		$in_data['list_html'] = $list_html;
+		
+		return $this->render('shuangxuannet/center.html', $in_data);
+	}
+	
+	/**
+	 * 企业报名--提交    zhouwenjun 2020/2/19 15:13
+	 */
+	function pageApplyCompanyPost($inPath) {
+		$path_data = base_lib_BaseUtils::saddslashes($this->getUrlParams($inPath));
+		$in_data['sid'] = base_lib_BaseUtils::getStr($path_data['sid'], 'int');
+		$in_data['company_name'] = base_lib_BaseUtils::getStr($path_data['company_name'], 'string');
+		$in_data['link_tel'] = base_lib_BaseUtils::getStr($path_data['link_tel'], 'string');
+		
+		if(!$in_data['sid']) {
+			$this->ajax_data_json(ERROR, '双选会ID错误', $in_data);
+		}
+		if(!$in_data['company_name']) {
+			$this->ajax_data_json(ERROR, '请输入企业名称', $in_data);
+		}
+		if(!$in_data['link_tel']) {
+			$this->ajax_data_json(ERROR, '请输入联系电话', $in_data);
+		}
+		$service_shuangxuan_net = new base_service_netfair_net();
+		$shaungxuan_net_info = $service_shuangxuan_net->getShuangXuanNetByID($in_data['sid'], '');
+		if(empty($shaungxuan_net_info)) {
+			$this->ajax_data_json(ERROR, '该场次双选会不存在', $in_data);
+		}
+		$ser_applycompany = new base_service_netfair_applycompany();
+		
+		$add_data = array (
+			'scene_id'     => $in_data['sid'],
+			'company_name' => $in_data['company_name'],
+			'link_tel'     => $in_data['link_tel'],
+			'create_time'  => $this->now(),
+		);
+		$re = $ser_applycompany->AddApplyCompanyInfo($add_data);
+		if($re === false) {
+			$this->ajax_data_json(SUCCESS, '报名失败!', $in_data);
+		}
+		
+		$this->ajax_data_json(SUCCESS, '提交成功，工作人员稍后联系您!', $in_data);
+	}
+	
+	/**
+	 * 活动开始提醒设置    zhouwenjun 2020/2/19 18:02
+	 */
+	function pageAddShuangXuanNetRemind($inPath) {
+		$path_data = base_lib_BaseUtils::saddslashes($this->getUrlParams($inPath));
+		$in_data['sid'] = base_lib_BaseUtils::getStr($path_data['sid'], 'int');
+		$in_data['company_net_id'] = base_lib_BaseUtils::getStr($path_data['company_net_id'], 'string');
+		
+		$user_id = 0;
+		if($this->isLogin() && $this->_usertype == 'p') {
+			$user_id = $this->_userid;
+		}
+		$in_data['user_id'] = $user_id;
+		
+		if(!$in_data['sid']) {
+			$this->ajax_data_json(ERROR, '双选会ID错误', $in_data);
+		}
+		if(!$in_data['user_id']) {
+			$this->ajax_data_json(ERROR, '登录后才能设置提醒', $in_data);
+		}
+		$service_shuangxuan_net = new base_service_netfair_net();
+		$shaungxuan_net_info = $service_shuangxuan_net->getShuangXuanNetByID($in_data['sid'], '');
+		if(empty($shaungxuan_net_info)) {
+			$this->ajax_data_json(ERROR, '该场次双选会不存在', $in_data);
+		}
+		if($in_data['company_net_id']) {
+			$ser_shuangxuancompanynet = new base_service_netfair_companynet();
+			$company_get_data = array (
+				'id'  => $in_data['company_net_id'],
+				'sid' => $in_data['sid'],
+			);
+			$shuangxuancompanynet_data = $ser_shuangxuancompanynet->getCompanyOne($company_get_data, 'id');
+			if(!$shuangxuancompanynet_data || !$shuangxuancompanynet_data['id']) {
+				$this->ajax_data_json(ERROR, '设置提醒的单位不存在', $in_data);
+			}
+		}
+		
+		$ser_shuangXuanNetRemind = new base_service_netfair_remindnet();
+		
+		$re = $ser_shuangXuanNetRemind->AddShuangXuanNetRemind($in_data['sid'], $user_id, $in_data['company_net_id']);
+		if($re === false) {
+			$this->ajax_data_json(SUCCESS, '设置提醒失败!', $in_data);
+		}
+		
+		$this->ajax_data_json(SUCCESS, '设置提醒成功!', $in_data);
+	}
+	
+	/**
+	 * 校园网络双选会招聘大厅 ajax    zhouwenjun 2020/2/19 12:37
+	 * @param $inPath
+	 * @return
+	 */
+	function pageJobFairListAjax($inPath) {
+		$path_data = base_lib_BaseUtils::saddslashes($this->getUrlParams($inPath));
+		$page = base_lib_BaseUtils::getStr($path_data['page'], 'int', 1);
+		$sid = base_lib_BaseUtils::getStr($path_data['sid'], 'int', '');
+		//如果没有传递双选会场次ID，就跳转到报错页面
+		if(!$sid) {
+			return $this->render('404.html', array ('error_msg' => '双选会场次ID错误'));
+		}
+		$JobFairList_type = base_lib_BaseUtils::getCookie('JobFairList_type') ?: "company";
+		if($JobFairList_type == 'company') {
+			$list_html = $this->GetShuangXuanNetCompanyList($sid, $page);
+		}
+		else {
+			$list_html = $this->GetShuangXuanNetPersonList($sid, $page);
+		}
+		
+		$in_data['sid'] = $sid;
+		$in_data['page'] = $page;
+		$in_data['list_html'] = $list_html;
+		
+		$this->ajax_data_json(SUCCESS, '获取成功!', $in_data);
+	}
+	
+	/**
+	 * 企业大厅    zhouwenjun 2020/2/19 12:35
+	 * @param int   $sid
+	 * @param int   $page
+	 * @param array $path_data
+	 * @return
+	 */
+	private function GetShuangXuanNetCompanyList($sid = 0, $page = 1, $path_data = []) {
+		$in_data = [];
+		if($sid > 0) {
+			$service_netfair_companynet = new base_service_netfair_companynet();
+			$in_data = $service_netfair_companynet->GetNetfairCompanyList($sid, $page, 1000, $this->_userid);
+			//var_dump($in_data);exit;
+		}
+		$in_data['default_photo'] = base_lib_Constant::STYLE_URL . "/img/m/new_person/headportrait.png";
+		$in_data['page'] = $page;
+		$in_data['sid'] = $sid;
+		
+		return $this->render('shuangxuannet/center_company_ajax.html', $in_data);
+	}
+	
+	/**
+	 * 求职大厅    zhouwenjun 2020/2/19 12:35
+	 * @param int $sid
+	 * @param int $page
+	 * @return
+	 */
+	private function GetShuangXuanNetPersonList($sid = 0, $page = 1) {
+		$in_data['sid'] = $sid;
+		$in_data['page'] = $page;
+		$page_size = 99;
+		$ser_personenternet = new base_service_netfair_personenternet();
+		$in_data['page_size'] = $page_size;
+		$order = 'order by login_time desc';
+		$in_data['order'] = $order;
+		$enter_person = $ser_personenternet->getEnterPersonList($sid, $in_data);
+		
+		$in_data['list'] = $enter_person->items;
+		$in_data['default_photo'] = base_lib_Constant::STYLE_URL . "/img/m/new_person/headportrait.png";
+		
+		//$in_data['pager'] = $this->pageBar($enter_person->totalSize, $page_size, $page, $inPath);
+		return $this->render('shuangxuannet/center_person_ajax.html', $in_data);
+	}
+	
+	
+	/**
+	 * @param $start_time
+	 * @param $end_time
+	 * @return int   0未开始；1进行中；2结束
+	 */
+	protected function _getActivityStatus($start_time, $end_time) {
+		$start_time = strtotime($start_time);
+		$end_time = strtotime($end_time);
+		$now_time = time();
+		if($end_time < $start_time) {
+			return 2;
+		}
+		if($now_time < $start_time) {
+			return 0;
+		}
+		if($now_time <= $end_time) {
+			return 1;
+		}
+		else {
+			return 2;
+		}
+	}
+	
+	/**
+	 * 提交资料
+	 * User:hujian 2019/9/25 16:22:10
+	 */
+	public function pageAddCompanyNet($inPath) {
+		$pathdata = base_lib_BaseUtils::saddslashes($this->getUrlParams($inPath));
+		$sid = base_lib_BaseUtils::getStr($pathdata['sid'], "string", "");
+		//		$service_company = new base_service_company_company();
+		//		$company = $service_company->getCompany($this->_userid, 1, 'company_id,company_flag,'
+		//			. 'company_name,property_id,size_id,area_id,calling_ids,address,is_audit,'
+		//			. 'linkman,'
+		//			. 'open_linkman,link_tel,open_tel,fax,open_fax,link_mobile,'
+		//			. 'open_mobile,company_logo_path,company_video_path,company_video_name,email,'
+		//			. 'company_bright_spot,company_shortname,company_reward_ids,company_other_reward');
+		//
+		//		$this->_aParams['base_company_shortname'] = $company['company_shortname'];
+		//		$service_shortname_audit = new base_service_company_shortnameaudit();
+		//		$shortname_result = $service_shortname_audit->getLastedAudit($this->_userid);
+		//		$this->_aParams['need_audit_shortname'] = !empty($shortname_result);
+		//		if($this->_aParams['need_audit_shortname'] && !empty($shortname_result['company_shortname']))
+		//			$company['company_shortname'] = $shortname_result['company_shortname'];
+		
+		//如果没有传递双选会场次ID，就跳转到报错页面
+		if(!$sid) {
+			return $this->render('404.html', array ('error_msg' => '双选会场次ID错误'));
+		}
+		$detect = new SMobiledetect();
+		if($detect->isMobile() || $detect->isTablet()) {
+			$this->redirect_url2(base_lib_Constant::MNETFAIR_URL_NOT_HTTP . '/fairList/sid-' . $sid);
+		}
+		
+		$this->GetHeadData($sid);
+		$service_netfair_company = new base_service_netfair_company();
+		if(!$this->_netfair_userid) {
+			$this->_netfair_userid = $service_netfair_company->getCompanyID($this->_userid, $this->_source);
+		}
+		
+		$net_company = $service_netfair_company->GetCompanyDataByIds([$this->_netfair_userid], 'company_logo_path,company_shortname,info,address,property_id,size_id,area_id,' .
+			'calling_id,company_name,company_id');
+		$company = $net_company[ $this->_netfair_userid ];
+		$this->_aParams['company'] = $company;
+		
+		//		$xml = SXML::load('../config/company/company.xml');
+		//		if (!is_null($xml)) {
+		//			$VirtualName = $xml->VirtualName;//虚拟目录名 CompanyImages
+		//			$LogoFolder  = $xml->LogoFolder;// <!--logo文件夹名-->
+		//			$logoTempfolder = $xml->LogoTempFolder;
+		//		}
+		//
+		//		$this->_aParams['logo'] = empty($company['company_logo_path'])
+		//			? base_lib_Constant::STYLE_URL . "/img/job/newjob/newJob_57.png"
+		//			: base_lib_Constant::YUN_ASSETS_URL_NO_HTTP . '/' . $VirtualName . '/' . $LogoFolder . '/' . $company['company_logo_path'];
+		//
+		//		$this->_aParams['logo_virt_path'] =  base_lib_Constant::UPLOAD_FILE_URL . '/' . $VirtualName . '/' . $logoTempfolder . '/';
+		
+		//获取企业固定电话信息
+		//		$this->_aParams['phone_infor'] = $this->get_telephone_infor($company["link_tel"]);
+		
+		//获得企业行业数据
+		//		$calling_service = new base_service_common_calling();
+		//		$calling_arr = array_slice(explode(",", $company['calling_ids']), 0, 2);
+		//
+		//		$this->_aParams['calling_arr'] = $calling_arr;
+		
+		//获得主行业名称
+		//		if (!empty($calling_arr[0]))
+		//			$calling_names[0] = $calling_service->getCallingName($calling_arr[0]);
+		//
+		//		//获得次行业名称
+		//		if (!empty($calling_arr[1]))
+		//			$calling_names[1] = $calling_service->getCallingName($calling_arr[1]);
+		//
+		//		$this->_aParams['calling_names'] = $calling_names;
+		
+		// 获取信息完善度
+		//		$companyInfoPercent = 0;
+		//		$no_complete = $service_company->getComPercentAndNoComplete($this->_userid, false, $companyInfoPercent);
+		//		$this->_aParams['precent']     = $companyInfoPercent . '%';
+		//		$this->_aParams['no_complete'] = $no_complete;
+		
+		if($this->_source == 1) {
+			$properties_service = new base_service_common_comproperty();
+			$this->_aParams["properties"] = $properties_service->getAll();
+			$this->_aParams["company_property"] = $properties_service->getComproperty($company["property_id"]);
+			
+			// 百度地图
+			$service_baidumap = new base_service_company_companycooperaterbaidumap();
+			$map = $service_baidumap->getCompanyCooperateBaiduMapByCompanyID($company['company_id']);
+			$this->_aParams['map'] = $map;
+			
+			//获取企业的在招职位
+			$job = new base_service_company_job_job();
+			$job_status = new base_service_common_jobstatus();
+			$job_list = $job->getJobList($company['company_id'], "", $job_status->pub, 'job_id,station', 0, 0, null, null);
+		}
+		else {
+			// 获取公司性质码表信息
+			$properties_service = new base_service_common_blue_companyproperty();
+			$this->_aParams["properties"] = $properties_service->getAll();
+			$this->_aParams["company_property"] = $properties_service->getProperty($company["property_id"]);
+			
+			//获取全部行业
+			$base_service_common_blue_calling = new base_service_common_blue_bluecalling();
+			$all_calling = $base_service_common_blue_calling->getAll();
+			$this->_aParams['calling'] = $all_calling;
+			
+			//周文君公用方法不支持查询addres_id
+			$service_blue_company = new base_service_blue_company_company();
+			$blue_company = $service_blue_company->getCompanyInfoById($company['company_id'], 'address_id');
+			// 百度地图
+			$service_blue_bluecompanyaddress = new base_service_blue_company_address();
+			$field = "company_id,map_x,map_y,map_level,area_id,address_info";
+			
+			$this->_aParams['map'] = $service_blue_bluecompanyaddress->getCompanyAddressById($blue_company['address_id'], "company_id,map_x,map_y,map_level,area_id,address_info");
+			$this->_aParams['map']['map_zoom'] = $this->_aParams['map']['map_level'];
+			
+			//获取企业的在招职位
+			$base_serv_job = new base_service_blue_company_job();
+			$job_list = $base_serv_job->getJobInfoByCompanyId($company['company_id'], 'job_id,station')->items;
+		}
+		
+		// 获取公司规模码表信息
+		$service_comsize = new base_service_common_comsize();
+		$this->_aParams['comsizes'] = $service_comsize->getAll();
+		$this->_aParams["company_size"] = $service_comsize->getComsize($company["size_id"]);
+		
+		//获取企业的在招职位
+		$this->_aParams["job_list"] = $job_list;
+		
+		$this->_aParams['title'] = '报名资料完善';
+		$this->_aParams['upload_cookie_userid'] = $this->_userid;
+		$this->_aParams['upload_cookie_nickname'] = $this->_username;
+		$this->_aParams['upload_cookie_usertype'] = $this->_usertype;
+		$this->_aParams['upload_cookie_userkey'] = base_lib_BaseUtils::getCookie('userkey');
+		$this->_aParams['upload_cookie_tick'] = base_lib_BaseUtils::getCookie('tick');
+		
+		//		$service_resource = base_service_company_resources_resources::getInstance($this->_userid);
+		//		list($audit_status,$audit_param) = $service_resource->getCompanyAuditStatus();
+		//		$this->_aParams["audit_status"] = $audit_status;
+		//获取场次
+		$base_serv_shuangxuannet = new base_service_netfair_net();
+		$shuangxuannet = $base_serv_shuangxuannet->getShuangXuanNetByID($sid, 'id,title');
+		$this->_aParams["shuangxuannet"] = $shuangxuannet;
+		$this->_aParams["sid"] = $sid;
+		$this->_aParams["source"] = $this->_source;
+		
+		return $this->render('shuangxuannet/submitcompanyinfo.html', $this->_aParams);
+	}
+	
+	/**
+	 * 统计资料保存
+	 * User:hujian 2019/9/25 16:23:21
+	 */
+	public function pageAddCompanyNetDo($inPath) {
+		if(!$this->canDo("edit_company_info")) {
+			echo json_encode(array ('error' => "无权限访问，没有开通相应权限"));
+			
+			return;
+		}
+		$pathdata = base_lib_BaseUtils::saddslashes($this->getUrlParams($inPath));
+		$base_infor = $this->get_company_base_infor_from_post($pathdata);
+		
+		$result = $this->validate_company_base_info($base_infor);
+		if($result->has_err) {
+			echo $result->toJsonWithHtml();
+			
+			return;
+		}
+		$validator = new base_lib_Validator();
+		$address = $validator->getNotNull($pathdata['txtAddress'], '公司地址不能为空');
+		$area_id = $validator->getNotNull($pathdata['hidArea'], '公司地区不能为空');
+		$link_man = $validator->getNotNull($pathdata["link_man"], "请输入参会联系人");
+		$link_man = $validator->getStr($link_man, 1, 10, "参会联系人不能超过10字");
+		if($validator->has_err) {
+			echo header("Content-type:text/plain;charset=utf-8");
+			echo $validator->toJsonWithHtml();
+			
+			return;
+		}
+		$link_mobile = base_lib_BaseUtils::getStr($pathdata['link_mobile']);
+		if(!$this->matchPhoneNo($link_mobile)) {
+			echo json_encode(array ('error' => "请输入正确的联系电话"));
+			
+			return;
+		}
+		//选择的职位
+		$job_ids = base_lib_BaseUtils::getStr($pathdata['job_ids']);
+		if(!$job_ids) {
+			echo json_encode(array ('error' => "请选择要参会的职位"));
+			
+			return;
+		}
+		$job_ids = explode(',', $job_ids);
+		$sid = base_lib_BaseUtils::getStr($pathdata['sid']);
+		if(!$sid) {
+			echo json_encode(array ('error' => "请选择要参加的场次"));
+			
+			return;
+		}
+		$base_serv_companynet = new base_service_netfair_companynet();
+		
+		//保存单位基本信息
+		//        $service_company = new base_service_company_company();
+		//        $result = $service_company->saveCompanyAddress($this->_userid, $area_id, $address);
+		//        if ($result === false) {
+		//            echo json_encode(array('error'=>'保存公司地址失败'));
+		//            return;
+		//        }
+		$base_infor['map_x'] = base_lib_BaseUtils::getStr($pathdata['hidMapX'], 'float', '');
+		$base_infor['map_y'] = base_lib_BaseUtils::getStr($pathdata['hidMapY'], 'float', '');
+		$map_zoom = base_lib_BaseUtils::getStr($pathdata["hidMapZoom"], 'int', '');
+		
+		$base_infor['area_id'] = $area_id;
+		$base_infor['address'] = $address;
+		
+		$base_infor['map_address'] = [
+			'map_x'        => $base_infor['map_x'],
+			'map_y'        => $base_infor['map_y'],
+			'map_zoom'     => $map_zoom,
+			'area_id'      => $area_id,
+			'company_id'   => $this->_userid,
+			'address_info' => $address,
+		];
+		
+		//保存logo
+		//        $del_logo = base_lib_BaseUtils::getStr($pathdata['del_logo']);
+		//        if ($del_logo != $base_infor['logo']) {
+		//            $logo_name = array();
+		//            // 读取配置xml文件
+		//            $xml = SXML::load('../config/company/company.xml');
+		//            if (!is_null($xml)) {
+		//                $logo_folder        = $xml->LogoFolder;
+		//                $logo_temp_folder   = $xml->LogoTempFolder;
+		//                $company_image_path = $xml->CompanyImagePath;
+		//                $virtualName        = $xml->VirtualName;
+		//            }
+		//            array_push($logo_name, $base_infor['logo']);
+		//
+		//            //将LOGO移动到正式目录中
+		//            $postvar['newfile']      = "{$virtualName}/{$logo_folder}";
+		//            $postvar['oldfile']      = "{$virtualName}/{$logo_temp_folder}";
+		//            $postvar['names']        = $logo_name;
+		//            $postvar['thumbSuffix']  = '';
+		//            $postvar['authenticate'] = "logo";
+		//            $result_move = base_lib_Uploadfilesv::moveFile($postvar);
+		//
+		//            if (!$result_move) {
+		//                echo json_encode(array('error'=>"修改logo图片失败"));
+		//                return;
+		//            }
+		//
+		//            $service_company = base_service_company_company::getInstances();
+		//            $result = $service_company->delLogo($del_logo);
+		//
+		//            $service_logoaudit = new base_service_company_logoaudit();
+		//            $service_logoaudit->addCompanyLogoAudit($this->_userid, 0);//将logo 设置为未审核
+		//        }
+		//保存地址
+		//        $service_company = new base_service_company_company();
+		//        $result = $service_company->saveCompanyAddress($this->_userid, $area_id, $address);
+		//        if ($result === false) {
+		//            echo json_encode(array('error'=>'保存公司地址失败'));
+		//            return;
+		//        }
+		//        $map['company_id'] = $this->_userid;
+		//        $map['map_x']      = base_lib_BaseUtils::getStr($pathdata['hidMapX'], 'float', '');
+		//        $map['map_y']      = base_lib_BaseUtils::getStr($pathdata['hidMapY'], 'float', '');
+		//        $map['map_zoom']   = base_lib_BaseUtils::getStr($pathdata["hidMapZoom"],'int','');
+		
+		//        if ($map['map_x'] != '' && $map['map_y'] != '' && $map['map_zoom'] != '') {
+		//            $service_baidumap = new base_service_company_companycooperaterbaidumap();
+		//            $result  = $service_baidumap->saveBaiduMap($map);
+		//            if ($result === false) {
+		//                echo json_encode(array('error'=>'保存公司地图标注失败'));
+		//                return ;
+		//            }
+		//        }
+		$service_netfair_company = new base_service_netfair_company();
+		if(!$this->_netfair_userid) {
+			$this->_netfair_userid = $service_netfair_company->getCompanyID($this->_userid, $this->_source);
+		}
+		
+		$net_company = $service_netfair_company->GetCompanyDataByIds([$this->_netfair_userid], 'company_id');
+		$company = $net_company[ $this->_netfair_userid ];
+		//保存之后检测单位是否满足
+		if($this->_source == 1) {
+			$to_url = base_lib_Constant::COMPANY_URL . "/licencevalidate";
+			$to_url = "<a target='_blank' href='{$to_url}'><u>(去验证)</u></a>";
+		}
+		else {
+			$to_url = base_lib_Constant::KUAI_MI_COMPANY . "/licencevalidate";
+			$to_url = "<a target='_blank' href='{$to_url}'><u>(去验证)</u></a>";
+		}
+		
+		$result = $base_serv_companynet->checkCompanyInfo($this->_netfair_userid);
+		if($result['code'] == ERROR) {
+			echo json_encode(array ('error' => $result['msg']));
+			
+			return;
+		}
+		//添加职位信息
+		$aRs = $base_serv_companynet->addCompanyNet($company['company_id'], $sid, $job_ids, $link_man, $link_mobile, 2, 0, $this->_source);
+		if($aRs['code'] == ERROR) {
+			echo json_encode(array ('error' => $aRs['msg']));
+			
+			return;
+		}
+		
+		$result = $service_netfair_company->UpdateCompanyDataById($this->_netfair_userid, $base_infor);
+		if($result['code'] == ERROR) {
+			echo json_encode(array ('error' => $result['msg']));
+			
+			return;
+		}
+		
+		echo json_encode(array ('success' => "报名成功"));
+		
+		return;
+	}
+	
+	/**
+	 * 电话
+	 * User:hujian 2019/9/25 16:36:07
+	 */
+	private function get_telephone_infor($telephone) {
+		$telephone_infor = array ('zone' => '', 'phone' => '', 'ext' => '');
+		preg_match("/^([0-9]+)-([0-9]+)(\(([0-9]+)\))?$/", $telephone, $regs);
+		if(count($regs) <= 0) {
+			$telephone_infor["phone"] = $telephone;
+			
+			return $telephone_infor;
+		}
+		if($regs[1] != "") {
+			$telephone_infor["zone"] = $regs[1];
+		}
+		if($regs[2] != "") {
+			$telephone_infor["phone"] = $regs[2];
+		}
+		if($regs[4] != "") {
+			$telephone_infor["ext"] = $regs[4];
+		}
+		
+		return $telephone_infor;
+	}
+	
+	/**
+	 * 获取提交数据
+	 * User:hujian 2019/9/26 10:33:28
+	 */
+	private function get_company_base_infor_from_post($post) {
+		$base_infor = [];
+		
+		$base_infor["property_id"] = $this->get_post_value($post["company_property"]);
+		$base_infor["size_id"] = $this->get_post_value($post["company_size"]);
+		$base_infor["calling_id"] = $this->get_post_value($post["calling_id"]);
+		$base_infor["info"] = urldecode(urldecode($this->get_post_value($post["company_info"])));
+		
+		/*$base_infor["linkman"]              = urldecode(urldecode($this->get_post_value($post["linkman"])));
+		$base_infor["link_mobile"]          = $this->get_post_value($post["link_mobile"]);*/
+		
+		return $base_infor;
+	}
+	
+	/**
+	 * 获取提交数据
+	 * User:hujian 2019/9/26 10:34:24
+	 */
+	private function get_post_value($value) {
+		return isset($value) ? base_lib_BaseUtils::getStr($value) : "";
+	}
+	
+	/**
+	 * 数据验证
+	 * User:hujian 2019/9/26 10:40:17
+	 */
+	private function validate_company_base_info($base_infor) {
+		$validator = new base_lib_Validator();
+		
+		$properties_service = new base_service_common_comproperty();
+		$service_resource = base_service_company_resources_resources::getInstance($this->_userid);
+		list($audit_status, $audit_param) = $service_resource->getCompanyAuditStatus();
+		
+		$properties = $properties_service->getAll();
+		
+		if(!isset($properties[ $base_infor["property_id"] ])) {
+			$validator->addErr("请选择正确的公司性质");
+		}
+		
+		$size_service = new base_service_common_comsize();
+		$sizes = $size_service->getAll();
+		if(!isset($sizes[ $base_infor["size_id"] ])) {
+			$validator->addErr("请选择正确的公司规模");
+		}
+		
+		$validator->getNotNull($base_infor["calling_id"], "请选择公司所属行业");
+		//        $validator->getNotNull($base_infor["info"], "请输入公司简介");
+		//        $validator->getStr($base_infor["info"], 2, 4000, "公司简介请输入2-4000个字");
+		//        $validator->getStr($base_infor["hidCompanyShortName"], 1, 15, "公司简称请输入1-15个字");
+		//        $validator->getStr($base_infor["hidRightSpot"], 5, 50, "主营业务及行业地位请输入5-50个字");
+		return $validator;
+	}
+	
+	/**
+	 * 验证座机号和手机号
+	 * User:hujian 2019/9/20 13:49:38
+	 */
+	public function matchPhoneNo($tel) {
+		//验证手机号
+		$isMob = "/^1[345789]{1}\d{9}$/";
+		//验证座机
+		$isTel = '/^(0[0-9]{2,3}-)?([2-9][0-9]{6,7})+(-[0-9]{1,4})?$/';
+		if(!preg_match($isMob, $tel) && !preg_match($isTel, $tel)) {
+			return false;
+		}
+		
+		return true;
+	}
+	
+	/**
+	 * 自动报名    zhouwenjun 2020/3/25 11:02
+	 * @param $inPath
+	 */
+	function pageIndexAutoAddEnter($inPath) {
+		$path_data = base_lib_BaseUtils::saddslashes($this->getUrlParams($inPath));
+		$in_data['sid'] = base_lib_BaseUtils::getStr($path_data['sid'], 'int');
+		
+		$user_id = 0;
+		if($this->isLogin() && $this->_usertype == 'p') {
+			$user_id = $this->_netfair_userid;
+		}
+		$in_data['user_id'] = $user_id;
+		
+		if(!$in_data['sid']) {
+			$this->ajax_data_json(ERROR, '双选会ID错误', $in_data);
+		}
+		if(!$in_data['user_id']) {
+			$this->ajax_data_json(ERROR, '登录后才能报名', $in_data);
+		}
+		$service_shuangxuan_net = new base_service_netfair_net();
+		$shaungxuan_net_info = $service_shuangxuan_net->getShuangXuanNetByID($in_data['sid'], '');
+		if(empty($shaungxuan_net_info)) {
+			$this->ajax_data_json(ERROR, '该场次双选会不存在', $in_data);
+		}
+		
+		$service_person_enter = new base_service_netfair_personenternet();
+		$re = $service_person_enter->IndexAutoAddEnter($in_data['sid'], $in_data['user_id']);
+		if($re === false) {
+			$this->ajax_data_json(SUCCESS, '报名失败!', $in_data);
+		}
+		
+		$this->ajax_data_json(SUCCESS, '报名成功!', $in_data);
+	}
+	
+	/**
+	 * 生成二维码    zhouwenjun 2020/3/25 15:46
+	 */
+	function pageQrCodeScanImage($inPath) {
+		$pathdata = base_lib_BaseUtils::sstripslashes($this->getUrlParams($inPath));
+		$scan_url = base_lib_BaseUtils::getStr($pathdata["scan_url"], "string");
+		$scan_url = html_entity_decode($scan_url);
+		$scan_url = html_entity_decode($scan_url);
+		SQrcode::png1(urldecode($scan_url), 4, 1);
+	}
+	
+}

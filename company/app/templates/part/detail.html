@@ -1,0 +1,195 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>兼职</title>
+<!–[if lt IE9]> 
+<script type="text/javascript" language="javascript" src="{/version file="html5.js"/}"></script>
+<![endif]–>
+<link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='comback.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='tJob_style.css'/}" />
+<script type="text/javascript" src="{/version file='version.js'/}"></script>
+<script type="text/javascript">
+window.CONFIG = {
+    HOST: '{/$siteurl.style/}',
+    COMBOPATH: '/js/v2/'
+}
+</script>
+<script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+<script type="text/javascript" src="{/version file='global.js'/}"></script>
+<script type="text/javascript">
+    hbjs.loadJS('{/$siteurl.style/}/js/v2/cqjob/common.js');
+</script>
+<link href="{/version file='base.css'/}" rel="stylesheet" />
+<link href="{/version file='comback.css'/}" rel="stylesheet" />
+<link href="{/version file='tJob_style.css'/}" rel="stylesheet" />
+</head>
+
+<body class="tpartDgray tpart_jobsee">
+<div class="tpart_logo">
+	<h1 class="logo">
+		<a href=""><img src="{/$siteurl.style/}/img/part/huibo_jzLogo.jpg" /></a>
+	</h1>
+</div>
+<div class="tpartDefinite">
+	<div class="tpartDefinLf">
+    	<div class="tDtoptit">
+        	<h2>{/$station/}</h2>
+            <p>职位类别：{/$jobsort/}</p>
+        </div>
+        <div class="tDtoptitx">
+        	<p><i class="tDtitIcon01"></i><span>{/$company_name/}</span></p>
+            <p><i class="tDtitIcon02"></i><span>招聘{/$apply_count/}人，{/if $need_invite == 1/}需要面试{/else/}不需要面试{//if/}</span></p>
+            <p><i class="tDtitIcon03"></i><span>{/$address/}</span><a target="_blank" href="http://api.map.baidu.com/marker?location={/$map_y/},{/$map_x/}&output=html&title={/$company_name/}&content={/$address/}"><em></em>查看地图</a></p>
+            <p><i class="tDtitIcon04"></i><span>{/$salary/}，{/$salary_type/}</span></p>
+            <p><i class="tDtitIcon05"></i><span data-long="{/$long_recruit/}">{/if $long_recruit/}长期招聘{/else/}{/$start_time/} -- {/$end_time/}{//if/}</span></p>
+            <table class="tpart_time">
+                <tr>
+                    <th class="black">TIME</th>
+                    <th>周一</th>
+                    <th>周二</th>
+                    <th>周三</th>
+                    <th>周四</th>
+                    <th>周五</th>
+                    <th>周六</th>
+                    <th>周日</th>
+                </tr>
+                {/assign var="noon" value=['01'=>'上午','02'=>'下午','03'=>'晚上']/}
+                {/assign var="day" value=['01','02','03','04','05','06','07']/}
+                {/foreach $noon as $k => $val/}
+                <tr>
+                    <th class="orange">{/$val/}</th>
+                    {/foreach $day as $va/}
+                    <td data-val="{/$va/}{/$k/}">       
+                        {/assign var='tt' value=$va|cat:$k/}                
+                        {/if in_array($tt, $freetimes)/}<i class="yes"></i>{/else/}&nbsp;{//if/}
+                    </td>
+                    {//foreach/}
+                </tr>
+                {//foreach/}
+            </table>
+            <p style="margin-left:35px;"><span>{/$time_detail/}</span></p>
+        </div>
+
+        <!--职位联系人-->
+        <style>
+            .announcer-infor{margin-top: 30px;margin-bottom: 10px}
+            .announcer-infor .img{width:40px;height:40px;border-radius: 40px;background-color: #66a5ea;color:#fff;text-align: center;font-size:20px;line-height: 40px;color:#fff;float:left}
+            .announcer-infor .img img{width:100%;height:100%;border-radius: 40px}
+            .announcer-infor .img a{color:#fff}
+            .announcer-infor .infor{margin-left:55px;color:#666;font-size:14px}
+            .announcer-infor .infor .name{color:#444;display: block;margin-bottom: 5px}
+            .announcer-infor .infor .msg{float:right;width:98px;height:42px;display: block;border:1px solid #0092db;font-size:19px;color:#0092db;background: url({/$siteurl.style/}/img/account/icon-msg.png) 10px center no-repeat;padding-left:40px;line-height: 42px;margin-right: 180px}
+            .announcer-infor .infor .desc{margin-top: 5px}
+            .announcer-infor .infor .desc strong{color:#ff6b50;font-size:16px;vertical-align: middle}
+            .announcer-infor .infor .desc span{color:#999;font-size:12px;margin-left: 20px}
+        </style>
+        <div class="announcer-infor clearfix" style="position: relative;padding-left:30px">
+            <dl>
+                <dt class="img"><a href="">{/if !empty($account_user_pic)/}<img src="{/$account_user_pic/}" />{/else/}{/$account_user_name_pic/}{//if/}</a></dt>
+                <dd class="infor">
+                    <span class="name" {/if empty($com_linkman['linkman_station']) && empty($com_linkman['link_tel'])/}style="padding-top:8px"{//if/}>职位发布人：{/$com_linkman['linkman']/}</span>
+                    <span>{/$com_linkman['linkman_station']/}</span>
+                    <p class="desc">
+                        <em id="show_phone_s"><strong>{/$com_linkman['link_tel']/}</strong></em>
+                    </p>
+                </dd>
+            </dl>
+        </div>
+
+        <div class="newTytit">
+            <h2>工作描述</h2>
+            <p>学历要求：{/if (empty($degree))/}不限{/else/}{/get_name degree=$degree/}{//if/}</p>
+            <p>性别要求：{/if (empty($sex))/}不限{/else/}{/get_name sex=$sex/}{//if/}</p>
+            <p>{/html_encode content=$position_require/}</p>
+        </div>
+        <div class="newTytit">
+            <h2>企业简介</h2>
+            <p>{/html_encode content=$info/}</p>
+        </div>
+        <div class="newTytitx">
+            <h2>求职者评价<span>（<span class="total">{/$assessment_count/}</span>条）</span><br /></h2>
+            <div>
+            {/foreach $assessments as $assessment/}
+            <dl>
+            	<dt><img src="{/$assessment['user_photo']/}" width="36" height="36" /></dt>
+                <dd>
+                	<p><span>{/$assessment['user_name']/}</span><em>{/$assessment['create_time']/}</em></p>
+                    <font>{/$assessment['content']/}</font>
+                </dd>
+            </dl>
+            {//foreach/}
+            {/if $assessment_count > 3/}
+            <a href="javascript:void(0)" class="tpartMore more">加载更多评论<i></i></a>
+            {//if/}
+            <a href="javascript:void(0)" class="tpartMore loading" style="display:none"><img src="{/$siteurl.style/}/img/part/loading.gif" />正在加载</a>
+            </div>
+        </div>
+    </div>
+    <div class="tpartDefinRt">
+    	<div class="tpartARate">
+        	<div class="tpartAVate">
+            	<p class="num"><span>{/$reply_rate/}</span>简历回复率</p>
+                <p><span>{/$good_rate/}</span>总计好评率</p>
+            </div>
+            <div class="tpartAVatex">
+            	<em><i>{/$blame_count/}</i><b>起</b></em><span>与求职者纠纷（近三个月）</span>
+            </div>
+        </div>
+        <div class="tpartAList">
+            {/if !empty($other_jobs)/}
+            <h2><span>我们的其他兼职</span></h2>
+            <ul>
+                {/foreach $other_jobs as $job/}
+                <li>
+                    <a target="_blank" href="{/get_url rule="/partjob/detail/" data="job_flag={/$job['job_flag']/}"/}">{/$job['station']/}</a><span><em>{/$job['salary']/}</em>{/$job['salary_type_text']/}</span>
+                </li>
+                {//foreach/}
+            </ul>
+            {//if/}
+        </div>
+    </div>
+</div>
+{/include 'footer.html'/}
+</body>
+<script type="text/javascript">
+var page = 1;
+hbjs.use('widge.overlay.hbDialog', function (Dialog, $) {
+    
+    $(".more").on("click", function (e) {
+        var _this = $(this);
+        _this.hide();
+        $(".loading").show();
+
+        $.ajax({
+            url : '/partjob/assessments',
+            data : {
+                page : page
+            },
+            type : "POST",
+            dataType : "JSON",
+            success : function (e) {
+                var str = ""
+                for (var i = 0; i < e.length; i++) {
+                    str += '<dl><dt><img src="' + e[i].user_photo + '" width="36" height="36" /></dt><dd>'
+                        + '<p><span>' + e[i].user_name + '</span><em>' + e[i].create_time + '</em></p>'
+                        + '<font>' + e[i].content + '</font></dd></dl>';
+                }
+
+                $(str).insertBefore(_this);
+
+                if (parseInt($(".total").text()) > (page * 20 + 3)) {
+                    _this.show();
+                }
+                page += 1;
+                $(".loading").hide();
+            }
+        });
+    });
+
+});
+</script>
+</html>
+
+

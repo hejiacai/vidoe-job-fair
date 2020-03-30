@@ -1,0 +1,166 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+<title>{/$title/}</title>
+<!–[if lt IE9]> 
+<script src="{/version file='html5.js'/}"></script>
+<![endif]–>
+<link rel="stylesheet" type="text/css" href="{/version file="base.css"/}" />
+<link rel="stylesheet" type="text/css" href="{/version file="comback.css"/}" />
+<link rel="stylesheet" type="text/css" href="{/version file="icons.css"/}" />
+
+<script type="text/javascript" language="javascript" src="{/version file="jquery-1.8.3.min.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="common.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="dialog.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="jquery.form.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="mediaquery.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="ui_menudisplay.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="ui_inputFocus.js"/}"></script><!--输入框获取焦点-->
+<script type="text/javascript" language="javascript" src="{/version file="ui_hovchange.js"/}"></script><!--指向改变class-->
+<script type="text/javascript" language="javascript" src="{/version file="ui_drop.js"/}"></script><!--下拉模拟-->
+<script type="text/javascript" language="javascript" src="{/version file="ui_validate.js"/}"></script>
+</head>
+<body id="body">
+<style type="text/css">
+.jobSuc{padding:85px 0;border-top: 1px solid #dadada}
+.jobSuc .l{float:left;display:inline; text-align:right;width:318px;padding-top:10px;}
+.jobSuc .r{float:left;display:inline;width:622px;margin-left:15px;font-family: "微软雅黑","Microsoft YaHei"}
+.jobSuc .l i.hbFntWes{font-size:50px;color:#00C60E}
+.jobSuc .r p{margin-bottom:10px;font-size: 14px}
+.jobSuc .r p.tit{font-size: 16px}
+.jobSuc .r p.tit em{color:#2faa38;margin:0 5px 0 0;font-size:18px;font-weight: bold}
+
+.jobErr{padding:60px 0 60px 200px;zoom:1;}
+.jobErr p.tit i.hbFntWes{font-size:45px;color:#f9ae0c; float:left; display:inline;}
+.jobErr p.tit em{float:left; display:inline; line-height:40px; margin-left:10px;}
+.jobErr p.tit{font-size:14px;color:#333; height:45px;}
+.jobErr dl{font-size:12px; margin:0 0 10px 50px;}
+.jobErr dl dt{font-weight:bold; height:26px; line-height:26px;}
+.jobErr dl dd .photoImg{width:61px; height:76px; float:left; display:inline; background:url({/$siteurl.style/}/img/common/user61_76.jpg) no-repeat;}
+.jobErr dl dd .photoImg img{width:61px; height:76px;}
+.jobErr dl dd .txt{float:left; display:inline; margin-left:15px;}
+
+/*================================= 流程引导 start ======================================*/
+
+.box_step .title span{font-size:20px;color:#54728c;font-weight:bold;font-family:"微软雅黑";padding-left: 10px}
+.box_step .title span i{border-left:4px solid #0ea5a0;height:20px;display: inline-block;float: left;margin-top: 6px}
+.stop_list{margin-left: 143px;margin-bottom: 20px}
+.stop_list li{float:left;width:200px;text-align: center}
+.stop_list li span{display: inline-block;width:30px;height: 30px;background: url({/$siteurl.style/}/img/job/newjob/yuan.jpg) no-repeat;text-align: center;font-size:18px;color:#fff;font-weight:bold;float:left;font-family: arial}
+.stop_list li em{display: inline-block;width:85px;height: 9px;background: url({/$siteurl.style/}/img/job/newjob/hr.jpg) no-repeat;float:left;margin-top: 12px}
+.stop_list li .first span,.stop_list li .first em{float:right}
+.stop_list li .text{font-size:14px;margin-top: 5px;color:#999}
+.stop_list li.cur .text{color:#00bab1}
+.stop_list li.cur span{background: url({/$siteurl.style/}/img/job/newjob/cur_yuan.jpg) no-repeat;}
+.stop_list li.cur em{background: url({/$siteurl.style/}/img/job/newjob/cur_hr.jpg) no-repeat;}
+.titJobx b{color:#ee7001;font-weight: normal}
+
+/*================================= 流程引导 end ======================================*/
+
+</style>
+{/include file="new_header.html" cur="发布职位"/}
+<div class="content" id="content">
+	<section class="section">
+    	<hgroup>
+        {/if $showTop/}
+            <div class="box_step">
+                <p class="title"><span><i></i>发布职位</span></p>
+                <ul class="clearfix stop_list">
+                    <li class="cur">
+                        <p class="clearfix first">                  
+                            <em></em>
+                            <span>1</span>          
+                        </p>
+                        <p class="text">完善公司资料</p>
+                    </li>
+                    <li class="cur">
+                        <p class="clearfix">
+                            <em></em>
+                            <span>2</span>
+                            <em></em>
+                        </p>                            
+                        <p class="text">填写职位信息</p>
+                    </li>
+                    <li class="cur">
+                        <p class="clearfix last">
+                            <em></em>
+                            <span>3</span>
+                        </p>
+                        <p class="text">发布成功</p>
+                    </li>
+                </ul>
+            </div>
+        {//if/}
+            <div class="jobSuc" data-adult="{/$licence/}" {/if !$showTop/}style="border-top:none"{//if/}>                               
+                <div class="l"><i class="hbFntWes">&#xf058;</i></div>
+                <div class="r">
+                    <p class="tit"><em>{/$station/}</em>职位发布成功！</p>
+                    {/if $member_info != 'member'/}
+                    <p class="titJobx" style="margin-bottom: 30px">
+                        我们会对
+                        {/if ($info_audit == '3') || ($info_audit == '0') || ($info_audit == '2')/} <b>公司资料</b>、{//if/}
+                        <b>职位信息</b>、
+                        {/if (($licence == '3') || ($licence == '0')  || ($licence == '2'))/}<b>营业执照</b>{//if/}
+                        {/if in_array($licence ,array(0,2,3)) && in_array($letter_audit_type,array(0,2,3))/} 和 {//if/}
+                        {/if in_array($letter_audit_type,array(0,2,3))/}<b>招聘委托书</b>{//if/}
+                        进行审核（需1个工作日）
+                        <br/>
+                        审核通过后，该职位会自动向求职者公开。
+                    </p>
+
+                    {//if/}
+                    {/if in_array($licence ,array(0,3)) || in_array($letter_audit_type,array(0,3))/}
+                    <p class="titJobx" style="margin-top: 20px">
+                        <strong>目前缺少资料：
+                            {/if in_array($licence ,array(0,3))/}营业执照{//if/}
+                            {/if in_array($licence ,array(0,3)) && in_array($letter_audit_type,array(0,3))/} 和 {//if/}
+                            {/if in_array($letter_audit_type,array(0,3))/}招聘委托书{//if/}
+                        </strong>
+                    </p>
+                    <p>
+                        <a href="{/get_url rule="/licencevalidate/index"/}" class="btn1 btnsF14">上传认证资料</a>
+                        {/if $is_can_sue_job/}<a href="{/get_url rule="/job/add"/}" class="btn3 btnsF14">继续发布下一个</a>{//if/}
+                    </p>
+                    {/else/}
+                    <p>
+                        {/if $is_can_sue_job/}<a href="{/get_url rule="/job/add"/}" class="btn1 btnsF14">继续发布下一个</a>{//if/}
+                        <a href="{/get_url rule="/index/JobList"/}" class="btn3 btnsF14">返回职位管理</a>
+                    </p>
+
+                    {//if/}
+                </div>
+                <div class="clear"></div>
+                {/if $hasHRManager && $member_info != 'member'/}
+                <dl style="display:none">
+                    <dt>您的招聘顾问：</dt>
+                    <dd>
+                        <div class="photoImg"><img src="{/$hrManager['head_photo_url']/}"/></div>
+                        <div class="txt">
+                            <p>{/$hrManager["user_name"]/}</p>
+                            <p>{/$customerService["phone400"]/}</p>
+                            {/if $hrManager["tel"]!=''/}<p style="font-size: 12px; line-height: 24px;">转{/$hrManager["tel"]/}</p>{//if/}
+                            {/if $hrManager["mobile"]!=''/}<p style="font-size: 12px; line-height: 24px;">{/$hrManager["mobile"]/}</p>{//if/}
+                            {/if $hrManager["qq"]!=''/}
+                            <p style="margin-top: 5px;"><a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin={/$hrManager["qq"]/}&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:{/$hrManager["qq"]/}:51" alt="点击这里给我发消息" title="点击这里给我发消息"/></a></p>
+                            {/else/}
+                            <p style="margin-top: 5px;"><!-- WPA Button Begin -->
+                                <script charset="utf-8" type="text/javascript" src="http://wpa.b.qq.com/cgi/wpa.php?key=XzkzODA0MDQyNl8xMjgzMTBfNDAwODg3Mjg4N18"></script>
+                            </p>
+                            {//if/}
+                        </div>
+                        <div class="clear"></div>
+                    </dd>
+                </dl>
+                {//if/}
+            </div>
+    	</hgroup>
+    </section>
+</div>
+{/include file="footer.html"/}
+<section class="floatRT"><a href="{/get_url rule='/about/message' domain='main'/}" target="_blank" class="serviceLink">我有问题要反馈</a><b></b></section>
+</body>
+</html>

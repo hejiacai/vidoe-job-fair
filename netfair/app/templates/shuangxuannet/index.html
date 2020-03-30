@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>视频招聘会</title>
+    <link rel="stylesheet" type="text/css" href="{/version file='base.css'/}"/>
+    <link rel="stylesheet" type="text/css" href="{/version file="v2-widge.css"/}"/>
+    <link rel="stylesheet" type="text/css" href="{/version file='videjobfair.css'/}"/>
+    <link rel="stylesheet" type="text/css" href="{/version file='mobile.swiper.css'/}"/>
+    <script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.min.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='mobile.swiper.js'/}"></script>
+    <script type="text/javascript" src="{/version file='jquery.cookie.js'/}"></script>
+    <script type="text/javascript" src="{/version file='layer.js'/}"></script>
+    <link type="text/css" href="{/version file='layer.css'/}">
+    <script type="text/javascript" src="{/version file='base_script.js'/}"></script>
+    <link rel="stylesheet" type="text/css" href="{/version file='v2-reset.css,v2-widge.css,v2-header.css,newindex2018.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='newHeader2019.css'/}" />
+    <script type="text/javascript" src="{/version file='version.js'/}"></script>
+    <script type="text/javascript">
+        window.CONFIG = {
+            HOST: '{/$siteurl.style/}',
+            COMBOPATH: '/js/v2/',
+        };
+    </script>
+    <script type="text/javascript"
+            src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+    <script type="text/javascript" src="{/version file='global.js'/}"></script>
+    <script type="text/javascript">
+        hbjs.config({
+            combos: {
+                '@homeSideSortMenu': [
+                    'product.homeSideSortMenu', 'product.sideMenu.sideSortMenuGroup', 'product.sideMenu.sideSortMenu',
+                    'product.sideMenu.sideSortMenuData', '@popup'
+                ]
+            }
+        });
+        hbjs.loadJS('{/$siteurl.style/}/js/v2/cqjob/common.js');
+    </script>
+    <style type="text/css">
+        .huiboJob{ overflow: hidden;}
+        .huiboJob a{ display:block;width:100%; height: 60px; background:url({/$siteurl.style/}/img/zhaopinhui2020.jpg) center top no-repeat;}
+
+        a.enterprise_qiye i {background: url({/$siteurl.style/}/img/newindex/enterCompany.png) no-repeat;display: inline-block;width: 18px;height: 17px;vertical-align: -4px;vertical-align: -2px\9;margin-right: 5px;}
+        .newHeadtop .newheadMage .log_new a.enterprise_qiye:link {color: #999;cursor: pointer;}
+        #userEnterBox .reg_new .jobWanted {margin-right: 0;}
+        .jobWanted i {background: url({/$siteurl.style/}/img/newindex/login_register.png) no-repeat;display: inline-block;width: 14px;height: 16px;vertical-align: -4px;vertical-align: -2px\9;margin-right: 5px;}
+    </style>
+</head>
+<body>
+{/$head_data/}
+<div class="videoJobFairTop">
+    <div>
+        <a>视频招聘会</a>
+    </div>
+</div>
+<div class="videoJobFairMain">
+    <div class="videoJobFairTit">
+        <i></i>视频招聘会列表
+    </div>
+    <div class="videoJobFairList">
+        {/if !empty($list)/}
+            {/foreach $list as $key=>$val/}
+                <div class="videoJobFairListx">
+                    <a href="{/get_url rule='/fairList/'/}sid-{/$val.id/}" target="_blank">{/if $val.list_poster/}<img src="{/$val.list_poster_info/}" class="videoJobImg" />{/else/}<img src="{/$siteurl.style/}/img/mobile/moren_pic.png" class="videoJobImg" />{//if/}</a>
+                    <div class="videoJobCenter">
+                        <a href="{/get_url rule='/fairList/'/}sid-{/$val.id/}" target="_blank"><span class="videoJobName">{/$val.title/}{/if $val.school_type==1/}<i>校园</i>{//if/}</span></a>
+                        <span class="videoJobTime">{/$val.start_time|date_format:'Y.m.d H:i'/}  ～ {/$val.end_time|date_format:'Y.m.d H:i'/}  </span>
+                        <span class="videoJobPox">企业<em>{/$val.count_data.company_num/}</em>家<i></i>岗位<em>{/$val.count_data.job_num/}</em>个<i></i>参与<em>{/$val.count_data.person_num/}</em>人</span>
+                    </div>
+                    <div class="videoJobRight">
+                        <div class="videoJobVenue">
+                            <a href="{/get_url rule='/fairList/'/}sid-{/$val.id/}" class="enterAssemblyHallBtn"  target="_blank">进入会场</a>
+                            {/if $val.activity_ing_status!=2/}<a  class="enterpriseFairBtn" data-id="{/$val.id/}" data-phone="{/$val.enter_phone_desc/}" data-sign="{/$val.is_company_signup/}">企业定展</a>{//if/}
+                        </div>
+                        <span class="videoJobState {/if $val.activity_ing_status==0/}videoJobStateGreen{/elseif $val.activity_ing_status==1/}videoJobStateOrange{/else/}videoJobStateGray{//if/}"></span>
+                    </div>
+                </div>
+            {//foreach/}
+        {//if/}
+    </div>
+    {/$pager/}
+</div>
+
+<!-- 企业报名弹窗 -->
+<div class="m_master"></div>
+<div class="companySignx">
+	<div class="companySignTit">
+		<span class="companySignPhone">报名联系电话：{/$shaungxuan_net_info.enter_phone_desc/}</span>
+		<i class="companySignClose"></i>
+	</div>
+	<span class="companyNameTit">企业报名</span>
+	<div class="signPut">
+		<img src="{/$siteurl.style/}/img/company/video/videi_job_img20.jpg"/>
+		<input type="text" name="companyName" id="companyName" placeholder="请输入企业名称" value="">
+	</div>
+	<div class="signPut">
+		<img src="{/$siteurl.style/}/img/company/video/videi_job_img21.jpg"/>
+		<input type="text" name="companyPhone" id="companyPhone" placeholder="请输入联系电话" value="">
+		<input type="hidden" name="sid" id="sid" />
+        <input type="hidden" name="is_company_signup" id="is_company_signup" />
+	</div>
+	<a href="javascript:void(0);" class="companySignBtn">提交</a>
+</div>
+<form id="web_subscribe_form" action="//www.huibo.com/jobsearch/" method="post"><input type="hidden" name="subscribe_origin" value="nosearchpage"></form>
+
+</body>
+<script>
+    hbjs.use('@confirmBox', function (m) {
+
+        var ConfirmBox = m['widge.overlay.confirmBox'],
+            Dialog = m['widge.overlay.hbDialog'],
+            cookie = m['tools.cookie'],
+            fontSize = 18,
+            pWidth = 70;
+
+
+        // 填写企业报名信息
+        $(document).on('click','.companySignClose',function () {
+            $('.m_master,.companySignx').hide();
+        });
+        $('.enterpriseFairBtn').click(function () {
+            $('.m_master,.companySignx').show();
+            var sid = $(this).attr('data-id');
+            var enter_phone_desc = $(this).attr('data-phone')
+            var is_company_signup = $(this).attr('data-sign');
+            $('.companySignPhone').html('报名联系电话：'+enter_phone_desc);
+            $('#sid').val(sid);
+            $('#is_company_signup').val(is_company_signup);
+        });
+        $('body').on('click', '.companySignBtn', function () {
+            var companyName = $('#companyName').val();
+            var companyPhone = $('#companyPhone').val();
+            var is_company_signup = $('#is_company_signup').val();
+            var sid = $('#sid').val();
+
+            var msg = '';
+            if (companyName == '') {
+                msg = '请输入企业名称';
+                return ConfirmBox.timeBomb(msg, {
+                    name: 'fail',
+                    width: fontSize * msg.length + pWidth,
+                });
+            }
+            if (companyPhone == '') {
+                msg = '请输入联系电话';
+                return  ConfirmBox.timeBomb(msg, {
+                    name: 'fail',
+                    width: fontSize * msg.length + pWidth,
+                });
+            }
+            if (is_company_signup == 0) {
+                msg = '该场活动需线下人工审核，请直接联系工作人员电话报名。';
+                return ConfirmBox.timeBomb(msg, {
+                    name: 'fail',
+                    width: fontSize * msg.length + pWidth,
+                });
+            }
+            // else if (!(/^1\d{10}$/.test(companyPhone))) {
+            //     msg = '请输入正确手机号';
+            //     ConfirmBox.timeBomb(msg, {
+            //         name: 'fail',
+            //         width: fontSize * msg.length + pWidth,
+            //     });
+            // }
+            var url = "{/get_url rule='/index/ApplyCompanyPost'/}",
+                data = {sid: sid,company_name:companyName,link_tel:companyPhone};
+            ajax_request_function(url, data, {
+                success: function (data) {
+                    ConfirmBox.timeBomb(data.msg, {
+                        name: 'success',
+                        width: fontSize * data.msg.length + pWidth,
+                    });
+                    setTimeout(function () {
+                        $('.m_master,.companySignx').hide();
+                    }, 800);
+                }
+            });
+        });
+    });
+</script>
+
+</html>

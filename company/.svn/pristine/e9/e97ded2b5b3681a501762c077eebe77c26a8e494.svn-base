@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>支付</title>
+    <link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file="m_font_style.css"/}">
+    <link rel="stylesheet" type="text/css" href="{/version file="m_font_style.css"/}"/>
+    <link rel="stylesheet" type="text/css" href="{/version file='resumePartTime.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}" />
+    <script type="text/javascript" language="javascript" src="//assets.huibo.com/js/jquery-1.8.3.min.js?v=20150226"></script>
+    <script type="text/javascript" src="{/version file='version.js'/}"></script>
+    <script type="text/javascript">
+        window.CONFIG = {
+            HOST: '{/$siteurl.style/}',
+            COMBOPATH: '/js/v2/'
+        }
+    </script>
+    <script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+    <script type="text/javascript" src="{/version file='global.js'/}"></script>
+    <style>
+        .hb_ui_dialog .ui_dialog_close{background: none !important;  line-height: inherit!important;}
+        .hb_ui_prt{z-index: 10025!important;}
+    </style>
+
+</head>
+<body>
+    <div class="pay-all">
+        {/if $order_info['order_src'] == 2 || $order_info['order_src'] == 4/}
+        <div class="pay-tit">
+            <i class="icon-particulars-require"></i>
+            {/$setmeal_info['name']/} <span>{/$setmeal_info['point_num']/}份</span> 支付金额：<em>￥{/$order_info['real_total_money']/}</em>
+        </div>
+        {/elseif in_array($order_info['order_src'],[ 1,3,5 ])/}
+        <div class="pay-tit">
+            <i class="icon-particulars-require"></i>
+            职位置顶-{/$job_top_type[$job_top_info['top_type']]['name']/} <span>{/$job_top_type[$job_top_info['top_type']]['price']/}元/天</span><span>{/$job_top_info['top_day']/}天</span>
+            <p>支付金额：<em>￥{/$job_top_type[$job_top_info['top_type']]['price']*$job_top_info['top_day']/}</em></p>
+        </div>
+        {/elseif in_array($order_info['order_src'],[ 8,9,10 ])/}
+        <div class="pay-tit">
+            <i class="icon-particulars-require"></i>
+             职位数购买 <span>{/$partJobPrice*$PartMoneyToRmb/}元/条</span><span>{/$order_info['buy_job_num']/}条</span>
+            <p>支付金额：<em>￥{/$partJobPrice*$PartMoneyToRmb*$order_info['buy_job_num']/}</em></p>
+        </div>
+        {//if/}
+        <p class="pay-time">有效期：{/date("Y-m-d")/}~{/if $order_info['order_src'] == 2 || $order_info['order_src'] == 4/}{/date("Y-m-d",strtotime($resume_point_info['end_time']))/}{/else/}{/date("Y-m-d",strtotime($job_top_info['end_time']))/}{//if/}（请在有效期内使用完毕）</p>
+        <div class="pay-choose">
+            <div class="pay-choose-tit">
+                <a href="javascript:void(0)" class="chose">{/$pay_type[$order_info['pay_type']]['sort_name']/}</a>
+            </div>
+            <ul class="pay-choose-con">
+               <li>
+                   <div class="master_weixin_erweima">
+                       <img class="order_pay_src" src='' alt="">
+                       <div class="master_weixin_erweima_success" style="display: none;">
+                           <i></i>
+                           <h1>支付成功</h1>
+                           <p>页面自动跳转中...</p>
+                       </div>
+                       <div class="master_weixin_erweima_time_out" style="display: none;">
+                           <i class="icon-svg152"></i>
+                           <h1>支付超时</h1>
+                           <p></p>
+                       </div>
+                   </div>
+                    <div class="master_weixin_erweima_next" style="display: none;">
+                        <a href="javascript:void(0);" id="overPay">支付完成？</a>
+                        <a href="javascript:void(0);"  id="rePay">重新选择支付方式</a>
+                    </div>
+                   <p class="please">请使用<span>{/$pay_type[$order_info['pay_type']]['sort_name']/}</span>扫描 <br> 二维码以完成支付 </p>
+               </li>
+            </ul>
+        </div>
+    </div>
+</body>
+<script>
+    var  is_refresh = '{/$is_refresh/}';
+
+    hbjs.use(' @confirmBox', function(m){
+        var confirmBox = m['widge.overlay.confirmBox'],
+                Dialog = m['widge.overlay.hbDialog'],
+                fontSize = 18,
+                pWidth = 70,
+                $ = m['jquery'];
+        $('.master_weixin_erweima').find('.order_pay_src').attr('src', '{/get_url rule="/partorder/PaySQrcode"/}?code_url={/$code_url/}');
+
+        var scan_status;
+        var _scan_status;
+        var _scan_status_count = 0;//请求10次 间隔3秒再次请求
+        var start_scan_time;
+        var scan_time_time_out = 300 * 1000;//毫秒
+
+        //检查订单状态
+        _scan_status = setInterval(function () {
+
+            _scan_status_count++;
+
+            if(_scan_status_count > 76){
+                clearInterval(_scan_status);
+            }
+            checkOrderStatus();
+
+        }, 4000);
+
+        //重新支付
+        $("#rePay").click(function(){
+//            $(window.parent.document).find(".hb_ui_ui-mask").css('z-index',9999);
+//            parent.agreementDialog.destory();
+            $(window.parent.document).find(".hb_ui_ui-mask").css('z-index',9999);
+            parent.agreementDialog.destory();
+
+        });
+        //支付完成
+        $("#overPay").click(function(){
+            //检查订单状态
+            var url = '{/get_url rule="/partorder/scanCodePaySearchResult"/}';
+            var data = {
+                order_no: "{/$order_info['order_no']/}",
+                from:'overpay'
+            };
+
+            $.post(url, data, function(data){
+                console.log(data);
+                //订单状态返回失败，弹出失败原因，走重新支付
+                if(!data.status || data.data.is_pay < 1){
+                    confirmBox.timeBomb(data.msg, {
+                        name : 'fail',
+                        timeout :3000,
+                        width: 70 + data.msg.length * 18
+                    });
+//                    setTimeout(function () {
+//                        $(window.parent.document).find(".hb_ui_ui-mask").css('z-index',9999);
+//                        parent.agreementDialog.destory();
+//                    },3000);
+                }
+
+                if (data.data.is_pay) {
+                    $('.master_weixin_erweima_time_out').hide();
+                    $('.master_weixin').find('.order_but').find('.master_but2').hide();
+                    $('.master_weixin_erweima_success').show();
+                    //success_pay();
+                    confirmBox.timeBomb(data.msg, {
+                        name : 'success',
+                        timeout :3000,
+                        width: 70 + data.msg.length * 18
+                    });
+                    console.log(is_refresh);
+                    //关闭弹框
+                    setTimeout(function () {
+                        if(is_refresh == ''){
+                            window.parent.parent.document.location.reload();
+                        }
+                        parent.is_descoty = true;
+                        parent.agreementDialog.destory();
+
+                    },3000);
+
+
+                }
+
+
+            });
+        });
+
+        function checkOrderStatus() {
+            if (!start_scan_time) {
+                start_scan_time = new Date().getTime();
+            }
+            //支付超时
+            if (start_scan_time + scan_time_time_out < new Date().getTime()) {
+                scan_status_close();
+                $('.master_weixin_erweima_time_out').show();
+                $('.master_weixin_erweima_next').show();
+                //$('.master_weixin_erweima').find('.order_pay_src').hide();
+            }
+
+            //检查订单状态
+            var url = '{/get_url rule="/partorder/scanCodePaySearchResult"/}';
+            var data = {
+                order_no: "{/$order_info['order_no']/}"
+            };
+
+            $.post(url, data, function(data){
+                console.log(data);
+                if(!data.status){
+                    console.log(data.status);
+                    scan_status_close();
+                    return false;
+                }
+
+                if (data.data.is_pay) {
+                    scan_status_close();
+                    $('.master_weixin_erweima_time_out').hide();
+                    $('.master_weixin').find('.order_but').find('.master_but2').hide();
+                    $('.master_weixin_erweima_success').show();
+                    //success_pay();
+                    confirmBox.timeBomb(data.msg, {
+                        name : 'success',
+                        timeout :3000,
+                        width: 70 + data.msg.length * 18
+                    });
+                    //关闭弹框
+                    setTimeout(function () {
+                        if(is_refresh == ''){
+                            window.parent.parent.document.location.reload();
+                        }
+                        parent.is_descoty = true;
+                        parent.agreementDialog.destory();
+
+                    },3000);
+
+
+                }
+
+
+            });
+
+
+        }
+
+        //关闭轮询
+        function scan_status_close() {
+            console.log(22222);
+            clearInterval(_scan_status);
+        }
+
+        checkOrderStatus();
+    });
+
+</script>
+</html>

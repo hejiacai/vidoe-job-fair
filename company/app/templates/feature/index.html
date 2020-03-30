@@ -1,0 +1,165 @@
+<style>
+	.setWelfare a{background-color:#f2f2f2;color:#666;display: inline-block;padding:3px 10px;margin:7px 5px;font-family:"微软雅黑"}
+	.setWelfare .hbIconMoon{font-size:14px;color:#cacaca;margin-left: 5px}
+	.setWelfare a:hover{background-color: #eaffcc}
+	.setWelfare a.cur{background-color: #599403;color:#fff}
+	.setWelfare a.cur .hbIconMoon{color:#fff}
+        #msg{color:red;text-decoration: 2em;font-size:12px;}
+</style>
+<script type="text/javascript">
+var selectedFeature = {};
+</script>
+<form action="/feature/featureDo/" method="post" id="formfeature" onsubmit='return false'>
+	<p style="color:red;font-size:12px;margin-left: 5px;padding:15px 15px 0 15px">最多可选择12项</p>
+	<div style="width:550px;padding:10px 15px" id='feature' class="dialogCont setWelfare">
+		{/if count($all_feature_data > 0)/}
+                    {/foreach $all_feature_data as $feature/}
+                        <a href="javascript:;" {/if in_array($feature['feature_id'],$job_default_features)/}class="cur"{//if/}date-featureid={/$feature['feature_id']/} data-type='default'>{/$feature['feature_name']/}<i class="hbIconMoon">&#xe0fb;</i></a>
+                        <script type="text/javascript">
+                        	selectedFeature["{/$feature['feature_name']/}"] = true;
+                        </script>
+                    {//foreach/}
+                {//if/}
+                
+                {/if count(job_other_features)>0/}
+                    {/foreach $job_other_features as $feature/}
+                        <a href='javascript:;'  data-type='other' date-featureid=0 class='cur'>{/$feature/}<i class="hbIconMoon">&#xe0fb;</i></a>
+                    {//foreach/}
+                {//if/}
+	</div>
+      
+	<input name='other_feature' type="text" placeholder="添加自定义，最多6个字" style="padding:5px;margin:0 15px 20px 15px" /><a style=' vertical-align: 3px;' href="javascript:void(0);" class="btn1 btnsF12" id='addOtherFea'>添加</a>
+        &nbsp;&nbsp;<span id='msg'></span>
+	<div class="dialogFooter">
+		<a id="btnReardSave" href="javascript:void(0);" class="btn1 btnsF12">确定</a><a id="btnRwardCancel" href="javascript:void(0);" class="btn3 btnsF12">取消</a>
+	</div>
+</form>
+<script>
+    var cacheDefaultFea = '';
+    var cacheDefaultName = '';
+    var cacheOtherFea = '';
+    var count =parseInt({/$count/});
+    var feature = {
+		initialize:function(){
+                        //情况缓存数据
+                         cacheDefaultFea ='';
+                         cacheOtherFea = '';  
+                         cacheDefaultName = '';
+                     $("#addOtherFea").click(function(){
+                         if(parseInt(count)>=12){
+                            $.anchorMsg("最多只能选择12项岗位特点");
+                             return false;
+                         }
+                         var v = $.trim($("input[name='other_feature']").val());
+                         if(v ==''){
+                             $("#msg").html('添加岗位特点不能为空');
+                             return false;
+                         }
+                         if(v.length > 6){
+                             $("#msg").html('添加岗位特点不能超过6个字符');
+                             return false;
+                         }
+						 if(selectedFeature[v]){
+							$.anchorMsg("添加岗位特点不能重复");
+							return false;
+						 }
+						 
+                         var other_feature_html = "<a href='javascript:;' date-featureid=0  data-type='other' class='cur'>"+v+"<i class='hbIconMoon'>&#xe0fb;</i></a>"
+                         $("#feature").append(other_feature_html);
+						 selectedFeature[v] = true;
+						 count++;
+                     });
+                        $("#feature").on("click", "a", function(){
+                            var c = $(this).attr('class');
+							var value = $(this).text().substring(0, $(this).text().length - 1);
+							
+                            if(c == 'cur'){
+                                count = parseInt(count)-1;
+                                if(count <=0){count =0;}
+                                $(this).removeClass('cur');
+                            } else {
+                                if(parseInt(count)>=12){
+                                     $.anchorMsg("最多只能选择12项岗位特点");
+                                     return false;
+                                }
+                                count = parseInt(count)+1;
+								selectedFeature[value] = true;
+                                $(this).addClass('cur');
+                            }
+                        }); 
+                     $("input[name='other_feature']").focus(function(){
+                          $("input[name='other_feature']").attr({'placeholder':''});
+                     }).blur(function(){
+                         var v = $("input[name='other_feature']").val();
+                         if(v ==''){
+                              $("input[name='other_feature']").attr({'placeholder':'添加自定义，最多6个字'});
+                         }
+                     });
+                     $("#btnRwardCancel").click(function(){
+                         //取消并清空缓存
+                         cacheDefaultFea ='';
+                         cacheOtherFea = '';  
+                         cacheDefaultName = '';
+                          $(this).closeDialog();
+                     });
+                     $("#btnReardSave").click(function(){
+                         
+                         feature.getCacheData();
+                        jobAdd.refreshFea(cacheDefaultFea,cacheDefaultName,cacheOtherFea);
+//                        $.anchorMsg("保存成功",{onclose:function(){
+//                          $('#btnReardSave').closeDialog();
+//                        }});
+                     $(this).closeDialog();
+                     });
+		},
+		successCallBack:function(result){
+                    
+                },
+                getCacheData:function(){
+                     $("#feature a").each(function(){
+                        var c = $(this).attr('class');//是否选择
+                        var type = $(this).attr('data-type');
+                      
+                        if(c == 'cur'){
+                            if(type =='default'){
+                                var feature_id = $(this).attr('date-featureid');
+                                var feature_name = $(this).html();
+                                feature_name = feature_name.toLocaleLowerCase();
+                                feature_name = feature_name.substring(0,feature_name.indexOf("<i"));
+                                if(cacheDefaultName == ''){
+                                     cacheDefaultName = feature_name;
+                                }else{
+                                    cacheDefaultName = cacheDefaultName + ','+feature_name;
+                                }
+                                if(cacheDefaultFea == ''){
+                                    cacheDefaultFea = feature_id;
+                                }else{
+                                    cacheDefaultFea = cacheDefaultFea + ','+feature_id;
+                                }
+                            }else{
+                                var feature = $(this).html();
+                                feature = feature.toLocaleLowerCase();
+                                feature = feature.substring(0,feature.indexOf("<i"));
+                                if(cacheOtherFea == ''){
+                                    cacheOtherFea = feature;
+                                }else{
+                                    cacheOtherFea = cacheOtherFea + ','+$.trim(feature);
+                                }
+                            }
+                        }
+                    }); 
+                }
+                
+        }   
+feature.initialize();    
+    
+//       $.post('{/get_url rule="/department/deletedept/"/}',{'dept_id':deptid},function(result){
+//             if(result.success){
+//                var del = $(v).parents('.s');
+//                del.empty().remove();
+//                return;
+//             }else{
+//                  $.anchorMsg(result.error,{icon:'fail'});
+//             }
+//         })
+</script>

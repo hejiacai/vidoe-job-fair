@@ -1,0 +1,400 @@
+<?php
+/**
+ * @copyright 2002-2013 www.huibo.com
+ * @name 简历回收站
+ * @author arkfang
+ * @version 2014-6-30 上午15:14:00
+*/
+class controller_recycle extends components_cbasepage {
+	
+	const NEED_COUNT = true;
+	/**
+	 * 构造函数
+	 */
+	function __construct() {
+		parent::__construct();
+	}
+
+ 	/**
+	 * 回收站入口
+	 */
+	function pageIndex($inPath) {
+        if(!$this->canDo("resume_manage")){
+            $this->_aParams["msg"] = "无权限访问，没有开通相应权限";
+            $this->_aParams["url"] = "/";
+            return $this->render("./common/showmsgpopedom.html", $this->_aParams);
+        }
+		$params = base_lib_BaseUtils::saddslashes($this->getUrlParams($inPath));
+
+		$this->_aParams["title"] = "简历回收站";
+		$origin_id  = base_lib_BaseUtils::getStr($params["origin_id"], "int", null);
+		$origin_id  = ($origin_id == 0) ? null : $origin_id;
+		$keyword    = base_lib_BaseUtils::getStr($params['keyword'],'string','');
+		$searchmode = base_lib_BaseUtils::getStr($params['search_model'],'int','0'); // 查询方式 0表示按筛选条件，1表示按姓名/简历编号  
+		$cur_page   = base_lib_BaseUtils::getStr($params['page'],'int',1);
+		$page_size  = base_lib_BaseUtils::getStr($params['pageSize'],'int',base_lib_Constant::PAGE_SIZE);
+
+		$service_origintype = new base_service_company_resume_origintype();
+		$origintype_arr = $service_origintype->getOriginType();
+
+		$service_person = new base_service_person_person();
+		$service_recycle = new base_service_company_resume_recycle();
+
+		// OR关系
+		if ($searchmode == 1) {
+			unset($origin_id);
+		} else {
+			unset($keyword);
+		}
+
+		$pages = array(
+			"page" => $cur_page,
+			"limit" => $page_size,
+			"count" => self::NEED_COUNT
+		);
+		
+		$company_resources = base_service_company_resources_resources::getInstance($this->_userid);
+		$recycles = $service_recycle->getRecycleList($company_resources->all_accounts, $origin_id, $pages, $keyword);
+
+		if (!base_lib_BaseUtils::nullOrEmpty($recycles->items)) {
+			$service_resume        = new base_service_person_resume_resume();
+			$service_resume_work   = new base_service_person_resume_work();
+			$service_resume_remark = new base_service_company_resume_resumeremark();
+			$service_edu           = new base_service_person_resume_edu();
+			$area                  = new base_service_common_area();
+			$degree                = new base_service_common_degree();
+			
+			$recycle_datas = $this->arrayFormat($recycles->items, "recycle_id");
+			// 个人简历信息
+			$field = 'person_id,resume_id,resume_name,degree_id,current_station,current_station_start_time,current_station_end_time,is_effect';
+			$resume_list = array();
+			$resume_ids = $this->getPropertys($recycles->items, "resume_id");
+
+			if (!empty($resume_ids)) {
+				$resume_list = $service_resume->getResumes($resume_ids, $field,false);
+				$resume_datas = $this->arrayFormat($resume_list->items, "resume_id");
+			}
+			// 个人身份信息
+			$field = "person_id,user_name,sex,birthday2,cur_area_id,start_work,photo,small_photo,name_open";
+			$person_datas = array();
+			$person_ids = $this->getPropertys($resume_list->items, "person_id");
+			if (!empty($person_ids)) {
+				$person_list = $service_person->GetPersonListByIDs(implode(",",$person_ids), $field);
+				$person_datas = $this->arrayFormat($person_list->items, "person_id");
+			}
+			// 个人工作情况信息
+			$work_datas = array();
+			$field = "work_id,resume_id,start_time,end_time,station,company_name,work_content";
+			if (!empty($resume_ids)) {
+				$work_datas = $service_resume_work->getResumeWorks(implode(',',$resume_ids), $field);
+				//$work_datas = $this->arrayFormat($work_datas->items, "resume_id");
+                                foreach ($work_datas->items as $workskey=>$worksvalue){
+                                    $workslist[$worksvalue["resume_id"]][$workskey]['start_time'] = date('Y/m',strtotime($worksvalue['start_time']));
+                                    $workslist[$worksvalue["resume_id"]][$workskey]['end_time'] = empty($worksvalue['end_time'])?"至今":date('Y/m',strtotime($worksvalue['end_time']));
+                                    $workslist[$worksvalue["resume_id"]][$workskey]['station'] = $worksvalue['station'];
+                                    $workslist[$worksvalue["resume_id"]][$workskey]['company_name'] = $worksvalue['company_name'];
+                                    $workslist[$worksvalue["resume_id"]][$workskey]['work_content'] = base_lib_BaseUtils::cutstr($worksvalue['work_content'], 180,'utf-8','','...');
+				}
+			}
+			// 个人备注信息
+			$remark_datas = array();
+			$field = "remark_id,resume_id,company_id,remark,update_time";
+			if (!empty($resume_ids)) {
+				$remark_datas = $service_resume_remark->getLastResumeRemarks($this->_userid, $resume_ids, $field);
+				$remark_datas = $this->arrayFormat($remark_datas->items, "resume_id");
+			}
+			// 个人学历信息
+			$edu_datas = array();
+			$field = "resume_id,school,major_desc,degree";
+			if (!empty($resume_ids)) {
+				$edu_datas = $service_edu->getResumeEdus(implode(",", $resume_ids), $field);
+				//$edu_datas = $this->arrayFormat($edu_datas->items, "resume_id");
+			}
+		}
+        
+        //是否在下载或者投递记录里面
+        $privilege = $service_person->checkMobilesPrivilege($resume_ids, $this->_userid);
+        
+		// 拼装数据
+		foreach ((array)$recycle_datas as $key => $item) {
+			$resume_id = $item['resume_id'];
+			$person_id = $resume_datas[$item["resume_id"]]["person_id"];
+			$temp = array();
+            $is_show_name = $privilege[$resume_id];
+            if($person_datas[$person_id]["name_open"] == 1 && $is_show_name){
+                $temp["user_name"] = $person_datas[$person_id]['user_name'];
+            }else{
+                $sex_name = $person_datas[$person_id]['sex'] == 1 ? '先生' : '女士';
+                $temp['user_name']=mb_substr($person_datas[$person_id]['user_name'], 0, 1, 'utf-8') . $sex_name;
+            }
+            
+			$temp["remark"] = base_lib_BaseUtils::nullOrEmpty($remark_datas[$resume_id]['remark'])? false :  base_lib_BaseUtils::cutstr($remark_datas[$resume_id]['remark'],8,'utf-8','',"..."). " " . date('Y-m-d',strtotime($remark_datas[$item["resume_id"]]['update_time']));
+			if (base_lib_BaseUtils::nullOrEmpty($person_datas[$person_id]['photo'])){
+				$temp['small_photo'] = false;
+			} elseif (base_lib_BaseUtils::nullOrEmpty($person_datas[$person_id]['small_photo'])){
+				$temp['small_photo'] = base_lib_Constant::YUN_ASSETS_URL_NO_HTTP.$person_datas[$person_id]['photo'];					
+			} else {
+				$temp['small_photo'] = base_lib_Constant::YUN_ASSETS_URL_NO_HTTP.$person_datas[$person_id]['photo'];//改版后用原始头像
+			}
+
+			$temp["sex"] = $this->getSex($person_datas[$person_id]["sex"]);
+			$temp["age"] = base_lib_TimeUtil::ceil_diff_year($person_datas[$person_id]["birthday2"]) . "岁";
+			if ($resume_datas[$item['resume_id']]['current_station']=='') {
+                            $temp['work'] = '无';
+			}elseif (empty($resume_datas[$item['resume_id']]['current_station_start_time'])) {
+                            $temp['work'] = $resume_datas[$item['resume_id']]['current_station'];
+			}else{
+                            $temp['work'] = $resume_datas[$item['resume_id']]['current_station'].'('.base_lib_TimeUtil::date_diff_year3($resume_datas[$item['resume_id']]['current_station_start_time'],$resume_datas[$item['resume_id']]['current_station_end_time']).')';
+			}
+			$temp['area'] = $area->getArea($person_datas[$person_id]['cur_area_id']);
+			$temp['degree'] = $degree->getDegree($resume_datas[$item['resume_id']]['degree_id']);
+			//$temp["work_year"] =base_lib_TimeUtil::date_diff_year3($person_datas[$person_id]['start_work']);
+			$basic_start_work_year = base_lib_TimeUtil::date_diff_month($person_datas[$person_id]['start_work']);		
+			$workY = floor($basic_start_work_year/12); 
+			$workM = intval($basic_start_work_year%12); 
+
+			if($workY<=0 && $workM<=6&&$workM>=-6){
+				$basic_start_work_year = '应届毕业生';
+			}else if($workY == 0 && $workM>6){
+				$basic_start_work_year = $workM.'个月工作经验';
+			}else if($basic_start_work_year<-6){
+				$basic_start_work_year = '目前在读';
+			}else{
+				$basic_start_work_year = $workY.'年工作经验';
+			}
+			$temp["work_year"] = $basic_start_work_year;
+			if(base_lib_BaseUtils::nullOrEmpty($temp["work_year"])){
+				$temp["work_year"] = "应届毕业生";
+			}
+			$temp["origin_type"] = $origintype_arr[$item["origin_type"]];
+                        //毕业院校
+                        $edu_info =$this->arrayFind($edu_datas->items,'resume_id', $resume_id);
+                        $temp['school'] = $edu_info['school'];
+                        $temp['major_desc'] = $edu_info['major_desc'];
+                        $temp['school_degree'] = $this->getDegree($edu_info['degree']) ;
+                        //最近工作经历
+                        $count =count($workslist["$resume_id"]);
+						if($count >0){
+							$temp['worklist'] = array_slice($workslist["$resume_id"],0,($count>=3?3:$count));
+						}else{
+							$temp['worklist'] = array();
+						}
+			$recyclesData[$key] = $temp;
+		}
+		$pager = $this->pageBar($recycles->totalSize, $page_size, $cur_page, $inPath);
+
+		$origin_arr = array();
+		array_push($origin_arr, array("id"=>0, "name"=> "不限"));
+		foreach ($origintype_arr as $key => $arr) {
+			$origin_arr[] = array("id" => $key, "name" => $arr);
+		}
+
+		$this->_aParams["totalSize"] = $recycles->totalSize;
+		$this->_aParams["recyclesData"] = $recyclesData;
+		$this->_aParams['origintypes'] = $origin_arr;
+		$this->_aParams["origin_id"] = $origin_id;
+		$this->_aParams["pager"] = $pager;
+		$this->_aParams["has_resume"] = true;
+		$this->_aParams["hasFilter"] = true;
+		$this->_aParams["search_model"] = $searchmode;
+                $this->_aParams['keyword'] = $keyword;
+		$show_filter = (base_lib_BaseUtils::nullOrEmpty($origin_id) && base_lib_BaseUtils::nullOrEmpty($keyword)) ? false : true;
+
+		if (intval($recycles->totalSize) == 0) {
+			if ($searchmode == 0 && !$show_filter) {
+ 				$this->_aParams["has_resume"] = false;
+			} else {
+				$this->_aParams["hasFilter"] = false;
+			}
+		}
+
+		$this->_aParams["show_filter"] = $show_filter; 
+		//获得各种状态下收到的总条数
+		$use_job_ids = array();
+		$showStopJobApply = base_lib_BaseUtils::getCookie("showStopJobApply"); //判断用户是否包含了 停招招聘的职位
+		if(base_lib_BaseUtils::nullOrEmpty($showStopJobApply) || $showStopJobApply!="true"){
+			$service_job = new base_service_company_job_job();
+			$job_status = new base_service_common_jobstatus();
+			$use_job_list = $service_job->getJobList($this->_userid, null,$job_status->pub,'job_id');
+			$use_job_ids = $this->getPropertys($use_job_list,"job_id");
+		}
+		$service_apply = new base_service_company_resume_apply();
+		$apply_status_count = $service_apply->getStatusGroupCount($this->_userid,$use_job_ids);
+		$this->_aParams['apply_status_count'] = $apply_status_count->items;
+        
+        $service_question = new base_service_company_question();
+        if($service_question->canAnswer($this->_userid)){
+            $this->_aParams['is_question'] = 1;
+        }
+		return $this->render("resume/recycle/list_v2.html", $this->_aParams);
+	}
+
+	/**
+	 * @Desc 提取字段数组
+	 * @return 
+	 */
+	private function getPropertys($arr=array(), $property) {
+		$peropertys = array();	 
+		if (empty($arr)) {
+			return array();
+		}
+		foreach ($arr as $item){
+			if (!base_lib_BaseUtils::nullOrEmpty($item[$property])) {
+				array_push($peropertys, $item[$property]);
+			}
+		}
+		return $peropertys;	
+	}
+
+	/**
+	 * @Desc 更改数组key值为主键
+	 * @return 
+	 */
+	private function arrayFormat($arr=array(), $priKey="") {
+		$newArray = array();
+		if (empty($arr)) {
+			return array();
+		}
+		foreach ($arr as $item) {
+			if (!base_lib_BaseUtils::nullOrEmpty($item[$priKey])) {
+				$newArray[$item[$priKey]] = $item;
+			}
+		}
+		return $newArray;
+	}
+	/**
+	 * @Desc 获取性别
+	 * @return 
+	 */
+	private function getSex($sex,$default='') {
+		if(base_lib_BaseUtils::nullOrEmpty($sex) || $sex=='0') {
+			return $default;
+		}
+		$enum_sex = new base_service_common_sex();
+		return $enum_sex->getName($sex);
+	}
+
+	/**
+	 *@desc清空回收站
+	 *@return
+	 */
+	public function pageClear($inPath) {
+        if(!$this->canDo("delete_resume")){
+            echo json_encode(array('error'=>'无权限访问，没有开通相应权限'));
+			return ;
+        }
+		$recycle = new base_service_company_resume_recycle();
+		$recycle = $recycle->clearRecycle($this->_userid);
+		if ($recycle === false) {
+			echo json_encode(array('error'=>'清空回收站失败'));
+			return ;
+		}
+		echo json_encode(array('success'=>'1'));
+	}
+	
+	
+	/**
+	 *@desc 删除简历
+	 *@return
+	*/
+	public function pageDelete($inPath) {
+        if(!$this->canDo("delete_resume")){
+             echo json_encode(array('error'=>'无权限访问，没有开通相应权限'));
+			return ;
+        }
+		$path_data = base_lib_BaseUtils::saddslashes($this->getUrlParams($inPath));
+		$recycle_ids = explode(',', $path_data['ids']);
+
+		if (empty($recycle_ids)) {
+			echo json_encode(array('error'=>'请选择你要删除的简历'));
+			return ;
+		}
+		
+		$recycle = new base_service_company_resume_recycle();
+		$recycle->deleteRecycle($this->_userid, $recycle_ids);
+
+		echo json_encode(array('success' => '1'));
+	}
+
+
+	/**
+	 * @Desc 恢复简历
+	 * @return 
+	 */
+	public function pageRecoveryDo($inPath) {
+		$path_data = base_lib_BaseUtils::saddslashes($this->getUrlParams($inPath));
+		$recycle_ids = base_lib_BaseUtils::getStr($path_data['ids'], 'array', null);
+		$recycle_ids = base_lib_BaseUtils::getIntArrayOrString($recycle_ids);
+
+		if (empty($recycle_ids)) {
+			echo json_encode(array('error'=>'请选择你要恢复的简历'));
+			return ;
+		}
+
+		$company_resources = base_service_company_resources_resources::getInstance($this->_userid);
+
+		$recycle = new base_service_company_resume_recycle();
+		$recycles = $recycle->getRecycles($recycle_ids, $field="recycle_id,company_id,resume_id", $company_resources->all_accounts);
+		$resume_ids = base_lib_BaseUtils::getProperty($recycles,'resume_id');
+		$recycles = base_lib_BaseUtils::array_key_assoc($recycles, "recycle_id");
+
+		foreach ($recycle_ids as $recycle_id) {
+			$recycle->recoveryRecycle($recycles[$recycle_id]['company_id'], $recycle_id);
+		}
+
+		$service_persons = new base_service_person_person();
+		$service_resumes = new base_service_person_resume_resume();
+		$resume_infos = $service_resumes->getResumes($resume_ids,'resume_id,person_id');
+		$person_ids = base_lib_BaseUtils::getProperty($resume_infos->items,'person_id');
+		$resume_infos = $service_persons->getPersons($person_ids,'person_id,user_name')->items;
+		$person_user_name = base_lib_BaseUtils::getProperty($resume_infos,'user_name');
+		$log_message = implode('，',$person_user_name);
+
+		//---------添加操作日志--------
+		$common_oper_type = new base_service_common_account_accountoperatetype();
+		$service_oper_log = new base_service_company_companyaccountlog();
+		$common_oper_src_type = new base_service_common_account_accountlogfrom();
+		$insertItems=array(
+			"company_id"=>$this->_userid,
+			"source"=>$common_oper_src_type->website,
+			"account_id"=>base_lib_BaseUtils::getCookie('accountid'),
+			"operate_type"=>$common_oper_type->resume_form_delete,
+			"content"=>"以下用户投递简历从回收站恢复：".$log_message,
+			"create_time"=>date("Y-m-d H:i:s",time())
+		);
+		$service_oper_log->addLogToMongo($insertItems);
+		//-------------END------------
+
+
+
+		echo json_encode(array('success'=>'1'));				
+		exit;
+	}
+        /* 
+        * 数组查询
+        * @param array $arr
+        * @param string $key
+        * @param string $value
+        */
+       private function arrayFind($arr,$property,$value) {
+            $obj = null;
+            foreach ($arr as $item){
+                   if($item[$property]==$value) {
+                           $obj =  $item;
+                           break;
+                   }
+            }
+            return  $obj;
+       }
+        /**
+          * 获取学历
+          */
+         private function getDegree($degree_id,$default='') {
+            if(empty($degree_id)) {
+                   return $default;
+            }
+            $service_degree = new base_service_common_degree();
+            return $service_degree->getDegree($degree_id);
+         }	
+
+}

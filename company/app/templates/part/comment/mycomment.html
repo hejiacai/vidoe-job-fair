@@ -1,0 +1,268 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+<title>{/$title/}</title>
+<!–[if lt IE9]> 
+<script src="{/version file='html5.js'/}"></script>  
+<![endif]–>
+
+<link rel="stylesheet" type="text/css" href="{/version file="base.css"/}" />
+<link rel="stylesheet" type="text/css" href="{/version file="comback.css"/}" />
+<link rel="stylesheet" type="text/css" href="{/version file="tJob_style.css"/}" />
+<link rel="stylesheet" type="text/css" href="{/version file="v2-widge.css"/}" />
+	<script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.js'/}"></script>
+<script type="text/javascript" src="{/version file='version.js'/}"></script>
+<script type="text/javascript">
+window.CONFIG = {
+	HOST: '{/$siteurl.style/}',
+	COMBOPATH: '/js/v2/'
+}
+</script>
+<script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+<script type="text/javascript" src="{/version file='global.js'/}"></script>
+<style>
+/*弹窗*/
+.formMod .l{width:135px;font-size:14px;color:#666}
+.formMod .r{width:380px}
+.assicon label{display: inline-block;width:77px;height: 35px;background-color: #e6e6dc;color:#979691;float:left;margin-right: 2px;line-height: 35px;text-align: center;cursor: pointer}
+.assicon label i{vertical-align: -2px;margin-right: 5px;font-size:18px}
+.assicon label.first{border-radius: 5px 0 0 5px}
+.assicon label.last{border-radius: 0 5px 5px 0}
+.assicon label.cur1{background-color: #19bdb4;color:#fff}
+.assicon label.cur2{background-color: #f29e16;color:#fff}
+.assicon label.cur3{background-color: #fc7958;color:#fff}
+</style>
+</head>
+<body class="tjob_main">
+{/include file="new_header.html" par="兼职招聘" cur="评价管理"/} 
+    <!--new-->
+    <div class="tjob_manager clearfix">
+    	<div class="tjob_left">
+    		<ul>
+    			<li><a href="/partcomment/index">被评价</a></li>
+    			<li class="cur"><a href="javascript:void(0)"><i class="hbFntWes">&#xf0da;</i>我的评价</a></li>
+    		</ul>
+    	</div>
+    	<div class="tjob_right">
+    		<ul class="tjob_noass" style="margin-bottom: 0px">
+				{/foreach $needComments as $list/}
+    			<li class="graybg" id="{/$list['offer_id']/}">
+    				<a href="javascript:void(0)" class="showComment" data-pid="{/$list['person_id']/}" data-fid="{/$list['offer_id']/}" data-name="{/$list['user_name']/}">去评价</a>
+    				<span>{/$list['user_name']/} 的报道时间已经过了，请在 {/date('m月d日',strtotime('+1 month',strtotime($list['offer_time'])))/} 前进行评价，过期则自动好评</span>
+    			</li>
+    			{//foreach/}
+    		</ul>
+            {/if $cur_page<$total_page/}
+            <a class="tpartMore loadmore" href="javascript:;" data-href="/partcomment/ajaxloadmoreneed" data-curpage="{/$cur_page/}" style="margin:0;background: none;color:#3d84b8">加载更多评论<i style="background-size:80%;vertical-align:-3px"></i></a>
+            <a class="tpartMore loading" href="#" style="margin:0;background: none;display: none"><img src="{/$siteurl.style/}/img/part/loading.gif" style="width:18px">正在加载</a>
+            {//if/}
+
+    		<p class="tjob_ass_title" style="margin-top: 10px">我的全部评价</p>
+
+			{/if !empty($dataLst)/}
+    		<table class="tjob_ass_list">
+				{/foreach $dataLst as $key=>$list/}
+    			<tr>
+    				<td class="img" valign="top">
+    					<a href="javascript:void(0);"><img src="{/if !empty($list['small_photo'])/}{/$pic_baseUrl/}{/$list['small_photo']/}{/else/}{/$default_photo/}{//if/}" onerror="this.src='{/$default_photo/}'"/></a>
+    				</td>
+    				<td class="desc" valign="top">
+    					<p class="assText" style="width：643px">{/$list['content']/}</p>
+    					<p class="gray9">{/if $list['level']==1/}
+    					<span class="good">好</span>
+    					{/elseif $list['level']==2/}
+    					<span class="okay">中</span>
+    					{/else/}
+    					<span class="bad">差</span>
+    					{//if/}
+    					被评人：{/$list['user_name']/}
+    					</p>
+    				</td>
+    				<td class="time" valign="center">
+    					{/substr($list['create_time'],0,-3)/}
+    				</td>
+    			</tr>
+				{//foreach/}    			
+    		</table>
+    		{/$pager/}
+    		{/else/}
+    		<div class="noData">你还没有评价过求职者</div>
+    		{//if/}
+    	</div>
+    </div>
+    <!--new end-->
+<!-- 弹窗 -->
+<div style="height: auto; overflow: auto; display:none;" class="ui_dialog_container" id="comment_dialog">
+	<div style="margin-bottom: 0px" class="formMod mgt10">
+        <div class="l">被评人：</div>
+        <div class="r"><p class="mgt5" id="user_name"></p></div>
+        <div class="clear"></div>
+    </div>
+    <div class="formMod mgt10">
+        <div class="l">总体评价：</div>
+        <div class="r assicon">
+        	<label class="first cur1"><i class="hbFntWes hbIconMoon"></i>好评</label>
+        	<label class="cur2"><i class="hbFntWes hbIconMoon"></i>中评</label>
+        	<label class="last cur3"><i class="hbFntWes hbIconMoon"></i>差评</label>
+            <span class="tipPos" style="display:none" id="levelTip">
+                <span class="tipLay">
+                    <span for="linkman" generated="true" class="tipLayErr tipw100"></span>
+                </span>
+            </span>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <form action="/partcomment/addcommentDo" method="post" id="commentForm">
+    <input name="person_id" value="" type="hidden" id="pid"/>
+    <input name="offer_id" value="" type="hidden" id="offer_id"/>
+    <input name="level" value="0" type="hidden" id="level"/>
+    <div class="formMod mgt10">
+        <div class="l">详细评价：</div>
+        <div class="r">
+        	<span class="formTextarea">
+                <textarea style="width: 300px;height: 120px" class="textarea" name="content"></textarea>
+            </span>
+            <span class="tipPos" style="display:none" id="contentTip">
+                <span class="tipLay">
+                    <span for="linkman" generated="true" class="tipLayErr tipw180"></span>
+                </span>
+            </span>
+        </div>
+        <div class="clear"></div>
+    </div> 
+    </form>               
+    <div style="margin-left: 140px;margin-bottom: 30px" class="formBtn">
+    	<a style="padding:0 40px;text-decoration: none" href="javascript:;" id="btnSave" class="btnsF16 btn1">提交</a>
+    </div>
+</div>
+
+{/include file="footer.html"/}
+    
+</body>
+<script type="text/javascript">
+hbjs.use('widge.overlay.hbDialog,widge.overlay.confirmBox,module.verifier',function(Dialog,confirmBox,verifier,$){
+    var myDialog = new Dialog({
+            idName: 'myDialog',
+            isAjax: true,
+            width: 610,
+            close: ' '
+        });
+
+    $(document).on('click','.showComment',function(e){
+        var _self = $(this),
+            HTML = $("#comment_dialog");
+            HTML.find('#user_name').html(_self.attr('data-name'));
+            HTML.find('#pid').val(_self.attr('data-pid'));
+            HTML.find('#offer_id').val(_self.attr('data-fid'));
+
+        myDialog.setContent({
+            isOverflow: true,
+            title: '兼职评论',
+            content: HTML.html()
+        }).show();
+
+        myDialog.query('.assicon label').on('click', function(e){
+            var _self = $(this);
+            var val = _self.index()+1;
+            myDialog.query('#level').val(val);
+            _self.addClass('cur'+val).siblings().each(function(){
+                $(this).removeClass('cur'+($(this).index()+1));
+            });
+        });
+
+        myDialog.query('textarea').on('focus', function(e){
+            $(this).removeClass('error');
+            myDialog.query("#contentTip").hide();
+        });
+
+        myDialog.query('#btnSave').on('click', function(e){
+            var level = myDialog.query('#level'),
+                content = myDialog.query('textarea'),
+                _self = $(this); 
+            if(!verifier.rangeNum(level, [1, 3])){
+                if(myDialog.query("#levelTip").is(":hidden")){
+                    myDialog.query("#levelTip").show()
+                    .find(".tipLayErr")
+                    .html("<span class='tipArr'></span>请选择好中差评!");
+                    setTimeout(function(){myDialog.query("#levelTip").hide()},1500);
+                }
+                
+            }else if((level.val()==3) && ((verifier.getLength(content)<10)||(verifier.getLength(content)>500))){
+                content.addClass('error');
+                myDialog.query("#contentTip").show()
+                .find(".tipLayErr")
+                .html("<span class='tipArr'></span>差评请填写详细评价(10-500字)!");
+            }else if((level.val()!=3) && (verifier.getLength(content)>500)){
+                content.addClass('error');
+                myDialog.query("#contentTip").show()
+                .find(".tipLayErr")
+                .html("<span class='tipArr'></span>详细评价不能大于500字!");
+            }else{         
+                if(!_self.hasClass('locked')){
+                    _self.addClass('locked');
+                    $.post("/partcomment/addcommentDo",myDialog.query('#commentForm').serialize(),
+                        function(data){
+                        if((data.status) != 0){
+                            confirmBox.timeBomb(data.success, {name: 'success',width: 240});
+                            setTimeout(function(){myDialog.hide();
+                                window.location.href = window.location.href;},2000);
+                        }else{
+                            confirmBox.timeBomb(data.error, {name: 'fail',width: 240});
+                            setTimeout(function(){_self.removeClass('locked');},2000);
+                        }
+                    },'json');
+                }   
+            }
+        });
+
+    });
+    
+    $('.loadmore').on('click',function(){
+        var _self = $(this),
+            curpage = parseInt(_self.attr('data-curpage'))+1,
+            baseurl = _self.attr('data-href');
+            _self.hide();$(".loading").show();
+            $.ajax({
+                'url':baseurl,
+                'dataType':'json',
+                'type':'get',
+                'data':{'page':curpage},
+                'success':function(data){
+                    if(parseInt(data.status)){
+                        _self.attr('data-curpage',data.cur_page);
+                        var list = data.dataLst;
+                        if(list.length>0){
+
+                            for(var i=0;i<list.length;i++){
+                                if(typeof(list[i].user_name) == 'undefined'){
+                                    list[i].user_name = "";
+                                }
+                                var baseobj = '<li class="graybg" id="'+list[i].offer_id+'">';
+                                    baseobj+= '<a href="javascript:void(0)" class="showComment" data-pid="'+list[i].person_id+'" data-fid="'+list[i].offer_id+'" data-name="'+list[i].user_name+'">去评价</a>';
+                                    baseobj+= '<span>'+list[i].user_name+' 的报道时间已经过了，请在'+list[i].before_time+' 前进行评价，过期则自动好评</span>';
+                                    baseobj+= '</li>';
+                                
+                                $(".tjob_noass").append(baseobj);
+                            }
+                        }
+                        if(parseInt(data.cur_page) == parseInt(data.total_page)){
+                            $('.tpartMore').hide();
+                        }else{
+                            $(".loading").hide();
+                            _self.show();
+                        }
+                    }
+                },
+                'error':function(){
+                    _self.html('加载失败！').css('color','red');
+                    $(".loading").hide();_self.show();
+                }
+            });
+        });
+});
+</script>
+</html>

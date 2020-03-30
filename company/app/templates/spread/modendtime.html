@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="Keywords" content="" />
+    <meta name="Description" content="" />
+    <style>
+        .cngPassBox{width:335px;font-size:12px;}
+        .cngPassBox .formMod .l{width:100px;}
+        .cngPassBox .formMod .r{width:210px;zoom:1;}
+        .cngPassBox .formBtn{margin:10px 0 0 110px;zoom:1;}
+        .cngPassBox .formBtn a{margin:0 10px 0 0;zoom:1;}
+    </style>
+    <script type="text/javascript" src="{/version file='jquery.min.js'/}"></script>
+    <script type="text/javascript" src="{/version file='WdatePicker.js'/}"></script>
+</head>
+<body>
+<form id="formModPass" action="{/get_url rule="/spreadjob/ModEndTimeDo"/}" method="post">
+<input type="hidden" name="company_id" value="{/$company_id/}">
+<input type="hidden" name="job_id" value="{/$job_id/}">
+<input type="hidden" name="spread_id" value="{/$spread_id/}">
+<div class="dgBox cngPassBox">
+    <div class="cngIdForm">
+
+        <div class="formMod">
+            <div class="l">截止时间<i>&nbsp;</i></div>
+            <div class="r">
+            	<span class="formText">
+                    <input type="text" id="endTime" readonly="readonly" name="endtime" style="width:158px;" onClick="WdatePicker({dateFmt:'yyyy-M-d H:mm',minDate:'{/$thisDate/}'})" value="{/$endTime/}" class="text" />
+                </span>
+                <span class="tipPos">
+                    <span class="tipLay">
+                    </span>
+                </span>
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div class="formBtn"><a href="javascript:void(0)" id="btnSure" class="btn1 btnsF14">确定</a><a href="javascript:void(0)" id="btnCancel" class="btn3 btnsF14">取消</a></div>
+    </div>
+</div>
+</form>
+<script type="text/javascript">
+    var spread_source = "{/$source/}";
+    $('#btnSure').click(function(){
+        $('#btnSure').submitForm({ success: successCallback, clearForm: false });
+    });
+
+    $('#btnCancel').click(function(){
+        $(this).closeDialog();
+    })
+    function successCallback(json){
+        is_submit = false;
+        if (json && json.error){
+            $.message(json.error,{ icon: 'warning' });
+            return;
+        }
+        if(spread_source == 'job'){
+            $('.submaktTab03').text($('#endTime').val());
+            $('.marktOppen').attr('data-spread',json.spread_id);
+        }
+				
+        $('#btnSure').closeDialog();
+        $.anchorMsg(json.msg);
+        if(spread_source != 'job'){
+             setTimeout("window.location.reload()",'2000');
+        }
+
+        // history.go(0);
+    }
+</script>
+</body>
+</html>

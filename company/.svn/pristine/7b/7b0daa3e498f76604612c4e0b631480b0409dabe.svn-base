@@ -1,0 +1,775 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+<title>{/$title/}</title>
+<!–[if lt IE9]> 
+<script src="{/version file='html5.js'/}"></script>
+<![endif]–>
+<link rel="stylesheet" type="text/css" href="{/version file="base.css"/}" />
+<link rel="stylesheet" type="text/css" href="{/version file="comback.css"/}" />
+<link rel="stylesheet" type="text/css" href="{/version file="icons.css"/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}" />
+
+<link rel="stylesheet" type="text/css" href="{/version file='companySpread.css'/}" />
+
+    <script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.min.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='common.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='dialog.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='jquery.form.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='mediaquery.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='ui_menudisplay.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='ui_inputFocus.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='ui_hovchange.js'/}"></script><!--指向改变class-->
+    <script type="text/javascript" language="javascript" src="{/version file='ui_drop.js'/}"></script><!--下拉模拟-->
+    <script type="text/javascript" language="javascript" src="{/version file='ui_validate.js'/}"></script>
+    <script type="text/javascript" src="{/version file='WdatePicker.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='ui_dropdownlist.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='ui_tooltip.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='ui_autocomplete.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='jquery.email.tip.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='jquery.metadata.js'/}"></script><!--指向改变class-->
+
+
+<script type="text/javascript">
+window.CONFIG = {
+  HOST: '{/$siteurl.style/}',
+  COMBOPATH: '/js/v2/'
+}
+</script>
+<script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+<script type="text/javascript" src="{/version file='global.js'/}"></script>
+
+<style type="text/css">
+	.maktTab02 tr td span.submaktTab01, .maktTab02 tr td span.submaktTab02, .maktTab02 tr td span.submaktTab03{
+		cursor: default;
+	}
+</style>
+</head>
+
+<body id="body">
+
+{/include 'new_header.html' cur='发布职位'/}
+<div class="content" id="content">
+    <form id="spread-form">
+    <section class="section">
+
+        {/if $step/}
+            <div class="box_step">
+                <p class="title"><span><i></i>发布职位</span></p>
+                <ul class="clearfix stop_list">
+                    <li class="cur">
+                        <p class="clearfix first">                  
+                            <em></em>
+                            <span>1</span>          
+                        </p>
+                        <p class="text">完善公司资料</p>
+                    </li>
+                    <li class="cur">
+                        <p class="clearfix">
+                            <em></em>
+                            <span>2</span>
+                            <em></em>
+                        </p>                            
+                        <p class="text">填写职位信息</p>
+                    </li>
+                    <li class="cur">
+                        <p class="clearfix last">
+                            <em></em>
+                            <span>3</span>
+                        </p>
+                        <p class="text">发布成功</p>
+                    </li>
+                </ul>
+            </div>
+        {//if/}
+
+        <div style="padding:58px 0 0 60px">
+            <img src="{/$siteurl.style/}/img/company/suc.jpg" style="float:left;margin-right: 10px;width: 32px;" />
+            <p class="tit" style="font-size:14px;color:#333;margin-top: 10px">
+                <em style="color:#da221a;font-weight:bold">{/$station/} </em>职位发布成功！
+            </p>
+            <div class="clear"></div>
+            <!--<div class="share-box">
+										<h4>1分钟分享到朋友圈，可快速获得简历!</h4>
+										<ul>
+												<li><span>分享职位招聘海报</span><a id="postershare">立即分享</a></li>
+												<li><span>分享H5招聘</span><a href="{/get_url rule='/index/TemplateStatisticalByH5' data='type=4'/}" target="_blank">立即分享</a></li>
+										</ul>
+								</div>-->
+            {/if $com_level > 0 && $check_state !=4 && $audit_msg=='认证通过'/}
+                <!--<div class="share-job-box">
+                    <h3>生成职位招聘海报分享到朋友圈！</h3>
+                        <a href="javascript:void(0)" id="postershare">
+                            立即分享
+                        </a>
+                </div>-->
+                <div class="share-box">
+										<h4>1分钟分享到朋友圈，可快速获得简历!</h4>
+										<ul>
+												<li><span>分享职位招聘海报</span><a id="postershare">立即分享</a></li>
+												<li><span>分享H5招聘</span><a href="{/get_url rule='/index/TemplateStatisticalByH5' data='type=4'/}" target="_blank" id="h5share">立即分享</a></li>
+										</ul>
+								</div>
+            {//if/}
+        </div>
+        <div class="clear"></div>
+
+        <div style="padding:20px 0 80px 60px">
+            {/if $isEnd==false/}
+            更好提升招聘效果，您可以：<!-- <br />职位<strong style="color:#da221a">“置顶”</strong>，搜索特定关键词或该职位所属的职位类别时，职位会一直出现在搜索列表最顶端。<br /> -->
+            
+                        {/if $job_spread_list/}
+						<!-- 设置精准推广 -->
+						<h5 class="speadTitle pr">
+							<span class="sttext">精准推广</span> 
+							<span class="pr ques">?
+								<div class="tip pa">职位“精准推广”，搜索相关职位时，在职位列表顶部展示(展示在置顶前)。</div>
+							</span>
+						</h5>
+						
+						<div class="userOps chooseSpread">
+                            <table width="100%" border="0" class="maktTab maktTab02">
+                                <tr>
+                                    <!--<th height="40" width="130" align="left" valign="middle" class="marktTabpd20">职位</th>-->
+                                    <th height="40" align="center" valign="middle">出价</th>
+                                    <th height="40" align="center" valign="middle">每日预算（元/天）</th>
+                                    <th height="40" align="center" valign="middle">截止时间</th>
+                                    <th height="40" align="center" valign="middle">推广状态</th>
+                                    <th height="40" align="center" valign="middle">开关状态</th>
+                                    <th height="40" align="center" valign="middle">开关</th>
+                                </tr>
+                                {/foreach $job_spread_list as $k=>$v/}
+
+                                <tr data-username="{/$v['account_user_name']/}" data-cando="{/$v['can_do']/}" data-jobresource="{/$v['job_account_resource_type']/}">
+                                    <!--<td align="left" width="130" valign="middle" class="marktTabpd20">-->
+                                        <!--<span>{/$v['station']/}{/if $v['is_quality']/}<i class="icon-jing"></i>{//if/}</span>-->
+                                        <!--&lt;!&ndash; <b class="gray">{/if $v['ranking'] > 0/}（当前排名：第{/$v['ranking']/}位）{//if/}</b>&ndash;&gt;-->
+                                    <!--</td>-->
+                                    <td align="center" valign="middle" style="position: relative;">
+                                        <span class="submaktTab01" onclick="modbid(this)" data-companyid="{/$v['company_id']/}" data-jobid="{/$v['job_id']/}" title="点击编辑">{/if empty($v['bid'])/}--{/else/}{/$v['bid']/}{//if/}</span>
+                                        {/*  <b class="gray gray_small">最低出价：1元 {/if $v['bid'] > 0/} <br />平均出价：{/$v['avgbid']/} 元{//if/}</b>*/}
+                                        <b class="gray gray_small">{/if $v['avgbid'] >= 1/}平均出价：{/$v['avgbid']/} 元<br/>{//if/}首屏展示最低价{/$v['first_screen_bid']/}元<i class="hbFntWes">&#xf059;</i></b>
+                                        <div class="expBox" style="{/if $v['avgbid'] >= 1/}top:94px;{/else/} top:77px;{//if/}display: none;" id="expBox">
+                                            <em></em>
+                                            <div class="expBoxC">
+                                                <p>首屏展示价仅供参考，实际展示与职位名称等因素有关</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td align="center" valign="middle">
+                                        <span class="submaktTab02" onclick="modBudget(this)" data-companyid="{/$v['company_id']/}" data-jobid="{/$v['job_id']/}" title="点击编辑">{/if empty($v['budget'])/}--{/else/}{/$v['budget']/}{//if/}</span>
+                                        <b class="gray gray_small">{/if empty($v['budget'])/}{/else/}消费：{/$v['last_budget']/}{//if/}</b>
+                                    </td>
+                                    <td align="center" valign="middle">
+                                        <span class="submaktTab03" onclick="modEndtime(this)" data-companyid="{/$v['company_id']/}" data-jobid="{/$v['job_id']/}" title="点击编辑" data-spreadID="{/$v['spread_id']/}">{/if empty($v['end_time'])/}永久{/else/}{/$v['end_time']/}{//if/}</span>
+                                        <b class="gray gray_small">（选填）</b>
+                                    </td>
+                                    <td align="center" valign="middle" class="xiaxian {/if empty($v['status']) || (!empty($v['end_time']) && strtotime($v['end_time'])<=time())/}gray{/else/}orange{//if/}">
+                                        {/if !empty($v['end_time']) && strtotime($v['end_time'])<=time()/}已下线
+                                        {/else/}
+                                        {/if in_array($v['status'],array(0))/}已下线{/else/}正在推广{//if/}
+                                        {//if/}
+                                    </td>
+                                    <td align="center" valign="middle" class="open {/if empty($v['is_effect'])/}gray{/else/}orange{//if/}">{/if $v['is_effect']==1/}开启{/else/}关闭{//if/}</td>
+                                    <td align="center" valign="middle">
+                                        <a href="javaScript:;" class="marktOppen {/if $v['is_effect']==1/}marktOppencut{//if/}" data-spread="{/$v['spread_id']/}" data-status="{/$v['is_effect']/}"></a>
+                                    </td>
+                                </tr>
+                                {//foreach/}
+
+
+                            </table>
+						</div>
+                        {//if/}
+						<!-- 设置置顶 -->
+						<h5 class="speadTitle pr">
+							<span class="sttext">职位置顶</span> 
+							<span class="pr ques">?
+								<div class="tip pa">职位“置顶”，搜索特定关键词或该职位所属的职位类别时，职位会一直出现在搜索列表最顶端。</div>
+							</span>
+						</h5>
+						
+						<div class="userOps">
+							<span>
+							    <label style="display: block;margin-top: 10px;margin-bottom: 5px">
+							        <input name="hddSetTop" type="radio" value="0" style="display: inline-block;vertical-align: middle;"/> 不置顶
+							    </label>
+							    <label>
+							        <input name="hddSetTop" type="radio" value="1" style="display: inline-block;vertical-align: middle;"/> 设置为置顶<span style="color:red;">（某个行业的某个二级职位类别下的全部置顶职位最多只展示5个，多于5个随机展示）</span>
+							    </label>
+							</span>
+						</div>
+						
+						<div style="padding:10px 18px 0px;font-size: 12px;color:#666;display:none" id="set-top">
+						    <strong style="font-size: 14px">请设置需要置顶的关键词</strong>(一个关键词1天需{/$top_params['price']/}元)<br />
+						    <ul id="tops">
+						        <li>
+						            <p style="margin:7px 0">关键词<input type="text" style="padding:3px;margin:0 15px 0 5px" name="txtword" disabled />置顶
+						                <select name="dllday" style="padding:4px;margin:0 5px" disabled>
+						                    <option>1</option>
+						                    <option>2</option>
+						                    <option>3</option>
+						                    <option>4</option>
+						                    <option>5</option>
+						                </select>天
+						                <a href="javascript:void(0)" class="add">增加关键词</a>
+						            </p>
+						        </li>
+						    </ul>
+						    在以下职位分类搜索时也会置顶：<strong>{/$jobsorts[1]['jobsort_name']/}，{/$jobsorts[2]['jobsort_name']/}</strong><br/>
+						    <span style="color:red;">（您行业所在的“{/$jobsorts[1]['jobsort_name']/}”类别已有{/$sameSortJobNumber/}个职位置顶{/if $sameSortJobNumber>5/}，系统会随机展示5个{//if/}）</span>
+						</div>
+						
+						
+						<!-- 设置急聘 -->
+						<h5 class="speadTitle pr">
+							<span class="sttext">职位急聘</span> 
+							<span class="pr ques">?
+								<div class="tip pa">职位设为“急聘”，职位带有特有  <img src="{/$siteurl.style/}/img/company/jipin.jpg" style="margin: -3px 2px;" />   标识，并在急聘专区展示。</div>
+							</span>
+						</h5>
+						
+						<div class="userOps">
+							<span>
+							    <label style="display: block;margin-top: 10px;margin-bottom: 5px">
+							        <input name="hddSetUrgent" type="radio" value="0" style="display: inline-block;vertical-align: middle;"/> 不急聘</label>
+							    <label style="display: block;margin-bottom: 5px">
+							        <input name="hddSetUrgent" type="radio" value="1" style="display: inline-block;vertical-align: middle;"/> 急聘7天（花费{/$urg_params['price'] * 1/}元，至{/date('Y-m-d',strtotime('+7 days'))/}）</label>
+							    <label style="display: block;margin-bottom: 5px;">
+							        <input name="hddSetUrgent" type="radio" value="2" style="display: inline-block;vertical-align: middle;"/> 急聘14天（花费{/$urg_params['price'] * 2/}元，至{/date('Y-m-d',strtotime('+14 days'))/}）</label>
+							    <label style="display: block;margin-bottom: 5px">
+							        <input name="hddSetUrgent" type="radio" value="3" style="display: inline-block;vertical-align: middle;"/> 急聘21天（花费{/$urg_params['price'] * 3/}元，至{/date('Y-m-d',strtotime('+21 days'))/}）</label>
+							</span>
+						</div>
+						
+						<!-- =========================================================== -->
+						<!-- <span>
+                <label style="display: block;margin-top: 10px;margin-bottom: 5px">
+                    <input name="hddSetTop" type="radio" value="0" style="display: inline-block;vertical-align: middle;"/> 不置顶
+                </label>
+                <label>
+                    <input name="hddSetTop" type="radio" value="1" style="display: inline-block;vertical-align: middle;"/> 设置为置顶<span style="color:red;">（某个行业的某个二级职位类别下的全部置顶职位最多只展示5个，多于5个随机展示）</span>
+                </label>
+            </span>
+            <div style="padding:10px 18px 0px;font-size: 12px;color:#666;display:none" id="set-top">
+                <strong style="font-size: 14px">请设置需要置顶的关键词</strong>(一个关键词1天需{/$top_params['price']/}元)<br />
+                <ul id="tops">
+                    <li>
+                        <p style="margin:7px 0">关键词<input type="text" style="padding:3px;margin:0 15px 0 5px" name="txtword" disabled />置顶
+                            <select name="dllday" style="padding:4px;margin:0 5px" disabled>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>天
+                            <a href="javascript:void(0)" class="add">增加关键词</a>
+                        </p>
+                    </li>
+                </ul>
+                在以下职位分类搜索时也会置顶：<strong>{/$jobsorts[1]['jobsort_name']/}，{/$jobsorts[2]['jobsort_name']/}</strong><br/>
+                <span style="color:red;">（您行业所在的“{/$jobsorts[1]['jobsort_name']/}”类别已有{/$sameSortJobNumber/}个职位置顶{/if $sameSortJobNumber>5/}，系统会随机展示5个{//if/}）</span>
+            </div>
+
+            <p style="margin-top: 20px">职位设为<strong style="color:#da221a">“急聘”</strong>，职位带有特有<img src="{/$siteurl.style/}/img/company/jipin.jpg" style="margin: -3px 2px;" />标识，并在急聘专区中展示。</p>
+            <span>
+                <label style="display: block;margin-top: 10px;margin-bottom: 5px">
+                    <input name="hddSetUrgent" type="radio" value="0" style="display: inline-block;vertical-align: middle;"/> 不急聘</label>
+                <label style="display: block;margin-bottom: 5px">
+                    <input name="hddSetUrgent" type="radio" value="1" style="display: inline-block;vertical-align: middle;"/> 急聘7天（花费{/$urg_params['price'] * 1/}元，至{/date('Y-m-d',strtotime('+7 days'))/}）</label>
+                <label style="display: block;margin-bottom: 5px;">
+                    <input name="hddSetUrgent" type="radio" value="2" style="display: inline-block;vertical-align: middle;"/> 急聘14天（花费{/$urg_params['price'] * 2/}元，至{/date('Y-m-d',strtotime('+14 days'))/}）</label>
+                <label style="display: block;margin-bottom: 5px">
+                    <input name="hddSetUrgent" type="radio" value="3" style="display: inline-block;vertical-align: middle;"/> 急聘21天（花费{/$urg_params['price'] * 3/}元，至{/date('Y-m-d',strtotime('+21 days'))/}）</label>
+            </span> -->
+            {//if/}
+            <p style="margin-top: 20px">
+                {/if $isEnd == false/}<a href="javascript:void(0)" style="" class="submit-set">确认设置</a>{//if/}
+                {/if $type == "add"/}<a class="continue-pub" href="{/get_url rule="/job/add"/}" style="">{/if $isEnd == false/}跳过，{//if/}继续发布职位</a>{//if/}
+                <a class="back-job-center" href="{/get_url rule="/index/joblist/"/}" style="">返回职位管理</a>
+            </p>  
+        </div>
+    </section>
+    </form>
+    <ul style="display:none;" class="modal">
+        <li>
+            <p style="margin:7px 0">关键词<input type="text" style="padding:3px;margin:0 15px 0 5px" name="txtword" />置顶
+                <select name="dllday" style="padding:4px;margin:0 5px">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                </select>天
+                <a href="javascript:void(0)" class="del">删除</a>
+            </p>
+        </li>
+    </ul>
+    <input type="hidden" value="{/$job_id/}" name="hiddenjob" />
+    {/if $companyInfor['recruit_type']==1/}
+    <div class="weixin" style="display: none">
+        <h5>分享招聘海报</h5>
+        <h6>使用微信<br>扫码生成招聘海报</h6>
+        <img src="{/get_url rule='/poster/PostCode'/}/job_id-{/$job_id/}" alt="">
+        <p>分享招聘海报让更多朋友帮 <br> 你转发、为你推荐人才吧！</p>
+    </div>
+    {//if/}
+</div>
+
+{/include file="footer.html"/}
+<script  type="text/javascript">
+    var action_url = '{/$siteurl.style/}';
+    if(typeof action_dom == 'object'){
+        action_dom.push( ['#postershare', 41]);
+        action_dom.push( ['#h5share', 49]);
+    }else{
+        action_dom = [
+            ['#postershare', 41],
+            ['#h5share', 49]
+        ];
+    }
+</script>
+<script type="text/javascript" language="javascript" src="{/version file='action.js'/}"></script>
+<section class="floatRT"><a href="{/get_url rule='/about/message' domain='main'/}" target="_blank" class="serviceLink">我有问题要反馈</a><b></b></section>
+<script type="text/javascript">
+var isSelected = false;
+var getPic;
+hbjs.use('@imageEditor, @confirmBox, @jobsort, @orderActions, @dialog', function (m) {
+    
+    var orderActions = m['product.orderActions'],
+        confirmBox   = m['widge.overlay.confirmBox'];
+        Dialog       = m['widge.overlay.hbDialog'];
+
+    getPic = new Dialog({
+        close : 'X',
+        idName : 'getPicDialog',
+        title : '海报分享',
+        width : 700,
+        isOverflow : false,
+        isAjax : true
+    });
+		
+		
+		/* 设置进准推广 */
+		// setSpread = new Dialog({
+		//     close : 'X',
+		//     idName : 'setSpread',
+		//     title : '设置进准推广',
+		//     width : 700,
+		//     isOverflow : false,
+		//     isAjax : true
+		// });
+		
+		// $('.setSpread').on('click',function(){
+		// 	setSpread.setContent("{/get_url rule='/job/SetJobQuality/'/}"+"job_id-"+'{/$job_id/}').show();
+		// })
+		
+
+    // 新增关键词
+    $("#set-top").on("click", ".add", function (e) {
+        if ($(":input[name=hddSetTop][checked]").val() == 0)
+            return false;
+
+        var i = $("#tops").find("li").length + 1;
+        var $li = $(".modal").find('li').clone();
+        if (i >= 3) {
+            $(this).hide();
+        }
+
+        $("#set-top").find("ul#tops").append($li);
+    });
+
+    $("#postershare").on("click",function () {
+        // $.showModal("{/get_url rule='/poster/GetPic/'/}"+"job_id-"+, {title:'分享海报',showClose:true});
+        getPic.setContent("{/get_url rule='/poster/GetPic/'/}"+"job_id-"+'{/$job_id/}').show();
+    });
+
+    // 删除关键词
+    $("#set-top").on("click", ".del", function (e) {
+        if ($(":input[name=hddSetTop][checked]").val() == 0)
+            return false;
+
+        $(this).closest('li').remove();
+        if ($("#tops").find("li").length < 3)
+            $(".add").show();
+    });
+
+    $("input[name=hddSetUrgent]").on("click", function (e) {
+        isSelected = true;
+    })
+
+    // 选择置顶信息
+    $("input[name=hddSetTop]").on('click', function (e) {
+        isSelected = true;
+        if ($(this).val() == 0) {
+            $("#set-top").hide();
+
+            $("input[name=txtword]").attr("disabled", "disabled");
+            $("select[name=dllday]").attr("disabled", "disabled");
+        } else {
+            $("#set-top").show();
+
+            $("input[name=txtword]").removeAttr('disabled');
+            $("select[name=dllday]").removeAttr('disabled');
+        }
+    });
+		
+		// 选择进准推广
+		$("input[name=hddSpread]").on('click', function (e) {
+		    isSelected = true;
+		    if ($(this).val() == 0) {
+		        $("#set-spread").hide();
+		
+		        $("input[name=chujia]").attr("disabled", "disabled");
+		        $("input[name=yusuan]").attr("disabled", "disabled");
+		        $("input[name=endDate]").attr("disabled", "disabled");
+		    } else {
+		        $("#set-spread").show();
+		
+		        $("input[name=chujia]").removeAttr('disabled');
+		        $("input[name=yusuan]").removeAttr('disabled');
+		        $("input[name=endDate]").removeAttr('disabled');
+		    }
+		});
+
+    var jobAddValid = $("#spread-form").validate({
+        rules: {
+            hddSetUrgent : {required : true},
+            hddSetTop : {required : true},
+            hddSpread : {required : true}
+        },
+        messages : {
+            hddSetUrgent : {required : '请选择是否急聘<span class="tipArr"></span>'},
+            hddSetTop : {required : '请选择是否置顶<span class="tipArr"></span>'},
+            hddSpread : {required : '请选择是否精准推广<span class="tipArr"></span>'}
+        },
+        errorElement: 'span',
+        errorClasses: {
+            hddSetUrgent: {required: 'tipLayErr tipwurg'},
+            hddSetTop : {required: 'tipLayErr tipwtop'},
+						hddSpread: {required : 'tipLayErr tipwtop'}
+        }
+    })
+
+    // 确认设置
+    $(".submit-set").on("click", function (e) {
+			
+        var orders = [],
+            job_id = $("input[name=hiddenjob]").val();
+        if (!jobAddValid.form()) {
+            return false;
+        }
+
+        if ($(":input[name=hddSetTop][checked]").val() == 1) {
+					console.log(12311321)
+            $("#set-top").find("li").each(function (i, e) {
+                var txtword = $(this).find("input[name=txtword]").val();
+                var dllday  = $(this).find("select[name=dllday]").val();
+
+                orders.push({type : 'top', keyword : txtword, dllday : dllday});
+            });
+        }
+
+        if ($(":input[name=hddSetUrgent][checked]").val() > 0) {
+            orders.push({type : 'urgent', dllday : $(":input[name=hddSetUrgent][checked]").val()});
+        }
+
+        if (orders.length == 0) {
+            window.location.href = "{/base_lib_Constant::COMPANY_URL_NO_HTTP/}/index/joblist/";
+            return false;
+        }
+            
+
+        orderActions.show({
+            url: "{/get_url rule="/spread/order/"/}",
+            orders : orders,
+            jobid : job_id,
+            submit : function() {
+                var target = $(e.currentTarget),
+                    self = this;
+                    
+                orderActions.setSubmit(false, target);
+                $.post("{/get_url rule="/spread/consume/"/}", {job_id : job_id, orders : orders}, function (e) {
+                    if (e.status) {
+                        confirmBox.timeBomb("操作成功！", {
+                            name: 'success',
+                            timeout : 1000,
+                            width : 200,
+                            zIndex : 999999,
+                            callback : function (e) {
+                                window.location.href = "{/base_lib_Constant::COMPANY_URL_NO_HTTP/}/index/joblist/";
+                            }
+                        });
+                    } else {
+                        $.anchorMsg(e.msg, {icon : 'fail'});
+                        self.hide();
+                    }
+                });
+            },
+            hide : function () {
+            }
+        });
+    });
+    //App
+    {/if !in_array($account_id,$related_account_ids)/}
+    var Dialog = m['widge.overlay.hbDialog'];
+    var cookie = m['tools.cookie'];
+    if (cookie.get("addnewApp") != 'show') {
+        var downApp = new Dialog({
+            idName: 'new-downapp-dialog',
+            width: 750,
+            close: 'x',
+            title: ' '
+
+        });
+        downApp.setContent('<div style="margin:0 50px 40px 50px;padding-top:40px;height:356px;padding-left: 277px;background: url({/$siteurl.style/}/img/account/suc_appphone.jpg) left 40px no-repeat;font-family: ' + '\'' + 'Microsoft YaHei ' + '\'' + '"><p style="font-size: 18px;color: #444;padding-top: 20px">推荐使用<span style="color: #f00">汇博企业APP</span>，管理职位，处理简历</p><dl style="height: 195px;margin-top: 50px"><dt style="float: left;text-align: left"><img src="{/$siteurl.style/}/img/account/add_appewm.jpg" /><span style="font-size: 12px;color: #666;display: block;margin-top: 10px">扫描安装汇博企业APP</span><span style="font-size: 12px;color: #999">支持 安卓 IOS</span></dt><dd style="float: left;margin-left: 60px"><span style="font-size: 16px;color:#333">更多APP专属特权:</span><p style="background: url({/$siteurl.style/}/img/account/add_succ.jpg) 10px center no-repeat;padding-left: 35px;line-height: 14px;font-size: 14px;color: #666;margin-top: 15px">职位分享到朋友圈</p><p style="background: url({/$siteurl.style/}/img/account/add_succ.jpg) 10px center no-repeat;padding-left: 35px;line-height: 14px;font-size: 14px;color: #666;margin-top: 15px">及时与求职者沟通</p><p style="background: url({/$siteurl.style/}/img/account/add_succ.jpg) 10px center no-repeat;padding-left: 35px;line-height: 14px;font-size: 14px;color: #666;margin-top: 15px">职位免费刷新特权</p><p style="background: url({/$siteurl.style/}/img/account/add_succ.jpg) 10px center no-repeat;padding-left: 35px;line-height: 14px;font-size: 14px;color: #666;margin-top: 15px">扫码登录PC端网站</p></dd></dl></div>');
+        downApp.show();
+        cookie.set("addnewApp","show",{path:'/'});
+    }
+    {//if/}
+});
+</script>
+
+<script type="text/javascript">
+
+    var resource_type = "{/$companyresources['resource_type']/}";
+    var confirmBox1;
+	
+    hbjs.use('widge.select, widge.calendar.calendar, widge.checkBoxer,highcharts.highstock, widge.overlay.confirmBox, widge.overlay.hbDialog', function(Select, Calendar, checkBoxer, highstock, confirmBox,Dialog,$){
+
+        var t1 = '2012-01-01',
+                t2 = (new Date()),
+                dateMiddle = null;
+
+        confirmBox1 = confirmBox;
+
+        dialog = new Dialog({
+            close : 'X',
+            idName : 'job_dialog',
+            width : 425,
+            isOverflow : false,
+            isAjax : true
+        });
+
+        dialog_msg = new Dialog({
+            close : 'X',
+            idName : 'hr_dialog',
+            width : 520,
+            isOverflow : false,
+            isAjax : true
+        });
+
+
+
+
+        var tabRadio = $('.tabRadio'),
+                tabCheckbox = $('.tabRadio2'),
+                radioRet = [],
+                checkRet = [];
+        tabRadio.each(function(index, val){
+            radioRet.push(new checkBoxer({
+                element: $(this).children('.hb_ui_boss_radio'),
+                className: 'hb_ui_boss_checked_radio',
+                multiple: false
+            }));
+        });
+
+        tabCheckbox.each(function(index, val){
+            checkRet.push(new checkBoxer({
+                element:$(this).children('.hb_ui_boss_checkbox'),
+                className: 'hb_ui_boss_checked_checkbox',
+            }));
+
+            checkRet[index].on('select', function(e){
+                if(e.index === 0){
+                    this.all(this.isChecked());
+                } else {
+                    if(this.isAll(1)){
+                        this.setStatus(0, true);
+                    } else {
+                        this.setStatus(0, false);
+                    }
+                }
+            });
+        });
+
+        $('.hbFntWes').hover(function(){
+            $(this).parent().next('#expBox').toggle();
+        });
+
+        $('.marktOppen').click(function(){
+            var spread_id = $(this).attr('data-spread');
+            var status = $(this).attr('data-status');
+
+            var cando = $(this).closest('tr').attr("data-cando");
+            var jobresource = $(this).closest('tr').attr("data-jobresource");
+            var job_user_name = $(this).closest('tr').attr("data-username");
+            var msg = '';
+            if(cando == 2){
+                if(resource_type == 2){
+                    msg = '该职位由账号（'+job_user_name+'）发布，请登录该账号操作';
+                }else{
+                    msg ="该职位由分配模式账号（"+job_user_name+"）发布，请登录该子账号操作";
+                }
+
+                if(msg){
+                    confirmBox1.timeBomb(msg, {"name":"fail",width:'auto'});
+                    return false;
+                }
+
+            }
+
+            if(spread_id == null || spread_id == undefined || spread_id ==''){
+//	            confirmBox.timeBomb('请先输入出价和预算！', {"name":"success",width:'auto'});
+                confirmBox.timeBomb("请先输入出价和预算！", { "name":"fail",width:'auto'});
+                return;
+            }
+            $.ajax({
+                url: '{/get_url rule="/spreadjob/SetSpreadStatus"/}',
+                data: {'spread_id':spread_id,'status':status},
+                type: 'get',
+                dataType: 'json',
+                success: function(json) {
+                    if (json && json.error){
+                        //需要设置精品职位
+                        if(json.err_code == 'set_quality'){
+                            dialog.setContent({
+                                'title' : '精准推广',
+                                'content' : '{/get_url rule="/index/SetJobQualitySpread/" data="job_id='+json.job_id+'&from=spreadjob&v='+Math.random()+'"/}'
+                            }).show();
+                            return;
+                        }else {
+                            confirmBox.timeBomb(json.error, {"name": "fail", width: 'auto'});
+                            return;
+                        }
+                    }else{
+                        confirmBox.timeBomb(json.msg, {"name":"success",width:'auto'});
+												
+												$('.marktOppen').toggleClass("marktOppencut")
+												
+												if($('.marktOppen').hasClass('marktOppencut')){  //开启
+													$('.xiaxian').text('正在推广').addClass('orange')
+													$('.open').text('开启').addClass('orange')
+												}else{ //关闭
+													$('.xiaxian').text('已下线').removeClass('orange').addClass('gray')
+													$('.open').text('关闭').removeClass('orange').addClass('gray')
+												}
+                    }
+                    // setTimeout("window.location.reload()",'2000');
+
+                }
+            });
+        });
+
+    });
+
+
+    function modbid(obj){
+        var company_id = $(obj).attr('data-companyid');
+        var job_id = $(obj).attr('data-jobid');
+
+        var cando = $(obj).closest('tr').attr("data-cando");
+        var jobresource = $(obj).closest('tr').attr("data-jobresource");
+        var job_user_name = $(obj).closest('tr').attr("data-username");
+        var msg = '';
+        if(cando == 2){
+            if(resource_type == 2){
+                msg = '该职位由账号（'+job_user_name+'）发布，请登录该账号操作';
+            }else{
+                msg ="该职位由分配模式账号（"+job_user_name+"）发布，请登录该子账号操作";
+            }
+
+            if(msg){
+                confirmBox1.timeBomb(msg, {"name":"fail",width:'auto'});
+                return false;
+            }
+        }
+        $.showModal('{/get_url rule="/spreadjob/modbid/" data="source=job&type=bid&company_id='+company_id+'&job_id='+job_id+'"/}',{title:'出价修改'});
+    }
+    function modBudget(obj){
+        var company_id = $(obj).attr('data-companyid');
+        var job_id = $(obj).attr('data-jobid');
+        var cando = $(obj).closest('tr').attr("data-cando");
+        var jobresource = $(obj).closest('tr').attr("data-jobresource");
+        var job_user_name = $(obj).closest('tr').attr("data-username");
+        var msg = '';
+        if(cando == 2){
+            if(resource_type == 2){
+                msg = '该职位由账号（'+job_user_name+'）发布，请登录该账号操作';
+            }else{
+                msg ="该职位由分配模式账号（"+job_user_name+"）发布，请登录该子账号操作";
+            }
+
+            if(msg){
+                confirmBox1.timeBomb(msg, {
+                    name: 'fail',
+                    timeout: 2000,
+                    width:  msg*18 + 20,
+                    zIndex: 999999
+                });
+                return false;
+            }
+
+        }
+        $.showModal('{/get_url rule="/spreadjob/modbid/" data="source=job&type=budget&company_id='+company_id+'&job_id='+job_id+'"/}',{title:'预算修改'});
+    }
+
+    function modEndtime(obj){
+        var company_id = $(obj).attr('data-companyid');
+        var job_id = $(obj).attr('data-jobid');
+        var spread_id = $(obj).attr('data-spreadID');
+        var cando = $(obj).closest('tr').attr("data-cando");
+        var jobresource = $(obj).closest('tr').attr("data-jobresource");
+        var job_user_name = $(obj).closest('tr').attr("data-username");
+        var msg = '';
+        if(cando == 2){
+            if(resource_type == 2){
+                msg = '该职位由账号（'+job_user_name+'）发布，请登录该账号操作';
+            }else{
+                msg ="该职位由分配模式账号（"+job_user_name+"）发布，请登录该子账号操作";
+            }
+
+            if(msg){
+                confirmBox1.timeBomb(msg, {
+                    name: 'fail',
+                    timeout: 2000,
+                    width:  msg*18 + 20,
+                    zIndex: 999999
+                });
+                return false;
+            }
+
+        }
+        $.showModal('{/get_url rule="/spreadjob/ModEndTime/" data="source=job&company_id='+company_id+'&job_id='+job_id+'&spread_id='+spread_id+'"/}',{title:'推广截止时间'});
+    }
+
+    function modShowTop(){
+        $.showModal('{/get_url rule="/spreadjob/ModShowTopImage/"/}',{title:'推广示例',width:890,height:452});
+    }
+
+    function is_login(){
+        $.ajax({
+            url: '{/get_url rule="/spreadjob/SetSpreadStatus"/}',
+            data: {'spread_id':spread_id,'status':status},
+            type: 'get',
+            dataType: 'json',
+            success: function(json) {
+                if (json && json.error){
+                    confirmBox.timeBomb(json.error, {"name":"fail",width:'auto'});
+                    return;
+                }else{
+                    confirmBox.timeBomb(json.msg, {"name":"success",width:'auto'});
+                }
+                setTimeout("window.location.reload()",'2000');
+
+            }
+        });
+    }
+
+</script>
+</body>
+</html>

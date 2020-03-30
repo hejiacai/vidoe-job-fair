@@ -1,0 +1,3072 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>聊一聊</title>
+	{/$up_img_html.hand_html/}
+    <link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='chat.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='m_font_style.css'/}">
+    <link rel="stylesheet" type="text/css" href="{/version file='comback.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='icons.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='account.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='video_eng.css'/}" />
+    <!--<link rel="stylesheet" type="text/css" href="{/version file='alirtc.css'/}" />-->
+    <script type="text/javascript" src="{/version file='WdatePicker.js'/}"></script>
+    <script type="text/javascript" src="{/version file='version.js'/}"></script>
+   <!-- <script type="text/javascript" language="javascript"  src='{/version file="aliyun-webrtc-sdk-1.9.0.min.js"/}'></script>-->
+    <script type="text/javascript" language="javascript"  src='{/version file="aliyun-webrtc-sdk-1.10.1.min.js"/}'></script>
+    <script type="text/javascript" language="javascript"  src='{/version file="chatvideo.js"/}'></script>
+    <script type="text/javascript">
+        window.CONFIG = {
+            HOST: '{/$siteurl.style/}',
+            COMBOPATH: '/js/v2/'
+        }
+    </script>
+    <script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+
+
+	<script type="text/javascript" src="{/version file='global.js'/}"></script>
+	<style type="text/css">
+		.chat_resume_report_box .weChatList li{list-style: none;}
+	</style>
+</head>
+<body style="background: #eff0f5 !important;">
+{/include file="new_header.html" no_video_notice=1  par="全职招聘"/}
+<div class="chat-main">
+	<ul class="guide search_chat_status" data-status="{/$person_chat_status/}">
+		<li class="all {/if '-1'==$person_chat_status/}liActive{//if/}  chatSearchStatus " data-status="-1">全部</li>
+		<li class="startchat righttraggle {/if '1'==$person_chat_status/}liActive{//if/}    chatSearchStatus chatSearchStatus_1 " data-status="1">打招呼<div class="border-right-empty traggle1 "><span></span></div></li>
+		<li class="chatting righttraggle nextbg  {/if '2'==$person_chat_status/}liActive{//if/}  chatSearchStatus chatSearchStatus_2 " data-status="2"><div class="border-right-empty traggle1"><span></span></div>沟通中</li>
+		<li class="inivteInterview righttraggle nextbg {/if '3'==$person_chat_status/}liActive{//if/}    chatSearchStatus chatSearchStatus_3 " data-status="3"><div class="border-right-empty traggle1"><span></span></div>已发面试邀请</li>
+		<li class="InterviewSuccess righttraggle nextbg {/if '4'==$person_chat_status/}liActive{//if/}  chatSearchStatus chatSearchStatus_4 " data-status="4"><div class="border-right-empty traggle1"><span></span></div>面试通过</li>
+		<li class="sendOffer righttraggle nextbg pd0 {/if '5'==$person_chat_status/}liActive{//if/}  chatSearchStatus chatSearchStatus_5 " data-status="5">已发offer</li>
+		<li class="all chatSearchStatus {/if '6'==$person_chat_status/}liActive{//if/}  chatSearchStatus_6 dislikeStatus" data-status="6">不合适</li>
+		<li class="rightStartChat" id="showChatWordBox"><i class="icon-enterprise_chat_set setIcon"></i>打招呼</li>
+	</ul>
+
+	<div class="chatContainer">
+		<div class="chat-left">
+		    <div class="chat-search">
+				<!-- <a href="javascript:void(0)" onclick="hideHistory()"><返回</a> -->
+				<a href="javascript:void(0)" id="backFriendList"><返回</a>
+		        <div class="searchInputBox">
+		            <input type="text" placeholder="搜索一个月内聊过的求职者" id="j_search_input" onclick="showHistory()" style="color: #444444;" />
+		            <i class="icon-svg45" id="j_search_btn"></i>
+		        </div>
+		    </div>
+			<div class="chat-search-friend">
+				<i class="icon-115" id="showHistoryBtn"></i>
+				<div class="selectBox">
+					<i class="icon-svg122 selectTogglePos"></i>
+					<div class="showSelect">全部职务</div>
+					<div class="dialogBox-con selectBox-con" style="display: none;">
+						<ul id="select_name_job" class="search_job_sort" data-job-id="">
+							<li data-job-id="">全部职务</li>
+						</ul>
+					</div>
+				</div>
+				<div class="checkBox search_is_read"  data-status="0">
+					<i class="checkOnclick"></i>
+					<em>未读</em>
+				</div>
+
+			</div>
+			<div class="newFriendList" style="height: 668px;">
+				 <ul class="chat-left-list" id="myFrendList">
+					<!-- <li>
+					    <a href="javascript:void(0);" class="frendPart frendCard_p20664548" data-sessionid="p20664548" data-jobid="15152953">
+					        <img class="head-img" src="//imgs.huibo.com/photo/2019-06-28/0628479395_middle.jpg">
+					        <p>
+					            <span class="chat-list-tit01">
+					                <span class="frendUserName">测试</span>
+					                <i class="chat-list-icon01 jobstatus" style="display: inline-block;color: #000000;"></i>
+					            </span>
+					            <span class="chat-list-tit02 msgPro">
+					                <em class="readStatus" style="color: #16d9ad/*绿色已读*/;color: #fe4647/*红色未读*/;">【已读】</em>
+					                <span class="msgContent">您好，非常期待能够得到面试非常期待能够得到面试...</span>
+					            </span>
+					        </p>
+					        <span class="chat-list-time msgTime" >09:27</span>
+					        <span class="chat-list-msg notReadMsgCount msgPro" style="display:block;">5</span>
+					    </a>
+					</li> -->
+				</ul>
+				<div class="chat-more">
+				    <a href="javascript:void(0)" onclick="showHistory()">历史联系人</a>
+				</div>
+			</div>
+				 <ul class="chat-left-list" id="myHistoryList" style="display: block;"></ul>
+		        <!-- 里面的html结构和上面这个列表的一样 -->
+		        <!--<li>
+		            <a href="javascript:void(0);" class="frendPart frendCard_p20664548" data-sessionid="p20664548" data-jobid="15152953">
+		                <img class="head-img" src="//imgs.huibo.com/photo/2019-06-28/0628479395_middle.jpg">
+		                <p>
+		                    <span class="chat-list-tit01">
+		                        <span class="frendUserName">测试</span>
+		                        <span><em></em></span>
+		                        <span class="frendStation">暂无职位</span>
+		                        <i class="chat-list-icon01 jobstatus" style="display: none;"></i>
+		                    </span>
+		                    <span class="chat-list-tit02 msgPro">
+		                        <em class="readStatus"></em>
+		                        <span class="msgContent">3333</span>
+		                    </span>
+		                </p>
+		                <span class="chat-list-time msgTime">09:27</span>
+		                <span class="chat-list-msg notReadMsgCount msgPro" style="display:none"></span>
+		            </a>
+		        </li>-->
+		    <!-- </ul> -->
+
+		</div>
+		<div class="chatVideo" style="display:none">
+			<div class="chatVideoTop">
+				<div class='local-video' style="display:none;position: absolute;top: 35px; right: 0; height: 130px;width: 130px;">
+				</div>
+				<!-- 等待对方接受邀请 -->
+				<!-- 视频面试结束 -->
+			</div>
+			<div class="chatVideoBottom">
+				<textarea name="chatVideoSaveRemarkTxt"  placeholder="可填写面试备注,保存后在简历详情中查看"></textarea>
+				<span class="chatVideoSaveBtn chatVideoSaveRemark">保存</span>
+			</div>
+		</div>
+		<div class="chat-right">
+			<div class="chatRightList">
+			</div>
+			<div class="windowResumeshow">
+				<iframe class="gotoResumeshow" width="870" height="653" src="/resume/resumeshow?resumeid=0&1321313131321" frameborder="0" marginwidth="0" marginheight="0"></iframe>
+			</div>
+			<div class="chatPutx">
+			    <ul class="chatPutFac">
+					<li class="chatPhiz"><i class="icon-enterprise_chat_expression"></i><span class="videoShowTip" style="width: 40px;">表情</span></li><!--表情-->
+					<li class="chatReply md_nomol_replay"><i class="icon-enterprise_chat_language"></i><p class="videoShowTip" style="width: 50px;">常用语</p>
+					
+					</li><!--常用语-->
+					<!--<li class="chatChangeTel" style="position: relative;"><i class="icon-enterprise_chat_phone"></i>
+					<div class="changeTelBox">
+						&lt;!&ndash;已获取联系方式&ndash;&gt;
+						<div class="changeTelBox_title">联系方式 <i class="close_changeTelBox">×</i></div>
+						<p class="changeTelBox_telNum">电话&nbsp;:&nbsp;135132135135131</p>
+						&lt;!&ndash;未获取联系方式&ndash;&gt;
+						&lt;!&ndash; <p>确认是否与对方交换电话？</p>
+						<div class="changeTelBox-btn-ul"><a href="javascript:void(0); class='getTelCancel'">取消</a>
+							<a href="javascript:void(0); class='getTelSure'">确认</a>
+						</div> &ndash;&gt;
+
+					</div>
+					<p class="videoShowTip">手机号</p>
+					</li>--><!--交换电话-->
+					 <li class="chatArea md_addres"><i class="icon-enterprise_chat_adress"></i><p class="videoShowTip workTip">公司/工作地址</p></li><!--发送地址-->
+					 <li class="chatLog" id="j_msg_history" onclick="showHistoryR()"><i class="icon-enterprise_chat_clock"></i><p class="videoShowTip"  style="width: 60px;">历史记录</p></li><!--聊天记录-->
+					 <li class="chatOnceVideo" data-resume-id=""  data-session-id="">
+						<i class="icon-enterprise_chat_vdio"></i>
+						<p class="videoShowTip" style="width: 60px;">视频通话</p>
+						<i class="newIcon"></i>
+					 </li><!--视频面试-->
+					 <div class="rightIcon  personRemarkDo">
+						 <div class="rightIcon-li rightjoberStatus" style="display: none"><i class="icon-enterprise_chat_entry"></i><em></em>
+						 </div>
+						 <div class="rightIcon-li dislikeWord" style="display: none"><i class="icon-enterprise_chat_inappropriate"></i><em></em></div><!--交换电话-->
+					 </div>
+		            <!-- <span class="chatPhiz"></span>
+		            <span class="chatReply md_nomol_replay">常用回复</span>
+			        <span class="chatArea md_addres">发送地址</span>
+			        <span class="chatCard" style="display: none;">发送职位</span> --><!-- 聊天卡片，样式写好了，暂时不用上 -->
+			        <!-- <span class="chatOnceVideo"  data-resume-id="" style="display: none;">视频面试</span>
+			        <span class="chatLog" id="j_msg_history" onclick="showHistoryR()">聊天记录</span> -->
+			    </ul>
+			    <div class="chatTextareax">
+			        <textarea name="chatTextarea" class="chatTextarea" id="chatTextarea"></textarea>
+			    </div>
+			    <div class="chatBmsubmint">
+			        <span>按下Ctrl+Enter发送</span>
+			        <button class="chartSend">发送</button>
+			    </div>
+			</div>
+			<div class="tipBox"><span class="j_have_chat_notice"></span><a class="ignoreTip">忽略</a></div>
+
+			<div class="tipBoxBlackName"><span class="j_have_chat_notice_blackName">该求职者已被你加入黑名单，将不能接受对方信息。</span><a class="openBlackName">点击解禁</a></div>
+
+			<div class="chatHistoryBox">
+			    <div class="historyTitle">
+			        <div class="historyTitleLeft">
+			            消息记录
+			            <div class="historyClose" onclick="hideHistoryR()">×</div>
+			        </div>
+			        <div class="historyTitleRight">
+			            (聊天记录仅保存一个月)
+			        </div>
+			    </div>
+			    <div class="historyList" id="j_history_list">
+					
+			    </div>
+			    <div class="chatHistoryBottom">
+			        <input type="text" class="historyKey" >
+			        <i class="icon-svg45" onclick="getChatHistory('', '')"></i>
+			        <input type="text" class="historyTimeIpt"  readonly="readonly" onclick=' WdatePicker({minDate:"%y-#{%M-1}-#{%d}",maxDate:"%y-%M-#{%d}",onpicked:function(){
+					curDate=new Date(this.value);
+					var msg_date = $(".historyTimeIpt").val();
+					getChatHistory(msg_date);}})' data-days="" value="{/date('Y-m-d', time())/}">
+					
+			        <!-- <input type="text" class="historyTime" readonly="readonly" onclick="WdatePicker({opposite:true,disabledDates:['5$'],specialDates:['2019-9-01','2019-08-15']})" data-days="2019-9-01,2019-08-15" value="2019-09-10"> -->
+			        <div class="historyPages">
+			            <a href="javascript:void(0);" class="historyPageBtn historyPageBtnL j_page_last" data-page=""><i class="icon-chat_left_start"></i></a>
+			            <a href="javascript:void(0);" class="historyPageBtn historyPageBtnL mr30 j_page_pre" data-page="1"><i class="icon-chat_left"></i></a>
+			            <a href="javascript:void(0);" class="historyPageBtn historyPageBtnR j_page_after" data-page="2"><i class="icon-chat_right"></i></a>
+			            <a href="javascript:void(0);" class="historyPageBtn historyPageBtnR " data-page="1"><i class="icon-chat_right_end"></i></a>
+			            <!--<a href="javascript:void(0);" class="historyPageBtn historyPageBtnL" data-page="firstday"><i class="icon-chat_left_start"></i></a>
+			            <a href="javascript:void(0);" class="historyPageBtn historyPageBtnL mr30" data-page="preday"><i class="icon-chat_left"></i></a>
+			            <a href="javascript:void(0);" class="historyPageBtn historyPageBtnR" data-page="afterday"><i class="icon-chat_right"></i></a>
+			            <a href="javascript:void(0);" class="historyPageBtn historyPageBtnR" data-page="today"><i class="icon-chat_right_end"></i></a>-->
+			        </div>
+			    </div>
+			</div>
+		</div>
+
+	</div>
+
+</div>
+
+
+<!--企业二维码-->
+<div class="chat_code">
+    <img src="{/$siteurl.style/}/img/company/chat/chat_code_new03.jpg"/>
+</div>
+<div class="notChart" style="display:none">
+    <img src="{/$siteurl.style/}/img/company/chat/chat_icon13.jpg"/>
+    <span>还没有聊天记录哦~<br />
+        主动寻找求职者进行沟通吧！</span>
+    <a href="{/$siteurl.company/}/apply/">前往沟通</a>
+</div>
+<div id="showLoginOut" style="display:none">
+    <div class="m_master"></div>
+    <div class="chatPopx">
+        <img src="{/$siteurl.style/}/img/company/chat/chat_icon19.png" />
+        <span>你已在其他窗口/浏览器打开聊一聊，当前页面聊天已下线，刷新后可继续在此页面聊天。</span>
+        <a href="javascript:;" onclick="window.location.reload();">点此刷新</a>
+    </div>
+</div>
+<div id="noCanChat" style="display:none">
+    <div class="m_master"></div>
+    <div class="chatPopx">
+        <img src="{/$siteurl.style/}/img/company/chat/chat_icon19.png" />
+        <span style="text-align: center">当前不支持聊天</span>
+        <a href="javascript:;" onclick="closePageForm();">关闭</a>
+    </div>
+</div>
+<div id="ieNotShow" style="display:none">
+    <div class="m_master"></div>
+    <div class="chatPopx">
+        <img src="{/$siteurl.style/}/img/company/chat/chat_icon19.png" />
+        <span>您当前浏览器版本过低，不支持聊一聊功能</span>
+        <a href="javascript:;" style="display:none" onclick="window.location.reload();">去升级</a>
+    </div>
+</div>
+<!--添加备注弹框-->
+<div class="dialogBox-con addNotesBox-con">
+	<div class="addNotesBox_title">标注标签,仅自己可见</div>
+	<ul class="addNotesBox_list">
+		<li>已找到工作</li>
+		<li>不感兴趣</li>
+		<li>对方考虑</li>
+		<li>待定</li>
+		<li>经验不足</li>
+		<li>不合适</li>
+	</ul>
+	<textarea class="addNotesBox_textarea"></textarea><a href="javascript:void(0);" class="adNotesBox_saveBtn">保存</a>
+</div>
+<!--请选择重新沟通职位弹框-->
+<div class="dialogBox-con changechatJObBox">
+	<div class="changechatJOb_title">请选择重新沟通职位<i class="close_changechatJOb">×</i></div>
+	<ul id="changechatJOb_list">
+		{/foreach $job_list as $key=>$val/}
+		<li data-job-id="{/$val['job_id']/}">{/$val['station']/}</li>
+		{//foreach/}
+	</ul>
+</div>
+<!--常用语-->
+<div class="deilyChatWordBox"></div>
+<!--不合适-->
+<div class="dislikeWordBox"></div>
+<!--发送地址-->
+<div class="sendMapAddressBox">
+	
+</div>
+
+<!--<div>
+	<button id="chatVideoStart">开始视频</button>
+</div>-->
+
+<!--引入聊一聊主要JS_API-->
+<script type="text/javascript" language="javascript" src='{/$siteurl.style/}/js/chat/json2.js'></script>
+
+<script type="text/javascript" language="javascript" src='{/$siteurl.style/}/js/chat/nim/NIM_Web_SDK_v6.10.0.js'></script>
+<script type="text/javascript" language="javascript" src='{/$siteurl.style/}/js/chat/nim/NIM_Web_NIM_v6.10.0.js'></script>
+<script type="text/javascript" src="{/version file='nimwebim.js'/}"></script>
+<script type="text/javascript" language="javascript" src='{/$siteurl.style/}/js/chat/qqface.js'></script>
+<!--用于获取文件MD5，上传图片需要先获取文件的 MD5-->
+<script type="text/javascript" src='{/version file="spark-md5.js"/}'></script>
+<script>
+    function closePageForm(){
+        window.opener=null;
+        window.open('','_self');
+        window.close();
+    }
+    var newSession = [];//新的会话
+    {/if $has_init_info/}
+    var _session = {/$init_info/};
+    myWebim.selectedSessionId = _session.SessionId;
+    newSession.push(_session);
+    {//if/}
+</script>
+<!--聊一聊-->
+<script>
+    //聊一聊
+    //第一步 登录
+    //SDK 登录 企业信息
+    var loginInfo = {
+        'sdkAppID': "{/$swy_info['appkey']/}", //用户所属应用id,必填
+        'accountType':"{/$swy_info['account_type']/}",
+        'identifier': "{/$swy_info['accid']/}", //当前用户ID,必须是否字符串类型，必填
+        'identifierNick': "{/$swy_info['nick_name']/}", //当前用户昵称，不用填写，登录接口会返回用户的昵称，如果没有设置，则返回用户的id
+        'headurl': "{/$swy_info['photo']/}" //当前用户默认头像，选填，如果设置过头像，则可以通过拉取个人资料接口来得到头像信息
+    };
+    // console.log("{/$swy_info['token']/}",loginInfo);
+
+    var mywebinfo = {
+        selectResumeId        : '{/$resume_id/}',//qq图标
+        facePath        : '{/$siteurl.style/}/img/company/chat/face3/',//qq图标
+        defaultImgUrl   : '{/$siteurl.style/}/img/company/chat/chat_icon08.png',//默认头像
+        showResumeUrl   : "{/$siteurl.company/}/resume/resumeshow",
+        getResumeUrl    : '{/$siteurl.company/}/chat/GetResumeAndJobData', //获取简历信息 参数 job_ids  resume_ids
+        sendMsgUrl      : '{/$mobile_url/}/chat/getSendMsgJob',
+        showResumeType  :"0",
+		siteUrlStyle  :"{/$siteurl.style/}",
+    };
+    //初始化的企业基本信息
+    myWebim.init(loginInfo,mywebinfo,newSession);
+    function onConnect() {
+        //console.log('nim 连接成功');
+        myWebim.setCookie("chatLoginStatus","true");
+    }
+
+    function onWillReconnect(obj) {
+        // 此时说明 SDK 已经断开连接, 请开发者在界面上提示用户连接已断开, 而且正在重新建立连接
+        window.location.reload();
+        /* console.log(obj.retryCount);
+         console.log(obj.duration);*/
+    }
+    function onDisconnect(error) {
+        myWebim.onLineStatus = "off";
+        if (error) {
+            console.log('error',error);
+            switch (error.code) {
+                // 账号或者密码错误, 请跳转到登录页面并提示错误
+                case 302:
+                    $("#showLoginOut").find('span').text('你已在其他窗口/浏览器打开聊一聊，当前页面聊天已下线，刷新后可继续在此页面聊天。');
+                    $("#noCanChat").show();
+                    break;
+                // 重复登录, 已经在其它端登录了, 请跳转到登录页面并提示错误
+                case 417:
+                    $("#showLoginOut").show();
+                    break;
+                // 被踢, 请提示错误后跳转到登录页面
+                case 'kicked':
+                    $("#showLoginOut").find('span').text('你已在其他窗口/浏览器打开聊一聊，当前页面聊天已下线，刷新后可继续在此页面聊天。');
+                    $("#showLoginOut").show();
+                    break;
+                default:
+                    $("#showLoginOut").find('span').text('当前页面聊天已下线，刷新后可继续在此页面聊天。');
+                    $("#showLoginOut").show();
+                    break;
+            }
+        }else{
+            $("#showLoginOut").find('span').text('当前页面聊天已下线，刷新后可继续在此页面聊天。');
+            $("#showLoginOut").show();
+        }
+    }
+
+    function onError(error) {
+        console.log(error);
+    }
+
+    //数据同步完成  拉取会话 初始化UI
+    function onSyncDone() {
+        myWebim.initSessionsUI();
+    }
+
+    // 引入SDK类的引用以后，获取SDK对象实例
+    var nim = SDK.NIM.getInstance({
+        //debug: true,
+        appKey: "{/$swy_info['appkey']/}",
+        account: "{/$swy_info['accid']/}",
+        token: "{/$swy_info['token']/}",
+        db:true,
+        needReconnect:false,
+        syncSessionUnread :true,
+        syncMsgReceipts:true,
+        // privateConf: {}, // 私有化部署方案所需的配置
+        // 收到消息事件触发
+        onmsg: function (msg) {
+           // console.log('onmsg',msg);
+            if(msg.scene==myWebim.nimType){
+				if(msg.from.indexOf("pb") == -1){
+                   myWebim.getNewMsg(msg);
+				}
+            }
+        },
+        onconnect: onConnect,              //连接成功
+        onwillreconnect: onWillReconnect,
+        ondisconnect: onDisconnect,       //失去连接
+        onerror: onError,                 //连接出错了
+        onsessions: onSessions,           //初始化的会话
+        onupdatesession: onUpdateSession, //会话更新
+        onsyncdone: onSyncDone,   //数据同步完成
+        //忽略某条通知类消息
+        shouldIgnoreNotification:function () {
+            return true;
+        },
+        onblacklist: onBlacklist,  //黑名单列表
+        onsyncmarkinblacklist: onMarkInBlacklist
+    });
+    //初始化黑名单
+    function onBlacklist(blacklist) {
+        for(var i=0;i<blacklist.length;i++){
+            myWebim.onNimBlacklist[blacklist[i].account] = true;
+        }
+      //  console.log('onBlacklist',myWebim.onNimBlacklist);
+    }
+
+    //黑名单监控
+    function onMarkInBlacklist(obj) {
+    	if(obj.isAdd){
+			$('.msgCard_'+obj.account).find('.chatAddToBlacklist').addClass('isBlack');
+			myWebim.onNimBlacklist[obj.account] = true;
+			if(obj.account==myWebim.sess_id){
+				$('.tipBoxBlackName').show();
+				$('.chat-right').addClass('tipShow');
+			}
+		}else {
+			$('.msgCard_'+obj.account).find('.chatAddToBlacklist').removeClass('isBlack');
+			myWebim.onNimBlacklist[obj.account] = false;
+			if(obj.account==myWebim.sess_id){
+				$('.tipBoxBlackName').hide();
+				if($('.tipBox').css('display')=='none'){
+					$('.chat-right').removeClass('tipShow')
+				}
+				// $('.chat-right').removeClass('tipShow');
+			}
+		}
+    }
+    //初始化的基本信息
+    myWebim.initNim(nim);
+
+    //初始化的会话列表
+    function onSessions(sessions) {
+        //兼容ie
+		var new_sessions = new Array();
+		for (var i = 0; i < sessions.length; i++) {
+			var temp_session_id = sessions[i].id;
+			if (temp_session_id.indexOf("pb") == -1) {
+				new_sessions.push(sessions[i]);
+			}
+		}
+		//console.log('new_sessions', new_sessions);
+		objSessions = myWebim.sessionMergeDataNew(new_sessions);
+		myWebim.newSession = nim.mergeSessions(objSessions, myWebim.newSession);
+		//console.log('onSessions', myWebim.newSession);
+    }
+
+    //收到消息，发送消息触发 和用户的会话
+    function onUpdateSession(session) {
+        if(session.scene==myWebim.nimType){
+            if(session.id.indexOf("pb") == -1){
+				if (myWebim.sessionMap[session.id]) {
+					myWebim.newSession = nim.mergeSessions(myWebim.newSession, session);
+				} else {
+					//myWebim.sessionMap[session.id] = true;
+					objSessions = myWebim.sessionMergeDataNew([session]);
+					myWebim.newSession = nim.mergeSessions(myWebim.newSession, objSessions);
+				}
+				myWebim.setReadOnUpSession(session);
+            }
+        }
+    }
+
+    //同步数据成功后的获取会话数及信息 初始化UI
+    function getLocalSessionsDone(error, obj) {
+        if (!error) {
+            var objSessions = obj.sessions;
+          //  console.log('初始化会话数据',objSessions,myWebim.newSession);
+           //ie浏览器不支持
+            objSessions = myWebim.sessionMergeDataNew(objSessions);
+            myWebim.newSession = nim.mergeSessions(objSessions, myWebim.newSession);
+            myWebim.initSessionsUI();
+        }
+    }
+
+    //初始化表情
+    $('.chatPhiz').qqFace({
+        id : 'facebox', //表情盒子的ID
+        assign:'chatTextarea', //给那个控件赋值
+        path:'{/$siteurl.style/}/img/company/chat/face3/'	//表情存放的路径
+    });
+	$('body').on('click','.chatPhiz',function(e){
+		if($('#facebox').css('display')=='none'){
+			eventController($('#facebox'));
+		}else{
+			eventController($('#facebox'),2);
+		}
+		
+	})
+	$('.chatPhiz')
+    //查看结果
+    function replace_em(str){
+        str = str.replace(/\</g,'&lt;');
+        str = str.replace(/\>/g,'&gt;');
+        str = str.replace(/\n/g,'<br/>');
+        str = str.replace(/\[em_([0-9]*)\]/g,'<img src="face/$1.gif" border="0" />');
+        return str;
+    }
+</script>
+<!--其他-->
+<script type="text/javascript">
+    var VideoaAnchorMsg;
+    var VideoConfirmBox;
+    var payTip_Dialog;
+    var anchorMsg;
+	var promptInterview=null;
+	var net_apply_id = {/$net_apply_id/};
+	var sid          = {/$sid/};
+    hbjs.use('@validator, @fileUploader, @confirmBox, @hbCommon, @jobDialog', function(m){
+        var validator = m['widge.validator.form'];
+        var fileUploader = m['widge.fileUploader'];
+        var ConfirmBox = m['widge.overlay.confirmBox'];
+
+        var Dialog = m['widge.overlay.hbDialog'];
+        var $ = m['product.hbCommon'].extend(m['cqjob.jobDialog']);
+        var cookie = m['tools.cookie'];
+        VideoaAnchorMsg = $.anchorMsg;
+        VideoConfirmBox = ConfirmBox;
+        var temp_list       = {/$template_list/}; //常用语列表
+        var address_list    = {/$address_list/};   //地址列表
+        var hello_list    = {/json_encode($hello_list)/};
+        var fix_list    = {/json_encode($set_fix_list)/};
+
+
+
+        var pWidth = 80,
+            fontWidth = 18;
+        function showModel(icon, msg) {
+            ConfirmBox.timeBomb(msg, {
+                name: icon,
+                width: pWidth + msg.length * fontWidth
+            });
+        }
+        var hello_default = "{/$hello_default/}";
+		var update_hello_default = function(id,content){
+				for(var i in hello_list){
+					var _id = hello_list[i].template_id;
+					if( _id == id){
+						hello_list[i]["content"] = content;
+						break;
+					}
+				}
+
+		}
+		var update_hello_default_set = function(id){
+
+			for(var i in hello_list){
+				var _id = hello_list[i].template_id;
+				if( _id == id){
+					hello_list[i]["is_default"] = '1';
+				}else{
+					hello_list[i]["is_default"] = '0';
+			     }
+			}
+          // console.log('hello_list',hello_list);
+		}
+		//打招呼的设置
+		$("#showChatWordBox").on('click',function(){
+
+		    var chatWordHtml = '<div class="setChatWord"><div class="autoChat"><span>自动打招呼</span>';
+			if(1==hello_default){
+                chatWordHtml += '<i class="icon-button-on"></i>';
+			}else{
+                chatWordHtml += '<i class="icon-button-off"></i>';
+			}
+
+                chatWordHtml += '</div><ul class="setChatWordList">';
+			for(var i=0;i<hello_list.length;i++){
+				if('1'==hello_list[i]['is_default']){
+					chatWordHtml +='<li class="cut" data-template-id="'+hello_list[i]['template_id']+'">';
+				}else {
+					chatWordHtml +='<li data-template-id="'+hello_list[i]['template_id']+'">';
+				}
+				chatWordHtml +=		'<span class="defaultChatWord" data-attr="'+hello_list[i]["content"]+'">'+hello_list[i]["content"]+'</span>'+
+						'<i></i>设置为默认'+
+						'<a href="javascript:void(0);" class="changeChatWord">编辑</a>'+
+						'</li>';
+			}
+			chatWordHtml +=	'</ul></div>';
+
+		    var chatWordDialog = new Dialog({
+		        idName: 'chatWord_dialog',
+		        title: '打招呼设置',
+		        content: chatWordHtml,
+		        close: '╳',
+		        width: 630,
+				isAjax: false
+		    });
+			chatWordDialog.show();
+
+			//设置打招呼默认模板
+			$("body").on('click','.setChatWordList i',function(){
+				var _thisParent = $(this).parent();
+				var templateId = _thisParent.attr('data-template-id');
+				_thisParent.parent().find('.cut').removeClass('cut');
+				_thisParent.addClass('cut');
+				//console.log('setChatWordListi',templateId);
+				$.ajax({
+					url:"{/get_url rule='/chat/SeTHelloDefaultTemplate'/}",
+					type:"post",
+					dataType: "json",
+					data: {id:templateId},
+					success:function(json){
+						if(json.code==200){
+							update_hello_default_set(templateId);
+						}
+						else{
+							$.anchorMsg(json.msg, {icon: 'warning'});
+						}
+					}
+				});
+		   });
+              //设置打招呼开启状态设置
+			$("body").on('click','.autoChat i',function(){
+				if($(this).hasClass('icon-button-off')){
+                    var is_effect = 1;
+				}else{
+                    var is_effect = 0;
+				}
+				var _this = $(this);
+                $.ajax({
+                    url:"{/get_url rule='/chat/SetHello'/}",
+                    type:"post",
+                    dataType: "json",
+                    data: {is_effect:is_effect},
+                    success:function(json){
+                        if(json.code==200){
+                            if(_this.hasClass('icon-button-off')){
+                                _this.removeClass('icon-button-off').addClass('icon-button-on');
+                                hello_default = 1;
+                            }else{
+                                _this.removeClass('icon-button-on').addClass('icon-button-off');
+                                hello_default = 0;
+                            }
+                        }
+                    }
+                });
+			});
+             //设置打招呼 修改内容
+			$("body").on('click','.changeChatWord',function(){
+			var changeChatWordspan = '';
+				changeChatWordspan = $(this).siblings('.defaultChatWord');
+				var templateId =  $(this).parent().attr('data-template-id');
+				var changeWordHtml = '<div class="changeWord">'+
+				'<textarea defaultValue="'+changeChatWordspan.attr("data-attr")+'" value="'+changeChatWordspan.attr("data-attr")+'">'+changeChatWordspan.attr("data-attr")+'</textarea>'+
+				'<div class="only60word">限60字</div>'+
+				'<a href="javascript:void(0);" class="changeCancel">取消</a>'+
+				'<a href="javascript:void(0);" class="changeSure">确定</a>'+
+				'</div>'
+				var changeWordDialog = new Dialog({
+				    idName: 'changeWor_dialog',
+				    title: '编辑文本',
+				    content: changeWordHtml,
+				    close: '╳',
+				    width: 630,
+					isAjax:false
+				});
+				changeWordDialog.show();
+				$("body").on('click','.changeSure',function(){
+					var textareahtml = $(this).siblings('textarea').val();
+					$.ajax({
+						url:"{/get_url rule='/chat/SeTHelloUpdateTemplate'/}",
+						type:"post",
+						dataType: "json",
+						data: {id:templateId,content:textareahtml},
+						success:function(json){
+							if(json.code==200){
+								changeChatWordspan.attr('data-attr',textareahtml);
+								changeChatWordspan.html(textareahtml);
+								changeWordDialog.hide();
+								update_hello_default(templateId,textareahtml)
+							}
+							else{
+								$.anchorMsg(json.msg, {icon: 'warning'});
+							}
+
+						}
+					});
+				})
+				$("body").on('click','.changeCancel',function(){
+					changeWordDialog.hide();
+				})
+			})
+		});
+		$('body').on("mouseover mouseout", function (event){
+			var eventDom = $(event.target);
+			var textH = eventDom.text();
+			if(event.type == "mouseover"){
+				if(eventDom.is('span') && eventDom.hasClass('showNotesItem')){
+					if(textH.length > 6){
+						$('.showSpanAllCon').css('left',eventDom[0].offsetLeft);
+						$('.showSpanAllCon').html(eventDom.text());
+						$('.showSpanAllCon').show();
+					};
+				}
+				if(eventDom.is('a') && eventDom.hasClass('gotoJobDetail')){
+				 if(textH.length > 6){
+				 	$('.showchatJObAllCon').html(textH)
+				 	$('.showchatJObAllCon').show();
+				 }
+				}
+			} else if(event.type == "mouseout"){
+				if(eventDom.is('span') && eventDom.hasClass('showNotesItem')){
+					eventDom='';
+					textH='';
+					$('.showSpanAllCon').hide();
+				}else if(eventDom.is('a') && eventDom.hasClass('gotoJobDetail')){
+					eventDom='';
+					textH='';
+					$('.showchatJObAllCon').hide();
+				}else{
+					return
+				}
+			}
+        })
+		//不合适点击事件判断处理
+		$(document).on('click',".dislikeWord",function(e){
+			e.stopPropagation();
+			if($(this).find('em').text()!='不合适'){
+			    //取消不合适
+				var sessionId = myWebim.sess_id;
+				var nowNewSession = myWebim.getNowNewSession(sessionId);
+				$.ajax({
+					url: "{/$siteurl.company/}/chat/SetPersonFix",
+					type: "post",
+					dataType: "json",
+					data: {session_id: sessionId, ResumeId:nowNewSession.resume_id,job_id:nowNewSession.SessionJobId,status:1},
+					success: function (json) {
+						if(json.code==200){
+							//发送text
+							$('.personRemarkDo').find('.dislikeWord').find('em').text('不合适');
+							var freandPart = myWebim.getFrendPart(sessionId);
+							var status = freandPart.attr('data-chatstatus',json.data.chat_status);
+							myWebim.personRemarkDo(nowNewSession);
+							myWebim.searchChange();
+
+						}else{
+							$.anchorMsg(json.msg, {icon: 'warning'});
+						}
+					}
+				});
+				return false;
+			}
+			if($('.dislikeWordBox').css('display')=='none'){
+				$('.dislikeWordBox').css('left', e.pageX - $('.dislikeWordBox').width()+100);
+				$('.dislikeWordBox').css('top', e.pageY - $('.dislikeWordBox').height() - $(this).height());
+				var _content_html = '';
+				for(var i in fix_list){
+					_content_html = _content_html + '<li><span class="send_'+fix_list[i].id+'">'+fix_list[i].content+'</span></li>';
+				}
+				$('.replyList').empty().append(_content_html);
+
+				$('.dislikeWordBox').empty().append(getDislikeSendHtml());
+				// $('.dislikeWordBox').show();
+				eventController($('.dislikeWordBox'));
+				$(document).one('click',function(){
+					eventController($('.dislikeWordBox'),2);
+				});
+				$(document).on('click','.dislikeWordBox',function(e){
+					e.stopPropagation();
+				});
+			}
+			else{
+				// $('.dislikeWordBox').hide()
+				eventController($('.dislikeWordBox'),2);
+			}
+		});
+		//不合适的发送
+		$('body').on('click','.sendNotTemplate',function (e) {
+			var text = $(this).text();
+			var template_id = $(this).parent().find('a').attr('data-id');
+			var sessionId = myWebim.sess_id;
+			var nowNewSession = myWebim.getNowNewSession(sessionId);
+			$.ajax({
+				url: "{/$siteurl.company/}/chat/SetPersonFix",
+				type: "post",
+				dataType: "json",
+				data: {session_id: sessionId, content: text,ResumeId:nowNewSession.resume_id,job_id:nowNewSession.SessionJobId,template_id:template_id,},
+				success: function (json) {
+					if(json.code==200){
+						//发送text
+						var freandPart = myWebim.getFrendPart(sessionId);
+						freandPart.attr('data-chatstatus',json.data.chat_status);
+						myWebim.personRemarkDo(nowNewSession);
+						myWebim.addOneMsg(text);
+						myWebim.searchChange();
+						eventController($('.dislikeWordBox'),2);//关闭弹框
+					}else{
+						$.anchorMsg(json.msg, {icon: 'warning'});
+					}
+				}
+			});
+		});
+		//不合适 点编辑按钮
+		$('body').on('click','.dislikeWordEdit',function(){
+			var dislikeWord = getDislikeSendHtml();
+			var templateDialog = new Dialog({
+				idName: 'dislikeWord_dialog',
+				title: '不合适设置',
+				content: dislikeWord,
+				close: '╳',
+				width: 630,
+				//isAjax: true
+			});
+			var templateObj = templateDialog.query('#MyDislikeTemplate');
+			//console.log('templateObj',templateObj.html());
+			var save_html = getSvaeHtml();    //发送框textarea
+			templateObj.append($(save_html)); //编辑编辑框
+			var editHtml = getDislikeEditHtml();
+			templateObj.append($(editHtml));
+			templateObj.find(".chatReplyPop").hide();
+			templateObj.find(".editReplyPop").show();
+			templateObj.find(".inReplyx").hide();
+			templateDialog.show();
+
+			templateObj.on("click", ".editReply", function () {
+				var id = $(this).attr("data-id");
+				var eidtObj = templateObj.find(".edit_" + id);
+				var sendObj = templateObj.find(".send_" + id);
+				var replyObj = templateObj.find(".inReplyx");
+				var text = eidtObj.text();
+				//隐藏 发送 和 编辑 html 显示修改
+				templateObj.find(".chatReplyPop").hide();
+				templateObj.find(".editReplyPop").hide();
+				templateObj.find(".inReplyx").show();
+				replyObj.show();
+				replyObj.find("textarea").val(text)
+				replyObj.find(".inSaveEdit").attr("data-id", id);
+			});
+			//保存编辑
+			templateObj.on("click", ".inReplyx .inSaveEdit", function () {
+				var _this = $(this);
+				if (_this.hasClass("isLock")) {
+					alert("保存中，请稍后...");
+					return;
+				}
+				var id = $(this).attr("data-id"); //如果有ID 则是编辑 如果没有ID 则是新增
+				var eidtObj = templateObj.find(".edit_" + id);
+				var sendObj = templateObj.find(".send_" + id);
+				// console.log('sendObj', sendObj.html(), ".send_" + id);
+				var replyObj = templateObj.find(".inReplyx");
+				var text = templateObj.find(".inReplyx textarea").val();
+				var is_add = id == "" ? true : false;
+				_this.html("保存中...");
+				_this.addClass("isLock");
+				$.ajax({
+					url: "{/$siteurl.company/}/chat/SeTFixUpdateTemplate",
+					type: "post",
+					dataType: "json",
+					data: {id: id, 'content': text},
+					success: function (json) {
+						_this.html("保存")
+						_this.removeClass("isLock");
+						if (json.error) {
+							$.anchorMsg(json.error, {icon: 'warning'});
+							return;
+						}
+						var new_id = json.id;
+						updatefix_list(new_id, text, is_add);
+						//如果是新增
+						if (is_add) {
+							var send_html = '<li><span class="sendTemplate send_' + new_id + '">' + text + '</span><a href="javascript:void(0);" data-id="' + new_id + '" class="">发送</a></li>';
+							var edit_html = '<li><span class="edit_' + new_id + '">' + text + '</span><a href="javascript:void(0);" data-id="' + new_id + '" class="closeReply">删除</a><a href="javascript:void(0);" data-id="' + new_id + '" class="editReply">编辑</a></li>';
+							//prepend
+							templateObj.find(".chatReplyPop .replyList").prepend(send_html);
+							templateObj.find(".editReplyPop .editReplyList").prepend(edit_html);
+						} else {
+							eidtObj.html(text);
+							sendObj.html(text);
+						}
+						//返回编辑页面
+						templateObj.find(".editReplyPop").show();
+						templateObj.find(".inReplyx").hide();
+						$('.dislikeWordBox').empty().append(getDislikeSendHtml());
+					}
+				});
+			});
+			//取消编辑
+			templateObj.on("click", ".inReplyx .inClose", function () {
+				templateObj.find(".chatReplyPop").hide();
+				templateObj.find(".editReplyPop").show();
+				templateObj.find(".inReplyx").hide();
+
+				 var replyObj = templateObj.find(".inReplyx");
+				 replyObj.find(".inSaveEdit").attr("data-id", ""); //将ID置空
+			});
+			//删除
+			templateObj.on("click", ".closeReply", function () { //编辑
+				var id = $(this).attr("data-id");
+				ConfirmBox.confirm("确定要删除该条不合适语吗？", "提示", function (obj) {
+					var self = this;
+					self.hide();
+					$.ajax({
+						url: "{/$siteurl.company/}/chat/SeTFixDelTemplate",
+						type: "post",
+						dataType: "json",
+						data: {id: id},
+						success: function (json) {
+							if (json.error) {
+								$.anchorMsg(json.error, {icon: 'warning'});
+								return;
+							}
+							//更新 temp_list
+							delete_fix_list(id);
+							var eidtObj = templateObj.find(".edit_" + id);
+							var sendObj = templateObj.find(".send_" + id);
+							eidtObj.parent("li").remove();
+							sendObj.parent("li").remove();
+							$.anchorMsg("删除成功");
+							$('.dislikeWordBox').empty().append(getDislikeSendHtml());
+						}
+					});
+				});
+			});
+
+			// templateObj.on("click",".replyEdit",function(){
+			//     templateObj.find(".chatReplyPop").hide();
+			//     templateObj.find(".editReplyPop").show();
+			// });
+			// templateObj.on("click", ".sendTemplate", function () {
+			// 	var text = $(this).text();
+			// 	//发送text
+			// 	myWebim.addOneMsg(text);
+			// });
+			// templateObj.on("click",".goBack",function(){
+			//     templateObj.find(".chatReplyPop").show();
+			//     templateObj.find(".editReplyPop").hide();
+			// });
+			//点单条编辑
+			templateObj.on("click", ".editReply", function () {
+				var id = $(this).attr("data-id");
+				var eidtObj = templateObj.find(".edit_" + id);
+				var sendObj = templateObj.find(".send_" + id);
+				var replyObj = templateObj.find(".inReplyx");
+				var text = eidtObj.text();
+				//隐藏 发送 和 编辑 html 显示修改
+				templateObj.find(".chatReplyPop").hide();
+				templateObj.find(".editReplyPop").hide();
+				templateObj.find(".inReplyx").show();
+				replyObj.show();
+				replyObj.find("textarea").val(text)
+				replyObj.find(".inSaveEdit").attr("data-id", id);
+			});
+
+			//新增
+			templateObj.on("click", ".addReplyBtn", function () {
+				//debugger;
+				var replyObj = templateObj.find(".inReplyx");
+				//隐藏 发送 和 编辑 html 显示修改
+				templateObj.find(".chatReplyPop").hide();
+				templateObj.find(".editReplyPop").hide();
+				templateObj.find(".inReplyx").show();
+				replyObj.show();
+				replyObj.find("textarea").val("")
+				replyObj.find(".inSaveEdit").attr("data-id", "");
+				$('.dislikeWordBox').empty().append(getDislikeSendHtml());
+			});
+		});
+			
+		$("body").on('click','.change_dislikeChatWord',function(){
+			var changeChatWordspan = '';
+				changeChatWordspan = $(this).siblings('.defaultDislikeWord');
+				var changeDislikeWordHtml = '<div class="changeWord">'+
+				'<textarea defaultValue="'+changeChatWordspan.attr("data-attr")+'" value="'+changeChatWordspan.attr("data-attr")+'">'+changeChatWordspan.attr("data-attr")+'</textarea>'+
+				'<div class="only60word">限60字</div>'+
+				'<a href="javascript:void(0);" class="changeCancel">取消</a>'+
+				'<a href="javascript:void(0);" class="changeSure">确定</a>'+
+				'</div>'
+				var changeDislikeDialog = new Dialog({
+					idName: 'changeWord_ialog',
+					title: '编辑文本',
+					content: changeDislikeWordHtml,
+					close: '╳',
+					width: 630,
+					isAjax: true
+				});
+				changeDislikeDialog.show();
+
+				$("body").on('click','.changeSure',function(){
+					var textareahtml = $(this).siblings('textarea').val();
+					console.log('changeChatWordspan',changeChatWordspan);
+					changeChatWordspan.attr('data-attr',textareahtml);
+					changeChatWordspan.html(textareahtml);
+					changeDislikeDialog.hide();
+				})
+				$("body").on('click','.changeCancel',function(){
+					changeDislikeDialog.hide();
+				})
+
+			});
+
+		var dialog = new Dialog({
+					idName: 'save-comp',
+					title: '保存到电脑',
+					close: 'x',
+					isAjax: true
+				});
+        //简历举报
+		$("body").on('click','.chat_resume_report',function(){
+			var freandPart = myWebim.getFrendPart(myWebim.sess_id);
+			var resume_id = freandPart.attr('data-resumeid');
+			var person_id =myWebim.sess_id.replace(/[a-z|\_]+/g,"");
+			$.getJSON('{/get_url rule="/report/CheckReported/"/}',{
+				resume_id:resume_id,
+				person_id:person_id,
+				v:Math.random(),
+			}, function (result) {
+				if(result.success) {
+					dialog.resetSize(600).setContent({
+						isOverflow : false,
+						title : '举报',
+						content :'{/get_url rule="/report/index/"/}'+'?resume_id='+resume_id+'&person_id='+person_id+'&report_from=chat',
+					}).off('loadComplete').on('loadComplete', function() {
+						this.oneCloseEvent('#btnReportSubmit');
+					}).show();
+				} else {
+					showModel('info', result.error);
+				}
+
+			});
+		});
+		//常用语
+		$(".chatReply").on("click",function(e){
+			e.stopPropagation();
+			if($('.deilyChatWordBox').css('display')=='none'){
+			    var _content_html = '';
+				for(var i in temp_list){
+					_content_html = _content_html + '<li><span class="send_'+temp_list[i].id+'">'+temp_list[i].content+'</span></li>';
+				}
+				$('.replyList').empty().append(_content_html);
+				$('.deilyChatWordBox').css('left', e.pageX - $('.deilyChatWordBox').width()/2 + 100);
+				$('.deilyChatWordBox').css('top', e.pageY - $('.deilyChatWordBox').height() - $(this).height());
+				// $('.deilyChatWordBox').show();
+				eventController($('.deilyChatWordBox'));
+				$(document).one('click',function(){
+					eventController($('.deilyChatWordBox'),2);
+				});
+				$('.deilyChatWordBox').empty().append(getSendHtml())
+			}
+		});
+		//发送常用语
+		$('body').on('click','.sendTemplate',function(e) {
+			var text = $(this).text();
+			//发送text
+			myWebim.addOneMsg(text);
+			eventController($('.deilyChatWordBox'),2);//关闭弹框
+	   });
+		//常用语 点编辑 进入编辑语句列表
+		$('body').on('click','.replyEdit',function() {
+			var templateHtml = getSendHtml();
+			var templateDialog = new Dialog({
+				idName: 'uppwd_dialog',
+				title: '修改常用语',
+				content: templateHtml,
+				close: '╳',
+				width: 550
+			});
+			var templateObj = templateDialog.query('#MyTemplate');
+			var save_html = getSvaeHtml();    //发送框textarea
+			templateObj.append($(save_html)); //编辑编辑框
+			var editHtml = getEditHtml();
+			templateObj.append($(editHtml));
+			templateObj.find(".chatReplyPop").hide();
+			templateObj.find(".editReplyPop").show();
+			templateObj.find(".inReplyx").hide();
+			templateDialog.show();
+			//保存编辑
+			templateObj.on("click", ".inReplyx .inSaveEdit", function () {
+				var _this = $(this);
+				if (_this.hasClass("isLock")) {
+					alert("保存中，请稍后...");
+					return;
+				}
+				var id = $(this).attr("data-id"); //如果有ID 则是编辑 如果没有ID 则是新增
+				var eidtObj = templateObj.find(".edit_" + id);
+				var sendObj = templateObj.find(".send_" + id);
+				var replyObj = templateObj.find(".inReplyx");
+				var text = templateObj.find(".inReplyx textarea").val();
+				var is_add = id == "" ? true : false;
+				_this.html("保存中...");
+				_this.addClass("isLock");
+				$.ajax({
+					url: "{/$siteurl.company/}/chat/saveTemplate",
+					type: "post",
+					dataType: "json",
+					data: {id: id, 'content': text},
+					success: function (json) {
+						_this.html("保存")
+						_this.removeClass("isLock");
+						if (json.error) {
+							$.anchorMsg(json.error, {icon: 'warning'});
+							return;
+						}
+						var new_id = json.id;
+						updateTempList(new_id, text, is_add);
+						//如果是新增
+						if (is_add) {
+							var send_html = '<li><span class="sendTemplate send_' + new_id + '">' + text + '</span><a href="javascript:void(0);" data-id="' + new_id + '" class="">发送</a></li>';
+							var edit_html = '<li><span class="edit_' + new_id + '">' + text + '</span><a href="javascript:void(0);" data-id="' + new_id + '" class="closeReply">删除</a><a href="javascript:void(0);" data-id="' + new_id + '" class="editReply">编辑</a></li>';
+							//prepend
+							templateObj.find(".chatReplyPop .replyList").prepend(send_html);
+							templateObj.find(".editReplyPop .editReplyList").prepend(edit_html);
+						} else {
+							eidtObj.html(text);
+							sendObj.html(text);
+						}
+						//返回编辑页面
+						templateObj.find(".editReplyPop").show();
+						templateObj.find(".inReplyx").hide();
+						$('.deilyChatWordBox').empty().append(getSendHtml())
+					}
+				});
+			});
+			//取消编辑
+			templateObj.on("click", ".inReplyx .inClose", function () {
+				templateObj.find(".chatReplyPop").hide();
+				templateObj.find(".editReplyPop").show();
+				templateObj.find(".inReplyx").hide();
+
+				var replyObj = templateObj.find(".inReplyx");
+				replyObj.find(".inSaveEdit").attr("data-id", ""); //将ID置空
+			});
+			//删除
+			templateObj.on("click", ".closeReply", function () { //编辑
+				var id = $(this).attr("data-id");
+				ConfirmBox.confirm("确定要删除该条常用语吗？", "提示", function (obj) {
+					var self = this;
+					self.hide();
+					$.ajax({
+						url: "{/$siteurl.company/}/chat/DeleteTempList",
+						type: "post",
+						dataType: "json",
+						data: {id: id},
+						success: function (json) {
+							if (json.error) {
+								$.anchorMsg(json.error, {icon: 'warning'});
+								return;
+							}
+							//更新 temp_list
+							delete_templist(id);
+							var eidtObj = templateObj.find(".edit_" + id);
+							var sendObj = templateObj.find(".send_" + id);
+							eidtObj.parent("li").remove();
+							sendObj.parent("li").remove();
+							$.anchorMsg("删除成功");
+						}
+					});
+				});
+			});
+			//点单条编辑
+			templateObj.on("click", ".editReply", function () {
+				//debugger;
+				var id = $(this).attr("data-id");
+				var eidtObj = templateObj.find(".edit_" + id);
+				var sendObj = templateObj.find(".send_" + id);
+				var replyObj = templateObj.find(".inReplyx");
+				var text = eidtObj.text();
+				//隐藏 发送 和 编辑 html 显示修改
+				templateObj.find(".chatReplyPop").hide();
+				templateObj.find(".editReplyPop").hide();
+				templateObj.find(".inReplyx").show();
+				replyObj.show();
+				replyObj.find("textarea").val(text)
+				replyObj.find(".inSaveEdit").attr("data-id", id);
+			});
+			
+			//新增
+			templateObj.on("click", ".addReplyBtn", function () {
+				var replyObj = templateObj.find(".inReplyx");
+				//隐藏 发送 和 编辑 html 显示修改
+				templateObj.find(".chatReplyPop").hide();
+				templateObj.find(".editReplyPop").hide();
+				templateObj.find(".inReplyx").show();
+				replyObj.show();
+				replyObj.find("textarea").val("")
+				replyObj.find(".inSaveEdit").attr("data-id", "");
+			});
+		});
+		//转发到QQ、微信
+		$("body").on("click",".chatForwarding",function(){
+				var resume_id = $(this).parent().attr('data-resume-id');
+				var shareBtnHtml = '<div class="shareBtnBox"><span class="shareQQ">转发到QQ</span><span class="shareWX">转发到微信</span></div>';
+				var shareUrl = '';
+				$.get('{/$siteurl.company|replace:"http:":""/}/resume/getShareHtml/?resume_id='+resume_id , function(data){
+						shareUrl = data;
+				});
+				var lyldialog2 = new Dialog({
+					idName: 'save-comp',
+					title: '简历转发',
+					width: 600,
+					close: 'x',
+					content: '<div class="shareTemp">'+shareBtnHtml+'</div>',
+					isAjax: true
+				});
+				$('body').on('click','.shareQQ',function(){
+					lyldialog2.query('.shareTemp').html(shareUrl);
+				})
+				$('body').on('click','.shareWX',function(){
+					lyldialog2.query('.shareTemp').html(shareUrl);
+				})
+				lyldialog2.on('loadComplete', function(){
+					var codeCopyBtn = this.query('.codeCopyBtn');
+					var codeLink    = this.query('#linkCopyx');
+					codeCopyBtn.on("click",function(){
+						// console.log(codeLink);
+						codeLink[0].select(); // 选择对象
+						document.execCommand("Copy");
+						showModel('success', '复制成功');
+					})
+				});
+				lyldialog2.on('.ui_dialog_close', function(){
+					lyldialog2.hide();
+				})
+				$.getJSON('{/get_url rule="/resume/CheckCompanyLetter/"/}'+ '-v-' + Math.random(), function(json){
+					if(!json.status){
+						if(json.code == 701) {
+							dialog.resetSize(450).setContent({
+								title: '企业认证',
+								content: getLetterContent(json.msg)
+							}).show();
+						}
+					}else{
+						lyldialog2.show();
+					}
+				});
+				return false;
+		})
+		//备注列表显示
+		$("body").on('click','.showNotesAll',function(e){
+			// if ($(e.target).is('.deleteChatRemark')) {
+			// 	return ;
+			// }
+			var notesLogBoxHtml='<div class="notesLogBox"><ul id="notesLogBox_list">';
+			var html = '';
+			$(this).parent().find('span').each(function(i){
+				var temp = $(this);
+				html +='<li data-remarkid="'+temp.find('i').attr('data-remarkid')+'"><span class="notesLogBox_list_time">'+temp.attr('data-date')+'</span><span class="notesLogBox_list_con">'+temp.text()+'</span><i>╳</i></li>';
+			});
+			notesLogBoxHtml +=html;
+			notesLogBoxHtml +='</ul></div>';
+			//console.log('notesLogBoxHtml',notesLogBoxHtml);
+			var notesLogBoxDialog = new Dialog({
+				idName: 'notesLogBox_dialog',
+				title: '备注信息',
+				content: notesLogBoxHtml,
+				close: '╳',
+				width: 525
+			});
+			notesLogBoxDialog.show();
+			$("body").on('click','#notesLogBox_list li i',function(e){
+				//console.log();
+				//e.stopPropagation();
+				var freandPart = myWebim.getFrendPart(myWebim.sess_id);
+				var  sessionPart = myWebim.getSessionPart(myWebim.sess_id);
+				var resume_id = freandPart.attr('data-resumeid');
+				var remark_id =  $(this).parent().attr('data-remarkid');
+				var _this = $(this);
+				$.getJSON("{/get_url rule='/resumeremark/RemarkDoV1'/}"+ '-v-' + Math.random(),{
+					operate: 'delete',
+					resume_id: resume_id,
+					remark_id: remark_id,
+					v: Math.random(),
+				}, function(json){
+					sessionPart.find('.chatNotesList').find('span').each(function(i){
+						if(remark_id==$(this).find('i').attr('data-remarkid')){
+							$(this).remove();
+						}
+
+					});
+
+					_this.parent().remove();
+				});
+			})
+		});
+			//简历备注
+		$('.adNotesBox_saveBtn').on('click',function () {
+			var freandPart = myWebim.getFrendPart(myWebim.sess_id);
+			var sessionPart = myWebim.getSessionPart(myWebim.sess_id);
+			var resume_id = freandPart.attr('data-resumeid');
+			var taRemark = $('.addNotesBox_textarea').val();
+			if(taRemark == ''){
+				showModel('fail', '标注标签内容不能为空');
+				return
+			}
+			if (resume_id != undefined && resume_id > 0 && resume_id!="") {
+				$.getJSON("{/get_url rule='/resumeremark/RemarkDoV1'/}"+ '-v-' + Math.random(),{
+					operate: 'save',
+					hidResumeId: resume_id,
+					taRemark: taRemark,
+					v: Math.random(),
+				}, function(json){
+					if(json.error){
+						showModel('fail', json.error);
+						return;
+					}
+					// $('.addNotesBox_textarea').val("");
+					$('.addNotesBox_textarea').val("");
+					$('.addNotesBox_list li').removeClass('liActive');
+					eventController($('.addNotesBox-con'),2);
+					var chatNotesListNode = sessionPart.find('.chatNotesList');
+					chatNotesListNode.prepend('<span class="showNotesItem" data-date="'+json.update_time+'">'+json.remark+'<i data-remarkid="'+json.remark_id+'" class="icon-enterprise_chat_inappropriate deleteSign deleteChatRemark"></i></span>');
+					if(chatNotesListNode.width() >= 550){
+						$('.showNotesAll').show();
+					}else{
+						$('.showNotesAll').hide()
+					}
+				});
+
+			} else {
+				showModel('fail', '请选择一个简历后再进行备注');
+			}
+		});
+		//保存备注
+		$("body").on("click",".chatVideoSaveRemark",function(){
+			var value = $("textarea[name='chatVideoSaveRemarkTxt']").val();
+			console.log(value);
+			if(value == ""){
+				$.anchorMsg("备注内容不能为空",{ icon: 'warning' });return;
+			}
+			//resume_id = "{/$resume_id/}";
+			var freandPart = myWebim.getFrendPart(myWebim.sess_id);
+			var resume_id = freandPart.attr('data-resumeid');
+			var url = "{/get_url rule='/resumeremark/RemarkDo'/}";
+			$.post(url, {hidResumeId:resume_id,taRemark:value,"operate":"save"}, function(re){
+				if(re.error){
+					$.anchorMsg(re.error,{ icon: 'warning' });
+					return;
+				}else{
+					$.anchorMsg("保存成功");
+					return;
+				}
+			},'json');
+		});
+		//删除简历备注
+		$("body").on("click",'.deleteChatRemark',function () {
+			var freandPart = myWebim.getFrendPart(myWebim.sess_id);
+			var resume_id = freandPart.attr('data-resumeid');
+			var _this = $(this);
+			$.getJSON("{/get_url rule='/resumeremark/RemarkDoV1'/}"+ '-v-' + Math.random(),{
+				operate: 'delete',
+				resume_id: resume_id,
+				remark_id: $(this).attr('data-remarkid'),
+				v: Math.random(),
+			}, function(json){
+				_this.parent().remove();
+			});
+		});
+		//收藏
+		$("body").on("click",'.chatResumeFav',function () {
+			var resume_id = $(this).parent().attr('data-resume-id');
+			var operatingIconCur = $(this);
+			//console.log(resume_id);
+
+			var  sessionPart = myWebim.getSessionPart(myWebim.sess_id); //聊天部分
+			$.getJSON('{/get_url rule="/fav/fav"/}', {
+				resume_id: resume_id,
+				r: Math.random().toString().replace('.', '0')
+			}, function (json) {
+				if (json && json.error) {
+					showModel('fail', json.error);
+					return;
+				}
+				if (json.fav_type == "add") {
+					operatingIconCur.addClass('operatingIconCur');
+					dialog.resetSize('auto').setContent({
+						title: '标记为感兴趣',
+						content: '{/get_url rule="/mark"/}'+'/markfav-resumeid-'+resume_id+'-operate-fav.html'
+					}).off('loadComplete').on('loadComplete', function () {
+						this.oneCloseEvent('#btnFavSava');
+						sessionPart.find('.chatResumeFav').addClass('isFav');
+					}).show();
+					return;
+				}
+				if (json.fav_type == "cancel") {
+					operatingIconCur.removeClass('operatingIconCur');
+					showModel('success', '取消感兴趣成功');
+					//target.html('<em class="smIcon05"></em>收藏');
+					sessionPart.find('.chatResumeFav').removeClass('isFav');
+					return;
+				}
+			});
+	});
+        //黑名单操作回调
+		function markInBlacklistDone(error, obj) {
+			//console.log('markInBlacklistDone',obj);
+			if(!error){
+				if(obj.isAdd){
+					showModel('success', '加入黑名单成功');
+					if($('.windowResumeshow').css('display')=='block'){
+						$('.tipBoxBlackName').hide();
+						$('.tipBox').hide();
+						$('.chat-right').removeClass('tipShow');
+					}else{
+						$('.tipBoxBlackName').show()
+						$('.tipBox').show();
+						$('.chat-right').addClass('tipShow');
+					}
+					$('.msgCard_'+obj.account).find('.chatAddToBlacklist').addClass('isBlack');
+					myWebim.onNimBlacklist[obj.account] = true;
+				}else {
+					showModel('success', '取消黑名单成功');
+					$('.tipBoxBlackName').hide();
+					var jHaveChatNotice = $('.j_have_chat_notice').text();
+					if(jHaveChatNotice!=""){
+						if($('.windowResumeshow').css('display')=='block'){
+							$('.tipBox').hide();
+						}
+						else{
+							$('.tipBox').show();
+						}
+						
+					}else{
+						$('.chat-right').removeClass('tipShow');
+						$('.tipBox').hide();
+					}
+					//debugger
+					$('.msgCard_'+obj.account).find('.chatAddToBlacklist').removeClass('isBlack');
+					myWebim.onNimBlacklist[obj.account] = false;
+				}
+			}else{
+				showModel('fail', '操作失败');
+			}
+		}
+        //解除黑名单
+		$('.openBlackName').on('click',function () {
+			nim.markInBlacklist({
+				account: myWebim.sess_id,
+				isAdd: false,
+				done: markInBlacklistDone
+			});
+		})
+		//黑名单
+		$("body").on("click",'.chatAddToBlacklist',function (){
+			if($(this).hasClass('isBlack')){
+				var  isAdd = false;
+				var   userName = $(this).parent().parent().parent().parent().find('.chatUserName').text();
+				var content = '<p style="text-align: center;font-size:14px;">确定要将<span style="color: red"> '+userName+' </span>解除黑名单吗？</p>' ;
+			}else{
+				var  isAdd = true;
+				var  userName = $(this).parent().parent().parent().parent().find('.chatUserName').text();
+				var content = '<p style="text-align: center;font-size:14px;">确定要将<span style="color: red"> '+userName+' </span>加入黑名单吗？加入后他将无法与你沟通</p>' ;
+
+			}
+			VideoConfirmBox.confirm(content, null, function() {
+				var self = this;
+				nim.markInBlacklist({
+					account: myWebim.sess_id,
+					isAdd: isAdd,
+					done: markInBlacklistDone
+				});
+				self.hide();
+			},{
+				width:300
+			});
+
+		});
+        //不合适更新 fix_list
+        var updatefix_list = function(id,content,is_add){
+			//debugger
+            if(is_add){ //新增
+                fix_list.unshift({id:id,content:content});
+            }else{ //编辑
+                for(var i in fix_list){
+                    var _id = fix_list[i].id;
+                    if( _id == id){
+                        fix_list[i]["content"] = content;
+                        break;
+                    }
+                }
+            }
+        }
+		//不合适删除
+		var delete_fix_list = function(id){
+		    var new_fix_list = [];
+		    for(var i in fix_list){
+		        var _id = fix_list[i].id;
+		        if( _id != id){
+		            new_fix_list.push(fix_list[i]);
+		        }
+		    }
+			fix_list = new_fix_list;
+		}
+
+
+		//获取不合适回复发送html
+		var getDislikeSendHtml = function(){
+			var templateHtml = "";
+			var _html = '<div id="MyDislikeTemplate"><div class="chatReplyPop"><a href="javascript:void(0);" class="dislikeWordEdit">编辑</a><ul class="replyList">';
+			var _content_html = '';
+			for(var i in fix_list){
+				_content_html = _content_html + '<li><span class="sendNotTemplate send_'+fix_list[i].id+'">'+fix_list[i].content+'</span><a href="javascript:void(0);" data-id="'+fix_list[i].id+'" class="">发送</a></li>';
+			}
+			var end_html = '</ul></div></div>';
+			templateHtml = _html + _content_html + end_html;
+			return templateHtml;
+		};
+
+		//获取不合适回复编辑标签
+		var getDislikeEditHtml = function(){
+			var editHtml = "";
+			// var editStart = '<div class="editReplyPop" style="display:none"><!--<a href="javascript:void(0);" class="goBack">返回</a>--><ul class="editReplyList">';
+			var editStart = '<div class="editReplyPop" style="display:none"><ul class="editReplyList">';
+			var _content_html = '';
+			for(var i in fix_list){
+				_content_html = _content_html + '<li><span class="edit_'+fix_list[i].id+'">'+fix_list[i].content+'</span><a href="javascript:void(0);" data-id="'+fix_list[i].id+'" class="closeReply">删除</a><a href="javascript:void(0);" data-id="'+fix_list[i].id+'" class="editReply">编辑</a></li>';
+			}
+			var editEnd   = '</ul><div class="addReply"><a class="addReplyBtn" href="javascript:void(0);">新增不合适回复</a><span>（最多4条）</span><span class="error">最多只能新增4条不合适回复</span></div>';
+
+			templateHtml = editStart + _content_html + editEnd;
+			return templateHtml;
+		}
+
+		//编辑不合适模板
+		var getEditDisLikeHtml = function(){
+		    var html = '<div class="inReplyx" style="display:none">'
+		        + '<div class="inTextAreax">'
+		        + '<em class="textAreaError">1252</em>'
+		        +'<textarea name="inTextArea" class="inTextArea" placeholder=""></textarea>'
+		        +'<span>最多可输入60字</span>'
+		        +'</div>'
+		        +'<div class="inTextAreaz">'
+		        + '<a href="javascript:void(0);" data-id="" class="inSaveEdit" style="display: inline-block;">保存</a>'
+		        +'<a href="javascript:void(0);" class="inClose">取消</a>'
+		        +'</div>'
+		        +'</div>'
+		    return html;
+		};
+        //更新常用语temp_list
+        var updateTempList = function(id,content,is_add){
+            if(is_add){ //新增
+                temp_list.unshift({id:id,content:content});
+            }else{ //编辑
+                for(var i in temp_list){
+                    var _id = temp_list[i].id;
+                    if( _id == id){
+                        temp_list[i]["content"] = content;
+                        break;
+                    }
+                }
+            }
+        }
+        var delete_templist = function(id){
+            var new_temp_list = [];
+            for(var i in temp_list){
+                var _id = temp_list[i].id;
+                if( _id != id){
+                    new_temp_list.push(temp_list[i]);
+                }
+            }
+            temp_list = new_temp_list;
+        }
+        //获取常用回复发送html
+        var getSendHtml = function(){
+            var templateHtml = "";
+            var _html = '<div id="MyTemplate"><div class="chatReplyPop"><a href="javascript:void(0);" class="replyEdit">编辑</a><ul class="replyList">';
+            var _content_html = '';
+            for(var i in temp_list){
+                _content_html = _content_html + '<li><span class="sendTemplate send_'+temp_list[i].id+'">'+temp_list[i].content+'</span><a href="javascript:void(0);" data-id="'+temp_list[i].id+'" class="">发送</a></li>';
+            }
+            var end_html = '</ul></div></div>';
+            templateHtml = _html + _content_html + end_html;
+            return templateHtml;
+        }
+
+        //获取常用回复编辑标签
+        var getEditHtml = function(){
+            var editHtml = "";
+            // var editStart = '<div class="editReplyPop" style="display:none"><!--<a href="javascript:void(0);" class="goBack">返回</a>--><ul class="editReplyList">';
+            var editStart = '<div class="editReplyPop" style="display:none"><ul class="editReplyList">';
+			var _content_html = '';
+            for(var i in temp_list){
+                _content_html = _content_html + '<li><span class="edit_'+temp_list[i].id+'">'+temp_list[i].content+'</span><a href="javascript:void(0);" data-id="'+temp_list[i].id+'" class="closeReply">删除</a><a href="javascript:void(0);" data-id="'+temp_list[i].id+'" class="editReply">编辑</a></li>';
+            }
+            var editEnd   = '</ul><div class="addReply"><a class="addReplyBtn" href="javascript:void(0);">新增常用回复</a><span>（最多10条）</span><span class="error">最多只能新增10条常用回复</span></div>';
+
+            templateHtml = editStart + _content_html + editEnd;
+            return templateHtml;
+        }
+
+        var getSvaeHtml = function(){
+            var html = '<div class="inReplyx" style="display:none">'
+                + '<div class="inTextAreax">'
+                + '<em class="textAreaError">1252</em>'
+                +'<textarea name="inTextArea" class="inTextArea" placeholder=""></textarea>'
+                +'<span>最多可输入60字</span>'
+                +'</div>'
+                +'<div class="inTextAreaz">'
+                + '<a href="javascript:void(0);" data-id="" class="inSaveEdit" style="display: inline-block;">保存</a>'
+                +'<a href="javascript:void(0);" class="inClose">取消</a>'
+                +'</div>'
+                +'</div>'
+            return html;
+        };
+
+        //公司地址
+		$(".chatArea").on("click",function(e){
+		    e.stopPropagation();
+		    var addressHtml = getAddressHtml();
+			$('.sendMapAddressBox').empty().append(addressHtml);
+		    if($('.sendMapAddressBox').css('display')=='none'){
+				$('.sendMapAddressBox').css('left', e.pageX - $('.sendMapAddressBox').width()/2 + 100);
+				$('.sendMapAddressBox').css('top', e.pageY - $('.sendMapAddressBox').height() - $(this).height());
+				eventController($('.sendMapAddressBox'));
+				$(document).one('click',function(){
+					eventController($('.sendMapAddressBox'),2);
+				});
+				$(document).one('click','.sendMapAddressBox',function(e){
+					e.stopPropagation();
+				});
+				var addressObj = $('.sendMapAddressBox').find(".sitePopx");
+				addressObj.on("click",".siteArea li",function(e){ //选择
+					var text = $(this).find("span").attr("data-attr");
+					myWebim.addOneMsg(text);
+					eventController($('.sendMapAddressBox'),2);
+				});
+		    }else{
+				eventController($('.sendMapAddressBox'),2);
+			}
+		   
+		    // addressDialog.show();
+		});
+        // $(".chatArea").on("click",function(){
+        //     var addressHtml = getAddressHtml();
+        //     var addressDialog = new Dialog({
+        //         idName: 'address_dialog',
+        //         title: '公司地址',
+        //         content: addressHtml,
+        //         close: '╳',
+        //         width: 470
+        //     });
+        //     var addressObj = addressDialog.query(".sitePopx");
+        //     addressObj.on("click","li",function(){ //选择
+        //         addressObj.find("li").removeClass("cut");
+        //         $(this).addClass("cut");
+        //     });
+
+        //     addressObj.on("click",".siteSave",function(){ //保存
+        //         var objLi = addressObj.find("li.cut");
+        //         var text = objLi.find("span").attr("data-attr");
+        //         myWebim.addOneMsg(text);
+        //         addressDialog.hide();
+        //     });
+        //     addressDialog.show();
+        // });
+
+        var getAddressHtml = function(){
+            var start_html = '<div class="sitePopx"><ul class="siteArea">';
+            var li_html     = "";
+            for(var i in address_list){
+                var _address = address_list[i];
+                var _class   = _address["id"] == 0 ? "cut" : "";
+                var is_company = _address["id"] == 0 ? "(公司地址)" : "(工作地址)";
+                li_html = li_html + '<li class="'+_class+'">'+
+				// '<i></i>'+
+				'<span data-attr="'+_address.add_info+'">'+_address.add_info+is_company+'</span></li>';
+            }
+            var end_html = '</ul>'+
+			// '<a href="javascript:void(0);" class="siteSave">确定发送</a>'+
+			'</div>';
+            return start_html + li_html + end_html;
+        }
+        // $.anchorMsg("删除头像失败，请稍后再试",{ icon: 'warning' });
+
+		var close = '×';
+		var width = 600;
+		var zIndex = 9999;
+		var title = '面试时间设置';
+		var canVideoTipDialog1 = new Dialog({
+			close: close,
+			idName: 'canVideoTipDialog1',
+			title: '提示',
+			width: width,
+			zIndex: zIndex,
+			content:$(".canVideoTipDialog1").html()
+		});
+		var canVideoTipDialog2 = new Dialog({
+			close: close,
+			idName: 'canVideoTipDialog2',
+			title: '提示',
+			width: width,
+			zIndex: zIndex,
+			content:$(".canVideoTipDialog2").html()
+		});
+		var canVideoTipDialog3 = new Dialog({
+			close: close,
+			idName: 'canVideoTipDialog3',
+			title: '提示',
+			width: width,
+			zIndex: zIndex,
+			content:$(".canVideoTipDialog3").html()
+		});
+		var videoSelectDialog = new Dialog({
+			close: close,
+			idName: 'videoSelectDialog',
+			title: '选择视频通话方式',
+			width: width,
+			zIndex: zIndex,
+			content:$(".videoSelectDialog").html()
+		});
+		var mobileVideoDialog = new Dialog({
+			close: close,
+			idName: 'mobileVideoDialog',
+			title: '手机面试',
+			width: 380,
+			zIndex: zIndex,
+			content:$(".mobileVideoDialog").html()
+		});
+		var downloadErWeiMaDialog = new Dialog({
+			close: close,
+			idName: 'downloadErWeiMaDialog',
+			title: '汇博APP下载',
+			width: 300,
+			zIndex: zIndex,
+			content:$(".downloadErWeiMaDialog").html()
+		});
+		var rtcScanStatusDialog = new Dialog({
+			close: close,
+			idName: 'rtcScanStatusDialog',
+			title: '面试结果设置',
+			width: 520,
+			zIndex: zIndex,
+			content:$(".rtcScanStatusDialog").html()
+		});
+		
+		var skipInterviewDialog = new Dialog({
+		    close: close,
+		    idName: 'skipInterviewDialog',
+		    title: '跳过求职者',
+		    width: 520,
+		    zIndex: zIndex,
+		    content:$(".skipInterviewDialog").html()
+		});
+		//去充值 充值提示
+		 payTip_Dialog = new Dialog({
+		    close: close,
+		    idName: 'payTip_Dialog',
+		    title: '充值提示',
+		    width: 520,
+		    zIndex: zIndex,
+		    content:$(".payTipDialog").html()
+		});
+		
+		//设备检查
+		var detectionDevice_dialog = new Dialog({
+		    close: close,
+		    idName: 'detectionDevice_dialog',
+		    title: '设备故障,请检查设备',
+		    width: 330,
+		    zIndex: zIndex,
+		    content:$(".detectionDeviceDialog").html()
+		});
+		function detectionDevice(error){
+			console.log("detectionDevice",error);
+			detectionDevice_dialog.show();
+			//摄像头
+			if (!error.videoDevice) {
+				detectionDevice_dialog.query("#j_videoDevice").addClass('failIcon').removeClass('successIcon');
+			} else {
+				detectionDevice_dialog.query("#j_videoDevice").removeClass('failIcon').addClass('successIcon');
+			}
+			//音频设备
+			if (!error.audioDevice) {
+				detectionDevice_dialog.query("#j_audioDevice").addClass('failIcon').removeClass('successIcon');
+			} else {
+				detectionDevice_dialog.query("#j_audioDevice").removeClass('failIcon').addClass('successIcon');
+			}
+			var browserVersion = error.browser_version;
+			var versionNo = browserVersion.split(".");
+			//浏览器
+			if (error.browser == 'Chrome' && versionNo[0]>60) {
+				$('.downloadChromecon').hide();
+				detectionDevice_dialog.query("#j_browser").removeClass('failIcon').addClass('successIcon');
+			} else {
+				detectionDevice_dialog.query("#j_browser").addClass('failIcon').removeClass('successIcon');
+				$('.downloadChromecon').show();
+			}
+		}
+		//视频面试新增内容
+		$(".chatOnceVideo").click(function(){
+			var apply_id =  $(".chatOnceVideo").attr("data-netapply-id");
+			var resume_id = $(".chatOnceVideo").attr("data-resume-id");
+			$.ajax({
+				type: 'post',
+				url: '{/get_url rule="/video/CanVideo"/}',
+				data: {net_apply_id: apply_id, resume_id: resume_id},
+				dataType: 'json',
+				success: function (res) {
+					if(res.status){
+						console.log("apply_id",apply_id);
+						//显示剩余的分钟数
+						if(apply_id=="0" || apply_id==""){
+							if(res.data.surplus_time>30){
+								canVideoTipDialog1.show();
+								canVideoTipDialog1.query(".canVideoTipDialogTime").text(res.data.surplus_time);
+								return;
+							}
+							//显示去充值
+							if(res.data.surplus_time<=30 && res.data.surplus_time>5){
+								canVideoTipDialog2.query(".canVideoTipDialogTime").text(res.data.surplus_time);
+								canVideoTipDialog2.show();
+								return;
+							}
+							if(res.data.surplus_time<=5){
+								canVideoTipDialog3.query(".canVideoTipDialogTime").text(res.data.surplus_time);
+								canVideoTipDialog3.show();
+								return;
+							}
+						}else{
+							videoSelectDialog.show();
+							return;
+						}
+					}else{
+						ConfirmBox.timeBomb(res.msg,{
+							name: 'fail',
+							width:'auto',
+							timeout : 2000
+						});
+						return;
+					}
+				}
+			});
+		});
+		payTip_Dialog.query('.payTipDialog_closeBtn').on('click', function(){
+			payTip_Dialog.hide();
+		});
+		payTip_Dialog.query('.payTipDialog_sureBtn').on('click', function(){
+			payTip_Dialog.hide();
+			var jdialog = new Dialog({
+				close: 'x',
+				idName: 'jian_dialog',
+				title: '详情咨询',
+				width: 380,
+				content:$(".warning_dialog").html()
+			});
+			jdialog.show();
+		});
+		canVideoTipDialog1.query('.canVideoCancel').on('click', function(){
+			canVideoTipDialog1.hide();
+		});
+		canVideoTipDialog2.query('.canVideoCancel').on('click', function(){
+			canVideoTipDialog2.hide();
+		});
+		canVideoTipDialog3.query('.canVideoCancel').on('click', function(){
+			canVideoTipDialog3.hide();
+		});
+		canVideoTipDialog2.query('.canVideoLink').on('click', function(){
+			canVideoTipDialog2.hide();
+			var jdialog = new Dialog({
+				close: 'x',
+				idName: 'jian_dialog',
+				title: '详情咨询',
+				width: 380,
+				content:$(".warning_dialog").html()
+			});
+			jdialog.show();
+		});
+		canVideoTipDialog3.query('.canVideoLink').on('click', function(){
+			canVideoTipDialog3.hide();
+			var jdialog = new Dialog({
+				close: 'x',
+				idName: 'jian_dialog',
+				title: '详情咨询',
+				width: 380,
+				content:$(".warning_dialog").html()
+			});
+			jdialog.show();
+		});
+		$('.redetectionAgain').on('click',function () {
+			detectionDevice_dialog.hide();
+			var time = window.setInterval(function () {
+				detectionDevice_dialog.show();
+				AliRtcEngine.isSupport().then(re => {
+					//创建房间
+					detectionDevice(re);
+				}).catch(err => {
+					detectionDevice(err);
+				});
+				clearInterval(time);
+			}, 500);
+
+		});
+		$(".canVideoStart1").on('click', function () {
+			canVideoTipDialog1.hide();
+			videoSelectDialog.show();
+			// AliRtcEngine.isSupport().then(re => {
+			// 	//创建房间
+			// 	//console.log("canVideoStart1",re);
+			// 	if (re.isSupported) {
+			// 		//if(true){
+			// 		var temp_apply_id = $(".chatOnceVideo").attr("data-netapply-id");
+			// 		var temp_resume_id = $(".chatOnceVideo").attr("data-resume-id");
+			// 		chatVideo.createRoom(temp_apply_id, temp_resume_id);
+			// 	} else {
+			// 		detectionDevice(re);
+			// 	}
+			// }).catch(err => {
+			// 	// console.log("canVideoStart1",err);
+			// 	detectionDevice(err);
+			// });
+		})
+		$(".canVideoStart2").on('click',function () {
+			canVideoTipDialog2.hide();
+			videoSelectDialog.show();
+		})
+		$(".chatVideoSelect").on('click',function () {
+				var temp_apply_id = $(".chatOnceVideo").attr("data-netapply-id");
+			    var temp_resume_id    = $(".chatOnceVideo").attr("data-resume-id");
+			    if(temp_apply_id=="0"){
+					videoSelectDialog.hide();
+					AliRtcEngine.isSupport().then(re => {
+						//创建房间
+						if(re.isSupported){
+						//if(true){
+							var temp_apply_id = $(".chatOnceVideo").attr("data-netapply-id");
+							var temp_resume_id    = $(".chatOnceVideo").attr("data-resume-id");
+							var nowSession = myWebim.getNowNewSession(myWebim.sess_id);
+							var job_id = nowSession.SessionJobId;
+							chatVideo.createRoom(temp_apply_id,temp_resume_id,job_id);
+						}else{
+							detectionDevice(re);
+						}
+					}).catch(err => {
+						detectionDevice(err);
+					});
+			    }else{
+					var nowSession = myWebim.getNowNewSession(myWebim.sess_id);
+					var job_id = nowSession.SessionJobId;
+					chatVideo.createRoom(temp_apply_id,temp_resume_id,job_id);
+					videoSelectDialog.hide();
+			    }
+
+		})
+		mobileVideoDialog.query("#downloadErWeiMaBtn").on("click", function(){
+			clearInterval(promptInterview);
+			mobileVideoDialog.hide();
+			downloadErWeiMaDialog.show();
+		});
+
+		//手机面试
+		var rtcScanStatusDialog_status_value = 0,
+				rtcScanStatusDialog_apply_id = 0;
+		var rtc_scan_channel_id = 0;
+		mobileVideoDialog.on('closeX', function(){
+			clearInterval(promptInterview);
+		});
+		$(".mobileVideoBtn").on('click', function(){
+			//console.log('mobileVideoBtn',111111111111);
+			videoSelectDialog.hide();
+			var apply_id =  $(".chatOnceVideo").attr("data-netapply-id");
+			var resume_id = $(".chatOnceVideo").attr("data-resume-id");
+			var nowSession = myWebim.getNowNewSession(myWebim.sess_id);
+			var person_id = nowSession.SessionId.replace(/[^0-9]/ig,"");
+			var job_id = nowSession.SessionJobId;
+
+			$(".video-ing-img").attr('src',nowSession.SessionImage);
+			$(".video-ing-name").text(nowSession.SessionNick);
+			$(".video-ing-job-name").text(nowSession.SessionJobStation);
+
+
+			rtcScanStatusDialog_apply_id = apply_id;
+			//弹出手机面试二维码弹框
+			mobileVideoDialog.query("#rtcScanCodeImg").attr("src", "{/get_url rule='/video/RtcScanCode'/}?job_id="+job_id+"&resume_id="+resume_id+"&net_apply_id="+apply_id);
+			mobileVideoDialog.show();
+			clearInterval(promptInterview);
+			rtcScanStatusDialog_status_value = 0;
+			$('.rtcScanStatusDialog_status').removeClass('statusActive');
+			//rtcScanStatusDialog.show();return;
+			promptInterview = setInterval(function(){
+				$.ajax({
+					type: 'post',
+					url: '{/get_url rule="/video/RtcScanStatus"/}',
+					data: {person_id: person_id, channel_id: rtc_scan_channel_id},
+					dataType: 'json',
+					success: function (res) {
+						//扫码成功，弹出反馈结果弹窗
+                        if(res.status){
+							if(res.data.channel_id){
+								rtc_scan_channel_id = res.data.channel_id;
+							}
+                        	if(res.data.apply_source==1){
+								if(res.data.status >= 1){
+									mobileVideoDialog.hide();
+									if(res.data.is_first){
+										rtcScanStatusDialog.show();
+									}
+								}
+								if(res.data.status == 3){
+									clearInterval(promptInterview);
+								}
+							}
+							if(res.data.apply_source==0){
+								clearInterval(promptInterview);
+							}
+                        }else{
+							//rtcScanStatusDialog.show();
+                        	ConfirmBox.alert(res.msg,function () {
+								//mobileVideoDialog.hide();
+							},{title:"提示"});
+							clearInterval(promptInterview);
+                        }
+					}
+				});
+
+			},3000);
+		});
+		function setVideoStatus(id, status,person_id){
+			if(status!=99){
+				$.ajax({
+					type: 'post',
+					url: '{/get_url rule="/videohall/SetInterviewStatus"/}',
+					data: {id: id, status: status,person_id},
+					dataType: 'json',
+					success: function (res) {
+						if(res.isNeedLogin){
+							window.location.reload();
+							return;
+						}
+						if(!res.status){
+							ConfirmBox.timeBomb(res.msg,{
+								name: 'fail',
+								width:'auto',
+								timeout : 2000
+							});
+							return;
+						}
+						ConfirmBox.timeBomb(res.msg,{
+							name: 'success',
+							width:'auto',
+							timeout : 2000
+						});
+						setTimeout(function () {
+							rtcScanStatusDialog.hide();
+						},2000);
+						return;
+					}
+				});
+			}else{
+				ConfirmBox.timeBomb("设置成功",{
+					name: 'success',
+					width:'auto',
+					timeout : 2000
+				});
+				setTimeout(function () {
+					rtcScanStatusDialog.hide();
+				},2000);
+				return;
+			}
+		}
+		rtcScanStatusDialog.query('.rtcScanStatusDialog_status').on('click', function(){
+			rtcScanStatusDialog_status_value = $(this).attr('data-status');
+			$(this).addClass("statusActive").siblings().removeClass('statusActive');;
+		});
+		rtcScanStatusDialog.query('#rtcScanStatusDialog_sure_btn').on('click', function(){
+			if(!rtcScanStatusDialog_status_value){
+				ConfirmBox.timeBomb('请设置面试结果',{
+					name: 'fail',
+					width:'auto',
+					timeout : 2000
+				});
+				return;
+			}
+			var nowSession = myWebim.getNowNewSession(myWebim.sess_id);
+			var person_id = nowSession.SessionId.replace(/[^0-9]/ig,"");
+			setVideoStatus(rtcScanStatusDialog_apply_id, rtcScanStatusDialog_status_value,person_id);
+		});
+
+    //下面结束
+		function sendInvite(resume_id) {
+			{/if $from_cd/}
+			// console.log(777);
+			$.getJSON('{/get_url rule="/resume/CheckCompanyLetter/"/}'+ '-v-' + Math.random(), function(json){
+				if(!json.status){
+					if(json.code == 701) {
+						dialog.resetSize(450).setContent({
+							title: '企业认证',
+							content: getLetterContent(json.msg)
+						}).show();
+					}
+				}else{
+					$.getJSON('{/get_url rule="/download/checkbalance"/}', {
+						resume_id : resume_id,
+						get_alert: true,
+						check_type:'invite'
+					}, function (json) {
+
+						if(json.code == 502){
+							ConfirmBox.timeBomb(json.msg, {
+								name: 'fail',
+								timeout: 2000,
+								width:  json.msg*18 + 20,
+								zIndex: 999999
+							});
+							return;
+
+						}
+						if (json && !json.status) {
+
+							dialog.resetSize('auto').setContent({
+								title: '查看联系方式',
+								content: json.alert_info
+							}).show();
+						} else {
+							var invite_url = '{/get_url rule="/invite/invitesingleshowv1/"/}?resumeID='+resume_id+'&isfromdetail=detail&chat_status='+chatStatus;
+							dialog.resetSize('auto').setContent({
+								isOverflow : true,
+								title :"邀请简历",
+								content : invite_url
+							}).off('loadComplete').on('loadComplete', function() {
+								this.oneCloseEvent('#btnSendInvite');
+							}).show();
+						}
+					});
+				}
+			});
+			{/else/}
+			// console.log(88);
+			$.getJSON('{/get_url rule="/resume/CheckCompanyLetter/"/}'+ '-v-' + Math.random(), function(json){
+				if(!json.status){
+					if(json.code == 701) {
+						dialog.resetSize(450).setContent({
+							title: '企业认证',
+							content: getLetterContent(json.msg)
+						}).show();
+					}
+				}else{
+					$.getJSON('{/get_url rule="/download/checkbalance"/}', {
+						resume_id : resume_id,
+						check_type:'invite'
+					}, function (json) {
+						if(json.code == 502){
+							ConfirmBox.timeBomb(json.msg, {
+								name: 'fail',
+								timeout: 2000,
+								width:  json.msg*18 + 20,
+								zIndex: 999999
+							});
+							return;
+						}
+						if (json.isCqNewService){
+							var nameV1 = '需花费简历点：';
+							var price  = 1;
+							var name = "<p class='t2'>剩余简历点：<span>￥" + json.spread_overage + "</span><br />";
+						}else {
+							var nameV1 = '简历需花费：';
+							var name = "<p class='t2'>当前帐号余额：<span>￥" + json.account_overage + "</span><br />";
+							var price  = json.price;
+						}
+						if (json && !json.status) {
+							dialog_msg_liao.setContent("{/get_url rule='/resume/resumeinfomsghtml'/}?type=1").show();
+						} else {
+							var chatStatus = $('.search_chat_status').attr('data-status');
+							var invite_url = '{/get_url rule="/invite/invitesingleshowv1/"/}?resumeID='+resume_id+'&isfromdetail=detail&chat_status='+chatStatus;
+							dialog.resetSize('auto').setContent({
+								isOverflow : true,
+								title : '邀请简历',
+								content : invite_url
+							}).off('loadComplete').on('loadComplete', function() {
+								this.oneCloseEvent('#btnSendInvite');
+							}).show();
+						}
+					});
+				}
+			});
+			{//if/}
+		}
+		//处理发送面试邀请，发送offer
+		$('.rightjoberStatus').on('click',function () {
+			var freandPart = myWebim.getFrendPart(myWebim.sess_id);
+            var status = freandPart.attr('data-chatstatus');
+            if(1==status||2==status){
+                //发送面试邀请
+            	sendInvite(freandPart.attr('data-resumeid'));
+            }
+            //console.log('rightjoberStatus',status);
+            if(3==status||4==status||5==status){
+				//发送offer
+            	$.getJSON("{/get_url rule='/chat/SendOffer'/}",{
+                    session_id: myWebim.sess_id,
+                    v: Math.random(),
+                }, function(json){
+                    if(json.code==200){
+                        window.open("{/get_url rule='/offertemplate/index/'/}"+"invite_id-"+json.data.invite_id,"_blank");
+                    }
+                });
+            }
+		});
+		$('body').on('click','#changechatJOb_list li',function(){
+
+			var sessionJobId = $(this).attr('data-job-id');
+			var sessionJobStation = $(this).text();
+			var res= myWebim.personJobIdChangRemove(sessionJobId,sessionJobStation);
+			//if(res!=false){
+				$(this).parent().parent().hide();
+				$.anchorMsg("切换成功");
+			//}
+		});
+
+
+
+        var videoInfo    = {
+            netApplyId          : net_apply_id,
+            sid                 : sid,
+            videoAuthInfoUrl    : "{/$siteurl.company/}/video/GetToken",
+            createRoomUrl       : "{/$siteurl.company/}/video/createRoom",
+            baseInfoUrl         : "{/$siteurl.company/}/video/GetApplyBaseInfo",
+            nextUrl             : "{/$siteurl.company/}/chat/",
+            schoolNetFairUrl    : "{/$netfair_url/}/videohall/VideoInterviewHall/?sid={/$sid/}",
+            companyName         : "{/$company_name/}",
+            applySource        : "{/$apply_source/}",
+            resumeId            : "{/$resume_id/}"
+        };
+        {/if !$is_ie/}
+        $('#chatVideoStart').on('click',function () {
+			chatVideo.onLiveVideoScreen();
+		});
+
+		chatVideo.init(videoInfo,ConfirmBox,anchorMsg);
+		//chatVideo.createRoom(net_apply_id,"{/$resume_id/}");
+		AliRtcEngine.isSupport().then(re => {
+			//创建房间
+			{/if $auto_create_resume/}
+			chatVideo.createRoom(net_apply_id,"{/$resume_id/}","{/$job_id/}");
+			{//if/}
+			}).catch(err => {
+			console.log(err.message);
+			if(!err.audioDevice){
+				chatVideo.isSupported = false;
+				chatVideo.supportedmsg = "没有可用视频设备";
+				return;
+			}
+			if(!err.isSupported){
+				chatVideo.isSupported = false;
+				chatVideo.supportedmsg = "err.message";
+			}
+		});
+        {//if/}
+    });
+    // 9.10新增js
+    function showHistory(){
+        if($('.chat-left').hasClass('show'))return false;
+        searchPerson('');
+        $('.chat-left').addClass('show');
+		$('.newFriendList').hide();
+		$('.chat-search-friend').hide();
+		$('#myHistoryList').show();
+		$('.chat-search').show();
+    }
+
+    function searchSubmit() {
+        var keyword = $('#j_search_input').val();
+        searchPerson(keyword);
+        // $('.chat-left').addClass('show');
+    }
+    //这个失去焦点的方法在测试的时候用
+    // $('#j_search_input').on('blur', function(){
+    //     searchSubmit();
+    // });
+    $('#j_search_btn').on('click',function(){
+        searchSubmit();
+    });
+    $('#j_search_input').on('keypress',function (event) {
+        if(event.which == 13){
+            searchSubmit();
+        }
+    });
+    //筛选联系过的求职者
+    function searchPerson(keyword) {
+        var url = "{/get_url rule='/chat/getAccountChatHistory'/}";
+        if (keyword) {
+            var data = {keyword: keyword};
+        }else{
+            var data = {};
+        }
+
+        var allFaces        = myWebim.getFaceNickObj();//表情
+        $.post(url, data, function(re){
+            if (re.status && re.data) {
+
+                var html = '';
+                var init_info = re.data['init_info'];
+                var list = re.data['list'];
+                if ($.isEmptyObject(list)) {
+                    $('#myHistoryList').html('<li style="text-align: center;margin-top: 10px;color:#ccc">暂无相关历史联系人</li>');
+                    return false;
+                }
+                var has_init_info = re.data['has_init_info'];
+                //$('.chatDivPart').addClass('hiddenPart');
+                var sessionMap      = myWebim.sessionMap;
+                var sessType = myWebim.nimType1; //设置会话类型
+                for(var i in list){
+                    var tempSendMsgEmoji     = myWebim.sendMsgEmoji(list[i].msg_content,allFaces);
+                    list[i].msg_content = tempSendMsgEmoji[1];
+                    if( list[i].job_status==1){
+
+					 var job_status_html = '                                    <i class="chat-list-icon01 jobstatus" style="display: none;"></i>\n'
+                    }else{
+						var job_status_html = '                                    <i class="chat-list-icon01 jobstatus" style="display: inline-block;"></i>\n'
+                    }
+					html += '<li>\n' +
+							'                        <a href="javascript:void(0);" class="frendPart frendCard_' + init_info[i].SessionId + '" data-sessionid="' + init_info[i].SessionId + '" data-jobid="' + list[i].job_id + '" data-timestamp="'+ (parseInt(list[i].msg_timestamp)*1000) +  +'" data-starttime="'+ (parseInt(list[i].start_timestamp)*1000) +'" data-endtime="'+ (parseInt(list[i].msg_endstamp)*1000) +'">'+
+							'                            <img class="head-img" src="' + init_info[i].SessionImage + '">'+
+							'                            <p>\n' +
+							'                                <span class="chat-list-tit01">\n' +
+							'                                    <span class="frendUserName">' + init_info[i].SessionNick + '</span>\n' +
+							job_status_html +
+
+							'                                </span>\n' +
+							'                                <span class="chat-list-tit02 msgPro">\n' +
+							'                                    <em class="readStatus"></em>\n' +
+							'                                    <span class="msgContent">'+ list[i].msg_content +'</span>\n' +
+							'                                </span>\n' +
+							'                            </p>\n' +
+							'                            <span class="chat-list-time msgTime">' + myWebim.timeToDate(list[i].msg_timestamp)+'</span>\n' +
+							'                            <span class="chat-list-msg notReadMsgCount msgPro" style="display:none">0</span>\n' +
+							'                            <span class="j_close_chat close-chat" style="display: none;">×</span>'+
+							'                        </a>\n' +
+							'                    </li>';
+
+                }
+                if (has_init_info) {
+                    var notInMap = new Array();
+                    for(var k in init_info) {
+                        if (!sessionMap[sessType + init_info[k].SessionId] && $('.msgCard_'+init_info[k].SessionId).length===0) {
+                            myWebim.addChatMsgPart(myWebim.initNewSession(init_info[k]), true);
+                            notInMap.push(myWebim.initNewSession(init_info[k]));
+                        }
+                    }
+                    //console.log(notInMap);
+                    if(notInMap.length>0){
+                        myWebim.refreshMsgTopTips(notInMap,0,0);
+                    }
+                }
+               // $('.chat-right').removeClass('tipShow');
+                $('#myHistoryList').html(html);
+                // $('#j_search_input').removeAttr('onclick');
+                //myWebim.sess_id = init_info[0].SessionId;//更改当前正在聊天的人
+               // myWebim.changeSession(init_info[0].SessionId);
+                //查询当前对话的求职者14天内是否有过聊天记录
+                //$('.' + myWebim.msgFre + init_info[0].SessionId).removeClass('hiddenPart');
+                /*var selToID   = myWebim.sess_id;
+                var sess_data = myWebim.getSessDataBySessId(selToID);
+                var resume_id = sess_data.ResumeId;
+                var url = "/chat/checkChatHistory";
+                $.post(url, {resume_id:resume_id}, function(re){
+                    if (!re.status) {
+                        $('.j_have_chat_notice').html(re.msg);
+						$('.chat-right').addClass('tipShow')
+                        // $('.tipBox').show();
+                    } else {
+                        $('.j_have_chat_notice').html('');
+						$('.chat-right').removeClass('tipShow')
+                        // $('.tipBox').hide();
+                    }
+                },'json');
+                //切换后关闭语言
+                myWebim.closeAudio();*/
+            }
+        },'json');
+    }
+
+    $('#myHistoryList').on('click', 'a', function(){
+        $('#j_history_list').html('');
+
+        $("#myHistoryList").find("a.cut").removeClass("cut");
+        $('.chat-right').removeClass('tipShow');
+        $('.historyTimeIpt').val('');
+        $('.chatRightList .chatDivPart').addClass('hiddenPart');
+        var sessionId =  $(this).attr('data-sessionid');//历史联系人更改当前正在聊天的人
+        if(sessionId==myWebim.sess_id){
+            myWebim.changeSession(sessionId);
+        }else{
+            myWebim.sess_id = sessionId;//历史联系人更改当前正在聊天的人
+            myWebim.changeSession(sessionId);
+            $('.historyKey').val('');
+			if($('.chat-right').hasClass('tipShow') && $('.tipBox').css('display') == 'none'){
+				$('.tipBox').show()
+			}
+			if($('.chat-right').hasClass('tipShow') && $('.tipBoxBlackName').css('display') == 'none'){
+				$('.tipBoxBlackName').show()
+			}
+			$('.chatPutx').show();
+			$('.windowResumeshow').hide();
+			$('.chat-card-header').show();
+			$('.charDialog').show();
+			if($(".chatRightList").find("." + myWebim.msgFre + sessionId).find('.chatNotesList')[0].offsetWidth >= 520){
+				$('.showNotesAll').show();
+			}else{
+				$('.showNotesAll').hide()
+			}
+        }
+
+        $('.' + myWebim.msgFre + myWebim.sess_id).removeClass('hiddenPart');
+        $('.frendPart').removeClass('cut');
+        $('.' + myWebim.frendFre + myWebim.sess_id).addClass('cut');
+        firstDate.setTime($(this).attr('data-starttime'));
+        lastDate.setTime($(this).attr('data-endtime')|| formatDate(new Date()));
+        //$('.historyTimeIpt').val(formatDate(lastDate))
+       /* var selToID   = myWebim.sess_id;
+        var sess_data = myWebim.getSessDataBySessId(selToID);
+        var resume_id = sess_data.ResumeId;*/
+
+        var url = "/chat/checkChatHistoryV2";
+        $('.chat-right').removeClass('tipShow');
+        $.post(url, {session_id:sessionId}, function(re){
+            if (!re.status) {
+                $('.j_have_chat_notice').html(re.msg);
+                $('.chat-right').addClass('tipShow')
+                $('.tipBox').show();
+            } else {
+                $('.j_have_chat_notice').html('');
+				if($('.tipBoxBlackName').css('display')=='none'){
+					$('.chat-right').removeClass('tipShow')
+				}
+				$('.tipBox').hide();
+                // $('.chat-right').removeClass('tipShow')
+                // $('.tipBox').hide();
+            }
+        },'json');
+        //切换后关闭语言
+        myWebim.closeAudio();
+    });
+
+
+    function hideHistory(){
+        // $('#j_search_input').attr('onclick', 'showHistory()');
+        // $('.chat-left').removeClass('show');
+        $('#j_search_input').val('');
+        //$('#myFrendList li a').eq(0).click();
+    }
+    //页面最老那条聊天数据的日期
+    var first_msg_date = '';
+    function getChatHistory(msg_date, keyword, page) {
+        $('#j_history_list').html('');
+        keyword=keyword||$('.historyKey').val();
+        var selToID   = myWebim.sess_id;
+       // var sess_data = myWebim.getSessDataBySessId(selToID);
+        //var resume_id = sess_data.ResumeId;
+        var url = "{/get_url rule='/chat/getChatHistory'/}";
+        $.post(url, {session_id:selToID, msg_date:msg_date, keyword:keyword, page:page}, function(re){
+            if (re.status && re.data) {
+                var data = re.data;
+                var list = data.list;
+                var html = '';
+                var curr_msg_date = '';
+                $('.j_page_pre').attr('data-page',data.pre_page);
+                $('.j_page_after').attr('data-page', data.after_page);
+                $('.j_page_last').attr('data-page',data.total_page);
+                var allFaces        = myWebim.getFaceNickObj();//表情
+                if (!$.isEmptyObject(list)) {
+                    for(var i in list) {
+                        if (curr_msg_date != list[i].msg_date) {
+                            html += '<div class="historyTopTime j_'+ list[i].msg_date +'">' + list[i].msg_date + '</div>';
+                            curr_msg_date = list[i].msg_date;
+                        }
+                        if (i == 0) {
+                            first_msg_date = list[i].msg_format_date;
+                        }
+                        if (list[i].send_origin == 1) {
+                            html += '<div class="historyMsgMe">\n';
+                        } else {
+                            html += '<div class="historyMsgOther">\n';
+                        }
+                        html += '   <span class="historyName">' + list[i].from_name + '</span><span class="historyTime" style="" data-time="' + list[i].msg_timestamp + '">' + list[i].send_time + '</span>';
+                        if (list[i].msg_type == 1) {
+                            var tempSendMsgEmoji     = myWebim.sendMsgEmoji(list[i].msg_content,allFaces);
+                            list[i].msg_content = tempSendMsgEmoji[0];
+                        }
+                        html += '       <div class="historyMsg">\n' +
+                            list[i].msg_content +
+                            '   </div>\n' +
+                            '</div>';
+                        $('.historyTimeIpt').val(first_msg_date);
+                    }
+                    if (myWebim.sess_id != $('.historyTimeIpt').attr('data-session-id')) {
+                        $('.historyTimeIpt').attr('data-session-id', myWebim.sess_id);
+                    }
+                } else {
+                    html = '<div class="historyTopTime">没有符合条件的聊天记录</div>';
+                }
+                $('#j_history_list').html(html);
+                addGray(data.curr_page,data.total_page)
+            }
+        },'json');
+    }
+    function showHistoryR(){
+        //调用获取聊天记录的方法,默认不需要关键字
+        getChatHistory('', '');
+        $('.chat-right').addClass('show');
+    }
+    function hideHistoryR(){
+        curDate.setTime(nowDate)
+        //$('.historyTimeIpt').val(formatDate(curDate))
+        $('.chat-right').removeClass('show')
+    }
+
+   /* $('.historyTimeIpt').on('click',function(){
+        var spacialDates=$(this).attr('data-days').split(',');
+        WdatePicker({
+            //minDate:"#F{formatDate(firstDate)}",
+            minDate:"%y-#{%M-1}-#{%d}",
+           // maxDate:"#F{formatDate(lostDate)}",
+            maxDate:"%y-%M-#{%d}",
+           // specialDates:spacialDates,
+            onpicked:function(){
+				debugger
+                curDate=new Date(this.value);
+                var msg_date = $('.historyTimeIpt').val();
+                getChatHistory(msg_date);
+            }
+        })
+    })*/
+
+    $('body').on('click', '.ignoreTip', function(){
+        // $('.tipBox').hide();
+        $('.chat-right').removeClass('tipShow')
+    });
+
+    // 9.12新增js
+	
+	//下拉弹窗管理
+	var eventList=[];
+	
+    var curDate=new Date();
+    var nowDate=new Date();
+    var lastDate=new Date();
+    var activeDate = new Date();
+    var firstDate=new Date( nowDate.getTime() - 30*24*3600*1000 );
+    var lostDate=new Date( nowDate.getTime());
+    var pageL=$('.historyPageBtnL');
+    var pageR=$('.historyPageBtnR');
+    function plus0(num){
+        return (num < 10 ? "0" : "") +num
+    }
+    function formatDate(date){
+        return date.getFullYear()+"-"+plus0(date.getMonth()+1)+"-"+ plus0(date.getDate())
+    }
+    $('.historyPageBtn').on('click',function(){
+        if($(this).hasClass('gray'))return false;
+        var page = $(this).attr('data-page');
+        var keyword = $('.historyKey').val();
+        getChatHistory('',keyword,page);
+    });
+
+    function addGray(cur,total){
+        if(cur==1){
+            pageR.addClass('gray')
+        }else{
+            pageR.removeClass('gray')
+        }
+        if(cur>=total){
+            pageL.addClass('gray')
+        }else{
+            pageL.removeClass('gray')
+        }
+    }
+	// $('.chatPutFac li').hover(function(){
+	// 	$(this).find('.videoShowTip').html($(this).find('.span').html());
+	// 	$(this).find('.videoShowTip').show();
+	// },function(){
+	// 	$(this).find('.videoShowTip').hide();
+	// })
+
+	$('.guide li').hover(function(){
+		var index = $(this).index();
+		if(index == 1){
+			$(this).find('.traggle1').addClass('bigtraggleHover')
+			$(this).find('.traggle1 span').addClass('smalltraggleHover')
+		}else if( 1 < index && index < 6){
+			$(this).find('.traggle1').addClass('bigtraggleHover');
+			$(this).find('.traggle1 span').addClass('smalltraggleHover');
+			$('.guide li').eq(index-1).find('.traggle1').addClass('bigtraggleHoverBg');
+		}
+	},function(){
+		var index = $(this).index();
+		if(index == 1){
+			$(this).find('.traggle1').removeClass('bigtraggleHover')
+			$(this).find('.traggle1 span').removeClass('smalltraggleHover')
+		}else if( 1 < index && index < 6){
+			$(this).find('.traggle1').removeClass('bigtraggleHover');
+			$(this).find('.traggle1 span').removeClass('smalltraggleHover');
+			$('.guide li').eq(index-1).find('.traggle1').removeClass('bigtraggleHoverBg');
+		}
+	})
+	$(".guide li").click(function(){
+		var index = $(this).index();
+		if(index<7){
+			$(this).addClass('liActive').siblings().removeClass('liActive');
+		}
+		$(this).siblings().children().removeClass('bigtraggleCur');
+		$(this).children().removeClass('bigtraggleCurBg');
+		$(this).siblings().children().removeClass('bigtraggleCurBg');
+		$(this).siblings().find('.traggle1 span').removeClass('smalltraggleCur');
+		if(index == 1){
+			$(this).find('.traggle1').addClass('bigtraggleCur')
+			$(this).find('.traggle1 span').addClass('smalltraggleCur')
+		}else if( 1 < index && index < 6){
+			$(this).find('.traggle1').addClass('bigtraggleCur');
+			$(this).find('.traggle1 span').addClass('smalltraggleCur');
+			$('.guide li').eq(index-1).find('.traggle1').addClass('bigtraggleCurBg');
+		}
+	})
+	$('.chatSearchStatus').on('click',function () {
+		var status = $(this).attr('data-status');
+		$(this).parent().attr('data-status',status);
+		myWebim.searchChange();
+	})
+
+	// $('.selectBox i').click(function(){
+	// 	$('.showSelect').click();
+	// })
+	//全部职位下拉框
+	$('.selectBox').click(function(e){
+		e.stopPropagation();
+		if($('.selectBox-con').css('display')=='none'){
+			eventController($('.selectBox-con'));
+			$(document).one('click',function(){
+				eventController($('.selectBox-con'),2);
+			});
+			$(document).one('click','.selectBox-con',function(e){
+				e.stopPropagation();
+			});
+			// $('.selectBox-con').show();
+		}
+		// else{
+		// 	// $('.selectBox-con').hide();
+		// 	eventController($('.selectBox-con'),2);
+		// }
+	});
+	$('.selectBox-con').on('click','#select_name_job li',function (e) {
+		e.stopPropagation();
+		eventController($('.selectBox-con'),2);
+		$('.selectBox .showSelect').html($(this).html());
+		var jobId = $(this).attr('data-job-id');
+		
+		$('.search_job_sort').attr('data-job-id',jobId);
+		myWebim.searchChange();
+	});
+	//未读单选
+	$('.checkBox').click(function(){
+		if($(this).find('i').hasClass('checkBoxchecked')){
+			$(this).find('i').removeClass('checkBoxchecked');
+			$(this).attr('data-status',0);
+		}else{
+			$(this).find('i').addClass('checkBoxchecked');
+			$(this).attr('data-status',1);
+		}
+		myWebim.searchChange();
+	})
+	$('#backFriendList').click(function(){
+		// $(this).parent().hide();
+		$('#myHistoryList').hide();
+		$('.chat-search').hide();
+		$('.newFriendList').show();
+		$('.chat-search-friend').show();
+		$('.chat-left').removeClass('show')
+		
+	})
+	$('#showHistoryBtn').click(function(){
+		$('.newFriendList').hide();
+		$('.chat-search-friend').hide();
+		$('.chat-search').show();
+		$('#myHistoryList').show();
+		// $(this).parent().hide();
+		$('.chat-left').addClass('show');
+	})
+	
+	$('.chatChangeTel').click(function(e){
+		e.stopPropagation();
+		if($('.changeTelBox').css('display')=='none'){
+			eventController($('.changeTelBox'));
+			$(document).one('click',function(){
+				eventController($('.changeTelBox'),2);
+			});
+			// $('.changeTelBox').show();
+		}
+		else{
+			// $('.changeTelBox').hide();
+			eventController($('.changeTelBox'),2);
+		}
+	})
+	$('.getTelCancel').click(function(e){
+		// $('.changeTelBox').hide();
+		eventController($('.changeTelBox'),2);
+	})
+	$('.getTelSure').click(function(){
+	})
+	$('.chatPutFac li').hover(function(){
+		$(this).find('.videoShowTip').css('display','inline-block');
+		$(this).siblings().find('.videoShowTip').hide();
+	},function(){
+		$(this).find('.videoShowTip').hide();
+	})
+	$('body').on('click','.close_changechatJOb',function(){
+		$(this).parent().parent().hide();
+	});
+
+	
+
+    $('.addNotesBox_list li').on('click',function () {
+		$(this).addClass('liActive').siblings().removeClass('liActive');
+		$(this).parent().parent().find('.addNotesBox_textarea').val($(this).text());
+	});
+	$('.chat-right').on('click','.chatJOb',function(e){
+		e.stopPropagation();
+		if($('.changechatJObBox').css('display')=='none'){
+			// $('.changechatJObBox').show();
+			eventController($('.changechatJObBox'));
+			$(document).one('click',function(){
+				eventController($('.changechatJObBox'),2);
+			});
+			$(document).one('click','.changechatJObBox',function(e){
+				e.stopPropagation();
+			});
+		}
+		// else{
+		// 	// $('.changechatJObBox').hide();
+		// 	eventController($('.changechatJObBox'),2);
+		// }
+		$('.changechatJObBox').css('left',e.pageX - $(this).width()/2)
+		$('.changechatJObBox').css('top',e.pageY +$(this).height()/2+5)
+		
+	});
+	$('body').on('click','.addNotesBtn',function(e){
+		e.stopPropagation();
+		$('.addNotesBox-con').css('left' , e.pageX - $(this).width()/2 - $('.addNotesBox-con').width()/2);
+		$('.addNotesBox-con').css('top' , e.pageY + $(this).height()/2 + 10);
+		if($('.addNotesBox-con').css('display') == 'none'){
+			// $('.addNotesBox-con').show();
+			eventController($('.addNotesBox-con'));
+			$(document).one('click',function(){
+				eventController($('.addNotesBox-con'),2);
+			});
+			$(document).on('click','.addNotesBox-con',function(e){
+				e.stopPropagation();
+			});
+		}
+		// var target = $(e.target);
+		// $(document).one('click',function(){
+		// 	if(!target.is('.addNotesBox-con')  ){
+		// 		eventController($('.addNotesBox-con'),2);
+		//
+		// 	}
+		// });
+		// e.stopPropagation();
+
+	});
+	// $('body').on('click','.adNotesBox_saveBtn',function(e){
+	// 	$('.addNotesBox-con').hide();
+	// })
+	$('body').on('click','.tabBarIcon',function(e){
+		$(this).find('span').addClass('tabBarActive');
+		$(this).siblings('.tabBarIcon').find('span').removeClass('tabBarActive');
+		//关闭聊天记录
+		hideHistoryR();
+		if($(this).index()==1){
+			var _parent =   $(this).parent().parent().parent();
+			var resume_id = _parent.attr('data-resume-id');
+			$('.gotoResumeshow').attr('src','/recommend/RecommendResumeInfochat?resumeid='+resume_id);
+			$('.windowResumeshow').show();
+			$('.chat-card-header').hide();
+			$('.chatPutx').hide();
+			$('.charDialog').hide();
+			if($('.chat-right').hasClass('tipShow') && $('.tipBox').css('display') == 'block'){
+				$('.tipBox').hide()
+			}
+			if($('.chat-right').hasClass('tipShow') && $('.tipBoxBlackName').css('display') == 'block'){
+				$('.tipBoxBlackName').hide()
+			}
+		}else{
+			if($('.chat-right').hasClass('tipShow') && $('.tipBox').css('display') == 'none'){
+				$('.tipBox').show()
+			}
+			if($('.chat-right').hasClass('tipShow') && $('.tipBoxBlackName').css('display') == 'none'){
+				$('.tipBoxBlackName').show()
+			}
+			$('.chatPutx').show();
+			$('.windowResumeshow').hide();
+			$('.chat-card-header').show();
+			$('.charDialog').show();
+			// if($('.tipBox').css('display')=='none'){
+			// 	$('.tipBox').show()
+			// }
+			// if($('.tipBoxBlackName').css('display')=='none'){
+			// 	$('.tipBoxBlackName').show()
+			// }
+		}
+	})
+
+	function eventController(boxObj,eventType=1){
+		switch(eventType) {
+			 case 1:
+				 if(boxObj=={}){return};
+				 if(eventList.indexOf(boxObj) == -1){
+					 if(eventList.length>0){
+						for(var i=0;i<eventList.length;i++){
+							if(eventList[i].css('display')=='block'||eventList[i].css('display')=='inline-block'||eventList[i].css('display')=='inline'){
+								eventList[i].hide();
+							}
+						}
+					 }
+					eventList.push(boxObj);
+					boxObj.show();
+				 }
+				break;
+			 case 2:
+				if(eventList.length>0){
+					eventList.splice(eventList.indexOf(boxObj),1)
+					boxObj.hide();
+				}
+				break;
+			 default:
+				break;
+		}
+	}
+	// function closeEventController(){
+	// 	if(eventList.length==0)return;
+	// 	if(eventList.length>0){
+	// 		for (var i = 0; i < eventList.length; i++) {
+	// 			eventList[i].hide();
+	// 		}
+	// 	}
+	// }
+</script>
+<script  type="text/javascript">
+    var action_url = '{/$siteurl.style/}';
+    if(typeof action_dom == 'object'){}else{
+        action_dom = [];
+    }
+    action_dom.push( ['.charResume', 151]);
+    action_dom.push( ['.md_nomol_replay', 152]);
+    action_dom.push( ['.md_addres', 153]);
+
+    // //视频面试新增内容
+    // $(".chatOnceVideo").click(function(){
+    // 	var net_apply_id = $(this).attr("data-netapply-id");
+    //     var resume_id    = $(this).attr("data-resume-id");
+    //     chatVideo.createRoom(net_apply_id,resume_id);
+    //     $("#chatVideoQerImg").attr('src','{/$siteurl.company/}/video/RtcScanCode/?net_apply_id='+net_apply_id+'&resume_id='+resume_id);
+	//
+    // });
+    // $('#chatVideoSelect').on('click',function () {
+    //    console.log('chatVideoSelect',$('.chatOnceVideo').attr('data-session-id'));
+	// });
+	// var chatVideoSelectMobileInterval = null;
+	// var chatVideoSelectMobileChannel = 0;
+	// $('#chatVideoSelectMobile').on('click',function () {
+	// 	var nowSession = myWebim.getNowNewSession(myWebim.sess_id);
+	// 	var person_id = nowSession.SessionId.replace(/[^0-9]/ig,"");
+	// 	 chatVideoSelectMobileInterval = window.setInterval(function(){
+	// 		$.post('{/$siteurl.company/}/video/RtcScanStatus/', {person_id:person_id,channel_id:chatVideoSelectMobileChannel}, function(){
+	// 			chatVideoSelectMobileChannel = re.data.channel_id;
+	// 			//显示操作
+	// 			if(re.data.status==1){
+	//
+	// 		    }
+	// 			if(re.data.status==3){
+	//
+	// 			}
+    //              console.log('chatVideoSelectMobile',re);
+	// 		},'json');
+	// 	},3000);
+	// });
+	// $('.school-net-status').on('click', function () {
+	// 	var status = $(this).attr('data-status');
+	// 	var id = $('.chatOnceVideo').attr('data-netapply-id');
+	// 	$.post('{/$siteurl.company/}/videohall/SetInterviewStatus/', {id: id, status: status}, function () {
+	// 		//显示操作
+	// 		if (re.status == true) {
+	//
+	// 		}else{
+	//
+	// 		}
+	// 		console.log('chatVideoSelectMobile', re);
+	// 	}, 'json');
+	// });
+
+
+    $("body .closeChatResumeTip").click(function(){
+        myWebim.setCookie("chatCloseResumeTip", "true");
+        $(".chat-right").find(".chat_resume_tip").hide();
+    });
+	// $("body").on('click','.addNotesBtn',function(){
+	// 	if($('.addNotesBox-con').css('display')=='none'){
+	// 		$('.addNotesBox-con').show();
+	// 	}else{
+	// 		$('.addNotesBox-con').hide();
+	// 	}
+	// })
+	// $('body').click(function(){
+	// 	closeEventController()
+	// })
+	$(document).keyup(function(event){
+	  if(event.keyCode ==13){
+		    if($('.addNotesBox-con').css('display')=='block'){
+				$('.adNotesBox_saveBtn')[0].click();
+		    }
+	  }
+	});
+</script>
+
+<script type="text/javascript" language="javascript" src="{/version file='action.js'/}"></script>
+<!-- <div class="mc"></div> -->
+<div class="videoSelectDialog" style="display:none;">
+	<div class="videoSelectDialog-box">
+		<button class="chatVideoSelect">电脑视频</button>
+		<button class="mobileVideoBtn" >手机视频</button>
+	</div>
+</div>
+<div class="mobileVideoDialog" style="display:none;">
+	<div class="mobileVideoDialog-box">
+		<img id='rtcScanCodeImg' src="{/get_url rule='/video/RtcScanCode'/}?job_id=&resume_id=&net_apply_id=" >
+		<div class="saomaTip">汇博企业APP 扫一扫</div>
+		<div class="noHuiboAPP">没有汇博APP？<a href="javascript:;" id="downloadErWeiMaBtn">点击下载</a></div>
+	</div>
+</div>
+<div class="downloadErWeiMaDialog" style="display:none;">
+	<div class="downloadErWeiMaDialog-box">
+		<img src="{/$siteurl.style/}/img/company/company_code.jpg" />
+		<p>微信扫一扫</p>
+	</div>
+</div>
+<div class="rtcScanStatusDialog" style="display:none;">
+	<div class="rtcScanStatusDialog-box">
+		<div class="user-detail">
+			<img class="video-ing-img" src="" />
+			<div class="userInfo">
+				<h4 class="video-ing-name"></h4>
+				<p>面试职位：<span class="video-ing-job-name"></span></p>
+			</div>
+		</div>
+		<div class="inviteViewStatus-btn">
+			<a class="rtcScanStatusDialog_status statusActive" data-status="99">未接通</a>
+			<a class="rtcScanStatusDialog_status" data-status="2">初面通过</a>
+			<a class="rtcScanStatusDialog_status" data-status="4">待定</a>
+			<a class="rtcScanStatusDialog_status" data-status="3">不适合</a>
+		</div>
+		<a id='rtcScanStatusDialog_sure_btn' class="rtcScanStatusDialog_sure_btn">确定</a>
+	</div>
+</div>
+<div class="skipInterviewDialog" style="display:none;">
+	<div class="skipInterviewDialog-box">
+		<p>是否主动跳过该求职者？您该场招聘会还剩<span class="+"'jumpNum'"+">{/$skip_num/}次</span>跳过机会。</p>
+		<a href="javascript:void(0);" class="skipInterview_sureBtn">跳过</a>
+		<a href="javascript:void(0);" class="skipInterview_closeBtn">取消</a>
+	</div>
+</div>
+
+<div class="payTipDialog" style="display:none;">
+	<div class="dialog_box payTipDialog-box ">
+		<p>您套餐内的视频面试时间已用完，请联系销售充值后再使用该功能</p>
+		<a href="javascript:void(0);" class="dialog_closeBtn payTipDialog_closeBtn">取消</a>
+		<a href="javascript:void(0);" class="dialog_sureBtn payTipDialog_sureBtn">去充值</a>
+	</div>
+</div>
+
+
+<div class="canVideoTipDialog1" style="display:none;">
+	<div class="dialog_box canVideoTipDialog1-box">
+		<p>套餐内剩余分钟数：<span class="canVideoTipDialogTime">100</span>分钟</p>
+		<p>是否开启视频面试？请提醒求职者使用手机下载汇博APP进行视频面试</p>
+		<a href="javascript:void(0);" class="dialog_closeBtn canVideoCancel">取消</a>
+		<a href="javascript:void(0);" class="dialog_sureBtn canVideoStart1">开始</a>
+	</div>
+</div>
+<div class="canVideoTipDialog2" style="display:none;">
+	<div class="dialog_box canVideoTipDialog2-box">
+		<p>套餐内剩余分钟数：<span class="canVideoTipDialogTime">30</span>分钟</p>
+		<p>剩余视频时间不充裕，是否先联系销售充值再进行视频面试？</p>
+		<a href="javascript:void(0);" class="dialog_closeBtn canVideoStart2">直接开始</a>
+		<a href="javascript:void(0);" class="dialog_sureBtn canVideoLink">去充值</a>
+	</div>
+</div>
+
+<div class="canVideoTipDialog3" style="display:none;">
+	<div class="dialog_box canVideoTipDialog3-box">
+		<p>套餐内剩余分钟数：<span class="canVideoTipDialogTime">5</span>分钟</p>
+		<p>面试分钟数不足，请联系销售充值后再进行面试</p>
+		<a href="javascript:void(0);" class="dialog_closeBtn  canVideoCancel">取消</a>
+		<a href="javascript:void(0);" class="dialog_sureBtn  canVideoLink">去充值</a>
+	</div>
+</div>
+	<div class="detectionDeviceDialog" style="display:none;">
+		<div class="detectionDeviceDialog-box">
+			<ul class="devices-ul">
+				<li>
+					<div class="devices-box devices-camera"><img src="{/$siteurl.style/}/img/company/video/eng_icon16.png"><span>摄像头</span><i id="j_videoDevice" class="deviceIcon successIcon"></i></div>
+<!--					<p>未检测到摄像头，请接入设备后重新检测</p>-->
+				</li>
+<!--				<li>-->
+<!--					<div class="devices-box devices-mike"><img src="{/$siteurl.style/}/img/company/video/eng_icon17.png" ><span>麦克风</span><i class="deviceIcon successIcon failIcon"></i></div>-->
+<!--					<p>未检测到麦克风设备，请接入设备后重新检测</p>-->
+<!--				</li>-->
+				<li>
+					<div class="devices-box devices-voice"><img src="{/$siteurl.style/}/img/company/video/eng_icon18.png"><span>音频设备</span><i id="j_audioDevice" class="deviceIcon successIcon"></i></div>
+<!--					<p>未检测到音频设备，请接入设备后重新检测</p>-->
+				</li>
+				<li>
+					<div class="devices-box devices-chrome"><img src="{/$siteurl.style/}/img/company/video/eng_icon19.png"><span>浏览器检测</span><i id="j_browser" class="deviceIcon successIcon"></i></div>
+<!--					<p>建议安装推荐浏览器</p>-->
+				</li>
+				<li>
+					<p class="downloadChromecon"><i class='chromeIcon'></i>chrome  <a class='downloadChromeIcon' href='{/$siteurl.style/}/down/chrome.exe'>点击下载</a></p>
+				</li>
+				<li class="novideotip">
+					若您没有视频设备，可下载汇博APP企业版，使用APP进行视频面试
+				</li>
+			</ul>
+			<div class="redetectionBtn redetectionAgain">重新检测</div>
+		</div>
+	</div>
+	<div class="warning_dialog" style="display: none">
+		<div class="warning_dialog1" style="padding:15px;font-family:'微软雅黑';line-height:30px;text-align: left;">
+			<p>联系招聘顾问购买视频时长</p>
+			{/if !empty($hrManager["user_name"])/}
+			<p>招聘顾问：{/$hrManager["user_name"]/}</p>
+			{//if/}
+			{/if !empty($hrManager["mobile"])/}
+			<p>联系电话：{/$tel_head/}转{/$hrManager["tel"]/} [9：00-18：00]</p>
+			<p>手机号码：{/$hrManager["mobile"]/}</p>
+			{/else/}
+			<p>联系电话：400-1010-970</p>
+			{//if/}
+			<p style="margin-top:15px">
+				{/if !empty($hrManager["qq"])/}
+				<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin={/trim($hrManager[" qq"])/}&site=qq&menu=yes">
+				<img src="{/$siteurl.style/}/img/newindex/qq.jpg"/>
+				</a>
+				{/else/}
+				<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=2851501279&site=qq&menu=yes">
+					<img src="{/$siteurl.style/}/img/newindex/qq.jpg"/>
+				</a>
+				{//if/}
+			</p>
+		</div>
+	</div>
+</body>
+</html>

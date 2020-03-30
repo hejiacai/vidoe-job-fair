@@ -1,0 +1,406 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>企业微招聘</title>
+
+		<link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+		<link rel="stylesheet" type="text/css" href="{/version file='ratePoster.css'/}" />
+		<script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.min.js'/}"></script>
+		<script type="text/javascript" language="javascript" src="{/version file='dialog.js'/}"></script>
+		<style>
+			.rateImgList div {
+				position: relative;
+				width: 9999px;
+			}
+			.ratePosterMain{
+				padding-bottom: 0;
+			}
+			.ratePosterLeft{
+				position: relative;
+				overflow: visible;
+			}
+			.rateImgMain{
+				overflow: visible;
+			}
+			.rateImgz{
+				overflow: visible;
+			}
+			.rateImgList{
+	            width: 870px;
+	            overflow: visible;
+	            background: #f1f1f1;
+	            margin-left: 0;
+	           	padding:16px 65px;
+	            position: relative;
+	    		left: -40px;
+        	}
+        	.rateImgLeft,.rateImgRight{display: none;}
+        	
+        	
+        	
+        	
+        	
+        	.rateImgBtn{
+        		position: absolute;
+        		top:200px;
+        		right:-37px;
+				writing-mode:tb-rl;
+				color:#ccc;
+				font-size: 17px;
+        	}
+        	.rateImgBtn ul{
+        		position:absolute;
+        		width:100%;
+        	}
+        	.rateImgBtn li{
+        		width:100%;
+        		text-align: center;
+        		
+        	}
+        	
+        	.rateImgBtn .dot{
+        		display: inline-block;
+        		width:8px;
+        		height:8px;
+        		border-radius: 4px;
+        		border:1px solid #999;
+        		box-sizing: border-box;
+        	}
+        	.rateImgBtn li.cur .dot{
+        		background: #999;
+        	}
+        	.rateImgUp{
+        		margin-top:240px;
+        	}
+        	.rateImgDown{
+        		margin-top:30px;
+        	}
+        	.rateImgDown,.rateImgUp{
+        		width:22px;
+        		color:#999;
+        		text-align: center;
+        		-webkit-user-select: none;
+        		-moz-user-select: none;
+        		-ms-user-select: none;
+        		cursor: pointer;
+        	}
+        	.rateImgDown:hover,.rateImgUp:hover{
+        		color:#444;
+        	}
+        	.rateImgDown i,.rateImgUp i{
+        		display: block;
+        		width:22px;
+        		height:22px;
+        		margin:5px 0;
+        	}
+        	.rateImgDown i{
+        		background: url({/$siteurl.style/}/img/company/mrecruit/pc_down_off_icon.png);
+        	}
+        	.rateImgDown:hover i{
+        		background: url({/$siteurl.style/}/img/company/mrecruit/pc_down_on_icon.png);
+        	}
+        	.rateImgUp i{
+        		background: url({/$siteurl.style/}/img/company/mrecruit/pc_up_off_icon.png);
+        	}
+        	.rateImgUp:hover i{
+        		background: url({/$siteurl.style/}/img/company/mrecruit/pc_up_on_icon.png);
+        	}
+        	
+        	
+        	.rateImgx{
+        		width:335px;
+        		height:592px;
+        	}
+        	.rtCode04 i{
+			    background: url({/$siteurl.style/}/img/company/mrecruit/copyicon.jpg) no-repeat;
+        	}
+			.ieForbid{
+				position: absolute;
+				width:100%;
+				height:100%;
+				background: #fff;
+				z-index: 9999;
+				font-size: 20px;
+			}
+			.editRatexTip{width:385px; overflow: hidden; margin-left: 20px; }
+        	.editRatexTip i{ position: relative; z-index: 1; display: block;width:11px; height: 10px; background: url("{/$siteurl.style/}/img/company/mrecruit/music_tip_icon02.jpg") no-repeat; margin-left: 60px;}
+        	.editRatexTip span{ display: block; border: 1px solid #f6e5a6;  background: #fffadd; line-height: 34px; padding: 0 16px; border-radius: 25px; font-size: 14px; color: #604e29; margin-top: -1px;}
+        	.editRatexTip span img{ display: inline-block; vertical-align: -4px; margin-right: 5px;} 
+        	.editRatexTip span em{ font-size: 14px; color: #ffa200;}
+			.editRatex{ margin-bottom: 5px;}
+			.rtCode04{ padding-top: 55px;}
+		</style>
+	</head>
+	<body>
+		<!--[if IE 8]>
+			<div class="ieForbid">您的浏览器版本较低，暂不支持预览/分享等功能，请使用谷歌、360等浏览器。</div>
+		<![endif]-->
+	<div class="gpHeader">
+			<div>
+				<span class="cur"><a href="javascript:void(0);">企业微招聘</a></span>
+				<span><a href="{/get_url rule='/createposter/index/'/}">招聘海报</a></span>
+				<!--<a href="">返回首页</a>-->
+			</div>
+		</div>
+		<div class="ratePosterMain ratePosterMainLine">
+			<div class="ratePosterLeft">
+				
+				<div class="clear"></div>
+				<div class="rateImgTitle">
+					<img src="{/$siteurl.style/}/img/company/mrecruit/phoneicon.png" alt="" />扫右侧二维码可查看完整效果
+				</div>
+				<div class="rateImgMain">
+					<div class="rateImgBtn">
+						<div class="rateImgText">鼠标滚动可翻页</div>
+					</div>
+					<!-- 这个版本不需要了 -->
+					<!-- <div class="rateImgBtn" style="display: none;">
+						
+						<ul>
+						</ul>
+						<div class="rateImgUp"><i></i>上<br />一<br />页</div>
+						<div class="rateImgDown">下<br />一<br />页<i></i></div>
+					</div> -->
+					<div class="rateImgx">
+						<iframe id="iframeH5" style="width:100%;height:100%;" src='{/$h5_url/}?tempid={/$introduce["template_type"]/}' frameborder="0"></iframe>
+						
+						<!--<a href="//company.huibo.com/createposter/CompanyPoster/company_flag-entmz1j59-poster_type-2" target="_blank" title="点击放大">
+						<img src="//company.huibo.com/createposter/CompanyPoster/company_flag-entmz1j59-poster_type-2" /></a>-->
+					</div>
+					<div class="rateImgz">
+						<div class="rateImgList">
+							<div>
+								{/foreach $page_style as $template/}
+								<span  data-key="{/$template['id']/}" class="{/if $template['id'] == $introduce['template_type']/}cut{//if/}" >
+										<i></i>
+										<img src="{/$template['pic_url']/}" />
+									</span>
+								{//foreach/}
+							</div>
+						</div>
+						<a href="javascript:void(0);" class="rateImgLeft"></a>
+						<a href="javascript:void(0);" class="rateImgRight"></a>
+					</div>
+				</div>
+                <input type="hidden" id="imgKey" value="2" name="imgKey"/>
+			</div>
+			<div class="ratePosterRight">
+				<!--<a href="{/get_url rule='/mrecruit/edit/'/}" class="editRatex">-->
+				<a href="javascript:void(0);" class="editRatex">
+					<i class="editIcon"></i>编辑H5内容
+				</a>
+				<div class="editRatexTip">
+					<i></i>
+					<span>
+						<img src="{/$siteurl.style/}/img/company/mrecruit/music_tip_icon.jpg"/>
+						完善<em>产品/项目介绍、高管团队</em>可显著提升招聘效果
+					</span>
+				</div>
+				<div class="rateCodex">
+					<span class="rtCode01">使用微信/QQ扫码分享</span>
+					<div class="rtCode02">
+						<img id="qrCode" src='{/get_url rule="/mrecruit/PostCode/"/}' />
+					</div>
+					<span class="rtCode03">分享H5招聘页面让更多同事朋友<br />
+<b>帮你转发、为你推荐</b>人才吧！</span>
+					<span class="rtCode04"><i></i>分享链接</span>
+					
+					<a href="javascript:void(0);" class="saveComputer">复制链接</a>
+					
+				</div>
+			</div>	
+		</div>
+		<input style="position: absolute;top:-999999999px;" type="text" id="copyH5" value="" />
+	</body>
+	
+	<script  type="text/javascript">
+        var action_url = '{/$siteurl.style/}';
+        if(typeof action_dom == 'object'){
+            action_dom.push( ['.saveComputer', 52]);
+        }else{
+            action_dom = [
+                ['.saveComputer', 52]
+            ];
+        }
+    </script>
+    <script type="text/javascript" language="javascript" src="{/version file='action.js'/}"></script>
+	<script>
+
+        //------------------全局变量定义区------------------
+        var cur_temp_id = parseInt('{/$introduce["template_type"]/}');//当前模板
+        // var cur_temp_size = parseInt('{/$page_size/}');//当前模板页数
+        // var h5_url = parseInt("{/$h5_url/}");//h5访问路径
+		var h5_url = "{/$h5_url/}";
+        var curStyle=cur_temp_id;
+		var qrSrc='{/get_url rule="/mrecruit/PostCode/"/}';
+        //------------------全局变量定义区------------------
+
+
+        $(window).ready(function () {
+        	console.log(curStyle)
+        	// var list='';
+			// for(var i=0;i<cur_temp_size;i++){
+				// list+='<li><div class="dot"></div></li>'
+				//list+='<li'+(i==0?'class="cur"':'')+'></li>';
+			// }
+			// $('.rateImgBtn ul').html(list)
+			$('.rateImgList div span[data-key='+ curStyle +']').click()
+			if($('.rateImgList span').length<=3) {
+                $('.rateImgLeft,.rateImgRight').hide();
+			}
+			$('#copyH5').val(h5_url + tempId())
+			$('#qrCode').prop('src',qrSrc + tempId())
+        })
+		function tempId(){
+			return "?tempid="+curStyle
+		}
+
+//此版本不需要，以后海报样式多起来了需要计算宽度改变位置
+//跳转时海报的位置
+//	$('.rateImgList div span').ready(function(){
+//		if($('.rateImgList div span').length<=3){
+//	            return
+//	        }else {
+//	            if($('#imgKey').val()-1<2){
+//	                $('.rateImgList div').css({'left':0+'px'})
+//	                return;
+//	            }
+//	            if($('#imgKey').val()-1<=$('.rateImgList div span').length-1 && $('#imgKey').val()-1>$('.rateImgList div span').length-3) {
+//	                $('.rateImgList div').css({'left':-(($('.rateImgList div span').eq($('#imgKey').val()-1).outerWidth(true))*($('.rateImgList div span').length-3))+'px'});
+//	                return;
+//	            }
+//	        }
+//      $('.rateImgList div').css({'left':-(($('#imgKey').val()-1)*($('.rateImgList div span').eq($('#imgKey').val()-1).outerWidth(true)))+'px'})
+//   });
+
+	//选择分享海报
+	$('.rateImgList span').click(function(){
+		var thisId = $(this).attr('data-key');
+		if(curStyle==thisId)return false
+		
+		$(this).addClass('cut').siblings().removeClass('cut');
+		// var thisIndex = $(this).index()+1;
+        $('#imgKey').val(thisId);
+        curStyle=thisId;
+		var iframeH5=document.getElementById('iframeH5');
+		iframeH5.src=h5_url + tempId()
+		$('#copyH5').val(h5_url + tempId())
+		$('#qrCode').prop('src',qrSrc + tempId())
+        // curPage=1;
+        //changesrc()
+
+//此版本不需要，以后海报样式多起来了需要计算宽度改变数字
+//      if($('.rateImgList div span').length<=3){
+//          return
+//      }else {
+//          if(thisIndex<2){
+//              $('.rateImgList div').animate({'left':0+'px'})
+//              return;
+//          }
+//          if(thisIndex<=$('.rateImgList div span').length-1 && thisIndex>$('.rateImgList div span').length-3) {
+//              $('.rateImgList div').animate({'left':-(($(this).outerWidth(true))*($('.rateImgList div span').length-3))+'px'});
+//              return;
+//          }
+//      }
+//      $('.rateImgList div').animate({'left':-((thisIndex-1)*($(this).outerWidth(true)))+'px'})
+	});
+        $('.saveComputer').on("click",function(){
+
+            var copyText = document.getElementById("copyH5");
+            copyText.select();
+            document.execCommand("Copy");
+            $.anchorMsg("复制成功")
+
+//            $.post('{/get_url rule="/mrecruit/CanPub"/}',{},function (e) {
+//				if(e.status){
+//                    var copyText = document.getElementById("copyH5");
+//                    copyText.select();
+//                    document.execCommand("Copy");
+//                    $.anchorMsg("复制成功")
+//				}else{
+//                    $.anchorMsg(e.msg, {icon: "warning"});
+//				}
+//            },'json')
+
+
+
+        	//console.log(window.clipboardData.getData())
+//          var type = $('#imgKey').val();
+//                      window.location.href = "/createposter/companyposter/poster_type-"+type+"-down-1-company_flag-"+'entmz1j59';
+            
+        });
+
+
+//左右按钮选择海报
+    $('.rateImgLeft').on('click',function () {
+		console.log( $('.rateImgList div span.cut').index(),$('.rateImgList div span').length);
+		if($('.rateImgList div span.cut').index()<=0){
+			$('.rateImgList div span').eq($('.rateImgList div span').length-1)[0].click()
+		}else{
+        	$('.rateImgList div span').eq($('.rateImgList div span.cut').index()-1)[0].click()
+        }
+    })
+    $('.rateImgRight').on('click',function () {
+		if($('.rateImgList div span.cut').index()>=$('.rateImgList div span').length-1){
+			$('.rateImgList div span').eq(0)[0].click()
+		}else{
+        	$('.rateImgList div span').eq($('.rateImgList div span.cut').index()+1)[0].click()
+        }
+    })
+    
+    //编辑海报传值
+        $('.editRatex').click(function(){
+//          var type = $('#imgKey').val();
+//          if('' != ''){
+//              window.location.href = "/createposter/editposter/id--poster_type-"+type;
+//          }else{
+//              window.location.href = "/createposter/editposter/poster_type-"+type;
+//          }
+			// window.location.href='{/get_url rule="/mrecruit/edit"/}'+'?curStyle='+curStyle;
+			var url='{/get_url rule="/mrecruit/getPic"/}'+'?save_temp=true&tempid='+curStyle;
+			$.post(url,{},function(res){
+				window.location.href='{/get_url rule="/mrecruit/edit"/}';
+				
+			})
+        })
+        
+        
+        
+        
+//         function changesrc(){
+// //      	var url='{/get_url rule="/mrecruit/getPic?page='+curPage+'&tempid='+curStyle+'"/}'
+// //      	$(".rateImgBtn li").removeClass('cur').eq(curPage-1).addClass('cur')
+// //      	$('.rateImgx img').prop('src',url)
+// //			console.log('进入changesrc')
+// 			$('.rateImgx img').hide();
+// 			$(".rateImgBtn li").removeClass('cur').eq(curPage-1).addClass('cur')
+//             var url='{/get_url rule="/mrecruit/getPic"/}'+'?save_temp=true&page='+curPage+'&tempid='+curStyle+'&v='+Math.random();
+// 
+//         	if($('.s'+curStyle+'p'+curPage).length>0){
+// //      		已有该图片
+//         		$('.s'+curStyle+'p'+curPage).show()
+//                 var img = new Image();
+//                 img.src = url;
+//         	}else{
+// //      		没有找到图片
+//         		$('.rateImgx').append('<img class="s'+curStyle+'p'+curPage+'" src='+url+'/>')
+//         	}
+//         }
+        //上下翻页
+        // $('.rateImgUp').on('click',function(){
+        // 	curPage=(curPage==1)?curPage:(curPage-1);
+        // 	changesrc()
+        // })
+        // $('.rateImgDown').on('click',function(){
+        // 	curPage=(curPage == $(".rateImgBtn li").length)?curPage:(curPage+1);
+        // 	changesrc()
+        // })
+        // $(".rateImgBtn").on('click','li',function(){
+        // 	curPage=$(this).index()+1;
+        // 	changesrc()
+        // })
+        
+	</script>
+</html>

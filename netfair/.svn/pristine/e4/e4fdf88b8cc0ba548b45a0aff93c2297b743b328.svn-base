@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>视频招聘会</title>
+    <link rel="stylesheet" type="text/css" href="{/version file='netfarJobList.css'/}"/>
+    <script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.min.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='mobile.swiper.js'/}"></script>
+    <script type="text/javascript" src="{/version file='jquery.cookie.js'/}"></script>
+    <script type="text/javascript" src="{/version file='layer.js'/}"></script>
+    <link type="text/css" href="{/version file='layer.css'/}">
+    <script type="text/javascript" src="{/version file='base_script.js'/}"></script>
+    <script type="text/javascript" src="{/version file='version.js'/}"></script>
+    <script type="text/javascript">
+        window.CONFIG = {
+            HOST: '{/$siteurl.style/}',
+            COMBOPATH: '/js/v2/',
+        };
+    </script>
+    <script type="text/javascript"
+            src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+    <script type="text/javascript" src="{/version file='global.js'/}"></script>
+    <script type="text/javascript">
+        hbjs.config({
+            combos: {
+                '@homeSideSortMenu': [
+                    'product.homeSideSortMenu', 'product.sideMenu.sideSortMenuGroup', 'product.sideMenu.sideSortMenu',
+                    'product.sideMenu.sideSortMenuData', '@popup'
+                ]
+            }
+        });
+        hbjs.loadJS('{/$siteurl.style/}/js/v2/cqjob/common.js');
+    </script>
+    <style>
+        html,body{background: #f7f7f7;}
+        .videoJobFairTop div a{
+            display: block;
+            padding-left: 160px;
+            background: url({/$siteurl.style/}/img/company/video/videi_job_img01.jpg) no-repeat;
+            line-height: 60px;
+            color: #fff;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: left;
+        }
+        .apply_item_c .apply_item_img {
+            width: 580px;
+            vertical-align: top;
+            margin-bottom: 19px;
+            height: 300px;
+        }
+    </style>
+</head>
+<body>
+{/$head_data/}
+<div class="videoJobFairTop">
+    <div>
+        <a>视频招聘会</a>
+    </div>
+</div>
+<div class="search_box">
+    <div class="serach">
+        <form action="{/get_url rule="/index/Index"/}" method="get" id="form">
+            <input type="text" placeholder="搜索招聘会、心仪公司或职位" name="content" value="{/$content/}">
+            <input type="hidden">
+        </form>
+        <img src="{/$siteurl.style/}/img/company/video/serach_bot_03.jpg" id="submit">
+    </div>
+    <div class="apply">
+        <div class="apply_title">
+            <img src="{/$siteurl.style/}/img/company/video/vidoe_03.jpg" class="top_img">
+            <span class="title_mark">视频面试中</span>
+            <span>今日申请,今日面试</span>
+        </div>
+        <div class="apply_items">
+            {/if $list.interview_in/}
+                {/foreach $list.interview_in as $key=>$val/}
+                    <div class="apply_item_c">
+                        {/if $val.list_poster/} <img src="{/$val.list_poster_info/}" class="apply_item_img">{/else/}<img src="{/$siteurl.style/}/img/mobile/moren_pic.png" class="apply_item_img" />{//if/}
+                    <div class="apply_item_c_box">
+                        <div class="apply_item_c_content">
+                            <img src="{/$siteurl.style/}/img/company/video/vidoe_03.jpg" >
+                            <span>{/$val.title/}</span>
+                        </div>
+                        <div class="baom_scri">
+                            <span>企业 <em>{/$val.count_data.company_num/}</em> 家</span>
+                            <span>岗位 <em>{/$val.count_data.job_num/}</em> 个</span>
+                            <span>参与 <em>{/$val.count_data.person_num/}</em> 人</span>
+                        </div>
+                        <div class="end_time">
+                            {/$val.interview_end_time|date_format:'H:i'/}结束  剩余56个名额
+                        </div>
+                        {/if $val.station/}
+                        <div class="tuijian">
+                            <img src="{/$siteurl.style/}/img/company/video/03.jpg" alt="">
+                            <span class="jobName">{/$val.station/}</span>
+                            <span>等{/$val.station_count/}个在招</span>
+                        </div>
+                        {//if/}
+                    </div>
+                </div>
+                {//foreach/}
+            {//if/}
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>
+<div class="activi_box">
+    <div class="box_ms">
+        <div class="list_items">
+            <div class="list_item_title">报名中</div>
+            {/if $list.signup_in/}
+                {/foreach $list.signup_in as $key=>$val/}
+                    <div class="list_item_c">
+                    <div class="list_item_cc">
+                        {/if $val.list_poster/} <img src="{/$val.list_poster_info/}" class="nav_img">{/else/}<img src="{/$siteurl.style/}/img/mobile/moren_pic.png" class="nav_img" />{//if/}
+                        <div class="list_item_c_conte">
+                            <div class="apply_item_c_content_t">
+                                <img src="{/$siteurl.style/}/img/company/video/vidoe_03.jpg" >
+
+                                <span>{/$val.title/}</span>
+                            </div>
+                            <div class="baom_scri">
+                                <span>企业 <em>{/$val.count_data.company_num/}</em> 家</span>
+                                <span>岗位 <em>{/$val.count_data.job_num/}</em> 个</span>
+                                <span>参与 <em>{/$val.count_data.person_num/}</em> 人</span>
+                            </div>
+                            <div class="baom">
+                                <span>面试：</span>
+                                <span class="jttime">{/$val.interview_start_time|date_format:'m.d H:i'/}  - {/$val.interview_end_time|date_format:'m.d H:i'/}</span>
+                            </div>
+                            <div class="end_time">
+                                {/$val.day/}天后报名结束
+                            </div>
+                            {/if $val.station/}
+                            <div class="tuijian">
+                                <img src="{/$siteurl.style/}/img/company/video/03.jpg" alt="">
+                                <span class="jobName">{/$val.station/}</span>
+                                <span>等{/$val.station_count/}个在招</span>
+                            </div>
+                            {//if/}
+                        </div>
+                    </div>
+                </div>
+                {//foreach/}
+            {//if/}
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div class="box_ms">
+        <div class="list_items">
+            <div class="list_item_title">已结束</div>
+            {/if $list.over/}
+            {/foreach $list.over as $key=>$val/}
+            <div class="list_item_c">
+                <div class="list_item_cc">
+                    {/if $val.list_poster/} <img src="{/$val.list_poster_info/}" class="nav_img">{/else/}<img src="{/$siteurl.style/}/img/mobile/moren_pic.png" class="nav_img" />{//if/}
+                    <div class="list_item_c_conte">
+                        <div class="apply_item_c_content_t">
+                            <img src="{/$siteurl.style/}/img/company/video/vidoe_03.jpg" >
+
+                            <span>{/$val.title/}</span>
+                        </div>
+                        <div class="baom_scri">
+                            <span>企业 <em>{/$val.count_data.company_num/}</em> 家</span>
+                            <span>岗位 <em>{/$val.count_data.job_num/}</em> 个</span>
+                            <span>参与 <em>{/$val.count_data.person_num/}</em> 人</span>
+                        </div>
+                        <div class="baom">
+                            <span>活动时间：</span>
+                            <span class="jttime">{/$val.start_time|date_format:'m.d H:i'/}  - {/$val.end_time|date_format:'m.d H:i'/}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {//foreach/}
+            {//if/}
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    $('#submit').click(function () {
+        $('#form').submit();
+    })
+</script>
+</html>

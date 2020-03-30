@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>{/$title/}</title>
+		<link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+		<link rel="stylesheet" type="text/css" href="{/version file='comback.css'/}" />
+		<link rel="stylesheet" type="text/css" href="{/version file='job-manage.css'/}" />
+		<link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}" />
+		<link rel="stylesheet" type="text/css" href="{/version file='m_font_style.css'/}" />
+		<link rel="stylesheet" type="text/css" href="{/version file='talentSharing.css'/}">
+	</head>
+	<body style="background: #eff0f5;">
+	{/include file="new_header.html" cur="人才共享"/}
+	<div class="employeesShareMain">
+		{/include file="workershar/header.html" cur=$cur/}
+			{/if $list/}
+			<div class="employeesSharex">
+				{/foreach $list as $key => $val/}
+				<div class="employeesShareList">
+					<img src="{/$val['logo_path']/}">
+					<div class="employeesShareCenter">
+						<span class="employShare01"><em>{/$val['title']/}</em></span>
+						<span class="employShare02">可共享员工：<em>{/$val['worker_require']/}</em></span>
+						<span class="employShare03">可雇用时长：<em>{/$val['worker_day']/}天</em></span>
+						<span class="employShare04">企业：{/$val['company_name']/}</span>
+					</div>
+					<a href='{/get_url rule="/workershar/SharInfo" data="id={/$val['id']/}"/}' class="employShare05" target="_blank">查看详情</a>
+				</div>
+				{//foreach/}
+			</div>
+			
+			
+			<div class="page">
+				{/$pager/}
+			</div>
+			{/else/}
+				<div class="notData">
+					没有数据
+				</div>
+			{//if/}
+		</div>
+	{/include file="footer.html"/}
+	</body>
+</html>

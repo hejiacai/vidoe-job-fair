@@ -1,0 +1,49 @@
+<!-- <head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+<title>汇博人才网-企业登录</title>
+<!–[if lt IE9]> 
+<script type="text/javascript" language="javascript" src="http://assets.huibo.com/js/html5.js?v=20150226"></script>
+<![endif]–>
+<link rel="stylesheet" type="text/css" href="http://assets.huibo.com/css/base.css?v=20150529" />
+<link rel="stylesheet" type="text/css" href="http://assets.huibo.com/css/comback.css?v=20150428" />
+<link rel="stylesheet" type="text/css" href="css/tJob_style.css" />
+</head> -->
+<div style="width:334px;padding:10px 0 20px;margin: 0 auto;">
+	<style>
+		.haopinNum{font-size:16px;color:#666}
+		.haopinNum label{margin-right:25px}
+		.grenn1{color:#19bdb4;font-size:24px}
+		.grenn2{color:#19bdb4;font-size:14px}
+		.orange1{color:#f29e17;font-size:24px}
+		.orange2{color:#f29e17;font-size:14px}
+		.red1{color:#fb7957;font-size:24px}
+		.red2{color:#fb7957;font-size:14px}
+		.haopin_list{border-top:1px solid #ececec;border-left:1px solid #ececec;margin-top: 10px}
+		.haopin_list th,.haopin_list td{padding:7px 0;border-bottom:1px solid #ececec;border-right:1px solid #ececec;text-align: center}
+		.haopin_list th{color:#fff;font-size:18px;height: 20px;padding:5px 0}
+		.haopin_list .greent{background-color: #19bdb4}
+		.haopin_list .yellowt{background-color: #f29e16}
+		.haopin_list td{font-size: 12px}
+	</style>
+	<p class="haopinNum" style="font-size:16px">
+		<label>好评<i class="grenn1">+</i><i class="grenn1">{/$level[1][2]/}</i><i class="grenn2">分</i></label>
+		<label>中评<i class="orange1">+</i><i class="orange1">{/$level[2][2]/}</i><i class="orange2">分</i></label>
+		<label>差评<i class="red1">-</i><i class="red1">{/abs($level[3][2])/}</i><i class="red2">分</i></label>
+	</p>
+	<table class="haopin_list" style="width:100%;">
+		<tr>
+			<th class="greent">积分</th>
+			<th class="yellowt">等级</th>
+		</tr>
+		{/foreach $list as $key=>$val/}
+		<tr>
+			<td class="grenn1">{/$val.score_min/}-{/$val.score_max/}分</td>
+			<td class="orange1">{/$key/}级</td>
+		</tr>
+		{//foreach/}
+	</table>
+	<!-- <div class="formBtn" style="margin-top: 15px;"><a class="btnsF16 btn1" id="btnSaveAddress" href="javascript:void(0);" style="padding:0 40px;text-decoration: none">确定</a></div> -->
+</div>              

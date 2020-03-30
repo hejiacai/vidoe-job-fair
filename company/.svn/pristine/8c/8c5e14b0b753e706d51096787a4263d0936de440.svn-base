@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="Keywords" content="" />
+        <meta name="Description" content="" />
+        <title>汇博人才网-求职者大厅</title>
+        <!–[if lt IE9]>
+        <script src="{/version file='html5.js'/}"></script>
+        <![endif]–>
+        <link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+        <link rel="stylesheet" type="text/css" href="{/version file='comback.css'/}" />
+        <link rel="stylesheet" type="text/css" href="{/version file='video_eng.css'/}" />
+        <link rel="stylesheet" type="text/css" href="{/version file='m_font_style.css'/}">
+        <link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}">
+		<script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.min.js'/}"></script>
+        
+        <script type="text/javascript" src="{/version file='version.js'/}"></script>
+        <script type="text/javascript">
+            window.CONFIG = {
+                HOST: '{/$siteurl.style/}',
+                COMBOPATH: '/js/v2/'
+            }
+        </script>
+        <script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+        <script type="text/javascript" src="{/version file='global.js'/}"></script>
+        <script type="text/javascript" language="javascript" src="{/version file='confirmBox.js'/}"></script>
+        <script type="text/javascript" language="javascript" src="{/version file='dialog.js'/}"></script>
+        <script type="text/javascript" language="javascript" src="{/version file='WdatePicker.js'/}"></script>
+	</head>
+	<body style="background: #f6f7f8;">
+    {/include 'schoolnet/hallhead.html' par='求职者大厅'/} 
+	<div class="videoIhalMain">
+        <form id="frmInvite" method="get" action="{/get_url rule='/videohall/JobWanters/'/}">
+            <input type="hidden" name="sid" value="{/$sid/}" />
+            <div class="dataStatScreen dataJobhunter">
+                <span>姓名</span>
+                <input type="text" name="user_name" value="{/$user_name/}" autocomplete="off">
+                <span>性别</span>
+                <select name="sex">
+                    <option value="">请选择</option>
+                    <option value="1" {/if $sex == 1/}selected{//if/}>男</option>
+                    <option value="2" {/if $sex == 2/}selected{//if/}>女</option>
+                </select>
+                <span>专业</span>
+                <input type="text" name="major" style="margin-right: 0;" value="{/$major/}" autocomplete="off">
+                <button type="button" class="statSearchBtn">搜索</button>
+                <div class="clear"></div>
+            </div>
+        </form>
+		<table class="jobhunterTab">
+			<tr>
+				<th>姓名</th>
+				<th>性别</th>
+				<th>年龄</th>
+				<th>学历</th>
+				<th width="12%">学校</th>
+				<th width="12%">专业</th>
+				<th width="22%">意向职位</th>
+				<th width="15%">操作</th>
+			</tr>
+            {/foreach $list as $k=>$v/}
+			<tr>
+				<td><a href="{/get_url rule='/resume/resumeshow/'/}type-network-resumeid-{/$v['resume_id']/}-src-video" target="_blank">{/$v['user_name']/}</a></td>
+				<td>{/$v['sex_name']/}</td>
+				<td>{/$v['age']/}</td>
+				<td>{/$v['degree_name']/}</td>
+				<td>{/$v['school']/}</td>
+				<td>{/$v['major_desc']/}</td>
+				<td>{/$v['exp_jobsort']/}</td>
+				<td data-person-id="{/$v['person_id']/}">
+                    {/if $shuang_xuan_time_class_name != 'videoActivityEnd'/}
+					<a href="javascript:;" class="startVideoBtn">立即面试</a>
+                    {//if/}
+				</td>
+			</tr>
+            {//foreach/}
+		</table>
+		{/$pager/}
+	</div>
+    <div class="jobVacancyPop" id='selectJobsDiv' style='display:none;'>
+		<div class="jobVacancySelect">
+            {/foreach $net_jobs as $v/}
+			<span data-id="{/$v['job_id']/}"><i></i>{/$v['station']/}</span>
+            {//foreach/}
+		</div>
+	</div> 
+    <div class="failureCheckingPop"  id="videoCheckDiv" style="display:none;">
+        <ul class="failureCheckingx">
+            <li class="videoDevice">
+                <img src="{/$siteurl.style/}/img/company/video/eng_icon16.png" >
+                <span>
+                    摄像头
+                    <em>未检测到摄像头设备，请接入设备后重新检测</em>
+                </span>
+                <img src="{/$siteurl.style/}/img/company/video/eng_icon14.png" class="right" >
+            </li>
+            <li class="audioDevice">
+                <img src="{/$siteurl.style/}/img/company/video/eng_icon17.png" >
+                <span>
+                    麦克风
+                    <em>未检测到麦克风设备，请接入设备后重新检测</em>
+                </span>
+                <img src="{/$siteurl.style/}/img/company/video/eng_icon14.png"  class="right">
+            </li>
+            <li class="audioDevice">
+                <img src="{/$siteurl.style/}/img/company/video/eng_icon18.png" >
+                <span>
+                    音频设备
+                    <em>未检测到音频设备，请接入设备后重新检测</em>
+                </span>
+                <img src="{/$siteurl.style/}/img/company/video/eng_icon14.png"  class="right">
+            </li>
+            <li class="browserDevice">
+                <img src="{/$siteurl.style/}/img/company/video/eng_icon19.png" >
+                <span>
+                    浏览器检测
+                    <em>建议安装推荐浏览器</em>
+                </span>
+                <img src="{/$siteurl.style/}/img/company/video/eng_icon14.png"  class="right">
+            </li>
+        </ul>
+        <div class="chromeDown browserDevice">
+            <img src="{/$siteurl.style/}/img/company/video/eng_icon15.png" >
+            <span>chrome</span>
+            <a href="https://www.google.cn/intl/zh-CN/chrome/" target="_blank">下载</a>
+        </div>
+        <div class="videoPopBtn">
+            <a href="javascript:;" id="hideVideoCheckDiv">关闭</a>
+        </div>
+    </div>
+    <script type="text/javascript" language="javascript"  src='{/version file="aliyun-webrtc-sdk-1.9.0.min.js"/}'></script>
+    <script type="text/javascript">
+    hbjs.use('@confirmBox, @jobDialog', function (m) {
+        var ConfirmBox = m['widge.overlay.confirmBox'],
+            Dialog = m['widge.overlay.hbDialog'],
+            $ = m['jquery'].extend(m['cqjob.jobDialog']);
+
+        var close = '×';
+        var width = 455;
+        var zIndex = 9999;
+        var title = '职位选择';
+        
+        var selectJobDialog = new Dialog({
+            close: close,
+            idName: 'selectJob_dialog',
+            title: title,
+            width: width,
+            zIndex: zIndex,
+            content:$("#selectJobsDiv").html()
+        }),
+        checkVideoDialog = new Dialog({
+            close: close,
+            idName: 'checkVideo_dialog',
+            title: '提示',
+            width: width,
+            zIndex: zIndex,
+            content:$("#videoCheckDiv").html()
+        });
+        
+        
+        $('.startVideoBtn').on('click', function(){
+            var person_id = $(this).parent().attr('data-person-id');
+            selectJobDialog.setContent($("#selectJobsDiv").html()).show();
+            selectJobDialog.query('.jobVacancySelect span').on('click', function(){
+                var job_id = $(this).attr('data-id');
+                $('.jobVacancySelect span.cut').each(function(i,n){
+                    $(n).removeClass('cut');
+                });
+                $(this).addClass('cut');
+                AliRtcEngine.isSupport().then(re => {
+                    checkVideo(re,job_id,person_id);
+                }).catch(err => {
+                    checkVideo(err,job_id,person_id);
+                });
+                selectJobDialog.hide();
+            });
+        });
+        
+        function checkVideo(msg,job_id,person_id){
+console.log(msg);
+            if(!msg.isSupported){
+                if(!msg.audioDevice){
+                    $('.audioDevice').show();
+                }else{
+                    $('.audioDevice').hide();
+                }
+
+                if(!msg.videoDevice){
+                    $('.videoDevice').show();
+                }else{
+                    $('.videoDevice').hide();
+                }
+
+                if(msg.browser.toLowerCase() != 'chrome'){
+                    $('.browserDevice').show();
+                }else{
+                    $('.browserDevice').hide();
+                }
+                
+                checkVideoDialog.show();
+                return;
+            }
+
+            $.ajax({
+                type: 'post',
+                url: '{/get_url rule="/videohall/StartInterview"/}',
+                data: {job_id: job_id, sid: '{/$sid/}', person_id: person_id},
+                dataType: 'json',
+                success: function (res) {
+                    if(!res.status){
+                        ConfirmBox.timeBomb(res.msg,{
+                            name: 'fail',
+                            width:'auto',
+                            timeout : 5000
+                        });
+                        return;
+                    }
+                    var newwindow = window.open('about:blank');
+                    newwindow.location.href = "https:{/base_lib_Constant::COMPANY_URL_NO_HTTP/}/chat/?resume_id=" + res.data.resume_id + "&job_id=" + res.data.job_id + "&net_apply_id=" + res.data.id + "&sid=" + res.data.sid;
+                    window.location.reload();
+                }
+            });
+        }
+        
+        checkVideoDialog.query('#hideVideoCheckDiv').on('click', function(){
+            checkVideoDialog.hide();
+        });
+        
+        $('.statSearchBtn').on('click', function(){
+            $('#frmInvite').get(0).submit();
+        });
+    });
+    </script>
+	</body>
+</html>

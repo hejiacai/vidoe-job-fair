@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>账户整体分析</title>
+    <!–[if lt IE9]>
+    <script src="{/version file='html5.js'/}"></script>
+    <![endif]–>
+    <link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='comback.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='resument2015.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='repcalendar.css'/}">
+    <link rel="stylesheet" type="text/css" href="{/version file='market.css'/}" />
+    <script type="text/javascript" src="{/version file='version.js'/}"></script>
+    <script type="text/javascript">
+        window.CONFIG = {
+            HOST: '{/$siteurl.style/}',
+            COMBOPATH: '/js/v2/'
+        }
+    </script>
+    <script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+    <script type="text/javascript" src="{/version file='global.js'/}"></script>
+</head>
+
+<body>
+{/include 'new_header.html' par="全职招聘" cur='精准推广'/}
+<div class="resumentNbg">
+    <div class="rMentLt">
+        <ul class="rMentUl rMentPinp">
+            <li><a href="{/get_url rule='/spreadstatistics/index'/}"  class="cut">效果统计</a></li>
+            {/if $this_company_id == $super_company_id/}
+            <li><a href="{/get_url rule='/companybrandspread/index'/}">品牌推广</a></li>
+            {//if/}
+            <li><a href="{/get_url rule='/spreadjob/'/}">职位推广</a></li>
+        </ul>
+    </div>
+    <div class="rMentRt">
+        <ul class="newMsgList" style="width:auto">
+            <li><a href="/spreadstatistics/index" class="cut">账户整体分析</a></li>
+            <li><a href="/spreadstatistics/SpreadJobList" >推广职位分析</a></li>
+            <!--<li><a href="/spreadstatistics/SpreadBrand">品牌推广分析</a></li>-->
+            <li class="msgrt">推广金额：<b>{/$count/}元</b></li>
+        </ul>
+        <div class="clear"></div>
+        <ul class="newMakList">
+            <li>昨日推广单元：<span>{/$yesterday_num/}个</span></li>
+            <li>昨日展示量：<span>{/$yesterday_see_times/}次</span></li>
+            <li>昨日点击量：<span>{/$yesterday_click_times/}次</span></li>
+            <li>昨日消费：<span>{/$yesterday_total_consume/}元</span></li>
+        </ul>
+        <form action="./index" method="get" id="form1">
+            <div class="subMetx clearfix">
+
+
+                <div class="makSelect makTime" style="padding-bottom:10px;float:left" >
+                    <b>时间：</b>
+                    <input type="text" id="startDay" name="startDay" value="{/$stime/}" />
+                    <span>~</span>
+                    <input type="text" id="endDay" name="endDay" value="{/$etime/}" />
+                </div>
+                <a href="#" class="maketSecrch" onclick="document:form1.submit();" style="margin-right:0px;">搜索</a>
+                <!--<input type="submit"  class="maketSecrch" style="margin-right:0px;" value="搜索"/>-->
+            </div>
+        </form>
+        <table width="100%" border="0" class="maktTab">
+            <tr>
+                <th height="50" align="center" valign="middle">时间</th>
+                <th height="50" align="center" valign="middle">推广单元</th>
+                <th height="50" align="center" valign="middle">展示量</th>
+                <th height="50" align="center" valign="middle">点击量</th>
+                <th height="50" align="center" valign="middle">点击率</th>
+                <th height="50" align="center" valign="middle">消费</th>
+            </tr>
+            {/foreach $list as $k=>$v/}
+            <tr>
+                <td align="center" valign="middle">{/$v['days']/}</td>
+                <td align="center" valign="middle">{/$v['num']/}个</td>
+                <td align="center" valign="middle">{/$v['seeTimes']/}</td>
+                <td align="center" valign="middle">{/$v['clickTimes']/}</td>
+                <td align="center" valign="middle">{/$v['click_rate']/}</td>
+                <td align="center" valign="middle">{/$v['totalConsume']/}元</td>
+            </tr>
+            {//foreach/}
+
+        </table>
+
+
+    </div>
+</div>
+{/include file="chat/chat.html"/}
+</body>
+<script type="text/javascript">
+
+    hbjs.use('widge.select, widge.calendar.calendar, widge.checkBoxer,highcharts.highstock', function(Select, Calendar, checkBoxer, $, highstock){
+        var t1 = '2012-01-01',
+                t2 = (new Date()),
+                dateMiddle = null;
+
+
+                c1 = new Calendar({trigger: $('#startDay'), range: [t1, null]}),
+                c2 = new Calendar({trigger: $('#endDay'), range: [null, t2]});
+        c1.on('selectDate', function(date) {
+            c2.range([date.value, t2]);
+        });
+        c2.on('selectDate', function(date) {
+            c1.range([t1, date.value]);
+        });
+
+        var tabRadio = $('.tabRadio'),
+                tabCheckbox = $('.tabRadio2'),
+                radioRet = [],
+                checkRet = [];
+        tabRadio.each(function(index, val){
+            radioRet.push(new checkBoxer({
+                element: $(this).children('.hb_ui_boss_radio'),
+                className: 'hb_ui_boss_checked_radio',
+                multiple: false
+            }));
+        });
+
+        tabCheckbox.each(function(index, val){
+            checkRet.push(new checkBoxer({
+                element:$(this).children('.hb_ui_boss_checkbox'),
+                className: 'hb_ui_boss_checked_checkbox',
+            }));
+
+            checkRet[index].on('select', function(e){
+                if(e.index === 0){
+                    this.all(this.isChecked());
+                } else {
+                    if(this.isAll(1)){
+                        this.setStatus(0, true);
+                    } else {
+                        this.setStatus(0, false);
+                    }
+                }
+            });
+        });
+    });
+
+</script>
+</html>

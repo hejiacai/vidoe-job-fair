@@ -1,0 +1,207 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>支付</title>
+    <link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file="m_font_style.css"/}">
+    <link rel="stylesheet" type="text/css" href="{/version file="m_font_style.css"/}"/>
+    <link rel="stylesheet" type="text/css" href="{/version file='resumePartTime.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}" />
+    <script type="text/javascript" language="javascript" src="//assets.huibo.com/js/jquery-1.8.3.min.js?v=20150226"></script>
+    <script type="text/javascript" src="{/version file='version.js'/}"></script>
+    <script type="text/javascript">
+        window.CONFIG = {
+            HOST: '{/$siteurl.style/}',
+            COMBOPATH: '/js/v2/'
+        }
+    </script>
+    <script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+    <script type="text/javascript" src="{/version file='global.js'/}"></script>
+    <style>
+        .hb_ui_dialog .ui_dialog_close{background: none !important;  line-height: inherit!important;}
+        .hb_ui_prt{z-index: 10025!important;}
+    </style>
+</head>
+<body>
+<div class="pay-all">
+    <div class="pay-tit">
+        <i class="icon-particulars-require"></i>
+        支付金额：<em>￥{/$charge_amount/}</em>
+    </div>
+    <p class="pay-time">请在10分钟内完成支付</p>
+    <div class="pay-choose">
+        <div class="pay-choose-tit">
+            <a href="javascript:void(0)" class="chose">微信</a>
+        </div>
+        <ul class="pay-choose-con">
+            <li>
+                <div class="master_weixin_erweima">
+                    <img class="order_pay_src" src='' alt="">
+                    <div class="master_weixin_erweima_success" style="display: none;">
+                        <i></i>
+                        <h1>支付成功</h1>
+                        <p>页面自动跳转中...</p>
+                    </div>
+                    <div class="master_weixin_erweima_time_out" style="display: none;">
+                        <i class="icon-svg152"></i>
+                        <h1>支付超时</h1>
+                        <p></p>
+                    </div>
+                </div>
+                <!--<div class="master_weixin_erweima_next" style="display: none;">-->
+                    <!--<a href="javascript:void(0);" id="overPay">支付完成？</a>-->
+                    <!--<a href="javascript:void(0);"  id="rePay">重新选择支付方式</a>-->
+                <!--</div>-->
+                <p class="please">请使用<span>微信</span>扫描 <br> 二维码以完成支付 </p>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+<script>
+    var  is_refresh = '';
+
+    hbjs.use(' @confirmBox', function(m){
+        var confirmBox = m['widge.overlay.confirmBox'],
+                Dialog = m['widge.overlay.hbDialog'],
+                fontSize = 18,
+                pWidth = 70,
+                $ = m['jquery'];
+        $('.master_weixin_erweima').find('.order_pay_src').attr('src', '{/get_url rule="/pay/PaySQrcode"/}?code_url={/$code_url/}');
+
+        var scan_status;
+        var _scan_status;
+        var _scan_status_count = 0;//请求10次 间隔3秒再次请求
+        var start_scan_time;
+        var scan_time_time_out = 600 * 1000;//毫秒
+
+        //检查订单状态
+        _scan_status = setInterval(function () {
+
+            _scan_status_count++;
+
+            if(_scan_status_count > 151){
+                clearInterval(_scan_status);
+            }
+            checkOrderStatus();
+
+        }, 4000);
+
+//        //重新支付
+//        $("#rePay").click(function(){
+////            $(window.parent.document).find(".hb_ui_ui-mask").css('z-index',9999);
+////            parent.agreementDialog.destory();
+//            $(window.parent.document).find(".hb_ui_ui-mask").css('z-index',9999);
+//            parent.agreementDialog.destory();
+//
+//        });
+        //支付完成
+//        $("#overPay").click(function(){
+//            //检查订单状态
+//            var url = '/partorder/scanCodePaySearchResult/';
+//            var data = {
+//                order_no: "2019071216201894434",
+//                from:'overpay'
+//            };
+//
+//            $.post(url, data, function(data){
+//                console.log(data);
+//                //订单状态返回失败，弹出失败原因，走重新支付
+//                if(!data.status || data.data.is_pay < 1){
+//                    confirmBox.timeBomb(data.msg, {
+//                        name : 'fail',
+//                        timeout :3000,
+//                        width: 70 + data.msg.length * 18
+//                    });
+////                    setTimeout(function () {
+////                        $(window.parent.document).find(".hb_ui_ui-mask").css('z-index',9999);
+////                        parent.agreementDialog.destory();
+////                    },3000);
+//                }
+//
+//                if (data.data.is_pay) {
+//                    $('.master_weixin_erweima_time_out').hide();
+//                    $('.master_weixin').find('.order_but').find('.master_but2').hide();
+//                    $('.master_weixin_erweima_success').show();
+//                    //success_pay();
+//                    confirmBox.timeBomb(data.msg, {
+//                        name : 'success',
+//                        timeout :3000,
+//                        width: 70 + data.msg.length * 18
+//                    });
+//                    console.log(is_refresh);
+//                    //关闭弹框
+//                    setTimeout(function () {
+//                        if(is_refresh == ''){
+//                            window.parent.parent.document.location.reload();
+//                        }
+//                        parent.is_descoty = true;
+//                        parent.agreementDialog.destory();
+//
+//                    },3000);
+//
+//
+//                }
+//
+//
+//            });
+//        });
+
+        function checkOrderStatus() {
+            if (!start_scan_time) {
+                start_scan_time = new Date().getTime();
+            }
+            //支付超时
+            if (start_scan_time + scan_time_time_out < new Date().getTime()) {
+                scan_status_close();
+                $('.master_weixin_erweima_time_out').show();
+               // $('.master_weixin_erweima_next').show();
+                //$('.master_weixin_erweima').find('.order_pay_src').hide();
+            }
+
+            //检查订单状态
+            var url = "{/get_url rule='/pay/CheckOrder/'/}";
+            var data = {
+                orderno: "{/$orderno/}"
+            };
+
+            $.post(url, data, function(r){
+
+                if(r.error){
+                    scan_status_close();
+                    return false;
+                }
+                if (r.state == '1') {
+                    scan_status_close();
+                    var msg = "成功充值金额{/$charge_amount/}元";
+                    confirmBox.timeBomb(msg, {
+                        name : 'success',
+                        timeout :3000,
+                        width: 70 + msg.length * 18
+                    });
+                    //关闭弹框
+                    wxialog.hide();
+                    setTimeout("window.location.reload()",2900);
+
+
+                }
+
+
+            },'json');
+
+
+        }
+
+        //关闭轮询
+        function scan_status_close() {
+            console.log(22222);
+            clearInterval(_scan_status);
+        }
+
+        checkOrderStatus();
+    });
+
+</script>
+</html>

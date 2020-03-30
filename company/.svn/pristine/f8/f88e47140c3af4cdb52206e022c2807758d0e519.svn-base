@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{/$title/}</title>
+<link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='comback.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='wechat.css'/}" />
+<link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}"/>
+<script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.min.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='common.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='jquery.form.js'/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file='dialog.js'/}"></script>
+<!–[if lt IE9]> 
+<script src="{/version file='html5.js'/}"></script>  
+<![endif]–>
+<style>
+body{ background:#e9e9e9;font-family: "微软雅黑";}
+</style>
+<script type="text/javascript" src="{/version file='version.js'/}"></script>
+<script type="text/javascript">
+window.CONFIG = {
+	HOST: '{/$siteurl.style/}',
+	COMBOPATH: '/js/v2/'
+}
+</script>
+<script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+<script type="text/javascript" src="{/version file='global.js'/}"></script>
+
+</head>
+<body> 
+{/include file="new_header.html" par="全职招聘" cur="微信助手"/}
+<div class="weChatBg">
+	<div class="weChatLf">
+    	<h2 class="weTitx">微信公众号--汇博招聘</h2>
+        <div class="weChatDl">
+            <dl>
+                <dt><img src="{/$siteurl.style/}/img/c/weChat01.png" width="168" height="168" /></dt>
+                <dd>
+                    <b>告别电脑，手机即可处理</b>
+                    <span>处理求职者简历<br />
+    管理职位、刷新职位<br />
+    搜索简历、邀请面试<br />
+    ……</span>
+                </dd>
+            </dl>
+            <dl>
+                <dt><img src="{/$siteurl.style/}/img/c/weChat02.png" width="168" height="168" /></dt>
+                <dd>
+                    <b>微信提醒，不怕错过</b>
+                    <span>新收到简历、新推荐简历<br />
+    面试邀请反馈
+</span>
+                </dd>
+            </dl>
+            <dl style="margin-right:0;">
+                <dt><img src="{/$siteurl.style/}/img/c/weChat03.png" width="168" height="168" /></dt>
+                <dd>
+                    <b>拒绝消息泛滥、骚扰</b>
+                    <span>自定义免打扰时段<br />
+    自定义提醒的消息类型</span>
+                </dd>
+            </dl>
+        </div>
+        <h2 class="weTitx">如何关注公众号？</h2>
+        <div class="weChatD2">
+        	<p>1、用微信扫扫下方二维码，即可轻松关注</p>
+            <img id="codeimg" />
+            <p>2、在微信通讯录-公众号中搜索“汇博招聘”，点击关注！</p>
+            <img src="{/$siteurl.style/}/img/c/weChat05_01.jpg" />
+        </div>
+    </div>
+    <div class="weChatRt">
+    	<h3>微信绑定规则：</h3>
+        <p>
+            1.一个企业账号只允许绑定一个<br />&nbsp;&nbsp;&nbsp;微信号<br/>
+            2.管理员账号可以管理解绑所有<br />&nbsp;&nbsp;&nbsp;微信号<br/>
+            3.子账号只能解绑自己微信号<br/>
+            4.如果要多个绑定多个微信号，<br />&nbsp;&nbsp;&nbsp;可以在账号管理中添加子账号，使用企业子账号绑定微信账号，</p>
+        <h3>微信绑定管理：</h3>
+		<ul id="weixincontainer">
+        	<li class="weChattit"><span>微信昵称</span><em>绑定账号</em><b>操作</b></li>
+              {/foreach $companyweixins as $key=>$value/}
+                  {/if $account_id == $value.account_id/}
+                <li class="{/if $value@iteration is even/}weChatlit{//if/} item"><span>{/$value['nickname']/}</span><em>{/$value['account_user_name']/}</em>
+                    <a href="javascript:void(0);" data-value="{/$value['open_id']/}">解绑</a>
+                    &nbsp;&nbsp;
+                </li>
+                  {//if/}
+              {/foreachelse/}
+                <li class="weChatlit"><em style="text-align: center;width: 100%;">当前未绑定微信号</em></li>   
+              {//foreach/}
+        </ul>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#weixincontainer').find('a[data-value]').click(function(){
+            var openid = $(this).attr('data-value'),
+                self = $(this);
+            $.confirm('确定解除绑定吗？', '操作提示', function() {    
+                $.getJSON('{/get_url rule="/account/unbindweixin/"/}', {openid:openid}, function(result) {
+                     if(!result.status) {
+                        $.anchorMsg(result.msg, { icon: 'fail' }); 
+                        return false;
+                     }
+                    $.anchorMsg(result.msg);
+                    self.closest('li').remove();
+                    if($('#weixincontainer').find('li.item').length<1) {
+                        $('#weixincontainer').append('<li><em style="text-align: center;width: 100%;">当前未绑定微信号</em></li>');
+                    }
+                })
+            });
+        });
+
+        var loadcodeurl = function() {
+            $('#codeimg').removeAttr('width').removeAttr('height').attr('src',"{/$siteurl.style/}/img/c/indicator_medium.gif");
+            $.getJSON('{/get_url rule="/account/twodimensioncode/"/}',function(result){
+                if(result&&result.status) {
+                    $('#codeimg').removeAttr('src').attr({width:271,height:275,src:result.data.codeurl});
+                }else {
+                    $('#codeimg').attr({title:'加载失败，请刷新页面',src:''});
+                }
+            });
+        }
+
+        $('#codeimg').click(function(){
+            loadcodeurl();
+        });
+
+        loadcodeurl();
+    });
+</script>
+{/include file="chat/chat.html"/}
+</body>
+</html>

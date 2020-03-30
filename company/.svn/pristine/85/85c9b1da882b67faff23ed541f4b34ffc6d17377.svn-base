@@ -1,0 +1,414 @@
+<!doctype html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="Keywords" content="" />
+    <meta name="Description" content="" />
+    <title>职位推广</title>
+    <!–[if lt IE9]>
+    <script src="{/version file='html5.js'/}"></script>
+    <![endif]–>
+    <link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='comback.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='resument2015.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}" />
+    <link rel="stylesheet" type="text/css" href="{/version file='market.css'/}" />
+    <script type="text/javascript">
+      window.CONFIG = {
+        HOST: '{/$siteurl.style/}',
+        COMBOPATH: '/js/v2/'
+      }
+    </script>
+
+    <script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.min.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='common.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='dialog.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='ui_inputFocus.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='ui_validate.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='jquery.form.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='ui_dropdownlist.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='ui_tooltip.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='ui_autocomplete.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='jquery.email.tip.js'/}"></script>
+    <script type="text/javascript" language="javascript" src="{/version file='jquery.metadata.js'/}"></script><!--指向改变class-->
+
+    <script type="text/javascript" src="{/version file='hbjs.js'/}"></script>
+    <script type="text/javascript" src="{/version file='jquery.min.js'/}"></script>
+    <script type="text/javascript" src="{/version file='util.js'/}"></script>
+    <script type="text/javascript" src="{/version file='class.js'/}"></script>
+    <script type="text/javascript" src="{/version file='shape.js'/}"></script>
+    <script type="text/javascript" src="{/version file='event.js'/}"></script>
+    <script type="text/javascript" src="{/version file='aspect.js'/}"></script>
+    <script type="text/javascript" src="{/version file='attribute.js'/}"></script>
+    <script type="text/javascript" src="{/version file='cookie.js'/}"></script>
+    <script type="text/javascript" src="{/version file='global.js'/}"></script>
+    <script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+    <script type="text/javascript" src="{/version file='global.js'/}"></script>
+    <script type="text/javascript">
+      hbjs.loadJS('{/$siteurl.style/}/js/v2/cqjob/common.js');
+    </script>
+    <!--<style>-->
+    <!--.maktTab02 tr td span{ display: inline-block; border: 1px solid #ddd; padding: 0 8px;}-->
+    <!--</style>-->
+    <style>
+        .maktTab02 tr td span.submaktTab01,.maktTab02 tr td span.submaktTab02,.maktTab02 tr td span.submaktTab03{ display: inline-block; border: 1px solid #ddd; padding: 0 8px;}
+        .gray_small{font-size:12px;}
+        .marketSick{width:100%; overflow: hidden; padding-bottom: 15px;}
+        .marketSick p{ line-height: 24px; color: #999; font-size:12px;}
+        .marketSick p a{ padding-right: 20px; display:inline-block;background: url({/$siteurl.style/}/img/company/marketShow.png) right center no-repeat;}
+        .icon-jing{display: inline-block;width: 16px;height: 16px;background: url('{/$siteurl.style/}/img/v2/job/icon-jing.png') no-repeat;vertical-align: -2px;margin-left: 4px;}
+        .hb_ui_dialog .ui_dialog_title {
+            text-align: left;
+        }
+		.gray_small i{ display: inline-block;width:16px; height: 16px; color: #3d84b8; cursor: pointer; margin-left: 6px; vertical-align: -2px; font-size: 20px;}
+		.expBox{position:absolute; top:94px; left:-42px; background:#fffbe8;width: 386px; padding: 10px; z-index: 10;} 
+		.expBox em{ background: url({/$siteurl.style/}/img/common/common.gif) no-repeat -174px 0;width: 20px;height: 10px;display: inline-block;top: -10px;right: 206px;position: absolute;}
+		.expBox p{line-height:20px; zoom:1;}
+		.marketSick p a i{ font-size: 20px; vertical-align: -2px; color: #3d84b8; padding-left: 5px;}
+    </style>
+</head>
+
+<body id="body">
+{/include 'new_header.html' par="全职招聘" cur='精准推广'/}
+<div class="resumentNbg" style="overflow: inherit;">
+    <div class="rMentLt">
+        <ul class="rMentUl rMentPinp">
+             <li><a href="javascript:;" onclick="javascript:$('.j_result_stastics_btn').click();window.location.href='{/get_url rule='/spreadstatistics/index'/}';">效果统计</a></li>
+            {/if $this_company_id == $super_company_id/}
+            <li><a href="{/get_url rule='/companybrandspread/index'/}">品牌推广</a></li>
+            {//if/}
+            <li><a href="/spreadjob/" class="cut">职位推广</a></li>
+        </ul>
+    </div>
+    <div class="rMentRt">
+
+        <h2 class="promoteAmount">推广金额：<b>{/$count/}元</b></h2>
+        <form action="" method="get" id="form1">
+            <div class="subMetx clearfix" style="padding:30px 0 26px 0;">
+                <span style="padding-top:5px;">推广状态：</span>
+                <div id="selDateType" name="dateType" class="xkTabSelect"><b class="hbFntWes dropIco"></b>
+                    <label></label>
+                </div>
+
+                <a href="#" class="maketSecrch" onclick="document:form1.submit();" style="margin-right:0px;">搜索</a>
+                <!--<input type="submit"  class="maketSecrch" style="margin-right:0px;" value="搜索"/>-->
+            </div>
+        </form>
+        <div class="marketSick">
+            <p>1、开启推广的职位有机会在职位列表最前面展示（置顶之前）；<a href="javaScript:;" class="marketShow j_marketShow_btn" onclick="modShowTop()" style="background: none;">展示示例<i class="hbFntWes">&#xf059;</i></a></p>
+            <p>2、展示位置排名=出价*质量分数，展示不付费，点击扣费；</p>
+            <p>3、每日预算为当天最大消费金额，消费金额大于每日预算，广告自动下线</p>
+
+        </div>
+        <!--<p style="font-size:12px; color:#a1a1a1; margin-bottom: 5px;">职位推广为点击付费，职位被点击一次扣费的金额和出价相关，每日预算为当天消费最大金额；（职位推广排名=出价*质量分数）</p>-->
+        <table width="100%" border="0" class="maktTab maktTab02">
+            <tr>
+                <th height="40" width="130" align="left" valign="middle" class="marktTabpd20">职位</th>
+                <th height="40" align="center" valign="middle">出价</th>
+                <th height="40" align="center" valign="middle">每日预算（元/天）</th>
+                <th height="40" align="center" valign="middle">截止时间</th>
+                <th height="40" align="center" valign="middle">推广状态</th>
+                <th height="40" align="center" valign="middle">开关状态</th>
+                <th height="40" align="center" valign="middle">开关</th>
+            </tr>
+            {/foreach $list as $k=>$v/}
+
+            <tr data-username="{/$v['account_user_name']/}" data-cando="{/$v['can_do']/}" data-jobresource="{/$v['job_account_resource_type']/}">
+                <td align="left" width="130" valign="middle" class="marktTabpd20">
+                    <span>{/$v['station']/}{/if $v['is_quality']/}<i class="icon-jing"></i>{//if/}</span>
+                    <!-- <b class="gray">{/if $v['ranking'] > 0/}（当前排名：第{/$v['ranking']/}位）{//if/}</b>-->
+                </td>
+                <td align="center" valign="middle">
+                    <span class="submaktTab01" onclick="modbid(this)" data-companyid="{/$v['company_id']/}" data-jobid="{/$v['job_id']/}" title="点击编辑">{/if empty($v['bid'])/}--{/else/}{/$v['bid']/}{//if/}</span>
+                  {/*  <b class="gray gray_small">最低出价：1元 {/if $v['bid'] > 0/} <br />平均出价：{/$v['avgbid']/} 元{//if/}</b>*/}
+                    <b class="gray gray_small">{/if $v['avgbid'] >= 1/}平均出价：{/$v['avgbid']/} 元<br/>{//if/}首屏展示最低价{/$v['first_screen_bid']/}元<i class="hbFntWes">&#xf059;</i></b>
+					<div class="expBox" style="{/if $v['avgbid'] >= 1/}top:94px;{/else/} top:77px;{//if/}display: none;" id="expBox">
+						<em></em>
+						<div class="expBoxC">
+							<p>首屏展示价仅供参考，实际展示与职位名称等因素有关</p>
+						</div>
+					</div>
+                </td>
+                <td align="center" valign="middle">
+                    <span class="submaktTab02" onclick="modBudget(this)" data-companyid="{/$v['company_id']/}" data-jobid="{/$v['job_id']/}">{/if empty($v['budget'])/}--{/else/}{/$v['budget']/}{//if/}</span>
+                    <b class="gray gray_small">{/if empty($v['budget'])/}{/else/}消费：{/$v['last_budget']/}{//if/}</b>
+                </td>
+                <td align="center" valign="middle">
+                    <span class="submaktTab03" onclick="modEndtime(this)" data-companyid="{/$v['company_id']/}" data-jobid="{/$v['job_id']/}" data-spreadID="{/$v['spread_id']/}">{/if empty($v['end_time'])/}永久{/else/}{/$v['end_time']/}{//if/}</span>
+                    <b class="gray gray_small">（选填）</b>
+                </td>
+                <td align="center" valign="middle" class="{/if empty($v['status']) || (!empty($v['end_time']) && strtotime($v['end_time'])<=time())/}gray{/else/}orange{//if/}">
+                    {/if !empty($v['end_time']) && strtotime($v['end_time'])<=time()/}已下线
+                    {/else/}
+                    {/if in_array($v['status'],array(0))/}已下线{/else/}正在推广{//if/}
+                    {//if/}
+                </td>
+                <td align="center" valign="middle" class="{/if empty($v['is_effect'])/}gray{/else/}orange{//if/}">{/if $v['is_effect']==1/}开启{/else/}关闭{//if/}</td>
+                <td align="center" valign="middle">
+                    <a href="javaScript:;" class="marktOppen {/if $v['is_effect']==1/}marktOppencut{//if/}" data-spread="{/$v['spread_id']/}" data-status="{/$v['is_effect']/}"></a>
+                </td>
+            </tr>
+            {//foreach/}
+
+
+        </table>
+
+
+    </div>
+	<div class="clear"></div>
+</div>
+
+
+
+<!--弹窗职位不匹配提示结束-->
+{/include file="msgpop.html"/}
+{/include file="footer.html"/}
+<div class="j_result_stastics_btn" data-explain="do not delete!" style="display: none"></div>
+<script  type="text/javascript">
+    var action_url = '{/$siteurl.style/}';
+    action_dom = [
+        ['.j_result_stastics_btn', 408],
+        ['#selDateType', 414],
+        ['.j_marketShow_btn', 415]
+    ];
+</script>
+<script type="text/javascript" language="javascript" src="{/version file='action.js'/}"></script>
+<script type="text/javascript">
+  var dataTypeList = [
+    {'value':'0','label':'全部'},
+    {'value':'1','label':'正在推广'},
+    {'value':'2','label':'已下线'}
+  ];
+  var resource_type = "{/$companyresources['resource_type']/}";
+  var confirmBox1;
+  hbjs.use('widge.select, widge.calendar.calendar, widge.checkBoxer,highcharts.highstock, widge.overlay.confirmBox, widge.overlay.hbDialog', function(Select, Calendar, checkBoxer, highstock, confirmBox,Dialog,$){
+
+    var t1 = '2012-01-01',
+      t2 = (new Date()),
+      dateMiddle = null;
+
+      confirmBox1 = confirmBox;
+
+      dialog = new Dialog({
+          close : 'X',
+          idName : 'job_dialog',
+          width : 425,
+          isOverflow : false,
+          isAjax : true
+      });
+
+      dialog_msg = new Dialog({
+          close : 'X',
+          idName : 'hr_dialog',
+          width : 520,
+          isOverflow : false,
+          isAjax : true
+      });
+
+    var selDateType = new Select({
+      trigger : $('#selDateType'),
+      selectName : 'status',
+      className : 'boss_select',
+      align : {baseXY: [0, '100%-1']},
+      dataSource : dataTypeList,
+      selectedValue : "{/$status/}",
+    });
+
+
+    var tabRadio = $('.tabRadio'),
+      tabCheckbox = $('.tabRadio2'),
+      radioRet = [],
+      checkRet = [];
+    tabRadio.each(function(index, val){
+      radioRet.push(new checkBoxer({
+        element: $(this).children('.hb_ui_boss_radio'),
+        className: 'hb_ui_boss_checked_radio',
+        multiple: false
+      }));
+    });
+
+    tabCheckbox.each(function(index, val){
+      checkRet.push(new checkBoxer({
+        element:$(this).children('.hb_ui_boss_checkbox'),
+        className: 'hb_ui_boss_checked_checkbox',
+      }));
+
+      checkRet[index].on('select', function(e){
+        if(e.index === 0){
+          this.all(this.isChecked());
+        } else {
+          if(this.isAll(1)){
+            this.setStatus(0, true);
+          } else {
+            this.setStatus(0, false);
+          }
+        }
+      });
+    });
+	
+	$('.hbFntWes').hover(function(){
+		$(this).parent().next('#expBox').toggle();
+	});
+
+    $('.marktOppen').click(function(){
+        var spread_id = $(this).attr('data-spread');
+        var status = $(this).attr('data-status');
+
+        var cando = $(this).closest('tr').attr("data-cando");
+        var jobresource = $(this).closest('tr').attr("data-jobresource");
+        var job_user_name = $(this).closest('tr').attr("data-username");
+        var msg = '';
+        if(cando == 2){
+            if(resource_type == 2){
+                msg = '该职位由账号（'+job_user_name+'）发布，请登录该账号操作';
+            }else{
+                msg ="该职位由分配模式账号（"+job_user_name+"）发布，请登录该子账号操作";
+            }
+
+            if(msg){
+                confirmBox1.timeBomb(msg, {"name":"fail",width:'auto'});
+                return false;
+            }
+
+        }
+
+      if(spread_id == null || spread_id == undefined || spread_id ==''){
+//	            confirmBox.timeBomb('请先输入出价和预算！', {"name":"success",width:'auto'});
+        confirmBox.timeBomb("请先输入出价和预算！", { "name":"fail",width:'auto'});
+        return;
+      }
+      $.ajax({
+        url: '{/get_url rule="/spreadjob/SetSpreadStatus"/}',
+        data: {'spread_id':spread_id,'status':status},
+        type: 'get',
+        dataType: 'json',
+        success: function(json) {
+          if (json && json.error){
+              //需要设置精品职位
+              if(json.err_code == 'set_quality'){
+                  dialog.setContent({
+                      'title' : '精准推广',
+                      'content' : '{/get_url rule="/index/SetJobQualitySpread/" data="job_id='+json.job_id+'&from=spreadjob&v='+Math.random()+'"/}'
+                  }).show();
+                  return;
+              }else {
+                  confirmBox.timeBomb(json.error, {"name": "fail", width: 'auto'});
+                  return;
+              }
+          }else{
+            confirmBox.timeBomb(json.msg, {"name":"success",width:'auto'});
+          }
+          setTimeout("window.location.reload()",'2000');
+
+        }
+      });
+    });
+
+  });
+
+
+  function modbid(obj){
+      var company_id = $(obj).attr('data-companyid');
+      var job_id = $(obj).attr('data-jobid');
+
+      var cando = $(obj).closest('tr').attr("data-cando");
+      var jobresource = $(obj).closest('tr').attr("data-jobresource");
+      var job_user_name = $(obj).closest('tr').attr("data-username");
+      var msg = '';
+      if(cando == 2){
+          if(resource_type == 2){
+              msg = '该职位由账号（'+job_user_name+'）发布，请登录该账号操作';
+          }else{
+              msg ="该职位由分配模式账号（"+job_user_name+"）发布，请登录该子账号操作";
+          }
+
+          if(msg){
+              confirmBox1.timeBomb(msg, {"name":"fail",width:'auto'});
+              return false;
+          }
+      }
+      $.showModal('{/get_url rule="/spreadjob/modbid/" data="type=bid&company_id='+company_id+'&job_id='+job_id+'"/}',{title:'出价修改'});
+  }
+  function modBudget(obj){
+      var company_id = $(obj).attr('data-companyid');
+      var job_id = $(obj).attr('data-jobid');
+      var cando = $(obj).closest('tr').attr("data-cando");
+      var jobresource = $(obj).closest('tr').attr("data-jobresource");
+      var job_user_name = $(obj).closest('tr').attr("data-username");
+      var msg = '';
+      if(cando == 2){
+          if(resource_type == 2){
+              msg = '该职位由账号（'+job_user_name+'）发布，请登录该账号操作';
+          }else{
+              msg ="该职位由分配模式账号（"+job_user_name+"）发布，请登录该子账号操作";
+          }
+
+          if(msg){
+              confirmBox1.timeBomb(msg, {
+                  name: 'fail',
+                  timeout: 2000,
+                  width:  msg*18 + 20,
+                  zIndex: 999999
+              });
+              return false;
+          }
+
+      }
+      $.showModal('{/get_url rule="/spreadjob/modbid/" data="type=budget&company_id='+company_id+'&job_id='+job_id+'"/}',{title:'预算修改'});
+  }
+
+  function modEndtime(obj){
+      var company_id = $(obj).attr('data-companyid');
+      var job_id = $(obj).attr('data-jobid');
+      var spread_id = $(obj).attr('data-spreadID');
+      var cando = $(obj).closest('tr').attr("data-cando");
+      var jobresource = $(obj).closest('tr').attr("data-jobresource");
+      var job_user_name = $(obj).closest('tr').attr("data-username");
+      var msg = '';
+      if(cando == 2){
+          if(resource_type == 2){
+              msg = '该职位由账号（'+job_user_name+'）发布，请登录该账号操作';
+          }else{
+              msg ="该职位由分配模式账号（"+job_user_name+"）发布，请登录该子账号操作";
+          }
+
+          if(msg){
+              confirmBox1.timeBomb(msg, {
+                  name: 'fail',
+                  timeout: 2000,
+                  width:  msg*18 + 20,
+                  zIndex: 999999
+              });
+              return false;
+          }
+
+      }
+      $.showModal('{/get_url rule="/spreadjob/ModEndTime/" data="company_id='+company_id+'&job_id='+job_id+'&spread_id='+spread_id+'"/}',{title:'推广截止时间'});
+  }
+
+  function modShowTop(){
+      $.showModal('{/get_url rule="/spreadjob/ModShowTopImage/"/}',{title:'推广示例',width:890,height:452});
+  }
+
+  function is_login(){
+      $.ajax({
+          url: '{/get_url rule="/spreadjob/SetSpreadStatus"/}',
+          data: {'spread_id':spread_id,'status':status},
+          type: 'get',
+          dataType: 'json',
+          success: function(json) {
+              if (json && json.error){
+                  confirmBox.timeBomb(json.error, {"name":"fail",width:'auto'});
+                  return;
+              }else{
+                  confirmBox.timeBomb(json.msg, {"name":"success",width:'auto'});
+              }
+              setTimeout("window.location.reload()",'2000');
+
+          }
+      });
+  }
+
+</script>
+</body>
+</html>

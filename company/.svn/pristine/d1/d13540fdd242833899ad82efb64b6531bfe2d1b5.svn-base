@@ -1,0 +1,202 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta property="qc:admins" content="14122575176051276375" />
+<meta name="keywords" content="重庆人才网，重庆招聘，重庆招聘网，重庆找工作，汇博人才网" />
+<meta name="description" content="汇博人才网（huibo.com）,原重庆人才网，重庆人都爱上的招聘网站，重庆找工作的理想选择，招聘职位多、真实可靠、薪酬公开的专业招聘网站，查重庆人才网最新招聘信息，找工作，上汇博人才网！!" />
+<title>重庆人才网_重庆招聘网_重庆最新招聘信息_重庆找工作_汇博人才网</title>
+<link rel="stylesheet" type="text/css" href="{/version file="base.css"/}" />
+<link rel="stylesheet" type="text/css" href="{/version file="style.css"/}" />
+</head>
+<style type="text/css">
+body{font-family: "微软雅黑","Microsoft YaHei";text-align: left}
+.hhy-head{background: url({/$siteurl.style/}/img/company/head.jpg) top center no-repeat;height: 502px}
+.float-box{height:300px;width: 248px;position:fixed;right:10px;top:122px;background-color: #fdf7ff;padding:15px;border-radius: 0 0 10px 10px;font-size:14px;color:#333;line-height: 30px;z-index: 3}
+.float-box .tit1,.float-box .tit2{font-size:18px;font-weight:bold;padding-bottom: 5px;margin-bottom: 5px}
+.float-box .tit1{color:#ea6e2b;border-bottom:1px solid #fee6df}
+.float-box span{color:#666}
+.float-box .tit2{color:#18c2b8;border-bottom:1px solid #ddf0ef;margin-top: 5px}
+.float-box .link{background: url({/$siteurl.style/}/img/company/butn.jpg) no-repeat;width:128px;height: 32px;display: inline-block;text-indent: -999px;overflow: hidden}
+.float-box .link:hover{background-position: 0 -32px}
+.hhy-menu{background-color: #e76747;height: 122px;position: absolute;left:0px;top:502px;width:100%;z-index: 2}
+.hhy-menu ul{width:1000px;margin:0 auto}
+.hhy-menu ul li{float:left;height: 122px;width:250px;text-align: center;font-size:16px}
+.hhy-menu ul li a{color: #fff;display: block;width:100%;height: 100%}
+.hhy-menu ul li em{display:block;width:50px;height: 50px;background: url({/$siteurl.style/}/img/company/menu.png) no-repeat;margin: 25px auto 5px}
+.hhy-menu ul .m2 em{background-position: -50px 0}
+.hhy-menu ul .m3 em{background-position: -100px 0}
+.hhy-menu ul .m4 em{background-position: -150px 0}
+.hhy-menu ul .m5 em{background-position: -200px 0}
+.hhy-menu ul .m6 em{background-position: -250px 0}
+.hhy-menu ul .cur{background-color: #f7f5f0}
+.hhy-menu ul .cur .m1{color:#ff6633}
+.hhy-menu ul .cur .m1 em{background-position: 0px -50px}
+.hhy-menu ul .cur .m2{color:#45c4a4}
+.hhy-menu ul .cur .m2 em{background-position: -50px -50px}
+.hhy-menu ul .cur .m3{color:#ff807a}
+.hhy-menu ul .cur .m3 em{background-position: -100px -50px}
+.hhy-menu ul .cur .m4{color:#6ea1ff}
+.hhy-menu ul .cur .m4 em{background-position: -150px -50px}
+.hhy-menu ul .cur .m5{color:#b588e5}
+.hhy-menu ul .cur .m5 em{background-position: -200px -50px}
+.hhy-menu ul .cur .m6{color:#3ac3d4}
+.hhy-menu ul .cur .m6 em{background-position: -250px -50px}
+.hhy-table1,.hhy-table2,.hhy-table3,.hhy-table4,.hhy-table5,.hhy-table6{height: 750px;width: 100%}
+table{width: 920px;margin:0 auto;height: 100%}
+table td{width: 550px;color:#666}
+.hhy-table1 h3,.hhy-table2 h3,.hhy-table3 h3,.hhy-table4 h3,.hhy-table5 h3,.hhy-table6 h3{font-size:48px;font-weight:bold}
+.hhy-table1 .t1,.hhy-table2 .t1,.hhy-table3 .t1,.hhy-table4 .t1,.hhy-table5 .t1,.hhy-table6 .t1{color:#333;font-size:24px;border-bottom:1px solid #cecece;padding-bottom: 10px;margin-bottom: 10px}
+.hhy-table1 .t2,.hhy-table2 .t2,.hhy-table3 .t2,.hhy-table4 .t2,.hhy-table5 .t2,.hhy-table6 .t2{font-size:18px;margin-bottom: 10px}
+.hhy-table1 strong,.hhy-table2 strong,.hhy-table3 strong,.hhy-table4 strong,.hhy-table5 strong,.hhy-table6 strong{font-weight:bold}
+
+.hhy-table1{background-color: #faf7f2;display: block}
+.hhy-table1 h3{color:#ea951b}
+.hhy-table1 strong{color:#ea951b}
+
+.hhy-table2{background-color: #fff}
+.hhy-table2 h3{color:#48cfad}
+.hhy-table2 strong{color:#48cfad}
+
+.hhy-table3{background-color: #faf7f7}
+.hhy-table3 h3{color:#ff807a}
+.hhy-table3 strong{color:#ff807a}
+
+.hhy-table4{background-color: #fff}
+.hhy-table4 h3{color:#6ea1ff}
+.hhy-table4 strong{color:#6ea1ff}
+
+.hhy-table5{background-color: #fcfafc}
+.hhy-table5 h3{color:#b588e5}
+.hhy-table5 strong{color:#b588e5}
+
+.hhy-table6{background-color: #fff}
+.hhy-table6 h3{color:#3ac3d4}
+.hhy-table6 strong{color:#3ac3d4}
+.hhy-footer{background-color: #c25d40;text-align: center;color:#fff2ee;font-size:14px;height: 120px;line-height: 120px}
+
+</style>
+	<body>	
+		<div class="hhy-head"></div>
+		<div class="float-box">
+			 <p class="tit1">汇博会员为您提供</p>
+			 <p style="line-height:24px;">简历优惠<br />职位发布<br />投递简历免费使用<br />
+职位优先展示等<br />专属VIP服务！</p>
+			 <p class="tit2">开通会员服务，请联系客服</p>
+			 <p>热线：{/$huibo_phone/}<br />客服：{/$huibo_phone/}转1<span>[9：00-18：00]</span></p>
+			 <a href="http://wpa.qq.com/msgrd?v=3&uin=2851501286&site=qq&menu=yes" class="link">QQ咨询</a>
+		</div>
+		<div class="hhy-menu">
+			<ul class="clearfix">
+				<li class="cur"><a href="#weizhi1" class="m1"><em></em><span>简历优惠特权</span></a></li>
+				<li><a href="#weizhi2" class="m2"><em></em><span>职位发布特权</span></a></li>
+				<li><a href="#weizhi3" class="m3"><em></em><span>收到简历免费特权</span></a></li>
+				<li><a href="#weizhi4" class="m4"><em></em><span>职位优先展示特权</span></a></li>
+				<!--<li><a href="#weizhi5" class="m5"><em></em><span>职位刷新特权</span></a></li>
+				<li><a href="#weizhi6" class="m6"><em></em><span>面试短信特权</span></a></li>-->
+			</ul>
+		</div>
+		<a name="weizhi1" class="weizhi1"></a>
+		<div class="hhy-table1" style="margin-top: 122px">
+			<table>
+				<tr>
+					<td>
+						<h3>简历优惠特权</h3>
+						<p class="t1">开通会员服务，尊享超低简历优惠，简历低至2元！</p>
+						<p class="t2"><strong>新玩儿法</strong> 通过下载点获取简历联系方式</p>
+						<span>成为会员，会员套餐中奖赠送简历下载点。通过主动搜索简历库下载简历将直接使用
+简历点进行抵扣，简历最低只需要1个下载点，换算成人民币只需要2元。</span>
+					</td>					
+					<th align="right">
+						<img src="{/$siteurl.style/}/img/company/img1.jpg" />
+					</th>
+				</tr>
+			</table>
+		</div>
+		<a name="weizhi2" class="weizhi2"></a>
+		<div class="hhy-table2">
+			<table>
+				<tr>										
+					<th>
+						<img src="{/$siteurl.style/}/img/company/img2.jpg" />
+					</th>
+					<td>
+						<h3>职位发布特权</h3>
+						<p class="t1">加入会员，提高简历职位发布数<br />最大可同时发布100个职位 </p>
+						<p class="t2"><strong>就是任性</strong> 职位多，想怎么发就怎么发</p>
+						<span>可同时在线职位数提升至100，满足更大的招聘需求 </span>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<a name="weizhi3" class="weizhi3"></a>
+		<div class="hhy-table3">
+			<table>
+				<tr>		
+					<td>
+						<h3>收到简历免费特权</h3>
+						<p class="t1">开通会员服务，职位收到的简历全部获取联系方式</p>
+						<p class="t2"><strong>最实惠</strong>吸引求职者的好职位，就是该享受免费待遇</p>
+						<span>搜索入口职位置顶，让您的职位总是出现在搜索结果的第一排，提升职位曝光度。</span>
+					</td>								
+					<th align="right">
+						<img src="{/$siteurl.style/}/img/company/img3.jpg" />
+					</th>
+				</tr>
+			</table>
+		</div>
+		<a name="weizhi4" class="weizhi4"></a>
+		<div class="hhy-table4">
+			<table>
+				<tr>								
+					<th>
+						<img src="{/$siteurl.style/}/img/company/img4.jpg" />
+					</th>	
+					<td>
+						<h3>职位优先展示特权</h3>
+						<p class="t1">成为会员，会被优先展示在非付费会员前面</p>
+						<p class="t2"><strong>插队有理</strong> 想要招聘效果好，职位就是该排前面</p>
+						<span>求职者搜索与您职位相关的关键词或类别时，在搜索结果中您的职位会自动优先的展示
+到非付费会员前面，可更好的吸引求职者，提高职位流量，从而获得更好的招聘效果。 </span>
+					</td>	
+				</tr>
+			</table>
+		</div>
+		<a name="weizhi5" class="weizhi5"></a>
+		<div class="hhy-footer">©2019 汇博网 版权所有  |  增值电信业务经营许可证：渝B2-20060063  |  人才中介服务许可证：渝新委发[2012] 124号  |  渝公网安备 50010502001182号</div>
+		<script type="text/javascript" language="javascript" src="{/version file="jquery-1.8.3.min.js"/}"></script>
+		<script>
+			var bwidth = $("body").width();
+			if(bwidth - 1000 > (248*2)){
+				$(".float-box").css("right",(bwidth-1000)/2-288);
+			}
+			
+			var idx = 0,ytop = 502,menu = $(".hhy-menu");
+			$(".hhy-menu li").click(function(){
+				/*$(".hhy-menu li").eq(idx).removeClass("cur").css("background-color","#e76747");*/
+				$(".hhy-table"+(idx+1)).css("pading-top","0px");
+				
+				idx = $(this).index();
+				if((idx+1) != 6)$(".hhy-table"+(idx+1)).css("pading-top","120px");
+			});
+
+			$(window).scroll(function(){
+				var top = $(this).scrollTop(),idxI = parseInt((top - 502)/750);
+				if(top < 500){
+					menu.css("top","502px");
+				}else{
+					menu.css("top",top);
+				}				
+				menu.find("li").removeClass("cur").removeAttr("style").eq(idxI).addClass("cur");
+				if(idxI%2){
+					menu.find(".cur").css("background-color","#fff");
+				}else{
+					menu.find(".cur").css("background-color","#faf7f7");
+				}
+			});
+		</script>
+	</body>		
+</html>
+

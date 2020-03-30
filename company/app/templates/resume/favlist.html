@@ -1,0 +1,590 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="Keywords" content="" />
+<meta name="Description" content="" />
+<title>汇博人才网_招聘中心_感兴趣的简历</title>
+<!–[if lt IE9]>
+<script type="text/javascript" language="javascript" src="{/version file="html5.js"/}"></script>
+<![endif]–>
+<link rel="stylesheet" type="text/css" href="{/version file="base.css"/}" />
+<link rel="stylesheet" type="text/css" href="{/version file="comback.css"/}" />
+<link rel="stylesheet" type="text/css" href="{/version file="combacklst.css"/}" />
+
+<script type="text/javascript" language="javascript" src="{/version file="jquery-1.8.3.min.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="common.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="dialog.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="ui_inputFocus.js"/}"></script><!--输入框获取焦点-->
+<script type="text/javascript" language="javascript" src="{/version file="ui_hovchange.js"/}"></script><!--指向改变class-->
+<script type="text/javascript" language="javascript" src="{/version file="ui_tooltip.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="ui_page.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="ui_validate.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="jquery.metadata.js"/}"></script><!-- 验证 -->
+<script type="text/javascript" language="javascript" src="{/version file="jquery.form.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="ui_dropdownlist.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="ui_autocomplete.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="ui_listingshowlogic.js"/}"></script>
+<script type="text/javascript" language="javascript" src="{/version file="ui_reslst.js"/}"></script>
+<script type="text/javascript" language="javascript"  src="{/version file="ui_fancybox.js"/}"></script>
+<script type="text/javascript" language="javascript"  src="{/version file="ui_fancybox-thumbs.js"/}"></script>
+
+<style type="text/css">
+.datFun .funL .layBd{margin:1px;}
+</style>
+</head>
+<body id="body">
+{/include file="nav.html" parent="网络招聘" cur="我感兴趣的"/}
+<div class="content" id="content">
+	<input type="hidden" id="hddCurrResumeId"/>
+	<section class="noData" {/if $has_resume===true/}style="display:none;"{//if/}>
+    	<p>您还没有感兴趣的求职者！</p>
+        <p>当您在预览简历时，点击简历右侧的“<span class="blue hbFntWes">&#xf005;</span>”，便可将TA标记为感兴趣了</p>
+    </section>
+
+	<section class="recL" id="recL" {/if $has_resume===false/}style="display:none;"{//if/}>
+   	  <div class="lCon" id="lCon">
+   	  	  <form action="/fav/resumeFav" method="post" id="fmResumeFav">
+	   		  <input type="hidden" name="tagid" value="{/if $tagid==''/}0{/else/}{/$tagid/}{//if/}"/>
+	   	  </form>
+           <div class="datFun" id="datFun" {/if count($tags)>0/}style="display:block"{//if/}>                
+               <div class="funL">
+                	<a href="javascript:void(0)" class="btn3 btnsF12" id="layLnk"><i id="layLnkSub" class="hbFntWes">&#xf0dd;</i>按适合的岗位查看</a>
+                    <div class="lay" id="lay">
+                        <div class="layBd" id="layLst" {/if count($tags)<5/}style="height:auto;"{//if/}>
+                        	<ul>
+                        		<li class="all"><a href="javascript:void(0)" v="">查看全部</a></li>
+                        		{/foreach $tags as $key_tags=>$value_tags/}
+                        			<li><a href="javascript:void(0)" v="{/$value_tags['tag_id']/}">{/$value_tags['tag_name']/}</a></li>
+                        		{//foreach/}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="datLst" id="datLst">
+            	<div class="datLstNo" style="display:none;" id="lstNoReadData">
+                	<p class="hbFntWes">&#xf016;</p>
+                	<p>没有相关数据！</p>
+                </div>
+                
+            	<ul class="hbTip" id="lstData">
+
+                </ul>
+            </div>
+            <div class="datBot" id="datBot">
+            	<div class="l">
+                	<div class="batch">
+                    	<a href="javascript:void(0)" class="btn1 btnsF14 batchLnk" id="batchLnk"><i class="hbFntWes">&#xf067;</i>批量操作</a>
+                        <div class="batchBox" id="batchBox">
+                            <ul>
+                            <li><a href="javascript:void(0);" id="batchInvLnk">邀请面试</a></li>
+                            <li><a href="javascript:void(0);" id="batchDelLnk">删除</a></li>
+                            <li><a href="javascript:void(0);" id="btnResumeSendEmail">转发到邮箱</a></li>
+                            <li class="downComp" id="downComp">
+                                <a href="javascript:void(0);">保存到电脑<i class="hbFntWes">&#xf105;</i></a>
+                                <div class="downBox" id="downBox">
+                                	<ul>
+                                    <li><a href="javascript:void(0);" id="btnWordsDown">保存为Word文件</a></li>
+                                    <li><a href="javascript:void(0);" id="btnHtmlsDown">保存为Html文件</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="r">
+                	<div class="datPage" id="page">
+                    	
+                    </div>
+                </div>
+            </div>
+      </div>
+    </section>
+    
+    <section class="recR" id="recR" {/if $has_resume===false/} style="display: none;" {//if/}>
+    	<div class="datPer" id="datPer" style="display:none;">
+        	<div class="datPerC">
+                <div class="l">
+                    <span class="lLnk"><a href="javascript:void(0);" id="btnPrintRsume"><i class="hbFntWes">&#xf02f;</i>打印</a></span>
+                    <span class="lLnk">
+                        <a href="javascript:void(0);" id="downCmtLnk"><i class="hbFntWes">&#xf0c7;</i>保存到电脑</a>
+                        <span class="downCmt" id="downCmt">
+                            <a href="javascript:void(0);" id="btnWordDown">保存为Word文件</a>
+                            <a href="javascript:void(0);" id="btnHtmlDown">保存为Html文件</a>
+                        </span>
+                    </span>
+                    <span class="lLnk"><a href="javascript:void(0);" id="relLnk"><i class="hbFntWes">&#xf003;</i>转发</a></span>
+                    <span class="lLnk hbTip"><a href="javascript:void(0);" id="remLnk" data-toggle="tooltip" data-placement="right"><i class="hbFntWes">&#xf0c5;</i>备注</a></span>
+                </div>
+                <div class="r">
+                    <span class="rLnk"><a  href="javascript:void(0);" class="btn1 btnsF12 lnk" id="invLnk">邀请面试</a></span>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+        <div class="datPerBg" id="datPerBg"></div>
+        <div class="datErr" id="contentTip">单击左侧的一个求职者，在此处显示TA的完整简历 </div>
+    </section>
+  <div class="clear"></div>
+</div>
+<section class="floatRT"><a href="{/get_url rule='/about/message' domain='main'/}" target="_blank" class="serviceLink">我有问题要反馈</a><b></b></section>
+<script type="text/javascript">
+
+</script>
+
+<script type="text/javascript">
+var resumefav = {
+	init:function(){
+		/**
+		 *  分页查询事件
+		 */
+		var renderData = function(data,total) {
+		    var lst = $('#lstData').empty().hide(),
+		    	footlst = $('#datBot').hide(),
+		    	currresumeid = 0,
+		    	currfavid = 0,
+		    	remark = '';
+		    if(typeof data == 'undefined'||data.length<=0) {
+		    	$('#lstNoReadData').show();
+		    	return;
+           	}else{
+    	        var arr =new Array();
+    			lst.show();
+    	    	$.each(data,function(i,n){
+    	    		if(i===0){
+                		currresumeid = n.resume_id;
+                		currfavid = n.fav_id;
+                		remark = n.remark;
+                    }
+    			    // 输出数据
+    				var temp =  '<li r="'+n.resume_id+'" a="'+n.fav_id+'">'+
+    			            	'<div class="l"><p class="pic">'+n.photo+'</p>'+
+    			            	(n.is_effect==0
+    		    		            	?'<p class="chkBoxBlo" title="TA已删除简历，无法选择" data-toggle="tooltip" data-placement="right"><input type="checkbox" name="chkresume" effect="false" class="chkBox" disabled="disabled"  /></p>'
+    		    	    		        :'<p class="chkBoxBlo"><input type="checkbox" class="chkBox" name="chkresume" /></p>')+
+    		    		        '</div>'+    	
+    			                '<div class="c">'+
+    			                '<p><a href="javascript:void(0)" class="nam" id="rem1">'+n.user_name+'</a><i>'+n.age+'/'+n.area+(n.degree==null?'':'/'+n.degree)+'</i></p>'+
+    			                '<p>最近工作：<i name="workexperience" title="'+(n.work==null?'无':n.work)+'">'+(n.work==null?'无':n.work)+'</i></p>'+
+    			                '<p>适合的岗位：<i><span class="black">'+(n.suit_work==null?'无':n.suit_work) +'</span></i></p>'+
+    			                '</div>'+
+    			                '<div class="r">'+
+    			                '<p class="time">'+n.create_time_name+'</p>'+
+    			                '<p class="del"><a href="javascript:void(0)" class="hbIconMoon del abs" data-toggle="tooltip" data-placement="left" title="删除" onclick="resumefav.deleteFav(\''+n.user_name+'\',\''+n.fav_id+'\')">&#xe0fd;</a></p>'+
+    							(n.remark==null
+    								?'<p class="remLnk"><a href="javascript:void(0)" onclick="resumefav.resumeRemark('+n.resume_id+');" class="hbIconMoon gray" data-toggle="tooltip" data-placement="left">&#xe0c4;</a></p>'
+    								:'<p class="remLnk"><a href="javascript:void(0)" onclick="resumefav.resumeRemark('+n.resume_id+');" class="hbIconMoon" data-toggle="tooltip" data-placement="left" title="'+n.remark+'">&#xe0c4;</a></p>')+
+    			                '</div>'+
+    			                '<div class="clear"></div>'+
+    			           		'</li>';       		     		
+    			    arr.push(temp);		
+    			    /*if(n.is_effect==0){
+    					$('#datPer').hide();
+    	        	}else{
+    	        		$('#datPer').show();
+    	        	}*/	
+    	    	});
+    	    	lst.append(arr.join(''));
+    	    	footlst.show();
+            	//$('#hddCurrResumeId').val(currresumeid);
+            	//resumefav.loadResume(currfavid);
+            	//$('#lstData').find('li:first').addClass('cu');
+            }
+            {/if count($tags)>0/}
+            	$.fn.reslst({offTop:97,defSub:199,scrollSub:102}); 
+
+            {/else/}
+            	$.fn.reslst({offTop:97,defSub:148,scrollSub:51});
+
+            {//if/}
+		}
+        $.fn.reslst({offTop:97,defSub:199,scrollSub:102});	
+		// 绑定分页控件
+		$('#page').pager({dataType:'json',renderData:renderData,queryForm:'fmResumeFav',isLimitShow:1,preRender:function(){
+			$('#lstNoReadData').hide();
+			$('#lstData').empty().append('<div class="datLoad"><p class="load"></p><p>数据加载中...</p></div>').show();
+		}});	
+
+		// 点击左侧求职者简历事件
+	    $('#lstData').click(function(event){
+			var target = $(event.target).is('li')?$(event.target):$(event.target).closest('li'),
+				favid = target.attr('a'),
+				resumeid = target.attr('r');
+			if($(event.target).is(':checkbox')||$(event.target).hasClass('hbIconMoon')) {
+				// 选中备注或者复选框时，不加载简历
+				return;
+			}
+			target.siblings('li').removeClass('cu').end().addClass('cu');
+			$('#hddCurrResumeId').val(resumeid);
+			resumefav.loadResume(favid);
+			if(target.find(':input[type=checkbox]').attr('effect')=='false'){
+				$('#datPer').hide();
+        	}else{
+        		$('#datPer').show();
+        	}
+			$('#recR').css({'height':'auto'});
+	   }).mouseover(function(event) {
+		   var target = $(event.target).is('li')?$(event.target):$(event.target).closest('li');
+		   if(target.length>0) {
+			   target.siblings('li').removeClass('hov').end().addClass('hov');
+		   }
+	   }).mouseout(function(event){
+		   $(this).find('li').removeClass('hov');		
+	   });
+
+	  
+      // 列表事件
+      $('#layLnk,#layLnkSub').click(function(){
+    	  $('#lay').css({'display':'block'});
+	  });
+      var laylst =  $('#layLst ul');		 
+      laylst.click(function(event){
+		  var target = $(event.target);
+		  if(target.is('a')) {
+			  if(typeof(target.closest('li').attr("enabled"))=="undefined") {
+				  $('#lay').hide();
+			      var tagid = target.attr('v');
+				  var arr =[{key:'tagid',value:tagid}];
+				  resumefav.query(arr);
+				  if(target.html()=='查看全部'){
+					  $('#layLnk').html('<i class="hbFntWes">&#xf0dd;</i>按合适的岗位查询');
+				  }else{
+				  	$('#layLnk').html('<i class="hbFntWes">&#xf0dd;</i>'+target.html());
+				  }
+			  } 		
+		  }
+	  }).mouseover(function(event){
+			var target = $(event.target);
+			if(target.is('li')||target.closest('li').length>0){
+				laylst.find('li').removeClass('hov');
+				var element = ((target.is('li')&&target)||(target.closest('li').length>0&&target.closest('li')))
+				if(typeof(element.attr("enabled"))=="undefined") {
+					element.addClass('hov');
+				}	
+			}		
+	  });
+	  
+      //备注
+      $('.hbTip').tooltip({
+    	  selector: "a[data-toggle=tooltip],p[data-toggle=tooltip]",html:true
+      });
+
+  	  //邀请   
+      $('#invLnk').click(function() {
+     		var resumeId=$('#hddCurrResumeId').val();
+    		if(typeof resumeId != 'undefined' && resumeId>0){
+    			$.showModal('{/get_url rule="/invite/invitesingleshow" data="resumeID='+resumeId+'"/}',{title:'邀请面试'});
+    		}
+    		else{
+    			$.anchor('请选择一个简历后再进行邀请',{icon:'warning'});
+    		}
+   	  }); 
+	  //备注
+      $('#remLnk').click(function() {
+			var resume_id=$('#hddCurrResumeId').val();
+			if(resume_id != undefined && resume_id>0){
+				$.showModal('{/get_url rule="/resumeremark/index/"/}resume_id-'+resume_id+'-v-'+Math.random(),{title:'备注',onclose:function(){
+					 resumefav.updateRemark(resume_id);					
+				}});
+			}
+			else{
+				$.anchor('请选择一个简历后再进行备注',{icon:'warning'});
+			}
+		}); 
+
+	  
+      /*----------------------批量操作事件-------------------------*/
+      $('#batchLnk').click(function(){
+			$('#batchBox').css({'display':'block'}).find('#downComp').find('a').bind('mouseover',function(){
+				$('#downBox').css({'display':'block'});
+				$('#downComp').bind('mouseout',function(){
+					$('#downBox').css({'display':'none'});
+				});
+			});
+	   });
+	   //批量邀请
+	  $('#batchInvLnk').click(function() {
+  		 var checkboxs = $('#lstData').find('input[name="chkresume"]:checked');
+		 if(checkboxs.length>0) {
+    		var ids = new Array();
+    		checkboxs.each(function(){
+    			ids.push($(this).closest('li').attr('r'));		
+        	});
+    		$.showModal('{/get_url rule="/invite/InviteMultiShow/" data="resumeids='+ids.join(',')+'&v='+Math.random()+'"/}',{title:'批量邀请'});
+    	 }
+		 else{
+			$.anchor('请选择需要邀请的简历',{icon:'warning'});
+			return;
+    	 }
+	 });
+
+	//批量发送到邮箱
+      $('#btnResumeSendEmail').click(function(){
+    	    var checkboxs = $('#lstData').find('input[name="chkresume"]:checked');
+    		if(checkboxs.length>0) {	    			  		
+        		var ids = new Array();
+        		checkboxs.each(function(){
+        			ids.push($(this).closest('li').attr('r'));		
+            	});
+        		$.showModal('{/get_url rule="/resume/wordsend" data="resumeid='+ids.join(',')+'"/}',{title:'转发到邮箱'});
+        		//$.showModal('{/get_url rule="/apply/DeleteApply/" data="names='+arr.join(',')+'&ids='+ids.join(',')+'&v='+Math.random()+'"/}',{title:'删除'});
+        	}else{
+        		$.anchorMsg('请选择需要操作的简历', { icon: 'info' }); 
+    			return;
+		    }
+	      
+    	  
+	  });
+
+
+      //单个发送到邮箱
+      $('#relLnk').click(function() {
+    	  	var resumeId=$('#hddCurrResumeId').val();
+    		$.showModal('{/get_url rule="/resume/wordsend" data="resumeid='+resumeId+'&src=fav"/}',{title:'转发到邮箱'});
+    	}); 
+
+	  //单个下载HTML
+	  $('#btnHtmlDown').click(function(){
+		  var resumeId=$('#hddCurrResumeId').val();
+		  var url = '{/get_url rule="/resume/htmldown" data="resumeid='+resumeId+'&src=fav"/}';
+		  $(this).attr('href',url).attr('target','_blank');
+		  //alert(url);
+ 	  });
+
+	  //单个下载Word
+	  $('#btnWordDown').click(function(){
+		  var resumeId=$('#hddCurrResumeId').val();
+		  var url = '{/get_url rule="/resume/worddown" data="resumeid='+resumeId+'&src=fav"/}';
+		  $(this).attr('href',url).attr('target','_blank');
+		  //alert(url);
+ 	  });
+
+	  //批量下载HTML
+	  $('#btnHtmlsDown').click(function(){
+		  var checkboxs = $('#lstData').find('input[name="chkresume"]:checked');
+    	  if(checkboxs.length>0) {	    			  		
+        	var ids = new Array();
+        	checkboxs.each(function(){
+        		ids.push($(this).closest('li').attr('r'));		
+            });
+        	var url = '{/get_url rule="/resume/htmldown" data="resumeid='+ids+'&src=fav"/}';
+   			$(this).attr('href',url).attr('target','_blank');
+          }else{
+        	$.anchorMsg('请选择需要操作的简历', { icon: 'info' }); 
+    		return;
+		  }
+		 
+		  //alert(url);
+ 	  });
+
+	  //批量下载Word
+	  $('#btnWordsDown').click(function(){
+		  var checkboxs = $('#lstData').find('input[name="chkresume"]:checked');
+    	  if(checkboxs.length>0) {	    			  		
+        	var ids = new Array();
+        	checkboxs.each(function(){
+        		ids.push($(this).closest('li').attr('r'));		
+            });
+        	var url = '{/get_url rule="/resume/worddown" data="resumeid='+ids+'&src=fav"/}';
+			$(this).attr('href',url).attr('target','_blank');
+          }else{
+        	$.anchorMsg('请选择需要操作的简历', { icon: 'info' }); 
+    		return;
+		  }
+		  
+ 	  });
+	 //打印
+	 $('#btnPrintRsume').click(function(){
+		  var resumeId=$('#hddCurrResumeId').val();
+		  var url = '{/get_url rule="/resume/htmlprint" data="resumeid='+resumeId+'"/}';
+		  if($.browser.msie){
+		  	$(this).attr('href',url).attr('target','_blank');
+		  }
+		  else{
+		  	$('#printIframe').attr("src", url);
+		  }
+		 
+     });
+
+	 //保存到电脑
+	 $('#downCmtLnk').click(function(){
+		 $('#downCmt').css({'display':'block'});
+	 });
+		 
+      // 删除		
+      $('#batchDelLnk').click(function() {
+    		var checkboxs = $('#lstData').find('input[name="chkresume"]:checked');
+    		if(checkboxs.length>0) {
+        		var arr = new Array(),
+        			ids = new Array();
+        		checkboxs.each(function(){
+        			arr.push($(this).closest('li').find('a.nam').html());
+        			ids.push($(this).closest('li').attr('a'));		
+            	});
+        		$.showModal(encodeURI('{/get_url rule="/fav/deleteFavs/" data="names='+arr.join(',')+'&ids='+ids.join(',')+'&v='+Math.random()+'"/}'),{title:'删除'});
+        	}
+    		else{
+				$.anchor('请选择需要取消收藏的简历',{icon:'warning'});
+				return;
+        	}
+    	});
+       $('#recR').datashow();
+
+       resumefav._hideEvent();
+	},
+	_hideEvent:function() {
+		$('body').click(function(e){
+			// 检测发生在body中的点击事件
+			var cell = $(e.target);
+			if (cell)
+			{
+				var tgID = $(cell).attr('id') == '' ? "string" : $(cell).attr('id');
+				var inID = 'lay';
+				var isTagert = false;
+				try
+				{
+					 // 如果事件触发元素不是Input元素 并且不是发生在时间控件区域
+					 isTagert = tgID!='layLnk' && tgID!='layLnkSub' && tgID != inID && $(cell).closest('#' + inID).length <= 0;
+				}
+				catch (e)
+				{
+					isTagert = true;
+				}
+				if (isTagert)
+				{
+					$('#lay').hide();
+				}
+			}
+		});	
+	   $('body').click(function(e){
+			// 检测发生在body中的点击事件
+			var cell = $(e.target);
+			if (cell)
+			{
+				var tgID = $(cell).attr('id') == '' ? "string" : $(cell).attr('id');
+				var inID = 'schBox';
+				var isTagert = false;
+				try
+				{
+					 // 如果事件触发元素不是Input元素 并且不是发生在时间控件区域
+					 isTagert = tgID!='schBoxLnk' && tgID != inID && $(cell).closest('#' + inID).length <= 0;
+				}
+				catch (e)
+				{
+					isTagert = true;
+				}
+				if (isTagert)
+				{
+					$('#schBox').hide();
+				}
+			}
+		});	
+	   $('body').click(function(e){
+			// 检测发生在body中的点击事件
+			var cell = $(e.target);
+			if (cell)
+			{
+				var tgID = $(cell).attr('id') == '' ? "string" : $(cell).attr('id');
+				var inID = 'downCmt';
+				var isTagert = false;
+				try
+				{
+					 // 如果事件触发元素不是Input元素 并且不是发生在时间控件区域
+					 isTagert = tgID!='downCmtLnk';
+				}
+				catch (e)
+				{
+					isTagert = true;
+				}
+				if (isTagert)
+				{
+					$('#downCmt').hide();
+				}
+			}
+		});
+	   $('body').click(function(e){
+			// 检测发生在body中的点击事件
+			var cell = $(e.target);
+			if (cell)
+			{
+				var tgID = $(cell).attr('id') == '' ? "string" : $(cell).attr('id');
+				var inID = 'batchBox';
+				var isTagert = false;
+				try
+				{
+					 // 如果事件触发元素不是Input元素 并且不是发生在时间控件区域
+					 isTagert = tgID!='batchLnk' && tgID != inID && $(cell).closest('#' + inID).length <= 0;
+				}
+				catch (e)
+				{
+					isTagert = true;
+				}
+				if (isTagert)
+				{
+					$('#batchBox').hide();
+				}
+			}
+		});	
+	},
+	loadResume:function(favid){
+		var url = '{/get_url rule="/resume/Control/"/}'+'favid-'+favid+'-type-fav';
+		var isScroll = false;	
+		if($(document).scrollTop()>=97) {
+			isScroll = true;
+		}		
+		var flag = Math.random();
+		$('#recR').setFlag(flag);
+		$('#recR').loadData(url,function(){
+			$('#datPer').show();
+			if(isScroll) {
+				$(window).scrollTop(97);
+		    }else {
+		    	$(window).scrollTop(0);
+			}				
+		},null,function(){
+			$('#contentTip').hide();
+		},flag);
+	},
+	removelisting:function(favid) {
+		$('#lstData').find('li[a="'+favid+'"]').remove();
+		if($('#lstData').find('li').length<=0){
+			$('.noData').show();
+		}
+	},
+	updateRemark:function(resumeid) {
+		// 更新备注
+		$.getJSON("{/get_url rule="/resumeremark/ResumeRemark/"/}"+'-resumeid-'+resumeid+'-v-'+Math.random(),function(result){
+		    var element = $('#lstData').find('li[r="'+resumeid+'"]');
+			element.find('p.remLnk a').unTooltip();
+			if(result.remark ==''||result.remark == null) {
+				element.find('p.remLnk a').removeAttr('data-toggle').removeAttr('title').addClass('gray');				
+			}else {
+				element.find('p.remLnk a').attr('data-toggle','tooltip').attr('title',result.remark).removeClass('gray');
+			}
+		    
+		});
+    },
+    query:function(values) {
+	    var form = $('#fmResumeFav');
+	    $.each(values,function(i,n){
+	    	form.find('input[name="'+n.key+'"]').val(n.value);
+		});
+	    form.submit();	
+    },
+    deleteFav:function(name,id) {
+    	$.showModal(encodeURI('{/get_url rule="/fav/deleteFavs/" data="names='+name+'&ids='+id+'-v-'+Math.random()+'"/}'),{title:'删除'});
+    },
+    resumeRemark:function(resume_id){
+    	$.showModal('{/get_url rule="/resumeremark/index/"/}resume_id-'+resume_id+'-v-'+Math.random(),{title:'备注',onclose:function(){
+			 resumefav.updateRemark(resume_id);					
+		}});
+    }
+};
+resumefav.init();
+</script>
+</body>
+</html>

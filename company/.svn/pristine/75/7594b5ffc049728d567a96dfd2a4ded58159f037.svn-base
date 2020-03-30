@@ -1,0 +1,205 @@
+<style>
+.addressMod .drop .dropLstCon{width:300px}
+.addressMod #area{float:left;}
+</style>
+<div style="padding: 30px;">
+	<p style='font-size: 18px;color: #333;border-bottom: 1px solid #dadada;padding-left: 15px;padding-bottom: 5px;font-weight: bold;font-family: "Microsoft yahei", "Microsoft YaHei", "微软雅黑"'>添加工作地点</p>
+	<div class="clearfix" style="padding: 15px">
+		<div class="formMod addressMod" style="height:30px">
+        	<div id="area"></div>
+			<span class="tipPos"><span class="tipLay"></span></span>
+        </div>
+        <div class="formMod clearfix">
+            <span class="formText">
+                <input type="text" style="width:425px;float: left" value="" id="addInfo" class="text watermark" watermark="详细地址描述，如：环球广场25楼汇博人才网" data-map-x="{/$map_x/}" data-map-y="{/$map_y/}">
+                <div id="searchResultPanel" style="border:1px solid #C0C0C0;width:150px;height:auto; display:none;"></div>
+            </span>
+            <span class="tipPos"><span class="tipLay"></span></span>
+            <p class="formMap" style="color: red; position: relative; font-size: 12px; margin: 5px 0px;">(请拖动图标在地图中标注上班地点)</p>
+        </div>
+		<span id="mapCon" class="formMap" style="width:650px;height:290px;"></span>
+	</div>
+	<p style="text-align: center;padding:20px 0"><a href="javascript:void(0);" style="width: 80px;text-align: center" class="btnsF16 btn1 publish" id="saveAddressBtn" data-can-sub="1">保存</a></p>
+</div>
+
+<script>
+
+//hbjs.use('widge.overlay.confirmBox, widge.overlay.hbDialog, cqjob.areaSimple', function (ConfirmBox, Dialog, $) {
+
+var areaDrop, baiduSearch;
+hbjs.use('@dialog, @areaDrop', function (m) {
+	
+	var Dialog = m['widge.overlay.hbDialog'],
+		AreaDrop = m['product.areaDrop'],
+		$ = m['jquery'];
+
+    $("#saveAddressBtn").on("click",function(){
+        var add_info = $('#addInfo').val();
+        var map_x = $('#addInfo').attr("data-map-x");
+        var map_y = $('#addInfo').attr("data-map-y");
+        var area_id = $('input[name=hddArea1]').val();
+
+        var is_edit = {/$is_edit/};
+        if($.trim(add_info) == ""){
+            $.message("请填写工作地点", { title: "操作提示", icon: "fail" });
+            return false;
+        }
+        if(add_info.length > 100){
+            $.message("地址信息过长", { title: "操作提示", icon: "fail" });
+            return false;
+        }
+        if(area_id == 0){
+            $.message("请选择地区", { title: "操作提示", icon: "fail" });
+            return false;
+        }
+        var area_ids = areaDrop.getSelectedValues();
+        if($(".ui_hb_areaDrop_drop:visible").size() > area_ids.length){
+            $.message("请选择到详细的地区", { title: "操作提示", icon: "fail" });
+            return false;
+        }
+        var areainfo = map_x + '|' + map_y + '|' + area_id + '|' + add_info;
+        var html = '<div class="partArea" data-areainfo="'+areainfo+'"> <span>工作地址：'+add_info+'</span><input type="hidden" name="add_info[]" value="'+areainfo+'"> <a href="#" class="partAreaEdit">编辑</a> <a href="#" class="partAreaDel">删除</a> </div>';
+        if(is_edit == 0){
+            $("#workAreas").append(html);
+        }else{
+            old_map_div.parent().html(html);
+        }
+
+        mapDialog.hide();
+
+    });
+    //添加地图
+    var map = new BMap.Map("mapCon");
+    map.enableScrollWheelZoom();
+    var pt;
+    {/if !$map_x || !map_y/}
+        pt = new BMap.Point(106.450872, 29.642148);
+    {/else/}
+        pt = new BMap.Point('{/$map_x/}', '{/$map_y/}');
+    {//if/}
+
+    var myIcon = new BMap.Icon("{/$siteurl.style/}/img/common/maplabel.png", new BMap.Size(33, 50));
+    marker = new BMap.Marker(pt, {icon: myIcon});  // 创建标注
+    map.addOverlay(marker);              // 将标注添加到地图中
+    marker.enableDragging();
+    marker.setTitle('请拖动至上班位置');
+
+    var label = new BMap.Label("请拖动至上班位置", {offset: new BMap.Size(35, 5)});
+    marker.setLabel(label);
+
+    //添加事件，在拖动时去掉文字提示
+    marker.addEventListener('dragstart', function () {
+        label.setStyle({display: 'none'});
+    });
+    var geoc = new BMap.Geocoder();
+    marker.addEventListener('dragend', function (e) {
+        var poi = marker.getPosition();
+        geoc.getLocation(poi, function (rs) {
+            var addComp = rs.addressComponents;
+            if(addComp.province == addComp.city){
+                $("#addInfo").val(addComp.city + addComp.district + addComp.street + addComp.streetNumber);
+            }else{
+                $("#addInfo").val(addComp.province + addComp.city + addComp.district + addComp.street + addComp.streetNumber);
+            }
+            $(".txtLabel").hide();
+            $('#addInfo').attr("data-map-x",marker.getPosition().lng);
+            $('#addInfo').attr("data-map-y",marker.getPosition().lat);
+        });
+
+    });
+    map.centerAndZoom(pt, 18);
+
+    baiduSearch = new BMap.Autocomplete(    //建立一个自动完成的对象
+	{
+		"input": "addInfo",
+		"location": map
+	});
+
+    {/if $add_info/}
+        baiduSearch.setInputValue("{/$add_info/}");
+    {//if/}
+        
+    baiduSearch.addEventListener("onhighlight", function (e) {  //鼠标放在下拉列表上的事件
+        var str = "";
+        var _value = e.fromitem.value;
+        var value = "";
+        if (e.fromitem.index > -1) {
+            value = _value.province + _value.city + _value.district + _value.street + _value.business;
+        }
+        str = "FromItem<br />index = " + e.fromitem.index + "<br />value = " + value;
+
+        value = "";
+        if (e.toitem.index > -1) {
+            _value = e.toitem.value;
+            if(_value.province == _value.city){
+                value = _value.city + _value.district + _value.street + _value.business;
+            }else{
+                value = _value.province + _value.city + _value.district + _value.street + _value.business;
+            }
+        }
+        str += "<br />ToItem<br />index = " + e.toitem.index + "<br />value = " + value;
+        G("searchResultPanel").innerHTML = str;
+    });
+    var myValue;
+    baiduSearch.addEventListener("onconfirm", function (e) {    //鼠标点击下拉列表后的事件
+        var _value = e.item.value;
+        if(_value.province == _value.city){
+            myValue = _value.city + _value.district + _value.street + _value.business;
+        }else{
+            myValue = _value.province + _value.city + _value.district + _value.street + _value.business;
+        }
+        G("searchResultPanel").innerHTML = "onconfirm<br />index = " + e.item.index + "<br />myValue = " + myValue;
+        setPlace();
+    });
+
+    function G(id) {
+        return document.getElementById(id);
+    }
+
+    function setPlace() {
+        map.clearOverlays();    //清除地图上所有覆盖物
+        function myFun() {
+            var pp = local.getResults().getPoi(0).point;    //获取第一个智能搜索的结果
+            map.centerAndZoom(pp, 18);
+            marker.setPosition(pp);
+            map.addOverlay(marker);    //添加标注
+            $('#addInfo').attr("data-map-x",pp.lng);
+            $('#addInfo').attr("data-map-y",pp.lat);
+        }
+
+        local = new BMap.LocalSearch(map, { //智能搜索
+            onSearchComplete: myFun
+        });
+        local.search(myValue);
+    }
+
+    //详细地址焦点离开
+    $("#addInfo").blur(function () {
+        if ($.trim($(this).val()) != '' && myValue != $.trim($(this).val())) {
+            myValue = $.trim($(this).val());
+            setPlace();
+        }
+    });
+	
+	areaDrop = new AreaDrop({
+		hidName: 'hddArea1',
+		container: $('#area'),
+		selectedValue: '{/$area_id/}',
+		zIndex: 99999
+	});
+	
+	var no_child_area_ids = ["0101", "0102", "0103", "0104", "0105", "0106", "0107", "0108", "0109", "0110", "0111", "0112", "0113", "0114", "0115", "0116", "0117", "0118", "0201", "0202", "0203", "0204", "0205", "0206", "0207", "0208", "0209", "0210", "0211", "0212", "0213", "0214", "0215", "0216", "0217", "0218", "0342", "0313", "0319", "0320", "0321", "0323", "0324", "0326", "0327", "0328", "0329", "0330", "0331", "0332", "0333", "0334", "0335", "0336", "0337", "0338", "0339", "0340", "0401", "0402", "0403", "0404", "0405", "0406", "0407", "0408", "0409", "0410", "0411", "0412", "0413", "0414", "0415", "0416", "0503", "0511", "1521", "2102", "3102", "3201", "3301", "3302", "3303", "3304", "3305", "3306", "3307", "3308", "3309", "3310", "3311", "3312", "3313", "3314", "3315", "3316", "3317", "3318", "3401"];
+	
+	areaDrop.on('selectedItem', function(e){
+		var label = this.getLabel();
+		
+		if(myValue != label){
+			$("#addInfo").val(label);
+			myValue = label;
+			setPlace();
+		}
+	});
+	
+});
+
+</script>

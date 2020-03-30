@@ -1,0 +1,355 @@
+{/include_php file='app/controller/chat.php'/}
+<style type="text/css">
+    .qq_newsz{width:338px; height: 58px; overflow:hidden; background:url({/$siteurl.style/}/img/company/chat/chat_icon15.png) no-repeat; position: fixed; bottom:188px; left: 50%; margin-left: 162px; z-index: 999;}
+    .qq_newsz span,.qq_newsz a{ display: block; float: left;}
+    .qq_newsz span{width:285px; font-size: 16px; color: #fff; line-height: 20px; text-align: left; margin: 10px 0 0 18px;cursor:pointer}
+    .qq_newsz span b{color: #ff3532; font-weight: normal;}
+    .qq_newsz a{ float: right; width:24px; height: 24px;  margin: 7px 8px 0 0;}
+    .qq_newsx{width:80px; height: 65px; background: url({/$siteurl.style/}/img/company/chat/chat_icon_new12.png) left 2px no-repeat; position: fixed; bottom:170px; left: 50%; margin-left: 510px;}
+    .qq_newsx i{ display: block; height: 16px; padding: 0 6px; background: #f00; color: #fff; font-size: 10px; margin-left: 30px; float: left; border-radius: 20px; line-height: 18px;}
+	.qq_newsx em{ display: block;width:48px; font-size: 10px; color: #444; text-align:center; margin-top: 50px;}
+    /*绑定手机号*/
+    .boundPhonePop{width:285px; overflow: hidden; padding: 20px; margin: 0 auto; text-align: left;}
+    .boundx01,.boundx02{ display: block; padding-bottom: 3px;}
+    .boundx01{ line-height: 18px; color: #444;}
+    .boundx02{ color: #ff671c;}
+    .boundFrom{width:100%; overflow: hidden; padding-top: 15px;}
+    .putBound{ display:block; float: left; height: 29px; border: 1px solid #ccc; line-height: 29px; text-indent: 8px;width:282px}
+    .noteCodex{width:100%; overflow: hidden; padding-top: 15px;}
+    .boundGetCode{ cursor:pointer; display:block; float: right; width:104px; height: 30px; background: #66bce4; color: #fff; text-align: center; line-height: 30px; border-radius: 2px;}
+    .noteCodex img{ display: block; float: left; margin-left:15px ; height: 30px;}
+    .boundBtn{ display: block;width:282px; height: 32px; text-align: center; line-height: 32px; background: #66bce4; margin-top: 15px; border-radius: 2px; color: #fff;}
+    .boundBtn:hover,.boundGetCode:hover{ background: #39ade3; color: #fff;}
+    /*职位沟通*/
+    .postSearchPop{width:335px; padding: 15px; overflow: hidden; margin: 0 auto; text-align: left;}
+    .postSearchx{width:333px; height: 28px; border: 1px solid #ccc; overflow: hidden;}
+    .postSearchx input{ display: block; float: left; border: none;width:300px; height: 28px; line-height: 28px; text-indent: 8px;}
+    .postSearchx a{ display: block; float: right;width:30px; height: 28px; background: url({/$siteurl.style/}/img/company/chat/chat_icon16.png) no-repeat; border: none;}
+    .postSchList{width:100%; overflow: hidden; padding-top: 15px; height: 210px; overflow-y: auto;}
+    .postSchList li{ cursor: pointer; overflow: hidden; line-height: 38px; height: 38px; border-bottom: 1px dashed #e7e7e7;}
+    .postSchList li span{ display: block;width:230px; height: 38px; float: left; overflow:hidden;white-space:nowrap;text-overflow:ellipsis; text-indent: 15px;}
+    .postSchList li span em{ display:inline-block; height:16px; line-height:16px; padding:0 6px; border-radius:2px; background:#15cd7d; color:#fff; text-indent:0px; font-size:10px; margin-right:5px;}
+    .postSchList li a{ display: block; float: right; padding-left: 20px; margin-right: 15px; color: #3d84b8; font-size: 12px;}
+    .postSchList li:hover{ background: #f6f8fe;}
+    .noPostx{width:100%;}
+    .noPostx img{ margin: 0px auto 20px auto;}
+    .noPostx img,.noPostx span{ display: block; text-align: center; font-size: 12px; color: #999;}
+    .noPostx span a:hover {
+        color: #3d84b8;
+    }
+    
+    /*加载层*/
+    .chatloading{width:104px; height:30px;text-align:left; font-size:12px;}
+    .boundGetCode img{ display:inline-block;width:16px; height:16px;margin-top:7px; color:#666; margin-right: 10px}
+    
+    /*转发*/
+    .chatBottomAndSend a{ display:block; float:left; text-align: center; width: 88px;border-radius: 10px;color: #fff;background-color: #2b6fad;line-height: 20px;}
+
+    .chatBottomAndSend a:hover{ background-color:#3D84B8;color:#fff;}
+		
+		.chatBottomAndSend a.notOffenUse{ background-color:#999;}
+		.chatBottomAndSend a.notOffenUse:hover{  background-color:#666;}
+
+
+		
+    .chatBottomAndSend span{ display:block; float:left; padding:0 8px; color:#ccc; line-height:30px}
+    
+    .yaoqing-alert{margin:30px;color:#999;font-size:14px;line-height: 22px; text-align: center}
+    .yaoqing-alert dt{float: left;width:121px;height: 121px;margin-right: 20px}
+    .yaoqing-alert .t1{color:#0ea5a0;font-size:24px;font-family: '微软雅黑';margin-bottom: 15px}
+    .yaoqing-alert .t2{margin-bottom: 15px}
+    .yaoqing-alert .t2 span{color:#ff6563}
+    .yaoqing-alert .link2{color:#3f74c2;font-size:14px;margin-left: 10px}
+    .yqQual{height: 30px;background: #66bce4;font-size: 14px;color: #fff;line-height: 30px;border-radius: 2px;margin-right: 10px;width: 121px;display: inline-block;}
+    .yqQual:hover{ background: #31a2d6; color: #fff;}
+
+	.remindWord p{
+		padding-bottom:5px;
+	}
+</style>
+{/if $can_chat/}
+<script type="text/javascript" language="javascript" src='{/$siteurl.style/}/js/chat/json2.js'></script>
+<script type="text/javascript" language="javascript" src='{/$siteurl.style/}/js/chat/nim/NIM_Web_SDK_v6.10.0.js'></script>
+<script type="text/javascript" language="javascript" src='{/$siteurl.style/}/js/chat/nim/NIM_Web_NIM_v6.10.0.js'></script>
+{//if/}
+<script>
+    //解决ie8js不执行
+if (typeof window.console === "undefined") {
+        window.console = {};
+        window.console.log = function(str) {};
+}
+
+    var resume_price, video_point_use
+hbjs.use('@validator, @fileUploader, @confirmBox, @hbCommon, @jobDialog', function(m) {
+    var ConfirmBox = m['widge.overlay.confirmBox'];
+    var Dialog = m['widge.overlay.hbDialog'];
+    var $ = m['product.hbCommon'].extend(m['cqjob.jobDialog']);
+    var cookie = m['tools.cookie'];
+    var seed = "{/$chat_seed/}";
+    var chat_job_list = {/$chat_job_list/}
+    ; //职位列表
+
+
+    var liaoyiliao_resume_id = '';
+
+
+
+    var lyldialog_pay = new Dialog({
+        idName: 'save-comp',
+        title: '获取联系方式',
+        width: 562,
+        close: 'x',
+        isAjax: true
+    });
+var noBalance_box = new Dialog({
+		    idName: 'save-comp',
+		    title: '余额不足',
+		    width: 600,
+		    close: 'x',
+		    isAjax: true,
+			content:"<p class='noBalance_box'>您的视频点<span style='color:#ff2100'>余额不足</span>，请联系工作人员充值: <span style='color: #296df6'>{/$link_by/}</span></p>"
+		});
+		var  getnetfairLinkclicked=false;
+    function getnetfairLink(type, resume_id, job_id, _this) {
+		if(getnetfairLinkclicked){return false};
+		getnetfairLinkclicked = true;
+        $.post('/resume/NeedPay', {resume_id: '{/$resume_id/}', sid: '{/$sid/}'}, function (e) {
+            if (e.is_need_pay) {
+				getnetfairLinkclicked = false;
+                if (e.resource.video_point < (e.resource.video_point_use + e.price)) {
+					noBalance_box.show();
+                    // showModel('fail', '您的视频点余额不足，请联系工作人员充值'+phone);
+                } else {
+                    lyldialog_pay.setContent("<div class='getTel-dialog'><p class='videoNumCon'>确认花费<em class='videoNum'>" + resume_price + "视频点</em>下载联系方式？</p>" +
+                        '<p>（您的余额：' + video_point_use + '视频点，充值视频点可联系工作人员: ' + phone + '）</p>' +
+                        '<div id="getNow" class="getTelBtn">立即获取联系方式</div>'+
+                        '<p>（下载过联系方式的简历，我们会为您保存3个月，若想长期查看使用，请记得导出保存到本机上）</p></div>'
+                    );
+                    lyldialog_pay.show();
+                    lyldialog_pay.query("#getNow").on("click", function () {
+                        $.post('/resume/PayResumDo', {resume_id: '{/$resume_id/}', sid: '{/$sid/}'}, function (data) {
+							getnetfairLinkclicked=false;
+                            if (!data.status) {
+								console.log(data.msg)
+                                showModel('fail', data.msg);
+                            } else {
+								
+                                switch (type) {
+                                    case 'chat':
+                                        lyldialog_pay.hide();
+                                        selectJob(resume_id, job_id, _this);
+
+                                        break;
+                                    default:
+                                        break;
+                                }
+
+                            }
+                        }, 'json')
+                    });
+                }
+
+            } else {
+
+                switch (type) {
+                    case 'chat':
+                        lyldialog_pay.hide();
+                        selectJob(resume_id, job_id, _this);
+                        break;
+                    default:
+                        break;
+                }
+
+
+            }
+        }, 'json')
+    }
+
+
+    /**
+     *@desc 聊一聊事件
+     */
+    $("body").on("click", ".chatOneChat", function (e) {
+        var _this = $(this);
+        liaoyiliao_resume_id = _this.attr("data-resume-id");
+        var run0 = _this.running();
+
+        need_bind = false;//为了注释掉之后不影响之前的逻辑，这里强行定义为不需要绑定的状态
+        //2019-11-05注释结束
+        var not_area_limit = _this.attr('data-arealimit-id');
+        if (not_area_limit == 0) {
+            //已超出简历下载地区限制，请联系工作人员开通相应招聘服务。
+        }
+        //绑定成功后判断是否需要下载
+        var resume_id = _this.attr("data-resume-id");
+        var need_downlaod = _this.attr("data-need-download");
+        var job_id = _this.attr("data-job-id");
+        var from = _this.attr("data-from");
+        sid = _this.attr("data-sid");
+        phone = _this.attr("data-phone");
+        net_apply_id = _this.attr("data-netapplyid");
+        var job_effect = _this.attr("data-job-effect");//职位是否有效
+        resume_price = _this.attr("data-resumeprice");
+        video_point_use = parseInt(_this.attr("data-videopointlast"));
+
+        if (typeof(job_id) != 'undefined' && job_id != '' && typeof(job_effect) != 'undefined' && job_effect == 0) {
+            job_id = "";
+        }
+
+        getnetfairLink('chat', resume_id, job_id, _this);
+
+
+    })
+
+
+    function selectJobDo(resume_id, from_job_id, msg, $this) {
+        var joblisthtml = getJobListHtml(from_job_id, msg);
+        var jobListDialog = new Dialog({
+            idName: 'selectJob_dialog',
+            title: '请选择想要沟通的职位',
+            content: joblisthtml,
+            close: '╳',
+            width: 380
+        });
+        var joblistObj = jobListDialog.query(".chatPostSearchJob");
+        joblistObj.on("click", ".gotoChat", function () {
+            var _job_id = $(this).attr("data-job-id");
+            var chat_url = "{/$siteurl.company/}/chat/?resume_id=" + resume_id + "&job_id=" + _job_id;
+            window.open(chat_url);
+            jobListDialog.hide();
+        });
+        //搜索职位
+        joblistObj.on("click", ".searchSubmit", function () {
+            var _this = $(this);
+            var station = joblistObj.find("#postSearchText").val();
+            var searchUrl = "{/$siteurl.company/}/chat/searchJob";
+
+            _this.hide();
+            var $run = $this.running();
+            joblistObj.find(".searchjobloading").show();
+            $.getJSON(searchUrl, {station: station}, function (result) { //获取职位
+                $run.close();
+                _this.show();
+                joblistObj.find(".searchjobloading").hide();
+                var job_list = result.job_list;
+                var new_job_list = [];
+                if (typeof(from_job_id) != 'undefined' && from_job_id != '') {
+                    for (var i = 0; i < job_list.length; i++) {
+                        if (job_list[i].job_id == from_job_id) {
+                            new_job_list.unshift({'job_id': job_list[i].job_id, 'station': job_list[i].station});
+                        } else {
+                            new_job_list.push({'job_id': job_list[i].job_id, 'station': job_list[i].station});
+                        }
+                    }
+                } else {
+                    new_job_list = job_list;
+                }
+                if (new_job_list.length > 0) {
+                    joblistObj.find(".noChatSearchJob").hide();
+                    var li_html = "";
+                    for (var i = 0; i < new_job_list.length; i++) {
+                        var _pre_html = "";
+                        if (new_job_list[i].job_id == from_job_id) {
+                            _pre_html = '<em class="chatHasApply">已投</em>';
+                        }
+                        li_html += '<li><span>' + _pre_html + new_job_list[i].station + '</span><a href="javascript:void(0);" data-job-id="' + new_job_list[i].job_id + '" class="gotoChat">聊一聊</a></li>';
+                        ;
+                    }
+                    joblistObj.find("ul").html(li_html);
+                    joblistObj.find("ul").show();
+                } else {
+                    joblistObj.find("ul").hide();
+                    joblistObj.find(".chatSearchKeyWord").html(station);
+                    joblistObj.find(".noChatSearchJob").show();
+                }
+            });
+        });
+        //回车事件
+        joblistObj.find("#postSearchText").keydown(function (event) {
+            if (event.keyCode == 13) {
+                joblistObj.find(".searchSubmit").click();
+            }
+        });
+        jobListDialog.show();
+    }
+
+    //选择职位
+    var selectJob = function (resume_id, from_job_id, $this) {
+        if (typeof(from_job_id) != 'undefined' && from_job_id != '') {
+            var chat_url = "{/$siteurl.company/}/chat/?resume_id=" + resume_id + "&job_id=" + from_job_id + "&sid=" + sid + '&net_apply_id=' + net_apply_id;
+            window.open(chat_url);
+            return;
+        }
+        var msg = '';
+        selectJobDo(resume_id, from_job_id, msg, $this);
+
+    };
+
+
+    /**
+     *@desc 获取职位选择弹窗
+     */
+    function getJobListHtml(from_job_id, msg) {
+        var job_list = [];
+        var start_html = '<div class="postSearchPop chatPostSearchJob">';
+        if (typeof(from_job_id) != 'undefined' && from_job_id != '') {
+            for (var i = 0; i < chat_job_list.length; i++) {
+                if (chat_job_list[i].job_id == from_job_id) {
+                    job_list.unshift({'job_id': chat_job_list[i].job_id, 'station': chat_job_list[i].station});
+                } else {
+                    job_list.push({'job_id': chat_job_list[i].job_id, 'station': chat_job_list[i].station});
+                }
+            }
+        } else {
+            job_list = chat_job_list;
+        }
+        console.log(job_list);
+        if (job_list.length > 0) {
+            //重新排序
+            if (msg) {
+                start_html = start_html + '<div style="height: 65px;overflow: auto;color: red;">' + msg + '，沟通前请确认是否重复联系</div>';
+            }
+            start_html = start_html + '<div class="postSearchx">'
+                + '<input type="text" name="postSearchText" id="postSearchText" placeholder="搜索职位" value="" />'
+                + '<a href="javascript:;" class="postSearchx searchSubmit"></a>'
+                + '<a href="javascript:;" class="postSearchx searchjobloading" style="background:none;display:none"><img style="margin:7px" src="{/$siteurl.style/}/img/common/loading.gif"/></a>'
+                + '</div>';
+        }
+        if (job_list.length > 0) {
+            start_html = start_html + '<div class="noPostx noChatSearchJob" style=display:none>'
+                + '<img src="{/$siteurl.style/}/img/company/chat/chat_icon18.png" />'
+                + '<span>没有找到“<b class="chatSearchKeyWord"></b>”相关职位<br />请更换关键词重新搜索</span>'
+                + '</div>';
+        } else {
+            start_html = start_html + '<div class="noPostx">'
+                + '<img src="{/$siteurl.style/}/img/company/chat/chat_icon18.png" />'
+                + '<span>当前没有参与网络招聘会报名的职位</span>'
+                + '</div>';
+        }
+
+        if (job_list.length > 0) {
+            start_html += '<ul class="postSchList chatJobSearchList">';
+            for (var j = 0; j < job_list.length; j++) {
+                var _pre_html = "";
+                if (job_list[j].job_id == from_job_id) {
+                    _pre_html = '<em class="chatHasApply">已投</em>';
+                }
+                start_html += '<li><span>' + _pre_html + job_list[j].station + '</span><a href="javascript:void(0);" data-job-id="' + job_list[j].job_id + '" class="gotoChat">聊一聊</a></li>';
+            }
+            start_html += '</ul>';
+        }
+        start_html += '</div>';
+        return start_html;
+    }
+
+
+    //关闭弹窗
+    $("#MyHbChat .closeChatTip").on("click", function () {
+        $("#MyHbChat .qq_newsz").hide();
+        //添加cookie
+        var tomorrow = new Date("{/date('Y/m/d 00:00:00',strtotime('+1 day'))/}");
+        cookie.set('hasCloseChatMsgCount', 'true', {'expires': tomorrow});
+    });
+})
+</script>
+

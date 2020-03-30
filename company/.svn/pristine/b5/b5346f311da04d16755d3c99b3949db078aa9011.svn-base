@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>汇博网_招聘中心_我的账户</title>
+	<link rel="stylesheet" type="text/css" href="{/version file='base.css'/}"/>
+	<link rel="stylesheet" type="text/css" href="{/version file='comback.css'/}"/>
+	<link rel="stylesheet" type="text/css" href="{/version file='icons.css'/}"/>
+	<link rel="stylesheet" type="text/css" href="{/version file='v2-widge.css'/}"/>
+	<link rel="stylesheet" type="text/css" href="{/version file='companyStyle.css'/}"/>
+
+	<link rel="stylesheet" type="text/css" href="{/version file='pcqual.css'/}"/>
+
+	<script type="text/javascript" language="javascript" src="{/version file='jquery-1.8.3.min.js'/}"></script>
+	<script type="text/javascript" language="javascript" src="{/version file='common.js'/}"></script>
+	<script type="text/javascript" language="javascript" src="{/version file='jquery.form.js'/}"></script>
+	<script type="text/javascript" language="javascript" src="{/version file='ui_inputFocus.js'/}"></script><!--输入框获取焦点-->
+
+	<script type="text/javascript" language="javascript" src="{/version file='ui_validate.js'/}"></script>
+	<script type="text/javascript" language="javascript" src="{/version file='ui_uploadify.js'/}"></script>
+
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<link rel="stylesheet" type="text/css" href="{/version file="webuploader.css"/}"/>
+	<script type="text/javascript" src="{/version file="webuploader.js"/}"></script>
+	<script type="text/javascript" src="{/version file="upload.js"/}"></script>
+	<link rel="stylesheet" type="text/css" href="{/version file='lightbox.css'/}"/>
+	<script type="text/javascript" src="{/version file='lightbox.js'/}"></script>
+
+	<script type="text/javascript" src="{/version file='version.js'/}"></script>
+	<script type="text/javascript">
+		window.CONFIG = {
+			HOST: '{/$siteurl.style/}',
+			COMBOPATH: '/js/v2/'
+		}
+	</script>
+	<script type="text/javascript" src="{/version file='hbjs.js,jquery.min.js,util.js,class.js,shape.js,event.js,aspect.js,attribute.js,cookie.js'/}"></script>
+
+	<script type="text/javascript" src="{/version file='global.js'/}"></script>
+
+	<style type="text/css">
+		.part {
+			border-radius: 5px;
+			padding: 15px;
+			margin: 0 0 20px;
+			zoom: 1;
+		}
+
+		.part dl {
+			overflow: hidden;
+		}
+
+		.part dl dt {
+			float: left;
+			display: inline;
+			width: 175px;
+			text-align: center;
+		}
+
+		.part dl dd {
+			float: left;
+			display: inline;
+			width: 745px;
+			margin: 5px 0 0;
+		}
+
+		.part dl dt .ico {
+			height: 80px;
+			width: 100px;
+			margin: 0 auto;
+			background: url({$siteurl.style}/img/c/c.gif) no-repeat;
+		}
+
+		.part dl dt p {
+			height: 22px;
+			line-height: 22px;
+			margin: 5px 0 0;
+			font-size: 16px;
+		}
+
+		.part dl dd p {
+			line-height: 30px;
+		}
+
+		.part dl dd p a.btn3 {
+			margin: 0 10px 0 0;
+		}
+
+		.part1 dl dt .ico {
+			background-position: 0 0;
+		}
+
+		.part2 dl dt .ico {
+			background-position: -100px 0;
+		}
+
+		.part3 dl dt .ico {
+			background-position: -200px 0;
+		}
+
+		.part4 dl dt .ico {
+			background-position: -300px 0;
+		}
+
+		.part1 p a.lnk {
+			margin: 0 10px;
+		}
+
+		.part2 p.tit {
+			height: 45px;
+		}
+
+		.part2 p.tit i.hbFntWes {
+			float: left;
+			display: inline;
+			margin: 0 5px 0 0;
+			font-size: 45px;
+		}
+
+		.part2 p.tit span {
+			float: left;
+			font-size: 12px;
+			margin: 8px 0 0 0;
+		}
+
+		.part2 p.tit span em {
+			font-weight: bold;
+			font-size: 16px;
+			line-height: 28px;
+			margin: 0 0 0 5px;
+		}
+
+		.part2 p span.line {
+			color: #cecece;
+			margin: 0 10px;
+		}
+
+		.part2 p a.lnk {
+			margin: 0 10px;
+		}
+
+		.part2 div.tip {
+			line-height: 30px;
+		}
+
+		.part2 div.tip span.lst {
+			float: left;
+			display: inline;
+			padding: 0 10px 0 0;
+			border-right: 1px solid #ccc;
+			margin-right: 10px;
+			height: 24px;
+			line-height: 24px;
+		}
+
+		.part2 div.tip span.last {
+			border: 0;
+		}
+
+		.part2 div.tip .tipLay {
+			top: -36px;
+			left: -196px;
+		}
+
+		.part2 div.tip .tipLayTxt {
+			width: 350px;
+			font-size: 12px;
+			background: #fffce3;
+			border: 1px solid #fad5a8;
+		}
+
+		.part2 div.tip .tipLay .tipArr {
+			background: url({/$siteurl.style/}/img/common/contrl.gif) no-repeat -8px 0;
+			width: 8px;
+			height: 5px;
+			top: auto;
+			bottom: -4px;
+			left: 115px;
+			z-index: 4
+		}
+
+		.part3 p.tit {
+			font-weight: bold;
+		}
+
+		.part3 p b {
+			float: left;
+			display: inline;
+			height: 30px;
+			line-height: 30px;
+			font-weight: normal;
+		}
+
+		.part3 p .bar {
+			margin: 7px 0 0;
+			display: inline-block;
+		}
+
+		.part3 p a {
+			margin: 0 10px 0;
+		}
+
+		.part4 p.tit {
+			height: 45px;
+		}
+
+		.part4 p.tit i.hbFntWes {
+			float: left;
+			display: inline;
+			margin: 0 5px 0 0;
+			font-size: 45px;
+		}
+
+		.part4 p.tit span {
+			float: left;
+			display: inline;
+			font-weight: bold;
+			font-size: 16px;
+			line-height: 28px;
+			margin: 8px 0 0 0;
+		}
+
+		.part4 p.tit span em {
+		}
+
+		.part4 dl dd.part4AttIng {
+			margin: 40px 0 0;
+		}
+
+		.part4 dl dd.part4AttS {
+			margin: 33px 0 0;
+		}
+
+		.part4 dl dd.part4AttS span a.btn3 {
+			margin: 0 0 0 10px;
+			font-weight: normal;
+		}
+
+		.part4 dl dd.part4AttErr {
+			margin: 17px 0 0;
+		}
+
+		.part4 dl dd.part4AttErr a.btn3 {
+			margin: 0 0 0 10px;
+			font-weight: normal;
+		}
+
+		.part4 dl dd.part4AttNo {
+			margin: 17px 0 0;
+		}
+
+		.part4 dl dd.part4AttNo a.btn3 {
+			margin: 0 0 0 10px;
+			font-weight: normal;
+		}
+
+		.part2 p.notmember {
+			margin-top: 20px;
+		}
+
+		.firmMemberPge a {
+			float: right;
+			display: block;
+			width: 160px;
+			height: 40px;
+			line-height: 40px;
+			color: #fff;
+			font-size: 16px;
+			background: #21a3df url({/$siteurl.style/}/img/c/new_index/firmicon16.png) 34px center no-repeat;
+			border-radius: 4px;
+			text-indent: 4.1em;
+			#text-indent: 4.8em;
+		}
+
+		.firmMemberPge img {
+			float: right;
+			display: block;
+			margin: 7px 20px 0 0;
+		}
+
+		.firmMemberPge a:hover {
+			background: #107cae url({/$siteurl.style/}/img/c/new_index/firmicon16.png) 34px center no-repeat;
+		}
+
+		.playm {
+			display: inline-block;
+			width: 72px;
+			height: 30px;
+			background: url({/$siteurl.style/}/img/c/icon.jpg) no-repeat;
+			text-indent: -999px;
+			overflow: hidden;
+			vertical-align: middle;
+			margin-left: 15px
+		}
+	</style>
+
+	<style type="text/css">
+		.banner {
+			width: 100%;
+			height: 79px;
+			overflow: hidden;
+			position: relative;
+			z-index: 1;
+		}
+
+		header, .hdCon {
+			background: #f0f0f0;
+		}
+
+		.hdCon {
+			height: 30px;
+		}
+
+		.hdL .logo {
+			height: 30px;
+			line-height: 30px;
+			color: #8e8e8e;
+			font-family: "宋体";
+			font-size: 12px;
+		}
+
+		.hdR ul li, .hdR ul li a.lnk, .hdR ul .navLst a {
+			height: 30px;
+			line-height: 30px;
+		}
+
+		.hdR ul .navLst i {
+			margin: 10px 5px 0 0;
+		}
+
+		.hdR ul li.wemChatlist {
+			width: 100px;
+		}
+
+		.hdR ul li.wemChatlist a, .hdR ul li.wemChatlist a:hover {
+			height: 30px;
+			line-height: 32px;
+			color: #888;
+			background: url({/$siteurl.style/}/img/newindex/weChat06.png) 0 center no-repeat
+		}
+
+		.hdR ul li.navLst a:hover, .hdR ul li.wemChatlist a:hover, .hdR ul li.tcomInfo a:hover, .hdR ul li.thelpInfo a:hover {
+			color: #666;
+		}
+
+		.compNavbg {
+			width: 100%;
+			overflow: hidden;
+			background: #fff;
+			margin-bottom: 20px;
+		}
+
+		.compNav {
+			width: 1000px;
+			height: 50px;
+			overflow: hidden;
+			margin: 0 auto;
+			text-align: left;
+		}
+
+		.compLogo {
+			display: block;
+			float: left;
+			width: 144px;
+			height: 30px;
+			background: url({/$siteurl.style/}/img/newindex/compLogo.png) no-repeat;
+			margin: 10px 0;
+		}
+
+		.compList {
+			float: left;
+			padding-left: 60px;
+		}
+
+		.compList li {
+			float: left;
+		}
+
+		.compList li a {
+			display: block;
+			width: 120px;
+			text-align: center;
+			height: 50px;
+			line-height: 50px;
+			font-size: 16px;
+			font-family: "微软雅黑";
+			color: #2a2623;
+		}
+
+		.compList li a:hover {
+			text-decoration: none;
+			color: #4c4b49;
+		}
+
+		.compList li.cut a {
+			font-weight: bold;
+			color: #004d92;
+			background: url({/$siteurl.style/}/img/newindex/hbcompany02.png) center bottom no-repeat;
+		}
+
+		.compList li.cut2 a {
+			font-weight: bold;
+			color: #004d92;
+			background: url({/$siteurl.style/}/img/newindex/weChat07.png) center bottom no-repeat;
+		}
+
+		.comPost {
+			display: block;
+			float: right;
+			width: 110px;
+			height: 30px;
+			line-height: 30px;
+			font-family: "微软雅黑";
+			background: url({/$siteurl.style/}/img/newindex/hbcompany03.png) 15px center no-repeat #66bce4;
+			text-indent: 40px;
+			margin-top: 10px;
+			color: #fff;
+			border-radius: 4px;
+			font-size: 14px;
+		}
+
+		.comPost:hover {
+			background: url({/$siteurl.style/}/img/newindex/hbcompany03.png) 15px center no-repeat #5ca8cc;
+			color: #fff;
+			text-decoration: none;
+		}
+
+		.comPost:focus, .comPost:active {
+			background-color: #4aa2f2
+		}
+
+		.subcompNavbg {
+			width: 100%;
+			overflow: hidden;
+			background: #2b6fad;
+			height: 36px;
+			text-align: left;
+		}
+
+		.subcompMage {
+			width: 1000px;
+			margin: 0 auto;
+		}
+
+		.subcompNav {
+			float: left;
+			overflow: hidden;
+		}
+
+		.subcompNav li {
+			float: left;
+			display: none;
+		}
+
+		.subcompNav li a {
+			display: block;
+			float: left;
+			color: #fff;
+			color: #d2e5f6;
+			font-family: "微软雅黑";
+			height: 16px;
+			line-height: 16px;
+			padding: 0 20px;
+			border-right: 1px solid #23598c;
+			border-left: 1px solid #368ad9;
+			margin-top: 11px;
+			font-size: 14px;
+		}
+
+		.subcompNav li a.first {
+			border-left: none;
+		}
+
+		.subcompNav li a.last {
+			border-right: none;
+		}
+
+		.subcompNav li a.cut {
+			font-weight: bold;
+			color: #fff;
+		}
+
+		.subcompNav li a:hover {
+			color: #fff;
+			text-decoration: none;
+		}
+
+		.subcompNav li.tabList3 {
+			margin-left: 97px;
+			_margin-left: 48px;
+		}
+
+		.subcompNav li.tabList4 {
+			margin-left: 217px;
+			_margin-left: 108px;
+		}
+
+		.subcompRt {
+			float: right;
+		}
+
+		.subcompRt a {
+			display: block;
+			height: 36px;
+			padding-left: 20px;
+			line-height: 36px;
+			color: #d2e5f6;
+			float: left;
+			font-family: "微软雅黑";
+			font-size: 14px;
+		}
+
+		.subcompRt a.compHome {
+			background: url({/$siteurl.style/}/img/newindex/hbcompany04.png) left center no-repeat;
+			margin-right: 20px;
+		}
+
+		.subcompRt a.compHome:hover {
+			background: url({/$siteurl.style/}/img/newindex/hbcompany04cut.png) left center no-repeat;
+			color: #fff;
+		}
+
+		.subcompRt a.compSch {
+			background: url({/$siteurl.style/}/img/newindex/hbcompany05.png) left center no-repeat;
+		}
+
+		.subcompRt a.compSch:hover {
+			background: url({/$siteurl.style/}/img/newindex/hbcompany05cut.png) left center no-repeat;
+			color: #fff;
+		}
+
+		.hdR ul li a em.num {
+			left: 25px;
+			top: 2px;
+		}
+
+		.comPostBg, .comPostBgcut {
+			width: 110px;
+			height: 50px;
+			overflow: hidden;
+			float: right;
+			background: url({/$siteurl.style/}/img/newindex/weChat07.png) center bottom no-repeat;
+		}
+
+		.compList li a {
+			position: relative;
+		}
+
+		.notice_icon {
+			background: url({/$siteurl.style/}/img/newindex/bubble.png);
+			width: 23px;
+			height: 21px;
+			font-size: 12px;
+			font-family: "宋体";
+			line-height: 18px;
+			color: #fff;
+			position: absolute;
+			top: 5px;
+			right: 4px;
+			text-align: center;
+		}
+
+	</style>
+
+	<style>
+		.dz_upimg .step_box {
+			margin: 40px 120px
+		}
+
+		.dz_upimg .step_box li {
+			height: 29px;
+			overflow: hidden;
+			float: left;
+			background: #f3f3f3 url({/$siteurl.style/}/img/c/hrmember/dz_step_ctr.jpg) right top no-repeat;
+			color: #444;
+			font-size: 12px;
+			line-height: 29px;
+			text-align: center;
+			width: 360px
+		}
+
+		.dz_upimg .step_box li.cur {
+			background-image: url({/$siteurl.style/}/img/c/hrmember/dz_step_ctrg.jpg)
+		}
+
+		.dz_upimg .step_box li.last {
+			background: #f3f3f3 url({/$siteurl.style/}/img/c/hrmember/dz_step_arrg.jpg) right top no-repeat
+		}
+
+		.dz_upimg .step_box li.lastcur {
+			background: #55728d url({/$siteurl.style/}/img/c/hrmember/dz_step_arr.jpg) right top no-repeat;
+			color: #fff
+		}
+
+		.dz_upimg .step_box li.cur {
+			background-color: #55728d;
+			color: #fff
+		}
+
+		.dz_upimg .orange {
+			color: #ed6802;
+			font-size: 14px;
+			margin-left: 120px
+		}
+
+		.dz_upimg dl {
+			color: #a6a6a6;
+			font-size: 14px;
+			margin: 20px 0 0 120px
+		}
+
+		.dz_upimg dl dt {
+			float: left
+		}
+
+		.dz_upimg dl dd {
+			margin-left: 150px;
+			font-size: 12px
+		}
+
+		.dz_upimg dl .uploadify {
+			margin-top: -4px
+		}
+
+		.dz_upimg .img {
+			margin: 20px 0 0 220px
+		}
+
+		.dz_upimg .success_box, .dz_upimg .warning_box {
+			margin-left: 300px;
+			margin-top: 40px;
+			margin-bottom: 100px
+		}
+
+		.dz_upimg .success_box dd, .dz_upimg .warning_box dd, .dz_upimg .error_box dd {
+			margin-left: 60px;
+			padding-top: 3px
+		}
+
+		.dz_upimg .success_box p {
+			color: #00c60e;
+			font-size: 14px;
+			margin-bottom: 5px
+		}
+
+		.dz_upimg .warning_box p {
+			color: #444;
+			font-size: 14px;
+			padding-top: 8px
+		}
+
+		.dz_upimg .error_box {
+			margin-left: 300px;
+			margin-top: 40px;
+			margin-bottom: 40px
+		}
+
+		.dz_upimg .error_box p {
+			color: #fa3f38;
+			font-size: 14px;
+			margin-bottom: 5px
+		}
+	</style>
+
+	<style type="text/css">
+		.noopen_box {
+			margin: 70px 0 70px 250px;
+			color: #6c6c6c;
+			font-size: 14px
+		}
+
+		.noopen_box dt {
+			float: left;
+			padding-top: 5px
+		}
+
+		.noopen_box dd {
+			margin-left: 60px;
+			font-family: "宋体"
+		}
+
+		.noopen_box dd label {
+			display: block;
+			margin: 10px 0;
+			color: #484848
+		}
+
+		.noopen_box dd span {
+			display: block;
+			margin-bottom: 10px
+		}
+
+		.noopen_box dd .link {
+			color: #fff;
+			font-size: 12px;
+			background-color: #00bab1;
+			border-radius: 3px;
+			padding: 7px 15px;
+			margin-left: 20px
+		}
+
+		#upload_photo-button {
+			margin-top: -27px;
+		}
+
+		.imgLst {
+			clear: both;
+			width: 730px;
+			float: left;
+			margin: 15px 0 0;
+			display: inline;
+		}
+
+		.imgLst ul li {
+			float: left;
+			display: inline;
+			position: relative;
+			z-index: 1;
+			width: 122px;
+			height: 125px;
+			margin: 0 24px 5px 0;
+		}
+
+		.imgLst ul li .pic {
+			height: 82px;
+		}
+
+		.imgLst ul li .pic img {
+			width: 120px;
+			height: 80px;
+			border: 1px solid #dadada;
+		}
+
+		.imgLst ul li a.del {
+			position: absolute;
+			right: -10px;
+			top: -10px;
+			font-size: 22px;
+			color: #D84D14;
+			background: #fff;
+			border-radius: 15px;
+		}
+
+		.imgLst ul li a.del:hover {
+			color: #cb4647;
+		}
+
+		.imgLst ul li .imgInp {
+			margin: 5px 0 0;
+		}
+
+		.imgLst ul li .imgInp input.imgTxt {
+			height: 22px;
+			line-height: 22px;
+			border: 1px solid #fff;
+			font-size: 12px;
+			width: 120px;
+			text-align: center;
+			cursor: pointer;
+		}
+
+		.imgLst ul li .imgInp input.imgTxtHov {
+			border: 1px solid #dadada;
+		}
+
+		.imgLst ul li .load {
+			display: none;
+			width: 120px;
+			height: 80px;
+			border: 1px solid #eaeaea;
+			background: url({/$siteurl.style/}/img/common/loadBox.gif) no-repeat center center;
+		}
+
+		.imgLst ul li .loadTxt {
+			text-align: center;
+			font-size: 12px;
+			display: none;
+			height: 24px;
+			line-height: 24px;
+			margin-top: 5px;
+		}
+
+		.imgLst ul li.hov .imgInp input.imgTxt {
+			border: 1px solid #aaa;
+		}
+
+		.imgLst ul li.hov .pic img {
+			border: 1px solid #cbcbcb
+		}
+
+		.imgLst ul li.imgLoading .load {
+			display: block;
+		}
+
+		.imgLst ul li.imgLoading .loadTxt {
+			display: block;
+		}
+
+		.imgLst ul li.imgLoading .pic, .imgLst ul li.imgLoading .imgInp, .imgLst ul li.imgLoading a.del {
+			display: none;
+		}
+	</style>
+	<style>
+		.content em.red {
+			background: red !important;
+		}
+
+		.content em.green {
+			background: #16bf7f !important;
+		}
+
+		.content em.gray {
+			background: #acb0b3 !important;
+		}
+
+		.content em.csc {
+			background: #169BD5 !important;
+		}
+
+		.AgencyEmpx {
+			height: auto;
+		}
+
+		.addEmp1 {
+			color: white !important;
+		}
+
+		.editEmp3 {
+			right: 0 !important;
+		}
+	</style>
+
+	<style>
+		.companyGence{width:870px; text-align: left; margin: 0 auto; border:1px solid #ccc; padding: 30px 30px 15px 30px; font-family: "微软雅黑";}
+		.gencexShow{ height: 110px; overflow: hidden;}
+		.companyGence h2{ text-align: center; color: #444; font-size: 16px; font-weight: bold; padding-bottom: 10px;}
+		.companyGence p{ color: #666; line-height: 26px; padding-bottom: 24px; }
+		.gencenShow{ color: #2b6fad; display: block; text-align: center;}
+		.gencenShow i{ display: inline-block; vertical-align: -3px; width:16px; height: 16px; background: url({/$siteurl.style/}/img/show_all.png) 0 0 no-repeat; margin-right: 8px;}
+		.gencenShowAll i{background: url({/$siteurl.style/}/img/show_all.png) -19px 0 no-repeat;}
+	</style>
+</head>
+</head>
+<body>
+{/include file="new_header.html" par="企业管理" cur="企业资质"/}
+
+<div class="content">
+	<section class="section" style="overflow:hidden;">
+		<hgroup>
+			<div class="part">
+				<div class="companyGence">
+					<h2 class="genceTit01">汇博招聘资质要求</h2>
+					<div class="gencexShow">
+						<p>在汇博网上进行招聘，企业须及时提供营业执照等各类相关手续所需的证件，中介和培训机构等特殊行业须提供相关业务所需的资质证件或证明。<br />
+							1、培训学校/机构等代招航空地勤类收费职位的代招机构须提供以下资料：<br />
+							①　提供培训机构（学校）的办学许可证<br/>
+							②　培训机构提供盖公章的授权委托书<br/>
+							③　被授权单位及个人的营业执照、身份证复印件</p>
+						<p>2、给代招国家机构类、事业单位类等职位的企业须提供以下资料：<br />
+							①　人力资源代招机构提供人力资源许可证和代招证明<br />
+							②　非人力资源类企业提供代招证明</p>
+						<p>3、进行海外招聘的企业须提供以下资料：<br />
+							①　提供人力资源许可证和代招证明<br />
+							②　提供资质证书（对外劳务合作经营资格）或者是跟有资质证书公司之间的代招协议</p>
+					</div>
+					<a href="#" class="gencenShow"><i></i>展开全文</a>
+				</div>
+				<div class="bd">
+					<div class="AgencyEmpx">
+					<span class="empCy01">人力资源服务许可证
+						</span>
+						{/if !$list[1] || $list[1]['check_status'] == 0/}
+							<em>尚未上传人力资源服务许可证</em>
+							{/$licence1_but=true/}
+						{//if/}
+						{/if $list[1]['certificate_code']/}
+							<span class="empCz02">
+								证书编号：{/$list[1]['certificate_code']/}
+								{/if $list[1] && $list[1]['check_status'] == 2 && $list[1]['maturity_time'] < date('Y-m-d')/}
+									<em class="red">已过期</em>
+									<i style="color: red">（资质已过期，请重新认证）</i>
+								{//if/}
+								{/if  $list[1]['check_status'] == 1/}
+									<em class="csc">审核中</em>
+									<i>（资质审核中，请等待结果）</i>
+								{//if/}
+								{/if  $list[1]['check_status'] == 2 && $list[1]['maturity_time'] >= date('Y-m-d')/}
+									<em class="green">审核通过</em>
+									<i>（如发生变更，可重新认证）</i>
+								{//if/}
+								{/if  $list[1]['check_status'] == 3/}
+									<em class="red">审核失败</em>
+									<i style="color: red">（审核未通过，请重新认证）</i>
+								{//if/}
+							</span>
+						{//if/}
+						{/if strtotime($list[1]['maturity_time'])/}
+							<span class="empCy02">有效期限：{/$list[1]['maturity_time']/}</span>
+						{//if/}
+						{/if $licence1_but/}
+							<a href="javascript:;" class="addEmp addEmp1"
+							   onclick="AddHrLicenceInfo(1,'{/$list[1]['id']/}')">
+								去认证
+							</a>
+						{/elseif $list[1]['check_status'] != 1/}
+							<a href="javascript:;" onclick="AddHrLicenceInfo(1,'{/$list[1]['id']/}')">重新认证</a>
+						{//if/}
+					</div>
+
+					<div class="AgencyEmpx">
+						<span class="empCy01">
+							对外劳务合作经营资格证书
+						</span>
+						{/if !$list[2] || $list[2]['check_status'] == 0/}
+							<em>尚未上传对外劳务合作经营资格证书</em>
+							{/$licence2_but=true/}
+						{//if/}
+						{/if $list[2]['certificate_code']/}
+							<span class="empCz02">
+								证书编号：{/$list[2]['certificate_code']/}
+								{/if $list[2] && $list[2]['check_status'] == 2 && $list[2]['maturity_time'] < date('Y-m-d')/}
+									<em class="red">已过期</em>
+									<i style="color: red">（资质已过期，请重新认证）</i>
+								{//if/}
+								{/if  $list[2]['check_status'] == 1/}
+									<em class="csc">审核中</em>
+									<i>（资质审核中，请等待结果）</i>
+								{//if/}
+								{/if  $list[2]['check_status'] == 2 && $list[2]['maturity_time'] >= date('Y-m-d')/}
+									<em class="green">审核通过</em>
+									<i>（如发生变更，可重新认证）</i>
+								{//if/}
+								{/if  $list[2]['check_status'] == 3/}
+									<em class="red">审核失败</em>
+									<i style="color: red">（审核未通过，请重新认证）</i>
+								{//if/}
+							</span>
+						{//if/}
+						{/if strtotime($list[2]['maturity_time'])/}
+							<span class="empCy02">有效期限：{/$list[2]['maturity_time']/}</span>
+						{//if/}
+						{/if $licence2_but/}
+							<a href="javascript:;" class="addEmp addEmp1"
+							   onclick="AddHrLicenceInfo(2,'{/$list[2]['id']/}')">
+								去认证
+							</a>
+						{/elseif $list[2]['check_status'] != 1/}
+							<a href="javascript:;" onclick="AddHrLicenceInfo(2,'{/$list[2]['id']/}')">重新认证</a>
+						{//if/}
+					</div>
+
+					<div class="AgencyEmpx" style="min-height:80px; padding-bottom: 0px;">
+						<span class="empCy01">代理招聘协议<i>（如为多家企业进行代招服务，请添加多份协议）</i></span>
+						{/if !$agency_agreement/}
+							<em>尚未上传代理招聘协议</em>
+						{//if/}
+						<a href="javascript:;" style="top: 20px" class="addEmp addEmp1" onclick="AddHrLicenceInfo(3,'')">添加</a>
+						<div class="clear"></div>
+						{/foreach $agency_agreement as $agency/}
+							<div class="empList">
+							<span class="empCz02">
+								协议名称：{/$agency['certificate_code']/}
+								{/if $agency && $agency['check_status'] == 2 && $agency['maturity_time'] < date('Y-m-d')/}
+									<em class="red">已过期</em>
+									<i style="color: red">（资质已过期，请重新认证）</i>
+								{//if/}
+								{/if !$agency || $agency['check_status'] == 0/}
+									<em>尚未上传人力资源服务许可证</em>
+								{//if/}
+								{/if  $agency['check_status'] == 1/}
+									<em class="csc">审核中</em>
+									<i>（资质审核中，请等待结果）</i>
+								{//if/}
+								{/if  $agency['check_status'] == 2 && $agency['maturity_time'] >= date('Y-m-d')/}
+									<em class="green">审核通过</em>
+									<i>（如发生变更，可重新认证）</i>
+								{//if/}
+								{/if  $agency['check_status'] == 3/}
+									<em class="red">审核失败</em>
+									<i style="color: red">（审核未通过，请重新认证）</i>
+								{//if/}
+								</span>
+								<span class="empCz03">有效期限：{/$agency['maturity_time']/}</span>
+								{/if  $agency['check_status'] != 1/}
+									<a href="javascript:;" class="editEmp editEmp3" onclick="AddHrLicenceInfo(3,'{/$agency.id/}')">重新认证</a>
+								{//if/}
+							</div>
+						{//foreach/}
+					</div>
+				</div>
+			</div>
+		</hgroup>
+	</section>
+</div>
+</body>
+<script type="text/javascript">
+	var company_msg = Number('{/$smarty.request.company_msg/}');
+	$(function(){
+		if (company_msg){
+            $('.gencenShow').click();
+		}
+	});
+
+    $('.gencenShow').click(function(){
+        $(this).toggleClass('gencenShowAll');
+        var thisAll = $(this).hasClass('gencenShowAll');
+        if(thisAll){
+            $('.gencexShow').css('height','auto');
+            $(this).html('<i></i>收起');
+        }else{
+            $('.gencexShow').css('height','110px');
+            $(this).html('<i></i>展开全文');
+        }
+    });
+</script>
+<script>
+	var confirmBox, Dialog;
+	hbjs.use('@dialog,@confirmBox', function (m) {
+		var $ = m['jquery'];
+		confirmBox = m['widge.overlay.confirmBox'];
+		Dialog = m['widge.overlay.hbDialog'];
+		$('.AgencyEmpx .empList:last').css('border', 'none');
+	});
+
+	//确定框
+	function confirm_box(msg, success_c, but_title) {
+		success_c = success_c ? success_c : {
+			success: function (data) {
+
+			},
+			error: function (data) {
+
+			}
+		};
+		var width = msg.length * 18 + 70;
+		width = width > 600 ? 600 : width;
+		return confirmBox.confirm(msg, but_title ? but_title : "提示",
+				function (data) {
+					this.hide();
+					if ('success' in success_c) {
+						success_c.success(data);
+					}
+				}, function (data) {
+					this.hide();
+					if ('error' in success_c) {
+						success_c.error(data);
+					}
+				}, {width: width});
+	}
+
+	//新建弹窗 hbDialog
+	function start_dialog(url_obj, idName, title, width) {
+		if (!(typeof url_obj == "object" ) || url_obj instanceof String) {
+			url_obj = {url: url_obj, data: null};
+		}
+		url_obj.data['hbDialog'] = 1;
+		if (url_obj.data) {
+			url_obj.data = jQuery.param(url_obj.data);
+		}
+		if (!url_obj.url) {
+			msg_error_box("请指定打开窗体的地址");
+			return false;
+		}
+		var space_mark = url_obj.url.indexOf('?') > 0 ? url_obj.data ? "&" : '' : '?';
+		url_obj.data = url_obj.data ? url_obj.data : '';
+		var add_info = new Dialog({
+			close: 'x',
+			idName: idName,
+			title: title ? title : '信息',
+			width: width ? width : 700,
+			content: url_obj.url + space_mark + url_obj.data,
+			isAjax: true
+		});
+		add_info.on('closeX', function (e) {
+			add_info.destory();
+		});
+		return add_info;
+	}
+
+	//错误提示 success-成功 fail-错误 warning-警告 question-疑问  info-信息 normal-正常
+	function msg_error_box(msg) {
+		confirmBox.timeBomb(msg ? msg : "参数错误!", {
+			name: 'fail',
+			timeout: 2000,
+			width: 70 + msg.length * 18
+		});
+		return false;
+	}
+
+	//成功提示 success-成功 fail-错误 warning-警告 question-疑问  info-信息 normal-正常
+	function msg_success_box(msg) {
+		confirmBox.timeBomb(msg ? msg : "成功!", {
+			name: 'success',
+			timeout: 1000,
+			width: 70 + msg.length * 18
+		});
+		return true;
+	}
+
+	function ajax_function(url, data, success_c, async, type) {
+		success_c = success_c ? success_c : {
+			success: function (data) {
+
+			},
+			error: function (data) {
+
+			}
+		};
+		type = type ? type : 'POST';
+		async = async ? async : false;//是否同步请求  //false-同步请求
+		if (!url || !success_c) {
+			msg_error_box('参数错误');
+		}
+		var re = false;
+		$.ajax({
+			type: type,
+			url: url,
+			data: data,//只要将表单序列化就可以了
+			async: async,//false-同步请求
+			dataType: 'json',
+			success: function (data) {
+				re = success_c.success(data);
+			},
+			error: function (request) {
+				msg_error_box("数据请求失败.请稍后重试");
+				re = success_c.error(request);
+				re = false;
+			}
+		});
+		return re;
+	}
+
+
+	//提交公用方法  表单  统一处理拦截错误信息
+	function ajax_form_function(form, success_c, async, type) {
+		success_c = success_c ? success_c : {
+			success: function (data) {
+
+			},
+			error: function (data) {
+
+			}
+		};
+		type = type ? type : 'POST';
+		async = async ? async : false;//是否同步请求  //false-同步请求
+		if (!form || !success_c) {
+			msg_error_box('参数错误');
+		}
+		var re = false;
+		$.ajax({
+			type: type,
+			url: $(form).attr('action'),
+			data: $(form).serialize(),//只要将表单序列化就可以了
+			async: async,//false-同步请求
+			dataType: 'json',
+			success: function (data) {
+				if (data.code == '200') {
+					if ('success' in success_c) {
+						re = success_c.success(data);
+					}
+				} else {
+					//提示错误
+					msg_error_box(data.msg);
+					if ("error" in success_c) {
+						re = success_c.error(data);
+					}
+				}
+			},
+			error: function (request) {
+				msg_error_box("数据请求失败.请稍后重试");
+				re = false;
+			}
+		});
+		return re;
+	}
+</script>
+<script>
+	//资质认证
+	var add_info;
+	function AddHrLicenceInfo(licence_type, licence_id) {
+		if (!licence_type) {
+			msg_error_box('企业资质类型错误');
+		}
+		var url_obj = {
+			url: "{/get_url rule='/hrlicence/AddHrLicenceInfo'/}",
+			data: {licence_type: licence_type, licence_id: licence_id}
+		};
+		add_info = start_dialog(url_obj, 'AddHrLicenceInfo', '资质认证', 700);
+		add_info.show();
+	}
+</script>
+{/include file="chat/chat.html"/}
+</html>

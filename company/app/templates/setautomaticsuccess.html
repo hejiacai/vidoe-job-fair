@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+</head>
+<body>
+<style>
+.remDelBox{width:335px;font-size:12px;}
+.remDelTxt{margin-bottom:10px;padding:0 0 10px 0;zoom:1;}
+.remDelTxt p{font-size:14px;padding-top:5px; line-height:24px;}
+.remDelTxt p em{color:#ED7066;margin:0 10px;}
+.remDelL{float:left;display:inline;margin:5px 0 0 0;}
+.remDelR{float:right;display:inline;}
+.remDelL input{vertical-align:middle;cursor:pointer;}
+.remDelL label{vertical-align:middle;cursor:pointer;margin:0 0 0 5px;}
+.remDelTxt h2 {text-align: center; color:#46b692; font-family:"微软雅黑";}
+.remDelTxt h2 em{ display:inline-block; vertical-align:middle; padding-right:9px; font-size:16px; color:#46b692;}
+</style>
+<div class="dgBox remDelBox">
+	<div class="remDelTxt">
+            <h2><em class="hbIconMoon">&#xe0fb;</em>自动过滤简历开启成功</h2>
+    	<p>
+            该职位收到与职位不匹配的简历将被自动隐藏，
+            您可以在“简历管理”查看过滤掉的简历
+    	</p>
+    </div>
+    <div class="remDelBtn">
+    	<div class="remDelL"><input type="checkbox" name="rem" id="rem" /><label for="rem">下次不要再提醒我</label></div>
+        <div class="remDelR"><a href="javascript:void(0)" class="btn1 btnsF14" id="btnTipdelete">我知道了</a></div>
+        <div class="clear"></div>
+    </div>
+</div>
+<script type="text/javascript">
+$(function(){
+     var job_id = {/$job_id/};
+    var result = {/$set_result/};
+    joblist.openAutomatic(job_id,result);
+})
+$('#btnTipdelete').click(function(){
+//    var job_id = {/$job_id/};
+//    var result = {/$set_result/};
+	if($('#rem').is(':checked')) {
+	   var val = cookieutility.get('automatic');
+	   if(val==null||val==''){
+		   cookieutility.set('automatic','true');
+	   }
+	}else {
+		cookieutility.del('automatic');
+	}
+    //joblist.openAutomatic(job_id,result);
+   $(this).closeDialog();
+});
+
+$('#btnTipCancel').click(function(){
+	$(this).closeDialog();
+});
+</script>
+</body>
+</html>

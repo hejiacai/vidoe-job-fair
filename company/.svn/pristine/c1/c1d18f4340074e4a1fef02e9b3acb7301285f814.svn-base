@@ -1,0 +1,297 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<!--<link rel="stylesheet" type="text/css" href="{/version file='base.css'/}" />-->
+<style>
+/*=======批量修改薪资弹窗======*/
+.set_myBg{width:740px; overflow:hidden; background:#fff; margin:0 auto;}
+.set_scrool{width:720px; max-height:400px; overflow-x:hidden; overflow-y:auto; margin-left:20px;}
+.set_myBg table{}
+.set_myBg table td{border-top:1px dashed #e4e4e4;color:#28698c;}
+.set_myBg table .not_line td{ border:none;}
+.set_myBg table .last_line td{border-bottom:1px dashed #e4e4e4;}
+.set_myBg table .set_tind{ text-indent:1em;}
+.set_myBg table tr th{ color:#999;}
+.set_myBg table tr td span{color:#666; margin:0 5px;display:inline-block; vertical-align:middle;}
+.set_myBg table tr td .dp_btn,.set_myBg table tr td .x_btn{display:inline-block; margin-top:2px; vertical-align:middle;}
+.set_iput{ display:inline-block;width:58px; height:23px; border:1px solid #a9a9a9; color:#000; line-height:23px; text-indent:0.4em;}
+.set_myBg table .set_bgc{ background:#f2f9fb;}
+.set_myBg table .set_table{width:720px;margin-left:0;}
+.set_table tr td{ padding:5px 0; font-size:12px;}
+.set_table tr .tipMsg{ display:block;color:#f00;padding-top:3px;}
+.set_btn{width:740px; overflow:hidden; text-align:center; margin:30px 0;}
+.set_btn a{ display:inline-block; padding:8px 26px; color:#fff; background:#1fa4c7; margin-right:10px; border:1px solid #1fa4c7; border-radius:5px;-moz-border-radius:5px;-webkit-border-radius:5px;-o-border-radius:5px;}
+.set_btn a:hover{ background:#0eaed8; border:1px solid #0eaed8; color:#fff;}
+.set_btn a:active{ background:#1691b1; border:1px solid #1691b1;}
+.set_btn .btn_shut{ background:#f2f8f8; border:1px solid #ccc; color:#666;}
+.set_btn .btn_shut:hover{background:#f94e4e; border:1px solid #f94e4e; color:#fff; }
+.set_btn .btn_shut:active{ background:#d54949; border:1px solid #d54949;}
+.nojob_err_text{
+	padding:30px;
+}
+</style>
+</head>
+
+<body>
+    {/if count($job_list) == 0/}
+        <div class="nojob_err_text">对不起，您还没有发布职位，请先发布职位吧！</div>
+    {/else/}
+<div id="setMyTable" class="set_myBg">
+	<table width="720" border="0" style="margin-left:20px; border-bottom:1px dashed #e4e4e4;">
+  <tr>
+    <th width="300" height="44" style="text-indent:1em;" align="left" valign="middle">职位名称</th>
+    <th width="160" height="44" align="left" valign="middle">基本薪资（元/月）</th>
+    <th width="246" height="44" align="left" valign="middle" style="text-indent:0.8em">平均收入（底薪+提成）</th>
+  </tr>
+  </table>
+    <form id="formjob" method="post" action="{/get_url rule='/job/MordModSalaryDo/'/}">
+  <div class="set_scrool">
+        <table class="set_table" width="720" border="0">
+            {/foreach $job_list as $key =>$value/}
+            <tr class="{/if $key ==0/}not_line{//if/} {/if $key%2 == 1/}set_bgc{//if/} {/if $key == (count($job_list)-1)/}last_line{//if/}">
+              <td width="300" height="44" align="left"  valign="middle" class="set_tind">{/$value.station/}</td>
+              <td width="160" height="44" align="left" valign="middle">
+                  <label style="margin-left:10px;display:none">
+                        <input type="checkbox" name='is_salary_shows[{/$key/}]'   class="dp_btn" value ='1' {/if $value.is_salary_show == 1/}checked{//if/} class="x_btn" /><span>面议</span>
+                   </label>
+                  <input type="hidden" name="jobids[{/$key/}]" value="{/$value.job_id/}" />
+                  <input type="hidden" name="job_stations[{/$key/}]" value="{/$value.station/}" />
+                  <input type="text" class="set_iput"  name="min_salarys[{/$key/}]" value="{/if $value.salary_type ==0/}{/$value.min_salary/}{/else/}{/$value.base_min_salary/}{//if/}"/>
+                  <span>~</span>
+                  <input type="text" class="set_iput" name="max_salarys[{/$key/}]" value="{/if $value.salary_type ==0/}{/$value.max_salary/}{/else/}{/$value.base_max_salary/}{//if/}" />
+                  
+                   <span class="tipMsg"></span>   
+              </td>
+              <td width="246" height="44" align="left" valign="middle">
+                  <label style="margin-left:10px;">
+                      <input type="checkbox" name="salary_types[{/$key/}]" value="1" {/if $value.salary_type == 1/}checked="checked"{//if/} class="x_btn" /><span>有提成</span>
+                  </label>
+                      <input type="text" value="{/if $value.salary_type != 0/}{/$value.min_salary/}{//if/}" name="base_min_salarys[{/$key/}]" class="set_iput x_int" {/if $value.salary_type == 0/} disabled="disabled"{//if/}/>
+                  <span>~</span>
+                  <input type="text" value="{/if $value.salary_type != 0/}{/$value.max_salary/}{//if/}" name="base_max_salarys[{/$key/}]" class="set_iput x_int" {/if $value.salary_type == 0/} disabled="disabled"{//if/} />
+                           <span class="tipMsg"></span>   
+               </td>
+              
+            </tr>
+            {//foreach/}
+            
+          </table>
+  </div>
+    <div class="set_btn">
+    	<a href="javascript:;" id="btn_sure" class="btn_sure">确定</a>
+        <a href="javascript:;" id="btn_shut" class="btn_shut">取消</a>
+    </div>
+        </form>
+    </div>
+    {//if/}
+    
+    <script>
+	var table = $('#setMyTable'),
+	x_btn = table.find('.x_btn'),
+	input = table.find('input.x_int');
+	table.on('change', '.x_btn', function(e){
+		var target = $(e.currentTarget);
+		target.closest('tr').find('input.x_int').prop('disabled', !target.prop('checked'));
+                if(!target.prop('checked')){
+                    target.closest('tr').find('.tipMsg').html('');
+                }
+	});
+        var isSubmit = true;
+        var jobLevel = {
+		initialize:function(){
+                    
+			$('#btn_sure').click(function(){
+                            if(!isSubmit){
+                                return;
+                            }
+ 
+                         var flag = true;
+                    
+                            $("table.set_table tr").each(function(){
+                                    var tdObj = $(this).find('td').eq(1).find('input[type="text"]').eq(0);
+                                    if( moneyCheck( tdObj  , 1 , 1 , 1) == false ) {
+                                            flag = false;
+                                    }
+                                    var tdObj = $(this).find('td').eq(2).find('input[type="text"]').eq(0);
+                                    if( moneyCheck( tdObj  , 1 , 2 , 1) == false ) {
+                                            flag = false;
+                                    }
+                            });
+                            if(flag == true){
+				 $(this).submitForm({success: jobLevel.successCallBack, clearForm: false});
+                             }
+			});
+			$('#btn_shut').click(function(){
+				 $(this).closeDialog();
+			});
+			
+		},
+		successCallBack:function(result){
+			if(result.success) {
+                $.anchorMsg("更改薪资成功", { onclose: function() {
+                    $('#btn_sure').closeDialog();
+                }});
+			}else{
+				 $.anchorMsg(result.error,{icon:'fail'});
+			}
+                        isSubmit = true;
+		}
+	};
+    jobLevel.initialize();  	
+	
+	$("table.set_table tr").each(function(){
+		$(this).find('td').eq(1).find('input[type="text"]').eq(0).blur(function(){
+			return moneyCheck($(this) , 1 , 1);
+		});
+		$(this).find('td').eq(1).find('input[type="text"]').eq(1).blur(function(){
+			return moneyCheck($(this) , 2 , 1);
+		});
+		$(this).find('td').eq(2).find('input[type="text"]').eq(0).blur(function(){
+			return moneyCheck($(this) , 1 , 2);
+		});
+		$(this).find('td').eq(2).find('input[type="text"]').eq(1).blur(function(){
+			return moneyCheck($(this) , 2 , 2);
+		});
+	});
+	
+	function moneyCheck(obj , t , c , s){   
+		if(c == 1 || (obj.parent().find('input[type="checkbox"]:last').prop('checked')==true && c== 2) ){
+			if(t == 1){
+				var oneValue = obj.val();
+				var twoValue = obj.next().next().val();
+			}else{
+				var oneValue = obj.prev().prev().val();
+				var twoValue = obj.val();
+			}
+			
+			if(oneValue != '' && twoValue != ''){
+				oneValue = parseInt(oneValue);
+				twoValue = parseInt(twoValue);
+				if(oneValue < 500){
+					obj.parent().find('.tipMsg').text('薪资不能小于500');
+					return false;
+				}else if(oneValue > 100000){
+					obj.parent().find('.tipMsg').text('薪资不能大于100000');
+					return false;
+				}else if(oneValue > twoValue){
+					obj.parent().find('.tipMsg').text('最小值必须小于最大值');
+					return false;
+				}else if( oneValue * 2 < twoValue){
+					obj.parent().find('.tipMsg').text('薪资范围不超过2倍');
+					return false;
+				}else{
+					obj.parent().find('.tipMsg').text('');
+				}
+				if(c == 2){
+					var lastPrevObject = obj.parent().prev().find('input[type="text"]');
+					if(oneValue <= lastPrevObject.eq(0).val()){
+						obj.parent().find('.tipMsg').text('平均收入必须大于底薪');
+						return false;
+					}else if(twoValue <= lastPrevObject.eq(1).val()){
+						obj.parent().find('.tipMsg').text('平均收入必须大于底薪');
+						return false;
+					}else{
+						obj.parent().find('.tipMsg').text('');
+						return true;
+					}
+				}else if(c == 1){
+					if(obj.parent().next().find('input[type="checkbox"]:last').prop('checked') == true){
+						var lastPrevObject = obj.parent().next().find('input[type="text"]');
+						if(oneValue >= lastPrevObject.eq(0).val()){
+							obj.parent().next().find('.tipMsg').text('平均收入必须大于底薪');
+							return false;
+						}else if(twoValue >= lastPrevObject.eq(1).val()){
+							obj.parent().next().find('.tipMsg').text('平均收入必须大于底薪');
+							return false;
+						}else{
+							obj.parent().next().find('.tipMsg').text('');
+							return true;
+						}
+					}
+				}
+			} else{
+				var tipFlag = true
+				if(s == 1){
+					tipFlag = false;
+				}else if(twoValue != ''&& oneValue){
+					tipFlag = false;
+				}
+				if(!tipFlag){
+					obj.parent().find('.tipMsg').text('请填写薪资的区间');
+				}
+				return tipFlag;
+			}
+		}else{
+                    c = 1;
+                    if(t == 1){
+				var oneValue = obj.val();
+				var twoValue = obj.next().next().val();
+			}else{
+				var oneValue = obj.prev().prev().val();
+				var twoValue = obj.val();
+			}
+			
+			if(oneValue != '' && twoValue != '' && c!=1){
+				oneValue = parseInt(oneValue);
+				twoValue = parseInt(twoValue);
+				if(oneValue < 500){
+					obj.parent().find('.tipMsg').text('薪资不能小于500');
+					return false;
+				}else if(oneValue > 100000){
+					obj.parent().find('.tipMsg').text('薪资不能大于100000');
+					return false;
+				}else if(oneValue > twoValue){
+					obj.parent().find('.tipMsg').text('最小值必须小于最大值');
+					return false;
+				}else if( oneValue * 2 < twoValue){
+					obj.parent().find('.tipMsg').text('薪资范围不超过2倍');
+					return false;
+				}else{
+					obj.parent().find('.tipMsg').text('');
+				}
+				if(c == 2 ){
+					var lastPrevObject = obj.parent().prev().find('input[type="text"]');
+					if(oneValue <= lastPrevObject.eq(0).val()){
+						obj.parent().find('.tipMsg').text('平均收入必须大于底薪');
+						return false;
+					}else if(twoValue <= lastPrevObject.eq(1).val()){
+						obj.parent().find('.tipMsg').text('平均收入必须大于底薪');
+						return false;
+					}else{
+						obj.parent().find('.tipMsg').text('');
+						return true;
+					}
+				}else if(c == 1){
+					if(obj.parent().next().find('input[type="checkbox"]:last').prop('checked') == true){
+						var lastPrevObject = obj.parent().next().find('input[type="text"]');
+						if(oneValue >= lastPrevObject.eq(0).val()){
+							obj.parent().next().find('.tipMsg').text('平均收入必须大于底薪');
+							return false;
+						}else if(twoValue >= lastPrevObject.eq(1).val()){
+							obj.parent().next().find('.tipMsg').text('平均收入必须大于底薪');
+							return false;
+						}else{
+							obj.parent().next().find('.tipMsg').text('');
+							return true;
+						}
+					}
+				}
+			} else if(false != obj.parent().find('input[type="checkbox"]:last').prop('checked')){
+				var tipFlag = true
+				if(s == 1){
+					tipFlag = false;
+				}else if(twoValue != ''&& oneValue){
+					tipFlag = false;
+				}
+				if(!tipFlag){
+					obj.parent().find('.tipMsg').text('请填写薪资的区间1');
+				}
+				return tipFlag;
+			}
+                }
+	}
+</script>
+</body>
+</html>
